@@ -9,49 +9,41 @@ import org.junit.Test;
 public class SetorServicoTest {
 
 	@Test
-	public void testCadastrarSetor() {
-		String nomeSetor;
-		int id;
-		ArrayList<Setor> listaSetor = new ArrayList<Setor>();	
-		SetorServico sv = new SetorServico();
-
-		nomeSetor = "RH";
-		id = 123;
-		int capacidade = 10;
-		
-		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade);
-		assertTrue(!listaSetor.isEmpty());
-	}
-	@Test
-	public void testeCapacidadeSetor() {
-		int capacidade = 10;
+	public void testeCadastrarSetor() {
+		String nomeSetor = "RH";
 		int id = 123;
-		String nomeSetor = "O brabooo";
-		SetorServico sv = new SetorServico();
+		int idPermissao = 3;
+		int capacidade = 10;
 		ArrayList<Setor> listaSetor = new ArrayList<Setor>();	
+		SetorServico sv = new SetorServico();
 		
-		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade);	
+		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade, idPermissao);
 		assertTrue(!listaSetor.isEmpty());
 	}
+
 	@Test
 	public void testeAlteraSetor() {
 		SetorServico sv = new SetorServico();
 		Setor setor = new Setor();
 		Setor setorInicial = new Setor();
 		ArrayList<Setor> listaSetor = new ArrayList<Setor>();
-		setor.capacidade = 10;
-		setor.id = 123;
-		setor.idPermissao = 111;
-		setor.nomeSetor = "RH";
+		setor.setCapacidade(10);
+		setor.setId(123);
+		setor.setIdPermissao(111);
+		setor.setNomeSetor("RH");
 		listaSetor.add(setor);
-		setorInicial.id = setor.id;
-		setorInicial.idPermissao = setor.idPermissao;
-		setorInicial.capacidade = setor.capacidade;
-		setorInicial.nomeSetor = setor.nomeSetor;
+		setorInicial.setCapacidade(setor.getId());
+		setorInicial.setIdPermissao(setor.getIdPermissao());
+		setorInicial.setCapacidade(setor.getCapacidade());
+		setorInicial.setNomeSetor(setor.getNomeSetor());		
 		
-		sv.alterarSetor(listaSetor, "Cont", setor.id, 9, 222);
-		assertFalse(setor.idPermissao == setorInicial.idPermissao);
-		assertFalse(setor.capacidade == setorInicial.capacidade);
-		assertFalse(setor.nomeSetor == setorInicial.nomeSetor);
+		setor.setNomeSetor("Cont");
+		setor.setCapacidade(9);
+		setor.setIdPermissao(222);
+		
+		sv.alterarSetor(listaSetor, setor.getNomeSetor(), setor.getId(), setor.getCapacidade(), setor.getIdPermissao());
+		assertFalse(setor.getIdPermissao() == setorInicial.getIdPermissao());
+		assertFalse(setor.getCapacidade() == setorInicial.getCapacidade());
+		assertFalse(setor.getNomeSetor() == setorInicial.getNomeSetor());
 	}
 }
