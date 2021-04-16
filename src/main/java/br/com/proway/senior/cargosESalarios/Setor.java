@@ -5,4 +5,5 @@ public class Setor {
 	int id;
 	String nomeSetor;
 	int capacidade;
+	int idPermissao;
 }

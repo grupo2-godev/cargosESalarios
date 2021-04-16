@@ -22,7 +22,7 @@ public class SetorServicoTest {
 		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade);
 		assertTrue(!listaSetor.isEmpty());
 	}
-
+	@Test
 	public void testeCapacidadeSetor() {
 		int capacidade = 10;
 		int id = 123;
@@ -32,5 +32,26 @@ public class SetorServicoTest {
 		
 		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade);	
 		assertTrue(!listaSetor.isEmpty());
+	}
+	@Test
+	public void testeAlteraSetor() {
+		SetorServico sv = new SetorServico();
+		Setor setor = new Setor();
+		Setor setorInicial = new Setor();
+		ArrayList<Setor> listaSetor = new ArrayList<Setor>();
+		setor.capacidade = 10;
+		setor.id = 123;
+		setor.idPermissao = 111;
+		setor.nomeSetor = "RH";
+		listaSetor.add(setor);
+		setorInicial.id = setor.id;
+		setorInicial.idPermissao = setor.idPermissao;
+		setorInicial.capacidade = setor.capacidade;
+		setorInicial.nomeSetor = setor.nomeSetor;
+		
+		sv.alterarSetor(listaSetor, "Cont", setor.id, 9, 222);
+		assertFalse(setor.idPermissao == setorInicial.idPermissao);
+		assertFalse(setor.capacidade == setorInicial.capacidade);
+		assertFalse(setor.nomeSetor == setorInicial.nomeSetor);
 	}
 }

@@ -15,7 +15,7 @@ public class SetorTest {
 		
 		setor.capacidade = 10;
 		setor.nomeSetor = "Recursos humanos";
-		setor.cadastrarSetor(listaSetor);
+		//setor.cadastrarSetor(listaSetor);
 		
 		assertTrue(listaSetor.contains(setor));
 	}
