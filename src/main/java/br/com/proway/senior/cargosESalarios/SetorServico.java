@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class SetorServico {
 	
-	
-	
 	/**
 	 * Cadastrar setores.
 	 * Recebe: String - int - ArrayList.
@@ -50,5 +48,29 @@ public class SetorServico {
 				break;
 			}
 		}	
+	}
+	/**
+	 * Busca um setor específicoe em uma lista de setores;
+	 * Recebe a Id do setor e retorna um objeto Setor;
+	 * Se o Id nao for encontrado, retorna null;
+	 * 
+	 * @param ArrayList<Setor>
+	 * @param int
+	 * @return Setor ou null se não encontrado
+	 */
+	public Setor consultarSetor(ArrayList<Setor> listaSetores, int idSetor) {
+		Setor setor = new Setor();
+		
+		for(Setor itemConsulta : listaSetores) {
+			if (itemConsulta.getId() == idSetor) {
+				setor.setNomeSetor(itemConsulta.getNomeSetor());
+				setor.setCapacidade(itemConsulta.getCapacidade());
+				setor.setId(itemConsulta.getId());
+				setor.setIdPermissao(itemConsulta.getIdPermissao());
+			
+				return setor;
+			}
+		}
+		return null;
 	}
 }

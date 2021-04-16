@@ -46,4 +46,36 @@ public class SetorServicoTest {
 		assertFalse(setor.getCapacidade() == setorInicial.getCapacidade());
 		assertFalse(setor.getNomeSetor() == setorInicial.getNomeSetor());
 	}
+	
+	@Test
+	public void testeConsultarSetor() {
+		SetorServico sv = new SetorServico();
+		ArrayList<Setor> listaSetor = new ArrayList<Setor>();
+		Setor setorConsultado = new Setor();
+		
+		sv.cadastrarSetor(listaSetor, "Recursos Humanos", 2654, 30, 352);
+		sv.cadastrarSetor(listaSetor, "Comercial", 2758, 30, 657);
+		sv.cadastrarSetor(listaSetor, "Financeiro", 2123, 30, 984);
+		sv.cadastrarSetor(listaSetor, "Contabilidade", 2841, 30, 612);
+		
+		setorConsultado = sv.consultarSetor(listaSetor, 2123);
+		
+		assertEquals(setorConsultado.getNomeSetor(), "Financeiro");
+	}
+	
+	@Test
+	public void testeConsultarSetorNaoExistente() {
+		SetorServico sv = new SetorServico();
+		ArrayList<Setor> listaSetor = new ArrayList<Setor>();
+		Setor setorConsultado = new Setor();
+		
+		sv.cadastrarSetor(listaSetor, "Recursos Humanos", 2654, 30, 352);
+		sv.cadastrarSetor(listaSetor, "Comercial", 2758, 30, 657);
+		sv.cadastrarSetor(listaSetor, "Financeiro", 2123, 30, 984);
+		sv.cadastrarSetor(listaSetor, "Contabilidade", 2841, 30, 612);
+		
+		setorConsultado = sv.consultarSetor(listaSetor, 1111);
+		
+		assertNull(setorConsultado);
+	}
 }
