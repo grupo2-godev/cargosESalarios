@@ -17,12 +17,13 @@ public class SetorServico {
 	 * @param id
 	 * @return void
 	 */
-	public void cadastrarSetor(ArrayList<Setor> listaSetores, String nomeSetor, int id, int capacidade) {
+	public void cadastrarSetor(ArrayList<Setor> listaSetores, String nomeSetor, int id, int capacidade, int idPermissao) {
 		Setor setor = new Setor();
 		
-		setor.id = id;
-		setor.nomeSetor = nomeSetor;
-		setor.capacidade = capacidade;
+		setor.setId(id);
+		setor.setNomeSetor(nomeSetor);
+		setor.setCapacidade(capacidade);
+		setor.setIdPermissao(idPermissao);
 		listaSetores.add(setor);
 	}
 	
@@ -41,11 +42,11 @@ public class SetorServico {
 		Setor setor = new Setor();
 		
 		for(Setor setorSelecionado : listaSetores) {
-			if (setorSelecionado.id == id) {
-				setor = setorSelecionado;
-				setor.nomeSetor = nomeSetor;
-				setor.idPermissao = idPermissao;
-				setor.capacidade = capacidade;
+			if (setorSelecionado.getId() == id) {
+				
+				setor.setNomeSetor(nomeSetor);
+				setor.setCapacidade(capacidade);
+				setor.setIdPermissao(idPermissao);
 				break;
 			}
 		}	

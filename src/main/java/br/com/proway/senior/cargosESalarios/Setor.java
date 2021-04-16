@@ -2,10 +2,10 @@ package br.com.proway.senior.cargosESalarios;
 
 
 public class Setor {
-	int id;
-	String nomeSetor;
-	int capacidade;
-	int idPermissao;
+	private int id;
+	private String nomeSetor;
+	private int capacidade;
+	private int idPermissao;
 	/**
 	 * @return the id
 	 */
