@@ -56,7 +56,7 @@ public class SetorServico {
 	 * 
 	 * @param ArrayList<Setor>
 	 * @param int
-	 * @return Setor ou null se não encontrado
+	 * @return Setor
 	 */
 	public Setor consultarSetor(ArrayList<Setor> listaSetores, int idSetor) {
 		Setor setor = new Setor();
