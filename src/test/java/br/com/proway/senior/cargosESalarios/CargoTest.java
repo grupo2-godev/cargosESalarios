@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class CargoTest {
 
+	/**
+	 * 
+	 */
 	@Test
 	void testCadastrarCargoConstrutor() {
 		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
@@ -63,10 +66,8 @@ class CargoTest {
 		cs.cadastrarCargo(listaCargo, 3, "Tester2");
 		cs.cadastrarCargo(listaCargo, 4, "Dev2");
 		cs.cadastrarCargo(listaCargo, 5, "Dev3");
-		// TODO
-		System.out.println(cs.visualizarTodosOsCargos(listaCargo));
-		/*
-		 * assertEquals(cs.visualizarTodosOsCargos(listaCargo),
-		 * listaCargo.get(0).getNomeCargo().equals("Desenvolvedor")); }
-		 */}
+		// System.out.println(cs.visualizarTodosOsCargos(listaCargo));
+
+		assertEquals(cs.visualizarTodosOsCargos(listaCargo), listaCargo.get(0).getNomeCargo().equals("Desenvolvedor"));
+	}
 }
