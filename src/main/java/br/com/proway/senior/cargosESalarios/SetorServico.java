@@ -2,11 +2,12 @@ package br.com.proway.senior.cargosESalarios;
 
 import java.util.ArrayList;
 
-public class SetorServico {
+public class SetorServico implements ISetorServico{
 	
 	/**
 	 * Cadastrar setores.
-	 * Recebe: String - int - ArrayList.
+	 * Recebe String com o nome do setor, int com a id do setor e um ArrayList à
+	 * ser populado com um objeto da classe Setor.
 	 * Instancia obejto setor com os parametros String e int. 
 	 * Popula a lista com o objeto.
 	 * 
@@ -16,12 +17,7 @@ public class SetorServico {
 	 * @return void
 	 */
 	public void cadastrarSetor(ArrayList<Setor> listaSetores, String nomeSetor, int id, int capacidade, int idPermissao) {
-		Setor setor = new Setor();
-		
-		setor.setId(id);
-		setor.setNomeSetor(nomeSetor);
-		setor.setCapacidade(capacidade);
-		setor.setIdPermissao(idPermissao);
+		Setor setor = new Setor(id, nomeSetor, capacidade, idPermissao);
 		listaSetores.add(setor);
 	}
 	
@@ -33,6 +29,7 @@ public class SetorServico {
 	 * @param listaSetores
 	 * @param nomeSetor
 	 * @param id
+	 * 
 	 * @param capacidade
 	 * @Return void
 	 */
@@ -72,5 +69,34 @@ public class SetorServico {
 			}
 		}
 		return null;
+	}
+	/**
+	 * Cosulta todos os setores cadastrados.
+	 * Recebe um ArrayList de objeto Setor.
+	 * 
+	 * 
+	 * @param ArrayList<Setor>.
+	 * @return ArrayList.
+	 */
+	
+	public ArrayList<Setor> consultarTodosOsSetores(ArrayList<Setor> listaSetores) {
+		return listaSetores;
+	}
+	/**
+	 * Deleta setor cadastrado.
+	 * Busca setor no ArrayList pela id;
+	 * 
+	 * 
+	 * @param ArrayList<Setor>.
+	 * @param int.
+	 * @return void
+	 */
+	public void deletarSetor(ArrayList<Setor> listaSetores, int id) {
+		for(Setor setorSelecionado : listaSetores) {
+			if (setorSelecionado.getId() == id) {	
+			listaSetores.remove(setorSelecionado);
+				break;
+			}
+		}	
 	}
 }
