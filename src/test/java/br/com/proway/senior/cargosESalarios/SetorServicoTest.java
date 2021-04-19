@@ -78,4 +78,19 @@ public class SetorServicoTest {
 		
 		assertNull(setorConsultado);
 	}
+	@Test
+	public void testeDeletarSetor() {
+		SetorServico sv = new SetorServico();
+		ArrayList<Setor> listaSetor = new ArrayList<Setor>();
+		Setor setorDeletado = new Setor(2123, "Financeiro", 30, 984);
+		
+		sv.cadastrarSetor(listaSetor, "Recursos Humanos", 2654, 30, 352);
+		sv.cadastrarSetor(listaSetor, "Comercial", 2758, 30, 657);
+		sv.cadastrarSetor(listaSetor, "Financeiro", 2123, 30, 984);
+		sv.cadastrarSetor(listaSetor, "Contabilidade", 2841, 30, 612);
+		
+		sv.deletarSetor(listaSetor, 2123);
+		
+		assertTrue(!listaSetor.contains(setorDeletado));
+	}
 }
