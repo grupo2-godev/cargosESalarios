@@ -2,13 +2,7 @@ package br.com.proway.senior.cargosESalarios;
 
 import java.util.ArrayList;
 
-/**
- * 
- * @author Sabrina/Vitor
- * @version 2.0
- *
- */
-public class CargoService implements ICargoService {
+public interface ICargoService {
 
 	/**
 	 * Adiciona um cargo à lista de cargos.
@@ -18,11 +12,7 @@ public class CargoService implements ICargoService {
 	 * @param idCargo          id do cargo que vai ser inserido
 	 * @return ArrayList de cargos criados
 	 */
-	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo) {
-		Cargo cargo = new Cargo(id, nomeCargo);
-		todosCadastrados.add(cargo);
-		return todosCadastrados;
-	}
+	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo);
 
 	/**
 	 * Remove um cargo da lista de cargos.
@@ -32,20 +22,7 @@ public class CargoService implements ICargoService {
 	 *                        <i>idCargoProcurar</i>
 	 * @return boolean        que faz a verificação se foi ou não removido
 	 */
-	public boolean removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
-		boolean foiRemovido;
-		for (int i = 0; i < listaCargo.size(); i++) {
-			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
-				listaCargo.remove(i);
-				return foiRemovido = true;
-
-			} else {
-				i++;
-			}
-
-		}
-		return foiRemovido = false;
-	}
+	public boolean removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo);
 
 	/**
 	 * Altera um cargo da lista de cargos.
@@ -55,24 +32,12 @@ public class CargoService implements ICargoService {
 	 * @param nomeCargo       nome do cargo a ser alterado
 	 * @return boolean        que faz a verificação se foi ou não alterado
 	 */
-	public boolean alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
-		boolean foiAlterado;
-		for (int i = 0; i < listaCargo.size(); i++) {
-			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
-				listaCargo.get(i).setNomeCargo(nomeCargo);
-				return foiAlterado = true;
-			} else {
-				i++;
-			}
-		}
-		return foiAlterado = false;
-	}
+	public boolean alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo);
 
 	/**
 	 * 
 	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
-	public String visualizarTodosOsCargos(ArrayList<Cargo> listaCargo) {
-		return listaCargo.toString();
-	}
+	public String visualizarTodosOsCargos(ArrayList<Cargo> listaCargo);
+
 }
