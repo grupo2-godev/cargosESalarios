@@ -1,6 +1,5 @@
 package br.com.proway.senior.cargosESalarios;
 
-
 public class Setor {
 	private int id;
 	private String nomeSetor;
@@ -73,7 +72,4 @@ public class Setor {
 	public Setor() {
 		super();
 	}
-	
-	
-	
 }

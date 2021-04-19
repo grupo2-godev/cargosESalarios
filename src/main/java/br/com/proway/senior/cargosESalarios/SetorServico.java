@@ -3,7 +3,6 @@ package br.com.proway.senior.cargosESalarios;
 import java.util.ArrayList;
 
 public class SetorServico implements ISetorServico{
-	
 	/**
 	 * Cadastrar setores.
 	 * Recebe String com o nome do setor, int com a id do setor e um ArrayList à

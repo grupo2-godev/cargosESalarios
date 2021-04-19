@@ -1,5 +1,4 @@
 package br.com.proway.senior.cargosESalarios;
-
 import java.util.ArrayList;
 
 /**
@@ -9,7 +8,6 @@ import java.util.ArrayList;
  *
  */
 public class CargoService {
-
 	/**
 	 * Adiciona um cargo à lista de cargos.
 	 * 
@@ -18,12 +16,36 @@ public class CargoService {
 	 * @param idCargo          id do cargo que vai ser inserido
 	 * @return ArrayList de cargos criados
 	 */
-	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo) {
+	public void cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo) {
 		Cargo cargo = new Cargo(id, nomeCargo);
+		todosCadastrados.add(cargo);
+	}
+	/**
+	 * Cadastra cargo.
+	 * 
+	 * Método de sobrecarga que recebe uma lista de setores e um id de setor e
+	 * adiciona a informação de setor ao cargo cadastrado
+	 * 
+	 * 
+	 * @param todosCadastrados
+	 * @param id
+	 * @param nomeCargo
+	 * @param listaConsultada
+	 * @param idSetor
+	 * @return ArrayList de cargos 
+	 */
+	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo, ArrayList<Setor> listaConsultada, int idSetor) {
+		Cargo cargo = new Cargo(id, nomeCargo, idSetor);
+		SetorServico sv = new SetorServico();
+		Setor setor = new Setor();
+		
+		setor = sv.consultarSetor(listaConsultada, idSetor);
+		
+		cargo.setSetor(setor);
+		
 		todosCadastrados.add(cargo);
 		return todosCadastrados;
 	}
-
 	/**
 	 * Remove um cargo da lista de cargos.
 	 * 
@@ -32,21 +54,15 @@ public class CargoService {
 	 *                        <i>idCargoProcurar</i>
 	 * @return boolean        que faz a verificação se foi ou não removido
 	 */
-	public boolean removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
-		boolean foiRemovido;
+	public void removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
 			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
 				listaCargo.remove(i);
-				return foiRemovido = true;
-
 			} else {
 				i++;
 			}
-
 		}
-		return foiRemovido = false;
 	}
-
 	/**
 	 * Altera um cargo da lista de cargos.
 	 * 
@@ -55,19 +71,15 @@ public class CargoService {
 	 * @param nomeCargo       nome do cargo a ser alterado
 	 * @return boolean        que faz a verificação se foi ou não alterado
 	 */
-	public boolean alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
-		boolean foiAlterado;
+	public void alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
 			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
 				listaCargo.get(i).setNomeCargo(nomeCargo);
-				return foiAlterado = true;
 			} else {
 				i++;
 			}
 		}
-		return foiAlterado = false;
 	}
-
 	/**
 	 * 
 	 * @return String retorna a mensagem com os dados contidos na lista
