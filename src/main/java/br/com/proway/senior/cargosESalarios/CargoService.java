@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * @version 2.0
  *
  */
-public class CargoService {
+public class CargoService implements ICargoService {
+
 	/**
 	 * Adiciona um cargo à lista de cargos.
 	 * 
