@@ -7,18 +7,20 @@ public class Cargo {
 	private Integer idCargo;
 	private String nomeCargo;
 	private Integer idSetor;
-	private String hierarquia; // Exemplo: Supervisão/Gerência
+	private String hierarquia;                 // Exemplo: Supervisão/Gerência
 	private Double salario;
-	private LocalDateTime dataCadastro; // Editar o cadastro
-	private LocalDateTime dataUltimaRevisao; //
-	private String cbo2002; // Vide http://www.mtecbo.gov.br/ CBO - Classificação Brasileira de Ocupações
-	private String cbo94; // Verificar
+	private LocalDateTime dataCadastro;      // Editar o cadastro
+	private LocalDateTime dataUltimaRevisao; 
+	private String cbo2002;                // Vide http://www.mtecbo.gov.br/ CBO - Classificação Brasileira de Ocupações
+	private String cbo94;                 // Verificar
 	private Integer horaMes;
-	private String grauDeInstrucao;// Exemplo: Superior Completo
-	private String experienciaMinima;// Exemplo: 2 anos.
-	private String atribuicoes; // Exemplo: Programação em Java, Criação de Banco de Dados, etc...
-	private String bonificacao; // Exemplo: ???
-	private Integer status; // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
+	private String grauDeInstrucao;     // Exemplo: Superior Completo
+	private String experienciaMinima;  // Exemplo: 2 anos.
+	private String atribuicoes;       // Exemplo: Programação em Java, Criação de Banco de Dados, etc...
+	private String bonificacao;      // Exemplo: ???
+	private Integer status;         // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
+	private int idPermissao; 
+
 
 	/**
 	 * @param idCargo
@@ -36,10 +38,13 @@ public class Cargo {
 	 * @param atribuicoes
 	 * @param bonificacao
 	 * @param status
+	 * @param idPermissao
 	 */
 	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor, String hierarquia, Double salario,
 			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, Integer horaMes,
-			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, Integer status) {
+			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, Integer status,
+			int idPermissao) {
+		super();
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
 		this.idSetor = idSetor;
@@ -55,6 +60,7 @@ public class Cargo {
 		this.atribuicoes = atribuicoes;
 		this.bonificacao = bonificacao;
 		this.status = status;
+		this.idPermissao = idPermissao;
 	}
 
 	public Cargo(Integer idCargo, String nomeCargo) {
@@ -278,7 +284,22 @@ public class Cargo {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
+	/**
+	 * @return the idPermissao
+	 */
+	public int getIdPermissao() {
+		return idPermissao;
+	}
 
+	/**
+	 * @param idPermissao the idPermissao to set
+	 */
+	public void setIdPermissao(int idPermissao) {
+		this.idPermissao = idPermissao;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Cargo - idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", hierarquia="

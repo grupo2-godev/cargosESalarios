@@ -15,7 +15,7 @@ class CargoTest {
 	@Test
 	void testCadastrarCargoConstrutor() {
 		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1);
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
 		cargo.setCbo94("1651515");
 		assertEquals(1, cargo.getIdCargo());
 
@@ -45,8 +45,7 @@ class CargoTest {
 		CargoService cs = new CargoService();
 		cs.cadastrarCargo(listaCargo, 1, "Desenvolvedor");
 		cs.cadastrarCargo(listaCargo, 2, "Tester");
-
-		assertTrue(cs.removerCargo(2, listaCargo));
+		assertNotNull(cs.removerCargo(2, listaCargo));
 	}
 
 	@Test
@@ -54,7 +53,7 @@ class CargoTest {
 		ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
 		CargoService cs = new CargoService();
 		cs.cadastrarCargo(listaCargo, 1, "Desenvolvedor");
-		assertTrue(cs.alterarCargo(listaCargo, 1, "testDev"));
+		assertNotNull(cs.alterarCargo(listaCargo, 1, "Tester"));
 	}
 
 	@Test
@@ -67,7 +66,6 @@ class CargoTest {
 		cs.cadastrarCargo(listaCargo, 4, "Dev2");
 		cs.cadastrarCargo(listaCargo, 5, "Dev3");
 		// System.out.println(cs.visualizarTodosOsCargos(listaCargo));
-
 		assertEquals(cs.visualizarTodosOsCargos(listaCargo), listaCargo.get(0).getNomeCargo().equals("Desenvolvedor"));
 	}
 }
