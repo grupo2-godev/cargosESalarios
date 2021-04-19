@@ -57,10 +57,6 @@ public class Cargo {
 		this.status = status;
 	}
 
-//	public void cargo(Integer idCargo, String nomeCargo) {
-//		this.cargo(this.idCargo, this.nomeCargo);
-//	}
-
 	public Cargo(Integer idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
@@ -283,57 +279,13 @@ public class Cargo {
 		this.status = status;
 	}
 
-	/**
-	 * Visualizar Cargo Visualiza os detalhes básicos um cargo.
-	 * 
-	 * Recebe o ID de um cargo e retorna o ID e o nome correspondente do cargo. (Por
-	 * enquanto retorna uma String com essas informações, pois ainda não podemos
-	 * utilizar Orientação a Objeto)
-	 * 
-	 * @deprecated metodo não utilizado já que as variaveis arayList foram
-	 *             transferidas para outra classe
-	 * @param _id ID do cargo
-	 * @return String contendo idCargo e nomeCargo
-	 */
-	private String visualizarCargo() {
-		return (" " + idCargo + "\t" + nomeCargo);
-	}
-
-	/**
-	 * Listar Cargos Lista todos os cargos do sistema. Para cada cargo no sistema,
-	 * chama o método visualizarCargo().
-	 */
-	private void listarCargos() { //TODO
-		System.out.println(" Id\tNome do Cargo");
-		for (int i = 0; i < idCargo; i++) {
-			// visualizarCargo(i);
-		}
-	}
-
 	@Override
 	public String toString() {
-		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", hierarquia="
+		return "Cargo - idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", hierarquia="
 				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
 				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
 				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
-				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status + "]";
+				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status;
 	}
-	
-	public void deletarCargo(Cargo cargo) {
-		cargo.setAtribuicoes(null);
-		cargo.setBonificacao(null);
-		cargo.setCbo2002(null);
-		cargo.setCbo94(null);
-		cargo.setDataCadastro(null);
-		cargo.setDataUltimaRevisao(null);
-		cargo.setExperienciaMinima(null);
-		cargo.setGrauDeInstrucao(null);
-		cargo.setHierarquia(null);
-		cargo.setHoraMes(null);
-		cargo.setIdCargo(null);
-		cargo.setIdSetor(null);
-		cargo.setNomeCargo(null);
-		cargo.setSalario(null);
-		cargo.setStatus(null);		
-	}	
+
 }
