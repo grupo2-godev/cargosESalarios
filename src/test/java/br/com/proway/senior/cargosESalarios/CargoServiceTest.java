@@ -103,13 +103,13 @@ public class CargoServiceTest {
 	public void testVisualizarCargo() {
 		ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
 		CargoService cs = new CargoService();
-		cs.cadastrarCargo(listaCargo, 1, "Desenvolvedor");
-		cs.cadastrarCargo(listaCargo, 2, "Tester");
-		cs.cadastrarCargo(listaCargo, 3, "Tester2");
-		cs.cadastrarCargo(listaCargo, 4, "Dev2");
-		cs.cadastrarCargo(listaCargo, 5, "Dev3");
+		cs.cadastrarCargo(listaCargo, 252, "Desenvolvedor");
+		cs.cadastrarCargo(listaCargo, 546, "Tester");
+		cs.cadastrarCargo(listaCargo, 321, "Tester2");
+		cs.cadastrarCargo(listaCargo, 587, "Dev2");
+		cs.cadastrarCargo(listaCargo, 325, "Dev3");
 		
-		assertEquals("Tester", cs.visualizarCargo(listaCargo, 2));
+		assertEquals("Tester", cs.visualizarCargo(listaCargo, 546));
 	}
 
 }

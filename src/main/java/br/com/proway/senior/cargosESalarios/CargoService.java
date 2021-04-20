@@ -46,6 +46,8 @@ public class CargoService implements ICargoService {
 		
 		todosCadastrados.add(cargo);
 	}
+	
+	
 	public void cadastrarCargo(ArrayList<Cargo> cargos, Cargo cargoASerCadastrado) {
 		
 		cargos.add(cargoASerCadastrado);
@@ -95,12 +97,11 @@ public class CargoService implements ICargoService {
 	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
 	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id) {
-		Cargo cargoRetornado = new Cargo();
-		for(Cargo cargoSelecionado : listaCargo) {
-			if(cargoSelecionado.getIdCargo() == id) {
-				cargoRetornado.setNomeCargo(cargoSelecionado.getNomeCargo().toString());
-			} 
+		for (Cargo cargo : listaCargo) {
+			if(cargo.getIdCargo() == id) {
+				return cargo.getNomeCargo();
+			}
 		}
-		return cargoRetornado.getNomeCargo();
+		return null;
 	}
 }

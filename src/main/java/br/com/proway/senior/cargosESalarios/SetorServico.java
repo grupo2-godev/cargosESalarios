@@ -20,6 +20,15 @@ public class SetorServico implements ISetorServico{
 		listaSetores.add(setor);
 	}
 	
+	/**
+	 * Cadastrar setores.
+	 * Recebe um objeto da classe Setor e um ArrayList à ser populado 
+	 * Popula a lista com o objeto
+	 * 
+	 * @param listaSetores
+	 * @param setor 
+	 * @return void 
+	 */
 	public void cadastrarSetor(ArrayList<Setor> listaSetores, Setor setor) {
 		listaSetores.add(setor);
 	}
