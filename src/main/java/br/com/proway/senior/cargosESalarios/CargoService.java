@@ -106,13 +106,14 @@ public class CargoService implements ICargoService {
 	 * Retorna todos os cargos contidos na lista
 	 * @return String 
 	 */
+	
 	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id) {
-		Cargo cargoRetornado = new Cargo();
-		for(Cargo cargoSelecionado : listaCargo) {
-			if(cargoSelecionado.getIdCargo() == id) {
-				cargoRetornado.setNomeCargo(cargoSelecionado.getNomeCargo().toString());
-			} 
-		}
-		return cargoRetornado.getNomeCargo();
-	}
+                for (Cargo cargo : listaCargo) {
+                        if(cargo.getIdCargo() == id) {
+                                return cargo.getNomeCargo();
+                        }
+                }
+                return null;
+        }
+
 }
