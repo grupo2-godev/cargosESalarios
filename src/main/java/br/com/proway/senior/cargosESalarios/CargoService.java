@@ -11,7 +11,7 @@ public class CargoService implements ICargoService {
 
 	/**
 	 * * Cadastrar setores.
-	 * Recebe o nome do cargo (String), id do cargo (int) e a ArrayList à ser populado 
+	 * Recebe o nome do cargo (String), id do cargo (int) e a ArrayList Ã  ser populado 
 	   com um objeto da classe Cargo.
 	 * Popula a lista com o objeto.
 	 * 
@@ -27,8 +27,8 @@ public class CargoService implements ICargoService {
 	/**
 	 * Cadastra cargo.
 	 * 
-	 * Método de sobrecarga que recebe uma lista de setores e um id (int) de setor e
-	 * adiciona a informação de setor ao cargo cadastrado
+	 * MÃ©todo de sobrecarga que recebe uma lista de setores e um id (int) de setor e
+	 * adiciona a informaÃ§Ã£o de setor ao cargo cadastrado
 	 * 
 	 * 
 	 * @param todosCadastrados
@@ -77,7 +77,7 @@ public class CargoService implements ICargoService {
 	}
 	/**
 	 * Altera parametros de um cargo da lista.
-	 * Lista os cargos para a alteração.
+	 * Lista os cargos para a alteraÃ§Ã£o.
 	 * Recebe idCargoProurar (int) e nomeCargo(String).
 	 * 
 	 * @param listaCargo      
@@ -107,12 +107,9 @@ public class CargoService implements ICargoService {
 	 * @return String 
 	 */
 	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id) {
-		Cargo cargoRetornado = new Cargo();
-		for(Cargo cargoSelecionado : listaCargo) {
-			if(cargoSelecionado.getIdCargo() == id) {
-				cargoRetornado.setNomeCargo(cargoSelecionado.getNomeCargo().toString());
-			} 
-		}
-		return cargoRetornado.getNomeCargo();
+		for (Cargo cargo : listaCargo) {
+			if(cargo.getIdCargo() == id) {
+				return cargo.getNomeCargo();
+			}
 	}
 }
