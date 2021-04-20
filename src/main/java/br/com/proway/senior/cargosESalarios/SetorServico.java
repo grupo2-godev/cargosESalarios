@@ -3,10 +3,9 @@ package br.com.proway.senior.cargosESalarios;
 import java.util.ArrayList;
 
 public class SetorServico implements ISetorServico {
-
 	/**
 	 * Cadastrar setores. Recebe String com o nome do setor, int com a id do setor e
-	 * um ArrayList à ser populado com um objeto da classe Setor. Instancia obejto
+	 * um ArrayList Ã  ser populado com um objeto da classe Setor. Instancia obejto
 	 * setor com os parametros String e int. Popula a lista com o objeto.
 	 * 
 	 * @param listaSetores
@@ -46,7 +45,7 @@ public class SetorServico implements ISetorServico {
 	}
 
 	/**
-	 * Busca um setor específicoe em uma lista de setores; Recebe a Id do setor e
+	 * Busca um setor especÃ­ficoe em uma lista de setores; Recebe a Id do setor e
 	 * retorna um objeto Setor; Se o Id nao for encontrado, retorna null;
 	 * 
 	 * @param listaSetores

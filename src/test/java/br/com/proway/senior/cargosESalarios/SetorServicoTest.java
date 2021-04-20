@@ -15,8 +15,7 @@ public class SetorServicoTest {
 		int idPermissao = 3;
 		int capacidade = 10;
 		ArrayList<Setor> listaSetor = new ArrayList<Setor>();	
-		SetorServico sv = new SetorServico();
-		
+		SetorServico sv = new SetorServico();		
 		sv.cadastrarSetor(listaSetor, nomeSetor, id, capacidade, idPermissao);
 		assertTrue(!listaSetor.isEmpty());
 	}

@@ -7,6 +7,7 @@ public class Cargo {
 	private Integer idCargo;
 	private String nomeCargo;
 	private Integer idSetor;
+	private Setor setor;
 	private String hierarquia;                 // Exemplo: Supervisão/Gerência
 	private Double salario;
 	private LocalDateTime dataCadastro;      // Editar o cadastro
@@ -65,6 +66,12 @@ public class Cargo {
 
 	public Cargo(Integer idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
+		this.nomeCargo = nomeCargo;
+	}
+	
+	public Cargo(Integer idCargo, String nomeCargo, int idSetor) {
+		this.idCargo = idCargo;
+		this.idSetor = idSetor;
 		this.nomeCargo = nomeCargo;
 	}
 
@@ -298,8 +305,21 @@ public class Cargo {
 	public void setIdPermissao(int idPermissao) {
 		this.idPermissao = idPermissao;
 	}
-
 	
+	/**
+	 * @return the setor
+	 */
+	public Setor getSetor() {
+		return setor;
+	}
+
+	/**
+	 * @param setor the setor to set
+	 */
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
 	@Override
 	public String toString() {
 		return "Cargo - idCargo =" + idCargo + ", nomeCargo =" + nomeCargo + ", idSetor =" + idSetor + ", hierarquia ="
