@@ -62,9 +62,7 @@ public class CargoService implements ICargoService {
 		for (int i = 0; i < listaCargo.size(); i++) {
 			if (listaCargo.get(i).getIdCargo() == idCargoProcurar) {
 				listaCargo.remove(i);
-			} else {
-				i++;
-			}
+			} 
 		}
 	}
 	/**
