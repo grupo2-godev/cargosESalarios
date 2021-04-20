@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class CargoService implements ICargoService {
 
 	/**
-	 * Adiciona um cargo √† lista de cargos.
+	 * Adiciona um cargo ‡ lista de cargos.
 	 * 
-	 * @param todosCadastrados traz a lista de todos os cargos no arrayList
+	 * @param todosCadastrados traz a lista de todos os cargos no  arrayList
 	 * @param nomeCargo        nome do cargo que vai ser inserido
 	 * @param idCargo          id do cargo que vai ser inserido
-	 * @return ArrayList de cargos criados
+	 * @return void
 	 */
 	public void cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo) {
 		Cargo cargo = new Cargo(id, nomeCargo);
@@ -24,8 +24,8 @@ public class CargoService implements ICargoService {
 	/**
 	 * Cadastra cargo.
 	 * 
-	 * M√©todo de sobrecarga que recebe uma lista de setores e um id de setor e
-	 * adiciona a informa√ß√£o de setor ao cargo cadastrado
+	 * MÈtodo de sobrecarga que recebe uma lista de setores e um id de setor e
+	 * adiciona a informaÁ„o de setor ao cargo cadastrado
 	 * 
 	 * 
 	 * @param todosCadastrados
@@ -50,11 +50,10 @@ public class CargoService implements ICargoService {
 	/**
 	 * Remove um cargo da lista de cargos.
 	 * 
-	 * @param idCargoProcurar id que serve para procurar e ent√£o remover os itens da
-	 *                        lista
-	 * @param listaCargo      Lista que serve para a adi√ß√£o de itens e procurar o id
+	 * @param idCargoProcurar id que serve para procurar e ent„o remover os itens da lista
+	 * @param listaCargo      Lista que serve para a adiÁ„o de itens e procurar o id
 	 *                        <i>idCargoProcurar</i>
-	 * @return boolean que faz a verifica√ß√£o se foi ou n√£o removido
+	 * @return boolean        que faz a verificaÁ„o se foi ou n„o removido
 	 */
 	public void removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
@@ -68,10 +67,10 @@ public class CargoService implements ICargoService {
 	/**
 	 * Altera um cargo da lista de cargos.
 	 * 
-	 * @param listaCargo      que serve como base para altera√ß√£o e inser√ß√£o de itens
-	 * @param idCargoProcurar id que serve para procurar item na lista
+	 * @param listaCargo      que serve como base para alteraÁ„o e inserÁ„o de itens
+	 * @param idCargoProcurar id que serve para procurar item na lista 
 	 * @param nomeCargo       nome do cargo a ser alterado
-	 * @return boolean que faz a verifica√ß√£o se foi ou n√£o alterado
+	 * @return boolean        que faz a verificaÁ„o se foi ou n„o alterado
 	 */
 	public void alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
@@ -89,12 +88,18 @@ public class CargoService implements ICargoService {
 	public String visualizarTodosOsCargos(ArrayList<Cargo> listaCargo) {
 		return listaCargo.toString();
 	}
+	
 	/**
 	 * 
 	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
 	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id) {
-			return listaCargo.get(id).toString();
-		
+		for(Cargo cargoSelecionado : listaCargo) {
+			if(cargoSelecionado.getIdCargo() == id) {
+				return cargoSelecionado.getNomeCargo().toString();				
+			}
+			break;
+		}
+		return null;
 	}
 }

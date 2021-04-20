@@ -16,5 +16,8 @@ public class Main {
 		
 		cargoSvc.cadastrarCargo(listaCargos, 2, "Auxiliar de Contabilidade", listaSetores, 3524);
 		cargoSvc.cadastrarCargo(listaCargos, 3, "Auxiliar", listaSetores, 3524);
+		
+		
+		
 	}
 }

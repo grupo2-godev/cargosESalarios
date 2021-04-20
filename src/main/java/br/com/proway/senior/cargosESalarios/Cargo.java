@@ -322,11 +322,11 @@ public class Cargo {
 
 	@Override
 	public String toString() {
-		return "Cargo - idCargo =" + idCargo + ", nomeCargo =" + nomeCargo + ", idSetor =" + idSetor + ", hierarquia ="
-				+ hierarquia + ", salario =" + salario + ", dataCadastro =" + dataCadastro + ", dataUltimaRevisao ="
-				+ dataUltimaRevisao + ", cbo2002 =" + cbo2002 + ", cbo94 =" + cbo94 + ", horaMes =" + horaMes
-				+ ", grauDeInstrucao =" + grauDeInstrucao + ", experienciaMinima =" + experienciaMinima + ", atribuicoes ="
-				+ atribuicoes + ", bonificacao =" + bonificacao + ", status =" + status;
+		return "Cargo - idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", hierarquia="
+				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
+				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
+				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
+				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status;
 	}
 
 }
