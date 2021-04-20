@@ -17,9 +17,22 @@ public class CargoServiceTest {
 	 */
 	@Test
 	public void testCadastrarCargoConstrutor() {
-		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+		Cargo cargo = new Cargo(1, "Gerente", 4, null, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
 				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+			
 		assertEquals(1, cargo.getIdCargo());
+	}
+	
+	@Test
+	public void testCadastrarCargoPassandoObjeto() {
+		ArrayList<Cargo> cargos = new ArrayList<Cargo>();
+		CargoService cs = new CargoService();
+		Cargo cargoASerCadastrado = new Cargo(1, "Gerente", 4, null, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+		
+		cs.cadastrarCargo(cargos, cargoASerCadastrado);
+		
+		assertTrue(cargos.contains(cargoASerCadastrado));
 	}
 
 	@Test
