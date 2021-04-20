@@ -39,5 +39,11 @@ public interface ICargoService {
 	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
 	public String visualizarTodosOsCargos(ArrayList<Cargo> listaCargo);
+	
+	/**
+	 * 
+	 * @return String retorna a mensagem com os dados contidos na lista
+	 */
+	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id);
 
 }

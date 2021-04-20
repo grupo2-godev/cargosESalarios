@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-class CargoTest {
+class CargoServiceTest {
 
 	/**
 	 * 
@@ -65,7 +65,16 @@ class CargoTest {
 		cs.cadastrarCargo(listaCargo, 3, "Tester2");
 		cs.cadastrarCargo(listaCargo, 4, "Dev2");
 		cs.cadastrarCargo(listaCargo, 5, "Dev3");
-		// System.out.println(cs.visualizarTodosOsCargos(listaCargo));
-		assertEquals(cs.visualizarTodosOsCargos(listaCargo), listaCargo.get(0).getNomeCargo().equals("Desenvolvedor"));
+		assertTrue(cs.visualizarTodosOsCargos(listaCargo).contains("Desenvolvedor"));
+	}
+	
+	@Test
+	public void testVisualizarCargo() {
+		ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
+		CargoService cs = new CargoService();
+		cs.cadastrarCargo(listaCargo, 0, "Desenvolvedor");
+		cs.cadastrarCargo(listaCargo, 1, "Tester");
+		System.out.println(cs.visualizarCargo(listaCargo, 0));
+		assertNotNull(cs.visualizarCargo(listaCargo, 0));
 	}
 }
