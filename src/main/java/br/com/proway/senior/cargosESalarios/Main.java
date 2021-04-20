@@ -19,10 +19,11 @@ public class Main {
 		cargoSvc.cadastrarCargo(listaCargos, 3, "Auxiliar de Contabilidade", listaSetores, 3524);
 		cargoSvc.cadastrarCargo(listaCargos, 4, "Representante Comercial", listaSetores, 3522);
 		
-		setorSvc.alterarSetor(listaSetores, "RH", 3521, 20, 1529);
+		setorSvc.alterarSetor(listaSetores, "RH", 3521, 20, 1529);		
+		setorSvc.deletarSetor(listaSetores, 3524);
 		
-		cargoSvc.alterarCargo(listaCargos, 2, "Recrutador de RH");
-		
+		cargoSvc.alterarCargo(listaCargos, 2, "Recrutador de RH");		
+		cargoSvc.removerCargo(4, listaCargos);		
 		
 		System.out.println();
 	}
