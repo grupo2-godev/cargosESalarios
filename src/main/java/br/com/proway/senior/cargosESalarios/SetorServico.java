@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class SetorServico implements ISetorServico{
 	/**
 	 * Cadastrar setores.
-	 * Recebe String com o nome do setor, int com a id do setor e um ArrayList à
-	 * ser populado com um objeto da classe Setor.
-	 * Instancia obejto setor com os parametros String e int. 
+	 * Recebe o nome do setor (String), id do setor (int) e a ArrayList à ser populado 
+	   com um objeto da classe Setor.
 	 * Popula a lista com o objeto.
 	 * 
 	 * @param listaSetores
@@ -19,15 +18,14 @@ public class SetorServico implements ISetorServico{
 		Setor setor = new Setor(id, nomeSetor, capacidade, idPermissao);
 		listaSetores.add(setor);
 	}
-	
 	/**
-	 * Cadastrar setores.
-	 * Recebe um objeto da classe Setor e um ArrayList à ser populado 
-	 * Popula a lista com o objeto
+	 * Recebe ArrayList e objeto da classe Setor.
+	 * Popula a lista com objeto.
 	 * 
 	 * @param listaSetores
-	 * @param setor 
-	 * @return void 
+	 * @param nomeSetor
+	 * @param id
+	 * @return void
 	 */
 	public void cadastrarSetor(ArrayList<Setor> listaSetores, Setor setor) {
 		listaSetores.add(setor);
@@ -35,13 +33,11 @@ public class SetorServico implements ISetorServico{
 	
 	/**
 	 * Altera o setor.
-	 * 
-	 * Procura na lista o obejto com id selecionado e atribui os parametros.
+	 * Procura na lista o obejto com id selecionado e atribui novos parametros.
 	 * 
 	 * @param listaSetores
 	 * @param nomeSetor
 	 * @param id
-	 * S
 	 * @param capacidade
 	 * @Return void
 	 */
@@ -65,10 +61,11 @@ public class SetorServico implements ISetorServico{
 			}
 		}	
 	}
+	
 	/**
-	 * Busca um setor específicoe em uma lista de setores;
-	 * Recebe a Id do setor e retorna um objeto Setor;
-	 * Se o Id nao for encontrado, retorna null;
+	 * Busca um setor específico em uma lista de setores.
+	 * Recebe Id do setor e retorna um objeto Setor.
+	 * Se o Id nao for encontrado, retorna null.
 	 * 
 	 * @param ArrayList<Setor>
 	 * @param int
@@ -103,7 +100,7 @@ public class SetorServico implements ISetorServico{
 	}
 	/**
 	 * Deleta setor cadastrado.
-	 * Busca setor no ArrayList pela id;
+	 * Busca setor no ArrayList pela id.                                                                                                    
 	 * 
 	 * 
 	 * @param ArrayList<Setor>.
