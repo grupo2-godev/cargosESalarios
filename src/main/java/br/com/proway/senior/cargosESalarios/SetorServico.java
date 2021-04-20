@@ -20,6 +20,10 @@ public class SetorServico implements ISetorServico{
 		listaSetores.add(setor);
 	}
 	
+	public void cadastrarSetor(ArrayList<Setor> listaSetores, Setor setor) {
+		listaSetores.add(setor);
+	}
+	
 	/**
 	 * Altera o setor.
 	 * 
@@ -28,19 +32,26 @@ public class SetorServico implements ISetorServico{
 	 * @param listaSetores
 	 * @param nomeSetor
 	 * @param id
-	 * 
+	 * S
 	 * @param capacidade
 	 * @Return void
 	 */
 	public void alterarSetor(ArrayList<Setor> listaSetores, String nomeSetor, int id, int capacidade, int idPermissao) {
-		Setor setor = new Setor();
 		
 		for(Setor setorSelecionado : listaSetores) {
-			if (setorSelecionado.getId() == id) {
+			if ((int) setorSelecionado.getId() == (int) id) {
 				
-				setor.setNomeSetor(nomeSetor);
-				setor.setCapacidade(capacidade);
-				setor.setIdPermissao(idPermissao);
+				if (!(nomeSetor == setorSelecionado.getNomeSetor())) {
+				setorSelecionado.setNomeSetor(nomeSetor);
+				}
+				
+				if (!((int) capacidade == setorSelecionado.getCapacidade())) {
+				setorSelecionado.setCapacidade(capacidade);	
+				}
+				
+				if (!((int) idPermissao == setorSelecionado.getIdPermissao())) {
+				setorSelecionado.setIdPermissao(idPermissao);
+				}
 				break;
 			}
 		}	

@@ -9,6 +9,9 @@ public interface ISetorServico {
 							   int id, 
 							   int capacidade, 
 							   int idPermissao);
+	
+	public void cadastrarSetor(ArrayList<Setor> listaSetores, Setor setor);
+	
 	public void alterarSetor(ArrayList<Setor> listaSetores, 
 			                 String nomeSetor, 
 			                 int id, 

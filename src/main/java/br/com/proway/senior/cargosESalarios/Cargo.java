@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class Cargo {
 
-	private Integer idCargo;
+	private int idCargo;
 	private String nomeCargo;
-	private Integer idSetor;
+	private int idSetor;
 	private Setor setor;
 	private String hierarquia;                 // Exemplo: Supervisão/Gerência
 	private Double salario;
@@ -14,12 +14,12 @@ public class Cargo {
 	private LocalDateTime dataUltimaRevisao; 
 	private String cbo2002;                // Vide http://www.mtecbo.gov.br/ CBO - Classificação Brasileira de Ocupações
 	private String cbo94;                 // Verificar
-	private Integer horaMes;
+	private int horaMes;
 	private String grauDeInstrucao;     // Exemplo: Superior Completo
 	private String experienciaMinima;  // Exemplo: 2 anos.
 	private String atribuicoes;       // Exemplo: Programação em Java, Criação de Banco de Dados, etc...
 	private String bonificacao;      // Exemplo: ???
-	private Integer status;         // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
+	private int status;         // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
 	private int idPermissao; 
 
 
@@ -41,14 +41,15 @@ public class Cargo {
 	 * @param status
 	 * @param idPermissao
 	 */
-	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor, String hierarquia, Double salario,
-			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, Integer horaMes,
-			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, Integer status,
+	public Cargo(int idCargo, String nomeCargo, int idSetor, Setor setor, String hierarquia, Double salario,
+			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, int horaMes,
+			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, int status,
 			int idPermissao) {
 		super();
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
 		this.idSetor = idSetor;
+		this.setor = setor;
 		this.hierarquia = hierarquia;
 		this.salario = salario;
 		this.dataCadastro = dataCadastro;
@@ -64,12 +65,12 @@ public class Cargo {
 		this.idPermissao = idPermissao;
 	}
 
-	public Cargo(Integer idCargo, String nomeCargo) {
+	public Cargo(int idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
 	}
 	
-	public Cargo(Integer idCargo, String nomeCargo, int idSetor) {
+	public Cargo(int idCargo, String nomeCargo, int idSetor) {
 		this.idCargo = idCargo;
 		this.idSetor = idSetor;
 		this.nomeCargo = nomeCargo;
@@ -78,21 +79,19 @@ public class Cargo {
 	/**
 	 * 
 	 */
-	public Cargo() {
-
-	}
+	public Cargo() {}
 
 	/**
 	 * @return the idCargo
 	 */
-	public Integer getIdCargo() {
+	public int getIdCargo() {
 		return idCargo;
 	}
 
 	/**
 	 * @param idCargo the idCargo to set
 	 */
-	public void setIdCargo(Integer idCargo) {
+	public void setIdCargo(int idCargo) {
 		this.idCargo = idCargo;
 	}
 
@@ -113,14 +112,14 @@ public class Cargo {
 	/**
 	 * @return the idSetor
 	 */
-	public Integer getIdSetor() {
+	public int getIdSetor() {
 		return idSetor;
 	}
 
 	/**
 	 * @param idSetor the idSetor to set
 	 */
-	public void setIdSetor(Integer idSetor) {
+	public void setIdSetor(int idSetor) {
 		this.idSetor = idSetor;
 	}
 
@@ -211,14 +210,14 @@ public class Cargo {
 	/**
 	 * @return the horaMes
 	 */
-	public Integer getHoraMes() {
+	public int getHoraMes() {
 		return horaMes;
 	}
 
 	/**
 	 * @param horaMes the horaMes to set
 	 */
-	public void setHoraMes(Integer horaMes) {
+	public void setHoraMes(int horaMes) {
 		this.horaMes = horaMes;
 	}
 
@@ -281,14 +280,14 @@ public class Cargo {
 	/**
 	 * @return the status
 	 */
-	public Integer getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(Integer status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	
@@ -322,11 +321,11 @@ public class Cargo {
 
 	@Override
 	public String toString() {
-		return "Cargo - idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", hierarquia="
-				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
-				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
-				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
-				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status;
+		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", setor=" + setor
+				+ ", hierarquia=" + hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro
+				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
+				+ ", horaMes=" + horaMes + ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima="
+				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", bonificacao=" + bonificacao + ", status="
+				+ status + ", idPermissao=" + idPermissao + "]";
 	}
-
 }

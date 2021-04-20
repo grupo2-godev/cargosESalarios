@@ -35,7 +35,7 @@ public class CargoService implements ICargoService {
 	 * @param idSetor
 	 * @return ArrayList de cargos 
 	 */
-	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo, ArrayList<Setor> listaConsultada, int idSetor) {
+	public void cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo, ArrayList<Setor> listaConsultada, int idSetor) {
 		Cargo cargo = new Cargo(id, nomeCargo, idSetor);
 		SetorServico sv = new SetorServico();
 		Setor setor = new Setor();
@@ -45,7 +45,10 @@ public class CargoService implements ICargoService {
 		cargo.setSetor(setor);
 		
 		todosCadastrados.add(cargo);
-		return todosCadastrados;
+	}
+	public void cadastrarCargo(ArrayList<Cargo> cargos, Cargo cargoASerCadastrado) {
+		
+		cargos.add(cargoASerCadastrado);
 	}
 	/**
 	 * Remove um cargo da lista de cargos.
@@ -57,7 +60,7 @@ public class CargoService implements ICargoService {
 	 */
 	public void removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
-			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
+			if (listaCargo.get(i).getIdCargo() == idCargoProcurar) {
 				listaCargo.remove(i);
 			} else {
 				i++;
@@ -74,7 +77,7 @@ public class CargoService implements ICargoService {
 	 */
 	public void alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
-			if (listaCargo.get(i).getIdCargo().equals(idCargoProcurar)) {
+			if (listaCargo.get(i).getIdCargo() == idCargoProcurar) {
 				listaCargo.get(i).setNomeCargo(nomeCargo);
 			} else {
 				i++;
