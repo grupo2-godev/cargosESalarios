@@ -12,7 +12,9 @@ public interface ICargoService {
 	 * @param idCargo          id do cargo que vai ser inserido
 	 * @return ArrayList de cargos criados
 	 */
-	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo);
+	public void cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo);
+	
+	public ArrayList<Cargo> cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo, ArrayList<Setor> listaConsultada, int idSetor);
 
 	/**
 	 * Remove um cargo da lista de cargos.
@@ -22,7 +24,7 @@ public interface ICargoService {
 	 *                        <i>idCargoProcurar</i>
 	 * @return boolean        que faz a verificação se foi ou não removido
 	 */
-	public boolean removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo);
+	public void removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo);
 
 	/**
 	 * Altera um cargo da lista de cargos.
@@ -32,7 +34,7 @@ public interface ICargoService {
 	 * @param nomeCargo       nome do cargo a ser alterado
 	 * @return boolean        que faz a verificação se foi ou não alterado
 	 */
-	public boolean alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo);
+	public void alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo);
 
 	/**
 	 * 

@@ -14,7 +14,10 @@ public class Main {
 		setorSvc.cadastrarSetor(listaSetores, "Contabilidade", 3524, 20, 1527);
 		setorSvc.cadastrarSetor(listaSetores, "Administracao", 3525, 20, 1528);
 		
-		cargoSvc.cadastrarCargo(listaCargos, 2, "Auxiliar de Contabilidade", listaSetores, 3524);
-		cargoSvc.cadastrarCargo(listaCargos, 3, "Auxiliar", listaSetores, 3524);
+		cargoSvc.cadastrarCargo(listaCargos, 1, "Auxiliar de Administração", listaSetores, 3525);
+		cargoSvc.cadastrarCargo(listaCargos, 2, "Recrutador", listaSetores, 3521);
+		cargoSvc.cadastrarCargo(listaCargos, 3, "Auxiliar de Contabilidade", listaSetores, 3524);
+		cargoSvc.cadastrarCargo(listaCargos, 4, "Representante Comercial", listaSetores, 3522);
+		System.out.println();
 	}
 }
