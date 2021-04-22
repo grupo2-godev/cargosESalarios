@@ -18,7 +18,7 @@ public class Cargo {
 	private String grauDeInstrucao;     // Exemplo: Superior Completo
 	private String experienciaMinima;  // Exemplo: 2 anos.
 	private String atribuicoes;       // Exemplo: Programação em Java, Criação de Banco de Dados, etc...
-	private String bonificacao;      // Exemplo: 	???
+	private String bonificacao;      // Exemplo: ???
 	private int status;         // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
 	private int idPermissao; 
 

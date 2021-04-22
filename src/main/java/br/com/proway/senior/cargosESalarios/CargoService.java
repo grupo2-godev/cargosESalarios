@@ -10,14 +10,11 @@ import java.util.ArrayList;
 public class CargoService implements ICargoService {
 
 	/**
-	 * * Cadastrar setores.
-	 * Recebe o nome do cargo (String), id do cargo (int) e a ArrayList à ser populado 
-	   com um objeto da classe Cargo.
-	 * Popula a lista com o objeto.
+	 * Adiciona um cargo à lista de cargos.
 	 * 
-	 * @param todosCadastrados
-	 * @param nomeSetor
-	 * @param id
+	 * @param todosCadastrados traz a lista de todos os cargos no  arrayList
+	 * @param nomeCargo        nome do cargo que vai ser inserido
+	 * @param idCargo          id do cargo que vai ser inserido
 	 * @return void
 	 */
 	public void cadastrarCargo(ArrayList<Cargo> todosCadastrados, int id, String nomeCargo) {
@@ -27,7 +24,7 @@ public class CargoService implements ICargoService {
 	/**
 	 * Cadastra cargo.
 	 * 
-	 * Método de sobrecarga que recebe uma lista de setores e um id (int) de setor e
+	 * Método de sobrecarga que recebe uma lista de setores e um id de setor e
 	 * adiciona a informação de setor ao cargo cadastrado
 	 * 
 	 * 
@@ -49,24 +46,19 @@ public class CargoService implements ICargoService {
 		
 		todosCadastrados.add(cargo);
 	}
-	/**
-	 * Recebe ArrayList e objeto da classe 	Cargo.
-	 * Popula a lista com objeto.
-	 * 
-	 * @param cargos
-	 * @return void
-	 */
+	
+	
 	public void cadastrarCargo(ArrayList<Cargo> cargos, Cargo cargoASerCadastrado) {
 		
 		cargos.add(cargoASerCadastrado);
 	}
 	/**
-	 *Remove um cargo da lista de cargos. 
-	 *Procura o Id (int) recebido na lista e remove. 
-	 *Lista os cargos para procurar o id.
-	 *
-	 * @param idCargoProcurar
-	 * @return void   
+	 * Remove um cargo da lista de cargos.
+	 * 
+	 * @param idCargoProcurar id que serve para procurar e então remover os itens da lista
+	 * @param listaCargo      Lista que serve para a adição de itens e procurar o id
+	 *                        <i>idCargoProcurar</i>
+	 * @return boolean        que faz a verificação se foi ou não removido
 	 */
 	public void removerCargo(int idCargoProcurar, ArrayList<Cargo> listaCargo) {
 		for (int i = 0; i < listaCargo.size(); i++) {
@@ -76,44 +68,45 @@ public class CargoService implements ICargoService {
 		}
 	}
 	/**
-	 * Altera parametros de um cargo da lista.
-	 * Lista os cargos para a alteração.
-	 * Recebe idCargoProurar (int) e nomeCargo(String).
+	 * Altera um cargo da lista de cargos.
 	 * 
-	 * @param listaCargo      
-	 * @param idCargoProcurar  
-	 * @param nomeCargo       
-	 * @return void       
+	 * @param listaCargo      que serve como base para alteração e inserção de itens
+	 * @param idCargoProcurar id que serve para procurar item na lista 
+	 * @param nomeCargo       nome do cargo a ser alterado
+	 * @return boolean        que faz a verificação se foi ou não alterado
 	 */
 	public void alterarCargo(ArrayList<Cargo> listaCargo, int idCargoProcurar, String nomeCargo) {
-		for (int i = 0; i < listaCargo.size(); i++) {
-			if (listaCargo.get(i).getIdCargo() == idCargoProcurar) {
-				listaCargo.get(i).setNomeCargo(nomeCargo);
-			} else {
-				i++;
+//		for (int i = 0; i < listaCargo.size(); i++) {
+//			if (listaCargo.get(i).getIdCargo() == idCargoProcurar) {
+//				listaCargo.get(i).setNomeCargo(nomeCargo);
+//			} else {
+//				i++;
+//			}
+//		}
+		for(Cargo cargoProcurado : listaCargo) {
+			if(cargoProcurado.getIdCargo() == idCargoProcurar) {
+				cargoProcurado.setNomeCargo(nomeCargo);
 			}
 		}
 	}
 	/**
-	 * Retorna todos os cargos contidos na lista.
-	 * @return String 
+	 * 
+	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
 	public String visualizarTodosOsCargos(ArrayList<Cargo> listaCargo) {
 		return listaCargo.toString();
 	}
 	
 	/**
-	 * Retorna todos os cargos contidos na lista
-	 * @return String 
+	 * 
+	 * @return String retorna a mensagem com os dados contidos na lista
 	 */
-	
 	public String visualizarCargo(ArrayList<Cargo> listaCargo, int id) {
-                for (Cargo cargo : listaCargo) {
-                        if(cargo.getIdCargo() == id) {
-                                return cargo.getNomeCargo();
-                        }
-                }
-                return null;
-        }
-
+		for (Cargo cargo : listaCargo) {
+			if(cargo.getIdCargo() == id) {
+				return cargo.getNomeCargo();
+			}
+		}
+		return null;
+	}
 }
