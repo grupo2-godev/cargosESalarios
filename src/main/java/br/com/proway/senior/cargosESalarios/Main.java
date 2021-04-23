@@ -1,6 +1,11 @@
 package br.com.proway.senior.cargosESalarios;
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
+import br.com.proway.senior.cargosESalarios.Cargo.CargoService;
+import br.com.proway.senior.cargosESalarios.Setor.Setor;
+import br.com.proway.senior.cargosESalarios.Setor.SetorServico;
+
 public class Main {
 	public static void main(String[] args) {
 		ArrayList<Setor> listaSetores = new ArrayList<Setor>();

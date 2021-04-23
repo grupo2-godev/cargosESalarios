@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
+import br.com.proway.senior.cargosESalarios.Cargo.CargoService;
+import br.com.proway.senior.cargosESalarios.Setor.Setor;
+import br.com.proway.senior.cargosESalarios.Setor.SetorServico;
+
 public class CargoServiceTest {
 
 	/**

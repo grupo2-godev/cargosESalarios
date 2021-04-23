@@ -1,6 +1,8 @@
-package br.com.proway.senior.cargosESalarios;
+package br.com.proway.senior.cargosESalarios.Cargo;
 
 import java.time.LocalDateTime;
+
+import br.com.proway.senior.cargosESalarios.Setor.Setor;
 
 public class Cargo {
 

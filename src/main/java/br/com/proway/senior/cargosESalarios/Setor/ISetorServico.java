@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios;
+package br.com.proway.senior.cargosESalarios.Setor;
 
 import java.util.ArrayList;
 
