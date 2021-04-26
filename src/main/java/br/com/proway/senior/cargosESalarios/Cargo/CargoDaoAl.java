@@ -35,6 +35,7 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	public void Update(Cargo obj) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
+				System.out.println(cargoProcurado.toString());
 				cargoProcurado = obj;
 			}
 		}

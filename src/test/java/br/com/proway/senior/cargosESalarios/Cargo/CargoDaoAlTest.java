@@ -44,6 +44,26 @@ public class CargoDaoAlTest {
 		assertNotEquals("18 meses", cargoRetornado.getExperienciaMinima());
 	}
 	
+	@Test
+	public void testUpdateCargo() {
+		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+		
+		new CargoDaoAl().Create(cargo);
+		
+		Cargo cargo2 = new Cargo(1, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
+				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
+		
+		new CargoDaoAl().Update(cargo2);
+		
+		Cargo cargoRetornado = new CargoDaoAl().Retrieve(1);
+		
+		assertEquals("Superior Incompleto", cargoRetornado.getGrauDeInstrucao());
+		assertNotEquals("12 meses", cargoRetornado.getExperienciaMinima());
+		assertNotEquals(2, cargoRetornado.getIdCargo());
+		
+	}
+	
 
 //	@Test
 //	void testRetrieveCargo(int id) {
