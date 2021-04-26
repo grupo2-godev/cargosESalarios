@@ -1,6 +1,8 @@
-package br.com.proway.senior.cargosESalarios.Setor;
+package backup;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.Setor.Setor;
 
 public class SetorServico implements ISetorServico{
 	/**

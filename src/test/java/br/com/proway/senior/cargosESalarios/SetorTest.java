@@ -6,11 +6,25 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import backup.SetorServico;
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
-import br.com.proway.senior.cargosESalarios.Setor.SetorServico;
+import br.com.proway.senior.cargosESalarios.Setor.SetorDAOCSV;
+import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
-public class SetorServicoTest {
+public class SetorTest {
 
+	@Test
+	public void testeSalvarUmSetor() {
+		Dados.getInstance().getListaCargos();
+		
+		
+		SetorDAOCSV setorDAO = new SetorDAOCSV();
+		Setor s = new Setor();
+		setorDAO.Create(s);
+		System.out.println(setorDAO.getAll());
+	}
+	
+	
 	@Test
 	public void testeCadastrarSetor() {
 		String nomeSetor = "RH";

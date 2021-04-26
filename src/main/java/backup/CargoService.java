@@ -1,8 +1,8 @@
-package br.com.proway.senior.cargosESalarios.Cargo;
+package backup;
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
-import br.com.proway.senior.cargosESalarios.Setor.SetorServico;
 
 /**
  * 
