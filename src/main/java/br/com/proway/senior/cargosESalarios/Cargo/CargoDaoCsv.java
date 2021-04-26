@@ -3,16 +3,16 @@ package br.com.proway.senior.cargosESalarios.Cargo;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
-import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
-public class CargoDAOAL implements CRUDInterface<Cargo> {
+//TO-DO
+public class CargoDaoCsv implements CRUDInterface<Cargo> {
 	
 	public void Create(Cargo obj) {
-		Dados.getInstance().getListaCargos().add(obj);
+		
 	}
 
 	public Cargo Retrieve(String key) {
-		return Dados.getInstance().getListaCargos().get(Integer.parseInt(key));
+		return null;
 	}
 
 	public void Update(Cargo obj) {
@@ -26,6 +26,4 @@ public class CargoDAOAL implements CRUDInterface<Cargo> {
 	public ArrayList<Cargo> getAll(){
 		return null;
 	}
-	
-	
 }

@@ -44,9 +44,7 @@ public class CargoService implements ICargoService {
 		Setor setor = new Setor();
 		
 		setor = sv.consultarSetor(listaConsultada, idSetor);
-		
-		cargo.setSetor(setor);
-		
+				
 		todosCadastrados.add(cargo);
 	}
 	

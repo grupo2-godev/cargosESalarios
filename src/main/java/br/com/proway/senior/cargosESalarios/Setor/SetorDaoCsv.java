@@ -8,7 +8,8 @@ import com.opencsv.CSVReader;
 
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 
-public class SetorDAOCSV implements CRUDInterface<Setor>{
+// TO-DO
+public class SetorDaoCsv implements CRUDInterface<Setor>{
 	public void Create(Setor obj) {
 		
 	}

@@ -1,58 +1,67 @@
 package br.com.proway.senior.cargosESalarios.Setor;
 
 public class Setor {
-	private int id;
+	private int idSetor;
 	private String nomeSetor;
 	private int capacidade;
 	private int idPermissao;
+
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return idSetor;
 	}
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.idSetor = id;
 	}
+
 	/**
 	 * @return the nomeSetor
 	 */
 	public String getNomeSetor() {
 		return nomeSetor;
 	}
+
 	/**
 	 * @param nomeSetor the nomeSetor to set
 	 */
 	public void setNomeSetor(String nomeSetor) {
 		this.nomeSetor = nomeSetor;
 	}
+
 	/**
 	 * @return the capacidade
 	 */
 	public int getCapacidade() {
 		return capacidade;
 	}
+
 	/**
 	 * @param capacidade the capacidade to set
 	 */
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
+
 	/**
 	 * @return the idPermissao
 	 */
 	public int getIdPermissao() {
 		return idPermissao;
 	}
+
 	/**
 	 * @param idPermissao the idPermissao to set
 	 */
 	public void setIdPermissao(int idPermissao) {
 		this.idPermissao = idPermissao;
 	}
+
 	/**
 	 * @param id
 	 * @param nomeSetor
@@ -61,11 +70,12 @@ public class Setor {
 	 */
 	public Setor(int id, String nomeSetor, int capacidade, int idPermissao) {
 		super();
-		this.id = id;
+		this.idSetor = id;
 		this.nomeSetor = nomeSetor;
 		this.capacidade = capacidade;
 		this.idPermissao = idPermissao;
 	}
+
 	/**
 	 * 
 	 */

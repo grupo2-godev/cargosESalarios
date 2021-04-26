@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import backup.SetorServico;
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
-import br.com.proway.senior.cargosESalarios.Setor.SetorDAOCSV;
+import br.com.proway.senior.cargosESalarios.Setor.SetorDaoCsv;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
 public class SetorTest {
@@ -18,7 +18,7 @@ public class SetorTest {
 		Dados.getInstance().getListaCargos();
 		
 		
-		SetorDAOCSV setorDAO = new SetorDAOCSV();
+		SetorDaoCsv setorDAO = new SetorDaoCsv();
 		Setor s = new Setor();
 		setorDAO.Create(s);
 		System.out.println(setorDAO.getAll());

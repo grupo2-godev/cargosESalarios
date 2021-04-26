@@ -2,28 +2,24 @@ package br.com.proway.senior.cargosESalarios.Cargo;
 
 import java.time.LocalDateTime;
 
-import br.com.proway.senior.cargosESalarios.Setor.Setor;
-
 public class Cargo {
 
-	private int idCargo;
+	private Integer idCargo;
 	private String nomeCargo;
-	private int idSetor;
-	private Setor setor;
-	private String hierarquia;                 // Exemplo: Supervisão/Gerência
+	private Integer idSetor;
+	private String hierarquia;
 	private Double salario;
-	private LocalDateTime dataCadastro;      // Editar o cadastro
-	private LocalDateTime dataUltimaRevisao; 
-	private String cbo2002;                // Vide http://www.mtecbo.gov.br/ CBO - Classificação Brasileira de Ocupações
-	private String cbo94;                 // Verificar
-	private int horaMes;
-	private String grauDeInstrucao;     // Exemplo: Superior Completo
-	private String experienciaMinima;  // Exemplo: 2 anos.
-	private String atribuicoes;       // Exemplo: Programação em Java, Criação de Banco de Dados, etc...
-	private String bonificacao;      // Exemplo: ???
-	private int status;         // Status do Cargo Cadastrado - 1 Ativo 2 Bloqueado 3 Inativo.
-	private int idPermissao; 
-
+	private LocalDateTime dataCadastro;
+	private LocalDateTime dataUltimaRevisao;
+	private String cbo2002;
+	private String cbo94;
+	private Integer horaMes;
+	private String grauDeInstrucao;
+	private String experienciaMinima;
+	private String atribuicoes;
+	private String bonificacao;
+	private Integer status;
+	private Integer idPermissao;
 
 	/**
 	 * @param idCargo
@@ -43,15 +39,14 @@ public class Cargo {
 	 * @param status
 	 * @param idPermissao
 	 */
-	public Cargo(int idCargo, String nomeCargo, int idSetor, Setor setor, String hierarquia, Double salario,
-			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, int horaMes,
-			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, int status,
-			int idPermissao) {
+	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor, String hierarquia, Double salario,
+			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, Integer horaMes,
+			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, Integer status,
+			Integer idPermissao) {
 		super();
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
 		this.idSetor = idSetor;
-		this.setor = setor;
 		this.hierarquia = hierarquia;
 		this.salario = salario;
 		this.dataCadastro = dataCadastro;
@@ -67,12 +62,12 @@ public class Cargo {
 		this.idPermissao = idPermissao;
 	}
 
-	public Cargo(int idCargo, String nomeCargo) {
+	public Cargo(Integer idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
 	}
-	
-	public Cargo(int idCargo, String nomeCargo, int idSetor) {
+
+	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor) {
 		this.idCargo = idCargo;
 		this.idSetor = idSetor;
 		this.nomeCargo = nomeCargo;
@@ -81,19 +76,20 @@ public class Cargo {
 	/**
 	 * 
 	 */
-	public Cargo() {}
+	public Cargo() {
+	}
 
 	/**
 	 * @return the idCargo
 	 */
-	public int getIdCargo() {
+	public Integer getIdCargo() {
 		return idCargo;
 	}
 
 	/**
 	 * @param idCargo the idCargo to set
 	 */
-	public void setIdCargo(int idCargo) {
+	public void setIdCargo(Integer idCargo) {
 		this.idCargo = idCargo;
 	}
 
@@ -114,14 +110,14 @@ public class Cargo {
 	/**
 	 * @return the idSetor
 	 */
-	public int getIdSetor() {
+	public Integer getIdSetor() {
 		return idSetor;
 	}
 
 	/**
 	 * @param idSetor the idSetor to set
 	 */
-	public void setIdSetor(int idSetor) {
+	public void setIdSetor(Integer idSetor) {
 		this.idSetor = idSetor;
 	}
 
@@ -212,14 +208,14 @@ public class Cargo {
 	/**
 	 * @return the horaMes
 	 */
-	public int getHoraMes() {
+	public Integer getHoraMes() {
 		return horaMes;
 	}
 
 	/**
 	 * @param horaMes the horaMes to set
 	 */
-	public void setHoraMes(int horaMes) {
+	public void setHoraMes(Integer horaMes) {
 		this.horaMes = horaMes;
 	}
 
@@ -282,52 +278,38 @@ public class Cargo {
 	/**
 	 * @return the status
 	 */
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * @return the idPermissao
 	 */
-	public int getIdPermissao() {
+	public Integer getIdPermissao() {
 		return idPermissao;
 	}
 
 	/**
 	 * @param idPermissao the idPermissao to set
 	 */
-	public void setIdPermissao(int idPermissao) {
+	public void setIdPermissao(Integer idPermissao) {
 		this.idPermissao = idPermissao;
-	}
-	
-	/**
-	 * @return the setor
-	 */
-	public Setor getSetor() {
-		return setor;
-	}
-
-	/**
-	 * @param setor the setor to set
-	 */
-	public void setSetor(Setor setor) {
-		this.setor = setor;
 	}
 
 	@Override
 	public String toString() {
-		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + ", setor=" + setor
-				+ ", hierarquia=" + hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro
-				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
-				+ ", horaMes=" + horaMes + ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima="
-				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", bonificacao=" + bonificacao + ", status="
-				+ status + ", idPermissao=" + idPermissao + "]";
+		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + "" + ", hierarquia="
+				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
+				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
+				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
+				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status + ", idPermissao=" + idPermissao
+				+ "]";
 	}
 }
