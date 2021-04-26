@@ -6,11 +6,11 @@ public interface CRUDInterface<T> {
 
 	public void Create(T obj);
 
-	public T Retrieve(String key);
+	public T Retrieve(int id);
 
 	public void Update(T obj);
 
-	public void Delete(String key);
+	public void Delete(int id);
 	
 	public ArrayList<T> getAll();
 

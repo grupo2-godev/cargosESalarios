@@ -11,15 +11,15 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 		Dados.getInstance().getListaCargos().add(obj);
 	}
 
-	public Cargo Retrieve(String key) {
-		return Dados.getInstance().getListaCargos().get(Integer.parseInt(key));
+	public Cargo Retrieve(int id) {
+		return Dados.getInstance().getListaCargos().get(id);
 	}
 
 	public void Update(Cargo obj) {
 		
 	}
 
-	public void Delete(String key) {
+	public void Delete(int id) {
 		
 	}
 	
