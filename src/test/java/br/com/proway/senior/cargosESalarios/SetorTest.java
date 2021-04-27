@@ -5,13 +5,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
-import java.io.Reader;
-import java.nio.file.Files;
-
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
@@ -27,7 +20,7 @@ public class SetorTest {
 		SetorDaoAl setorDao = new SetorDaoAl();
 		Setor setor1 = new Setor(idSetor, "Transporte", 20, 200);
 		setorDao.create(setor1);
-		Setor setor2 = new Setor(idSetor, "Destruição", 8000, 5832139);
+		Setor setor2 = new Setor(idSetor, "Nome do Setor Alterado (Teste)", 8000, 5832139);
 		setorDao.update(setor2);
 		Setor setorAlterado = setorDao.retrieve(idSetor);
 		assertEquals(setorAlterado, setor2);
@@ -66,32 +59,48 @@ public class SetorTest {
 		Setor setor = setorDao.retrieve(idSetor);
 		assertNull(setor);
 	}
-
-	@Test
-	public void testeGetAll() {
-		SetorDaoAl setorDao = new SetorDaoAl();
-		ArrayList<Setor> getAll = setorDao.getAll();
-		ArrayList<Setor> listaDados = Dados.getInstance().getListaSetores();
-		assertEquals(getAll, listaDados);
-	}
-	
-	@Test
-	public void testCSVReadAll() throws Exception {
-		SetorDaoCsv setorDAO = new SetorDaoCsv();
-		Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource("../classes/br/com/proway/senior/cargosESalarios/recursos/cargos.csv").toURI()));
-		List<String[]> minhaLista = setorDAO.readAll(reader);
-		for(String[] line : minhaLista) {
-			for(String word : line) {
-				System.out.println(word);
-			}			
-		}		
-	}
 	
 	@Test
 	public void testCreateCSV() throws Exception{
-		SetorDaoCsv setorDao = new SetorDaoCsv();	
-		Setor novoSetor = new Setor(4, "Limpeza", 10, 5);
+		int idSetor = 4;
+		SetorDaoCsv setorDao = new SetorDaoCsv();		
+		Setor novoSetor = new Setor(idSetor, "Limpeza", 10, 5);
 		setorDao.create(novoSetor);
+		Setor setorRetornado = setorDao.retrieve(idSetor);
+		assertEquals(setorRetornado, novoSetor);
 	}
 	
+	@Test
+	public void testRetrieveCSV() {
+		Integer idSetorRetornado = 2;
+		SetorDaoCsv setorDao = new SetorDaoCsv();
+		Setor setorRetornado = setorDao.retrieve(idSetorRetornado);
+		assertEquals(setorRetornado.getId(), idSetorRetornado);
+	}
+	
+	@Test
+	public void testUpdateCSV() {
+		int idSetorAlterado = 3;
+		SetorDaoCsv setorDao = new SetorDaoCsv();		
+		Setor setorAnterior = setorDao.retrieve(idSetorAlterado);
+		Setor setorAlterado = new Setor(setorAnterior.getId(), setorAnterior.getNomeSetor(), setorAnterior.getCapacidade() + 200, setorAnterior.getIdPermissao());
+		setorDao.update(setorAlterado);
+		Setor setorRetornado = setorDao.retrieve(idSetorAlterado);
+		assertEquals(setorRetornado, setorAlterado);
+		assertNotEquals(setorRetornado, setorAnterior);
+		
+	}
+	
+	@Test
+	public void testDeleteCSV() {
+		int idSetorDeletado = 5;
+		SetorDaoCsv setorDao = new SetorDaoCsv();		
+		Setor novoSetor = new Setor(idSetorDeletado, "SETOR A SER REMOVIDO", 23, 666);
+		int tamanhoAnterior = setorDao.getAll().size();
+		setorDao.create(novoSetor);		
+		setorDao.delete(idSetorDeletado);
+		int tamanhoAtual = setorDao.getAll().size();
+		assertEquals(tamanhoAnterior, tamanhoAtual);
+		
+	}
 }

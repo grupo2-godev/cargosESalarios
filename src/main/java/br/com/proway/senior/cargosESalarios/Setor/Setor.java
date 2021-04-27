@@ -90,9 +90,9 @@ public class Setor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + capacidade;
-		result = prime * result + idPermissao;
-		result = prime * result + idSetor;
+		result = prime * result + ((capacidade == null) ? 0 : capacidade.hashCode());
+		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
+		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
 		result = prime * result + ((nomeSetor == null) ? 0 : nomeSetor.hashCode());
 		return result;
 	}
@@ -106,11 +106,20 @@ public class Setor {
 		if (getClass() != obj.getClass())
 			return false;
 		Setor other = (Setor) obj;
-		if (capacidade != other.capacidade)
+		if (capacidade == null) {
+			if (other.capacidade != null)
+				return false;
+		} else if (!capacidade.equals(other.capacidade))
 			return false;
-		if (idPermissao != other.idPermissao)
+		if (idPermissao == null) {
+			if (other.idPermissao != null)
+				return false;
+		} else if (!idPermissao.equals(other.idPermissao))
 			return false;
-		if (idSetor != other.idSetor)
+		if (idSetor == null) {
+			if (other.idSetor != null)
+				return false;
+		} else if (!idSetor.equals(other.idSetor))
 			return false;
 		if (nomeSetor == null) {
 			if (other.nomeSetor != null)
@@ -119,6 +128,8 @@ public class Setor {
 			return false;
 		return true;
 	}
+
+
 
 
 	
