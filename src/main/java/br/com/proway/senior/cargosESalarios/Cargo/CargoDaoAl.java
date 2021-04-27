@@ -33,13 +33,13 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * 
 	 */
 	public void Update(Cargo obj) {
-		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
-			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
-				System.out.println(cargoProcurado.toString());
-				cargoProcurado = obj;
+		ArrayList<Cargo> lista = Dados.getInstance().getListaCargos();
+		for (Cargo cargoProcurado : lista) {
+			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {				
+				int idDoProcurado = lista.indexOf(cargoProcurado);
+				lista.set(idDoProcurado, obj);
 			}
 		}
-
 	}
 
 	/***
@@ -49,19 +49,22 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * 
 	 * @author Elton, Samuel
 	 * @param id
+	 * @return 
 	 */
-	public void Delete(int id) {
+	public Cargo Delete(int id) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id) {
 				Dados.getInstance().getListaCargos().remove(cargoProcurado);
+				break;
 			}
 
 		}
+		return null;
 
 	}
 
 	/***
-	 * Lista
+	 * Lista'
 	 * 
 	 * Lista todos os dados registrados.
 	 * 

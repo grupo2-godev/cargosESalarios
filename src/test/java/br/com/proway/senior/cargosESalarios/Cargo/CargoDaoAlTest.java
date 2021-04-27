@@ -1,55 +1,39 @@
 package br.com.proway.senior.cargosESalarios.Cargo;
 
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.recursos.Dados;
-
 public class CargoDaoAlTest {
 	
-//		for (Cargo cargop : Dados.getInstance().getListaCargos()) {
-//			System.out.println(cargop.toString());
-//		}
-
 	@Test
-	public void testCreateCargo() {
-		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+	public void testCreateAndRetrieveCargo() {
+		int idCargo1 = 5;
+		int idCargo2 = 6;
+		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
 				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
 		
-		new CargoDaoAl().Create(cargo);
-
-		assertEquals(1, (int) Dados.getInstance().getListaCargos().get(0).getIdCargo());
-		assertNotEquals(2, (int) Dados.getInstance().getListaCargos().get(0).getIdCargo());
-	}
-	
-	@Test
-	public void testRetrieveCargo() {
-		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+		new CargoDaoAl().Create(cargo1);
 		
-		new CargoDaoAl().Create(cargo);
-		
-		Cargo cargo2 = new Cargo(2, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
+		Cargo cargo2 = new Cargo(idCargo2, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
 				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
 		
 		new CargoDaoAl().Create(cargo2);
 		
-		Cargo cargoRetornado = new CargoDaoAl().Retrieve(1);
-		
-		assertEquals("Superior Completo", cargoRetornado.getGrauDeInstrucao());
-		assertNotEquals("18 meses", cargoRetornado.getExperienciaMinima());
+		Cargo cargoRetornado = new CargoDaoAl().Retrieve(idCargo1);
+		assertEquals(cargo1, cargoRetornado);
+		//assertNotEquals(cargo2, cargoRetornado);
 	}
-	
 	@Test
 	public void testUpdateCargo() {
-		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+		Cargo cargo1 = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
 				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
 		
-		new CargoDaoAl().Create(cargo);
+		new CargoDaoAl().Create(cargo1);
 		
 		Cargo cargo2 = new Cargo(1, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
 				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
@@ -57,25 +41,22 @@ public class CargoDaoAlTest {
 		new CargoDaoAl().Update(cargo2);
 		
 		Cargo cargoRetornado = new CargoDaoAl().Retrieve(1);
-		
-		assertEquals("Superior Incompleto", cargoRetornado.getGrauDeInstrucao());
-		assertNotEquals("12 meses", cargoRetornado.getExperienciaMinima());
-		assertNotEquals(2, cargoRetornado.getIdCargo());
-		
+			
+		assertEquals(cargo2, cargoRetornado);
+		assertNotEquals(cargo1, cargoRetornado);
+		assertSame(cargo2, cargoRetornado);
 	}
-	
-
-//	@Test
-//	void testRetrieveCargo(int id) {
-//		ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
-//		CargoService cs = new CargoService();
-//		
-//		cs.cadastrarCargo(listaCargo, 1, "Desenvolvedor");
-//		cs.cadastrarCargo(listaCargo, 2, "Tester");
-//		cs.cadastrarCargo(listaCargo, 3, "Tester2");
-//		cs.cadastrarCargo(listaCargo, 4, "Dev2");
-//		cs.cadastrarCargo(listaCargo, 5, "Dev3");
-//		
-//		assertEquals(Dados.getInstance().getListaCargos().get(id));
-
+		@Test
+	public void testDeleteCargo2() {
+		int idCargo1 = 0;
+		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+		CargoDaoAl cargoDao = new CargoDaoAl();
+		int tamanhoInicial = cargoDao.getAll().size();
+		
+		cargoDao.Create(cargo1);
+		assertEquals(tamanhoInicial + 1,cargoDao.getAll().size());
+		cargoDao.Delete(idCargo1);
+		assertEquals(tamanhoInicial,cargoDao.getAll().size());
+	}
 }
