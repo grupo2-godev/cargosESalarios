@@ -75,10 +75,7 @@ public class Setor {
 		this.capacidade = capacidade;
 		this.idPermissao = idPermissao;
 	}
-
-	/**
-	 * 
-	 */
+	
 	public Setor() {
 		super();
 	}

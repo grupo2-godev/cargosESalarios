@@ -21,14 +21,14 @@ public class CargoDaoAlTest {
 		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
 				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
 
-		new CargoDaoAl().Create(cargo1);
+		new CargoDaoAl().create(cargo1);
 
 		Cargo cargo2 = new Cargo(idCargo2, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
 				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
 
-		new CargoDaoAl().Create(cargo2);
+		new CargoDaoAl().create(cargo2);
 
-		Cargo cargoRetornado = new CargoDaoAl().Retrieve(idCargo1);
+		Cargo cargoRetornado = new CargoDaoAl().retrieve(idCargo1);
 		assertEquals(cargo1, cargoRetornado);
 	}
 
@@ -38,14 +38,14 @@ public class CargoDaoAlTest {
 		Cargo cargo1 = new Cargo(idCargo, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
 				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
 
-		new CargoDaoAl().Create(cargo1);
+		new CargoDaoAl().create(cargo1);
 
 		Cargo cargo2 = new Cargo(idCargo, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
 				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
 
-		new CargoDaoAl().Update(cargo2);
+		new CargoDaoAl().update(cargo2);
 
-		Cargo cargoRetornado = new CargoDaoAl().Retrieve(idCargo);
+		Cargo cargoRetornado = new CargoDaoAl().retrieve(idCargo);
 
 		assertEquals(cargo2, cargoRetornado);
 		assertNotEquals(cargo1, cargoRetornado);
@@ -60,9 +60,9 @@ public class CargoDaoAlTest {
 		CargoDaoAl cargoDao = new CargoDaoAl();
 		int tamanhoInicial = Dados.getInstance().getListaCargos().size();
 
-		cargoDao.Create(cargo1);
+		cargoDao.create(cargo1);
 		assertEquals(tamanhoInicial + 1, Dados.getInstance().getListaCargos().size());
-		cargoDao.Delete(idCargo1);
+		cargoDao.delete(idCargo1);
 		assertEquals(tamanhoInicial, Dados.getInstance().getListaCargos().size());
 	}
 	
@@ -70,7 +70,7 @@ public class CargoDaoAlTest {
 	public void testRetrieveIsNull() {
 		int idCargo = 10;
 		CargoDaoAl cargoDao = new CargoDaoAl();
-		Cargo cargo = cargoDao.Retrieve(idCargo);
+		Cargo cargo = cargoDao.retrieve(idCargo);
 		assertNull(cargo);
 	}
 	

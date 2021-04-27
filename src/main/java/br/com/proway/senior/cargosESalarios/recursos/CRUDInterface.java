@@ -10,13 +10,13 @@ import java.util.ArrayList;
  */
 public interface CRUDInterface<T> {
 
-	public void Create(T obj);
+	public void create(T obj);
 
-	public T Retrieve(int  id);
+	public T retrieve(int  id);
 
-	public void Update(T obj);
+	public void update(T obj);
 
-	public void Delete(int id);
+	public void delete(int id);
 	
 	public ArrayList<T> getAll();
 

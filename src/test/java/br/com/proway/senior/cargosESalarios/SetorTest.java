@@ -7,7 +7,7 @@ import static org.junit.Assert.assertNull;
 
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,10 @@ public class SetorTest {
 		int idSetor = 2;
 		SetorDaoAl setorDao = new SetorDaoAl();
 		Setor setor1 = new Setor(idSetor, "Transporte", 20, 200);
-		setorDao.Create(setor1);
+		setorDao.create(setor1);
 		Setor setor2 = new Setor(idSetor, "Destruição", 8000, 5832139);
-		setorDao.Update(setor2);
-		Setor setorAlterado = setorDao.Retrieve(idSetor);
+		setorDao.update(setor2);
+		Setor setorAlterado = setorDao.retrieve(idSetor);
 		assertEquals(setorAlterado, setor2);
 		assertNotEquals(setorAlterado, setor1);
 	}
@@ -40,9 +40,9 @@ public class SetorTest {
 		SetorDaoAl setorDAO = new SetorDaoAl();
 		Setor setor = new Setor(idSetor, "Recursos Humanos", 10, 100);
 		Setor setorClone = new Setor(idSetor, "Recursos Humanos", 10, 100);
-		setorDAO.Create(setor);
-		setorDAO.Create(setorClone);
-		Setor setorRetornado = setorDAO.Retrieve(idSetor);
+		setorDAO.create(setor);
+		setorDAO.create(setorClone);
+		Setor setorRetornado = setorDAO.retrieve(idSetor);
 		assertEquals(setorRetornado, setor);
 		assertNotSame(setorRetornado, setorClone);
 	}
@@ -53,9 +53,9 @@ public class SetorTest {
 		Setor setor01 = new Setor(idSetor, "Contabilidade", 20, 400);
 		SetorDaoAl setorDao = new SetorDaoAl();
 		int tamanhoInicial = Dados.getInstance().getListaSetores().size();
-		setorDao.Create(setor01);
+		setorDao.create(setor01);
 		assertEquals(tamanhoInicial + 1, Dados.getInstance().getListaSetores().size());
-		setorDao.Delete(idSetor);
+		setorDao.delete(idSetor);
 		assertEquals(tamanhoInicial, Dados.getInstance().getListaSetores().size());
 	}
 
@@ -63,7 +63,7 @@ public class SetorTest {
 	public void testSetorNaoExistente() {
 		int idSetor = 4;
 		SetorDaoAl setorDao = new SetorDaoAl();
-		Setor setor = setorDao.Retrieve(idSetor);
+		Setor setor = setorDao.retrieve(idSetor);
 		assertNull(setor);
 	}
 
@@ -91,7 +91,7 @@ public class SetorTest {
 	public void testCreateCSV() throws Exception{
 		SetorDaoCsv setorDao = new SetorDaoCsv();	
 		Setor novoSetor = new Setor(4, "Limpeza", 10, 5);
-		setorDao.Create(novoSetor);
+		setorDao.create(novoSetor);
 	}
 	
 }

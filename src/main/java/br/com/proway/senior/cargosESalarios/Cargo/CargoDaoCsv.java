@@ -7,19 +7,19 @@ import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 //TO-DO
 public class CargoDaoCsv implements CRUDInterface<Cargo> {
 	
-	public void Create(Cargo obj) {
+	public void create(Cargo obj) {
 		
 	}
 
-	public Cargo Retrieve(int id) {
+	public Cargo retrieve(int id) {
 		return null;
 	}
 
-	public void Update(Cargo obj) {
+	public void update(Cargo obj) {
 		
 	}
 
-	public void Delete(int id) {
+	public void delete(int id) {
 		
 	}
 	

@@ -10,11 +10,25 @@ public final class Dados {
 	private ArrayList<Cargo> listaCargos;	
 	private ArrayList<Setor> listaSetores;
 	
+	/**
+	 *Armazena os dados cadastrados do Setor em ArrayList. 
+	 * Armazena os dados cadastrados do Cargo em ArrayList. 
+	 *
+	 *@author Guilherme Silva e Gabriel.
+	 */
+	
 	private Dados() {
 		listaCargos = new ArrayList<Cargo>();
 		listaSetores = new ArrayList<Setor>();
 	}
-	
+	/**
+	 * Retorna uma referencia para o objeto Dados.
+	 * Garante que o objeto Dados seja instanciado apenas uma vez.
+	 * 
+	 * 
+	 * 
+	 * @return Dados
+	 */
 	public static Dados getInstance() {
 		if(instance == null) {
 			instance = new Dados();

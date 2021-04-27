@@ -21,7 +21,7 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 	
 	String uri = "../classes/br/com/proway/senior/cargosESalarios/recursos/cargos.csv";
 	
-	public void Create(Setor obj) {
+	public void create(Setor obj) {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource(uri).toURI()));
 			List<String[]> escrita = readAll(reader);
@@ -37,15 +37,15 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 		}
 	}
 
-	public Setor Retrieve(int id) {
+	public Setor retrieve(int id) {
 		return null;
 	}
 
-	public void Update(Setor obj) {
+	public void update(Setor obj) {
 
 	}
 
-	public void Delete(int id) {
+	public void delete(int id) {
 
 	}
 

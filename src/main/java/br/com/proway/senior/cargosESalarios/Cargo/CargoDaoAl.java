@@ -18,11 +18,11 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * 
 	 */
 
-	public void Create(Cargo obj) {
+	public void create(Cargo obj) {
 		Dados.getInstance().getListaCargos().add(obj);
 	}
 
-	public Cargo Retrieve(int id) {
+	public Cargo retrieve(int id) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id)
 				return cargoProcurado;
@@ -40,9 +40,8 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * @param Cargo obj, objeto recebido.
 	 * 
 	 * @author Elton, Samuel
-	 * 
 	 */
-	public void Update(Cargo obj) {
+	public void update(Cargo obj) {
 		ArrayList<Cargo> lista = Dados.getInstance().getListaCargos();
 		for (Cargo cargoProcurado : lista) {
 			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
@@ -61,18 +60,16 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * @param id
 	 * @return
 	 */
-	public void Delete(int id) {
+	public void delete(int id) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id) {
 				Dados.getInstance().getListaCargos().remove(cargoProcurado);
 				break;
 			}
-
 		}
 	}
 
 	/***
-	 * Lista'
 	 * 
 	 * Lista todos os dados registrados.
 	 * 
