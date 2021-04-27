@@ -7,6 +7,17 @@ import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
 public class CargoDaoAl implements CRUDInterface<Cargo> {
 
+	/***
+	 * Inserir Cargo.
+	 * 
+	 * Recebe um objeto cargo para inserior na lista.
+	 * 
+	 * @param Cargo obj, inserir na lista.
+	 * 
+	 * @author Elton, Samuel
+	 * 
+	 */
+
 	public void Create(Cargo obj) {
 		Dados.getInstance().getListaCargos().add(obj);
 	}
@@ -34,7 +45,7 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	public void Update(Cargo obj) {
 		ArrayList<Cargo> lista = Dados.getInstance().getListaCargos();
 		for (Cargo cargoProcurado : lista) {
-			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {				
+			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
 				int idDoProcurado = lista.indexOf(cargoProcurado);
 				lista.set(idDoProcurado, obj);
 			}
@@ -46,11 +57,11 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 *
 	 * Remove id selecionado.
 	 * 
-	 * @author Elton, Samuel
+	 * @author Elton, Guilherme
 	 * @param id
-	 * @return 
+	 * @return
 	 */
-	public Cargo Delete(int id) {
+	public void Delete(int id) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id) {
 				Dados.getInstance().getListaCargos().remove(cargoProcurado);
@@ -58,8 +69,6 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 			}
 
 		}
-		return null;
-
 	}
 
 	/***
