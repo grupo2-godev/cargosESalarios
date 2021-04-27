@@ -2,6 +2,8 @@ package br.com.proway.senior.cargosESalarios.recursos;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
+
 public interface CRUDInterface<T> {
 
 	public void Create(T obj);

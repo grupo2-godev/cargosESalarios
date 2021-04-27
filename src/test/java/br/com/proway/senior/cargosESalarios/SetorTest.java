@@ -20,7 +20,7 @@ public class SetorTest {
 		SetorDaoAl setorDao = new SetorDaoAl();
 		Setor setor1 = new Setor(idSetor, "Transporte", 20, 200);
 		setorDao.Create(setor1);
-		Setor setor2 = new Setor(idSetor, "Destruição", 8000, 5832139);
+		Setor setor2 = new Setor(idSetor, "DestruiÃ§Ã£o", 8000, 5832139);
 		setorDao.Update(setor2);
 		Setor setorAlterado = setorDao.Retrieve(idSetor);
 		assertEquals(setorAlterado, setor2);
