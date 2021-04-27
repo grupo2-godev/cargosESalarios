@@ -17,7 +17,6 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 				return cargoProcurado;
 		}
 		return null;
-
 	}
 
 	/***

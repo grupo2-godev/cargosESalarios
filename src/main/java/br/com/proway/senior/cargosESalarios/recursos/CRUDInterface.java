@@ -12,7 +12,7 @@ public interface CRUDInterface<T> {
 
 	public void Update(T obj);
 
-	public Cargo Delete(int id);
+	public void Delete(int id);
 	
 	public ArrayList<T> getAll();
 
