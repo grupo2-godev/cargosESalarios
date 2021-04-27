@@ -1,15 +1,22 @@
 package br.com.proway.senior.cargosESalarios;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
 
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
-import backup.SetorServico;
-import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
 import br.com.proway.senior.cargosESalarios.Setor.SetorDaoAl;
+import br.com.proway.senior.cargosESalarios.Setor.SetorDaoCsv;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
 public class SetorTest {
@@ -67,4 +74,24 @@ public class SetorTest {
 		ArrayList<Setor> listaDados = Dados.getInstance().getListaSetores();
 		assertEquals(getAll, listaDados);
 	}
+	
+	@Test
+	public void testCSVReadAll() throws Exception {
+		SetorDaoCsv setorDAO = new SetorDaoCsv();
+		Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource("../classes/br/com/proway/senior/cargosESalarios/recursos/cargos.csv").toURI()));
+		List<String[]> minhaLista = setorDAO.readAll(reader);
+		for(String[] line : minhaLista) {
+			for(String word : line) {
+				System.out.println(word);
+			}			
+		}		
+	}
+	
+	@Test
+	public void testCreateCSV() throws Exception{
+		SetorDaoCsv setorDao = new SetorDaoCsv();	
+		Setor novoSetor = new Setor(4, "Limpeza", 10, 5);
+		setorDao.Create(novoSetor);
+	}
+	
 }

@@ -11,7 +11,7 @@ public class CargoDaoCsv implements CRUDInterface<Cargo> {
 		
 	}
 
-	public Cargo Retrieve(String key) {
+	public Cargo Retrieve(int id) {
 		return null;
 	}
 
@@ -19,7 +19,7 @@ public class CargoDaoCsv implements CRUDInterface<Cargo> {
 		
 	}
 
-	public void Delete(String key) {
+	public void Delete(int id) {
 		
 	}
 	
