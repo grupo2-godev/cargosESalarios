@@ -82,4 +82,48 @@ public class Setor {
 	public Setor() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Setor [idSetor=" + idSetor + ", nomeSetor=" + nomeSetor + ", capacidade=" + capacidade
+				+ ", idPermissao=" + idPermissao + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + capacidade;
+		result = prime * result + idPermissao;
+		result = prime * result + idSetor;
+		result = prime * result + ((nomeSetor == null) ? 0 : nomeSetor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Setor other = (Setor) obj;
+		if (capacidade != other.capacidade)
+			return false;
+		if (idPermissao != other.idPermissao)
+			return false;
+		if (idSetor != other.idSetor)
+			return false;
+		if (nomeSetor == null) {
+			if (other.nomeSetor != null)
+				return false;
+		} else if (!nomeSetor.equals(other.nomeSetor))
+			return false;
+		return true;
+	}
+
+
+	
+	
 }
