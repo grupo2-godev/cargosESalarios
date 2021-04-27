@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
 import br.com.proway.senior.cargosESalarios.Setor.Setor;
 
+/**
+ * Classe Dados para realizar a persistência em ArrayList.
+ * Utiliza o padrão de projeto Singleton.
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi 
+ * @version Sprint3
+ * - Criação e implementação da classe.
+ * - Teste dos getListas.
+ */
 public final class Dados {
 	private static Dados instance;
 	private ArrayList<Cargo> listaCargos;	

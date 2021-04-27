@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
+/**
+ * Classe DAO do Cargo para persistência dos dados em ArrayList.
+ * @author Elton Oliveira, Samuel Levi
+ * @version Sprint3:
+ * 	- Criação e implementação dos métodos.
+ *  - Implementação dos testes.
+ */
 public class CargoDaoAl implements CRUDInterface<Cargo> {
 
 	/***

@@ -17,10 +17,11 @@ import com.opencsv.CSVWriter;
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 
 /**
- * SetorDaoCsv
- * Classe DAO para realizar a persistência dos dados em CSV.
- * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi 
- *
+ * Classe DAO do Setor para persistência dos dados em arquivo CSV.
+ * @author Lucas Grijó
+ * @version Sprint3:
+ * 	- Criado a classe e implementação dos métodos.
+ *  - Criado os testes unitários.
  */
 public class SetorDaoCsv implements CRUDInterface<Setor> {
 	
@@ -168,7 +169,7 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 	private List<String[]> readAll(Reader reader) throws Exception {
 		CSVParser parser = new CSVParserBuilder().withSeparator(';').withIgnoreQuotations(true).build();
 		CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(0).withCSVParser(parser).build();
-		List<String[]> list = new ArrayList<>();
+		List<String[]> list = new ArrayList<String[]>();
 		list = csvReader.readAll();
 		reader.close();
 		csvReader.close();

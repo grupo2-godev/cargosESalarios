@@ -12,6 +12,12 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
+/**
+ * Classe de testes do CargoDaoAl.
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi
+ * @version Sprint3:
+ *  - Implementação dos testes.
+ */
 public class CargoDaoAlTest {
 
 	@Test

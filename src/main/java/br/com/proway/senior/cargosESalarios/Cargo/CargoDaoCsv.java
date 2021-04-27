@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 
-//TO-DO
+/**
+ * Classe DAO do Cargo para persistência dos dados em arquivo CSV.
+ * @author Lucas Grijó
+ * @version Sprint3:
+ * 	- Criado a classe, sem implementação (TO-DO).
+ */
 public class CargoDaoCsv implements CRUDInterface<Cargo> {
 	
 	public void create(Cargo obj) {

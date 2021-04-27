@@ -2,6 +2,13 @@ package br.com.proway.senior.cargosESalarios.Cargo;
 
 import java.time.LocalDateTime;
 
+/**
+ * Classe de modelo Cargo.
+ * @author Sprint 1
+ * @version Sprint3:
+ * 	- Alteração dos tipo primitivo int para Integer.
+ * 	- Adição do hash e Equals.
+ */
 public class Cargo {
 
 	private Integer idCargo;

@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios;
+package br.com.proway.senior.cargosESalarios.Setor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -7,11 +7,14 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.Setor.Setor;
-import br.com.proway.senior.cargosESalarios.Setor.SetorDaoAl;
-import br.com.proway.senior.cargosESalarios.Setor.SetorDaoCsv;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
+/**
+ * Classe de testes do SetorDaoAl e SetorDaoCsv.
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi
+ * @version Sprint3:
+ *  - Implementação dos testes.
+ */
 public class SetorTest {
 
 	@Test

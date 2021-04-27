@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
-/**
- * @author Gabriel Simon
- * @author Guilherme Silva
- */
 
+/**
+ * Classe DAO do Setor para persistência dos dados em ArrayList.
+ * @author Gabriel Simon, Guilherme Ezequiel
+ * @version Sprint3:
+ * 	- Criação e implementação dos métodos.
+ *  - Implementação dos testes.
+ */
 public class SetorDaoAl implements CRUDInterface<Setor> {
 	/**
 	 * Popula setor no ArrayList.

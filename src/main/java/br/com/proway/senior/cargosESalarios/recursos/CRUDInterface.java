@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * Contém os métodos Create, Retrive, Update, Delete e getAll.
  * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi 
  * @param <T> Generics, utilize uma classe de entidade.
+ * @version Sprint3
+ * - Criação e implementação da classe.
  */
 public interface CRUDInterface<T> {
 
