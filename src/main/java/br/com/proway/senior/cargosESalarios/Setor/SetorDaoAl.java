@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
+/**
+ * 
+ * @author Gabriel Simon
+ * @author Guilherme 
+ *
+ */
+
 public class SetorDaoAl implements CRUDInterface<Setor> {
 
 	
@@ -43,9 +50,11 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 */
 	public void Update(Setor obj) {
-		for(Setor setorProcurado : Dados.getInstance().getListaSetores()) {
+		ArrayList<Setor> lista = Dados.getInstance().getListaSetores();
+		for(Setor setorProcurado : lista) {
 			if(setorProcurado.getId() == obj.getId()) {
-				setorProcurado = obj;
+				int posSetorProcurado = lista.indexOf(setorProcurado);
+				lista.set(posSetorProcurado, obj);
 			}
 		}
 	}
