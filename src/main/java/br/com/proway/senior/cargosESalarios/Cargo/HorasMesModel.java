@@ -5,7 +5,6 @@ package br.com.proway.senior.cargosESalarios.Cargo;
  * ID na classe Cargo.
  * 
  * @author Sarah Brito
- *
  */
 
 public class HorasMesModel {
