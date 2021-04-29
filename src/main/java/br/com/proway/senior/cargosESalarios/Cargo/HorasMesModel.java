@@ -33,5 +33,6 @@ public class HorasMesModel {
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
+	
 
 }
