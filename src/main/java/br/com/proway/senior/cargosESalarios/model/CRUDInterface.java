@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.recursos;
+package br.com.proway.senior.cargosESalarios.model;
 
 import java.util.ArrayList;
 

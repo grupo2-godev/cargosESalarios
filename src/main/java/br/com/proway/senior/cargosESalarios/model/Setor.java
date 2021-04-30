@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.Setor;
+package br.com.proway.senior.cargosESalarios.model;
 
 /**
  * Classe de modelo Setor.

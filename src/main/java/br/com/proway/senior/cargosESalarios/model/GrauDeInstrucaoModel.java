@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.Cargo;
+package br.com.proway.senior.cargosESalarios.model;
 
 /**
  * Classe de apoio para persistência via banco de dados. Será chamado seu

@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.Cargo;
+package br.com.proway.senior.cargosESalarios.model;
 
 import java.time.LocalDateTime;
 

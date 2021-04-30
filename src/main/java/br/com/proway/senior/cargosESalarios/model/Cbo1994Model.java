@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.Cargo;
+package br.com.proway.senior.cargosESalarios.model;
 
 /**
  * Classe de apoio para persistência via banco de dados. Será chamado seu
@@ -8,14 +8,14 @@ package br.com.proway.senior.cargosESalarios.Cargo;
  *
  */
 
-public class Cbo2002Model {
+public class Cbo1994Model {
 	
 	private Integer codigoId;
 	private String descricao;
 	private Double percentualInsalubridade;
 	public Double percentualPericulosidade;
 	
-	public Cbo2002Model(Integer codigoId, String descricao, Double percentualInsalubridade,
+	public Cbo1994Model(Integer codigoId, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
 		this.codigoId = codigoId;
 		this.descricao = descricao;
@@ -54,6 +54,5 @@ public class Cbo2002Model {
 	public void setPercentualPericulosidade(Double percentualPericulosidade) {
 		this.percentualPericulosidade = percentualPericulosidade;
 	}
-		
 
 }

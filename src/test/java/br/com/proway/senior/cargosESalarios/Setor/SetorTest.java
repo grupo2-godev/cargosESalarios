@@ -8,7 +8,10 @@ import static org.junit.Assert.assertNull;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.recursos.Dados;
+import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.Setor;
+import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
+import br.com.proway.senior.cargosESalarios.model.SetorDaoCsv;
 
 /**
  * Classe de testes do SetorDaoAl e SetorDaoCsv.

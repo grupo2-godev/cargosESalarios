@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
-import br.com.proway.senior.cargosESalarios.Setor.Setor;
+import br.com.proway.senior.cargosESalarios.model.Cargo;
+import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.Setor;
 
 /**
  * Classe de testes do Dados.

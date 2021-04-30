@@ -1,9 +1,6 @@
-package br.com.proway.senior.cargosESalarios.recursos;
+package br.com.proway.senior.cargosESalarios.model;
 
 import java.util.ArrayList;
-
-import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
-import br.com.proway.senior.cargosESalarios.Setor.Setor;
 
 /**
  * Classe Dados para realizar a persistência em ArrayList.

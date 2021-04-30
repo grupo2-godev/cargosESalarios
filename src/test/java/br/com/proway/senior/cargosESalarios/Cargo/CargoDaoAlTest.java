@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.recursos.Dados;
+import br.com.proway.senior.cargosESalarios.model.Cargo;
+import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
+import br.com.proway.senior.cargosESalarios.model.Dados;
 
 /**
  * Classe de testes do CargoDaoAl.
