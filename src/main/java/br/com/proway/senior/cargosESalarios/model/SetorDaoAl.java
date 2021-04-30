@@ -10,13 +10,13 @@ import java.util.ArrayList;
  * 	- Criação e implementação dos métodos.
  *  - Implementação dos testes.
  */
-public class SetorDaoAl implements CRUDInterface<Setor> {
+public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	/**
 	 * Popula setor no ArrayList.
 	 * 
 	 * @param String obj
 	 */
-	public boolean create(Setor obj) {
+	public boolean create(SetorModel obj) {
 		Dados.getInstance().getListaSetores().add(obj);
 		return true;
 	}
@@ -27,8 +27,8 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * @param int id
 	 * @return Retorna o setor procurado ou nulo se não encontrado
 	 */
-	public Setor retrieve(int id) {
-		for (Setor setorProcurado : Dados.getInstance().getListaSetores()) {
+	public SetorModel retrieve(int id) {
+		for (SetorModel setorProcurado : Dados.getInstance().getListaSetores()) {
 			if (setorProcurado.getId() == id) {
 				return setorProcurado;
 			}
@@ -42,9 +42,9 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * @param String obj
 	 * 
 	 */
-	public boolean update(Setor obj) {
-		ArrayList<Setor> lista = Dados.getInstance().getListaSetores();
-		for (Setor setorProcurado : lista) {
+	public boolean update(SetorModel obj) {
+		ArrayList<SetorModel> lista = Dados.getInstance().getListaSetores();
+		for (SetorModel setorProcurado : lista) {
 			if (setorProcurado.getId() == obj.getId()) {
 				int posSetorProcurado = lista.indexOf(setorProcurado);
 				lista.set(posSetorProcurado, obj);
@@ -61,7 +61,7 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 */
 	public boolean delete(int id) {
 
-		for (Setor setorDeletado : Dados.getInstance().getListaSetores()) {
+		for (SetorModel setorDeletado : Dados.getInstance().getListaSetores()) {
 			if (setorDeletado.getId() == id) {
 				Dados.getInstance().getListaSetores().remove(setorDeletado);
 				return true;
@@ -76,7 +76,7 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 * @return Retorna um ArrayList<Setor> com todos os setores
 	 */
-	public ArrayList<Setor> getAll() {
+	public ArrayList<SetorModel> getAll() {
 		return Dados.getInstance().getListaSetores();
 	}
 }

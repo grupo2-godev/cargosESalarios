@@ -15,6 +15,8 @@ public class Cbo2002Model {
 	private Double percentualInsalubridade;
 	public Double percentualPericulosidade;
 	
+	public Cbo2002Model() {}
+	
 	public Cbo2002Model(Integer codigoId, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
 		this.codigoId = codigoId;

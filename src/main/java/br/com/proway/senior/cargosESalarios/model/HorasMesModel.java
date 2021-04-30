@@ -12,6 +12,8 @@ public class HorasMesModel {
 	private Integer idGrauDeInstrucao;
 	private Double quantidade;
 	
+	public HorasMesModel() {}
+	
 	public HorasMesModel(Integer idGrauDeInstrucao, Double quantidade) {
 		this.idGrauDeInstrucao = idGrauDeInstrucao;
 		this.quantidade = quantidade;
