@@ -18,8 +18,9 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 * @param String obj
 	 */
-	public void create(Setor obj) {
+	public boolean create(Setor obj) {
 		Dados.getInstance().getListaSetores().add(obj);
+		return true;
 	}
 
 	/**
@@ -43,14 +44,16 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * @param String obj
 	 * 
 	 */
-	public void update(Setor obj) {
+	public boolean update(Setor obj) {
 		ArrayList<Setor> lista = Dados.getInstance().getListaSetores();
 		for (Setor setorProcurado : lista) {
 			if (setorProcurado.getId() == obj.getId()) {
 				int posSetorProcurado = lista.indexOf(setorProcurado);
 				lista.set(posSetorProcurado, obj);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/** 
@@ -58,14 +61,15 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 * @param int id
 	 */
-	public void delete(int id) {
+	public boolean delete(int id) {
 
 		for (Setor setorDeletado : Dados.getInstance().getListaSetores()) {
 			if (setorDeletado.getId() == id) {
 				Dados.getInstance().getListaSetores().remove(setorDeletado);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**

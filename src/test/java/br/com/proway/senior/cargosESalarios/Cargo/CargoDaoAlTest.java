@@ -25,12 +25,12 @@ public class CargoDaoAlTest {
 		int idCargo1 = 5;
 		int idCargo2 = 6;
 		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
 
 		new CargoDaoAl().create(cargo1);
 
 		Cargo cargo2 = new Cargo(idCargo2, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
-				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
+				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", true, 2, 40.0);
 
 		new CargoDaoAl().create(cargo2);
 
@@ -42,12 +42,12 @@ public class CargoDaoAlTest {
 	public void testUpdateCargo() {
 		int idCargo = 1;
 		Cargo cargo1 = new Cargo(idCargo, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
 
 		new CargoDaoAl().create(cargo1);
 
 		Cargo cargo2 = new Cargo(idCargo, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
-				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", "media", 2, 2);
+				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", true, 2, 40.0);
 
 		new CargoDaoAl().update(cargo2);
 
@@ -62,7 +62,7 @@ public class CargoDaoAlTest {
 	public void testDeleteCargo() {
 		int idCargo1 = 0;
 		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
 		CargoDaoAl cargoDao = new CargoDaoAl();
 		int tamanhoInicial = Dados.getInstance().getListaCargos().size();
 

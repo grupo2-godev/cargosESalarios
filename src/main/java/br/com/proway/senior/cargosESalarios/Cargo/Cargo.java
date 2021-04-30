@@ -24,9 +24,9 @@ public class Cargo {
 	private String grauDeInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
-	private String bonificacao;
-	private Integer status;
+	private Boolean status;
 	private Integer idPermissao;
+	private Double insalubridade;
 
 	/**
 	 * @param idCargo
@@ -42,14 +42,13 @@ public class Cargo {
 	 * @param grauDeInstrucao
 	 * @param experienciaMinima
 	 * @param atribuicoes
-	 * @param bonificacao
 	 * @param status
 	 * @param idPermissao
 	 */
 	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor, String hierarquia, Double salario,
 			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, Integer horaMes,
-			String grauDeInstrucao, String experienciaMinima, String atribuicoes, String bonificacao, Integer status,
-			Integer idPermissao) {
+			String grauDeInstrucao, String experienciaMinima, String atribuicoes, Boolean status,
+			Integer idPermissao, Double insalubridade) {
 		super();
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
@@ -64,9 +63,9 @@ public class Cargo {
 		this.grauDeInstrucao = grauDeInstrucao;
 		this.experienciaMinima = experienciaMinima;
 		this.atribuicoes = atribuicoes;
-		this.bonificacao = bonificacao;
 		this.status = status;
 		this.idPermissao = idPermissao;
+		this.insalubridade = insalubridade;
 	}
 
 	public Cargo(Integer idCargo, String nomeCargo) {
@@ -84,6 +83,131 @@ public class Cargo {
 	 * 
 	 */
 	public Cargo() {
+	}
+
+	@Override
+	public String toString() {
+		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + "" + ", hierarquia="
+				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
+				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
+				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
+				+ atribuicoes + ", status=" + status + ", idPermissao=" + idPermissao + "Insalubridade=" + insalubridade
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((atribuicoes == null) ? 0 : atribuicoes.hashCode());
+		result = prime * result + ((cbo2002 == null) ? 0 : cbo2002.hashCode());
+		result = prime * result + ((cbo94 == null) ? 0 : cbo94.hashCode());
+		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
+		result = prime * result + ((dataUltimaRevisao == null) ? 0 : dataUltimaRevisao.hashCode());
+		result = prime * result + ((experienciaMinima == null) ? 0 : experienciaMinima.hashCode());
+		result = prime * result + ((grauDeInstrucao == null) ? 0 : grauDeInstrucao.hashCode());
+		result = prime * result + ((hierarquia == null) ? 0 : hierarquia.hashCode());
+		result = prime * result + ((horaMes == null) ? 0 : horaMes.hashCode());
+		result = prime * result + ((idCargo == null) ? 0 : idCargo.hashCode());
+		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
+		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
+		result = prime * result + ((nomeCargo == null) ? 0 : nomeCargo.hashCode());
+		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((insalubridade == null) ? 0 : insalubridade.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cargo other = (Cargo) obj;
+		if (atribuicoes == null) {
+			if (other.atribuicoes != null)
+				return false;
+		} else if (!atribuicoes.equals(other.atribuicoes))
+			return false;
+		if (cbo2002 == null) {
+			if (other.cbo2002 != null)
+				return false;
+		} else if (!cbo2002.equals(other.cbo2002))
+			return false;
+		if (cbo94 == null) {
+			if (other.cbo94 != null)
+				return false;
+		} else if (!cbo94.equals(other.cbo94))
+			return false;
+		if (dataCadastro == null) {
+			if (other.dataCadastro != null)
+				return false;
+		} else if (!dataCadastro.equals(other.dataCadastro))
+			return false;
+		if (dataUltimaRevisao == null) {
+			if (other.dataUltimaRevisao != null)
+				return false;
+		} else if (!dataUltimaRevisao.equals(other.dataUltimaRevisao))
+			return false;
+		if (experienciaMinima == null) {
+			if (other.experienciaMinima != null)
+				return false;
+		} else if (!experienciaMinima.equals(other.experienciaMinima))
+			return false;
+		if (grauDeInstrucao == null) {
+			if (other.grauDeInstrucao != null)
+				return false;
+		} else if (!grauDeInstrucao.equals(other.grauDeInstrucao))
+			return false;
+		if (hierarquia == null) {
+			if (other.hierarquia != null)
+				return false;
+		} else if (!hierarquia.equals(other.hierarquia))
+			return false;
+		if (horaMes == null) {
+			if (other.horaMes != null)
+				return false;
+		} else if (!horaMes.equals(other.horaMes))
+			return false;
+		if (idCargo == null) {
+			if (other.idCargo != null)
+				return false;
+		} else if (!idCargo.equals(other.idCargo))
+			return false;
+		if (idPermissao == null) {
+			if (other.idPermissao != null)
+				return false;
+		} else if (!idPermissao.equals(other.idPermissao))
+			return false;
+		if (idSetor == null) {
+			if (other.idSetor != null)
+				return false;
+		} else if (!idSetor.equals(other.idSetor))
+			return false;
+		if (nomeCargo == null) {
+			if (other.nomeCargo != null)
+				return false;
+		} else if (!nomeCargo.equals(other.nomeCargo))
+			return false;
+		if (salario == null) {
+			if (other.salario != null)
+				return false;
+		} else if (!salario.equals(other.salario))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (insalubridade == null) {
+			if (other.insalubridade != null)
+				return false;
+		} else if (!insalubridade.equals(other.insalubridade))
+			return false;
+		return true;
 	}
 
 	/**
@@ -269,30 +393,16 @@ public class Cargo {
 	}
 
 	/**
-	 * @return the bonificacao
-	 */
-	public String getBonificacao() {
-		return bonificacao;
-	}
-
-	/**
-	 * @param bonificacao the bonificacao to set
-	 */
-	public void setBonificacao(String bonificacao) {
-		this.bonificacao = bonificacao;
-	}
-
-	/**
 	 * @return the status
 	 */
-	public Integer getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(Integer status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
@@ -308,134 +418,13 @@ public class Cargo {
 	 */
 	public void setIdPermissao(Integer idPermissao) {
 		this.idPermissao = idPermissao;
-	}
-
-	@Override
-	public String toString() {
-		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + "" + ", hierarquia="
-				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
-				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
-				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
-				+ atribuicoes + ", bonificacao=" + bonificacao + ", status=" + status + ", idPermissao=" + idPermissao
-				+ "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((atribuicoes == null) ? 0 : atribuicoes.hashCode());
-		result = prime * result + ((bonificacao == null) ? 0 : bonificacao.hashCode());
-		result = prime * result + ((cbo2002 == null) ? 0 : cbo2002.hashCode());
-		result = prime * result + ((cbo94 == null) ? 0 : cbo94.hashCode());
-		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
-		result = prime * result + ((dataUltimaRevisao == null) ? 0 : dataUltimaRevisao.hashCode());
-		result = prime * result + ((experienciaMinima == null) ? 0 : experienciaMinima.hashCode());
-		result = prime * result + ((grauDeInstrucao == null) ? 0 : grauDeInstrucao.hashCode());
-		result = prime * result + ((hierarquia == null) ? 0 : hierarquia.hashCode());
-		result = prime * result + ((horaMes == null) ? 0 : horaMes.hashCode());
-		result = prime * result + ((idCargo == null) ? 0 : idCargo.hashCode());
-		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
-		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
-		result = prime * result + ((nomeCargo == null) ? 0 : nomeCargo.hashCode());
-		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cargo other = (Cargo) obj;
-		if (atribuicoes == null) {
-			if (other.atribuicoes != null)
-				return false;
-		} else if (!atribuicoes.equals(other.atribuicoes))
-			return false;
-		if (bonificacao == null) {
-			if (other.bonificacao != null)
-				return false;
-		} else if (!bonificacao.equals(other.bonificacao))
-			return false;
-		if (cbo2002 == null) {
-			if (other.cbo2002 != null)
-				return false;
-		} else if (!cbo2002.equals(other.cbo2002))
-			return false;
-		if (cbo94 == null) {
-			if (other.cbo94 != null)
-				return false;
-		} else if (!cbo94.equals(other.cbo94))
-			return false;
-		if (dataCadastro == null) {
-			if (other.dataCadastro != null)
-				return false;
-		} else if (!dataCadastro.equals(other.dataCadastro))
-			return false;
-		if (dataUltimaRevisao == null) {
-			if (other.dataUltimaRevisao != null)
-				return false;
-		} else if (!dataUltimaRevisao.equals(other.dataUltimaRevisao))
-			return false;
-		if (experienciaMinima == null) {
-			if (other.experienciaMinima != null)
-				return false;
-		} else if (!experienciaMinima.equals(other.experienciaMinima))
-			return false;
-		if (grauDeInstrucao == null) {
-			if (other.grauDeInstrucao != null)
-				return false;
-		} else if (!grauDeInstrucao.equals(other.grauDeInstrucao))
-			return false;
-		if (hierarquia == null) {
-			if (other.hierarquia != null)
-				return false;
-		} else if (!hierarquia.equals(other.hierarquia))
-			return false;
-		if (horaMes == null) {
-			if (other.horaMes != null)
-				return false;
-		} else if (!horaMes.equals(other.horaMes))
-			return false;
-		if (idCargo == null) {
-			if (other.idCargo != null)
-				return false;
-		} else if (!idCargo.equals(other.idCargo))
-			return false;
-		if (idPermissao == null) {
-			if (other.idPermissao != null)
-				return false;
-		} else if (!idPermissao.equals(other.idPermissao))
-			return false;
-		if (idSetor == null) {
-			if (other.idSetor != null)
-				return false;
-		} else if (!idSetor.equals(other.idSetor))
-			return false;
-		if (nomeCargo == null) {
-			if (other.nomeCargo != null)
-				return false;
-		} else if (!nomeCargo.equals(other.nomeCargo))
-			return false;
-		if (salario == null) {
-			if (other.salario != null)
-				return false;
-		} else if (!salario.equals(other.salario))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		return true;
-	}
-
+	}	
 	
-	
-	
+	public Double getInsalubridade() {
+		return insalubridade;
+	}
+
+	public void setInsalubridade(Double insalubridade) {
+		this.insalubridade = insalubridade;
+	}	
 }

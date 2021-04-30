@@ -25,8 +25,9 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * 
 	 */
 
-	public void create(Cargo obj) {
+	public boolean create(Cargo obj) {
 		Dados.getInstance().getListaCargos().add(obj);
+		return true;
 	}
 
 	public Cargo retrieve(int id) {
@@ -48,14 +49,16 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * 
 	 * @author Elton, Samuel
 	 */
-	public void update(Cargo obj) {
+	public boolean update(Cargo obj) {
 		ArrayList<Cargo> lista = Dados.getInstance().getListaCargos();
 		for (Cargo cargoProcurado : lista) {
 			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
 				int idDoProcurado = lista.indexOf(cargoProcurado);
 				lista.set(idDoProcurado, obj);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/***
@@ -67,13 +70,14 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * @param id
 	 * @return
 	 */
-	public void delete(int id) {
+	public boolean delete(int id) {
 		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id) {
 				Dados.getInstance().getListaCargos().remove(cargoProcurado);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/***

@@ -1,7 +1,6 @@
 package br.com.proway.senior.cargosESalarios.recursos;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class DadosTest {
 
 	@Test
 	public void testeGetListaSetores() {
-		Setor setor = new Setor(45, "RH", 85, 23124);
+		Setor setor = new Setor(45, "RH", 23124);
 		int tamanhoInicial = Dados.getInstance().getListaSetores().size();
 		Dados.getInstance().getListaSetores().add(setor);
 		ArrayList<Setor> lista = Dados.getInstance().getListaSetores();
@@ -30,8 +29,8 @@ public class DadosTest {
 	
 	@Test
 	public void testeGetListaCargos() {
-		Cargo cargo = new Cargo(1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", "nenhuma", 1, 1);
+		Cargo cargo = new Cargo(0, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
+		"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
 		int tamanhoInicial = Dados.getInstance().getListaCargos().size();
 		Dados.getInstance().getListaCargos().add(cargo);
 		ArrayList<Cargo> listaCargo = Dados.getInstance().getListaCargos();

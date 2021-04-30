@@ -40,7 +40,7 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 				Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource(uri).toURI()));
 				List<String[]> escrita = readAll(reader);
 				 
-				String[] palavras = { obj.getId().toString(), obj.getNomeSetor(), obj.getCapacidade().toString(), obj.getIdPermissao().toString()};
+				String[] palavras = { obj.getId().toString(), obj.getNomeSetor(), obj.getIdPermissao().toString()};
 				escrita.add(palavras);
 
 				Path path = Paths.get(ClassLoader.getSystemResource(uri).toURI());
@@ -80,7 +80,6 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 			for(String[] line : escrita) {
 				if(line[0].equals(obj.getId().toString())) {
 					line[1] = obj.getNomeSetor().toString();
-					line[2] = obj.getCapacidade().toString();
 					line[3] = obj.getIdPermissao().toString();	
 				}
 			}
@@ -135,7 +134,6 @@ public class SetorDaoCsv implements CRUDInterface<Setor> {
 					Setor tempSetor = new Setor();
 					tempSetor.setId(Integer.parseInt(line[0]));
 					tempSetor.setNomeSetor(line[1]);
-					tempSetor.setCapacidade(Integer.parseInt(line[2]));
 					tempSetor.setIdPermissao(Integer.parseInt(line[3]));
 					setoresLidos.add(tempSetor);
 				}			
