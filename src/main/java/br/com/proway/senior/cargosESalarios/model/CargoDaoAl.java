@@ -9,31 +9,65 @@ import java.util.ArrayList;
  * 	- Criação e implementação dos métodos.
  *  - Implementação dos testes.
  */
-public class CargoDaoAl implements CRUDInterface<Cargo> {
+public class CargoDaoAl implements CRUDInterface<CargoModel> {
 
 	/***
 	 * Inserir Cargo.
 	 * 
 	 * Recebe um objeto cargo para inserior na lista.
 	 * 
-	 * @param Cargo obj, inserir na lista.
+	 * @param CargoModel obj, inserir na lista.
 	 * 
 	 * @author Elton, Samuel
 	 * 
 	 */
 
-	public boolean create(Cargo obj) {
+	public int create(CargoModel obj) {
+		int size = Dados.getInstance().getListaCargos().size();
+		int novoCargoId;
+		if (size > 0) {
+			novoCargoId =  Dados.getInstance().getListaCargos().get(size-1).getIdCargo();
+		}
+		else {
+			novoCargoId = 0;
+		}
+		obj.setIdCargo(novoCargoId);
 		Dados.getInstance().getListaCargos().add(obj);
-		return true;
+		return novoCargoId;
 	}
-
-	public Cargo retrieve(int id) {
-		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
+	
+	/**
+	 * Ler Cargo por ID
+	 * 
+	 * Procura cargo pelo id e retorna nulo caso não encontrado
+	 * 
+	 * @param id Do cargo
+	 * @return null/Cargo
+	 */
+	public CargoModel retrieve(int id) {
+		for (CargoModel cargoProcurado : Dados.getInstance().getListaCargos()) {
 			if (cargoProcurado.getIdCargo() == id)
 				return cargoProcurado;
 		}
 		return null;
 	}
+	
+	/**
+	 * Ler Cargo por nome
+	 * 
+	 * Procura cargo pelo nome e retorna nulo caso não encontrado
+	 * 
+	 * @param nomeCargo
+	 * @return null/Cargo
+	 */
+	public CargoModel retrieve(String nomeCargo) {
+		for (CargoModel cargoProcurado : Dados.getInstance().getListaCargos()) {
+			if (cargoProcurado.getNomeCargo() == nomeCargo)
+				return cargoProcurado;
+		}
+		return null;
+	}
+	
 
 	/***
 	 * Atualizar Cargo.
@@ -42,13 +76,13 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * no ID do cargo informado ao encontrar atribui um objeto cargo no objeto com
 	 * ID encontrato.
 	 * 
-	 * @param Cargo obj, objeto recebido.
+	 * @param CargoModel obj, objeto recebido.
 	 * 
 	 * @author Elton, Samuel
 	 */
-	public boolean update(Cargo obj) {
-		ArrayList<Cargo> lista = Dados.getInstance().getListaCargos();
-		for (Cargo cargoProcurado : lista) {
+	public boolean update(CargoModel obj) {
+		ArrayList<CargoModel> lista = Dados.getInstance().getListaCargos();
+		for (CargoModel cargoProcurado : lista) {
 			if (cargoProcurado.getIdCargo() == obj.getIdCargo()) {
 				int idDoProcurado = lista.indexOf(cargoProcurado);
 				lista.set(idDoProcurado, obj);
@@ -68,13 +102,27 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * @return
 	 */
 	public boolean delete(int id) {
-		for (Cargo cargoProcurado : Dados.getInstance().getListaCargos()) {
-			if (cargoProcurado.getIdCargo() == id) {
+		for (CargoModel cargoProcurado : Dados.getInstance().getListaCargos()) {
+			if (this.retrieve(id).getIdCargo() == id) {
 				Dados.getInstance().getListaCargos().remove(cargoProcurado);
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Deleta um cargo
+	 * 
+	 * Deleta um cargo do banco de dados que é igual ao passado como
+	 * parametro
+	 * 
+	 * @param cargo A ser excluido
+	 * @return boolean
+	 */
+	public boolean delete(CargoModel cargo) {
+		Dados.getInstance().getListaCargos().remove(cargo);
+		return true;
 	}
 
 	/***
@@ -85,7 +133,19 @@ public class CargoDaoAl implements CRUDInterface<Cargo> {
 	 * @author Elton, Samuel
 	 */
 
-	public ArrayList<Cargo> getAll() {
+	public ArrayList<CargoModel> getAll() {
 		return Dados.getInstance().getListaCargos();
+	}
+	
+	/**
+	 * Limpar ArrayList de Cargos
+	 * 
+	 * Método realiza a limpeza do ArrayList de cargos
+	 * na classe Dados.	Utilizado para os testes unitários. 
+	 *
+	 * @return void
+	 */
+	public void limparArray() {
+		Dados.getInstance().getListaCargos().clear();
 	}
 }

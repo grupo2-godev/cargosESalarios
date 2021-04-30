@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public final class Dados {
 	private static Dados instance;
-	private ArrayList<Cargo> listaCargos;	
-	private ArrayList<Setor> listaSetores;
+	private ArrayList<CargoModel> listaCargos;	
+	private ArrayList<SetorModel> listaSetores;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -23,8 +23,8 @@ public final class Dados {
 	 */
 	
 	private Dados() {
-		listaCargos = new ArrayList<Cargo>();
-		listaSetores = new ArrayList<Setor>();
+		listaCargos = new ArrayList<CargoModel>();
+		listaSetores = new ArrayList<SetorModel>();
 	}
 	/**
 	 * Retorna uma referencia para o objeto Dados.
@@ -41,11 +41,11 @@ public final class Dados {
 		return instance;
 	}
 	
-	public ArrayList<Cargo> getListaCargos() {
+	public ArrayList<CargoModel> getListaCargos() {
 		return listaCargos;
 	}
 	
-	public ArrayList<Setor> getListaSetores() {
+	public ArrayList<SetorModel> getListaSetores() {
 		return listaSetores;
 	}
 	

@@ -7,7 +7,7 @@ package br.com.proway.senior.cargosESalarios.model;
  * 	- Alteração dos tipo primitivo int para Integer.
  * 	- Adição do hash e Equals.
  */
-public class Setor {
+public class SetorModel {
 	private Integer idSetor;
 	private String nomeSetor;
 	private Integer idPermissao;
@@ -18,13 +18,13 @@ public class Setor {
 	 * @param capacidade
 	 * @param idPermissao
 	 */
-	public Setor(Integer id, String nomeSetor, Integer idPermissao) {
+	public SetorModel(Integer id, String nomeSetor, Integer idPermissao) {
 		this.idSetor = id;
 		this.nomeSetor = nomeSetor;
 		this.idPermissao = idPermissao;
 	}
 	
-	public Setor() {
+	public SetorModel() {
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class Setor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Setor other = (Setor) obj;
+		SetorModel other = (SetorModel) obj;
 		if (idPermissao == null) {
 			if (other.idPermissao != null)
 				return false;

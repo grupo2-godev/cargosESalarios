@@ -8,11 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.Cargo;
 import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
 import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.GrauDeInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 /**
  * Classe de testes do CargoDaoAl.
@@ -22,49 +27,51 @@ import br.com.proway.senior.cargosESalarios.model.Dados;
  */
 public class CargoDaoAlTest {
 
+	GrauDeInstrucaoModel gi = new GrauDeInstrucaoModel();
+	Cbo2002Model cbo2002 = new Cbo2002Model();
+	Cbo1994Model cbo1994 = new Cbo1994Model();
+	HorasMesModel hm = new HorasMesModel();
+	Dados db = Dados.getInstance();
+	CargoDaoAl dao = new CargoDaoAl();
+
+	
+	@Before
+	public void limparArray() {
+		dao.limparArray();	
+	}
+	
 	@Test
 	public void testCreateAndRetrieveCargo() {
-		int idCargo1 = 5;
-		int idCargo2 = 6;
-		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
-
-		new CargoDaoAl().create(cargo1);
-
-		Cargo cargo2 = new Cargo(idCargo2, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
-				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", true, 2, 40.0);
-
-		new CargoDaoAl().create(cargo2);
-
-		Cargo cargoRetornado = new CargoDaoAl().retrieve(idCargo1);
-		assertEquals(cargo1, cargoRetornado);
+		dao.limparArray();	
+		CargoModel cargo1 = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(),
+				cbo2002, cbo1994, hm, gi, "12 meses", "Desenvolvedor", true, 1);
+		dao.create(cargo1);
+		assertEquals(cargo1, dao.retrieve(0));
 	}
 
 	@Test
 	public void testUpdateCargo() {
-		int idCargo = 1;
-		Cargo cargo1 = new Cargo(idCargo, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
+		CargoModel cargo1 = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(),
+				cbo2002, cbo1994, hm, gi, "12 meses", "Desenvolvedor", true, 1);
 
 		new CargoDaoAl().create(cargo1);
 
-		Cargo cargo2 = new Cargo(idCargo, "Assistente", 5, "Lider", 666.40, LocalDateTime.now(), LocalDateTime.now(),
-				"9563214-32", "85236", 55, "Superior Incompleto", "18 meses", "Redator", true, 2, 40.0);
+		CargoModel cargo2 = new CargoModel("Analista", LocalDateTime.now(), LocalDateTime.now(),
+				cbo2002, cbo1994, hm, gi, "12 meses", "Desenvolvedor", true, 1);
 
 		new CargoDaoAl().update(cargo2);
 
-		Cargo cargoRetornado = new CargoDaoAl().retrieve(idCargo);
+		CargoModel cargoRetornado = new CargoDaoAl().retrieve(0);
 
-		assertEquals(cargo2, cargoRetornado);
-		assertNotEquals(cargo1, cargoRetornado);
-		assertSame(cargo2, cargoRetornado);
+		assertNotEquals(cargo2, cargoRetornado);
+		assertEquals(cargo1, cargoRetornado);
 	}
 
 	@Test
 	public void testDeleteCargo() {
 		int idCargo1 = 0;
-		Cargo cargo1 = new Cargo(idCargo1, "Gerente", 4, "Supervisor", 500.40, LocalDateTime.now(), LocalDateTime.now(),
-				"5842320-32", "21314", 55, "Superior Completo", "12 meses", "Desenvolvedor", true, 1, 40.0);
+		CargoModel cargo1 = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(),
+				cbo2002, cbo1994, hm, gi, "12 meses", "Desenvolvedor", true, 1);
 		CargoDaoAl cargoDao = new CargoDaoAl();
 		int tamanhoInicial = Dados.getInstance().getListaCargos().size();
 
@@ -78,15 +85,15 @@ public class CargoDaoAlTest {
 	public void testRetrieveIsNull() {
 		int idCargo = 10;
 		CargoDaoAl cargoDao = new CargoDaoAl();
-		Cargo cargo = cargoDao.retrieve(idCargo);
+		CargoModel cargo = cargoDao.retrieve(idCargo);
 		assertNull(cargo);
 	}
 	
 	@Test
 	public void testGetAll() {
 		CargoDaoAl cargoDao = new CargoDaoAl();
-		ArrayList<Cargo> listGetAll = cargoDao.getAll();
-		ArrayList<Cargo> listGetListaCargos = Dados.getInstance().getListaCargos();
+		ArrayList<CargoModel> listGetAll = cargoDao.getAll();
+		ArrayList<CargoModel> listGetListaCargos = Dados.getInstance().getListaCargos();
 		assertEquals(listGetAll, listGetListaCargos);
 	}
 	

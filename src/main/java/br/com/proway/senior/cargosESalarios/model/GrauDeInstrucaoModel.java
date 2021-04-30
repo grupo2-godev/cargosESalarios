@@ -13,6 +13,8 @@ public class GrauDeInstrucaoModel {
 	private Integer idGrauDeInstrucao;
 	private String descricao;
 	
+	public GrauDeInstrucaoModel() {}
+	
 	public GrauDeInstrucaoModel(Integer idGrauDeInstrucao, String descricao) {
 		this.idGrauDeInstrucao = idGrauDeInstrucao;
 		this.descricao = descricao;

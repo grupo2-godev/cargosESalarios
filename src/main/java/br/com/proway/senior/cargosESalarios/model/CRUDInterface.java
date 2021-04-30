@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public interface CRUDInterface<T> {
 
-	public boolean create(T obj);
+	public int create(T obj);
 
 	public T retrieve(int  id);
 

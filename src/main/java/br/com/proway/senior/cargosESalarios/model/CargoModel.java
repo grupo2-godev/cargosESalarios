@@ -9,31 +9,24 @@ import java.time.LocalDateTime;
  * 	- Alteração dos tipo primitivo int para Integer.
  * 	- Adição do hash e Equals.
  */
-public class Cargo {
+public class CargoModel {
 
 	private Integer idCargo;
 	private String nomeCargo;
-	private Integer idSetor;
-	private String hierarquia;
-	private Double salario;
 	private LocalDateTime dataCadastro;
 	private LocalDateTime dataUltimaRevisao;
-	private String cbo2002;
-	private String cbo94;
-	private Integer horaMes;
-	private String grauDeInstrucao;
+	private Cbo2002Model cbo2002;
+	private Cbo1994Model cbo94;
+	private HorasMesModel horaMes;
+	private GrauDeInstrucaoModel grauDeInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
 	private Boolean status;
 	private Integer idPermissao;
-	private Double insalubridade;
 
 	/**
 	 * @param idCargo
 	 * @param nomeCargo
-	 * @param idSetor
-	 * @param hierarquia
-	 * @param salario
 	 * @param dataCadastro
 	 * @param dataUltimaRevisao
 	 * @param cbo2002
@@ -45,16 +38,34 @@ public class Cargo {
 	 * @param status
 	 * @param idPermissao
 	 */
-	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor, String hierarquia, Double salario,
-			LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao, String cbo2002, String cbo94, Integer horaMes,
-			String grauDeInstrucao, String experienciaMinima, String atribuicoes, Boolean status,
-			Integer idPermissao, Double insalubridade) {
-		super();
+	
+
+	/**
+	 * @param idCargo
+	 * @param nomeCargo
+	 */
+	public CargoModel(Integer idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
 		this.nomeCargo = nomeCargo;
-		this.idSetor = idSetor;
-		this.hierarquia = hierarquia;
-		this.salario = salario;
+	}
+
+	/**
+	 * @param nomeCargo
+	 * @param dataCadastro
+	 * @param dataUltimaRevisao
+	 * @param cbo2002
+	 * @param cbo94
+	 * @param horaMes
+	 * @param grauDeInstrucao
+	 * @param experienciaMinima
+	 * @param atribuicoes
+	 * @param status
+	 * @param idPermissao
+	 */
+	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
+			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauDeInstrucaoModel grauDeInstrucao,
+			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
+		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
 		this.dataUltimaRevisao = dataUltimaRevisao;
 		this.cbo2002 = cbo2002;
@@ -65,35 +76,11 @@ public class Cargo {
 		this.atribuicoes = atribuicoes;
 		this.status = status;
 		this.idPermissao = idPermissao;
-		this.insalubridade = insalubridade;
 	}
 
-	public Cargo(Integer idCargo, String nomeCargo) {
-		this.idCargo = idCargo;
-		this.nomeCargo = nomeCargo;
+	public CargoModel() {
 	}
 
-	public Cargo(Integer idCargo, String nomeCargo, Integer idSetor) {
-		this.idCargo = idCargo;
-		this.idSetor = idSetor;
-		this.nomeCargo = nomeCargo;
-	}
-
-	/**
-	 * 
-	 */
-	public Cargo() {
-	}
-
-	@Override
-	public String toString() {
-		return "Cargo [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", idSetor=" + idSetor + "" + ", hierarquia="
-				+ hierarquia + ", salario=" + salario + ", dataCadastro=" + dataCadastro + ", dataUltimaRevisao="
-				+ dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94 + ", horaMes=" + horaMes
-				+ ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima=" + experienciaMinima + ", atribuicoes="
-				+ atribuicoes + ", status=" + status + ", idPermissao=" + idPermissao + "Insalubridade=" + insalubridade
-				+ "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -106,16 +93,21 @@ public class Cargo {
 		result = prime * result + ((dataUltimaRevisao == null) ? 0 : dataUltimaRevisao.hashCode());
 		result = prime * result + ((experienciaMinima == null) ? 0 : experienciaMinima.hashCode());
 		result = prime * result + ((grauDeInstrucao == null) ? 0 : grauDeInstrucao.hashCode());
-		result = prime * result + ((hierarquia == null) ? 0 : hierarquia.hashCode());
 		result = prime * result + ((horaMes == null) ? 0 : horaMes.hashCode());
 		result = prime * result + ((idCargo == null) ? 0 : idCargo.hashCode());
 		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
-		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
 		result = prime * result + ((nomeCargo == null) ? 0 : nomeCargo.hashCode());
-		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((insalubridade == null) ? 0 : insalubridade.hashCode());
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "CargoModel [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", dataCadastro=" + dataCadastro
+				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
+				+ ", horaMes=" + horaMes + ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima="
+				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", status=" + status + ", idPermissao="
+				+ idPermissao + "]";
 	}
 
 	@Override
@@ -126,7 +118,7 @@ public class Cargo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cargo other = (Cargo) obj;
+		CargoModel other = (CargoModel) obj;
 		if (atribuicoes == null) {
 			if (other.atribuicoes != null)
 				return false;
@@ -162,11 +154,6 @@ public class Cargo {
 				return false;
 		} else if (!grauDeInstrucao.equals(other.grauDeInstrucao))
 			return false;
-		if (hierarquia == null) {
-			if (other.hierarquia != null)
-				return false;
-		} else if (!hierarquia.equals(other.hierarquia))
-			return false;
 		if (horaMes == null) {
 			if (other.horaMes != null)
 				return false;
@@ -182,30 +169,15 @@ public class Cargo {
 				return false;
 		} else if (!idPermissao.equals(other.idPermissao))
 			return false;
-		if (idSetor == null) {
-			if (other.idSetor != null)
-				return false;
-		} else if (!idSetor.equals(other.idSetor))
-			return false;
 		if (nomeCargo == null) {
 			if (other.nomeCargo != null)
 				return false;
 		} else if (!nomeCargo.equals(other.nomeCargo))
 			return false;
-		if (salario == null) {
-			if (other.salario != null)
-				return false;
-		} else if (!salario.equals(other.salario))
-			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
 		} else if (!status.equals(other.status))
-			return false;
-		if (insalubridade == null) {
-			if (other.insalubridade != null)
-				return false;
-		} else if (!insalubridade.equals(other.insalubridade))
 			return false;
 		return true;
 	}
@@ -239,48 +211,6 @@ public class Cargo {
 	}
 
 	/**
-	 * @return the idSetor
-	 */
-	public Integer getIdSetor() {
-		return idSetor;
-	}
-
-	/**
-	 * @param idSetor the idSetor to set
-	 */
-	public void setIdSetor(Integer idSetor) {
-		this.idSetor = idSetor;
-	}
-
-	/**
-	 * @return the hierarquia
-	 */
-	public String getHierarquia() {
-		return hierarquia;
-	}
-
-	/**
-	 * @param hierarquia the hierarquia to set
-	 */
-	public void setHierarquia(String hierarquia) {
-		this.hierarquia = hierarquia;
-	}
-
-	/**
-	 * @return the salario
-	 */
-	public Double getSalario() {
-		return salario;
-	}
-
-	/**
-	 * @param salario the salario to set
-	 */
-	public void setSalario(Double salario) {
-		this.salario = salario;
-	}
-
-	/**
 	 * @return the dataCadastro
 	 */
 	public LocalDateTime getDataCadastro() {
@@ -311,56 +241,56 @@ public class Cargo {
 	/**
 	 * @return the cbo2002
 	 */
-	public String getCbo2002() {
+	public Cbo2002Model getCbo2002() {
 		return cbo2002;
 	}
 
 	/**
 	 * @param cbo2002 the cbo2002 to set
 	 */
-	public void setCbo2002(String cbo2002) {
+	public void setCbo2002(Cbo2002Model cbo2002) {
 		this.cbo2002 = cbo2002;
 	}
 
 	/**
 	 * @return the cbo94
 	 */
-	public String getCbo94() {
+	public Cbo1994Model getCbo94() {
 		return cbo94;
 	}
 
 	/**
 	 * @param cbo94 the cbo94 to set
 	 */
-	public void setCbo94(String cbo94) {
+	public void setCbo94(Cbo1994Model cbo94) {
 		this.cbo94 = cbo94;
 	}
 
 	/**
 	 * @return the horaMes
 	 */
-	public Integer getHoraMes() {
+	public HorasMesModel getHoraMes() {
 		return horaMes;
 	}
 
 	/**
 	 * @param horaMes the horaMes to set
 	 */
-	public void setHoraMes(Integer horaMes) {
+	public void setHoraMes(HorasMesModel horaMes) {
 		this.horaMes = horaMes;
 	}
 
 	/**
 	 * @return the grauDeInstrucao
 	 */
-	public String getGrauDeInstrucao() {
+	public GrauDeInstrucaoModel getGrauDeInstrucao() {
 		return grauDeInstrucao;
 	}
 
 	/**
 	 * @param grauDeInstrucao the grauDeInstrucao to set
 	 */
-	public void setGrauDeInstrucao(String grauDeInstrucao) {
+	public void setGrauDeInstrucao(GrauDeInstrucaoModel grauDeInstrucao) {
 		this.grauDeInstrucao = grauDeInstrucao;
 	}
 
@@ -418,13 +348,6 @@ public class Cargo {
 	 */
 	public void setIdPermissao(Integer idPermissao) {
 		this.idPermissao = idPermissao;
-	}	
-	
-	public Double getInsalubridade() {
-		return insalubridade;
 	}
 
-	public void setInsalubridade(Double insalubridade) {
-		this.insalubridade = insalubridade;
-	}	
 }
