@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.recursos;
 
 import java.util.ArrayList;
 
@@ -12,13 +12,13 @@ import java.util.ArrayList;
  */
 public interface CRUDInterface<T> {
 
-	public int create(T obj);
+	public void create(T obj);
 
 	public T retrieve(int  id);
 
-	public boolean update(T obj);
+	public void update(T obj);
 
-	public boolean delete(int id);
+	public void delete(int id);
 	
 	public ArrayList<T> getAll();
 
