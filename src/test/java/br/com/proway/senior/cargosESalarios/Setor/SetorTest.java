@@ -5,13 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.Dados;
-import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
-import br.com.proway.senior.cargosESalarios.model.SetorDaoCsv;
+import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
 /**
  * Classe de testes do SetorDaoAl e SetorDaoCsv.
@@ -25,11 +21,11 @@ public class SetorTest {
 	public void testeUpdate() {
 		int idSetor = 2;
 		SetorDaoAl setorDao = new SetorDaoAl();
-		SetorModel setor1 = new SetorModel(idSetor, "Transporte", 200);
+		Setor setor1 = new Setor(idSetor, "Transporte", 20, 200);
 		setorDao.create(setor1);
-		SetorModel setor2 = new SetorModel(idSetor, "Nome do Setor Alterado (Teste)", 5832139);
+		Setor setor2 = new Setor(idSetor, "Nome do Setor Alterado (Teste)", 8000, 5832139);
 		setorDao.update(setor2);
-		SetorModel setorAlterado = setorDao.retrieve(idSetor);
+		Setor setorAlterado = setorDao.retrieve(idSetor);
 		assertEquals(setorAlterado, setor2);
 		assertNotEquals(setorAlterado, setor1);
 	}
@@ -38,11 +34,11 @@ public class SetorTest {
 	public void testeCreateERetrieve() {
 		int idSetor = 1;
 		SetorDaoAl setorDAO = new SetorDaoAl();
-		SetorModel setor = new SetorModel(idSetor, "Recursos Humanos", 100);
-		SetorModel setorClone = new SetorModel(idSetor, "Recursos Humanos", 100);
+		Setor setor = new Setor(idSetor, "Recursos Humanos", 10, 100);
+		Setor setorClone = new Setor(idSetor, "Recursos Humanos", 10, 100);
 		setorDAO.create(setor);
 		setorDAO.create(setorClone);
-		SetorModel setorRetornado = setorDAO.retrieve(idSetor);
+		Setor setorRetornado = setorDAO.retrieve(idSetor);
 		assertEquals(setorRetornado, setor);
 		assertNotSame(setorRetornado, setorClone);
 	}
@@ -50,7 +46,7 @@ public class SetorTest {
 	@Test
 	public void testeDelete() {
 		int idSetor = 3;
-		SetorModel setor01 = new SetorModel(idSetor, "Contabilidade", 400);
+		Setor setor01 = new Setor(idSetor, "Contabilidade", 20, 400);
 		SetorDaoAl setorDao = new SetorDaoAl();
 		int tamanhoInicial = Dados.getInstance().getListaSetores().size();
 		setorDao.create(setor01);
@@ -63,46 +59,46 @@ public class SetorTest {
 	public void testSetorNaoExistente() {
 		int idSetor = 4;
 		SetorDaoAl setorDao = new SetorDaoAl();
-		SetorModel setor = setorDao.retrieve(idSetor);
+		Setor setor = setorDao.retrieve(idSetor);
 		assertNull(setor);
 	}
 	
-	@Ignore
+	@Test
 	public void testCreateCSV() throws Exception{
 		int idSetor = 4;
 		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel novoSetor = new SetorModel(idSetor, "Limpeza", 5);
+		Setor novoSetor = new Setor(idSetor, "Limpeza", 10, 5);
 		setorDao.create(novoSetor);
-		SetorModel setorRetornado = setorDao.retrieve(idSetor);
+		Setor setorRetornado = setorDao.retrieve(idSetor);
 		assertEquals(setorRetornado, novoSetor);
 	}
 	
-	@Ignore
+	@Test
 	public void testRetrieveCSV() {
 		Integer idSetorRetornado = 2;
 		SetorDaoCsv setorDao = new SetorDaoCsv();
-		SetorModel setorRetornado = setorDao.retrieve(idSetorRetornado);
+		Setor setorRetornado = setorDao.retrieve(idSetorRetornado);
 		assertEquals(setorRetornado.getId(), idSetorRetornado);
 	}
 	
-	@Ignore
+	@Test
 	public void testUpdateCSV() {
 		int idSetorAlterado = 3;
 		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel setorAnterior = setorDao.retrieve(idSetorAlterado);
-		SetorModel setorAlterado = new SetorModel(setorAnterior.getId(), setorAnterior.getNomeSetor(), setorAnterior.getIdPermissao());
+		Setor setorAnterior = setorDao.retrieve(idSetorAlterado);
+		Setor setorAlterado = new Setor(setorAnterior.getId(), setorAnterior.getNomeSetor(), setorAnterior.getCapacidade() + 200, setorAnterior.getIdPermissao());
 		setorDao.update(setorAlterado);
-		SetorModel setorRetornado = setorDao.retrieve(idSetorAlterado);
+		Setor setorRetornado = setorDao.retrieve(idSetorAlterado);
 		assertEquals(setorRetornado, setorAlterado);
 		assertNotEquals(setorRetornado, setorAnterior);
 		
 	}
 	
-	@Ignore
+	@Test
 	public void testDeleteCSV() {
 		int idSetorDeletado = 5;
 		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel novoSetor = new SetorModel(idSetorDeletado, "SETOR A SER REMOVIDO", 666);
+		Setor novoSetor = new Setor(idSetorDeletado, "SETOR A SER REMOVIDO", 23, 666);
 		int tamanhoAnterior = setorDao.getAll().size();
 		setorDao.create(novoSetor);		
 		setorDao.delete(idSetorDeletado);

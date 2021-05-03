@@ -1,6 +1,8 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.Cargo;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
 
 /**
  * Classe DAO do Cargo para persistência dos dados em arquivo CSV.
@@ -8,11 +10,8 @@ import java.util.ArrayList;
  * @version Sprint3:
  * 	- Criado a classe, sem implementação (TO-DO).
  */
-
-@Deprecated
-
-public class CargoDaoCsv{
-	/*
+public class CargoDaoCsv implements CRUDInterface<Cargo> {
+	
 	public void create(Cargo obj) {
 		
 	}
@@ -32,5 +31,4 @@ public class CargoDaoCsv{
 	public ArrayList<Cargo> getAll(){
 		return null;
 	}
-*/
 }

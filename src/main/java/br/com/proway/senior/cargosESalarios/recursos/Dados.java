@@ -1,6 +1,9 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.recursos;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.Cargo.Cargo;
+import br.com.proway.senior.cargosESalarios.Setor.Setor;
 
 /**
  * Classe Dados para realizar a persistência em ArrayList.
@@ -12,9 +15,8 @@ import java.util.ArrayList;
  */
 public final class Dados {
 	private static Dados instance;
-	private ArrayList<CargoModel> listaCargos;	
-	private ArrayList<SetorModel> listaSetores;
-	private ArrayList<PostoDeTrabalhoModel> listaPostos;
+	private ArrayList<Cargo> listaCargos;	
+	private ArrayList<Setor> listaSetores;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -24,9 +26,8 @@ public final class Dados {
 	 */
 	
 	private Dados() {
-		listaCargos = new ArrayList<CargoModel>();
-		listaSetores = new ArrayList<SetorModel>();
-		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
+		listaCargos = new ArrayList<Cargo>();
+		listaSetores = new ArrayList<Setor>();
 	}
 	/**
 	 * Retorna uma referencia para o objeto Dados.
@@ -43,16 +44,12 @@ public final class Dados {
 		return instance;
 	}
 	
-	public ArrayList<CargoModel> getListaCargos() {
+	public ArrayList<Cargo> getListaCargos() {
 		return listaCargos;
 	}
 	
-	public ArrayList<SetorModel> getListaSetores() {
+	public ArrayList<Setor> getListaSetores() {
 		return listaSetores;
-	}
-	
-	public ArrayList<PostoDeTrabalhoModel> getListaPostos() {
-		return listaPostos;
 	}
 	
 }
