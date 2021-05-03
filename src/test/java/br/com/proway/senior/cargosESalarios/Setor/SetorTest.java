@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
  */
 public class SetorTest {
 
-	@Test
+	@Ignore
 	public void testeUpdate() {
 		int idSetor = 2;
 		SetorDaoAl setorDao = new SetorDaoAl();
@@ -34,7 +34,7 @@ public class SetorTest {
 		assertNotEquals(setorAlterado, setor1);
 	}
 
-	@Test
+	@Ignore
 	public void testeCreateERetrieve() {
 		int idSetor = 1;
 		SetorDaoAl setorDAO = new SetorDaoAl();
@@ -47,7 +47,7 @@ public class SetorTest {
 		assertNotSame(setorRetornado, setorClone);
 	}
 
-	@Test
+	@Ignore
 	public void testeDelete() {
 		int idSetor = 3;
 		SetorModel setor01 = new SetorModel(idSetor, "Contabilidade", 400);
@@ -59,7 +59,7 @@ public class SetorTest {
 		assertEquals(tamanhoInicial, Dados.getInstance().getListaSetores().size());
 	}
 
-	@Test
+	@Ignore
 	public void testSetorNaoExistente() {
 		int idSetor = 4;
 		SetorDaoAl setorDao = new SetorDaoAl();

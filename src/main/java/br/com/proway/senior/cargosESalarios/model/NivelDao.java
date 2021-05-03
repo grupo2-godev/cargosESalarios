@@ -72,6 +72,11 @@ public class NivelDao {
 		return false;
 	}
 
+	/**
+	 * Pega todos os niveis do banco
+	 * 
+	 * @return todos os niveis
+	 */
 	public ArrayList<NivelModel> getAll() {
 		return db;
 	}

@@ -2,10 +2,8 @@ package br.com.proway.senior.cargosESalarios.recursos;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -31,7 +29,7 @@ public class DadosTest {
 
 	@Test
 	public void testeGetListaSetores() {
-		SetorModel setor = new SetorModel(45, "RH", 23124);
+		SetorModel setor = new SetorModel("RH", 23124);
 		int tamanhoInicial = Dados.getInstance().getListaSetores().size();
 		Dados.getInstance().getListaSetores().add(setor);
 		ArrayList<SetorModel> lista = Dados.getInstance().getListaSetores();
@@ -40,8 +38,7 @@ public class DadosTest {
 	
 	@Test
 	public void testeGetListaCargos() {
-		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(),
-				cbo2002, cbo1994, hm, gi, "12 meses", "Desenvolvedor", true, 1);
+		CargoModel cargo = new CargoModel();
 		int tamanhoInicial = Dados.getInstance().getListaCargos().size();
 		Dados.getInstance().getListaCargos().add(cargo);
 		ArrayList<CargoModel> listaCargo = Dados.getInstance().getListaCargos();

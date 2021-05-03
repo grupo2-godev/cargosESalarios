@@ -18,8 +18,7 @@ public class SetorModel {
 	 * @param capacidade
 	 * @param idPermissao
 	 */
-	public SetorModel(Integer id, String nomeSetor, Integer idPermissao) {
-		this.idSetor = id;
+	public SetorModel(String nomeSetor, Integer idPermissao) {
 		this.nomeSetor = nomeSetor;
 		this.idPermissao = idPermissao;
 	}

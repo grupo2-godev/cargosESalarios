@@ -8,13 +8,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-class NivelDaoTest {
+public class NivelDaoTest {
 
 	NivelDao dao = new NivelDao();
-	GrauDeInstrucaoModel gi = new GrauDeInstrucaoModel();
-	Cbo2002Model cbo2002 = new Cbo2002Model();
-	Cbo1994Model cbo1994 = new Cbo1994Model();
-	HorasMesModel hm = new HorasMesModel();
 	ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
 	
 	@Before
