@@ -17,6 +17,7 @@ public final class Dados {
 	private ArrayList<Cbo2002Model> listaCbo2002;
 	private ArrayList<PostoDeTrabalhoModel> listaPostos;
 	private ArrayList<NivelModel> listaNiveis;
+	private ArrayList<HorasMesModel> listaHorasMesModel;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -30,6 +31,7 @@ public final class Dados {
 		listaCbo2002 = new ArrayList<Cbo2002Model>();
 		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
 		listaNiveis = new ArrayList<NivelModel>();
+		listaHorasMesModel = new ArrayList<HorasMesModel>();
 	}
   
 	/**
@@ -64,5 +66,9 @@ public final class Dados {
   
 	public ArrayList<NivelModel> getListaNiveis() {
 		return listaNiveis;
+	}
+
+	public ArrayList<HorasMesModel> getListaHorasMes() {
+		return listaHorasMesModel;
 	}
 }
