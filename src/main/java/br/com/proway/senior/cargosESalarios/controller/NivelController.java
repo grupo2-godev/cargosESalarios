@@ -2,13 +2,12 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelDao;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelController {
 
-NivelDao dao = new NivelDao();
+	NivelDao dao = new NivelDao();
 	
 	/**
 	 * Cadastra um novo nível

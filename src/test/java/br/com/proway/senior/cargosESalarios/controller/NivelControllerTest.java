@@ -1,10 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
