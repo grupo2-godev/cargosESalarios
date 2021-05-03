@@ -45,5 +45,9 @@ public class PostoDeTrabalhoDaoSql {
 		return 0;
 	}
 	
+	public void limparTabela() throws SQLException {
+		String limpar = "TRUNCATE TABLE grupo2.posto_de_trabalho";
+		conexao.executeQuery(limpar);	
+	}
 
 }
