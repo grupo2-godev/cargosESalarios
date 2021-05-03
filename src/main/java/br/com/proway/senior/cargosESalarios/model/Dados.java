@@ -3,11 +3,11 @@ package br.com.proway.senior.cargosESalarios.model;
 import java.util.ArrayList;
 
 /**
- * Classe Dados para realizar a persistência em ArrayList.
- * Utiliza o padrão de projeto Singleton.
- * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi 
+ * Classe Dados para realizar a persistÃªncia em ArrayList.
+ * Utiliza o padrÃ£o de projeto Singleton.
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas GrijÃ³, Samuel Levi 
  * @version Sprint3
- * - Criação e implementação da classe.
+ * - CriaÃ§Ã£o e implementaÃ§Ã£o da classe.
  * - Teste dos getListas.
  */
 public final class Dados {
@@ -15,6 +15,12 @@ public final class Dados {
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
 	private ArrayList<Cbo1994Model> listaCbo1994;
+	private ArrayList<Cbo2002Model> listaCbo2002;
+	private ArrayList<PostoDeTrabalhoModel> listaPostos;
+	private ArrayList<NivelModel> listaNiveis;
+	private ArrayList<HorasMesModel> listaHorasMesModel;
+	private ArrayList<GrauInstrucaoModel> listaGrauInstrucao;
+
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -22,12 +28,17 @@ public final class Dados {
 	 *
 	 *@author Guilherme Silva e Gabriel.
 	 */
-	
 	private Dados() {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
-		listaCbo1994 = new ArrayList<Cbo1994Model>();;
+		listaCbo1994 = new ArrayList<Cbo1994Model>();
+		listaCbo2002 = new ArrayList<Cbo2002Model>();
+		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
+		listaNiveis = new ArrayList<NivelModel>();
+		listaHorasMesModel = new ArrayList<HorasMesModel>();
+		listaGrauInstrucao = new ArrayList<GrauInstrucaoModel>();
 	}
+	
 	/**
 	 * Retorna uma referencia para o objeto Dados.
 	 * Garante que o objeto Dados seja instanciado apenas uma vez.
@@ -52,6 +63,24 @@ public final class Dados {
 	}
 	public ArrayList<Cbo1994Model> getListaCbo1994() {
 		return listaCbo1994;
+    
+	public ArrayList<Cbo2002Model> getListaCbo2002() {
+		return listaCbo2002;
 	}
 	
+	public ArrayList<PostoDeTrabalhoModel> getListaPostos() {
+		return listaPostos;
+	}
+  
+	public ArrayList<NivelModel> getListaNiveis() {
+		return listaNiveis;
+	}
+	
+	public ArrayList<GrauInstrucaoModel> getListaGrauInstrucao() {
+		return listaGrauInstrucao;
+	}
+
+	public ArrayList<HorasMesModel> getListaHorasMes() {
+		return listaHorasMesModel;
+	}
 }
