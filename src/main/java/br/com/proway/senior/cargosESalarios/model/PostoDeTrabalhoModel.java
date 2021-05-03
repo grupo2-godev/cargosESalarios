@@ -52,6 +52,9 @@ public class PostoDeTrabalhoModel {
 		this.salario = salario;
 	}
 
+	public PostoDeTrabalhoModel() {
+	}
+
 	public Integer getIdPosto() {
 		return idPosto;
 	}
