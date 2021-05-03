@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class NivelDao {
 
-	ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
+	static ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
 	
 	/**
 	 * Adiciona um novo nivel

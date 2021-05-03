@@ -18,11 +18,6 @@ public class GrauInstrucaoDao {
 	public Integer create(GrauInstrucaoModel newGI) {
 		int size = db.size();
 		int novoGIId;
-		for (GrauInstrucaoModel gi : db) {
-			if (gi.getInstrucao() == newGI.getInstrucao()) {
-				return null;
-			}
-		}
 		if (size > 0) {
 			novoGIId =  db.get(size-1).getIdInstrucao() + 1;
 		}
@@ -88,6 +83,15 @@ public class GrauInstrucaoDao {
 		return false;
 	}
 	
+	/**
+	 * Deleta um grau de instrucao
+	 * 
+	 * Deleta o respectivo Grau de Instrucao passado como parametro
+	 * o seu id
+	 * 
+	 * @param id do Grau desejado
+	 * @return true/false caso consiga excluir
+	 */
 	public boolean delete(int id) {
 		for(GrauInstrucaoModel gi : db) {
 			if(gi.getIdInstrucao() == id) {
