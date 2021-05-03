@@ -14,6 +14,7 @@ public final class Dados {
 	private static Dados instance;
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
+	private ArrayList<Cbo1994Model> listaCbo1994;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -25,6 +26,7 @@ public final class Dados {
 	private Dados() {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
+		listaCbo1994 = new ArrayList<Cbo1994Model>();;
 	}
 	/**
 	 * Retorna uma referencia para o objeto Dados.
@@ -47,6 +49,9 @@ public final class Dados {
 	
 	public ArrayList<SetorModel> getListaSetores() {
 		return listaSetores;
+	}
+	public ArrayList<Cbo1994Model> getListaCbo1994() {
+		return listaCbo1994;
 	}
 	
 }
