@@ -1,8 +1,6 @@
-package br.com.proway.senior.cargosESalarios.Setor;
+package br.com.proway.senior.cargosESalarios.model;
 
 import java.util.ArrayList;
-import br.com.proway.senior.cargosESalarios.recursos.CRUDInterface;
-import br.com.proway.senior.cargosESalarios.recursos.Dados;
 
 
 /**
@@ -12,14 +10,15 @@ import br.com.proway.senior.cargosESalarios.recursos.Dados;
  * 	- Criação e implementação dos métodos.
  *  - Implementação dos testes.
  */
-public class SetorDaoAl implements CRUDInterface<Setor> {
+public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	/**
 	 * Popula setor no ArrayList.
 	 * 
 	 * @param String obj
 	 */
-	public void create(Setor obj) {
+	public boolean create(SetorModel obj) {
 		Dados.getInstance().getListaSetores().add(obj);
+		return true;
 	}
 
 	/**
@@ -28,8 +27,8 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * @param int id
 	 * @return Retorna o setor procurado ou nulo se não encontrado
 	 */
-	public Setor retrieve(int id) {
-		for (Setor setorProcurado : Dados.getInstance().getListaSetores()) {
+	public SetorModel retrieve(int id) {
+		for (SetorModel setorProcurado : Dados.getInstance().getListaSetores()) {
 			if (setorProcurado.getId() == id) {
 				return setorProcurado;
 			}
@@ -43,14 +42,16 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * @param String obj
 	 * 
 	 */
-	public void update(Setor obj) {
-		ArrayList<Setor> lista = Dados.getInstance().getListaSetores();
-		for (Setor setorProcurado : lista) {
+	public boolean update(SetorModel obj) {
+		ArrayList<SetorModel> lista = Dados.getInstance().getListaSetores();
+		for (SetorModel setorProcurado : lista) {
 			if (setorProcurado.getId() == obj.getId()) {
 				int posSetorProcurado = lista.indexOf(setorProcurado);
 				lista.set(posSetorProcurado, obj);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/** 
@@ -58,14 +59,15 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 * @param int id
 	 */
-	public void delete(int id) {
+	public boolean delete(int id) {
 
-		for (Setor setorDeletado : Dados.getInstance().getListaSetores()) {
+		for (SetorModel setorDeletado : Dados.getInstance().getListaSetores()) {
 			if (setorDeletado.getId() == id) {
 				Dados.getInstance().getListaSetores().remove(setorDeletado);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**
@@ -74,7 +76,7 @@ public class SetorDaoAl implements CRUDInterface<Setor> {
 	 * 
 	 * @return Retorna um ArrayList<Setor> com todos os setores
 	 */
-	public ArrayList<Setor> getAll() {
+	public ArrayList<SetorModel> getAll() {
 		return Dados.getInstance().getListaSetores();
 	}
 }
