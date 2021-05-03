@@ -16,6 +16,7 @@ public final class Dados {
 	private ArrayList<SetorModel> listaSetores;
 	private ArrayList<PostoDeTrabalhoModel> listaPostos;
 	private ArrayList<NivelModel> listaNiveis;
+	private ArrayList<HorasMesModel> listaHorasMesModel;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -29,6 +30,7 @@ public final class Dados {
 		listaSetores = new ArrayList<SetorModel>();
 		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
 		listaNiveis = new ArrayList<NivelModel>();
+		listaHorasMesModel = new ArrayList<HorasMesModel>();
 	}
   
 	/**
@@ -60,5 +62,9 @@ public final class Dados {
   
 	public ArrayList<NivelModel> getListaNiveis() {
 		return listaNiveis;
+	}
+
+	public ArrayList<HorasMesModel> getListaHorasMes() {
+		return listaHorasMesModel;
 	}
 }
