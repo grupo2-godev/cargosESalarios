@@ -15,6 +15,7 @@ public final class Dados {
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
 	private ArrayList<NivelModel> listaNiveis;
+	private ArrayList<GrauInstrucaoModel> listaGrauInstrucao;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -27,7 +28,16 @@ public final class Dados {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
 		listaNiveis = new ArrayList<NivelModel>();
+		listaGrauInstrucao = new ArrayList<GrauInstrucaoModel>();
 	}
+	
+	/**
+	 * @return the listaGrauInstrucao
+	 */
+	public ArrayList<GrauInstrucaoModel> getListaGrauInstrucao() {
+		return listaGrauInstrucao;
+	}
+	
 	/**
 	 * Retorna uma referencia para o objeto Dados.
 	 * Garante que o objeto Dados seja instanciado apenas uma vez.
