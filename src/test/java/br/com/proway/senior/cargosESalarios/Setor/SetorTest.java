@@ -67,47 +67,47 @@ public class SetorTest {
 		assertNull(setor);
 	}
 	
-	@Ignore
-	public void testCreateCSV() throws Exception{
-		int idSetor = 4;
-		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel novoSetor = new SetorModel(idSetor, "Limpeza", 5);
-		setorDao.create(novoSetor);
-		SetorModel setorRetornado = setorDao.retrieve(idSetor);
-		assertEquals(setorRetornado, novoSetor);
-	}
-	
-	@Ignore
-	public void testRetrieveCSV() {
-		Integer idSetorRetornado = 2;
-		SetorDaoCsv setorDao = new SetorDaoCsv();
-		SetorModel setorRetornado = setorDao.retrieve(idSetorRetornado);
-		assertEquals(setorRetornado.getId(), idSetorRetornado);
-	}
-	
-	@Ignore
-	public void testUpdateCSV() {
-		int idSetorAlterado = 3;
-		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel setorAnterior = setorDao.retrieve(idSetorAlterado);
-		SetorModel setorAlterado = new SetorModel(setorAnterior.getId(), setorAnterior.getNomeSetor(), setorAnterior.getIdPermissao());
-		setorDao.update(setorAlterado);
-		SetorModel setorRetornado = setorDao.retrieve(idSetorAlterado);
-		assertEquals(setorRetornado, setorAlterado);
-		assertNotEquals(setorRetornado, setorAnterior);
-		
-	}
-	
-	@Ignore
-	public void testDeleteCSV() {
-		int idSetorDeletado = 5;
-		SetorDaoCsv setorDao = new SetorDaoCsv();		
-		SetorModel novoSetor = new SetorModel(idSetorDeletado, "SETOR A SER REMOVIDO", 666);
-		int tamanhoAnterior = setorDao.getAll().size();
-		setorDao.create(novoSetor);		
-		setorDao.delete(idSetorDeletado);
-		int tamanhoAtual = setorDao.getAll().size();
-		assertEquals(tamanhoAnterior, tamanhoAtual);
-		
-	}
+//	@Ignore
+//	public void testCreateCSV() throws Exception{
+//		int idSetor = 4;
+//		SetorDaoCsv setorDao = new SetorDaoCsv();		
+//		SetorModel novoSetor = new SetorModel(idSetor, "Limpeza", 5);
+//		setorDao.create(novoSetor);
+//		SetorModel setorRetornado = setorDao.retrieve(idSetor);
+//		assertEquals(setorRetornado, novoSetor);
+//	}
+//	
+//	@Ignore
+//	public void testRetrieveCSV() {
+//		Integer idSetorRetornado = 2;
+//		SetorDaoCsv setorDao = new SetorDaoCsv();
+//		SetorModel setorRetornado = setorDao.retrieve(idSetorRetornado);
+//		assertEquals(setorRetornado.getId(), idSetorRetornado);
+//	}
+//	
+//	@Ignore
+//	public void testUpdateCSV() {
+//		int idSetorAlterado = 3;
+//		SetorDaoCsv setorDao = new SetorDaoCsv();		
+//		SetorModel setorAnterior = setorDao.retrieve(idSetorAlterado);
+//		SetorModel setorAlterado = new SetorModel(setorAnterior.getId(), setorAnterior.getNomeSetor(), setorAnterior.getIdPermissao());
+//		setorDao.update(setorAlterado);
+//		SetorModel setorRetornado = setorDao.retrieve(idSetorAlterado);
+//		assertEquals(setorRetornado, setorAlterado);
+//		assertNotEquals(setorRetornado, setorAnterior);
+//		
+//	}
+//	
+//	@Ignore
+//	public void testDeleteCSV() {
+//		int idSetorDeletado = 5;
+//		SetorDaoCsv setorDao = new SetorDaoCsv();		
+//		SetorModel novoSetor = new SetorModel(idSetorDeletado, "SETOR A SER REMOVIDO", 666);
+//		int tamanhoAnterior = setorDao.getAll().size();
+//		setorDao.create(novoSetor);		
+//		setorDao.delete(idSetorDeletado);
+//		int tamanhoAtual = setorDao.getAll().size();
+//		assertEquals(tamanhoAnterior, tamanhoAtual);
+//		
+//	}
 }

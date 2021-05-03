@@ -1,7 +1,6 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 
@@ -40,10 +39,10 @@ public class PostoDeTrabalhoControllerTest {
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		PostoDeTrabalhoModel postoRecuperado = dao.retrieve(nomePosto);
 		assertEquals("Desenvolvedor(a)", postoRecuperado.getNomePosto());
-		assertEquals(3, postoRecuperado.getIdCargo());
-		assertEquals(4, postoRecuperado.getIdSetor());
-		assertEquals(1, postoRecuperado.getIdNivel());
-		assertEquals(1800.00, postoRecuperado.getSalario());
+		assertEquals(idCargo, postoRecuperado.getIdCargo());
+		assertEquals(idSetor, postoRecuperado.getIdSetor());
+		assertEquals(idNivel, postoRecuperado.getIdNivel());
+		assertEquals(salario, postoRecuperado.getSalario());
 	}
 	
 	@Test
@@ -58,7 +57,7 @@ public class PostoDeTrabalhoControllerTest {
 		PostoDeTrabalhoModel postoAtualizado = dao.retrieve(0);
 		controller.atualizarPostoDeTrabalho(0, "Desenvolvedor(a) Junior", idCargo, 7, idNivel, salario);
 		assertEquals("Desenvolvedor(a) Junior", postoAtualizado.getNomePosto());
-		assertEquals(7, postoAtualizado.getIdSetor());
+		assertEquals((Integer) 7, postoAtualizado.getIdSetor());
 		assertEquals(salario, postoAtualizado.getSalario());
 	}
 
@@ -67,7 +66,7 @@ public class PostoDeTrabalhoControllerTest {
 		dao.limparArray();
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		PostoDeTrabalhoModel postoProcurado = dao.retrieve(0);
-		assertEquals(0, postoProcurado.getIdPosto());
+		assertEquals((Integer)0, postoProcurado.getIdPosto());
 		assertEquals(nomePosto, postoProcurado.getNomePosto());
 		assertEquals(idCargo, postoProcurado.getIdCargo());
 		assertEquals(idSetor, postoProcurado.getIdSetor());
