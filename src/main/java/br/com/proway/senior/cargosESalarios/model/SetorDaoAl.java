@@ -16,9 +16,18 @@ public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	 * 
 	 * @param String obj
 	 */
-	public boolean create(SetorModel obj) {
-		Dados.getInstance().getListaSetores().add(obj);
-		return true;
+	public int create(SetorModel setorModel) {
+		int size = Dados.getInstance().getListaSetores().size();
+		int novoSetorId;
+		if (size > 0) {
+			novoSetorId =  Dados.getInstance().getListaSetores().get(size-1).getId();
+		}
+		else {
+			novoSetorId = 0;
+		}
+		setorModel.setId(novoSetorId);
+		Dados.getInstance().getListaSetores().add(setorModel);
+		return novoSetorId;
 	}
 
 	/**

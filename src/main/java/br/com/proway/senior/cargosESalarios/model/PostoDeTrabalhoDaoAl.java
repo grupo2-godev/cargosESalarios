@@ -23,7 +23,6 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return novoPostoId
 	 */
-	@Override
 	public int create(PostoDeTrabalhoModel postoModel) {
 		int size = Dados.getInstance().getListaPostos().size();
 		int novoPostoId;
@@ -47,7 +46,6 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	 * @param int idPosto
 	 * @return null ou PostoDeTrabalhoModel
 	 */
-	@Override
 	public PostoDeTrabalhoModel retrieve(int idPosto) {
 		for (PostoDeTrabalhoModel postoProcurado : Dados.getInstance().getListaPostos()) {
 			if (postoProcurado.getIdPosto() == idPosto)
