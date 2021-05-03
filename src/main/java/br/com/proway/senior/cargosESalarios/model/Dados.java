@@ -15,6 +15,7 @@ public final class Dados {
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
 	private ArrayList<NivelModel> listaNiveis;
+	private ArrayList<HorasMesModel> listaHorasMesModel;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -27,6 +28,7 @@ public final class Dados {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
 		listaNiveis = new ArrayList<NivelModel>();
+		listaHorasMesModel = new ArrayList<HorasMesModel>();
 	}
 	/**
 	 * Retorna uma referencia para o objeto Dados.
@@ -53,5 +55,9 @@ public final class Dados {
 	
 	public ArrayList<NivelModel> getListaNiveis() {
 		return listaNiveis;
+	}
+
+	public ArrayList<HorasMesModel> getListaHorasMes() {
+		return listaHorasMesModel;
 	}
 }

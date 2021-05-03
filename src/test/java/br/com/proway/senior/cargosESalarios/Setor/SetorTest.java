@@ -9,9 +9,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.Dados;
-import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
 import br.com.proway.senior.cargosESalarios.model.SetorDaoCsv;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 /**
  * Classe de testes do SetorDaoAl e SetorDaoCsv.
