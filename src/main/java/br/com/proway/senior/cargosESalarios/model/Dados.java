@@ -18,6 +18,7 @@ public final class Dados {
 	private ArrayList<PostoDeTrabalhoModel> listaPostos;
 	private ArrayList<NivelModel> listaNiveis;
 	private ArrayList<HorasMesModel> listaHorasMesModel;
+	private ArrayList<GrauInstrucaoModel> listaGrauInstrucao;
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -32,8 +33,9 @@ public final class Dados {
 		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
 		listaNiveis = new ArrayList<NivelModel>();
 		listaHorasMesModel = new ArrayList<HorasMesModel>();
+		listaGrauInstrucao = new ArrayList<GrauInstrucaoModel>();
 	}
-  
+	
 	/**
 	 * Retorna uma referencia para o objeto Dados.
 	 * Garante que o objeto Dados seja instanciado apenas uma vez.
@@ -66,6 +68,10 @@ public final class Dados {
   
 	public ArrayList<NivelModel> getListaNiveis() {
 		return listaNiveis;
+	}
+	
+	public ArrayList<GrauInstrucaoModel> getListaGrauInstrucao() {
+		return listaGrauInstrucao;
 	}
 
 	public ArrayList<HorasMesModel> getListaHorasMes() {

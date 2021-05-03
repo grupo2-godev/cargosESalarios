@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class NivelDao {
 
-	ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
+	static ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
 	
 	/**
 	 * Adiciona um novo nivel
@@ -94,7 +94,7 @@ public class NivelDao {
 	public boolean update(NivelModel nivel) {
 		for (NivelModel nivelProcurado : db) {
 			if (nivelProcurado.getIdNivel() == nivel.getIdNivel()) {
-				nivelProcurado = nivel;
+				nivelProcurado.setNomeNivel(nivel.getNomeNivel());
 				return true;
 			}
 		}
