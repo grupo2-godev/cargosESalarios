@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.Cbo1994DaoAl;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;

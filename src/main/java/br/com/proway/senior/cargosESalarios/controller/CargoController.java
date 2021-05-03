@@ -7,7 +7,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
-import br.com.proway.senior.cargosESalarios.model.GrauDeInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 /**
@@ -43,7 +43,7 @@ public class CargoController {
 	 * @return boolean
 	 */
 	public Integer cadastrarCargo(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauDeInstrucaoModel grauDeInstrucao,
+			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauDeInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		
 	

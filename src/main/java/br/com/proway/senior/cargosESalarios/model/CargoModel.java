@@ -18,7 +18,7 @@ public class CargoModel {
 	private Cbo2002Model cbo2002;
 	private Cbo1994Model cbo94;
 	private HorasMesModel horaMes;
-	private GrauDeInstrucaoModel grauDeInstrucao;
+	private GrauInstrucaoModel grauDeInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
 	private Boolean status;
@@ -63,7 +63,7 @@ public class CargoModel {
 	 * @param idPermissao
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauDeInstrucaoModel grauDeInstrucao,
+			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauDeInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
@@ -283,14 +283,14 @@ public class CargoModel {
 	/**
 	 * @return the grauDeInstrucao
 	 */
-	public GrauDeInstrucaoModel getGrauDeInstrucao() {
+	public GrauInstrucaoModel getGrauDeInstrucao() {
 		return grauDeInstrucao;
 	}
 
 	/**
 	 * @param grauDeInstrucao the grauDeInstrucao to set
 	 */
-	public void setGrauDeInstrucao(GrauDeInstrucaoModel grauDeInstrucao) {
+	public void setGrauDeInstrucao(GrauInstrucaoModel grauDeInstrucao) {
 		this.grauDeInstrucao = grauDeInstrucao;
 	}
 

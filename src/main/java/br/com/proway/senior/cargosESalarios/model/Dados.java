@@ -63,6 +63,7 @@ public final class Dados {
 	}
 	public ArrayList<Cbo1994Model> getListaCbo1994() {
 		return listaCbo1994;
+	}
     
 	public ArrayList<Cbo2002Model> getListaCbo2002() {
 		return listaCbo2002;

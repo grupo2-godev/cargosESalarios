@@ -1,10 +1,10 @@
 package br.com.proway.senior.setoresESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.controller.SetorController;
 import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
