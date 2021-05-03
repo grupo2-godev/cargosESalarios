@@ -1,15 +1,14 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDao;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 
 class GrauInstrucaoControllerTest {
 
@@ -18,7 +17,8 @@ class GrauInstrucaoControllerTest {
 	
 	@Ignore
 	void testCadastrarGrauInstrucao() {
-		assertEquals(0, controller.cadastrarGrauInstrucao("Ensino medio"));		
+		Integer id = 0;
+		assertEquals(id, controller.cadastrarGrauInstrucao("Ensino medio"));		
 	}
 
 	@Ignore

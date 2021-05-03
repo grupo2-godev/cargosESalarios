@@ -1,13 +1,13 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class GrauInstrucaoDaoTest {
 
@@ -21,9 +21,10 @@ class GrauInstrucaoDaoTest {
 	
 	@Test 
 	void testCreate() {
+		Integer id = 0;
 		dao.limparArray();
 		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Médio");
-		assertEquals(0, dao.create(gi));
+		assertEquals(id, dao.create(gi));
 	}
 	
 	@Test 

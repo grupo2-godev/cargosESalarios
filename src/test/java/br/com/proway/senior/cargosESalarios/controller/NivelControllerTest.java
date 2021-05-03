@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
-import br.com.proway.senior.cargosESalarios.model.GrauDeInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelDao;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
@@ -17,7 +17,7 @@ class NivelControllerTest {
 
 	NivelController controller = new NivelController();
 	NivelDao dao = new NivelDao();
-	GrauDeInstrucaoModel gi = new GrauDeInstrucaoModel();
+	GrauInstrucaoModel gi = new GrauInstrucaoModel();
 	Cbo2002Model cbo2002 = new Cbo2002Model();
 	Cbo1994Model cbo1994 = new Cbo1994Model();
 	HorasMesModel hm = new HorasMesModel();

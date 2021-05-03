@@ -18,7 +18,7 @@ public class CargoModel {
 	private Cbo2002Model cbo2002;
 	private Cbo1994Model cbo94;
 	private HorasMesModel horaMes;
-	private GrauDeInstrucaoModel grauDeInstrucao;
+	private GrauInstrucaoModel grauInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
 	private Boolean status;
@@ -61,9 +61,10 @@ public class CargoModel {
 	 * @param atribuicoes
 	 * @param status
 	 * @param idPermissao
+	 * @param grauInstrucao 
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauDeInstrucaoModel grauDeInstrucao,
+			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
@@ -71,7 +72,7 @@ public class CargoModel {
 		this.cbo2002 = cbo2002;
 		this.cbo94 = cbo94;
 		this.horaMes = horaMes;
-		this.grauDeInstrucao = grauDeInstrucao;
+		this.grauInstrucao = grauInstrucao;
 		this.experienciaMinima = experienciaMinima;
 		this.atribuicoes = atribuicoes;
 		this.status = status;
@@ -92,7 +93,7 @@ public class CargoModel {
 		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
 		result = prime * result + ((dataUltimaRevisao == null) ? 0 : dataUltimaRevisao.hashCode());
 		result = prime * result + ((experienciaMinima == null) ? 0 : experienciaMinima.hashCode());
-		result = prime * result + ((grauDeInstrucao == null) ? 0 : grauDeInstrucao.hashCode());
+		result = prime * result + ((grauInstrucao == null) ? 0 : grauInstrucao.hashCode());
 		result = prime * result + ((horaMes == null) ? 0 : horaMes.hashCode());
 		result = prime * result + ((idCargo == null) ? 0 : idCargo.hashCode());
 		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
@@ -105,7 +106,7 @@ public class CargoModel {
 	public String toString() {
 		return "CargoModel [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", dataCadastro=" + dataCadastro
 				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
-				+ ", horaMes=" + horaMes + ", grauDeInstrucao=" + grauDeInstrucao + ", experienciaMinima="
+				+ ", horaMes=" + horaMes + ", grauDeInstrucao=" + grauInstrucao + ", experienciaMinima="
 				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", status=" + status + ", idPermissao="
 				+ idPermissao + "]";
 	}
@@ -149,10 +150,10 @@ public class CargoModel {
 				return false;
 		} else if (!experienciaMinima.equals(other.experienciaMinima))
 			return false;
-		if (grauDeInstrucao == null) {
-			if (other.grauDeInstrucao != null)
+		if (grauInstrucao == null) {
+			if (other.grauInstrucao != null)
 				return false;
-		} else if (!grauDeInstrucao.equals(other.grauDeInstrucao))
+		} else if (!grauInstrucao.equals(other.grauInstrucao))
 			return false;
 		if (horaMes == null) {
 			if (other.horaMes != null)
@@ -283,15 +284,15 @@ public class CargoModel {
 	/**
 	 * @return the grauDeInstrucao
 	 */
-	public GrauDeInstrucaoModel getGrauDeInstrucao() {
-		return grauDeInstrucao;
+	public GrauInstrucaoModel getGrauInstrucao() {
+		return grauInstrucao;
 	}
 
 	/**
 	 * @param grauDeInstrucao the grauDeInstrucao to set
 	 */
-	public void setGrauDeInstrucao(GrauDeInstrucaoModel grauDeInstrucao) {
-		this.grauDeInstrucao = grauDeInstrucao;
+	public void setGrauDeInstrucao(GrauInstrucaoModel grauDeInstrucao) {
+		this.grauInstrucao = grauDeInstrucao;
 	}
 
 	/**
