@@ -1,6 +1,6 @@
 package br.com.proway.senior.cargosESalarios.connection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 

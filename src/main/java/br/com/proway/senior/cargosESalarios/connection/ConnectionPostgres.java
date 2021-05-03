@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 /**
@@ -54,5 +55,36 @@ public class ConnectionPostgres {
 		}
 		return "Falha ao conectar.";
 	}
+	
+	/**
+	 * Método executeQuery
+	 * 
+	 * Realiza a execução de uma query no banco de dados, conforme String
+	 * informada.
+	 * 
+	 * @param String query
+	 * @return ResultSet
+	 * @throws SQLException
+	 */
+	public static ResultSet executeQuery(String query) throws SQLException {
+		Statement st = conexao.createStatement();
+		ResultSet rs = st.executeQuery(query);
+		return rs;	
+	}
 
+	/**
+	 * Método executeUpdate
+	 * 
+	 * Realiza o update no banco conforme query informada como
+	 * parâmetro.
+	 * 
+	 * @param String query
+	 * @return void
+	 * @throws SQLException
+	 */
+	public static void executeUpdate(String query) throws SQLException {
+		Statement st = conexao.createStatement();
+		st.executeUpdate(query);
+	}
+	
 }
