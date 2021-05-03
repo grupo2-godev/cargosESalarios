@@ -3,17 +3,18 @@ package br.com.proway.senior.cargosESalarios.model;
 import java.util.ArrayList;
 
 /**
- * Classe Dados para realizar a persistência em ArrayList.
- * Utiliza o padrão de projeto Singleton.
- * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi 
+ * Classe Dados para realizar a persistÃªncia em ArrayList.
+ * Utiliza o padrÃ£o de projeto Singleton.
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas GrijÃ³, Samuel Levi 
  * @version Sprint3
- * - Criação e implementação da classe.
+ * - CriaÃ§Ã£o e implementaÃ§Ã£o da classe.
  * - Teste dos getListas.
  */
 public final class Dados {
 	private static Dados instance;
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
+	private ArrayList<PostoDeTrabalhoModel> listaPostos;
 	private ArrayList<NivelModel> listaNiveis;
 	
 	/**
@@ -26,8 +27,10 @@ public final class Dados {
 	private Dados() {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
+		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
 		listaNiveis = new ArrayList<NivelModel>();
 	}
+  
 	/**
 	 * Retorna uma referencia para o objeto Dados.
 	 * Garante que o objeto Dados seja instanciado apenas uma vez.
@@ -51,6 +54,10 @@ public final class Dados {
 		return listaSetores;
 	}
 	
+	public ArrayList<PostoDeTrabalhoModel> getListaPostos() {
+		return listaPostos;
+	}
+  
 	public ArrayList<NivelModel> getListaNiveis() {
 		return listaNiveis;
 	}
