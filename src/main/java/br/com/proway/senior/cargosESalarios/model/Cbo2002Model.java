@@ -13,7 +13,7 @@ public class Cbo2002Model {
 	private Integer codigoId;
 	private String descricao;
 	private Double percentualInsalubridade;
-	public Double percentualPericulosidade;
+	private Double percentualPericulosidade;
 	
 	public Cbo2002Model() {}
 	
