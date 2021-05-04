@@ -2,18 +2,19 @@ package br.com.proway.senior.cargosESalarios.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.proway.senior.cargosESalarios.model.ConnectFactory;
-import br.com.proway.senior.cargosESalarios.model.InterfaceConexao;
+import br.com.proway.senior.cargosESalarios.model.IConectar;
+
 /**
  * Classe de conexão com o banco de dados.
  * 
  * @author Sprint 4
  */
-public class ConnectionPostgres  extends ConnectFactory{
+public class ConnectionPostgres  implements IConectar<Connection> {
 	
 	static String url = "jdbc:postgresql://localhost:5432/grupo2";
 	static String usuario = "postgres";
@@ -26,10 +27,16 @@ public class ConnectionPostgres  extends ConnectFactory{
 	 * Realiza a conexão com o banco de dados.
 	 * 
 	 * @return Connection
-	 * @throws SQLException
 	 */
-	public Connection conectar() throws SQLException {
-		return conexao = DriverManager.getConnection(url, usuario, senha);
+	public  Connection conectar() {
+		try {
+			 conexao = DriverManager.getConnection(url, usuario, senha);
+			 return conexao;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conexao;
 	}
 
 	/**
@@ -90,10 +97,6 @@ public class ConnectionPostgres  extends ConnectFactory{
 		st.executeUpdate(query);
 	}
 
-
-	public void desconectar() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }
