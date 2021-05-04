@@ -1,27 +1,20 @@
 package br.com.proway.senior.cargosESalarios.model;
 
 /**
- * Classe de apoio para persistência via banco de dados. Registra a quantidade de horas
- * trabalhadas por mês.
+ * Classe de apoio para persistência via banco de dados. Registra o grau de instrução e a
+ * quantidade de horas trabalhadas por mês.
  * 
  * @author Lorran P. Santos
  */
 
 public class HorasMesModel {
 	
-	// TODO Corrigir documentação
-
 	private Integer idGrauDeInstrucao;
 	private Double quantidade;
 
 	public HorasMesModel() {
 	}
 
-	/**
-	 * 
-	 * @param idGrauDeInstrucao
-	 * @param quantidade
-	 */
 	public HorasMesModel(Integer idGrauDeInstrucao, Double quantidade) {
 		this.idGrauDeInstrucao = idGrauDeInstrucao;
 		this.quantidade = quantidade;
