@@ -2,7 +2,9 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import java.sql.SQLException;
+
+import org.junit.After;
 
 /**
  * Classes de testes para o PostoDeTrabalhoController.
@@ -12,7 +14,7 @@ import org.junit.Before;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoAl;
+import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoSql;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 
 public class PostoDeTrabalhoControllerTest {
@@ -23,21 +25,20 @@ public class PostoDeTrabalhoControllerTest {
 	Integer idSetor = 4;
 	Integer idNivel = 1;
 	Double salario = 1800.00;
-	PostoDeTrabalhoDaoAl dao = new PostoDeTrabalhoDaoAl();
 	PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
 	PostoDeTrabalhoModel postoModel = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
+	PostoDeTrabalhoDaoSql postoDaoSql = new PostoDeTrabalhoDaoSql();
 	
-	
-	@Before
-	public void limparArray() {
-		dao.limparArray();
-		
-	}
+//	@Before
+//	public void limparArray() {
+//		dao.limparArray();
+//		
+//	}
 	
 	@Test
 	public void cadastrarPostoDeTrabalhoTest() {
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
-		PostoDeTrabalhoModel postoRecuperado = dao.retrieve(nomePosto);
+		PostoDeTrabalhoModel postoRecuperado = postoDaoSql.retrieve(idPosto);
 		assertEquals("Desenvolvedor(a)", postoRecuperado.getNomePosto());
 		assertEquals(idCargo, postoRecuperado.getIdCargo());
 		assertEquals(idSetor, postoRecuperado.getIdSetor());
@@ -48,14 +49,14 @@ public class PostoDeTrabalhoControllerTest {
 	@Test
 	public void deletarPostoDeTrabalhoTest() {
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
-		assertTrue(controller.deletarPostoDeTrabalho(0));
+		assertTrue(controller.deletarPostoDeTrabalho(1));
 	}
 	
 	@Test
 	public void atualizarPostoDeTrabalhoTest() {
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
-		PostoDeTrabalhoModel postoAtualizado = dao.retrieve(0);
-		controller.atualizarPostoDeTrabalho(0, "Desenvolvedor(a) Junior", idCargo, 7, idNivel, salario);
+		controller.atualizarPostoDeTrabalho(1, "Desenvolvedor(a) Junior", idCargo, 7, idNivel, salario);
+		PostoDeTrabalhoModel postoAtualizado = postoDaoSql.retrieve(1);
 		assertEquals("Desenvolvedor(a) Junior", postoAtualizado.getNomePosto());
 		assertEquals((Integer) 7, postoAtualizado.getIdSetor());
 		assertEquals(salario, postoAtualizado.getSalario());
@@ -63,10 +64,9 @@ public class PostoDeTrabalhoControllerTest {
 
 	@Test
 	public void buscarPostoDeTrabalhoIdTest() {
-		dao.limparArray();
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
-		PostoDeTrabalhoModel postoProcurado = dao.retrieve(0);
-		assertEquals((Integer)0, postoProcurado.getIdPosto());
+		PostoDeTrabalhoModel postoProcurado = postoDaoSql.retrieve(1);
+		assertEquals((Integer) 1, postoProcurado.getIdPosto());
 		assertEquals(nomePosto, postoProcurado.getNomePosto());
 		assertEquals(idCargo, postoProcurado.getIdCargo());
 		assertEquals(idSetor, postoProcurado.getIdSetor());
@@ -76,10 +76,9 @@ public class PostoDeTrabalhoControllerTest {
 	
 	@Test
 	public void buscarPostoDeTrabalhoNomeTest() {
-		dao.limparArray();
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
-		PostoDeTrabalhoModel postoProcurado = dao.retrieve(nomePosto);
-		assertEquals(postoProcurado, controller.buscarPostoDeTrabalhoNome(nomePosto));	
+		PostoDeTrabalhoModel postoProcurado = postoDaoSql.retrieve(nomePosto);
+		assertEquals(postoProcurado.getNomePosto(), controller.buscarPostoDeTrabalhoNome(nomePosto).getNomePosto());	
 	}
 	
 	@Test
@@ -89,5 +88,10 @@ public class PostoDeTrabalhoControllerTest {
 		controller.cadastrarPostoDeTrabalho("Coordenador de RH", 7, 3, 3, 7000.00);
 		assertEquals(3, controller.buscarTodosPostosDeTrabalho().size());
 	}
+	
+	@After
+	public void limparTabela() throws SQLException {
+		postoDaoSql.limparTabela();
+		}
 	
 }
