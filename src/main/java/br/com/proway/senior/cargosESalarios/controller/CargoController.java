@@ -43,7 +43,11 @@ public class CargoController {
 	 * @return boolean
 	 */
 	public Integer cadastrarCargo(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
+<<<<<<< HEAD
 			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
+=======
+			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauDeInstrucao,
+>>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		
 	

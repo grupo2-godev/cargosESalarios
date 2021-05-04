@@ -14,11 +14,13 @@ public final class Dados {
 	private static Dados instance;
 	private ArrayList<CargoModel> listaCargos;	
 	private ArrayList<SetorModel> listaSetores;
+	private ArrayList<Cbo1994Model> listaCbo1994;
 	private ArrayList<Cbo2002Model> listaCbo2002;
 	private ArrayList<PostoDeTrabalhoModel> listaPostos;
 	private ArrayList<NivelModel> listaNiveis;
 	private ArrayList<HorasMesModel> listaHorasMesModel;
 	private ArrayList<GrauInstrucaoModel> listaGrauInstrucao;
+
 	
 	/**
 	 *Armazena os dados cadastrados do Setor em ArrayList. 
@@ -29,6 +31,7 @@ public final class Dados {
 	private Dados() {
 		listaCargos = new ArrayList<CargoModel>();
 		listaSetores = new ArrayList<SetorModel>();
+		listaCbo1994 = new ArrayList<Cbo1994Model>();
 		listaCbo2002 = new ArrayList<Cbo2002Model>();
 		listaPostos = new  ArrayList<PostoDeTrabalhoModel>();
 		listaNiveis = new ArrayList<NivelModel>();
@@ -58,6 +61,10 @@ public final class Dados {
 	public ArrayList<SetorModel> getListaSetores() {
 		return listaSetores;
 	}
+	public ArrayList<Cbo1994Model> getListaCbo1994() {
+		return listaCbo1994;
+	}
+    
 	public ArrayList<Cbo2002Model> getListaCbo2002() {
 		return listaCbo2002;
 	}

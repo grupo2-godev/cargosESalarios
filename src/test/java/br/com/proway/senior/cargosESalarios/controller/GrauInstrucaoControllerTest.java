@@ -1,5 +1,10 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -17,8 +22,12 @@ class GrauInstrucaoControllerTest {
 	
 	@Ignore
 	void testCadastrarGrauInstrucao() {
+<<<<<<< HEAD
 		Integer id = 0;
 		assertEquals(id, controller.cadastrarGrauInstrucao("Ensino medio"));		
+=======
+		assertEquals((Integer)0, controller.cadastrarGrauInstrucao("Ensino medio"));		
+>>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 	}
 
 	@Ignore

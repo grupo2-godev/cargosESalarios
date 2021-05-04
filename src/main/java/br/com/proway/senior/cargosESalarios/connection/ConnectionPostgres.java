@@ -25,7 +25,7 @@ public class ConnectionPostgres {
 	 * @return Connection
 	 * @throws SQLException
 	 */
-	public static Connection conectar() throws SQLException {
+	public Connection conectar() throws SQLException {
 		return conexao = DriverManager.getConnection(url, usuario, senha);
 	}
 

@@ -103,5 +103,9 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	public ArrayList<Cbo2002Model> getAll() {
 		return Dados.getInstance().getListaCbo2002();
 	}
+	
+	public void limparArray() {
+		Dados.getInstance().getListaCbo2002().clear();
+	}
 
 }
