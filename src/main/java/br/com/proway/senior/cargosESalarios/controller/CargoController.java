@@ -5,10 +5,6 @@ import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
-import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
-import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 /**
  * Classe CargoController
@@ -43,11 +39,7 @@ public class CargoController {
 	 * @return boolean
 	 */
 	public Integer cadastrarCargo(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-<<<<<<< HEAD
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
-=======
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauDeInstrucao,
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
+			Integer cbo2002, Integer cbo94, Integer horaMes, Integer grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		
 	

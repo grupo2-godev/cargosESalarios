@@ -15,14 +15,10 @@ public class CargoModel {
 	private String nomeCargo;
 	private LocalDateTime dataCadastro;
 	private LocalDateTime dataUltimaRevisao;
-	private Cbo2002Model cbo2002;
-	private Cbo1994Model cbo94;
-	private HorasMesModel horaMes;
-<<<<<<< HEAD
-	private GrauInstrucaoModel grauInstrucao;
-=======
-	private GrauInstrucaoModel grauDeInstrucao;
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
+	private Integer cbo2002;
+	private Integer cbo94;
+	private Integer horaMes;
+	private Integer grauInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
 	private Boolean status;
@@ -68,11 +64,7 @@ public class CargoModel {
 	 * @param grauInstrucao 
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-<<<<<<< HEAD
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
-=======
-			Cbo2002Model cbo2002, Cbo1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauDeInstrucao,
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
+			Integer cbo2002, Integer cbo94, Integer horaMes, Integer grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
@@ -250,66 +242,57 @@ public class CargoModel {
 	/**
 	 * @return the cbo2002
 	 */
-	public Cbo2002Model getCbo2002() {
+	public Integer getCbo2002() {
 		return cbo2002;
 	}
 
 	/**
 	 * @param cbo2002 the cbo2002 to set
 	 */
-	public void setCbo2002(Cbo2002Model cbo2002) {
+	public void setCbo2002(Integer cbo2002) {
 		this.cbo2002 = cbo2002;
 	}
 
 	/**
 	 * @return the cbo94
 	 */
-	public Cbo1994Model getCbo94() {
+	public Integer getCbo94() {
 		return cbo94;
 	}
 
 	/**
 	 * @param cbo94 the cbo94 to set
 	 */
-	public void setCbo94(Cbo1994Model cbo94) {
+	public void setCbo94(Integer cbo94) {
 		this.cbo94 = cbo94;
 	}
 
 	/**
 	 * @return the horaMes
 	 */
-	public HorasMesModel getHoraMes() {
+	public Integer getHoraMes() {
 		return horaMes;
 	}
 
 	/**
 	 * @param horaMes the horaMes to set
 	 */
-	public void setHoraMes(HorasMesModel horaMes) {
+	public void setHoraMes(Integer horaMes) {
 		this.horaMes = horaMes;
 	}
 
 	/**
-	 * @return the grauDeInstrucao
+	 * @return the grauInstrucao
 	 */
-<<<<<<< HEAD
-	public GrauInstrucaoModel getGrauInstrucao() {
+	public Integer getGrauInstrucao() {
 		return grauInstrucao;
-=======
-	public GrauInstrucaoModel getGrauDeInstrucao() {
-		return grauDeInstrucao;
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 	}
 
 	/**
-	 * @param grauDeInstrucao the grauDeInstrucao to set
+	 * @param grauInstrucao the grauInstrucao to set
 	 */
-	public void setGrauDeInstrucao(GrauInstrucaoModel grauDeInstrucao) {
-<<<<<<< HEAD
-		this.grauInstrucao = grauDeInstrucao;
-=======
-		this.grauDeInstrucao = grauDeInstrucao;
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
+	public void setGrauInstrucao(Integer grauInstrucao) {
+		this.grauInstrucao = grauInstrucao;
 	}
 
 	/**
@@ -368,4 +351,5 @@ public class CargoModel {
 		this.idPermissao = idPermissao;
 	}
 
+	
 }

@@ -11,19 +11,15 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
-import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
-import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 public class CargoControllerTest {
 
 	CargoController controller = new CargoController();
 	CargoDaoAl dao = new CargoDaoAl();
-	GrauInstrucaoModel gi = new GrauInstrucaoModel();
-	Cbo2002Model cbo2002 = new Cbo2002Model();
-	Cbo1994Model cbo1994 = new Cbo1994Model();
-	HorasMesModel hm = new HorasMesModel();
+	Integer gi = 0;
+	Integer cbo2002 = 0;
+	Integer cbo1994 = 0;
+	Integer hm = 0;
 	
 	@Before
 	public void limparArray() {

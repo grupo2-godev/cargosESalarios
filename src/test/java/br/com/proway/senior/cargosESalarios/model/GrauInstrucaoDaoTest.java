@@ -1,10 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -29,11 +24,8 @@ class GrauInstrucaoDaoTest {
 		Integer id = 0;
 		dao.limparArray();
 		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Médio");
-<<<<<<< HEAD
 		assertEquals(id, dao.create(gi));
-=======
 		assertEquals((Integer)0, dao.create(gi));
->>>>>>> 3102e4371203e0601f7ae9834a58bb282fc190f6
 	}
 	
 	@Test 
