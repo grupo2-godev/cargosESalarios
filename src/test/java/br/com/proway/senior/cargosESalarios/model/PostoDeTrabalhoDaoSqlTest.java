@@ -3,13 +3,10 @@ package br.com.proway.senior.cargosESalarios.model;
 import static org.junit.Assert.*;
 
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;

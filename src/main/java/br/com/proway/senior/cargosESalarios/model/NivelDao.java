@@ -1,10 +1,15 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
-public class NivelDao {
+public class NivelDao implements CRUDInterface<NivelModel>{
 
-	static ArrayList<NivelModel> db = Dados.getInstance().getListaNiveis();
+	private  Connection db;
+	
+	public NivelDao(Connection crud){
+		this.db = crud;
+	}
 	
 	/**
 	 * Adiciona um novo nivel
@@ -14,18 +19,8 @@ public class NivelDao {
 	 * @param newNivel
 	 * @return NivelModel
 	 */
-	public int create(NivelModel newNivel) {
-		int size = db.size();
-		int novoNivelId;
-		if (size > 0) {
-			novoNivelId =  db.get(size-1).getIdNivel();
-		}
-		else {
-			novoNivelId = 0;
-		}
-		newNivel.setIdNivel(novoNivelId);
-		db.add(newNivel);
-		return novoNivelId;
+	public Integer create(NivelModel newNivel) {
+		
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-public class GrauInstrucaoModel {
+public class GrauInstrucaoModel implements InterfaceModel {
 
 	private Integer idInstrucao;
 	private String instrucao;
@@ -19,28 +19,28 @@ public class GrauInstrucaoModel {
 	/**
 	 * @return the idInstrucao
 	 */
-	public Integer getIdInstrucao() {
+	public Integer getId() {
 		return idInstrucao;
 	}
 
 	/**
 	 * @param idInstrucao the idInstrucao to set
 	 */
-	public void setIdInstrucao(Integer idInstrucao) {
+	public void setId(Integer idInstrucao) {
 		this.idInstrucao = idInstrucao;
 	}
 
 	/**
 	 * @return the instrucao
 	 */
-	public String getInstrucao() {
+	public String getNome() {
 		return instrucao;
 	}
 
 	/**
 	 * @param instrucao the instrucao to set
 	 */
-	public void setInstrucao(String instrucao) {
+	public void setNome(String instrucao) {
 		this.instrucao = instrucao;
 	}
 	

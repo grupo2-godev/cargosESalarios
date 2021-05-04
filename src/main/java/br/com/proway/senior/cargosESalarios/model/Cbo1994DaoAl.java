@@ -20,7 +20,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	 * @return int com novo id
 	 * 
 	 */
-	public int create(Cbo1994Model obj) {
+	public Integer create(Cbo1994Model obj) {
 		int size = Dados.getInstance().getListaCbo1994().size();
 		int novoCboId;
 		if (size > 0) {
