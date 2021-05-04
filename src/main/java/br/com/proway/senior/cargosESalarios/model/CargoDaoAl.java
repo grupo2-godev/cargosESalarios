@@ -22,7 +22,7 @@ public class CargoDaoAl implements CRUDInterface<CargoModel> {
 	 * 
 	 */
 
-	public int create(CargoModel obj) {
+	public Integer create(CargoModel obj) {
 		int size = Dados.getInstance().getListaCargos().size();
 		int novoCargoId;
 		if (size > 0) {

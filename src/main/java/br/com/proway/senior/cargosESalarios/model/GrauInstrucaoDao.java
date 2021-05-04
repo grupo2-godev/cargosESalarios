@@ -1,10 +1,17 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GrauInstrucaoDao {
+public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 
-	ArrayList<GrauInstrucaoModel> db = Dados.getInstance().getListaGrauInstrucao();
+	private  Connection db;
+	
+	public GrauInstrucaoDao(Connection ps){
+		this.db = ps;
+	}
 	
 	/**
 	 * Cadastra um novo grau de instrucao
@@ -16,17 +23,19 @@ public class GrauInstrucaoDao {
 	 * @return id do grau de instrucao ou null caso nao de para criar
 	 */
 	public Integer create(GrauInstrucaoModel newGI) {
-		int size = db.size();
-		int novoGIId;
-		if (size > 0) {
-			novoGIId =  db.get(size-1).getIdInstrucao() + 1;
+		String sql1 = "INSERT INTO grau_de_instrucao (descricao) VALUES (?)";
+		try {
+			PreparedStatement pstmt = db.prepareStatement(sql1);
+			pstmt.setString(1, newGI.getNome());
+			pstmt.execute();
+			System.out.println("Grau Instrucao");
+		} catch (SQLException e) {
+			System.out.println("erro!!!!!!!!!!!!!!!!!!!!!!!!");
+			e.printStackTrace();
 		}
-		else {
-			novoGIId = 0;
-		}
-		newGI.setIdInstrucao(novoGIId);
-		db.add(newGI);
-		return novoGIId; 
+		
+		return Integer.getInteger(sql1);
+		
 	};
 	
 	/**
@@ -37,12 +46,7 @@ public class GrauInstrucaoDao {
 	 * 
 	 * @param id Do Grau de instrucao
 	 */
-	public GrauInstrucaoModel retrieve(Integer id) {
-		for(GrauInstrucaoModel gi : db) {
-			if(gi.getIdInstrucao().equals(id)) {
-				return gi;
-			}
-		}
+	public GrauInstrucaoModel retrieve(int id) {
 		return null;
 	}
 	
@@ -55,11 +59,6 @@ public class GrauInstrucaoDao {
 	 * @param nome Do Grau de instrucao
 	 */
 	public GrauInstrucaoModel retrieve(String nome) {
-		for(GrauInstrucaoModel gi : db) {
-			if(gi.getInstrucao() == nome) {
-				return gi;
-			}
-		}
 		return null;
 	}
 	
@@ -74,12 +73,6 @@ public class GrauInstrucaoDao {
 	 * @return boolean
 	 */
 	public boolean update(GrauInstrucaoModel gi) {
-		for (GrauInstrucaoModel giProcurado : db) {
-			if (giProcurado.getIdInstrucao() == gi.getIdInstrucao()) {
-				giProcurado.setInstrucao(gi.getInstrucao());;
-				return true;
-			}
-		}
 		return false;
 	}
 	
@@ -93,12 +86,6 @@ public class GrauInstrucaoDao {
 	 * @return true/false caso consiga excluir
 	 */
 	public boolean delete(int id) {
-		for(GrauInstrucaoModel gi : db) {
-			if(gi.getIdInstrucao() == id) {
-				db.remove(gi);
-				return true;
-			}
-		}
 		return false;
 	}
 	
@@ -107,10 +94,10 @@ public class GrauInstrucaoDao {
 	 * 
 	 * @return lista com todos os graus de instrucao
 	 */
-	public ArrayList<GrauInstrucaoModel> getAll() {
-		return db;
-	}
-	
+//	public ArrayList<InterfaceModel> getAll() {
+//		return null;
+//	}
+//	
 	/**
 	 * Limpar ArrayList de Graus de instrucao
 	 * 
@@ -120,7 +107,11 @@ public class GrauInstrucaoDao {
 	 * @return void
 	 */
 	public void limparArray() {
-		db.clear();
+	}
+
+	public ArrayList<GrauInstrucaoModel> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

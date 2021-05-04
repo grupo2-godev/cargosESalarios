@@ -1,6 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-public class NivelModel {
+public class NivelModel implements InterfaceModel{
 
 	private int idNivel;
 	private String nomeNivel;
@@ -12,28 +12,26 @@ public class NivelModel {
 	/**
 	 * @return the id
 	 */
-	public int getIdNivel() {
+	public Integer getId() {
 		return idNivel;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setIdNivel(int id) {
+	public void setId(Integer id) {
 		this.idNivel = id;
 	}
 	/**
 	 * @return the nome
 	 */
-	public String getNomeNivel() {
+	public String getNome() {
 		return nomeNivel;
 	}
 	/**
 	 * @param nome the nome to set
 	 */
-	public void setNomeNivel(String nome) {
+	public void setNome(String nome) {
 		this.nomeNivel = nome;
 	}
-	
-	
 	
 }
