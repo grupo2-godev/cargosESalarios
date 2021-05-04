@@ -8,7 +8,7 @@ package br.com.proway.senior.cargosESalarios.model;
  *
  */
 
-public class Cbo1994Model {
+public class Cbo1994Model{
 	
 	private Integer codigoId;
 	private String descricao;
