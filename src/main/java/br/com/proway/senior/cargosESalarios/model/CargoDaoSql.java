@@ -87,7 +87,14 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel>{
         return null;
     }
 
-
+    /**
+     * Atualizar um registro no banco de dados.
+     * Realiza a atualização dos dados no registro cujo o id_cargo
+     * seja idêntico ao IdCargo informado no parâmetro.
+     * @param idCargo int
+     * @param obj CargoModel
+     * @return boolean True se a atualização for efetuada e False caso contrário.
+     */
     public boolean update(int idCargo, CargoModel obj) {
         String updateDB = "UPDATE grupo2.cargo SET nome_cargo = ?, data_cadastro = ?,"
                 + "data_ultima_revisao = ?, cbo2002 = ?, cbo94 = ?, hora_mes = ?," +
@@ -134,7 +141,38 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel>{
         return false;
     }
 
+    /**
+     * Listar todos os registros da tabela.
+     * Busca todos os registros do banco, salva em um ArrayLis
+     * e retorna o ArrayList resultante.
+     * @return list ArrayList<CargoModel>
+     */
     public ArrayList<CargoModel> getAll() {
-        return null;
+        ArrayList<CargoModel> list = new ArrayList<CargoModel>();
+        String sqlSelectAll = "SELECT * FROM grupo2.cargo";
+        try {
+            Statement stmt = con.conectar().createStatement();
+            ResultSet rs = stmt.executeQuery(sqlSelectAll);
+            CargoModel cargo = new CargoModel();
+            while (rs.next()) {
+                cargo.setIdCargo(rs.getInt(1));
+                cargo.setNomeCargo(rs.getString(2));
+                cargo.setDataCadastro(rs.getDate(3));
+                cargo.setDataUltimaRevisao(rs.getDate(4));
+                cargo.setCbo2002(rs.getInt(5));
+                cargo.setCbo94(rs.getInt(6));
+                cargo.setHoraMes(rs.getInt(7));
+                cargo.setGrauInstrucao(rs.getInt(8));
+                cargo.setExperienciaMinima(rs.getString(9));
+                cargo.setAtribuicoes(rs.getString(10));
+                cargo.setStatus(rs.getBoolean(11));
+                cargo.setIdPermissao(rs.getInt(12));
+                System.out.println(cargo.toString());
+                list.add(cargo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
