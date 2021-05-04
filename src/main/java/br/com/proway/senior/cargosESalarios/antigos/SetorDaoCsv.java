@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.io.FileWriter;
 import java.io.Reader;

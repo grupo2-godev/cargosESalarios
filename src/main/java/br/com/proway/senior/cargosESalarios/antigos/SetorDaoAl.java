@@ -1,6 +1,10 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.model.CRUDInterface;
+import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 
 /**

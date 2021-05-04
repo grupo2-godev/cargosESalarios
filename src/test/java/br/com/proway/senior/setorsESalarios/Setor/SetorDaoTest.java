@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.SetorDaoAl;
 import br.com.proway.senior.cargosESalarios.model.Dados;
-import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 /**

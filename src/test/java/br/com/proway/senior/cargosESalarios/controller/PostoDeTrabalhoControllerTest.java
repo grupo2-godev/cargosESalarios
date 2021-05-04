@@ -92,6 +92,6 @@ public class PostoDeTrabalhoControllerTest {
 	@After
 	public void limparTabela() throws SQLException {
 		postoDaoSql.limparTabela();
-		}
+	}
 	
 }
