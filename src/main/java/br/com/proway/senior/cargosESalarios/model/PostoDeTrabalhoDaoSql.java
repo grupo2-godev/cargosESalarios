@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,6 +15,8 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
  * interação com o banco de dados.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Lorran Santos, lorran.santos@senior.com.br
+ * @author Samuel Levi, samuel.levi@senior.com.br
  */
 
 public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoModel> {
@@ -206,10 +207,10 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 			while (rs.next()) {
 				posto.setIdCargo(rs.getInt(1));
 				posto.setIdNivel(rs.getInt(2));
-				posto.setIdPosto(rs.getInt(3));
-				posto.setIdSetor(rs.getInt(4));
-				posto.setNomePosto(rs.getString(5));
-				posto.setSalario(rs.getDouble(6));  
+				posto.setIdSetor(rs.getInt(3));
+				posto.setNomePosto(rs.getString(4));
+				posto.setSalario(rs.getDouble(5));
+				posto.setIdPosto(rs.getInt(6)); 
 				System.out.println(posto.toString());
                	results.add(posto);
             }

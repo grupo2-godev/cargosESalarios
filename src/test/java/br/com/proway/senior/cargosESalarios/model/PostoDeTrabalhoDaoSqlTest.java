@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import static org.junit.Assert.*;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+
+/**
+ * Classes de testes para o PostoDeTrabalhoController.
+ * 
+ * @author Sarah Brito, sarah.brito@senior.com.br
+ */
 
 public class PostoDeTrabalhoDaoSqlTest {
 

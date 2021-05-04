@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoAl;
+import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoSql;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 
 /**
@@ -14,7 +14,7 @@ import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDaoAl daoPosto = new PostoDeTrabalhoDaoAl();
+	PostoDeTrabalhoDaoSql postoSQL = new PostoDeTrabalhoDaoSql();
 	
 	/**
 	 * Cadastro Posto de Trabalho
@@ -29,13 +29,13 @@ public class PostoDeTrabalhoController {
 	 * @return null ou idNovoPosto
 	 */
 	public Integer cadastrarPostoDeTrabalho(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) {		
-		if (daoPosto.retrieve(nomePosto) != null) {
+		if (postoSQL.retrieve(nomePosto).toString().isEmpty()) {
 			return null;
 		}
 		else {
 			PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
-			int idNovoPosto = daoPosto.create(novoPosto);
-			return idNovoPosto;
+			int quantidadeRegistros = postoSQL.create(novoPosto);
+			return quantidadeRegistros;
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class PostoDeTrabalhoController {
 	 * @return boolean
 	 */
 	public boolean deletarPostoDeTrabalho(Integer idPosto) {
-		return daoPosto.delete(idPosto);
+		return postoSQL.delete(idPosto);
 	}
 	
 	/**
@@ -66,13 +66,13 @@ public class PostoDeTrabalhoController {
 	 */
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, Integer novaIdCargo, Integer novaIdSetor,
 			Integer novoIdNivel, Double novoSalario) {
-		PostoDeTrabalhoModel posto = daoPosto.retrieve(idPosto);
+		PostoDeTrabalhoModel posto = postoSQL.retrieve(idPosto);
 		posto.setNomePosto(novoNome);
 		posto.setIdCargo(novaIdCargo);
 		posto.setIdSetor(novaIdSetor);
 		posto.setIdNivel(novoIdNivel);
 		posto.setSalario(novoSalario);
-		return daoPosto.update(posto);
+		return postoSQL.update(idPosto, posto);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoId(Integer idPosto) {
-		return daoPosto.retrieve(idPosto);
+		return postoSQL.retrieve(idPosto);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoNome(String nomePosto) {
-		return daoPosto.retrieve(nomePosto);
+		return postoSQL.retrieve(nomePosto);
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class PostoDeTrabalhoController {
 	 * @return ArrayList
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodosPostosDeTrabalho() {
-		return daoPosto.getAll();
+		return postoSQL.getAll();
 		
 	}
 
