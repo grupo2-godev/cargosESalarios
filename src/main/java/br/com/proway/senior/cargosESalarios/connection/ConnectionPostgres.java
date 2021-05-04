@@ -48,6 +48,7 @@ public class ConnectionPostgres {
 			Statement stmt = ((java.sql.Connection) conectar()).createStatement();
 			stmt.execute(query);
 			String mensagem = "Conectado com sucesso.";
+			System.out.println(mensagem);
 			return mensagem;
 		}catch(Exception e) {
 			e.printStackTrace();
