@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
@@ -27,6 +28,7 @@ public class PostoDeTrabalhoDaoSql {
 	 * @return novoPostoId
 	 */
 	public int create(PostoDeTrabalhoModel postoModel) {
+		ArrayList<PostoDeTrabalhoModel> pt = new ArrayList<PostoDeTrabalhoModel>();
 		String sql1 = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) VALUES (?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql1);
@@ -37,7 +39,8 @@ public class PostoDeTrabalhoDaoSql {
 			pstmt.setDouble(5, postoModel.getSalario());
 			pstmt.execute();
 			System.out.println("Posto de Trabalho cadastrado com sucesso.");
-			
+			System.out.println(pt.get(0).getNomePosto());
+			pt.add(postoModel);
 		} catch (SQLException e) {
 			System.out.println("Falha ao cadastrar Posto de Trabalho");
 			e.printStackTrace();

@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import br.com.proway.senior.cargosESalarios.model.ConnectFactory;
+import br.com.proway.senior.cargosESalarios.model.InterfaceConexao;
 /**
  * Classe de conexão com o banco de dados.
  * 
  * @author Sprint 4
  */
-public class ConnectionPostgres {
+public class ConnectionPostgres  extends ConnectFactory{
 	
 	static String url = "jdbc:postgresql://localhost:5432/grupo2";
 	static String usuario = "postgres";
@@ -85,6 +88,12 @@ public class ConnectionPostgres {
 	public static void executeUpdate(String query) throws SQLException {
 		Statement st = conexao.createStatement();
 		st.executeUpdate(query);
+	}
+
+
+	public void desconectar() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
