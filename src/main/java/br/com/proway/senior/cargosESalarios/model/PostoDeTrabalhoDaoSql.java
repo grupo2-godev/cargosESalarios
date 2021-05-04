@@ -29,11 +29,11 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	 * Recebe um objeto cargo para inserir no banco de dados.
 	 * 
 	 * @param PostoDeTrabalhoModel postoModel
-	 * @return novoPostoId
+	 * @return quantidade
 	 */
 	public int create(PostoDeTrabalhoModel postoModel) {
 		String sqlInsert = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) VALUES (?, ?, ?, ?, ?)";
-		int quantidade = 0;
+		int quantidadeRegistros = 0;
 		try {
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sqlInsert);
 			pstmt.setString(1, postoModel.getNomePosto());
@@ -45,14 +45,14 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.posto_de_trabalho";
 			ResultSet rs = conexao.executeQuery(sqlCount);
 			rs.next();
-			quantidade = rs.getInt(1);
+			quantidadeRegistros = rs.getInt(1);
 			System.out.println("Posto de Trabalho cadastrado com sucesso.");
-			return quantidade;
+			return quantidadeRegistros;
 		} catch (SQLException e) {
 			System.out.println("Falha ao cadastrar Posto de Trabalho");
 			e.printStackTrace();
 		}
-		return quantidade;
+		return quantidadeRegistros;
 	}
 	
 	/**
@@ -117,11 +117,11 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel retrieve(String nomePosto) {
-		String sqlRetrieveId = "SELECT * FROM grupo2.posto_de_trabalho WHERE nome_posto = " 
+		String sqlRetrieveNome = "SELECT * FROM grupo2.posto_de_trabalho WHERE nome_posto = " 
 				+ "'" + nomePosto + "'";
 		try {
 			Statement stmt = conexao.conectar().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlRetrieveId);
+			ResultSet rs = stmt.executeQuery(sqlRetrieveNome);
 			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
 			while (rs.next()) {
 				posto.setIdCargo(rs.getInt(1));
@@ -225,6 +225,8 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	 * 
 	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
 	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes.
+	 * É necessário implementar no banco as sequences, pois é lá que ocorre essa
+	 * "limpeza" do increment.
 	 * 
 	 * @throws SQLException
 	 * @return void
@@ -234,7 +236,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 		String removerIncremento = "ALTER SEQUENCE grupo2.posto_de_trabalho_increment RESTART";	
 		ConnectionPostgres.executeUpdate(limpar);
 		ConnectionPostgres.executeUpdate(removerIncremento);
-		System.out.println("Limpou tudo");
+		System.out.println("Limpeza realizada.");
 	}
 
 }

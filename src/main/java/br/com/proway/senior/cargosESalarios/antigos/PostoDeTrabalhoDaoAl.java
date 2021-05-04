@@ -1,6 +1,10 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.model.CRUDInterface;
+import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 
 /**
  * Classe PostoDeTrabalhoDao
@@ -18,7 +22,7 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	/***
 	 * Inserir Posto de Trabalho.
 	 * 
-	 * Recebe um objeto cargo para inserior na lista.
+	 * Recebe um objeto cargo para inserir na lista.
 	 * 
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return novoPostoId

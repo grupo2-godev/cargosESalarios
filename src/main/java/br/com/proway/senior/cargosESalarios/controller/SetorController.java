@@ -2,12 +2,22 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.SetorDaoAl;
+import br.com.proway.senior.cargosESalarios.antigos.SetorDaoAl;
+import br.com.proway.senior.cargosESalarios.model.SetorDaoSql;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
+
+/**
+ * Classe SetorController
+ * 
+ * Implementa os métodos do DAO para as devidas trataivas necessárias
+ *  
+ * @author Sprint 4
+ *
+ */
 
 public class SetorController {
 
-	SetorDaoAl dao = new SetorDaoAl();
+	SetorDaoSql setorSQL = new SetorDaoSql();
 	
 	/**
 	 * Cadastra um novo setor
@@ -15,17 +25,18 @@ public class SetorController {
 	 * Verifica se já existe um setor com o mesmo nome
 	 * e se não exister cria o setor e envia para o SetorDaoAl
 	 * 
-	 * @param nome
+	 * @param nomeSetor
 	 * @return Integer/null id do setor se foi possivel ser criado
 	 */
-	public Integer cadastrarSetor(String nome, Integer permissao) {
-		for (SetorModel setor : dao.getAll()) {
-			if(setor.getNomeSetor() == nome) {
-				return null;
-			}
+	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
+		if (setorSQL.retrieve(nomeSetor).toString().isEmpty()) {
+			return null;
 		}
-		SetorModel newSetor = new SetorModel(nome, permissao);
-		return dao.create(newSetor);
+		else {
+		SetorModel newSetor = new SetorModel(nomeSetor, idPermissao);
+		int quantidadeRegistros = setorSQL.create(newSetor);
+		return quantidadeRegistros;
+		}
 	}
 	
 	/**
@@ -37,7 +48,7 @@ public class SetorController {
 	 * @return boolean
 	 */
 	public boolean deletarSetor(Integer idSetor) {
-		return dao.delete(idSetor);
+		return setorSQL.delete(idSetor);
 	}
 	
 	/**
@@ -49,15 +60,24 @@ public class SetorController {
 	 * @param novoNome
 	 * @return boolean
 	 */
-	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer permissao) {
-		SetorModel setor = dao.retrieve(idSetor);
+	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer IdPermissao) {
+		SetorModel setor = setorSQL.retrieve(idSetor);
 		setor.setNomeSetor(novoNome);
-		setor.setIdPermissao(permissao);
-		return dao.update(setor);
+		setor.setIdPermissao(IdPermissao);
+		return setorSQL.update(idSetor, setor);
 	}
 	
+	
+	/**
+	 * Método buscarTodosSetores
+	 * 
+	 * Método realiza a busca de todos os setores cadastrados
+	 * e retorna em um ArrayList.
+	 * 
+	 * @return ArrayList<SetorModel>
+	 */
 	public ArrayList<SetorModel> buscarTodosSetores(){
-		return dao.getAll();
+		return setorSQL.getAll();
 	}
 	
 	/**
@@ -70,7 +90,7 @@ public class SetorController {
 	 * @return SetorModel
 	 */
 	public SetorModel buscarSetor(Integer idSetor) {
-		return dao.retrieve(idSetor);
+		return setorSQL.retrieve(idSetor);
 	}
 	
 	/**
@@ -83,7 +103,7 @@ public class SetorController {
 	 * @return SetorModel
 	 */
 	public SetorModel buscarSetor(String nomeSetor) {
-		return dao.retrieve(nomeSetor);
+		return setorSQL.retrieve(nomeSetor);
 	}
 	
 }

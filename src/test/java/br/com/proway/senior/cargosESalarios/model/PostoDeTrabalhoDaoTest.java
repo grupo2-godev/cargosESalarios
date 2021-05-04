@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.PostoDeTrabalhoDaoAl;
+
 /**
  * Classe de testes para PostoDeTrabalhoDao.
  * 

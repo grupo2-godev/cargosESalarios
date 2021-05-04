@@ -1,21 +1,19 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 /**
- * Classes de testes para o PostoDeTrabalhoController.
+ * Classes de testes para o PostoDeTrabalhoDaoSql.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
@@ -82,10 +80,11 @@ public class PostoDeTrabalhoDaoSqlTest {
 		ArrayList<PostoDeTrabalhoModel> listaPostos = new ArrayList<PostoDeTrabalhoModel>();
 		listaPostos = postoSql.getAll();
 		assertFalse(listaPostos.isEmpty());
+		assertEquals(2, listaPostos.size());
 	}
 	
 	@After
 	public void limparTabela() throws SQLException {
 			postoSql.limparTabela();
-		}
+	}
 }
