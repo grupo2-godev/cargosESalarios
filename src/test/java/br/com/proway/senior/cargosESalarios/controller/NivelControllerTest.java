@@ -31,7 +31,7 @@ class NivelControllerTest {
 	@Test
 	public void testCadastroNivelTrue() {	
 		NivelModel cm = new NivelModel("nivel1");
-		cm.setIdNivel(0);
+		cm.setId(0);
 		controller.cadastrarNivel("nivel1");
 		assertEquals(cm, dao.retrieve(0));
 	}
@@ -48,7 +48,7 @@ class NivelControllerTest {
 		controller.cadastrarNivel("nivel1");	
 		NivelModel cargoAtualizado = dao.retrieve(0);
 		controller.atualizarNivel(0, "nivel2");
-		assertEquals("nivel2", cargoAtualizado.getNomeNivel());
+		assertEquals("nivel2", cargoAtualizado.getNome());
 		}
 	
 	@Test

@@ -1,3 +1,4 @@
+package br.com.proway.senior.cargosESalarios.model;
 //package br.com.proway.senior.cargosESalarios.Setor;
 //
 //import static org.junit.Assert.assertEquals;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * 	- Criação e implementação dos métodos.
  *  - Implementação dos testes.
  */
+
 public class CargoDaoAl implements CRUDInterface<CargoModel> {
 
 	/***

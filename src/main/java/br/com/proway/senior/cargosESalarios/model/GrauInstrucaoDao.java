@@ -5,6 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe NivelDao
+ * 
+ * Classe está em desenvolvimento para atribuir as funções de banco de dados,
+ * é necessário revisar as funcionalidades.
+ * 
+ * @author Sprint 4
+ *
+ */
+
 public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 
 	private  Connection db;
@@ -30,7 +40,7 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 			pstmt.execute();
 			System.out.println("Grau Instrucao");
 		} catch (SQLException e) {
-			System.out.println("erro!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Erro!");
 			e.printStackTrace();
 		}
 		

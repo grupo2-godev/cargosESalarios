@@ -10,8 +10,11 @@ import java.util.ArrayList;
 
 /***
  * CargoDaoSQL
- * Classe DAO que implementa a InterfaceDaoCrud, com os mÃ©todos
- * necessÃ¡rios para a interaÃ§Ã£o com o banco de dados.
+ * Classe DAO que implementa a InterfaceDaoCrud, com os métodos
+ * necessários para a interação com o banco de dados.
+ * 
+ * TODO Ajustar interações com datas.
+ * 
  * @author Samuel Levi <samuel.levi@senior.com.br>
  */
 public class CargoDaoSql implements InterfaceDaoCrud<CargoModel>{

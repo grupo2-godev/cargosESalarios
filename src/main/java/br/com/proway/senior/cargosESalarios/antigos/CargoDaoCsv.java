@@ -1,7 +1,5 @@
 package br.com.proway.senior.cargosESalarios.antigos;
 
-import java.util.ArrayList;
-
 /**
  * Classe DAO do Cargo para persistência dos dados em arquivo CSV.
  * @author Lucas Grijó

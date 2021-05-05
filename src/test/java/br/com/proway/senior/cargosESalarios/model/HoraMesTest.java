@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.HoraMes;
+package br.com.proway.senior.cargosESalarios.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -16,13 +16,9 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 public class HoraMesTest {
 
 	@Before
-	public void testConectarBD() {
-		try {
-			ConnectionPostgres conexaoBanco = new ConnectionPostgres();
-			conexaoBanco.conectar();
-		} catch (SQLException e) {
-			fail(e.getMessage());
-		}
+	public void testConectarBD() throws SQLException {
+		ConnectionPostgres conexaoBanco = new ConnectionPostgres();
+		conexaoBanco.conectar();
 	}
 
 	@Test

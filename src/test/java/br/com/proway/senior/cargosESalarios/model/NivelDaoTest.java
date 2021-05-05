@@ -22,7 +22,7 @@ public class NivelDaoTest {
 	void testCreateNivel() {
 		db.clear();
 		NivelModel nivel = new NivelModel("nivel");
-		assertEquals(0, dao.create(nivel));
+		assertEquals((Integer) 0, dao.create(nivel));
 		assertEquals(nivel, db.get(0));
 	}
 	
@@ -30,7 +30,7 @@ public class NivelDaoTest {
 	public void testRetrive() {
 		NivelModel nivel = new NivelModel("nivel");
 		db.add(nivel);
-		assertEquals(nivel.getIdNivel(), dao.retrieve(0).getIdNivel());
+		assertEquals(nivel.getId(), dao.retrieve(0).getId());
 		assertEquals(null, dao.retrieve(1));
 	}
 	
@@ -41,7 +41,7 @@ public class NivelDaoTest {
 		NivelModel nivel2 = new NivelModel("nivel2");
 		assertTrue(dao.update(nivel2));
 		NivelModel nivelNovo = db.get(0);
-		assertEquals("nivel2", nivelNovo.getNomeNivel());
+		assertEquals("nivel2", nivelNovo.getNome());
 	}
 	
 }

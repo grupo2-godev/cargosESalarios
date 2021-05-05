@@ -3,12 +3,26 @@ package br.com.proway.senior.cargosESalarios.model;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/**
+ * Classe NivelDao
+ * 
+ * Classe está em desenvolvimento para atribuir as funções de banco de dados,
+ * é necessário revisar as funcionalidades.
+ * 
+ * @author Sprint 4
+ *
+ */
+
 public class NivelDao implements CRUDInterface<NivelModel>{
 
-	private  Connection db;
+	private Connection db;
 	
 	public NivelDao(Connection crud){
 		this.db = crud;
+	}
+	
+	public NivelDao() {
+		
 	}
 	
 	/**
@@ -20,6 +34,7 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @return NivelModel
 	 */
 	public Integer create(NivelModel newNivel) {
+		return null;
 		
 	}
 	
@@ -32,7 +47,7 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @return void
 	 */
 	public void limparArray() {
-		db.clear();
+		((ArrayList<NivelModel>) db).clear();
 	}
 
 	/**
@@ -41,11 +56,11 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @param id Do nivel
 	 */
 	public NivelModel retrieve(int id) {
-		for(NivelModel nivel : db) {
-			if(nivel.getIdNivel() == id) {
-				return nivel;
-			}
-		}
+//		for(Connection nivel : (ArrayList<Connection>) db) {
+//			if(db == id) {
+//				return nivel;
+//			}
+//		}
 		return null;
 	}
 	
@@ -58,12 +73,12 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @param id Do nivel a ser excluido
 	 */
 	public boolean delete(int id) {
-		for(NivelModel nivel : db) {
-			if(nivel.getIdNivel() == id) {
-				db.remove(nivel);
-				return true;
-			}
-		}
+//		for(NivelModel nivel : db) {
+//			if(nivel.getId() == id) {
+//				((ArrayList<NivelModel>) db).remove(nivel);
+//				return true;
+//			}
+//		}
 		return false;
 	}
 
@@ -73,7 +88,8 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @return todos os niveis
 	 */
 	public ArrayList<NivelModel> getAll() {
-		return db;
+		return null;
+//		return db;
 	}
 
 	/***
@@ -87,12 +103,12 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @return boolean
 	 */
 	public boolean update(NivelModel nivel) {
-		for (NivelModel nivelProcurado : db) {
-			if (nivelProcurado.getIdNivel() == nivel.getIdNivel()) {
-				nivelProcurado.setNomeNivel(nivel.getNomeNivel());
-				return true;
-			}
-		}
+//		for (NivelModel nivelProcurado : db) {
+//			if (nivelProcurado.getId() == nivel.getId()) {
+//				nivelProcurado.setNome(nivel.getNome());
+//				return true;
+//			}
+//		}
 		return false;
 	}
 	

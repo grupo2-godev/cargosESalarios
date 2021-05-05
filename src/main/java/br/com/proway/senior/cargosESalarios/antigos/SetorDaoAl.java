@@ -24,7 +24,7 @@ public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	 * @param String obj
 	 */
 
-	public int create(SetorModel obj) {
+	public Integer create(SetorModel obj) {
 		int size = db.size();
 		int novoSetorId;
 		if (size > 0) {

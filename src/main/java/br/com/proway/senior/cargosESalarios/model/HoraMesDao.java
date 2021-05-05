@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
@@ -12,9 +11,11 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
  * Classe DAO que implementa a interface CRUDInterface para
  * interação com o banco de dados.
  * 
+ * TODO Implementar métodos conforme InterfaceDaCrud
+ * 
  * @author Lorran Santos, lorran.santos@senior.com.br
  */
-public class HoraMesDao implements CRUDInterface<HorasMesModel> {
+public class HoraMesDao {
 
 	/**
 	 * * Inserir horas trabalhadas por mês.
@@ -61,39 +62,4 @@ public class HoraMesDao implements CRUDInterface<HorasMesModel> {
 		}
 	}
 
-	@Override
-	public int create(HorasMesModel obj) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public HorasMesModel retrieve(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean update(HorasMesModel obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ArrayList<HorasMesModel> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean delete(int id) {
-		String query = "DELETE FROM horas_mes WHERE id_horas_mes =" + id;
-		try {
-			ConnectionPostgres.executeUpdate(query);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 }

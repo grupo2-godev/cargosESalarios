@@ -14,7 +14,7 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	 * 
 	 * Verifica o tamanho da lista antes de criar o objeto, para atribuir o valor do Id.
 	 */
-	public int create(Cbo2002Model obj) {
+	public Integer create(Cbo2002Model obj) {
 		int size = Dados.getInstance().getListaCbo2002().size();
 		int novoCbo2002Id;
 		if (size > 0) {

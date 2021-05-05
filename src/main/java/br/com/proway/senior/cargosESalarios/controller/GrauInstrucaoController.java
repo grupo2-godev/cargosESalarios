@@ -4,9 +4,17 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDao;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
+/**
+ * Classe GrauInstrucaoController
+ * 
+ * Classe em desenvolvimento para interações com o DAO e factory.
+ * 
+ * @author Sprint 4
+ */
+
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDao dao = new GrauInstrucaoDao();
+	GrauInstrucaoDao dao = new GrauInstrucaoDao(null);
 	
 	/**
 	 * Cadastra um novo grau de instrucao
@@ -17,15 +25,15 @@ public class GrauInstrucaoController {
 	 * @param nome
 	 * @return Integer/null id do GrauInstrucao se foi possivel ser criado
 	 */
-	public Integer cadastrarGrauInstrucao(String nome) {
-		for (GrauInstrucaoModel gi : dao.getAll()) {
-			if(gi.getInstrucao() == nome) {
-				return null;
-			}
-		}
-		GrauInstrucaoModel newGI = new GrauInstrucaoModel(nome);
-		return dao.create(newGI);
-	}
+//	public Integer cadastrarGrauInstrucao(String nome) {
+//		for (GrauInstrucaoModel gi : dao.getAll()) {
+//			if(gi.getInstrucao() == nome) {
+//				return null;
+//			}
+//		}
+//		GrauInstrucaoModel newGI = new GrauInstrucaoModel(nome);
+//		return dao.create(newGI);
+//	}
 	
 	/**
 	 * Deleta um grauInstrucao
@@ -35,9 +43,9 @@ public class GrauInstrucaoController {
 	 * @param idGrauInstrucao
 	 * @return boolean
 	 */
-	public boolean deletarGrauInstrucao(Integer idGrauInstrucao) {
-		return dao.delete(idGrauInstrucao);
-	}
+//	public boolean deletarGrauInstrucao(Integer idGrauInstrucao) {
+//		return dao.delete(idGrauInstrucao);
+//	}
 	
 	/**
 	 * Atualizar GrauInstrucao
@@ -48,11 +56,11 @@ public class GrauInstrucaoController {
 	 * @param novoNome
 	 * @return boolean
 	 */
-	public boolean atualizarGrauInstrucao(Integer idInstrucao, String novoNome) {
-		GrauInstrucaoModel gi = dao.retrieve(idInstrucao);
-		gi.setInstrucao(novoNome);
-		return dao.update(gi);
-	}
+//	public boolean atualizarGrauInstrucao(Integer idInstrucao, String novoNome) {
+//		GrauInstrucaoModel gi = dao.retrieve(idInstrucao);
+//		gi.setInstrucao(novoNome);
+//		return dao.update(gi);
+//	}
 	
 	/**
 	 * Buscar grauInstrucao por ID
@@ -63,9 +71,9 @@ public class GrauInstrucaoController {
 	 * @param idGrauInstrucao
 	 * @return GrauInstrucaoModel
 	 */
-	public GrauInstrucaoModel buscarGrauInstrucao(Integer idInstrucao) {
-		return dao.retrieve(idInstrucao);
-	}
+//	public GrauInstrucaoModel buscarGrauInstrucao(Integer idInstrucao) {
+//		return dao.retrieve(idInstrucao);
+//	}
 	
 	/**
 	 * Buscar grauInstrucao por nome

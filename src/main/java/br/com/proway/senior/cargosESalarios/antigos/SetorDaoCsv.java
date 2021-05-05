@@ -1,19 +1,5 @@
 package br.com.proway.senior.cargosESalarios.antigos;
 
-import java.io.FileWriter;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.CSVWriter;
-
 /**
  * Classe DAO do Setor para persistência dos dados em arquivo CSV.
  * @author Lucas Grijó

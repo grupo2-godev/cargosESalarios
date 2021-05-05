@@ -27,7 +27,7 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return novoPostoId
 	 */
-	public int create(PostoDeTrabalhoModel postoModel) {
+	public Integer create(PostoDeTrabalhoModel postoModel) {
 		int size = Dados.getInstance().getListaPostos().size();
 		int novoPostoId;
 		if (size > 0) {

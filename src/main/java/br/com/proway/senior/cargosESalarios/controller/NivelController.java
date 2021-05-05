@@ -20,7 +20,7 @@ public class NivelController {
 	 */
 	public Integer cadastrarNivel(String nome) {
 		for (NivelModel nivel : dao.getAll()) {
-			if(nivel.getNomeNivel() == nome) {
+			if(nivel.getNome() == nome) {
 				return null;
 			}
 		}
@@ -51,7 +51,7 @@ public class NivelController {
 	 */
 	public boolean atualizarNivel(Integer idNivel, String novoNome) {
 		NivelModel nivel = dao.retrieve(idNivel);
-		nivel.setNomeNivel(novoNome);
+		nivel.setNome(novoNome);
 		return dao.update(nivel);
 	}
 	

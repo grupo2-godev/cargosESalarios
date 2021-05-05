@@ -54,7 +54,7 @@ public class CBO2002DaoSQL {
             while (rs.next()) {
                 cbo2002.setDescricao(rs.getString(1));
                 cbo2002.setPercentualInsalubridade(rs.getDouble(2));
-                cbo2002.getPercentualPericulosidade(rs.getDouble(3));
+                cbo2002.setPercentualPericulosidade(rs.getDouble(3));
 
                 System.out.println(cbo2002.toString());
             }

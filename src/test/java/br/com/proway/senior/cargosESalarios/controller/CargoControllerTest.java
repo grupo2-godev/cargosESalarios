@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.CargoControllerAntigo;
 import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 public class CargoControllerTest {
 
-	CargoController controller = new CargoController();
+	CargoControllerAntigo controller = new CargoControllerAntigo();
 	CargoDaoAl dao = new CargoDaoAl();
 	Integer gi = 0;
 	Integer cbo2002 = 0;
