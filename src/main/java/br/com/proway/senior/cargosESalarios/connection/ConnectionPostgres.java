@@ -14,7 +14,7 @@ import br.com.proway.senior.cargosESalarios.model.IConectar;
  * 
  * @author Sprint 4
  */
-public class ConnectionPostgres  implements IConectar<Connection> {
+public class ConnectionPostgres implements IConectar<Connection> {
 	
 	static String url = "jdbc:postgresql://localhost:5432/grupo2";
 	static String usuario = "postgres";
@@ -31,10 +31,11 @@ public class ConnectionPostgres  implements IConectar<Connection> {
 	public  Connection conectar() {
 		try {
 			 conexao = DriverManager.getConnection(url, usuario, senha);
+			 System.out.println("Conectado com sucesso.");
 			 return conexao;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Falha ao conectar.");
 		}
 		return conexao;
 	}
