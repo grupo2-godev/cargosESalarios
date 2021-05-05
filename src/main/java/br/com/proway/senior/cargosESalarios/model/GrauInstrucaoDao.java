@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 /**
- * Classe NivelDao
+ * Classe de do grau de instrução que implementa um crud e recebe o 
+ * modelo de grau de instrução. Criando uma variavel de conexão para
+ * criar a conexão postgres e abrindo o pstm para a query
  * 
- * Classe está em desenvolvimento para atribuir as funções de banco de dados,
- * é necessário revisar as funcionalidades.
- * 
- * @author Sprint 4
- *
+ * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
+ * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
  */
 
 public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
@@ -40,7 +38,7 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 			pstmt.execute();
 			System.out.println("Grau Instrucao");
 		} catch (SQLException e) {
-			System.out.println("Erro!");
+			System.out.println("erro!!!!!!!!!!!!!!!!!!!!!!!!");
 			e.printStackTrace();
 		}
 		

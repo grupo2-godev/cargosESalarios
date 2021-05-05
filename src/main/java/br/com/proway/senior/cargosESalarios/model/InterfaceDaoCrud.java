@@ -6,7 +6,9 @@ import java.util.ArrayList;
  * Interface para implementação de CRUD nas classes DAO do sistema,
  * vinculando ao Banco de Dados. Contém os métodos Create, Retrive, 
  * Update, Delete e getAll.
- * @author Sprint 4
+ * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
+ * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
+ *
  */
 
 public interface InterfaceDaoCrud<T> {
