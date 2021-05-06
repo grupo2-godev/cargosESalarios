@@ -10,9 +10,11 @@ import java.sql.Statement;
 import br.com.proway.senior.cargosESalarios.model.IConectar;
 
 /**
- * Classe de conexão com o banco de dados.
+ * Classe de conexão com o banco de dados e implemtação da interface 
+ * de conexão criando a conexão.
  * 
- * @author Sprint 4
+ * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
+ * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
  */
 public class ConnectionPostgres implements IConectar<Connection> {
 	

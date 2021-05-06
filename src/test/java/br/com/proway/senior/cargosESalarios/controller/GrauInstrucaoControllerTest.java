@@ -12,6 +12,7 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDao;
 
 /**
  * Classe dependente da finalização do GrauInstrucaoController.
+ * Pode ser exluida. att
  */
 
 class GrauInstrucaoControllerTest {
