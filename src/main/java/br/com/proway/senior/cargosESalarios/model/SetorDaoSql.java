@@ -7,11 +7,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 
 /**
  * Classe SetoroDaoSql
  * 
- * Classe DAO que implementa a interface CRUDInterface para interação com o
+ * Classe DAO que implementa a interface CRUDInterface para interaï¿½ï¿½o com o
  * banco de dados.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
@@ -19,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 
-	ConnectionPostgres conexao = new ConnectionPostgres();
+	FactoryConexao conexao = new FactoryPostgres();
 
 	/***
 	 * Inserir Posto de Trabalho.
@@ -33,12 +35,12 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 		String sqlInsert = "INSERT INTO grupo2.setor (nome_setor, id_permissao) VALUES (?, ?)";
 		int quantidadeRegistros = 0;
 		try {
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sqlInsert);
+			PreparedStatement pstmt = conexao.criarConexao().prepareStatement(sqlInsert);
 			pstmt.setString(1, setorModel.getNomeSetor());
 			pstmt.setInt(2, setorModel.getIdPermissao());
 			pstmt.execute();
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.setor";
-			ResultSet rs = conexao.executeQuery(sqlCount);
+			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
 			rs.next();
 			quantidadeRegistros = rs.getInt(1);
 			System.out.println("Setor cadastrado com sucesso.");
@@ -51,9 +53,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método countValores
+	 * Mï¿½todo countValores
 	 * 
-	 * Método realiza um select no banco para verificar a quantidade de registros e
+	 * Mï¿½todo realiza um select no banco para verificar a quantidade de registros e
 	 * retorna esse valor.
 	 * 
 	 * @return int quantidade
@@ -62,7 +64,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 		int quantidade = 0;
 		try {
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.setor";
-			ResultSet rs = conexao.executeQuery(sqlCount);
+			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
 			rs.next();
 			quantidade = rs.getInt(1);
 		} catch (SQLException e) {
@@ -72,9 +74,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método retrieve por idSetor
+	 * Mï¿½todo retrieve por idSetor
 	 * 
-	 * Método realiza a busca dos dados do setor no banco de dados, conforme idSetor
+	 * Mï¿½todo realiza a busca dos dados do setor no banco de dados, conforme idSetor
 	 * informada.
 	 * 
 	 * @param int idSetor
@@ -83,7 +85,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	public SetorModel retrieve(int idSetor) {
 		String sqlRetrieveId = "SELECT * FROM grupo2.setor WHERE id_setor = " + idSetor;
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlRetrieveId);
 			SetorModel setorModel = new SetorModel();
 			while (rs.next()) {
@@ -100,9 +102,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método retrieve por nomeSetor
+	 * Mï¿½todo retrieve por nomeSetor
 	 * 
-	 * Método realiza a busca dos dados do posto no banco de dados, conforme
+	 * Mï¿½todo realiza a busca dos dados do posto no banco de dados, conforme
 	 * nomeSetor informado.
 	 * 
 	 * @param String nomeSetor
@@ -111,7 +113,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	public SetorModel retrieve(String nomeSetor) {
 		String sqlRetrieveNome = "SELECT * FROM grupo2.setor WHERE nome_setor = " + "'" + nomeSetor + "'";
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlRetrieveNome);
 			SetorModel setorModel = new SetorModel();
 			while (rs.next()) {
@@ -128,9 +130,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método upadate
+	 * Mï¿½todo upadate
 	 * 
-	 * Método realiza a atualização dos dados no banco de dados para o setor
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o dos dados no banco de dados para o setor
 	 * informado, conforme idSetor.
 	 * 
 	 * @param int        idSetor
@@ -141,7 +143,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 		String sqlUpdate = "UPDATE grupo2.setor SET nome_setor= ?, id_permissao = ? WHERE id_setor = " + idSetor;
 		PreparedStatement pstmt;
 		try {
-			pstmt = conexao.conectar().prepareStatement(sqlUpdate);
+			pstmt = conexao.criarConexao().prepareStatement(sqlUpdate);
 			pstmt.setString(1, setorModel.getNomeSetor());
 			pstmt.setInt(2, setorModel.getIdPermissao());
 			pstmt.execute();
@@ -153,9 +155,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método delete
+	 * Mï¿½todo delete
 	 * 
-	 * Realiza a exclusão do setor informado em idSetor.
+	 * Realiza a exclusï¿½o do setor informado em idSetor.
 	 * 
 	 * @param int idSetor
 	 * @return boolean
@@ -163,7 +165,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	public boolean delete(int idSetor) {
 		String sqlDelete = "DELETE FROM grupo2.setor WHERE id_setor = " + idSetor;
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			stmt.execute(sqlDelete);
 			return true;
 		} catch (SQLException e) {
@@ -173,9 +175,9 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método getAll
+	 * Mï¿½todo getAll
 	 * 
-	 * Método realiza a busca de todos os setores cadastrados no banco e armazena em
+	 * Mï¿½todo realiza a busca de todos os setores cadastrados no banco e armazena em
 	 * um ArrayList.
 	 * 
 	 * @return ArrayList<SetorModel>
@@ -184,7 +186,7 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 		ArrayList<SetorModel> results = new ArrayList<SetorModel>();
 		String sqlSelectAll = "SELECT * FROM grupo2.setor";
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlSelectAll);
 			SetorModel setorModel = new SetorModel();
 			while (rs.next()) {
@@ -201,11 +203,11 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	}
 
 	/**
-	 * Método limparTabela
+	 * Mï¿½todo limparTabela
 	 * 
-	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes. É necessário
-	 * implementar no banco as sequences, pois é lá que ocorre essa "limpeza" do
+	 * Mï¿½todo realiza a limpeza da tabela no banco de dados, deletando os registros
+	 * e resetando a PrimaryKey. O foco ï¿½ ser utilizado nos testes. ï¿½ necessï¿½rio
+	 * implementar no banco as sequences, pois ï¿½ lï¿½ que ocorre essa "limpeza" do
 	 * increment.
 	 * 
 	 * @throws SQLException
@@ -214,8 +216,8 @@ public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.setor";
 		String removerIncremento = "ALTER SEQUENCE grupo2.setor_increment RESTART";
-		ConnectionPostgres.executeUpdate(limpar);
-		ConnectionPostgres.executeUpdate(removerIncremento);
+		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
 		System.out.println("Limpeza realizada.");
 	}
 

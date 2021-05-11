@@ -2,27 +2,25 @@ package br.com.proway.senior.cargosESalarios.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.proway.senior.cargosESalarios.model.IConectar;
-
 /**
- * Classe de conex�o com o banco de dados e implemta��o da interface 
- * de conex�o criando a conex�o.
+ * Classe de conexão com o banco de dados e implemtação da interface 
+ * de conexão criando a conexão.
  * 
- * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
- * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
+ * @author David Hildebrandt, david.hildebrandt@senior.com.br
+ * @author Sabrina Schmidt, sabrina.schmidt@senior.com.br
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
-public class ConnectionPostgres implements IConectar<Connection> {
+public final class ConnectionPostgres implements IConectar {
 	
-	static String url = "jdbc:postgresql://localhost:5432/grupo2";
-	static String usuario = "postgres";
-	static String senha = "admin";
-	static Connection conexao;
+	private static ConnectionPostgres instance;
+	private static String url = "jdbc:postgresql://localhost:5432/grupo2";
+	private static String usuario = "postgres";
+	private static String senha = "admin";
+	private static Connection conexao;
 	
 	/**
 	 * M�todo Conectar
@@ -43,6 +41,13 @@ public class ConnectionPostgres implements IConectar<Connection> {
 		return conexao;
 	}
 
+	public static ConnectionPostgres getInstance() {
+		if (instance == null) {
+			instance = new ConnectionPostgres();
+		}
+		return instance;
+	} 
+	
 	/**
 	 * M�todo dbVersion
 	 * 
@@ -84,6 +89,7 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	public static ResultSet executeQuery(String query) throws SQLException {
 		Statement st = conexao.createStatement();
 		ResultSet rs = st.executeQuery(query);
+		conexao.close();
 		return rs;	
 	}
 
@@ -100,6 +106,7 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	public static void executeUpdate(String query) throws SQLException {
 		Statement st = conexao.createStatement();
 		st.executeUpdate(query);
+		conexao.close();
 	}
 
 	
