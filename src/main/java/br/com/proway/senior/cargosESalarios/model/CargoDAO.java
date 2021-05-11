@@ -1,5 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
