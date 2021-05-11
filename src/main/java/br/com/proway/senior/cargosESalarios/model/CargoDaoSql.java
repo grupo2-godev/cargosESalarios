@@ -1,26 +1,26 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+
 /***
- * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os m�todos
- * necess�rios para a intera��o com o banco de dados.
+ * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os métodos
+ * necessários para a interação com o banco de dados.
  * 
- * TODO Ajustar intera��es com datas.
- * 
- * @author Samuel Levi <samuel.levi@senior.com.br>
+ * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
-	ConnectionPostgres con = new ConnectionPostgres();
+	
+	FactoryConexao conexao = new FactoryPostgres();
 
 	/***
 	 * Insere no banco de dados o registro de um CargoModel.
@@ -32,7 +32,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		String insertDB = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int qtd = 0;
 		try {
-			PreparedStatement prepStmt = con.conectar().prepareStatement(insertDB);
+			PreparedStatement prepStmt = conexao.criarConexao().prepareStatement(insertDB);
 			prepStmt.setString(1, obj.getNomeCargo());
 			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
 			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
@@ -46,7 +46,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			prepStmt.setInt(11, obj.getIdPermissao());
 			prepStmt.execute();
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.cargo";
-			ResultSet rs = con.executeQuery(sqlCount);
+			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
 			rs.next();
 			qtd = rs.getInt(1);
 			System.out.println("Cargo cadastrado com sucesso.");
@@ -68,7 +68,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	public CargoModel retrieve(int idCargo) {
 		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
 		try {
-			Statement stmt = con.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(retrieveById);
 			CargoModel cargo = new CargoModel();
 			while (rs.next()) {
@@ -115,7 +115,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 				+ idCargo;
 		PreparedStatement prepStmt;
 		try {
-			prepStmt = con.conectar().prepareStatement(updateDB);
+			prepStmt = conexao.criarConexao().prepareStatement(updateDB);
 			prepStmt.setString(1, obj.getNomeCargo());
 			// java.time.LocalDateTime to java.sql.Date
 			// @janaina
@@ -147,7 +147,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	public boolean delete(int idCargo) {
 		String deleteDB = "DELETE FROM grupo2.cargo WHERE id_cargo = " + idCargo;
 		try {
-			Statement stmt = con.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			stmt.execute(deleteDB);
 			return true;
 		} catch (SQLException e) {
@@ -166,7 +166,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		ArrayList<CargoModel> list = new ArrayList<CargoModel>();
 		String sqlSelectAll = "SELECT * FROM grupo2.cargo";
 		try {
-			Statement stmt = con.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlSelectAll);
 			CargoModel cargo = new CargoModel();
 			while (rs.next()) {
@@ -206,8 +206,8 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.cargo";
 		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";	
-		ConnectionPostgres.executeUpdate(limpar);
-		ConnectionPostgres.executeUpdate(removerIncremento);
+		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
 		System.out.println("Limpeza realizada.");
 	}
 }
