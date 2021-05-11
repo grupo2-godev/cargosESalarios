@@ -131,10 +131,10 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	}
 
 	/***
-	 * Deletar um registro da tabela. Busca no banco o registro cujo ID seja igual
+	 * Deleta um registro da tabela. Busca no banco o registro cujo ID seja igual
 	 * ao informado no parâmetro e exclui a tupla.
 	 * 
-	 * @param idCargo Int
+	 * @param idCargo int Id do registro a ser deletado.
 	 * @return boolean True se o registro for apagado e False em caso de falha.
 	 */
 	public boolean delete(int idCargo) {
