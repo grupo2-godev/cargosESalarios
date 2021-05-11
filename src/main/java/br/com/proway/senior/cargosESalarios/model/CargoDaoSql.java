@@ -192,4 +192,22 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		}
 		return list;
 	}
+	
+	/**
+	 * Método limparTabela
+	 * 
+	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
+	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes.
+	 * É necessário implementar no banco as sequences.
+	 * 
+	 * @throws SQLException
+	 * @return void
+	 */
+	public void limparTabela() throws SQLException {
+		String limpar = "delete from grupo2.cargo";
+		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";	
+		ConnectionPostgres.executeUpdate(limpar);
+		ConnectionPostgres.executeUpdate(removerIncremento);
+		System.out.println("Limpeza realizada.");
+	}
 }
