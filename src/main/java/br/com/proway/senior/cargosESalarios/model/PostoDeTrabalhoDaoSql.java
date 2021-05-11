@@ -7,12 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 
 /**
  * Classe PostoDeTrabalhoDaoSql
  * 
  * Classe DAO que implementa a interface CRUDInterface para
- * interação com o banco de dados.
+ * interaï¿½ï¿½o com o banco de dados.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
  * @author Lorran Santos, lorran.santos@senior.com.br
@@ -21,7 +23,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoModel> {
 	
-	ConnectionPostgres conexao = new ConnectionPostgres();
+	FactoryConexao conexao = new FactoryPostgres();
 	
 	/***
 	 * Inserir Posto de Trabalho.
@@ -35,15 +37,16 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 		String sqlInsert = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) VALUES (?, ?, ?, ?, ?)";
 		int quantidadeRegistros = 0;
 		try {
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sqlInsert);
+			PreparedStatement pstmt = conexao.criarConexao().prepareStatement(sqlInsert);
 			pstmt.setString(1, postoModel.getNomePosto());
 			pstmt.setInt(2, postoModel.getIdCargo());
 			pstmt.setInt(3, postoModel.getIdSetor());
 			pstmt.setInt(4, postoModel.getIdNivel());
 			pstmt.setDouble(5, postoModel.getSalario());
 			pstmt.execute();
+			pstmt.close();
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.posto_de_trabalho";
-			ResultSet rs = conexao.executeQuery(sqlCount);
+			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
 			rs.next();
 			quantidadeRegistros = rs.getInt(1);
 			System.out.println("Posto de Trabalho cadastrado com sucesso.");
@@ -56,9 +59,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * Método countValores
+	 * Mï¿½todo countValores
 	 * 
-	 * Método realiza um select no banco para verificar a quantidade
+	 * Mï¿½todo realiza um select no banco para verificar a quantidade
 	 * de registros e retorna esse valor.
 	 * 
 	 * @return int quantidade
@@ -67,7 +70,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 		int quantidade = 0;
 		try {
 			String sqlCount = "SELECT COUNT(*) FROM grupo2.posto_de_trabalho";
-			ResultSet rs = conexao.executeQuery(sqlCount);
+			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
 			rs.next();
 			quantidade = rs.getInt(1);
 		} catch (SQLException e) {
@@ -77,9 +80,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * Método retrieve por idPosto
+	 * Mï¿½todo retrieve por idPosto
 	 * 
-	 * Método realiza a busca dos dados do posto no banco de dados,
+	 * Mï¿½todo realiza a busca dos dados do posto no banco de dados,
 	 * conforme idPosto informada.
 	 * 
 	 * @param int idPosto
@@ -88,7 +91,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	public PostoDeTrabalhoModel retrieve(int idPosto) {
 		String sqlRetrieveId = "SELECT * FROM grupo2.posto_de_trabalho WHERE id_posto = " + idPosto;
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlRetrieveId);
 			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
 			while (rs.next()) {
@@ -108,9 +111,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * Método retrieve por nomePosto
+	 * Mï¿½todo retrieve por nomePosto
 	 * 
-	 * Método realiza a busca dos dados do posto no banco de dados,
+	 * Mï¿½todo realiza a busca dos dados do posto no banco de dados,
 	 * conforme nomePosto informado.
 	 * 
 	 * @param String nomePosto
@@ -120,7 +123,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 		String sqlRetrieveNome = "SELECT * FROM grupo2.posto_de_trabalho WHERE nome_posto = " 
 				+ "'" + nomePosto + "'";
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlRetrieveNome);
 			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
 			while (rs.next()) {
@@ -140,9 +143,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * Método upadate
+	 * Mï¿½todo upadate
 	 * 
-	 * Método realiza a atualização dos dados no banco de dados
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o dos dados no banco de dados
 	 * para o posto informado, conforme idPosto.
 	 * 
 	 * @param int idPosto
@@ -154,7 +157,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 				+ "id_setor = ?, id_nivel = ?, salario = ? WHERE id_posto = " + idPosto;
 		PreparedStatement pstmt;
 		try {
-			pstmt = conexao.conectar().prepareStatement(sqlUpdate);
+			pstmt = conexao.criarConexao().prepareStatement(sqlUpdate);
 			pstmt.setString(1, postoModel.getNomePosto());
 			pstmt.setInt(2, postoModel.getIdCargo());
 			pstmt.setInt(3, postoModel.getIdSetor());
@@ -169,9 +172,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * Método delete
+	 * Mï¿½todo delete
 	 * 
-	 * Realiza a exclusão do posto de trabalho informado
+	 * Realiza a exclusï¿½o do posto de trabalho informado
 	 * em idPosto.
 	 * 
 	 * @param int idPosto
@@ -180,7 +183,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	public boolean delete(int idPosto) {
 		String sqlDelete = "DELETE FROM grupo2.posto_de_trabalho WHERE id_posto = " + idPosto;
 		try {
-			Statement stmt = conexao.conectar().createStatement();
+			Statement stmt = conexao.criarConexao().createStatement();
 			stmt.execute(sqlDelete);
 			return true;
 		} catch (SQLException e) {
@@ -190,9 +193,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * Método getAll
+	 * Mï¿½todo getAll
 	 * 
-	 * Método realiza a busca de todos os postos de trabalho
+	 * Mï¿½todo realiza a busca de todos os postos de trabalho
 	 * cadastrados no banco e armazena em um ArrayList.
 	 * 
 	 * @return ArrayList<PostoDeTrabalhoModel>
@@ -201,7 +204,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
         ArrayList<PostoDeTrabalhoModel> results = new ArrayList<PostoDeTrabalhoModel>();
         String sqlSelectAll = "SELECT * FROM grupo2.posto_de_trabalho";
         try {
-        	Statement stmt = conexao.conectar().createStatement();
+        	Statement stmt = conexao.criarConexao().createStatement();
      		ResultSet rs = stmt.executeQuery(sqlSelectAll);
 			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
 			while (rs.next()) {
@@ -221,11 +224,11 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * Método limparTabela
+	 * Mï¿½todo limparTabela
 	 * 
-	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes.
-	 * É necessário implementar no banco as sequences, pois é lá que ocorre essa
+	 * Mï¿½todo realiza a limpeza da tabela no banco de dados, deletando os registros
+	 * e resetando a PrimaryKey. O foco ï¿½ ser utilizado nos testes.
+	 * ï¿½ necessï¿½rio implementar no banco as sequences, pois ï¿½ lï¿½ que ocorre essa
 	 * "limpeza" do increment.
 	 * 
 	 * @throws SQLException
@@ -234,8 +237,8 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.posto_de_trabalho";
 		String removerIncremento = "ALTER SEQUENCE grupo2.posto_de_trabalho_increment RESTART";	
-		ConnectionPostgres.executeUpdate(limpar);
-		ConnectionPostgres.executeUpdate(removerIncremento);
+		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
 		System.out.println("Limpeza realizada.");
 	}
 
