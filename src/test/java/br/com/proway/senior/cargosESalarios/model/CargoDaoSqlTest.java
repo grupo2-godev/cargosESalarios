@@ -19,7 +19,7 @@ public class CargoDaoSqlTest {
 	Integer cbo2002 = 0;
 	Integer cbo1994 = 0; 
 	Integer horasmes = 0;
-	CargoDaoSql cargoSql = new CargoDaoSql();
+	CargoDAO cargoSql = new CargoDAO();
 	ConnectionPostgres conexao = new ConnectionPostgres();
 
 	@Test
