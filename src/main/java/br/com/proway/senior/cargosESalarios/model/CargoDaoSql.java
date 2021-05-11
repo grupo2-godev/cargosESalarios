@@ -26,7 +26,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	 * Insere no banco de dados o registro de um CargoModel.
 	 *
 	 * @param obj CargoModel Objeto a ser inserido.
-	 * @return quantidade de registros.
+	 * @return int Quantidade de registros inseridos.
 	 */
 	public int create(CargoModel obj) {
 		String insertDB = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -59,11 +59,11 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	}
 
 	/***
-	 * Recuperar um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
+	 * Retorna um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
 	 * ID informado e retorna a tupla com os dados correspondentes.
 	 * 
-	 * @param idCargo int
-	 * @return cargo CargoModel
+	 * @param idCargo int Id do cargo a ser consultado.
+	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel retrieve(int idCargo) {
 		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
@@ -97,14 +97,14 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	 * Atualizar um registro no banco de dados. Realiza a atualização dos dados no
 	 * registro cujo o id_cargo seja idêntico ao IdCargo informado no parâmetro.
 	 * 
-	 * @param idCargo int
-	 * @param obj     CargoModel
+	 * @param idCargo int Id do objeto a ser atualizado.
+	 * @param obj     CargoModel Objeto que possui as informações que serão setadas no objeto que possui o id informado.
 	 * @return boolean True se a atualização for efetuada e False caso contrário.
 	 */
 	public boolean update(int idCargo, CargoModel obj) {
 		String updateDB = "UPDATE grupo2.cargo SET nome_cargo = ?, data_cadastro = ?,"
-				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo94 = ?, hora_mes = ?,"
-				+ "grau_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_posto = "
+				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo1994 = ?, horas_mes = ?,"
+				+ "grau_de_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_cargo = "
 				+ idCargo;
 		PreparedStatement prepStmt;
 		try {
