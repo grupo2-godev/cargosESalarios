@@ -6,9 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import java.sql.SQLException;
 
-import org.junit.After;
 import org.junit.Test;
-import org.postgresql.util.PSQLException;
 
 import br.com.proway.senior.cargosESalarios.model.SetorDaoSql;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
@@ -50,6 +48,7 @@ public class ConnectionPostgresTest {
 
 	@Test (expected = Exception.class)
 	public void executeQueryErroTest() throws SQLException {
+		setorSQL.limparTabela();
 		String sql = "";
 		ConnectionPostgres conexao = new ConnectionPostgres();
 		conexao.executeQuery(sql);
@@ -57,6 +56,7 @@ public class ConnectionPostgresTest {
 	
 	@Test
 	public void executeQueryOkTest() throws SQLException {
+		setorSQL.limparTabela();
 		String nomeSetor1 = "ERP I";
 		Integer idPermissao1 = 3;
 		SetorModel setor1 = new SetorModel(nomeSetor1, idPermissao1);
@@ -74,8 +74,8 @@ public class ConnectionPostgresTest {
 		conexao.executeUpdate(sql);
 	}
 	
-	@After
-	public void limparTabela() throws SQLException {
-		setorSQL.limparTabela();
-	}
+//	@After
+//	public void limparTabela() throws SQLException {
+//		setorSQL.limparTabela();
+//	}
 }
