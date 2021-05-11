@@ -15,14 +15,14 @@ import org.junit.Test;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 /**
- * Classe dependente da finalização do GrauInstrucaoDao.
+ * Classe dependente da finalizaï¿½ï¿½o do GrauInstrucaoDaoSQL.
  */
 
 
 class GrauInstrucaoDaoTest {
 	
 	ConnectionPostgres conexao = new ConnectionPostgres();
-//	GrauInstrucaoDao giSql = new GrauInstrucaoDao(conexao);
+//	GrauInstrucaoDaoSQL giSql = new GrauInstrucaoDaoSQL(conexao);
 //	
 //	@Before
 //	void beforeAllTest() {
@@ -41,15 +41,15 @@ class GrauInstrucaoDaoTest {
 //	
 //	@Ignore 
 //	void testCreateNull() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Médio");
+//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Mï¿½dio");
 //		dao.create(gi1);
-//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Médio");
+//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Mï¿½dio");
 //		assertNull(dao.create(gi2));
 //	}
 //	
 //	@Ignore
 //	void testRetriveId() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi1);
 //		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
 //		dao.create(gi2);
@@ -59,18 +59,18 @@ class GrauInstrucaoDaoTest {
 //	
 //	@Ignore
 //	void testRetriveNome() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi1);
 //		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
 //		dao.create(gi2);
-//		assertEquals(gi1, dao.retrieve("Ensino Médio Incompleto"));
+//		assertEquals(gi1, dao.retrieve("Ensino Mï¿½dio Incompleto"));
 //		assertEquals(gi2, dao.retrieve("Ensino Superior Incompleto"));	
 //	}
 //	
 //	@Ignore
 //	void testGetAll() {
 //		ArrayList<GrauInstrucaoModel> listaGI = new ArrayList<GrauInstrucaoModel>();
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi1);
 //		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
 //		dao.create(gi2);
@@ -82,18 +82,18 @@ class GrauInstrucaoDaoTest {
 //	@Ignore
 //	void testUpdate() {
 ////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi);
-//		GrauInstrucaoModel giNovo = new GrauInstrucaoModel(0, "Ensino Médio Completo");
+//		GrauInstrucaoModel giNovo = new GrauInstrucaoModel(0, "Ensino Mï¿½dio Completo");
 //		dao.update(giNovo);
 //		assertTrue(dao.update(giNovo));
-//		assertEquals("Ensino Médio Completo", dao.retrieve(0).getInstrucao());
+//		assertEquals("Ensino Mï¿½dio Completo", dao.retrieve(0).getInstrucao());
 //	}
 //	
 //	@Ignore
 //	void testDeleteTrue() {
 ////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi);
 //		assertTrue(dao.delete(0));
 //		assertEquals(0, db.size());
@@ -102,7 +102,7 @@ class GrauInstrucaoDaoTest {
 //	@Ignore
 //	void testDeleteFalse() {
 ////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Médio Incompleto");
+//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Mï¿½dio Incompleto");
 //		dao.create(gi);
 //		assertTrue(dao.delete(1));
 //		assertEquals(1, db.size());

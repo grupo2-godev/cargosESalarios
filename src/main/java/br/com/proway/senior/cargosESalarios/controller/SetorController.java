@@ -3,13 +3,13 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.antigos.SetorDaoAl;
-import br.com.proway.senior.cargosESalarios.model.SetorDaoSql;
+import br.com.proway.senior.cargosESalarios.model.SetorDaoSQL;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 /**
  * Classe SetorController
  * 
- * Implementa os métodos do DAO para as devidas trataivas necessárias
+ * Implementa os mï¿½todos do DAO para as devidas trataivas necessï¿½rias
  *  
  * @author Sprint 4
  *
@@ -17,13 +17,13 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 public class SetorController {
 
-	SetorDaoSql setorSQL = new SetorDaoSql();
+	SetorDaoSQL setorSQL = new SetorDaoSQL();
 	
 	/**
 	 * Cadastra um novo setor
 	 * 
-	 * Verifica se já existe um setor com o mesmo nome
-	 * e se não exister cria o setor e envia para o SetorDaoAl
+	 * Verifica se jï¿½ existe um setor com o mesmo nome
+	 * e se nï¿½o exister cria o setor e envia para o SetorDaoAl
 	 * 
 	 * @param nomeSetor
 	 * @return Integer/null id do setor se foi possivel ser criado
@@ -54,7 +54,7 @@ public class SetorController {
 	/**
 	 * Atualizar Setor
 	 * 
-	 * Método realiza a atualização do setor
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do setor
 	 *  
 	 * @param idSetor
 	 * @param novoNome
@@ -69,9 +69,9 @@ public class SetorController {
 	
 	
 	/**
-	 * Método buscarTodosSetores
+	 * Mï¿½todo buscarTodosSetores
 	 * 
-	 * Método realiza a busca de todos os setores cadastrados
+	 * Mï¿½todo realiza a busca de todos os setores cadastrados
 	 * e retorna em um ArrayList.
 	 * 
 	 * @return ArrayList<SetorModel>

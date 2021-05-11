@@ -1,6 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-public class GrauInstrucaoModel implements InterfaceModel {
+public class GrauInstrucaoModel {
 
 	private Integer idInstrucao;
 	private String instrucao;

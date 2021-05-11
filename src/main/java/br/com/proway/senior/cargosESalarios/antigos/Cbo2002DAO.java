@@ -1,20 +1,23 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
+import br.com.proway.senior.cargosESalarios.model.InterfaceDaoCrud;
 
 /**
  * @author Samuel Levi <samuel.levi@senior.com.br>
  * @version Sprint 4:
- *  - Implementa os métodos de CRUD da interface genérica.
+ *  - Implementa os mï¿½todos de CRUD da interface genï¿½rica.
  */
-public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
+public class Cbo2002DAO implements InterfaceDaoCrud<Cbo2002Model>{
 	
 	/**
-	 * Criar um novo objeto do tipo CBO padrão 2002.
+	 * Criar um novo objeto do tipo CBO padrï¿½o 2002.
 	 * 
 	 * Verifica o tamanho da lista antes de criar o objeto, para atribuir o valor do Id.
 	 */
-	public Integer create(Cbo2002Model obj) {
+	public int create(Cbo2002Model obj) {
 		int size = Dados.getInstance().getListaCbo2002().size();
 		int novoCbo2002Id;
 		if (size > 0) {
@@ -31,7 +34,7 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	/**
 	 * Busca um CBO pelo Id
 	 * 
-	 * Procura se pelo id e retorna nulo caso não encontrado
+	 * Procura se pelo id e retorna nulo caso nï¿½o encontrado
 	 * 
 	 * @param id Do CBO
 	 * @return null/CBO
@@ -45,7 +48,7 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	}
 
 	/***
-	 * Atualizar CBO padrão 2002.
+	 * Atualizar CBO padrï¿½o 2002.
 	 * 
 	 * Recebe um objetoC CBO2002, procura dentro da lista de CBO2002 existentes baseados
 	 * no ID do CBO2002 informado ao encontrar atribui um objeto CBO2002 no objeto com
@@ -55,7 +58,8 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	 * 
 	 * @author Samuel
 	 */
-	public boolean update(Cbo2002Model obj) {
+	//TODO: Implementar o uso do id para identificar o item a ser modificado com as informacaoes de obj
+	public boolean update(int id , Cbo2002Model obj) {
 		ArrayList<Cbo2002Model> lista = Dados.getInstance().getListaCbo2002();
 		for (Cbo2002Model cbo2002Procurado : lista) {
 			if (cbo2002Procurado.getCodigoId() == obj.getCodigoId()) {
@@ -89,7 +93,7 @@ public class Cbo2002DAO implements CRUDInterface<Cbo2002Model>{
 	/**
 	 * Deleta um CBO2002
 	 * 
-	 * Deleta um objeto do ArrayList que é igual ao objeto passado como
+	 * Deleta um objeto do ArrayList que ï¿½ igual ao objeto passado como
 	 * parametro
 	 * 
 	 * @param obj Objeto do tipo CBO 2002 a ser excluido

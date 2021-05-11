@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.controller;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.antigos.CargoControllerAntigo;
-import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 public class CargoControllerTest {

@@ -13,7 +13,7 @@ import org.junit.Test;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 /**
- * Classes de testes para o PostoDeTrabalhoDaoSql.
+ * Classes de testes para o PostoDeTrabalhoDaoSQL.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
@@ -32,7 +32,7 @@ public class PostoDeTrabalhoDaoSqlTest {
 	Integer idNivel2 = 4;
 	Double salario2 = 3000.00;
 	PostoDeTrabalhoModel posto2 = new PostoDeTrabalhoModel(nomePosto2, idCargo2, idSetor2, idNivel2, salario2);
-	PostoDeTrabalhoDaoSql postoSql = new PostoDeTrabalhoDaoSql();
+	PostoDeTrabalhoDaoSQL postoSql = new PostoDeTrabalhoDaoSQL();
 	ConnectionPostgres conexao = new ConnectionPostgres();
 	
 	

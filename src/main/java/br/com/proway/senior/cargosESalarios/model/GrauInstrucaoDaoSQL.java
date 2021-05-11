@@ -5,19 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
- * Classe de do grau de instrução que implementa um crud e recebe o 
- * modelo de grau de instrução. Criando uma variavel de conexão para
- * criar a conexão postgres e abrindo o pstm para a query
+ * Classe de do grau de instruï¿½ï¿½o que implementa um crud e recebe o 
+ * modelo de grau de instruï¿½ï¿½o. Criando uma variavel de conexï¿½o para
+ * criar a conexï¿½o postgres e abrindo o pstm para a query
  * 
  * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
  */
 
-public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
+public class GrauInstrucaoDaoSQL implements InterfaceDaoCrud<GrauInstrucaoModel> {
 
 	private  Connection db;
 	
-	public GrauInstrucaoDao(Connection ps){
+	public GrauInstrucaoDaoSQL(Connection ps){
 		this.db = ps;
 	}
 	
@@ -30,15 +30,15 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	 * @param newGI
 	 * @return id do grau de instrucao ou null caso nao de para criar
 	 */
-	public Integer create(GrauInstrucaoModel newGI) {
-		String sql1 = "INSERT INTO grau_de_instrucao (descricao) VALUES (?)";
+	public int create(GrauInstrucaoModel newGI) {
+		String sql1 = "INSERT INTO grupo2.grau_de_instrucao (descricao) VALUES (?)";
 		try {
 			PreparedStatement pstmt = db.prepareStatement(sql1);
 			pstmt.setString(1, newGI.getNome());
 			pstmt.execute();
 			System.out.println("Grau Instrucao");
 		} catch (SQLException e) {
-			System.out.println("erro!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Grau de instruÃ§Ã£o nÃ£o cadastrado!");
 			e.printStackTrace();
 		}
 		
@@ -80,7 +80,7 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	 * @param GrauInstrucao
 	 * @return boolean
 	 */
-	public boolean update(GrauInstrucaoModel gi) {
+	public boolean update(int id, GrauInstrucaoModel gi) {
 		return false;
 	}
 	
@@ -109,8 +109,8 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	/**
 	 * Limpar ArrayList de Graus de instrucao
 	 * 
-	 * Método realiza a limpeza do ArrayList de garuInstrucao
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de garuInstrucao
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */

@@ -8,17 +8,17 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDao;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDaoSQL;
 
 /**
- * Classe dependente da finalização do GrauInstrucaoController.
+ * Classe dependente da finalizaï¿½ï¿½o do GrauInstrucaoController.
  * Pode ser exluida. att
  */
 
 class GrauInstrucaoControllerTest {
 
 	GrauInstrucaoController controller = new GrauInstrucaoController();
-//	GrauInstrucaoDao dao = new GrauInstrucaoDao();
+//	GrauInstrucaoDaoSQL dao = new GrauInstrucaoDaoSQL();
 //	
 //	@Before
 //	void testDelete() {

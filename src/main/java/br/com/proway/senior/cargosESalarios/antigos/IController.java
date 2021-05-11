@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.controller;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 public interface IController<T> {
 

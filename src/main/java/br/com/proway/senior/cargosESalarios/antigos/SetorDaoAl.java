@@ -2,17 +2,15 @@ package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.CRUDInterface;
-import br.com.proway.senior.cargosESalarios.model.Dados;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 
 /**
- * Classe DAO do Setor para persistência dos dados em ArrayList.
+ * Classe DAO do Setor para persistï¿½ncia dos dados em ArrayList.
  * @author Gabriel Simon, Guilherme Ezequiel
  * @version Sprint3:
- * 	- Criação e implementação dos métodos.
- *  - Implementação dos testes.
+ * 	- Criaï¿½ï¿½o e implementaï¿½ï¿½o dos mï¿½todos.
+ *  - Implementaï¿½ï¿½o dos testes.
  */
 public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	ArrayList<SetorModel> db = Dados.getInstance().getListaSetores();
@@ -42,7 +40,7 @@ public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	 * Retorna um setor do ArrayList(ListaSetores) pelo id.
 	 * 
 	 * @param int id
-	 * @return Retorna o setor procurado ou nulo se não encontrado
+	 * @return Retorna o setor procurado ou nulo se nï¿½o encontrado
 	 */
 	public SetorModel retrieve(int id) {
 		for (SetorModel setorProcurado : Dados.getInstance().getListaSetores()) {
@@ -57,7 +55,7 @@ public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	 * Retorna um setor do ArrayList(ListaSetores) pelo id.
 	 * 
 	 * @param int id
-	 * @return Retorna o setor procurado ou nulo se não encontrado
+	 * @return Retorna o setor procurado ou nulo se nï¿½o encontrado
 	 */
 	public SetorModel retrieve(String nome) {
 		for (SetorModel setorProcurado : Dados.getInstance().getListaSetores()) {
@@ -115,8 +113,8 @@ public class SetorDaoAl implements CRUDInterface<SetorModel> {
 	/**
 	 * Limpar ArrayList de Setores
 	 * 
-	 * Método realiza a limpeza do ArrayList de setores
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de setores
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */

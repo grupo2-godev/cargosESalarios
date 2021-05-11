@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 
 import static org.junit.Assert.assertEquals;
@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import br.com.proway.senior.cargosESalarios.antigos.PostoDeTrabalhoDaoAl;
 
 /**
  * Classe de testes para PostoDeTrabalhoDao.

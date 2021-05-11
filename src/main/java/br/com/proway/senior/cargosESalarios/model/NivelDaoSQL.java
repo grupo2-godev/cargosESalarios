@@ -4,45 +4,45 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
- * Classe NivelDao
+ * Classe NivelDaoSQL
  * 
- * Classe está em desenvolvimento para atribuir as funções de banco de dados,
- * é necessário revisar as funcionalidades.
+ * Classe estï¿½ em desenvolvimento para atribuir as funï¿½ï¿½es de banco de dados,
+ * ï¿½ necessï¿½rio revisar as funcionalidades.
  * 
  * @author Sprint 4
  *
  */
 
-public class NivelDao implements CRUDInterface<NivelModel>{
+public class NivelDaoSQL implements InterfaceDaoCrud<NivelModel>{
 
 	private Connection db;
 	
-	public NivelDao(Connection crud){
+	public NivelDaoSQL(Connection crud){
 		this.db = crud;
 	}
 	
-	public NivelDao() {
+	public NivelDaoSQL() {
 		
 	}
 	
 	/**
 	 * Adiciona um novo nivel
 	 * 
-	 * Adiciona um novo nível no banco 
+	 * Adiciona um novo nï¿½vel no banco 
 	 * 
 	 * @param newNivel
 	 * @return NivelModel
 	 */
-	public Integer create(NivelModel newNivel) {
-		return null;
+	public int create(NivelModel newNivel) {
+		return -1;
 		
 	}
 	
 	/**
-	 * Limpar ArrayList de Níveis
+	 * Limpar ArrayList de Nï¿½veis
 	 * 
-	 * Método realiza a limpeza do ArrayList de niveis
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de niveis
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */
@@ -102,7 +102,7 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	 * @param NivelModel obj, objeto recebido.
 	 * @return boolean
 	 */
-	public boolean update(NivelModel nivel) {
+	public boolean update(int id, NivelModel nivel) {
 //		for (NivelModel nivelProcurado : db) {
 //			if (nivelProcurado.getId() == nivel.getId()) {
 //				nivelProcurado.setNome(nivel.getNome());

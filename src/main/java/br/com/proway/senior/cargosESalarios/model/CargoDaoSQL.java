@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
-public class CargoDAO implements InterfaceDaoCrud<CargoModel> {
+public class CargoDaoSQL implements InterfaceDaoCrud<CargoModel> {
 	
 	FactoryConexao conexao = new FactoryPostgres();
 

@@ -1,26 +1,26 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDao;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoDaoSQL;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 /**
  * Classe GrauInstrucaoController
  * 
- * Classe em desenvolvimento para interações com o DAO e factory.
+ * Classe em desenvolvimento para interaï¿½ï¿½es com o DAO e factory.
  * 
  * @author Sprint 4
  */
 
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDao dao = new GrauInstrucaoDao(null);
+	GrauInstrucaoDaoSQL dao = new GrauInstrucaoDaoSQL(null);
 	
 	/**
 	 * Cadastra um novo grau de instrucao
 	 * 
-	 * Verifica se já existe um nível com o mesmo nome
-	 * e se não exister cria o grau de instrucao e envia para o GrauInstucaoDao
+	 * Verifica se jï¿½ existe um nï¿½vel com o mesmo nome
+	 * e se nï¿½o exister cria o grau de instrucao e envia para o GrauInstucaoDao
 	 * 
 	 * @param nome
 	 * @return Integer/null id do GrauInstrucao se foi possivel ser criado
@@ -50,7 +50,7 @@ public class GrauInstrucaoController {
 	/**
 	 * Atualizar GrauInstrucao
 	 * 
-	 * Método realiza a atualização do GrauInstrucao
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do GrauInstrucao
 	 *  
 	 * @param idGrauInstrucao
 	 * @param novoNome

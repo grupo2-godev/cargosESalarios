@@ -12,7 +12,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 public class GrauInstrucaoDaoTest2 {
 
 	ConnectionPostgres conexao = new ConnectionPostgres();
-	GrauInstrucaoDao giSql = new GrauInstrucaoDao(conexao.conectar());
+	GrauInstrucaoDaoSQL giSql = new GrauInstrucaoDaoSQL(conexao.conectar());
 	
 	@Test
 	public void testCreate() {

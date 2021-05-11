@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
 
-public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
+public class SetorDaoSQL implements InterfaceDaoCrud<SetorModel> {
 
 	FactoryConexao conexao = new FactoryPostgres();
 

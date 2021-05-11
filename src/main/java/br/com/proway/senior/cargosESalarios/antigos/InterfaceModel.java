@@ -1,10 +1,10 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 public interface InterfaceModel {
 
 	public String getNome();
 	
-	public Integer getId();
+	public Integer getd();
 
 	public void setNome(String nome);
 	

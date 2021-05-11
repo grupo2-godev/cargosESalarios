@@ -11,7 +11,7 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 
 /**
- * Classe PostoDeTrabalhoDaoSql
+ * Classe PostoDeTrabalhoDaoSQL
  * 
  * Classe DAO que implementa a interface CRUDInterface para
  * intera��o com o banco de dados.
@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
  * @author Samuel Levi, samuel.levi@senior.com.br
  */
 
-public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoModel> {
+public class PostoDeTrabalhoDaoSQL implements InterfaceDaoCrud<PostoDeTrabalhoModel> {
 	
 	FactoryConexao conexao = new FactoryPostgres();
 	

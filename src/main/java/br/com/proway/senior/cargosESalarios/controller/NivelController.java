@@ -2,21 +2,21 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.NivelDao;
+import br.com.proway.senior.cargosESalarios.model.NivelDaoSQL;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelController {
 
-	NivelDao dao = new NivelDao();
+	NivelDaoSQL dao = new NivelDaoSQL();
 	
 	/**
-	 * Cadastra um novo nível
+	 * Cadastra um novo nï¿½vel
 	 * 
-	 * Verifica se já existe um nível com o mesmo nome
-	 * e se não exister cria o nivel e envia para o NivelDao
+	 * Verifica se jï¿½ existe um nï¿½vel com o mesmo nome
+	 * e se nï¿½o exister cria o nivel e envia para o NivelDaoSQL
 	 * 
 	 * @param nome
-	 * @return Integer/null id do usuário se foi possivel ser criado
+	 * @return Integer/null id do usuï¿½rio se foi possivel ser criado
 	 */
 	public Integer cadastrarNivel(String nome) {
 		for (NivelModel nivel : dao.getAll()) {
@@ -43,7 +43,7 @@ public class NivelController {
 	/**
 	 * Atualizar Nivel
 	 * 
-	 * Método realiza a atualização do nivel
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do nivel
 	 *  
 	 * @param idNivel
 	 * @param novoNome
@@ -52,7 +52,7 @@ public class NivelController {
 	public boolean atualizarNivel(Integer idNivel, String novoNome) {
 		NivelModel nivel = dao.retrieve(idNivel);
 		nivel.setNome(novoNome);
-		return dao.update(nivel);
+		return dao.update((int) idNivel , nivel);
 	}
 	
 	public ArrayList<NivelModel> buscarTodosNiveis(){

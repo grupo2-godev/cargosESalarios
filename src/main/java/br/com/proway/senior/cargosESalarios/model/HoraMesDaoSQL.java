@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
 /**
- * Classe HoraMesDao
+ * Classe HoraMesDaoSQL
  * 
  * Classe DAO que implementa a interface CRUDInterface para
- * interação com o banco de dados.
+ * interaï¿½ï¿½o com o banco de dados.
  * 
- * TODO Implementar métodos conforme InterfaceDaCrud
+ * TODO Implementar mï¿½todos conforme InterfaceDaCrud
  * 
  * @author Lorran Santos, lorran.santos@senior.com.br
  */
-public class HoraMesDao {
+public class HoraMesDaoSQL {
 
 	/**
-	 * * Inserir horas trabalhadas por mês.
+	 * * Inserir horas trabalhadas por mï¿½s.
 	 * 
 	 * Recebe um objeto cargo para inserir no banco de dados.
 	 * 
@@ -34,8 +34,8 @@ public class HoraMesDao {
 	/**
 	 * Quantidade de horas registradas
 	 * 
-	 * É feita uma consulta SQL para contar a quantidade de linhas que há na tabela horas_mes,
-	 * a qual retornará a quantidade de horas que foram trabalhadas por mês
+	 * ï¿½ feita uma consulta SQL para contar a quantidade de linhas que hï¿½ na tabela horas_mes,
+	 * a qual retornarï¿½ a quantidade de horas que foram trabalhadas por mï¿½s
 	 * 
 	 * @return qtdBD int
 	 * @throws SQLException
@@ -51,7 +51,7 @@ public class HoraMesDao {
 	/**
 	 * Apaga tudo
 	 * 
-	 * É feito um comando para apagar todos os registros no banco de dados
+	 * ï¿½ feito um comando para apagar todos os registros no banco de dados
 	 */
 	public void deleteAll() {
 		String query = "DELETE FROM grupo2.horas_mes";

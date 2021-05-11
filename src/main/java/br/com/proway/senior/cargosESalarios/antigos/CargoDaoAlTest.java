@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.antigos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Dados;
 
 /**
  * Classe de testes do CargoDaoAl.
- * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijï¿½, Samuel Levi
  * @version Sprint3:
- *  - Implementação dos testes.
+ *  - Implementaï¿½ï¿½o dos testes.
  */
 public class CargoDaoAlTest {
 

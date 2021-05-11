@@ -2,24 +2,24 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoSql;
+import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoSQL;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 
 /**
  * Classe PostoDeTrabalhoController
  * 
- * Implementa os métodos do DAO para as devidas trataivas necessárias
+ * Implementa os mï¿½todos do DAO para as devidas trataivas necessï¿½rias
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br 
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDaoSql postoSQL = new PostoDeTrabalhoDaoSql();
+	PostoDeTrabalhoDaoSQL postoSQL = new PostoDeTrabalhoDaoSQL();
 	
 	/**
 	 * Cadastro Posto de Trabalho
 	 * 
-	 * Recebe os parâmetros necessarios para a criacao de um posto de
+	 * Recebe os parï¿½metros necessarios para a criacao de um posto de
 	 * trabalho, as valida e envia para o DAO.
 	 * @param nomePosto
 	 * @param idCargo
@@ -42,7 +42,7 @@ public class PostoDeTrabalhoController {
 	/**
 	 * Deletar Posto de Trabalho
 	 * 
-	 * Realiza a exclusão do posto de trabalho conforme id de parâmetro.
+	 * Realiza a exclusï¿½o do posto de trabalho conforme id de parï¿½metro.
 	 * 
 	 * @param idPosto
 	 * @return boolean
@@ -54,7 +54,7 @@ public class PostoDeTrabalhoController {
 	/**
 	 * Atualizar Posto de Trabalho
 	 * 
-	 * Método realiza a atualização do posto de trabalho conforme parâmetros.
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do posto de trabalho conforme parï¿½metros.
 	 * 
 	 * @param idPosto
 	 * @param novoNome

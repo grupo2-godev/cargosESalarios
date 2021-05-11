@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.model.HoraMesDao;
+import br.com.proway.senior.cargosESalarios.model.HoraMesDaoSQL;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 public class HoraMesTest {
@@ -35,9 +35,9 @@ public class HoraMesTest {
 	public void testInserirHoraMes() {
 		try {
 			HorasMesModel novaHoraMes = new HorasMesModel(5, 440.0);
-			HoraMesDao horaMesDao = new HoraMesDao();
-			horaMesDao.create(novaHoraMes.getIdGrauDeInstrucao(), novaHoraMes.getQuantidade());
-			assertEquals(1, horaMesDao.getAmountOfLines());
+			HoraMesDaoSQL horaMesDaoSQL = new HoraMesDaoSQL();
+			horaMesDaoSQL.create(novaHoraMes.getIdGrauDeInstrucao(), novaHoraMes.getQuantidade());
+			assertEquals(1, horaMesDaoSQL.getAmountOfLines());
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
@@ -65,8 +65,8 @@ public class HoraMesTest {
 	
 	@After
 	public void testLimparTabela() {
-		HoraMesDao horaMesDao = new HoraMesDao();
-		horaMesDao.deleteAll();
+		HoraMesDaoSQL horaMesDaoSQL = new HoraMesDaoSQL();
+		horaMesDaoSQL.deleteAll();
 	}
 	
 }

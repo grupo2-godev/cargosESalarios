@@ -1,9 +1,9 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-public class NivelModel implements InterfaceModel{
+public class NivelModel {
 
 	private int idNivel;
-	private String nomeNivel;
+	private String nomeNivel;	
 	
 	public NivelModel(String nome) {
 		this.nomeNivel = nome;

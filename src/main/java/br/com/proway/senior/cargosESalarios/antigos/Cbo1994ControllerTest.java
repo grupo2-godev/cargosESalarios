@@ -1,5 +1,6 @@
+package br.com.proway.senior.cargosESalarios.antigos;
 /**
- * 
+ *  REFATORAR, ESSA VERSAO UTILIZAVA ARRAY LISTS
  */
 package br.com.proway.senior.cargosESalarios.controller;
 
