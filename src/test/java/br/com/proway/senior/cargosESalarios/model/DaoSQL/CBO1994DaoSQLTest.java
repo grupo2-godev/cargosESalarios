@@ -23,13 +23,12 @@ public class CBO1994DaoSQLTest {
 	@After
 	public void limparTabela() throws SQLException {
 			cbo1994Sql.limparTabela();
-			assertEquals(0, cbo1994Sql.getAll().size());
 	}
 	
 	@Test
 	public void testCreate() {
 		Cbo1994Model cbo1994 = new Cbo1994Model(codigo_cbo, descricao, percentual_insalubridade, percentual_periculosidade);
-		cbo1994Sql.create(cbo1994);	
+		cbo1994Sql.create(cbo1994);
 		assertEquals(1, cbo1994Sql.getAll().size());		
 	}
 

@@ -42,10 +42,10 @@ public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
 			rs.next();
 			quantidadeRegistros = rs.getInt(1);
 			System.out.println("CBO 1994 cadastrado com sucesso.");
-			return quantidadeRegistros;
 		} catch (SQLException e) {
 			System.out.println("Falha ao cadastrar o CBO 1994");
 			e.printStackTrace();
+			return -1;
 		}
 		return quantidadeRegistros;
 	}
@@ -68,7 +68,7 @@ public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
 	public ArrayList<Cbo1994Model> getAll() {
 
 		ArrayList<Cbo1994Model> list = new ArrayList<Cbo1994Model>();
-		String sqlSelectAll = "SELECT * FROM grupo2.cargo";
+		String sqlSelectAll = "SELECT * FROM grupo2.cbo1994";
 		try {
 			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(sqlSelectAll);
