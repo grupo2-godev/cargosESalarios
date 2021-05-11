@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
-	
+
 	FactoryConexao conexao = new FactoryPostgres();
 
 	/***
@@ -74,8 +74,6 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			while (rs.next()) {
 				cargo.setIdCargo(rs.getInt(1));
 				cargo.setNomeCargo(rs.getString(2));
-				// java.sql.Date java.time.LocalDateTime
-				// @Janaina
 				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
 				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
 				cargo.setCbo2002(rs.getInt(5));
@@ -93,11 +91,6 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private void Timestamp(long time) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -192,21 +185,21 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Método limparTabela
 	 * 
 	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes.
-	 * É necessário implementar no banco as sequences.
+	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes. É necessário
+	 * implementar no banco as sequences.
 	 * 
 	 * @throws SQLException
 	 * @return void
 	 */
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.cargo";
-		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";	
-		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";
+		conexao.criarConexao().createStatement().executeUpdate(limpar);
 		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
 		System.out.println("Limpeza realizada.");
 	}
