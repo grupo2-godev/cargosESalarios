@@ -16,7 +16,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
  * Classe PostoDeTrabalhoDaoSql
  * 
  * Classe DAO que implementa a interface CRUDInterface para
- * intera��o com o banco de dados.
+ * interacao com o banco de dados.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
  * @author Lorran Santos, lorran.santos@senior.com.br
@@ -36,7 +36,8 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	 * @return quantidade
 	 */
 	public int create(PostoDeTrabalhoModel postoModel) {
-		String sqlInsert = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) VALUES (?, ?, ?, ?, ?)";
+		String sqlInsert = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		int quantidadeRegistros = 0;
 		try {
 			PreparedStatement pstmt = conexao.criarConexao().prepareStatement(sqlInsert);
@@ -61,9 +62,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * M�todo countValores
+	 * Metodo countValores
 	 * 
-	 * M�todo realiza um select no banco para verificar a quantidade
+	 * Metodo realiza um select no banco para verificar a quantidade
 	 * de registros e retorna esse valor.
 	 * 
 	 * @return int quantidade
@@ -82,9 +83,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * M�todo retrieve por idPosto
+	 * Metodo retrieve por idPosto
 	 * 
-	 * M�todo realiza a busca dos dados do posto no banco de dados,
+	 * Metodo realiza a busca dos dados do posto no banco de dados,
 	 * conforme idPosto informada.
 	 * 
 	 * @param int idPosto
@@ -113,9 +114,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * M�todo retrieve por nomePosto
+	 * Metodo retrieve por nomePosto
 	 * 
-	 * M�todo realiza a busca dos dados do posto no banco de dados,
+	 * Metodo realiza a busca dos dados do posto no banco de dados,
 	 * conforme nomePosto informado.
 	 * 
 	 * @param String nomePosto
@@ -145,9 +146,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * M�todo upadate
+	 * Metodo upadate
 	 * 
-	 * M�todo realiza a atualiza��o dos dados no banco de dados
+	 * Metodo realiza a atualizacao dos dados no banco de dados
 	 * para o posto informado, conforme idPosto.
 	 * 
 	 * @param int idPosto
@@ -174,7 +175,7 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * M�todo delete
+	 * Metodo delete
 	 * 
 	 * Realiza a exclus�o do posto de trabalho informado
 	 * em idPosto.
@@ -195,9 +196,9 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 
 	/**
-	 * M�todo getAll
+	 * Metodo getAll
 	 * 
-	 * M�todo realiza a busca de todos os postos de trabalho
+	 * Metodo realiza a busca de todos os postos de trabalho
 	 * cadastrados no banco e armazena em um ArrayList.
 	 * 
 	 * @return ArrayList<PostoDeTrabalhoModel>
@@ -226,12 +227,11 @@ public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoMo
 	}
 	
 	/**
-	 * M�todo limparTabela
+	 * Metodo limparTabela
 	 * 
-	 * M�todo realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco � ser utilizado nos testes.
-	 * � necess�rio implementar no banco as sequences, pois � l� que ocorre essa
-	 * "limpeza" do increment.
+	 * Metodo realiza a limpeza da tabela no banco de dados, deletando os registros
+	 * e resetando a PrimaryKey. O foco eh ser utilizado nos testes. É necessário criar
+	 * as sequences no banco, pois eh partir delas que a Primary Key é resetada.
 	 * 
 	 * @throws SQLException
 	 * @return void

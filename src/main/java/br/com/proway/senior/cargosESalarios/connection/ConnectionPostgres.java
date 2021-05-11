@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Classe de conexão com o banco de dados e implemtação da interface 
- * de conexão criando a conexão.
+ * Classe de conexao com o banco de dados Postgres e implemtacao da 
+ * interface de conexao criando a conexao. Implementa o Design Pattern Singleton
+ * para que nao haja mais de uma conexao ativa com o banco de dados.
  * 
  * @author David Hildebrandt, david.hildebrandt@senior.com.br
  * @author Sabrina Schmidt, sabrina.schmidt@senior.com.br
- * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 4 e 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
  */
 public final class ConnectionPostgres implements IConectar {
 	
@@ -23,11 +25,12 @@ public final class ConnectionPostgres implements IConectar {
 	private static Connection conexao;
 	
 	/**
-	 * M�todo Conectar
+	 * Metodo Conectar
 	 * 
-	 * Realiza a conex�o com o banco de dados.
+	 * Realiza a conexao com o banco de dados, conforme parametros de URL, usuario e senha.
+	 * Retorna uma instancia da conexao para implementacao do Design Pattern Singleton.
 	 * 
-	 * @return Connection
+	 * @return instance
 	 */
 	public  Connection conectar() {
 		try {
@@ -41,6 +44,14 @@ public final class ConnectionPostgres implements IConectar {
 		return conexao;
 	}
 
+	/**
+	 * Metodo getInstance
+	 * 
+	 * Verifica se já existe uma conexao ativa e, caso exista, retorna a mesma.
+	 * Caso nao exista, retorna uma nova instancia ConneticonPostgres.
+	 * 
+	 * @return instance
+	 */
 	public static ConnectionPostgres getInstance() {
 		if (instance == null) {
 			instance = new ConnectionPostgres();
@@ -49,11 +60,11 @@ public final class ConnectionPostgres implements IConectar {
 	} 
 	
 	/**
-	 * M�todo dbVersion
+	 * Metodo dbVersion
 	 * 
-	 * M�todo realiza uma query no banco para verificar a vers�o do mesmo.
-	 * Retorna uma mensagem de conex�o v�lida ou inv�lida, utilizada no teste
-	 * desta classe e do m�todo conectar().
+	 * Metodo realiza uma query no banco para verificar a vers�o do mesmo.
+	 * Retorna uma mensagem de conexao valida ou invalida, utilizada no teste
+	 * desta classe e do metodo conectar().
 	 * 
 	 * @return String
 	 * @throws SQLException
@@ -112,3 +123,4 @@ public final class ConnectionPostgres implements IConectar {
 	
 	
 }
+
