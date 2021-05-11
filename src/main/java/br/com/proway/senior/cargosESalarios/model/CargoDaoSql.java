@@ -50,10 +50,10 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			rs.next();
 			qtd = rs.getInt(1);
 			System.out.println("Cargo cadastrado com sucesso.");
-			return qtd;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("Falha ao cadastrar Cargo");
 			e.printStackTrace();
+			return -1;
 		}
 		return qtd;
 	}
@@ -67,11 +67,12 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	 */
 	public CargoModel retrieve(int idCargo) {
 		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
+		CargoModel cargo = null;
 		try {
 			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(retrieveById);
-			CargoModel cargo = new CargoModel();
 			while (rs.next()) {
+				cargo = new CargoModel();
 				cargo.setIdCargo(rs.getInt(1));
 				cargo.setNomeCargo(rs.getString(2));
 				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
@@ -86,11 +87,11 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 				cargo.setIdPermissao(rs.getInt(12));
 				System.out.println(cargo.toString());
 			}
-			return cargo;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		return cargo;
 	}
 
 	/**

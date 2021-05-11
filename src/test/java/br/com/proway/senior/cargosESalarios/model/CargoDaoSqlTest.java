@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Date;
@@ -30,8 +31,17 @@ public class CargoDaoSqlTest {
 	public void testCreate() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-		cargoSql.create(cargo);
+		int quantidadeAtual = cargoSql.create(cargo);
+		assertEquals(1, quantidadeAtual);
 		assertEquals(1, cargoSql.getAll().size());
+	}
+	
+	
+	@Test
+	public void testCreateWithEmptyObject() {
+		CargoModel cargo = new CargoModel();
+		assertEquals(-1, cargoSql.create(cargo));
+		assertEquals(0, cargoSql.getAll().size());
 	}
 
 	@Test
@@ -52,15 +62,20 @@ public class CargoDaoSqlTest {
 			ConnectionPostgres.executeUpdate(queryCriar);
 			conexao.conectar();
 			ResultSet resultSet = ConnectionPostgres.executeQuery(queryConsultaId);
-			int idObjetoASerDeletado = 0;
+			int idObjetoASerConsultado = 0;
 			if (resultSet.next()) {
-				idObjetoASerDeletado = resultSet.getInt("id_cargo");
+				idObjetoASerConsultado = resultSet.getInt("id_cargo");
 			}
-			CargoModel cargoModel = cargoSql.retrieve(idObjetoASerDeletado);
+			CargoModel cargoModel = cargoSql.retrieve(idObjetoASerConsultado);
 			assertNotNull(cargoModel);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testRetrieveWithEmptyDatabase() {
+		assertEquals(null, cargoSql.retrieve(5));
 	}
 
 	@Test
