@@ -1,10 +1,10 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.Interface;
 
 import java.util.ArrayList;
 
 /**
- * Interface para implementação de CRUD nas classes DAO do sistema,
- * vinculando ao Banco de Dados. Contém os métodos Create, Retrive, 
+ * Interface para implementaï¿½ï¿½o de CRUD nas classes DAO do sistema,
+ * vinculando ao Banco de Dados. Contï¿½m os mï¿½todos Create, Retrive, 
  * Update, Delete e getAll.
  * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>

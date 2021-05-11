@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Dados;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.CargoDaoAl;
 
 /**
  * Classe de testes do CargoDaoAl.
- * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi
+ * @author Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijï¿½, Samuel Levi
  * @version Sprint3:
- *  - Implementação dos testes.
+ *  - Implementaï¿½ï¿½o dos testes.
  */
 public class CargoDaoAlTest {
 

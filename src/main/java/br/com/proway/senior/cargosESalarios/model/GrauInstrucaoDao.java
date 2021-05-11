@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
 /**
- * Classe de do grau de instrução que implementa um crud e recebe o 
- * modelo de grau de instrução. Criando uma variavel de conexão para
- * criar a conexão postgres e abrindo o pstm para a query
+ * Classe de do grau de instruï¿½ï¿½o que implementa um crud e recebe o 
+ * modelo de grau de instruï¿½ï¿½o. Criando uma variavel de conexï¿½o para
+ * criar a conexï¿½o postgres e abrindo o pstm para a query
  * 
  * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
@@ -109,8 +111,8 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	/**
 	 * Limpar ArrayList de Graus de instrucao
 	 * 
-	 * Método realiza a limpeza do ArrayList de garuInstrucao
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de garuInstrucao
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */

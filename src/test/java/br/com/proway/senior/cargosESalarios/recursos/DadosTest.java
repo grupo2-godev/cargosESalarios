@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
-import br.com.proway.senior.cargosESalarios.model.Dados;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 /**
  * Classe de testes do Dados.
- * @author Ricardo Oliveira, Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijó, Samuel Levi
+ * @author Ricardo Oliveira, Elton Oliveira, Gabriel Simon, Guilherme Ezequiel, Lucas Grijï¿½, Samuel Levi
  * @version Sprint3:
- *  - Implementação dos testes.
+ *  - Implementaï¿½ï¿½o dos testes.
  */
 public class DadosTest {
 	

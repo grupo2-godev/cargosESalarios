@@ -3,13 +3,13 @@ package br.com.proway.senior.cargosESalarios.antigos;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.CargoDaoAl;
 
 /**
  * Classe CargoController
  * 
- * Implementa os métodos do DAO para as devidas trataivas necessárias
+ * Implementa os mï¿½todos do DAO para as devidas trataivas necessï¿½rias
  * 
  * @author David Hildebrandt; david.hildebrandt@senior.com.br
  * @author Sarah Brito; sarah.brito@senior.com.br 
@@ -21,7 +21,7 @@ public class CargoControllerAntigo {
 	/**
 	 * Cadastro Cargo
 	 * 
-	 * Recebe os parâmetros necessarios para a criacao de um cargo
+	 * Recebe os parï¿½metros necessarios para a criacao de um cargo
 	 * as valida e envia para o dao 
 	 * 
 	 * @param idCargo
@@ -58,7 +58,7 @@ public class CargoControllerAntigo {
 	/**
 	 * Deletar Cargo
 	 * 
-	 * Realiza a exclusão do cargo conforme id de parâmetro.
+	 * Realiza a exclusï¿½o do cargo conforme id de parï¿½metro.
 	 * 
 	 * @param idCargo
 	 * @return boolean
@@ -70,9 +70,9 @@ public class CargoControllerAntigo {
 	/**
 	 * Atualizar Cargo
 	 * 
-	 * Método realiza a atualização do cargo conforme parâmetros 
-	 * possíveis de alteração. Para os demais dados, o indicado é criar
-	 * um novo cargo para manter histórico.
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do cargo conforme parï¿½metros 
+	 * possï¿½veis de alteraï¿½ï¿½o. Para os demais dados, o indicado ï¿½ criar
+	 * um novo cargo para manter histï¿½rico.
 	 * 
 	 * @param idCargo
 	 * @param novoNome

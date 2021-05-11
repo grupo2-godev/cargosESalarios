@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
 
 /***
  * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os métodos

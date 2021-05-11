@@ -1,9 +1,13 @@
 /**
  * 
  */
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoAl;
 
 import java.util.ArrayList;
+
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
+import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
 
 /**
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
@@ -34,7 +38,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	}
 
 	/**
-	 * Procura cbo1994 pelo id e retorna nulo caso não encontrado
+	 * Procura cbo1994 pelo id e retorna nulo caso nï¿½o encontrado
 	 * 
 	 * @param id do cbo1994
 	 * @return null/Cbo1994Model
@@ -48,7 +52,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	}
 
 	/**
-	 * Procura cargo pelo nome e retorna nulo caso não encontrado
+	 * Procura cargo pelo nome e retorna nulo caso nï¿½o encontrado
 	 * 
 	 * @param nomeCbo1994
 	 * @return null/Cbo1994Model
@@ -114,8 +118,8 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	/**
 	 * Limpar ArrayList de Cbo
 	 * 
-	 * Método realiza a limpeza do ArrayList de cbo na classe Dados. Utilizado para
-	 * os testes unitários.
+	 * Mï¿½todo realiza a limpeza do ArrayList de cbo na classe Dados. Utilizado para
+	 * os testes unitï¿½rios.
 	 *
 	 * @return void
 	 */

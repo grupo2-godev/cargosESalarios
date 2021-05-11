@@ -1,6 +1,8 @@
 package br.com.proway.senior.cargosESalarios.model;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DaoSQL;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -3,11 +3,13 @@ package br.com.proway.senior.cargosESalarios.model;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
+
 /**
  * Classe NivelDao
  * 
- * Classe está em desenvolvimento para atribuir as funções de banco de dados,
- * é necessário revisar as funcionalidades.
+ * Classe estï¿½ em desenvolvimento para atribuir as funï¿½ï¿½es de banco de dados,
+ * ï¿½ necessï¿½rio revisar as funcionalidades.
  * 
  * @author Sprint 4
  *
@@ -28,7 +30,7 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	/**
 	 * Adiciona um novo nivel
 	 * 
-	 * Adiciona um novo nível no banco 
+	 * Adiciona um novo nï¿½vel no banco 
 	 * 
 	 * @param newNivel
 	 * @return NivelModel
@@ -39,10 +41,10 @@ public class NivelDao implements CRUDInterface<NivelModel>{
 	}
 	
 	/**
-	 * Limpar ArrayList de Níveis
+	 * Limpar ArrayList de Nï¿½veis
 	 * 
-	 * Método realiza a limpeza do ArrayList de niveis
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de niveis
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */

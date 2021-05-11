@@ -1,19 +1,23 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
 
 /**
- * Implementar os métodos CRUD para o Banco de dados.
+ * Implementar os mï¿½todos CRUD para o Banco de dados.
  *
  * @author Samuel Alves <samuel.levi@senior.com.br>
  * @version Sprint 4
  */
 public class CBO2002DaoSQL {
 
-    ConnectionPostgres con = new ConnectionPostgres();
+	FactoryConexao conexao = new FactoryPostgres();
+
 
     /**
      * Criar um objeto. Cria um objeto do tipo Cbo2002.
@@ -22,16 +26,16 @@ public class CBO2002DaoSQL {
      */
     public int create(Cbo2002Model obj){
 
-        String insert = "INSERT INTO grupo2.cbo2002 (descricao, percentual_insalubridade, percentual_periculosidade) VALUES (?,?,?)";
+        String sqlInsert = "INSERT INTO grupo2.cbo2002 (descricao, percentual_insalubridade, percentual_periculosidade) VALUES (?,?,?)";
         int qtd =0;
         try {
-            PreparedStatement prepStmt = con.conectar().prepareStatement(insert);
+        	PreparedStatement prepStmt = conexao.criarConexao().prepareStatement(sqlInsert);
             prepStmt.setString(1, obj.getDescricao());
             prepStmt.setDouble(2, obj.getPercentualInsalubridade());
             prepStmt.setDouble(3, obj.getPercentualPericulosidade());
             prepStmt.execute();
             String sqlCount = "SELECT COUNT(*) FROM grupo2.cbo2002";
-            ResultSet rs = con.executeQuery(sqlCount);
+            ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
             rs.next();
             qtd = rs.getInt(1);
             System.out.println("CBO 2002 cadastrado com sucesso!");
@@ -48,7 +52,7 @@ public class CBO2002DaoSQL {
     public Cbo2002Model retrieve(int codigoCbo) {
         String sqlRetrieveId = "SELECT * FROM grupo2.cbo2002 WHERE codigo_cbo = " + codigoCbo;
         try {
-            Statement stmt = con.conectar().createStatement();
+            Statement stmt = conexao.criarConexao().createStatement();
             ResultSet rs = stmt.executeQuery(sqlRetrieveId);
             Cbo2002Model cbo2002 = new Cbo2002Model();
             while (rs.next()) {
@@ -94,7 +98,7 @@ public class CBO2002DaoSQL {
 
     /**
      * Apagar um registro da tabela. Busca na tabela o registro
-     * que possui o Id idêntico ao parâmetro informado e apaga.
+     * que possui o Id idï¿½ntico ao parï¿½metro informado e apaga.
      * @param index int
      */
     public void delete(int index) {
@@ -108,8 +112,8 @@ public class CBO2002DaoSQL {
 
     /**
      * Atualizar um registro na tabela. Busca na tabela o
-     * índice correspondente, na coluna informada e modifica
-     * o conteúdo existente, pela String informada na variável
+     * ï¿½ndice correspondente, na coluna informada e modifica
+     * o conteï¿½do existente, pela String informada na variï¿½vel
      * data.
      * @param index int
      * @param col String
@@ -126,8 +130,8 @@ public class CBO2002DaoSQL {
     }
 
     /**
-     * Deletar todo o conteúdo da tabela. Será usado para
-     * fins de testes unitários.
+     * Deletar todo o conteï¿½do da tabela. Serï¿½ usado para
+     * fins de testes unitï¿½rios.
      * @throws SQLException
      */
     public void limparTabela() throws SQLException {

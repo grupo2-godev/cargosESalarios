@@ -11,8 +11,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.Cbo1994DaoAl;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.Cbo1994DaoAl;
 
 /**
  * Classe de teste da classe Cbo1994Controller
