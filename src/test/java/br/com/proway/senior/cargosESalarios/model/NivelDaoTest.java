@@ -19,7 +19,7 @@ public class NivelDaoTest {
 	}
 	
 	@Test
-	void testCreateNivel() {
+	public void testCreateNivel() {
 		db.clear();
 		NivelModel nivel = new NivelModel("nivel");
 		assertEquals((Integer) 0, dao.create(nivel));
