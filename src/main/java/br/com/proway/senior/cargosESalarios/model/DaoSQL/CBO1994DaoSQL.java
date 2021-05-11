@@ -4,12 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
 
@@ -22,15 +20,17 @@ public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
 
 	FactoryConexao conexao = new FactoryPostgres();
 
+	/**
+	 * Insere no DB o registro de um Cbo1994Model
+	 * 
+	 * @param obj Cbo1994Model
+	 * @return int 
+	 */
 	public int create(Cbo1994Model obj) {
 		String sqlInsert = "INSERT INTO grupo2.cbo1994 (codigo_cbo, descricao, percentual_insalubridade, percentual_periculosidade) VALUES (?,?,?,?)";
 		int quantidadeRegistros = 0;
 		try {
 			PreparedStatement pstmt = conexao.criarConexao().prepareStatement(sqlInsert);
-//			pstmt.setInt(pstmt.getResultSet().getInt("codigo_cbo"), obj.getCodigo_cbo());
-//			pstmt.setString(pstmt.getResultSet().getInt("descricao"), obj.getDescricao());
-//			pstmt.setDouble(pstmt.getResultSet().getInt("percentual_insalubridade"), obj.getPercentualInsalubridade());
-//			pstmt.setDouble(pstmt.getResultSet().getInt("percentual_periculosidade"), obj.getPercentualPericulosidade());
 			pstmt.setInt(1, obj.getCodigo_cbo());
 			pstmt.setString(2, obj.getDescricao());
 			pstmt.setDouble(3, obj.getPercentualInsalubridade());
@@ -65,6 +65,11 @@ public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
 		return false;
 	}
 
+	/**
+	 * Lista todos os registro da tabela, salvando em uma ArrayList
+	 * 
+	 * @return ArrayList<Cbo1994Model>
+	 */
 	public ArrayList<Cbo1994Model> getAll() {
 
 		ArrayList<Cbo1994Model> list = new ArrayList<Cbo1994Model>();
@@ -88,6 +93,13 @@ public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
 		return list;
 	}
 	
+	/**
+	 * Metodo realiza a limpeza da tabela do DB, detalando os registros.
+	 * Foi feito para ser utilizado nos testes unitarios.
+	 * 
+	 * @throws SQLException
+	 * @return void
+	 */
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.cbo1994";	
 		conexao.criarConexao().createStatement().executeUpdate(limpar);	
