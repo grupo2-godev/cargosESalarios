@@ -27,7 +27,7 @@ public class HoraMesDao {
 	 * @throws SQLException
 	 */
 	public void create(int id, double horaMes) throws SQLException {
-		String insert1 = "INSERT INTO horas_mes (id_horas_mes, quantidade) VALUES (" + id + ", " + horaMes + ")";
+		String insert1 = "INSERT INTO grupo2.horas_mes (id_horas_mes, quantidade) VALUES (" + id + ", " + horaMes + ")";
 		ConnectionPostgres.executeUpdate(insert1);
 	}
 
@@ -41,7 +41,7 @@ public class HoraMesDao {
 	 * @throws SQLException
 	 */
 	public int getAmountOfLines() throws SQLException {
-		String qtd = "SELECT COUNT(id_horas_mes) as quantidade FROM horas_mes";
+		String qtd = "SELECT COUNT(id_horas_mes) as quantidade FROM grupo2.horas_mes";
 		ResultSet colunas = ConnectionPostgres.executeQuery(qtd);
 		colunas.next();
 		int qtdBD = colunas.getInt("quantidade");
@@ -54,7 +54,7 @@ public class HoraMesDao {
 	 * É feito um comando para apagar todos os registros no banco de dados
 	 */
 	public void deleteAll() {
-		String query = "DELETE FROM horas_mes";
+		String query = "DELETE FROM grupo2.horas_mes";
 		try {
 			ConnectionPostgres.executeUpdate(query);
 		} catch (SQLException e) {
