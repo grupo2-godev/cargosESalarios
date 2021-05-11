@@ -28,11 +28,11 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 		int size = Dados.getInstance().getListaCbo1994().size();
 		int novoCboId;
 		if (size > 0) {
-			novoCboId = Dados.getInstance().getListaCbo1994().get(size - 1).getCodigoId();
+			novoCboId = Dados.getInstance().getListaCbo1994().get(size - 1).getCodigo_cbo();
 		} else {
 			novoCboId = 0;
 		}
-		obj.setCodigoId(novoCboId);
+		obj.setCodigo_cbo(novoCboId);
 		Dados.getInstance().getListaCbo1994().add(obj);
 		return novoCboId;
 	}
@@ -45,7 +45,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	 */
 	public Cbo1994Model retrieve(int id) {
 		for (Cbo1994Model cbo1994 : Dados.getInstance().getListaCbo1994()) {
-			if (cbo1994.getCodigoId() == id)
+			if (cbo1994.getCodigo_cbo() == id)
 				return cbo1994;
 		}
 		return null;
@@ -77,7 +77,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	public boolean update(Cbo1994Model obj) {
 		ArrayList<Cbo1994Model> lista = Dados.getInstance().getListaCbo1994();
 		for (Cbo1994Model cbo1994 : lista) {
-			if (cbo1994.getCodigoId() == obj.getCodigoId()) {
+			if (cbo1994.getCodigo_cbo() == obj.getCodigo_cbo()) {
 				int idDoProcurado = lista.indexOf(cbo1994);
 				lista.set(idDoProcurado, obj);
 				return true;
@@ -96,7 +96,7 @@ public class Cbo1994DaoAl implements CRUDInterface<Cbo1994Model> {
 	 */
 	public boolean delete(int id) {
 		for (Cbo1994Model cbo1994 : Dados.getInstance().getListaCbo1994()) {
-			if (this.retrieve(id).getCodigoId() == id) {
+			if (this.retrieve(id).getCodigo_cbo() == id) {
 				Dados.getInstance().getListaCbo1994().remove(cbo1994);
 				return true;
 			}

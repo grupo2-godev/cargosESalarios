@@ -71,7 +71,7 @@ public class Cbo1994Controller {
 	public boolean atualizarCbo1994(Integer codigoId, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
 		Cbo1994Model cbo1994Param = cbo1994.retrieve(codigoId);
-		cbo1994Param.setCodigoId(codigoId);
+		cbo1994Param.setCodigo_cbo(codigoId);
 		cbo1994Param.setDescricao(descricao);
 		cbo1994Param.setPercentualInsalubridade(percentualInsalubridade);
 		cbo1994Param.setPercentualPericulosidade(percentualPericulosidade);
