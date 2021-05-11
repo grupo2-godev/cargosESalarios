@@ -1,8 +1,7 @@
 package br.com.proway.senior.cargosESalarios.connection;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**

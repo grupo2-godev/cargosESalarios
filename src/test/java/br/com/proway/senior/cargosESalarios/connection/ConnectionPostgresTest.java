@@ -73,9 +73,4 @@ public class ConnectionPostgresTest {
 		ConnectionPostgres conexao = new ConnectionPostgres();
 		conexao.executeUpdate(sql);
 	}
-	
-//	@After
-//	public void limparTabela() throws SQLException {
-//		setorSQL.limparTabela();
-//	}
 }
