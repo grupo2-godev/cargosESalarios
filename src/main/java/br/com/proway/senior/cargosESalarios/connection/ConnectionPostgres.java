@@ -10,11 +10,12 @@ import java.sql.Statement;
 import br.com.proway.senior.cargosESalarios.model.IConectar;
 
 /**
- * Classe de conexão com o banco de dados e implemtação da interface 
- * de conexão criando a conexão.
+ * Classe de conexï¿½o com o banco de dados e implemtaï¿½ï¿½o da interface 
+ * de conexï¿½o criando a conexï¿½o.
  * 
  * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
+ * @author Sarah Brito, sarah.brito@senior.com.br
  */
 public class ConnectionPostgres implements IConectar<Connection> {
 	
@@ -24,9 +25,9 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	static Connection conexao;
 	
 	/**
-	 * Método Conectar
+	 * Mï¿½todo Conectar
 	 * 
-	 * Realiza a conexão com o banco de dados.
+	 * Realiza a conexï¿½o com o banco de dados.
 	 * 
 	 * @return Connection
 	 */
@@ -43,11 +44,11 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	}
 
 	/**
-	 * Método dbVersion
+	 * Mï¿½todo dbVersion
 	 * 
-	 * Método realiza uma query no banco para verificar a versão do mesmo.
-	 * Retorna uma mensagem de conexão válida ou inválida, utilizada no teste
-	 * desta classe e do método conectar().
+	 * Mï¿½todo realiza uma query no banco para verificar a versï¿½o do mesmo.
+	 * Retorna uma mensagem de conexï¿½o vï¿½lida ou invï¿½lida, utilizada no teste
+	 * desta classe e do mï¿½todo conectar().
 	 * 
 	 * @return String
 	 * @throws SQLException
@@ -71,9 +72,9 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	}
 	
 	/**
-	 * Método executeQuery
+	 * Mï¿½todo executeQuery
 	 * 
-	 * Realiza a execução de uma query no banco de dados, conforme String
+	 * Realiza a execuï¿½ï¿½o de uma query no banco de dados, conforme String
 	 * informada.
 	 * 
 	 * @param String query
@@ -87,10 +88,10 @@ public class ConnectionPostgres implements IConectar<Connection> {
 	}
 
 	/**
-	 * Método executeUpdate
+	 * Mï¿½todo executeUpdate
 	 * 
 	 * Realiza o update no banco conforme query informada como
-	 * parâmetro.
+	 * parï¿½metro.
 	 * 
 	 * @param String query
 	 * @return void
