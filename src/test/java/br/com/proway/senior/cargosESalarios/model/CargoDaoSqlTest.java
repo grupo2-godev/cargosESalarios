@@ -1,9 +1,7 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -12,6 +10,9 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 
+/**
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ */
 public class CargoDaoSqlTest {
 
 	Integer grauinstrucao = 0;
