@@ -13,7 +13,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelDao;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
-class NivelControllerTest {
+public class NivelControllerTest {
 
 	NivelController controller = new NivelController();
 	NivelDao dao = new NivelDao();

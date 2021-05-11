@@ -4,8 +4,8 @@ package br.com.proway.senior.cargosESalarios.model;
  * Classe de modelo Setor.
  * @author Sprint 1
  * @version Sprint3:
- * 	- Alteração dos tipo primitivo int para Integer.
- * 	- Adição do hash e Equals.
+ * 	- Alteraï¿½ï¿½o dos tipo primitivo int para Integer.
+ * 	- Adiï¿½ï¿½o do hash e Equals.
  */
 public class SetorModel {
 	private Integer idSetor;
@@ -15,7 +15,6 @@ public class SetorModel {
 	/**
 	 * @param id
 	 * @param nomeSetor
-	 * @param capacidade
 	 * @param idPermissao
 	 */
 	public SetorModel(String nomeSetor, Integer idPermissao) {
