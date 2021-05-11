@@ -36,10 +36,10 @@ public final class ConnectionPostgres implements IConectar {
 		try {
 			 conexao = DriverManager.getConnection(url, usuario, senha);
 			 System.out.println("Conectado com sucesso.");
-			 return conexao;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Falha ao conectar.");
+			return null;
 		}
 		return conexao;
 	}
@@ -62,7 +62,7 @@ public final class ConnectionPostgres implements IConectar {
 	/**
 	 * Metodo dbVersion
 	 * 
-	 * Metodo realiza uma query no banco para verificar a vers�o do mesmo.
+	 * Metodo realiza uma query no banco para verificar a versao do mesmo.
 	 * Retorna uma mensagem de conexao valida ou invalida, utilizada no teste
 	 * desta classe e do metodo conectar().
 	 * 
@@ -88,9 +88,9 @@ public final class ConnectionPostgres implements IConectar {
 	}
 	
 	/**
-	 * M�todo executeQuery
+	 * Metodo executeQuery
 	 * 
-	 * Realiza a execu��o de uma query no banco de dados, conforme String
+	 * Realiza a execucao de uma query no banco de dados, conforme String
 	 * informada.
 	 * 
 	 * @param String query
@@ -105,10 +105,10 @@ public final class ConnectionPostgres implements IConectar {
 	}
 
 	/**
-	 * M�todo executeUpdate
+	 * Metodo executeUpdate
 	 * 
 	 * Realiza o update no banco conforme query informada como
-	 * par�metro.
+	 * parametro.
 	 * 
 	 * @param String query
 	 * @return void
@@ -118,5 +118,19 @@ public final class ConnectionPostgres implements IConectar {
 		Statement st = conexao.createStatement();
 		st.executeUpdate(query);
 		conexao.close();
+	}
+	
+	/*
+	 * Metodo setSenha.
+	 * 
+	 * Metodo será chamado no ConnectionPostgresTest {@link ConnectionPostgresTest} 
+	 * para quebrar a conexao e testar a Exception.
+	 * 
+	 * @param senha
+	 */
+	public void setSenha(String senha) {
+		ConnectionPostgres.senha = senha;
 	}	
+
 }
+
