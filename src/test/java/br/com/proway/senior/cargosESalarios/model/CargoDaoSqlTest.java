@@ -124,6 +124,36 @@ public class CargoDaoSqlTest {
 		}
 		assertTrue(registroDeletado);
 	}
+	
+	@Test
+	public void testGetAll() {
+		String queryCriar1 = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
+				+ "cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) "
+				+ "VALUES ('CargoParaTesteUnitario', '" + Date.valueOf(LocalDateTime.now().toLocalDate()) + "', '"
+				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "', " + cbo2002 + ", " + cbo1994 + ", " + horasmes
+				+ ", " + grauinstrucao + ", '12', 'Desenvolvedor', true, 1)";
+		String queryCriar2 = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
+				+ "cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) "
+				+ "VALUES ('CargoParaTesteUnitario', '" + Date.valueOf(LocalDateTime.now().toLocalDate()) + "', '"
+				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "', " + cbo2002 + ", " + cbo1994 + ", " + horasmes
+				+ ", " + grauinstrucao + ", '12', 'Desenvolvedor', true, 1)";
+		String queryCriar3 = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
+				+ "cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) "
+				+ "VALUES ('CargoParaTesteUnitario', '" + Date.valueOf(LocalDateTime.now().toLocalDate()) + "', '"
+				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "', " + cbo2002 + ", " + cbo1994 + ", " + horasmes
+				+ ", " + grauinstrucao + ", '12', 'Desenvolvedor', true, 1)";
+		try {
+		conexao.conectar();
+		ConnectionPostgres.executeUpdate(queryCriar1);
+		conexao.conectar();
+		ConnectionPostgres.executeUpdate(queryCriar2);
+		conexao.conectar();
+		ConnectionPostgres.executeUpdate(queryCriar3);
+		assertEquals(3, cargoSql.getAll().size());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@After
 	public void limparTabela() throws SQLException {

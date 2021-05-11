@@ -110,8 +110,6 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		try {
 			prepStmt = conexao.criarConexao().prepareStatement(updateDB);
 			prepStmt.setString(1, obj.getNomeCargo());
-			// java.time.LocalDateTime to java.sql.Date
-			// @janaina
 			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
 			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
 			prepStmt.setInt(4, obj.getCbo2002());
@@ -151,7 +149,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 
 	/**
 	 * Listar todos os registros da tabela. Busca todos os registros do banco, salva
-	 * em um ArrayLis e retorna o ArrayList resultante.
+	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo CargoModel.
 	 * 
 	 * @return list ArrayList<CargoModel>
 	 */
@@ -165,8 +163,6 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			while (rs.next()) {
 				cargo.setIdCargo(rs.getInt(1));
 				cargo.setNomeCargo(rs.getString(2));
-				// java.sql.Date java.time.LocalDateTime
-				// @Janaina
 				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
 				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
 				cargo.setCbo2002(rs.getInt(5));
