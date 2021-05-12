@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDaoSql;
 
 /**
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5

@@ -1,7 +1,7 @@
 package br.com.proway.senior.cargosESalarios.model;
 
 /**
- * Classe de apoio para persistência via banco de dados. Será chamado seu
+ * Classe de apoio para persistï¿½ncia via banco de dados. Serï¿½ chamado seu
  * ID na classe Cargo.
  * 
  * @author Sarah Brito
@@ -10,27 +10,27 @@ package br.com.proway.senior.cargosESalarios.model;
 
 public class Cbo1994Model{
 	
-	private Integer codigoId;
+	private Integer codigo_cbo;
 	private String descricao;
 	private Double percentualInsalubridade;
 	public Double percentualPericulosidade;
 	
 	public Cbo1994Model() {}
 	
-	public Cbo1994Model(Integer codigoId, String descricao, Double percentualInsalubridade,
+	public Cbo1994Model(Integer codigo_cbo, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
-		this.codigoId = codigoId;
+		this.codigo_cbo = codigo_cbo;
 		this.descricao = descricao;
 		this.percentualInsalubridade = percentualInsalubridade;
 		this.percentualPericulosidade = percentualPericulosidade;
 	}
 
-	public Integer getCodigoId() {
-		return codigoId;
+	public Integer getCodigo_cbo() {
+		return codigo_cbo;
 	}
 
-	public void setCodigoId(Integer codigoId) {
-		this.codigoId = codigoId;
+	public void setCodigo_cbo(Integer codigo_cbo) {
+		this.codigo_cbo = codigo_cbo;
 	}
 
 	public String getDescricao() {

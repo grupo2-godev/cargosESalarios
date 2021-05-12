@@ -5,8 +5,8 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.Cbo1994DaoAl;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.Cbo1994DaoAl;
 
 /**
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
@@ -22,7 +22,7 @@ public class Cbo1994Controller {
 	 * 
 	 * Cadastro Cbo
 	 * 
-	 * Recebe os parâmetros necessarios para a criacao de um cbo as valida e envia
+	 * Recebe os parï¿½metros necessarios para a criacao de um cbo as valida e envia
 	 * para o dao
 	 * 
 	 * @param codigoId
@@ -46,7 +46,7 @@ public class Cbo1994Controller {
 	/**
 	 * Deletar CBO1994
 	 * 
-	 * Realiza a exclusão do cbo conforme id de parâmetro.
+	 * Realiza a exclusï¿½o do cbo conforme id de parï¿½metro.
 	 * 
 	 * @param idCbo1994
 	 * @return boolean
@@ -58,9 +58,9 @@ public class Cbo1994Controller {
 	/**
 	 * Atualizar Cbo1994
 	 * 
-	 * Método realiza a atualização do cbo conforme parâmetros possíveis de
-	 * alteração. Para os demais dados, o indicado é criar um novo cbo para manter
-	 * histórico.
+	 * Mï¿½todo realiza a atualizaï¿½ï¿½o do cbo conforme parï¿½metros possï¿½veis de
+	 * alteraï¿½ï¿½o. Para os demais dados, o indicado ï¿½ criar um novo cbo para manter
+	 * histï¿½rico.
 	 * 
 	 * @param codigoId
 	 * @param descricao
@@ -71,7 +71,7 @@ public class Cbo1994Controller {
 	public boolean atualizarCbo1994(Integer codigoId, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
 		Cbo1994Model cbo1994Param = cbo1994.retrieve(codigoId);
-		cbo1994Param.setCodigoId(codigoId);
+		cbo1994Param.setCodigo_cbo(codigoId);
 		cbo1994Param.setDescricao(descricao);
 		cbo1994Param.setPercentualInsalubridade(percentualInsalubridade);
 		cbo1994Param.setPercentualPericulosidade(percentualPericulosidade);

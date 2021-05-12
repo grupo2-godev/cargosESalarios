@@ -142,7 +142,7 @@ public final class ConnectionPostgres implements IConectar {
 		st.executeUpdate(query);
 		conexao.close();
 	}
-	
+
 	/*
 	 * Metodo setSenha.
 	 * 
@@ -153,7 +153,6 @@ public final class ConnectionPostgres implements IConectar {
 	 */
 	public void setSenha(String senha) {
 		ConnectionPostgres.senha = senha;
-	}	
-
+	}
 }
 

@@ -2,15 +2,14 @@ package br.com.proway.senior.cargosESalarios.antigos;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.CRUDInterface;
-import br.com.proway.senior.cargosESalarios.model.Dados;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
 
 /**
  * Classe PostoDeTrabalhoDao
  * 
  * Classe DAO que implementa a interface CRUDInterface para
- * interação com o banco de dados.
+ * interaï¿½ï¿½o com o banco de dados.
  * 
  * @author Sarah Brito, sarah.brito@senior.com.br
  *
@@ -45,7 +44,7 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	/**
 	 * Ler Posto de Trabalho por ID
 	 * 
-	 * Procura posto de trabalho pelo id e retorna nulo caso não encontrado.
+	 * Procura posto de trabalho pelo id e retorna nulo caso nï¿½o encontrado.
 	 * 
 	 * @param int idPosto
 	 * @return null ou PostoDeTrabalhoModel
@@ -61,7 +60,7 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	/**
 	 * Ler Posto de Trabalho por nome
 	 * 
-	 * Procura posto de trabalho pelo id e retorna nulo caso não encontrado.
+	 * Procura posto de trabalho pelo id e retorna nulo caso nï¿½o encontrado.
 	 * 
 	 * @param nomePosto
 	 * @return null ou PostoDeTrabalhoModel
@@ -80,7 +79,7 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	 * 
 	 * Recebe um objeto Posto de Trabalho, procura na lista de postos existentes baseados
 	 * no ID do posto informado. Ao encontrar, atribui um novo objeto posto (sobrepondo os 
-	 * os dados anteriores), realizando a atualização dos dados.
+	 * os dados anteriores), realizando a atualizaï¿½ï¿½o dos dados.
 	 * 
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return boolean
@@ -131,8 +130,8 @@ public class PostoDeTrabalhoDaoAl implements CRUDInterface<PostoDeTrabalhoModel>
 	/**
 	 * Limpar ArrayList de Postos de Trabalhp
 	 * 
-	 * Método realiza a limpeza do ArrayList de postos
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de postos
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */

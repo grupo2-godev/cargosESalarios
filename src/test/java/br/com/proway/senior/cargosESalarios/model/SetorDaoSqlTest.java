@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
 
 /**
  * Classes de testes para o SetorDaoSql.
@@ -21,7 +22,7 @@ public class SetorDaoSqlTest {
 	String nomeSetor1 = "ERP I";
 	Integer idPermissao1 = 3;
 	SetorModel setor1 = new SetorModel(nomeSetor1, idPermissao1);
-	String nomePosto2 = "Gestão de Pessoas";
+	String nomePosto2 = "Gestï¿½o de Pessoas";
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomePosto2, idPermissao2);
 	SetorDaoSql setorSQL = new SetorDaoSql();
@@ -53,7 +54,7 @@ public class SetorDaoSqlTest {
 		setorSQL.create(setor1);
 		setorSQL.create(setor2);
 		SetorModel setor = new SetorModel();
-		setor = setorSQL.retrieve("Gestão de Pessoas");
+		setor = setorSQL.retrieve("Gestï¿½o de Pessoas");
 		assertEquals(nomePosto2, setor.getNomeSetor());
 	}
 	

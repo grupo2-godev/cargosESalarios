@@ -14,8 +14,8 @@ import org.junit.After;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoDaoSql;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDaoSql;
 
 public class PostoDeTrabalhoControllerTest {
 	

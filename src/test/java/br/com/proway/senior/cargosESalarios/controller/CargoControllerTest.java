@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.antigos.CargoControllerAntigo;
-import br.com.proway.senior.cargosESalarios.model.CargoDaoAl;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.CargoDaoAl;
 
 public class CargoControllerTest {
 

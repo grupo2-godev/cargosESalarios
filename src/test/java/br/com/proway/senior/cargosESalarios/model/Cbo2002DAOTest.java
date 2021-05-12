@@ -4,6 +4,9 @@ package br.com.proway.senior.cargosESalarios.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
+import br.com.proway.senior.cargosESalarios.model.DaoAl.Cbo2002DaoAl;
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -20,7 +23,7 @@ public class Cbo2002DAOTest {
 	String descricao = "SeniorX";
 	Double percInsalubridade = 0.10;
 	Double percPericulosidade = 0.4;
-	Cbo2002DAO dao = new Cbo2002DAO();
+	Cbo2002DaoAl dao = new Cbo2002DaoAl();
 
 	@Before
 	public void limparArray() {

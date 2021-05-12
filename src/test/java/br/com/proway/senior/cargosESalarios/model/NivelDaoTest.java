@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
+
 public class NivelDaoTest {
 
 	NivelDao dao = new NivelDao();

@@ -9,8 +9,8 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.model.SetorDaoSql;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
 
 /**
  * Classes de testes para o SetorController.
@@ -24,7 +24,7 @@ public class SetorControllerTest {
 	String nomeSetor1 = "ERP I";
 	Integer idPermissao1 = 3;
 	SetorModel setor1 = new SetorModel(nomeSetor1, idPermissao1);
-	String nomeSetor2 = "Gestão de Pessoas";
+	String nomeSetor2 = "Gestï¿½o de Pessoas";
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomeSetor2, idPermissao2);
 	SetorController controller = new SetorController();

@@ -1,13 +1,17 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoAl;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.antigos.Dados;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
+
 /**
- * Classe DAO do Cargo para persistência dos dados em ArrayList.
+ * Classe DAO do Cargo para persistï¿½ncia dos dados em ArrayList.
  * @author Elton Oliveira, Samuel Levi
  * @version Sprint3:
- * 	- Criação e implementação dos métodos.
- *  - Implementação dos testes.
+ * 	- Criaï¿½ï¿½o e implementaï¿½ï¿½o dos mï¿½todos.
+ *  - Implementaï¿½ï¿½o dos testes.
  */
 
 public class CargoDaoAl implements CRUDInterface<CargoModel> {
@@ -40,7 +44,7 @@ public class CargoDaoAl implements CRUDInterface<CargoModel> {
 	/**
 	 * Ler Cargo por ID
 	 * 
-	 * Procura cargo pelo id e retorna nulo caso não encontrado
+	 * Procura cargo pelo id e retorna nulo caso nï¿½o encontrado
 	 * 
 	 * @param id Do cargo
 	 * @return null/Cargo
@@ -56,7 +60,7 @@ public class CargoDaoAl implements CRUDInterface<CargoModel> {
 	/**
 	 * Ler Cargo por nome
 	 * 
-	 * Procura cargo pelo nome e retorna nulo caso não encontrado
+	 * Procura cargo pelo nome e retorna nulo caso nï¿½o encontrado
 	 * 
 	 * @param nomeCargo
 	 * @return null/Cargo
@@ -115,7 +119,7 @@ public class CargoDaoAl implements CRUDInterface<CargoModel> {
 	/**
 	 * Deleta um cargo
 	 * 
-	 * Deleta um cargo do banco de dados que é igual ao passado como
+	 * Deleta um cargo do banco de dados que ï¿½ igual ao passado como
 	 * parametro
 	 * 
 	 * @param cargo A ser excluido
@@ -141,8 +145,8 @@ public class CargoDaoAl implements CRUDInterface<CargoModel> {
 	/**
 	 * Limpar ArrayList de Cargos
 	 * 
-	 * Método realiza a limpeza do ArrayList de cargos
-	 * na classe Dados.	Utilizado para os testes unitários. 
+	 * Mï¿½todo realiza a limpeza do ArrayList de cargos
+	 * na classe Dados.	Utilizado para os testes unitï¿½rios. 
 	 *
 	 * @return void
 	 */
