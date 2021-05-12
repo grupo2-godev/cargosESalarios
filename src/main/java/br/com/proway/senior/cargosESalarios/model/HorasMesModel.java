@@ -1,31 +1,40 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
- * Classe de apoio para persistência via banco de dados. Registra o grau de instrução e a
- * quantidade de horas trabalhadas por mês.
+ * Classe de apoio para persistï¿½ncia via banco de dados. Registra o grau de instruï¿½ï¿½o e a
+ * quantidade de horas trabalhadas por mï¿½s.
  * 
  * @author Lorran P. Santos
  */
 
+@Entity
 public class HorasMesModel {
 	
-	private Integer idGrauDeInstrucao;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer idHorasMes;
 	private Double quantidade;
 
 	public HorasMesModel() {
 	}
 
-	public HorasMesModel(Integer idGrauDeInstrucao, Double quantidade) {
-		this.idGrauDeInstrucao = idGrauDeInstrucao;
+	public HorasMesModel(Integer idHorasMes, Double quantidade) {
+		this.idHorasMes = idHorasMes;
 		this.quantidade = quantidade;
 	}
 
-	public Integer getIdGrauDeInstrucao() {
-		return idGrauDeInstrucao;
+	public Integer getIdHorasMes() {
+		return idHorasMes;
 	}
 
-	public void setIdGrauDeInstrucao(Integer idGrauDeInstrucao) {
-		this.idGrauDeInstrucao = idGrauDeInstrucao;
+	public void setIdHorasMes(Integer idHorasMes) {
+		this.idHorasMes = idHorasMes;
 	}
 
 	public Double getQuantidade() {
@@ -38,7 +47,7 @@ public class HorasMesModel {
 
 	@Override
 	public String toString() {
-		return "HorasMesModel [idGrauDeInstrucao=" + idGrauDeInstrucao + ", quantidade=" + quantidade + "]";
+		return "HorasMesModel [idHorasMes=" + idHorasMes + ", quantidade=" + quantidade + "]";
 	}
 
 }
