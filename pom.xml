@@ -6,11 +6,6 @@
 	<artifactId>br.com.proway.senior.cargosESalarios</artifactId>
 	<version>0.0.1</version>
 	<dependencies>
-		<dependency>
-			<groupId>com.opencsv</groupId>
-			<artifactId>opencsv</artifactId>
-			<version>4.1</version>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
