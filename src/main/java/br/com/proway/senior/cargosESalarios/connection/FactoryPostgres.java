@@ -25,7 +25,7 @@ public final class FactoryPostgres extends FactoryConexao {
 	@Override
 	public Connection criarConexao() {
 		ConnectionPostgres conexao = ConnectionPostgres.getInstance();
-		return conexao.conectar();
+		return conexao.getConnection();
 	}
 
 }

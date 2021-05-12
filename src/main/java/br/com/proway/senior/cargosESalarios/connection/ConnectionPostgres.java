@@ -17,12 +17,35 @@ import java.sql.Statement;
  * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
  */
 public final class ConnectionPostgres implements IConectar {
-	
-	private static ConnectionPostgres instance;
 	private static String url = "jdbc:postgresql://localhost:5432/grupo2";
 	private static String usuario = "postgres";
 	private static String senha = "admin";
-	private static Connection conexao;
+	
+	private static ConnectionPostgres instance;
+	private static Connection conexao = null;
+	
+	/**
+	 * Ao construir o singleton ocorre a conex�o com o banco de dados e
+	 * essa conexao fica armazenada na variavel statica 'conexao'
+	 */
+	public ConnectionPostgres() {
+		conexao = this.conectar();
+	}
+	
+	/**
+	 * Retorna o objeto de conexao com o banco de dados armazenado na variavel 
+	 * static conexao. 
+	 * 
+	 * @return conexao
+	 */
+	public Connection getConnection() {
+		if (conexao == null) {
+			conexao = this.conectar();
+			System.out.println("Conex�o Singleton estava nula mas foi estabelecida!");
+		}
+		System.out.println("Retornando Conex�o Singleton...");
+		return conexao;
+	}
 	
 	/**
 	 * Metodo Conectar
@@ -45,10 +68,10 @@ public final class ConnectionPostgres implements IConectar {
 	}
 
 	/**
-	 * Metodo getInstance
+	 * Retorna a instancia do Singleton. 
 	 * 
-	 * Verifica se já existe uma conexao ativa e, caso exista, retorna a mesma.
-	 * Caso nao exista, retorna uma nova instancia ConneticonPostgres.
+	 * Essa funcao deve ser a unica forma de obter a referencia do Singleton para
+	 * uso.
 	 * 
 	 * @return instance
 	 */
