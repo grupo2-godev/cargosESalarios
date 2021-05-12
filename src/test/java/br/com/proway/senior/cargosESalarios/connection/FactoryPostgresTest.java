@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
+
 /**
  * Testes da classe FactoryPostgres.
  * 

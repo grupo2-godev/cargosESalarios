@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 

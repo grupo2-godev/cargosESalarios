@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 
 /**
  * Classe dependente da finaliza��o do GrauInstrucaoDao.

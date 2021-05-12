@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import org.junit.After;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 
 public class CBO1994DAOTest {
