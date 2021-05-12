@@ -3,9 +3,9 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 import java.sql.*;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
+import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
 
 /**

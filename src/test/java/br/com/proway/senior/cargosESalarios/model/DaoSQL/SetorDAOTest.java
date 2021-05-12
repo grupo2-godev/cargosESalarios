@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 

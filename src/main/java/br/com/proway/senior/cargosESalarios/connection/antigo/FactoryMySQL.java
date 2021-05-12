@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.connection;
+package br.com.proway.senior.cargosESalarios.connection.antigo;
 
 import java.sql.Connection;
 /**

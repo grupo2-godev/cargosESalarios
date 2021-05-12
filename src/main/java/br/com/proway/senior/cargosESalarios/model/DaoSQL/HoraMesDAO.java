@@ -3,7 +3,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 
 /**
  * Classe HoraMesDao

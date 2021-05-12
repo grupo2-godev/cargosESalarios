@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 
