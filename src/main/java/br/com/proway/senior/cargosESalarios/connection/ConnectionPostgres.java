@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Classe de conexÃ£o com o banco de dados e implemtaÃ§Ã£o da interface 
- * de conexÃ£o criando a conexÃ£o.
+ * Classe de conexao com o banco de dados Postgres e implemtacao da 
+ * interface de conexao criando a conexao. Implementa o Design Pattern Singleton
+ * para que nao haja mais de uma conexao ativa com o banco de dados.
  * 
  * @author David Hildebrandt, david.hildebrandt@senior.com.br
  * @author Sabrina Schmidt, sabrina.schmidt@senior.com.br
- * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 4 e 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
  */
 public final class ConnectionPostgres implements IConectar {
 	private static String url = "jdbc:postgresql://localhost:5432/grupo2";
@@ -23,7 +25,7 @@ public final class ConnectionPostgres implements IConectar {
 	private static Connection conexao = null;
 	
 	/**
-	 * Ao construir o singleton ocorre a conexão com o banco de dados e
+	 * Ao construir o singleton ocorre a conexï¿½o com o banco de dados e
 	 * essa conexao fica armazenada na variavel statica 'conexao'
 	 */
 	public ConnectionPostgres() {
@@ -39,18 +41,19 @@ public final class ConnectionPostgres implements IConectar {
 	public Connection getConnection() {
 		if (conexao == null) {
 			conexao = this.conectar();
-			System.out.println("Conexão Singleton estava nula mas foi estabelecida!");
+			System.out.println("Conexï¿½o Singleton estava nula mas foi estabelecida!");
 		}
-		System.out.println("Retornando Conexão Singleton...");
+		System.out.println("Retornando Conexï¿½o Singleton...");
 		return conexao;
 	}
 	
 	/**
-	 * Mï¿½todo Conectar
+	 * Metodo Conectar
 	 * 
-	 * Realiza a conexï¿½o com o banco de dados.
+	 * Realiza a conexao com o banco de dados, conforme parametros de URL, usuario e senha.
+	 * Retorna uma instancia da conexao para implementacao do Design Pattern Singleton.
 	 * 
-	 * @return Connection
+	 * @return instance
 	 */
 	public  Connection conectar() {
 		try {
@@ -67,10 +70,10 @@ public final class ConnectionPostgres implements IConectar {
 	/**
 	 * Retorna a instancia do Singleton. 
 	 * 
-	 * Essa função deve ser a unica forma de obter a referencia do Singleton para
+	 * Essa funcao deve ser a unica forma de obter a referencia do Singleton para
 	 * uso.
 	 * 
-	 * @return
+	 * @return instance
 	 */
 	public static ConnectionPostgres getInstance() {
 		if (instance == null) {
@@ -80,11 +83,11 @@ public final class ConnectionPostgres implements IConectar {
 	} 
 	
 	/**
-	 * Mï¿½todo dbVersion
+	 * Metodo dbVersion
 	 * 
-	 * Mï¿½todo realiza uma query no banco para verificar a versï¿½o do mesmo.
-	 * Retorna uma mensagem de conexï¿½o vï¿½lida ou invï¿½lida, utilizada no teste
-	 * desta classe e do mï¿½todo conectar().
+	 * Metodo realiza uma query no banco para verificar a versï¿½o do mesmo.
+	 * Retorna uma mensagem de conexao valida ou invalida, utilizada no teste
+	 * desta classe e do metodo conectar().
 	 * 
 	 * @return String
 	 * @throws SQLException
@@ -138,8 +141,5 @@ public final class ConnectionPostgres implements IConectar {
 		Statement st = conexao.createStatement();
 		st.executeUpdate(query);
 		conexao.close();
-	}
-
-	
-	
+	}	
 }

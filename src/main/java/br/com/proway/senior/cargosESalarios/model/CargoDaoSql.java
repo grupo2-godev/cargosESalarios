@@ -19,14 +19,14 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
-	
+
 	FactoryConexao conexao = new FactoryPostgres();
 
 	/***
 	 * Insere no banco de dados o registro de um CargoModel.
 	 *
 	 * @param obj CargoModel Objeto a ser inserido.
-	 * @return quantidade de registros.
+	 * @return int Quantidade de registros inseridos.
 	 */
 	public int create(CargoModel obj) {
 		String insertDB = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -50,32 +50,31 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			rs.next();
 			qtd = rs.getInt(1);
 			System.out.println("Cargo cadastrado com sucesso.");
-			return qtd;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("Falha ao cadastrar Cargo");
 			e.printStackTrace();
+			return -1;
 		}
 		return qtd;
 	}
 
 	/***
-	 * Recuperar um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
+	 * Retorna um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
 	 * ID informado e retorna a tupla com os dados correspondentes.
 	 * 
-	 * @param idCargo int
-	 * @return cargo CargoModel
+	 * @param idCargo int Id do cargo a ser consultado.
+	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel retrieve(int idCargo) {
 		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
+		CargoModel cargo = null;
 		try {
 			Statement stmt = conexao.criarConexao().createStatement();
 			ResultSet rs = stmt.executeQuery(retrieveById);
-			CargoModel cargo = new CargoModel();
 			while (rs.next()) {
+				cargo = new CargoModel();
 				cargo.setIdCargo(rs.getInt(1));
 				cargo.setNomeCargo(rs.getString(2));
-				// java.sql.Date java.time.LocalDateTime
-				// @Janaina
 				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
 				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
 				cargo.setCbo2002(rs.getInt(5));
@@ -88,37 +87,30 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 				cargo.setIdPermissao(rs.getInt(12));
 				System.out.println(cargo.toString());
 			}
-			return cargo;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
-	}
-
-	private void Timestamp(long time) {
-		// TODO Auto-generated method stub
-
+		return cargo;
 	}
 
 	/**
 	 * Atualizar um registro no banco de dados. Realiza a atualização dos dados no
 	 * registro cujo o id_cargo seja idêntico ao IdCargo informado no parâmetro.
 	 * 
-	 * @param idCargo int
-	 * @param obj     CargoModel
+	 * @param idCargo int Id do objeto a ser atualizado.
+	 * @param obj     CargoModel Objeto que possui as informações que serão setadas no objeto que possui o id informado.
 	 * @return boolean True se a atualização for efetuada e False caso contrário.
 	 */
 	public boolean update(int idCargo, CargoModel obj) {
 		String updateDB = "UPDATE grupo2.cargo SET nome_cargo = ?, data_cadastro = ?,"
-				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo94 = ?, hora_mes = ?,"
-				+ "grau_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_posto = "
+				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo1994 = ?, horas_mes = ?,"
+				+ "grau_de_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_cargo = "
 				+ idCargo;
 		PreparedStatement prepStmt;
 		try {
 			prepStmt = conexao.criarConexao().prepareStatement(updateDB);
 			prepStmt.setString(1, obj.getNomeCargo());
-			// java.time.LocalDateTime to java.sql.Date
-			// @janaina
 			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
 			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
 			prepStmt.setInt(4, obj.getCbo2002());
@@ -138,10 +130,10 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 	}
 
 	/***
-	 * Deletar um registro da tabela. Busca no banco o registro cujo ID seja igual
+	 * Deleta um registro da tabela. Busca no banco o registro cujo ID seja igual
 	 * ao informado no parâmetro e exclui a tupla.
 	 * 
-	 * @param idCargo Int
+	 * @param idCargo int Id do registro a ser deletado.
 	 * @return boolean True se o registro for apagado e False em caso de falha.
 	 */
 	public boolean delete(int idCargo) {
@@ -158,7 +150,7 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 
 	/**
 	 * Listar todos os registros da tabela. Busca todos os registros do banco, salva
-	 * em um ArrayLis e retorna o ArrayList resultante.
+	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo CargoModel.
 	 * 
 	 * @return list ArrayList<CargoModel>
 	 */
@@ -172,8 +164,6 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 			while (rs.next()) {
 				cargo.setIdCargo(rs.getInt(1));
 				cargo.setNomeCargo(rs.getString(2));
-				// java.sql.Date java.time.LocalDateTime
-				// @Janaina
 				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
 				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
 				cargo.setCbo2002(rs.getInt(5));
@@ -192,21 +182,21 @@ public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Método limparTabela
 	 * 
 	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes.
-	 * É necessário implementar no banco as sequences.
+	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes. É necessário
+	 * implementar no banco as sequences.
 	 * 
 	 * @throws SQLException
 	 * @return void
 	 */
 	public void limparTabela() throws SQLException {
 		String limpar = "delete from grupo2.cargo";
-		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";	
-		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";
+		conexao.criarConexao().createStatement().executeUpdate(limpar);
 		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
 		System.out.println("Limpeza realizada.");
 	}
