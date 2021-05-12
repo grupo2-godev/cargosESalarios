@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,18 +14,19 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDaoSql;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 
 /**
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
-public class CargoDaoSqlTest {
+public class CargoDAOTest {
 
 	Integer grauinstrucao = 0;
 	Integer cbo2002 = 0;
 	Integer cbo1994 = 0;
 	Integer horasmes = 0;
-	CargoDaoSql cargoSql = new CargoDaoSql();
+	CargoDAO cargoSql = new CargoDAO();
 	ConnectionPostgres conexao = new ConnectionPostgres();
 
 	@Test

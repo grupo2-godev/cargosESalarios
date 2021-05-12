@@ -11,13 +11,13 @@ import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
 
-public class CBO1994DaoSQLTest {
+public class CBO1994DAOTest {
 
 	Integer codigo_cbo = 345678;
 	String descricao = "descricao";
 	Double percentual_insalubridade = 0.3;
 	Double percentual_periculosidade = 0.2;
-	CBO1994DaoSQL cbo1994Sql = new CBO1994DaoSQL();	
+	CBO1994DAO cbo1994Sql = new CBO1994DAO();	
 	FactoryConexao conexao = new FactoryPostgres();
 	
 	@After

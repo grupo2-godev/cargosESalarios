@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
  * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os métodos
@@ -20,7 +20,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
-public class CargoDaoSql implements InterfaceDaoCrud<CargoModel> {
+public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 
 	FactoryConexao conexao = new FactoryPostgres();
 

@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
  * Implementar os metodos CRUD para o DB 
  * 
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
-public class CBO1994DaoSQL implements InterfaceDaoCrud<Cbo1994Model>{
+public class CBO1994DAO implements InterfaceDAOCRUD<Cbo1994Model>{
 
 	FactoryConexao conexao = new FactoryPostgres();
 

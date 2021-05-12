@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.SetorDaoSql;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Testes da classe ConnectionPostgres.
@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
  */
 public class ConnectionPostgresTest {
 
-	SetorDaoSql setorSQL = new SetorDaoSql();
+	SetorDAO setorSQL = new SetorDAO();
 	
 	@Test
 	public void testConectar() {
@@ -60,7 +60,7 @@ public class ConnectionPostgresTest {
 		String nomeSetor1 = "ERP I";
 		Integer idPermissao1 = 3;
 		SetorModel setor1 = new SetorModel(nomeSetor1, idPermissao1);
-		SetorDaoSql setorSQL = new SetorDaoSql();
+		SetorDAO setorSQL = new SetorDAO();
 		setorSQL.create(setor1);
 		String sql = "SELECT * FROM grupo2.setor";
 		ConnectionPostgres conexao = new ConnectionPostgres();

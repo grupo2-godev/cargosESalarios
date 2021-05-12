@@ -1,11 +1,12 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 /**
  * Classe de do grau de instru��o que implementa um crud e recebe o 
  * modelo de grau de instru��o. Criando uma variavel de conex�o para
@@ -15,11 +16,11 @@ import br.com.proway.senior.cargosESalarios.model.Interface.CRUDInterface;
  * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
  */
 
-public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
+public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 
 	private  Connection db;
 	
-	public GrauInstrucaoDao(Connection ps){
+	public GrauInstrucaoDAO(Connection ps){
 		this.db = ps;
 	}
 	
@@ -32,8 +33,8 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	 * @param newGI
 	 * @return id do grau de instrucao ou null caso nao de para criar
 	 */
-	public Integer create(GrauInstrucaoModel newGI) {
-		String sql1 = "INSERT INTO grau_de_instrucao (descricao) VALUES (?)";
+	public int create(GrauInstrucaoModel newGI) {
+		String sql1 = "INSERT INTO grupo2.grau_de_instrucao (descricao) VALUES (?)";
 		try {
 			PreparedStatement pstmt = db.prepareStatement(sql1);
 			pstmt.setString(1, newGI.getNome());
@@ -82,7 +83,7 @@ public class GrauInstrucaoDao implements CRUDInterface<GrauInstrucaoModel> {
 	 * @param GrauInstrucao
 	 * @return boolean
 	 */
-	public boolean update(GrauInstrucaoModel gi) {
+	public boolean update(int id, GrauInstrucaoModel gi) {
 		return false;
 	}
 	

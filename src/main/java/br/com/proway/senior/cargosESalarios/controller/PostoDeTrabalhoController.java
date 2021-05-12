@@ -3,7 +3,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDaoSql;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 
 /**
  * Classe PostoDeTrabalhoController
@@ -14,7 +14,7 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDaoSql;
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDaoSql postoSQL = new PostoDeTrabalhoDaoSql();
+	PostoDeTrabalhoDAO postoSQL = new PostoDeTrabalhoDAO();
 	
 	/**
 	 * Cadastro Posto de Trabalho

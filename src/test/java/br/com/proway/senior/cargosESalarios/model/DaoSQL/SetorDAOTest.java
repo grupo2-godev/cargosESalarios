@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,8 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Classes de testes para o SetorDaoSql.
@@ -17,7 +18,7 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
 
-public class SetorDaoSqlTest {
+public class SetorDAOTest {
 	
 	String nomeSetor1 = "ERP I";
 	Integer idPermissao1 = 3;
@@ -25,7 +26,7 @@ public class SetorDaoSqlTest {
 	String nomePosto2 = "Gest�o de Pessoas";
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomePosto2, idPermissao2);
-	SetorDaoSql setorSQL = new SetorDaoSql();
+	SetorDAO setorSQL = new SetorDAO();
 	ConnectionPostgres conexao = new ConnectionPostgres();
 	
 	@Test

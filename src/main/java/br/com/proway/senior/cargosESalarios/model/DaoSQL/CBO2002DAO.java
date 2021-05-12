@@ -14,7 +14,7 @@ import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
  * @author Samuel Alves <samuel.levi@senior.com.br>
  * @version Sprint 4
  */
-public class CBO2002DaoSQL {
+public class CBO2002DAO {
 
 	FactoryConexao conexao = new FactoryPostgres();
 

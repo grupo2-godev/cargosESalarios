@@ -10,7 +10,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
  * Classe PostoDeTrabalhoDaoSql
@@ -23,7 +23,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
  * @author Samuel Levi, samuel.levi@senior.com.br
  */
 
-public class PostoDeTrabalhoDaoSql implements InterfaceDaoCrud<PostoDeTrabalhoModel> {
+public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel> {
 	
 	FactoryConexao conexao = new FactoryPostgres();
 	

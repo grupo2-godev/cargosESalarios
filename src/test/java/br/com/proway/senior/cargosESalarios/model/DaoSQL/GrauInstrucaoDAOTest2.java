@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model;
+package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.*;
 
@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 
-public class GrauInstrucaoDaoTest2 {
+public class GrauInstrucaoDAOTest2 {
 
 	ConnectionPostgres conexao = new ConnectionPostgres();
-	GrauInstrucaoDao giSql = new GrauInstrucaoDao(conexao.conectar());
+	GrauInstrucaoDAO giSql = new GrauInstrucaoDAO(conexao.conectar());
 	
 	@Test
 	public void testCreate() {

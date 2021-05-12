@@ -10,7 +10,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.connection.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
  * Classe SetoroDaoSql
@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDaoCrud;
  * @author Sarah Brito, sarah.brito@senior.com.br
  */
 
-public class SetorDaoSql implements InterfaceDaoCrud<SetorModel> {
+public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 
 	FactoryConexao conexao = new FactoryPostgres();
 

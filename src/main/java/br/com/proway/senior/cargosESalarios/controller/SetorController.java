@@ -2,9 +2,8 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.antigos.SetorDaoAl;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Classe SetorController
@@ -17,7 +16,7 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDaoSql;
 
 public class SetorController {
 
-	SetorDaoSql setorSQL = new SetorDaoSql();
+	SetorDAO setorSQL = new SetorDAO();
 	
 	/**
 	 * Cadastra um novo setor

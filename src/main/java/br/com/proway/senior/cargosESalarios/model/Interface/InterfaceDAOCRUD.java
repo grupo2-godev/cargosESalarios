@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  */
 
-public interface InterfaceDaoCrud<T> {
+public interface InterfaceDAOCRUD<T> {
 	
 		public int create(T obj);
 

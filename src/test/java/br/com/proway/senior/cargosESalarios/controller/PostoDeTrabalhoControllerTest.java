@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDaoSql;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 
 public class PostoDeTrabalhoControllerTest {
 	
@@ -27,7 +27,7 @@ public class PostoDeTrabalhoControllerTest {
 	Double salario = 1800.00;
 	PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
 	PostoDeTrabalhoModel postoModel = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
-	PostoDeTrabalhoDaoSql postoDaoSql = new PostoDeTrabalhoDaoSql();
+	PostoDeTrabalhoDAO postoDaoSql = new PostoDeTrabalhoDAO();
 	
 //	@Before
 //	public void limparArray() {

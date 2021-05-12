@@ -1,8 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceModel;
-
-public class NivelModel implements InterfaceModel{
+public class NivelModel {
 
 	private int idNivel;
 	private String nomeNivel;
