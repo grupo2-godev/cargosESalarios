@@ -30,7 +30,7 @@ public class CBO1994DAOTest {
 	}			
 	
 	@Test
-	public void testCreateCBO1994() {
+	public void testCriaUmCBO1994() {
 		try {
 			CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4);
 			Integer codigo_CBO1994 = CBO1994Dao.create(CBO1994);
@@ -42,8 +42,15 @@ public class CBO1994DAOTest {
 	}
 
 	@Test
-	public void testRetrieveCBO1994() {
-		fail("Not yet implemented");
+	public void testBuscaCBO1994InformadoNumaListaContendoDoisObjetos() {
+		CBO1994Dao.create(new CBO1994Model(45343, "analista", 0.2, 0.1));
+		
+		CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4);
+		CBO1994Model novo_CBO1994 = CBO1994Dao.retrieve(CBO1994Dao.create(CBO1994));
+		assertEquals(CBO1994.getCodigo_cbo(), novo_CBO1994.getCodigo_cbo());
+		assertEquals(CBO1994.getDescricao(), novo_CBO1994.getDescricao());
+		assertEquals(CBO1994.getPercentualInsalubridade(), novo_CBO1994.getPercentualInsalubridade());
+		assertEquals(CBO1994.getPercentualPericulosidade(), novo_CBO1994.getPercentualPericulosidade());		
 	}
 
 	@Test

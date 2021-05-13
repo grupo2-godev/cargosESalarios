@@ -12,6 +12,7 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
@@ -48,7 +49,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 	 * Recebe um objeto CBO1994Model para inserir no banco de dados.
 	 * 
 	 * @param CBO1994Model CBO1994
-	 * @return int 
+	 * @return int codigoCBO
 	 */
 	public int create(CBO1994Model CBO1994) {
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
@@ -59,12 +60,21 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 		return codigoCBO;
 	}
 
-	public CBO1994Model retrieve(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Busca CBO1994 pelo seu codigo
+	 * 
+	 * Metodo busca o objeto CBO1994 no banco de dados conforme codigo informado
+	 * 
+	 * @param int codigo_CBO1994
+	 * @return results retorna objeto CBO1994Model
+	 */
+	public CBO1994Model retrieve(int codigo_CBO1994) {
+		CBO1994Model results = ConnectionHibernate.getSession().get(CBO1994Model.class, codigo_CBO1994);
+		System.out.println(results.toString());
+		return results;
 	}
 
-	public boolean update(int id, CBO1994Model obj) {
+	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
 		// TODO Auto-generated method stub
 		return false;
 	}
