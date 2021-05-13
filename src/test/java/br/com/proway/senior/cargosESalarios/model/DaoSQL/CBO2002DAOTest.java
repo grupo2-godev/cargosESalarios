@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
+
 /**
  * Classe CBO2002DAOTest.
  * 
@@ -23,7 +25,6 @@ public class CBO2002DAOTest {
 	
     @Test
     public void testInserirCBO2002() {
-        cbo2002DAO.delete(784205);
         CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de "
         		+ "linha de produção", 0.0, 0.2);
         Integer codigoCboCadastrado = cbo2002DAO.create(novoCBO);
@@ -33,7 +34,6 @@ public class CBO2002DAOTest {
 
     @Test
     public void testBuscarCBO2002PorID() {
-    	cbo2002DAO.delete(765010);
     	CBO2002Model novoCBO = new CBO2002Model(765010, "Padronista de chapéus", 0.0, 0.0);
     	CBO2002Model cboRetornado = cbo2002DAO.retrieve(cbo2002DAO.create(novoCBO));
     	assertEquals(novoCBO.getDescricao(), cboRetornado.getDescricao());
@@ -43,7 +43,6 @@ public class CBO2002DAOTest {
 
     @Test
     public void testAtualizarCBO2002() {
-    	cbo2002DAO.delete(223405);
     	CBO2002Model novoCBO = new CBO2002Model(223405, "Farmacêutico", 0.2, 0.0);
     	CBO2002Model cboAlterado = new CBO2002Model(223405, "Farmacêutico(a)", 0.2, 0.0);
     	int codigo = cbo2002DAO.create(novoCBO);
@@ -65,10 +64,23 @@ public class CBO2002DAOTest {
     
     @Test
     public void testListarTodosCBOs2002() {
+    	CBO2002Model novoCBO = new CBO2002Model(262810, "Dançarino", 0.0, 0.0);
+    	cbo2002DAO.create(novoCBO);
     	assertFalse(cbo2002DAO.getAll().isEmpty());
     }  
 
     @Test
     public void deleteAll() {
+    	CBO2002Model cbo1 = new CBO2002Model(241005, "Advogado", 0.0, 0.0);
+    	cbo2002DAO.create(cbo1);
+    	CBO2002Model cbo2 = new CBO2002Model(234604, "Professor de língua alema", 0.0, 0.0);
+    	cbo2002DAO.create(cbo2);
+    	cbo2002DAO.deleteAll();
+    	assertTrue(cbo2002DAO.getAll().isEmpty());
+    }
+    
+    @Before
+    public void limparTabela() {
+    	cbo2002DAO.deleteAll();
     }
 }

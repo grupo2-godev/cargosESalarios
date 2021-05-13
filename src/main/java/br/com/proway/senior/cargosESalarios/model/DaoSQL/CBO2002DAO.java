@@ -1,10 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
@@ -46,7 +39,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 			instance = new CBO2002DAO(session);
 		return instance;
 	}
-	
+
 	/**
 	 * Construtor da classe CBO2002DAO, utilizado no Singleton.
 	 * 
@@ -76,8 +69,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	/**
 	 * Buscar CBO 2002 por ID.
 	 * 
-	 * Metodo busca um objeto CBO 2002 no banco de dados, conforme
-	 * codigo informado no parametro.
+	 * Metodo busca um objeto CBO 2002 no banco de dados, conforme codigo informado
+	 * no parametro.
 	 * 
 	 * @param int codigoCBO
 	 * @return CBO2002Model
@@ -91,10 +84,10 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	/**
 	 * Atualizar um registro de CBO 2002.
 	 * 
-	 * Realiza a atualizacao de um registro CBO 2002, conforme o codigo
-	 * informado como parametro.
+	 * Realiza a atualizacao de um registro CBO 2002, conforme o codigo informado
+	 * como parametro.
 	 * 
-	 * @param int           codigoCBO2002 Identificacao do registro que sera alterado
+	 * @param int          codigoCBO2002 Identificacao do registro que sera alterado
 	 * @param CBO2002Model cbo2002Alterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
@@ -114,8 +107,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	/**
 	 * Deletar um registro de CBO 2002.
 	 * 
-	 * Metodo deleta um registro de CBO 2002 no banco de dados, conforme
-	 * codigo informado.
+	 * Metodo deleta um registro de CBO 2002 no banco de dados, conforme codigo
+	 * informado.
 	 * 
 	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
 	 * @return boolean
@@ -164,6 +157,5 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
-
 
 }
