@@ -3,8 +3,16 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
@@ -32,8 +40,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Singleton da classe HorasMesDAO.
 	 * 
-	 * @param session
-	 * @return
+	 * @param Session session
+	 * @return HorasMesDAO instance
 	 */
 	public static HorasMesDAO getInstance(Session session) {
 		if (instance == null)
@@ -44,7 +52,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Construtor da classe HorasMesDAO, utilizado no Singleton.
 	 * 
-	 * @param session
+	 * @param Session session
 	 */
 	private HorasMesDAO(Session session) {
 		this.session = session;
@@ -63,61 +71,100 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(horasMes);
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(horasMes);
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return idCadastrado;
 	}
 
-	/**
-	 * Quantidade de horas registradas
-	 * 
-	 * � feita uma consulta SQL para contar a quantidade de linhas que h� na tabela
-	 * horas_mes, a qual retornar� a quantidade de horas que foram trabalhadas por
-	 * m�s
-	 * 
-	 * @return qtdBD int
-	 * @throws SQLException
-	 */
-	public int getAmountOfLines() throws SQLException {
-		String qtd = "SELECT COUNT(id_horas_mes) as quantidade FROM grupo2.horas_mes";
-		ResultSet colunas = ConnectionPostgres.executeQuery(qtd);
-		colunas.next();
-		int qtdBD = colunas.getInt("quantidade");
-		return qtdBD;
-	}
+	
 
 	/**
-	 * Apaga tudo
+	 * Buscar horas mes por ID.
 	 * 
-	 * � feito um comando para apagar todos os registros no banco de dados
+	 * Método busca o objeto horas mes no banco de dados conforme parametro
+	 * informado.
+	 * 
+	 * @param int id
+	 * @return results retorna um objeto HorasMesModel
 	 */
-	public void deleteAll() {
-		String query = "DELETE FROM grupo2.horas_mes";
-		try {
-			ConnectionPostgres.executeUpdate(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public HorasMesModel retrieve(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
+		System.out.println(results.toString());
+		return results;
 	}
 
-	public boolean update(int id, HorasMesModel horasMes) {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * Atualizar um registro de horas mes.
+	 * 
+	 * Realiza a atualizacao de um registro HorasMesModel, conforme a Id informada
+	 * como parametro.
+	 * 
+	 * @param int           id Identificacao do registro que será alterado
+	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
+	 * @return boolean
+	 */
+	public boolean update(int id, HorasMesModel objetoAlterado) {
+		HorasMesModel original = retrieve(id);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setQuantidade(objetoAlterado.getQuantidade());
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
+	/**
+	 * Deletar um registro de horas mes.
+	 * 
+	 * Método deleta um registro de horas mes no banco de dados, conforme Id
+	 * informada.
+	 * 
+	 * @param int id Identificao do registro a ser deletado
+	 * @return boolean
+	 */
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		HorasMesModel entry = retrieve(id);
+
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
-	public ArrayList getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Buscar todos os registros de horas mes.
+	 * 
+	 * Método busca todos os registros de horas mes que constam no banco de dados e
+	 * retorna em um ArrayList.
+	 * 
+	 * @return ArrayList HorasMesModel
+	 */
+	public ArrayList<HorasMesModel> getAll() {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
+		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
+		Query query = session.createQuery(criteria);
+		List<HorasMesModel> results = query.getResultList();
+		return new ArrayList<HorasMesModel>(results);
 	}
 
+	/**
+	 * Deletar todos os registros do banco de dados.
+	 * 
+	 * Comando limpa a tabela de horas mes no banco de dados.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM horas_mes").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
+	}
 }
