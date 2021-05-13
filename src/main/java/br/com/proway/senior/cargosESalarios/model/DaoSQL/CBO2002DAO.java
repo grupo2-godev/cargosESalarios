@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
-import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
- * Implementar os m�todos CRUD para o Banco de dados.
- *
- * @author Samuel Alves <samuel.levi@senior.com.br>
- * @version Sprint 4
+ * Classe CBO2002DAO
+ * 
+ * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
+ * banco de dados.
+ * 
+ * @author Samuel Alves <samuel.levi@senior.com.br> - Sprint 4
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
-public class CBO2002DAO {
+public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 
 	FactoryConexao conexao = new FactoryPostgres();
 
@@ -24,7 +28,7 @@ public class CBO2002DAO {
      * @param obj Cbo2002Model
      * @throws SQLException exception
      */
-    public int create(Cbo2002Model obj){
+    public int create(CBO2002Model obj){
 
         String sqlInsert = "INSERT INTO grupo2.cbo2002 (descricao, percentual_insalubridade, percentual_periculosidade) VALUES (?,?,?)";
         int qtd =0;
@@ -49,12 +53,12 @@ public class CBO2002DAO {
         return qtd;
     }
 
-    public Cbo2002Model retrieve(int codigoCbo) {
+    public CBO2002Model retrieve(int codigoCbo) {
         String sqlRetrieveId = "SELECT * FROM grupo2.cbo2002 WHERE codigo_cbo = " + codigoCbo;
         try {
             Statement stmt = conexao.criarConexao().createStatement();
             ResultSet rs = stmt.executeQuery(sqlRetrieveId);
-            Cbo2002Model cbo2002 = new Cbo2002Model();
+            CBO2002Model cbo2002 = new CBO2002Model();
             while (rs.next()) {
                 cbo2002.setDescricao(rs.getString(1));
                 cbo2002.setPercentualInsalubridade(rs.getDouble(2));
@@ -138,4 +142,39 @@ public class CBO2002DAO {
         String limpar = "DELETE TABLE grupo2.cbo2002";
         ConnectionPostgres.executeQuery(limpar);
     }
+
+	public int create(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean update(int id, Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean deleteAll() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean update(int id, CBO2002Model obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
