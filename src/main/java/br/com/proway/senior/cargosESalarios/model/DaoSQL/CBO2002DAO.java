@@ -1,141 +1,161 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
-import br.com.proway.senior.cargosESalarios.model.Cbo2002Model;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
- * Implementar os m�todos CRUD para o Banco de dados.
- *
- * @author Samuel Alves <samuel.levi@senior.com.br>
- * @version Sprint 4
+ * Classe CBO2002DAO
+ * 
+ * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
+ * banco de dados.
+ * 
+ * @author Samuel Alves <samuel.levi@senior.com.br> - Sprint 4
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
-public class CBO2002DAO {
+public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 
-	FactoryConexao conexao = new FactoryPostgres();
+	private static CBO2002DAO instance;
+	private Session session;
 
+	/**
+	 * Singleton da classe CBO2002DAO.
+	 * 
+	 * @param Session session
+	 * @return CBO2002DAO instance
+	 */
+	public static CBO2002DAO getInstance(Session session) {
+		if (instance == null)
+			instance = new CBO2002DAO(session);
+		return instance;
+	}
 
-    /**
-     * Criar um objeto. Cria um objeto do tipo Cbo2002.
-     * @param obj Cbo2002Model
-     * @throws SQLException exception
-     */
-    public int create(Cbo2002Model obj){
+	/**
+	 * Construtor da classe CBO2002DAO, utilizado no Singleton.
+	 * 
+	 * @param Session session
+	 */
+	private CBO2002DAO(Session session) {
+		this.session = session;
+	}
 
-        String sqlInsert = "INSERT INTO grupo2.cbo2002 (descricao, percentual_insalubridade, percentual_periculosidade) VALUES (?,?,?)";
-        int qtd =0;
-        try {
-        	PreparedStatement prepStmt = conexao.criarConexao().prepareStatement(sqlInsert);
-            prepStmt.setString(1, obj.getDescricao());
-            prepStmt.setDouble(2, obj.getPercentualInsalubridade());
-            prepStmt.setDouble(3, obj.getPercentualPericulosidade());
-            prepStmt.execute();
-            String sqlCount = "SELECT COUNT(*) FROM grupo2.cbo2002";
-            ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
-            rs.next();
-            qtd = rs.getInt(1);
-            System.out.println("CBO 2002 cadastrado com sucesso!");
-            return qtd;
-        } catch (SQLException exception) {
-            System.out.println("Falha ao cadastrar o CBO 2002");
-            exception.getErrorCode();
-            exception.getSQLState();
-            exception.printStackTrace();
-        }
-        return qtd;
-    }
+	/**
+	 * Inserir CBO 2002.
+	 * 
+	 * Recebe um objeto CBO2002Model e insere como registro no banco de dados.
+	 * 
+	 * @param CBO2002Model Cbo2002 Objeto a ser inserido.
+	 * @return int id Id do registro.
+	 */
+	public int create(CBO2002Model cbo2002) {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		Integer codigoCadastrado = (Integer) ConnectionHibernate.getSession().save(cbo2002);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return codigoCadastrado;
+	}
 
-    public Cbo2002Model retrieve(int codigoCbo) {
-        String sqlRetrieveId = "SELECT * FROM grupo2.cbo2002 WHERE codigo_cbo = " + codigoCbo;
-        try {
-            Statement stmt = conexao.criarConexao().createStatement();
-            ResultSet rs = stmt.executeQuery(sqlRetrieveId);
-            Cbo2002Model cbo2002 = new Cbo2002Model();
-            while (rs.next()) {
-                cbo2002.setDescricao(rs.getString(1));
-                cbo2002.setPercentualInsalubridade(rs.getDouble(2));
-                cbo2002.setPercentualPericulosidade(rs.getDouble(3));
+	/**
+	 * Buscar CBO 2002 por ID.
+	 * 
+	 * Metodo busca um objeto CBO 2002 no banco de dados, conforme codigo informado
+	 * no parametro.
+	 * 
+	 * @param int codigoCBO
+	 * @return CBO2002Model
+	 */
+	public CBO2002Model retrieve(int codigoCBO2002) {
+		CBO2002Model results = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCBO2002);
+		System.out.println(results.toString());
+		return results;
+	}
 
-                System.out.println(cbo2002.toString());
-            }
-            return cbo2002;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	/**
+	 * Atualizar um registro de CBO 2002.
+	 * 
+	 * Realiza a atualizacao de um registro CBO 2002, conforme o codigo informado
+	 * como parametro.
+	 * 
+	 * @param int          codigoCBO2002 Identificacao do registro que sera alterado
+	 * @param CBO2002Model cbo2002Alterado novo objeto com os dados alterados.
+	 * @return boolean
+	 */
+	public boolean update(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
+		CBO2002Model original = retrieve(codigoCBO2002);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setDescricao(cbo2002Alterado.getDescricao());
+		original.setPercentualInsalubridade(cbo2002Alterado.getPercentualInsalubridade());
+		original.setPercentualPericulosidade(cbo2002Alterado.getPercentualPericulosidade());
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
+	}
 
-    /**
-     * Retornar todos os objetos da tabela. Percorre a tabela cbo2002,
-     * salva todos as tuplas em um ArrayList e retorna o resultado salvo.
-     * @return results
-     */
-    public ArrayList<ArrayList<String>> readAll() {
-        ArrayList<ArrayList<String>> results =
-                new ArrayList<ArrayList<String>>();
-        String query = "SELECT * FROM cbo2002";
-        ResultSet rs;
-        try {
-            rs = ConnectionPostgres.executeQuery(query);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int totalColumns = rsmd.getColumnCount();
-            while (rs.next()) {
-                ArrayList<String> row = new ArrayList<String>();
-                for (int i = 0; i < totalColumns; i++) {
-                    row.add(rs.getString(i));
-                }
-                results.add(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return results;
-    }
+	/**
+	 * Deletar um registro de CBO 2002.
+	 * 
+	 * Metodo deleta um registro de CBO 2002 no banco de dados, conforme codigo
+	 * informado.
+	 * 
+	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
+	 * @return boolean
+	 */
+	public boolean delete(int codigoCBO2002) {
+		CBO2002Model entry = retrieve(codigoCBO2002);
 
-    /**
-     * Apagar um registro da tabela. Busca na tabela o registro
-     * que possui o Id id�ntico ao par�metro informado e apaga.
-     * @param index int
-     */
-    public void delete(int index) {
-        String query = "DELETE FROM cbo2002 WHERE id =" + index;
-        try {
-            ConnectionPostgres.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
+	}
 
-    /**
-     * Atualizar um registro na tabela. Busca na tabela o
-     * �ndice correspondente, na coluna informada e modifica
-     * o conte�do existente, pela String informada na vari�vel
-     * data.
-     * @param index int
-     * @param col String
-     * @param data String
-     */
-    public void update(int index, String col, String data) {
-        String query =
-                "UPDATE cbo2002 SET " + col + "=" + data + " WHERE id =" + index;
-        try {
-            ConnectionPostgres.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Buscar todos os registros de CBO 2002.
+	 * 
+	 * Metodo busca todos os registros de CBO 2002 que constam no banco de dados e
+	 * retorna em um ArrayList.
+	 * 
+	 * @return ArrayList CBO2002Model
+	 */
+	public ArrayList<CBO2002Model> getAll() {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
+		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
+		Query query = session.createQuery(criteria);
+		List<CBO2002Model> results = query.getResultList();
+		return new ArrayList<CBO2002Model>(results);
+	}
 
-    /**
-     * Deletar todo o conte�do da tabela. Ser� usado para
-     * fins de testes unit�rios.
-     * @throws SQLException
-     */
-    public void limparTabela() throws SQLException {
-        String limpar = "DELETE TABLE grupo2.cbo2002";
-        ConnectionPostgres.executeQuery(limpar);
-    }
+	/**
+	 * Deletar todos os registros de CBOs 2002 do banco de dados.
+	 * 
+	 * Metodo limpa a tabela cbo2002 no banco de dados.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cbo2002").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
+	}
+
 }

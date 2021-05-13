@@ -81,16 +81,14 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Buscar horas mes por ID.
 	 * 
-	 * Método busca o objeto horas mes no banco de dados conforme parametro
+	 * Metodo busca o objeto horas mes no banco de dados conforme parametro
 	 * informado.
 	 * 
 	 * @param int id
 	 * @return results retorna um objeto HorasMesModel
 	 */
 	public HorasMesModel retrieve(int id) {
-		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
-		System.out.println(results.toString());
-		return results;
+		return ConnectionHibernate.getSession().get(HorasMesModel.class, id);
 	}
 
 	/**
