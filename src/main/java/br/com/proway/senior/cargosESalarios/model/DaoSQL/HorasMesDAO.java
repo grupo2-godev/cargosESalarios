@@ -1,21 +1,16 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -81,16 +76,14 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Buscar horas mes por ID.
 	 * 
-	 * MÃ©todo busca o objeto horas mes no banco de dados conforme parametro
+	 * Metodo busca o objeto horas mes no banco de dados conforme parametro
 	 * informado.
 	 * 
 	 * @param int id
 	 * @return results retorna um objeto HorasMesModel
 	 */
 	public HorasMesModel retrieve(int id) {
-		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
-		System.out.println(results.toString());
-		return results;
+		return ConnectionHibernate.getSession().get(HorasMesModel.class, id);
 	}
 
 	/**
