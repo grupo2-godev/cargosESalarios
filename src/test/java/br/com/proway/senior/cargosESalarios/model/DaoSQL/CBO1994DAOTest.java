@@ -10,7 +10,8 @@ import org.junit.Test;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
-import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 public class CBO1994DAOTest {
 
@@ -18,7 +19,7 @@ public class CBO1994DAOTest {
 	String descricao = "descricao";
 	Double percentual_insalubridade = 0.3;
 	Double percentual_periculosidade = 0.2;
-	CBO1994DAO cbo1994Sql = CBO1994DAO.getInstance(ConnectionHibernate.getSession());	
+	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());	
 	FactoryConexao conexao = new FactoryPostgres();
 
 	@Test
@@ -29,29 +30,34 @@ public class CBO1994DAOTest {
 	}			
 	
 	@Test
-	public void testCreate() {
-		Cbo1994Model cbo1994 = new Cbo1994Model(codigo_cbo, descricao, percentual_insalubridade, percentual_periculosidade);
-		cbo1994Sql.create(cbo1994);
-		assertEquals(1, cbo1994Sql.getAll().size());		
+	public void testCreateCBO1994() {
+		try {
+			CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4);
+			Integer codigo_CBO1994 = CBO1994Dao.create(CBO1994);
+			Object CBO1994Consultado = ConnectionHibernate.getSession().get(CBO1994Model.class, codigo_CBO1994);
+			assertEquals(codigo_CBO1994, ((CBO1994Model) CBO1994Consultado).getCodigo_cbo());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 	}
 
 	@Test
-	public void testRetrieve() {
+	public void testRetrieveCBO1994() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testUpdate() {
+	public void testUpdateCBO1994() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testDelete() {
+	public void testDeleteCBO1994() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetAll() {
+	public void testGetAllCBO1994() {
 		fail("Not yet implemented");
 	}
 
