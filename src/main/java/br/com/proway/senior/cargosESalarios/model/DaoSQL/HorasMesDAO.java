@@ -3,8 +3,15 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
@@ -63,7 +70,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(horasMes);
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(horasMes);
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return idCadastrado;
 	}
@@ -101,23 +108,48 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	}
 
 	public HorasMesModel retrieve(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
+		
+		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
+		Expression idSelector = (Expression) root.get("idhorasmes");
+		criteria.select(root).where(criteriaBuilder.equal(idSelector, id));
+
+		Query<HorasMesModel> query = session.createQuery(criteria);
+		HorasMesModel results = query.getSingleResult();
+		return (results);
 	}
 
-	public boolean update(int id, HorasMesModel horasMes) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(int id, HorasMesModel objetoAlterado) {
+		HorasMesModel original = retrieve(id);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setQuantidade(objetoAlterado.getQuantidade());
+		ConnectionHibernate.getSession().update(original);
+		return true;
 	}
 
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		HorasMesModel entry = retrieve(id);
+		
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
-	public ArrayList getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<HorasMesModel> getAll() {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
+
+		Query<HorasMesModel> query = session.createQuery(criteria);
+		List<HorasMesModel> results = query.getResultList();
+		return new ArrayList<HorasMesModel>(results);
 	}
 
 }
