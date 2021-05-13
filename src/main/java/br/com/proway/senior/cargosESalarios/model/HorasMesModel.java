@@ -14,6 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity
+@Table(name = "horas_mes")
 public class HorasMesModel {
 	
 	@Id
@@ -26,6 +27,15 @@ public class HorasMesModel {
 
 	public HorasMesModel(Integer idHorasMes, Double quantidade) {
 		this.idHorasMes = idHorasMes;
+		this.quantidade = quantidade;
+	}
+	
+	/**
+	 * Construtor secundário sem a ID, que é auto
+	 * incrementada no banco de dados.
+	 * @param quantidade
+	 */
+	public HorasMesModel(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 

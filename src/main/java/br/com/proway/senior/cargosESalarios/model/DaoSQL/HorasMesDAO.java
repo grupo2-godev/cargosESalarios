@@ -108,17 +108,9 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	}
 
 	public HorasMesModel retrieve(int id) {
-		Session session = ConnectionHibernate.getSession();
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
-		
-		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
-		Expression idSelector = (Expression) root.get("idhorasmes");
-		criteria.select(root).where(criteriaBuilder.equal(idSelector, id));
-
-		Query<HorasMesModel> query = session.createQuery(criteria);
-		HorasMesModel results = query.getSingleResult();
-		return (results);
+		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
+		System.out.println(results.toString());
+		return results;
 	}
 
 	public boolean update(int id, HorasMesModel objetoAlterado) {
@@ -128,6 +120,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		}
 		original.setQuantidade(objetoAlterado.getQuantidade());
 		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
 		return true;
 	}
 
@@ -146,8 +139,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
-
-		Query<HorasMesModel> query = session.createQuery(criteria);
+		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
+		Query query = session.createQuery(criteria);
 		List<HorasMesModel> results = query.getResultList();
 		return new ArrayList<HorasMesModel>(results);
 	}
