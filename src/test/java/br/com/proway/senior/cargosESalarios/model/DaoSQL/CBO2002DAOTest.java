@@ -16,7 +16,7 @@ import org.junit.Before;
  * 
  * Classe que testa os métodos da classe CBO2002DAO.
  * 
- * @author @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  *
  */
 public class CBO2002DAOTest {
