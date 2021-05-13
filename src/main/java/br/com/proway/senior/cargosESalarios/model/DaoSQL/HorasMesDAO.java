@@ -88,9 +88,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return results retorna um objeto HorasMesModel
 	 */
 	public HorasMesModel retrieve(int id) {
-		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
-		System.out.println(results.toString());
-		return results;
+		return ConnectionHibernate.getSession().get(HorasMesModel.class, id);
 	}
 
 	/**
