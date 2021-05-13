@@ -37,7 +37,7 @@ public class GrauInstrucaoDAOTest {
 	}
 
 	@Test
-	void testUpdate() {
+	public void testUpdate() {
 		GrauInstrucaoModel grauInstrucaoAntigo = new GrauInstrucaoModel("Tecnologia Antigo");
 		GrauInstrucaoModel grauInstrucaoNovo = new GrauInstrucaoModel("Tecnologia Novo");
 		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucaoAntigo);

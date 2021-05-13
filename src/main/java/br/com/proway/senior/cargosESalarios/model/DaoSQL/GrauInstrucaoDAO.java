@@ -75,29 +75,39 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	}
 
 	/**
-	 * busca o Grau de Instrucao pelo nome
+	 * busca o Grau de Instrucao pelo nome.
 	 * 
 	 * Verifica todos os graus de instrucoes e se o nome dele for igual ao passado
-	 * como parametro, retorna o objeto
+	 * como parametro, retorna o objeto.
 	 * 
-	 * @param nome Do Grau de instrucao
+	 * @param nome String Nome do Grau de Instrucao
 	 */
-	public GrauInstrucaoModel retrieve(String nome) {
-		return null;
-	}
+//	public GrauInstrucaoModel retrieve(String nome) {
+//		return null;
+//	}
 
 	/***
-	 * Atualizar GrauInstrucao.
+	 * Atualizar um objeto do tipo {@link GrauInstrucaoModel}.
 	 * 
-	 * Recebe um objeto GrauInstrucao, procura dentro da lista de niveis existentes
-	 * baseados no ID do id informado ao encontrar atribui um objeto GrauInstrucao
-	 * no objeto com ID encontrato.
+	 * Recebe um objeto do tipo {@link GrauInstrucaoModel} que sera a atualizacao do
+	 * objeto no banco de dados que possui o id recebido no parametro.
 	 * 
-	 * @param GrauInstrucao
-	 * @return boolean
+	 * @param grauInstrucao GrauInstrucaoModel Novo objeto que sera inserido no
+	 *                      banco de dados.
+	 * @param id            int Id do objeto a ser atualizado.
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
 	 */
-	public boolean update(int id, GrauInstrucaoModel gi) {
-		return false;
+	public boolean update(int id, GrauInstrucaoModel grauInstrucaoNovo) {
+		GrauInstrucaoModel grauInstrucao = retrieve(id);
+		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		grauInstrucao.setNome(grauInstrucaoNovo.getNome());
+		ConnectionHibernate.getSession().update(grauInstrucao);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
