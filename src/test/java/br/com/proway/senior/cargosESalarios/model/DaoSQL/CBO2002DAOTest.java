@@ -34,6 +34,6 @@ public class CBO2002DAOTest {
     }
 
     @Test
-    public void limparTabela() {
+    public void deleteAll() {
     }
 }
