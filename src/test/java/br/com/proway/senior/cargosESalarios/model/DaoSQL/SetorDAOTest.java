@@ -62,7 +62,11 @@ public class SetorDAOTest {
 
 	@Test
 	public void testDeletarSetorPorID() {
-		
+		int size = setorDAO.getAll().size();
+		SetorModel novoSetor = new SetorModel("Desenvolvimento I", 3);
+		int idCriada = setorDAO.create(novoSetor);
+		setorDAO.delete(idCriada);
+		assertEquals(size, setorDAO.getAll().size());
 	}
 	
 	@Test
