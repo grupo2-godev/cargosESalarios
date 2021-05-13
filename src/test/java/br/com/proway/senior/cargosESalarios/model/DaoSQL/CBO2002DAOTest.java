@@ -52,12 +52,12 @@ public class CBO2002DAOTest {
     }
     
     @Test
-    public void readAll() {
-    }
-
-    @Test
     public void delete() {
     }
+    
+    @Test
+    public void readAll() {
+    }  
 
     @Test
     public void deleteAll() {

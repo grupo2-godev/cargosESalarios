@@ -105,7 +105,16 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		return true;
 	}
 
-	public boolean delete(int id) {
+	/**
+	 * Deletar um registro de CBO 2002.
+	 * 
+	 * Metodo deleta um registro de CBO 2002 no banco de dados, conforme
+	 * codigo informado.
+	 * 
+	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
+	 * @return boolean
+	 */
+	public boolean delete(int codigoCBO2002) {
 		// TODO Auto-generated method stub
 		return false;
 	}
