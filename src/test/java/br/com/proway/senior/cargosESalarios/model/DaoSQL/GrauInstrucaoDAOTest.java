@@ -1,6 +1,7 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -21,35 +22,20 @@ public class GrauInstrucaoDAOTest {
 
 	@Test
 	public void testCreate() {
-		try {
-			GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino Medio");
-			Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucao);
-			Object grauInstrucaoConsultado = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class,
-					idObjetoCadastrado);
-			assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino Medio");
+		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucao);
+		Object grauInstrucaoConsultado = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class,
+				idObjetoCadastrado);
+		assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
 	}
 
-//	@Ignore 
-//	void testCreateNull() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio");
-//		dao.create(gi1);
-//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino M�dio");
-//		assertNull(dao.create(gi2));
-//	}
-//	
-//	@Ignore
-//	void testRetriveId() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi1);
-//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
-//		dao.create(gi2);
-//		assertEquals(gi1, dao.retrieve(0));
-//		assertEquals(gi2, dao.retrieve(1));	
-//	}
-//	
+	@Test
+	void testRetriveId() {
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
+		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.retrieve(grauInstrucaoDAO.create(grauInstrucao));
+		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
+	}
+	
 //	@Ignore
 //	void testRetriveNome() {
 //		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio Incompleto");
