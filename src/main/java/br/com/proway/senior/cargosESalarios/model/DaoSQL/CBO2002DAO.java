@@ -149,9 +149,20 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		return new ArrayList<CBO2002Model>(results);
 	}
 
+	/**
+	 * Deletar todos os registros de CBOs 2002 do banco de dados.
+	 * 
+	 * Metodo limpa a tabela cbo2002 no banco de dados.
+	 * 
+	 * @return boolean
+	 */
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cbo2002").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
 	}
 
 
