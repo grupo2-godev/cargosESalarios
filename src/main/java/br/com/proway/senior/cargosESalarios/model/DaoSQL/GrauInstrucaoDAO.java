@@ -4,8 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
@@ -122,7 +128,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 */
 	public boolean delete(int id) {
 		GrauInstrucaoModel grauIntrucao = retrieve(id);
-		
+
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
@@ -132,14 +138,23 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	}
 
 	/**
-	 * Busca todos os graus de instrucao
+	 * Retorna uma lista de objetos do tipo {@link GrauInstrucaoModel}.
 	 * 
-	 * @return lista com todos os graus de instrucao
+	 * Busca no banco de dados todos os objetos do tipo {@link GrauInstrucaoModel} e
+	 * nos retorna em um ArrayList.
+	 * 
+	 * @return listaDeGrauDeInstrucao ArrayList<GrauInstrucaoModel> Lista com objetos do tipo {@link GrauInstrucaoModel}.
 	 */
-//	public ArrayList<InterfaceModel> getAll() {
-//		return null;
-//	}
-//	
+	public ArrayList<GrauInstrucaoModel> getAll() {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
+		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
+		Query query = session.createQuery(criteria);
+		List<GrauInstrucaoModel> listaDeGrauDeInstrucao = query.getResultList();
+		return new ArrayList<GrauInstrucaoModel>(listaDeGrauDeInstrucao);
+	}
+
 	/**
 	 * Limpar ArrayList de Graus de instrucao
 	 * 
@@ -149,11 +164,6 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return void
 	 */
 	public void limparArray() {
-	}
-
-	public ArrayList<GrauInstrucaoModel> getAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public boolean deleteAll() {
