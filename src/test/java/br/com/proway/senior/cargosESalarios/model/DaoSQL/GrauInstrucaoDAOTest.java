@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,8 +45,8 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
 		grauInstrucaoDAO.create(grauInstrucao);
 		assertEquals(1, grauInstrucaoDAO.getAll().size());
-		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.retrieveNameCountains("comple");
-		assertEquals(1, lista);
+		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.retrieveNameCountains("Comple");
+		assertEquals(1, lista.size());
 	}
 
 	@Test
@@ -89,8 +90,15 @@ public class GrauInstrucaoDAOTest {
 	}
 	
 	@Before
-	public void deleteAll() {
+	public void beforeAll() {
 		grauInstrucaoDAO.deleteAll();
 	}
+	
+	@After
+	public void afterAll() {
+		grauInstrucaoDAO.deleteAll();
+	}
+	
+	
 
 }

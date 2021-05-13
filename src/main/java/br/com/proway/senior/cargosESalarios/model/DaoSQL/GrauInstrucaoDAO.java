@@ -99,9 +99,9 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
 		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
 		
-		Expression nome = root.get("nome");
+		Expression nome = (Expression) root.get("instrucao");
 		criteria.select(root).where(criteriaBuilder.like(nome, "%" + nomeASerConsultado + "%"));
-		Query query = session.createQuery(criteria);
+		Query<GrauInstrucaoModel> query = session.createQuery(criteria);
 		List<GrauInstrucaoModel> lista = query.getResultList();
 		return (ArrayList<GrauInstrucaoModel>)lista;
 		
