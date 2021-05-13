@@ -19,15 +19,24 @@ import static org.junit.Assert.*;
  */
 public class CBO2002DAOTest {
         
-	CBO2002DAO cbo2002 = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
 	
     @Test
     public void testInserirCBO2002() {
-        CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de linha de produção", 0.0, 0.2);
+        CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de "
+        		+ "linha de produção", 0.0, 0.2);
+        Integer codigoCboCadastrado = cbo2002DAO.create(novoCBO);
+        Object CBOConsultado = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCboCadastrado);
+        assertEquals(codigoCboCadastrado, ((CBO2002Model) CBOConsultado).getCodigoCBO2002());   
     }
 
     @Test
-    public void readById() {
+    public void testBuscarCBO2002PorID() {
+    	CBO2002Model novoCBO = new CBO2002Model(765010, "Padronista de chapéus", 0.0, 0.0);
+    	CBO2002Model cboRetornado = cbo2002DAO.retrieve(cbo2002DAO.create(novoCBO));
+    	assertEquals(novoCBO.getDescricao(), cboRetornado.getDescricao());
+    	assertEquals(novoCBO.getPercentualInsalubridade(), cboRetornado.getPercentualInsalubridade());
+    	assertEquals(novoCBO.getPercentualPericulosidade(), cboRetornado.getPercentualPericulosidade());
     }
 
     @Test

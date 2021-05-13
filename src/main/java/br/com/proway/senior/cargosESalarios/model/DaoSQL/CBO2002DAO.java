@@ -62,9 +62,9 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(cbo2002);
+		Integer codigoCadastrado = (Integer) ConnectionHibernate.getSession().save(cbo2002);
 		ConnectionHibernate.getSession().getTransaction().commit();
-		return idCadastrado;
+		return codigoCadastrado;
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param int codigoCBO
 	 * @return CBO2002Model
 	 */
-	public CBO2002Model retrieve(int codigoCBO) {
-		CBO2002Model results = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCBO);
+	public CBO2002Model retrieve(int codigoCBO2002) {
+		CBO2002Model results = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCBO2002);
 		System.out.println(results.toString());
 		return results;
 	}

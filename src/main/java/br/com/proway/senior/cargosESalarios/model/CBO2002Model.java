@@ -22,7 +22,7 @@ public class CBO2002Model {
 	 * codigo do CBO sera a PrimaryKey.
 	 */
 	@Id
-	private Integer codigoId;
+	private Integer codigoCBO2002;
 	private String descricao;
 	private Double percentualInsalubridade;
 	private Double percentualPericulosidade;
@@ -30,20 +30,20 @@ public class CBO2002Model {
 	public CBO2002Model() {
 	}
 
-	public CBO2002Model(Integer codigoId, String descricao, Double percentualInsalubridade,
+	public CBO2002Model(Integer codigoCBO2002, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
-		this.codigoId = codigoId;
+		this.codigoCBO2002 = codigoCBO2002;
 		this.descricao = descricao;
 		this.percentualInsalubridade = percentualInsalubridade;
 		this.percentualPericulosidade = percentualPericulosidade;
 	}
 
-	public Integer getCodigoId() {
-		return codigoId;
+	public Integer getCodigoCBO2002() {
+		return codigoCBO2002;
 	}
 
-	public void setCodigoId(Integer codigoId) {
-		this.codigoId = codigoId;
+	public void setCodigoId(Integer codigoCBO2002) {
+		this.codigoCBO2002 = codigoCBO2002;
 	}
 
 	public String getDescricao() {
@@ -72,7 +72,7 @@ public class CBO2002Model {
 
 	@Override
 	public String toString() {
-		return "Cbo2002Model [codigoId=" + codigoId + ", descricao=" + descricao + ", percentualInsalubridade="
+		return "Cbo2002Model [codigoId=" + codigoCBO2002 + ", descricao=" + descricao + ", percentualInsalubridade="
 				+ percentualInsalubridade + ", percentualPericulosidade=" + percentualPericulosidade + "]";
 	}
 
