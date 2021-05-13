@@ -53,8 +53,11 @@ public class CBO2002DAOTest {
     
     @Test
     public void delete() {
+    	int size = cbo2002DAO.getAll().size();
     	CBO2002Model novoCBO = new CBO2002Model(351415, "Tabelião substituto", 0.0, 0.0);
-    	
+    	int codigoCbo = cbo2002DAO.create(novoCBO);
+    	cbo2002DAO.delete(codigoCbo);
+    	assertEquals(size, cbo2002DAO.getAll().size());
     }
     
     @Test
