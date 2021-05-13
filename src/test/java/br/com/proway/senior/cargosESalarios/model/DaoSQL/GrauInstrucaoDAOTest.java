@@ -1,44 +1,37 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 
 /**
- * Classe dependente da finaliza��o do GrauInstrucaoDao.
+ * Testes referentes aos métodos da classe {@link GrauInstrucaoDAO}.
+ * 
+ * * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ *
  */
+public class GrauInstrucaoDAOTest {
 
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConnectionHibernate.getSession());
 
-class GrauInstrucaoDAOTest {
-	
-	ConnectionPostgres conexao = new ConnectionPostgres();
-//	GrauInstrucaoDao giSql = new GrauInstrucaoDao(conexao);
-//	
-//	@Before
-//	void beforeAllTest() {
-//	}
-//	
-//	@Test 
-//	void testCreate() throws SQLException {
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino Medio");
-//		giSql.create(gi);
-//		String sql = "SELECT COUNT(*) FROM grau_de_instrucao";
-//		ResultSet rs = conexao.executeQuery(sql);
-//		rs.next();
-//		rs.getInt(1);
-//		assertEquals(1, rs.getInt(1));
-//	}
-//	
+	@Test
+	public void testCreate() {
+		try {
+			GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino Medio");
+			Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucao);
+			Object grauInstrucaoConsultado = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class,
+					idObjetoCadastrado);
+			assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+
 //	@Ignore 
 //	void testCreateNull() {
 //		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio");
@@ -107,5 +100,5 @@ class GrauInstrucaoDAOTest {
 //		assertTrue(dao.delete(1));
 //		assertEquals(1, db.size());
 //	}
-	
+
 }

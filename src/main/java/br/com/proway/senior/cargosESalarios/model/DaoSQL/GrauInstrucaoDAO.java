@@ -5,80 +5,91 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
+
 /**
- * Classe de do grau de instru��o que implementa um crud e recebe o 
- * modelo de grau de instru��o. Criando uma variavel de conex�o para
- * criar a conex�o postgres e abrindo o pstm para a query
+ * Classe grau de instrucao que implementa a {@link InterfaceDAOCRUD} para
+ * interação com o banco de dados.
  * 
- * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i>
- * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i>
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author David Hildebrandt <i>david.hildebrandt@senior.com.br</i> - Sprint 4
+ * @author Sabrina Schmidt <i>sabrina.schmidt@senior.com.br</i> - Sprint 4
  */
 
 public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
+	private static GrauInstrucaoDAO instance;
+	private Session session;
 
-	private  Connection db;
-	
-	public GrauInstrucaoDAO(Connection ps){
-		this.db = ps;
-	}
-	
 	/**
-	 * Cadastra um novo grau de instrucao
+	 * Singleton da classe GrauInstrucaoDAO
 	 * 
-	 * Cria o novo id para o grau de instrucao e adiciona ele
-	 * como um novo grau de instrucao no banco
-	 * 
-	 * @param newGI
-	 * @return id do grau de instrucao ou null caso nao de para criar
+	 * @param session Session
+	 * @return instance GrauInstrucaoDAO
 	 */
-	public int create(GrauInstrucaoModel newGI) {
-		String sql1 = "INSERT INTO grupo2.grau_de_instrucao (descricao) VALUES (?)";
-		try {
-			PreparedStatement pstmt = db.prepareStatement(sql1);
-			pstmt.setString(1, newGI.getNome());
-			pstmt.execute();
-			System.out.println("Grau Instrucao");
-		} catch (SQLException e) {
-			System.out.println("erro!!!!!!!!!!!!!!!!!!!!!!!!");
-			e.printStackTrace();
-		}
+	public static GrauInstrucaoDAO getInstance(Session session) {
+		if (instance == null)
+			instance = new GrauInstrucaoDAO(session);
+		return instance;
+	}
+
+	/**
+	 * Construtor da classe GrauInstrucaoDAO, utilizado no Singleton.
+	 * 
+	 * @param session Session
+	 */
+	private GrauInstrucaoDAO(Session session) {
+		this.session = session;
+	}
+
+	/**
+	 * Cadastra um novo grau de instrucao.
+	 * 
+	 * @param grauInstrucao
+	 * @return id do objetoCriado
+	 */
+	public int create(GrauInstrucaoModel grauInstrucao) {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive())
+			ConnectionHibernate.getSession().beginTransaction();
 		
-		return Integer.getInteger(sql1);
-		
-	};
-	
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(grauInstrucao);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return idCadastrado;
+	}
+
 	/**
 	 * busca o Grau de Instrucao pelo id
 	 * 
-	 * Verifica todos os graus de instrucoes e se o id dele for
-	 * igual ao passado como parametro, retorna o objeto
+	 * Verifica todos os graus de instrucoes e se o id dele for igual ao passado
+	 * como parametro, retorna o objeto
 	 * 
 	 * @param id Do Grau de instrucao
 	 */
 	public GrauInstrucaoModel retrieve(int id) {
 		return null;
 	}
-	
+
 	/**
 	 * busca o Grau de Instrucao pelo nome
 	 * 
-	 * Verifica todos os graus de instrucoes e se o nome dele for
-	 * igual ao passado como parametro, retorna o objeto
+	 * Verifica todos os graus de instrucoes e se o nome dele for igual ao passado
+	 * como parametro, retorna o objeto
 	 * 
 	 * @param nome Do Grau de instrucao
 	 */
 	public GrauInstrucaoModel retrieve(String nome) {
 		return null;
 	}
-	
+
 	/***
 	 * Atualizar GrauInstrucao.
 	 * 
-	 * Recebe um objeto GrauInstrucao, procura dentro da lista de niveis existentes baseados
-	 * no ID do id informado ao encontrar atribui um objeto GrauInstrucao no objeto com
-	 * ID encontrato.
+	 * Recebe um objeto GrauInstrucao, procura dentro da lista de niveis existentes
+	 * baseados no ID do id informado ao encontrar atribui um objeto GrauInstrucao
+	 * no objeto com ID encontrato.
 	 * 
 	 * @param GrauInstrucao
 	 * @return boolean
@@ -86,12 +97,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	public boolean update(int id, GrauInstrucaoModel gi) {
 		return false;
 	}
-	
+
 	/**
 	 * Deleta um grau de instrucao
 	 * 
-	 * Deleta o respectivo Grau de Instrucao passado como parametro
-	 * o seu id
+	 * Deleta o respectivo Grau de Instrucao passado como parametro o seu id
 	 * 
 	 * @param id do Grau desejado
 	 * @return true/false caso consiga excluir
@@ -99,7 +109,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	public boolean delete(int id) {
 		return false;
 	}
-	
+
 	/**
 	 * Busca todos os graus de instrucao
 	 * 
@@ -112,8 +122,8 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	/**
 	 * Limpar ArrayList de Graus de instrucao
 	 * 
-	 * M�todo realiza a limpeza do ArrayList de garuInstrucao
-	 * na classe Dados.	Utilizado para os testes unit�rios. 
+	 * M�todo realiza a limpeza do ArrayList de garuInstrucao na classe Dados.
+	 * Utilizado para os testes unit�rios.
 	 *
 	 * @return void
 	 */
@@ -124,5 +134,10 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	public boolean deleteAll() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
