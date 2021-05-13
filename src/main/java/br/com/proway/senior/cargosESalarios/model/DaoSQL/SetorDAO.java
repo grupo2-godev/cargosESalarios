@@ -134,7 +134,14 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return boolean
 	 */
 	public boolean delete(int idSetor) {
+		SetorModel entry = retrieve(idSetor);
 
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
@@ -146,7 +153,13 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return ArrayList SetorModel
 	 */
 	public ArrayList<SetorModel> getAll() {
-
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
+		Root<SetorModel> root = criteria.from(SetorModel.class);
+		Query query = session.createQuery(criteria);
+		List<SetorModel> results = query.getResultList();
+		return new ArrayList<SetorModel>(results);
 	}
 
 	/**

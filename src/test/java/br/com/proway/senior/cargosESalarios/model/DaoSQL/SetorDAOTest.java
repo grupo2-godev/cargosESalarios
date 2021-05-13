@@ -59,18 +59,19 @@ public class SetorDAOTest {
 		assertEquals(setorAlterado.getIdPermissao(), atualizado.getIdPermissao());
 	}
 
-	@Test
-	public void testRetrieveSqlNome() {
-	
-	}
 
 	@Test
-	public void testDeleteSql() {
+	public void testDeletarSetorPorID() {
+		
+	}
+	
+	@Test
+	public void testDeletarTodosSetores() {
 		
 	}
 
 	@Test
-	public void testGetAll() {
+	public void testBuscarTodosSetores() {
 	
 	}
 
