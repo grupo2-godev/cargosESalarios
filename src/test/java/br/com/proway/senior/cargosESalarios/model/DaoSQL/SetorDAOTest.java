@@ -8,76 +8,56 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
- * Classes de testes para o SetorDaoSql.
+ * Classes de testes para o SetorDAO.
  * 
- * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
 
 public class SetorDAOTest {
-	
-	String nomeSetor1 = "ERP I";
-	Integer idPermissao1 = 3;
-	SetorModel setor1 = new SetorModel(nomeSetor1, idPermissao1);
-	String nomePosto2 = "Gest�o de Pessoas";
-	Integer idPermissao2 = 4;
-	SetorModel setor2 = new SetorModel(nomePosto2, idPermissao2);
-	SetorDAO setorSQL = new SetorDAO();
-	ConnectionPostgres conexao = new ConnectionPostgres();
-	
+
+	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
+
 	@Test
 	public void testIserirSetor() throws SQLException {
-		assertEquals(1, setorSQL.create(setor1));
-	}
-	
-	@Test
-	public void testRetrieveSqlId() {
-		setorSQL.create(setor1);
-		setorSQL.create(setor2);
-		SetorModel setorRecuperado = new SetorModel();
-		setorRecuperado = setorSQL.retrieve(1);
-		assertEquals(nomeSetor1, setorRecuperado.getNomeSetor());
-	}
-	
-	@Test
-	public void testUpdateSql() {
-		setorSQL.create(setor1);
-		setorSQL.create(setor2);
-		assertTrue(setorSQL.update(2, setor2));	
-	}
-	
-	@Test
-	public void testRetrieveSqlNome() {
-		setorSQL.create(setor1);
-		setorSQL.create(setor2);
-		SetorModel setor = new SetorModel();
-		setor = setorSQL.retrieve("Gest�o de Pessoas");
-		assertEquals(nomePosto2, setor.getNomeSetor());
-	}
-	
-	@Test
-	public void testDeleteSql() {
-		setorSQL.create(setor1);
-		setorSQL.create(setor2);
-		assertTrue(setorSQL.delete(1));
-	}
-	
-	@Test
-	public void testGetAll() {
-		setorSQL.create(setor1);
-		setorSQL.create(setor2);
-		ArrayList<SetorModel> listaSetores= new ArrayList<SetorModel>();
-		listaSetores = setorSQL.getAll();
-		assertFalse(listaSetores.isEmpty());
-		assertEquals(2, listaSetores.size());
+		SetorModel novoSetor = new SetorModel("Financeiro", 15);
+		Integer idSetorCadastrado = setorDAO.create(novoSetor);
+		Object setorConsultado = ConnectionHibernate.getSession().get(SetorModel.class, idSetorCadastrado);
+		assertEquals(idSetorCadastrado, ((SetorModel) setorConsultado).getId());
 	}
 
-	@After
-	public void limparTabela() throws SQLException {
-		setorSQL.limparTabela();
+	@Test
+	public void testRetrieveSqlId() {
+	
 	}
+
+	@Test
+	public void testUpdateSql() {
+		
+	}
+
+	@Test
+	public void testRetrieveSqlNome() {
+	
+	}
+
+	@Test
+	public void testDeleteSql() {
+		
+	}
+
+	@Test
+	public void testGetAll() {
+	
+	}
+
+//	@After
+//	public void limparTabela() throws SQLException {
+//		
+//	}
 }

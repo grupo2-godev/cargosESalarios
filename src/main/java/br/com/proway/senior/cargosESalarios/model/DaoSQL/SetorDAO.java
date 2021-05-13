@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 

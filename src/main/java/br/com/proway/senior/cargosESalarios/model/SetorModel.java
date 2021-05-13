@@ -27,8 +27,6 @@ public class SetorModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idSetor;
 	private String nomeSetor;
-	
-	@ManyToMany
 	private Integer idPermissao;
 
 	/**
