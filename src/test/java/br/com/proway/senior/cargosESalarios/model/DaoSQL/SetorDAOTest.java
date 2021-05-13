@@ -32,8 +32,11 @@ public class SetorDAOTest {
 	}
 
 	@Test
-	public void testRetrieveSqlId() {
-	
+	public void testBuscarSetorPorID() {
+		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
+		SetorModel setorRetornado = setorDAO.retrieve(setorDAO.create(novoSetor));
+		assertEquals(novoSetor.getNomeSetor(), setorRetornado.getNomeSetor());
+		assertEquals(novoSetor.getIdPermissao(), setorRetornado.getIdPermissao());
 	}
 
 	@Test
