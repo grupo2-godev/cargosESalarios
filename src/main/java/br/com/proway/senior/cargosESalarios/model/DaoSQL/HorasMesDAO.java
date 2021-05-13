@@ -39,8 +39,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Singleton da classe HorasMesDAO.
 	 * 
-	 * @param session
-	 * @return
+	 * @param Session session
+	 * @return HorasMesDAO instance
 	 */
 	public static HorasMesDAO getInstance(Session session) {
 		if (instance == null)
@@ -51,7 +51,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Construtor da classe HorasMesDAO, utilizado no Singleton.
 	 * 
-	 * @param session
+	 * @param Session session
 	 */
 	private HorasMesDAO(Session session) {
 		this.session = session;
@@ -76,27 +76,9 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	}
 
 	/**
-	 * Quantidade de horas registradas
+	 * Deletar todos os registros do banco de dados.
 	 * 
-	 * � feita uma consulta SQL para contar a quantidade de linhas que h� na tabela
-	 * horas_mes, a qual retornar� a quantidade de horas que foram trabalhadas por
-	 * m�s
-	 * 
-	 * @return qtdBD int
-	 * @throws SQLException
-	 */
-	public int getAmountOfLines() throws SQLException {
-		String qtd = "SELECT COUNT(id_horas_mes) as quantidade FROM grupo2.horas_mes";
-		ResultSet colunas = ConnectionPostgres.executeQuery(qtd);
-		colunas.next();
-		int qtdBD = colunas.getInt("quantidade");
-		return qtdBD;
-	}
-
-	/**
-	 * Apaga tudo
-	 * 
-	 * � feito um comando para apagar todos os registros no banco de dados
+	 * Comando limpa a tabela de horas mes no banco de dados.
 	 */
 	public void deleteAll() {
 		String query = "DELETE FROM grupo2.horas_mes";
@@ -107,12 +89,31 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		}
 	}
 
+	/**
+	 * Buscar horas mes por ID.
+	 * 
+	 * Método busca o objeto horas mes no banco de dados conforme parametro
+	 * informado.
+	 * 
+	 * @param int id
+	 * @return results retorna um objeto HorasMesModel
+	 */
 	public HorasMesModel retrieve(int id) {
 		HorasMesModel results = ConnectionHibernate.getSession().get(HorasMesModel.class, id);
 		System.out.println(results.toString());
 		return results;
 	}
 
+	/**
+	 * Atualizar um registro de horas mes.
+	 * 
+	 * Realiza a atualizacao de um registro HorasMesModel, conforme a Id informada
+	 * como parametro.
+	 * 
+	 * @param int           id Identificacao do registro que será alterado
+	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
+	 * @return boolean
+	 */
 	public boolean update(int id, HorasMesModel objetoAlterado) {
 		HorasMesModel original = retrieve(id);
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
@@ -124,9 +125,18 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		return true;
 	}
 
+	/**
+	 * Deletar um registro de horas mes.
+	 * 
+	 * Método deleta um registro de horas mes no banco de dados, conforme Id
+	 * informada.
+	 * 
+	 * @param int id Identificao do registro a ser deletado
+	 * @return boolean
+	 */
 	public boolean delete(int id) {
 		HorasMesModel entry = retrieve(id);
-		
+
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
@@ -135,6 +145,14 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		return true;
 	}
 
+	/**
+	 * Buscar todos os registros de horas mes.
+	 * 
+	 * Método busca todos os registros de horas mes que constam no banco de dados e
+	 * retorna em um ArrayList.
+	 * 
+	 * @return ArrayList HorasMesModel
+	 */
 	public ArrayList<HorasMesModel> getAll() {
 		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();

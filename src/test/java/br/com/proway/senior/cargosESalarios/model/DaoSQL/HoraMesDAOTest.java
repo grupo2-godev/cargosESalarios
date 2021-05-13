@@ -8,7 +8,17 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-
+/**
+ * Classe HoraMesDAOTest
+ * 
+ * Classe que realiza os testes da classe HoraMesDAO.
+ * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
+ */
 public class HoraMesDAOTest {
 
 	HorasMesDAO horasMesDao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
@@ -23,11 +33,6 @@ public class HoraMesDAOTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}
-	
-	@Test
-	public void testBuscarTodosHorarios() {
-		
 	}
 	
 	@Test
@@ -57,7 +62,7 @@ public class HoraMesDAOTest {
 	}
 	
 	@Test
-	public void testBuscarTodos() {
+	public void testBuscarTodosHorarios() {
 		assertFalse(horasMesDao.getAll().isEmpty());
 	}
 	
