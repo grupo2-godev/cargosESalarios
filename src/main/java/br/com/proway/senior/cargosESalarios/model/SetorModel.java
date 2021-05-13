@@ -1,13 +1,29 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
- * Classe de modelo Setor.
+ * Classe SetorModel
+ * 
+ * Cria os atributos necessarios para um setor, que sera vinculado ao um
+ * PostodeTrabalhoModel {@link PostoDeTrabalhoModel} e recebe uma chave
+ * estrangeira para identificar a permissao de acesso de um usuario para acessar
+ * as informacoes da tabela setor. os demais m�dulos.
+ * 
  * @author Sprint 1
- * @version Sprint3:
- * 	- Altera��o dos tipo primitivo int para Integer.
- * 	- Adi��o do hash e Equals.
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
+
+@Entity
+@Table(name = "setor")
 public class SetorModel {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idSetor;
 	private String nomeSetor;
 	private Integer idPermissao;
@@ -21,51 +37,8 @@ public class SetorModel {
 		this.nomeSetor = nomeSetor;
 		this.idPermissao = idPermissao;
 	}
-	
+
 	public SetorModel() {
-	}
-
-	@Override
-	public String toString() {
-		return "Setor [idSetor=" + idSetor + ", nomeSetor=" + nomeSetor
-				+ ", idPermissao=" + idPermissao + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idPermissao == null) ? 0 : idPermissao.hashCode());
-		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
-		result = prime * result + ((nomeSetor == null) ? 0 : nomeSetor.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SetorModel other = (SetorModel) obj;
-		if (idPermissao == null) {
-			if (other.idPermissao != null)
-				return false;
-		} else if (!idPermissao.equals(other.idPermissao))
-			return false;
-		if (idSetor == null) {
-			if (other.idSetor != null)
-				return false;
-		} else if (!idSetor.equals(other.idSetor))
-			return false;
-		if (nomeSetor == null) {
-			if (other.nomeSetor != null)
-				return false;
-		} else if (!nomeSetor.equals(other.nomeSetor))
-			return false;
-		return true;
 	}
 
 	/**
@@ -110,7 +83,9 @@ public class SetorModel {
 		this.idPermissao = idPermissao;
 	}
 
+	@Override
+	public String toString() {
+		return "Setor [idSetor=" + idSetor + ", nomeSetor=" + nomeSetor + ", idPermissao=" + idPermissao + "]";
+	}
 
-	
-	
 }
