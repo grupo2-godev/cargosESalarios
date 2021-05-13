@@ -155,9 +155,18 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 		return new ArrayList<GrauInstrucaoModel>(listaDeGrauDeInstrucao);
 	}
 
+	/**
+	 * Deleta todos os objetos da tabela {@link GrauInstrucaoModel}.
+	 * 
+	 * @return boolean Retorna true caso algum registro seja deletado, se der algum erro ou se nao houverem registros, retorna false.
+	 */
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int registrosModificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM grau_instrucao").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return registrosModificados > 0 ? true : false;
 	}
 
 }

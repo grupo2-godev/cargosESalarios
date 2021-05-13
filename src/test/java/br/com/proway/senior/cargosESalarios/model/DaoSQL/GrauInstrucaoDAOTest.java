@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
@@ -61,9 +62,10 @@ public class GrauInstrucaoDAOTest {
 
 	@Test
 	public void testGetAll() {
-		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Incompleto");
+		GrauInstrucaoModel grauInstrucao2 = new GrauInstrucaoModel("Superior Completo");
 		grauInstrucaoDAO.create(grauInstrucao);
-		grauInstrucaoDAO.create(grauInstrucao);
+		grauInstrucaoDAO.create(grauInstrucao2);
 		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.getAll();
 		assertEquals(2, lista.size());
 	}
@@ -75,6 +77,11 @@ public class GrauInstrucaoDAOTest {
 		assertEquals(1, grauInstrucaoDAO.getAll().size());
 		grauInstrucaoDAO.deleteAll();
 		assertEquals(0, grauInstrucaoDAO.getAll().size());
+	}
+	
+	@Before
+	public void deleteAll() {
+		grauInstrucaoDAO.deleteAll();
 	}
 
 }
