@@ -42,7 +42,13 @@ public class CBO2002DAOTest {
     @Test
     public void update() {
     	CBO2002Model novoCBO = new CBO2002Model(223405, "Farmacêutico", 0.2, 0.0);
-    	
+    	CBO2002Model cboAlterado = new CBO2002Model(223405, "Farmacêutico(a)", 0.2, 0.0);
+    	int codigo = cbo2002DAO.create(novoCBO);
+    	cbo2002DAO.update(codigo, cboAlterado);
+    	CBO2002Model alterado = cbo2002DAO.retrieve(codigo);
+    	assertEquals(alterado.getDescricao(), cboAlterado.getDescricao());
+    	assertEquals(alterado.getPercentualInsalubridade(), cboAlterado.getPercentualInsalubridade());
+    	assertEquals(alterado.getPercentualPericulosidade(), cboAlterado.getPercentualPericulosidade());
     }
     
     @Test
