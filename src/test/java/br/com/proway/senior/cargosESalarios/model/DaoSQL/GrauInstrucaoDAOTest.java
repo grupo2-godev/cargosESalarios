@@ -35,17 +35,17 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.retrieve(grauInstrucaoDAO.create(grauInstrucao));
 		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
 	}
-	
-//	@Ignore
-//	void testRetriveNome() {
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi1);
-//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
-//		dao.create(gi2);
-//		assertEquals(gi1, dao.retrieve("Ensino M�dio Incompleto"));
-//		assertEquals(gi2, dao.retrieve("Ensino Superior Incompleto"));	
-//	}
-//	
+
+	@Test
+	void testUpdate() {
+		GrauInstrucaoModel grauInstrucaoAntigo = new GrauInstrucaoModel("Tecnologia Antigo");
+		GrauInstrucaoModel grauInstrucaoNovo = new GrauInstrucaoModel("Tecnologia Novo");
+		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucaoAntigo);
+		grauInstrucaoDAO.update(idObjetoCadastrado, grauInstrucaoNovo);
+		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.retrieve(idObjetoCadastrado);
+		assertEquals(grauInstrucaoNovo.getNome(), grauInstrucaoAtualizado.getNome());
+	}
+
 //	@Ignore
 //	void testGetAll() {
 //		ArrayList<GrauInstrucaoModel> listaGI = new ArrayList<GrauInstrucaoModel>();
@@ -57,18 +57,7 @@ public class GrauInstrucaoDAOTest {
 //		listaGI.add(gi2);
 //		assertEquals(listaGI.get(0).getInstrucao(), db.get(0).getInstrucao());
 //	}
-//	
-//	@Ignore
-//	void testUpdate() {
-////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi);
-//		GrauInstrucaoModel giNovo = new GrauInstrucaoModel(0, "Ensino M�dio Completo");
-//		dao.update(giNovo);
-//		assertTrue(dao.update(giNovo));
-//		assertEquals("Ensino M�dio Completo", dao.retrieve(0).getInstrucao());
-//	}
-//	
+
 //	@Ignore
 //	void testDeleteTrue() {
 ////		dao.limparArray();
