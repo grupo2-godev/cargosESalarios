@@ -49,8 +49,14 @@ public class SetorDAOTest {
 	}
 
 	@Test
-	public void testUpdateSql() {
-		
+	public void testAlterarSetor() {
+		SetorModel novoSetor = new SetorModel("Desenvolvimento I", 3);
+		SetorModel setorAlterado = new SetorModel("Desenvolvimento II", 3);
+		Integer idcriado = setorDAO.create(novoSetor);
+		setorDAO.update(idcriado, setorAlterado);
+		SetorModel atualizado = setorDAO.retrieve(idcriado);
+		assertEquals(setorAlterado.getNomeSetor(), atualizado.getNomeSetor());
+		assertEquals(setorAlterado.getIdPermissao(), atualizado.getIdPermissao());
 	}
 
 	@Test
