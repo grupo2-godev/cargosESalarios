@@ -38,6 +38,15 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.retrieve(grauInstrucaoDAO.create(grauInstrucao));
 		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
 	}
+	
+	@Test
+	public void testRetrieveNameCountains() {
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
+		grauInstrucaoDAO.create(grauInstrucao);
+		assertEquals(1, grauInstrucaoDAO.getAll().size());
+		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.retrieveNameCountains("comple");
+		assertEquals(1, lista);
+	}
 
 	@Test
 	public void testUpdate() {

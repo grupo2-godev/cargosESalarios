@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -81,16 +82,30 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	}
 
 	/**
-	 * busca o Grau de Instrucao pelo nome.
+	 * Busca um objeto do tipo {@link GrauInstrucaoModel} atraves do nome.
 	 * 
-	 * Verifica todos os graus de instrucoes e se o nome dele for igual ao passado
-	 * como parametro, retorna o objeto.
+	 * Consulta no banco de dados grupo2.grau_instrucao um objeto do tipo
+	 * {@link GrauInstrucaoModel} que contenha o nome igual ao nome recebido no
+	 * parametro, adiciona em uma lista e retorna.
 	 * 
-	 * @param nome String Nome do Grau de Instrucao
+	 * @param nome String Nome do objeto a ser consultado.
+	 * @return lista ArrayList<GrayIndtrucaoModel> Lista dos objetos localizados.
 	 */
-//	public GrauInstrucaoModel retrieve(String nome) {
-//		return null;
-//	}
+	public ArrayList<GrauInstrucaoModel> retrieveNameCountains(String nomeASerConsultado) {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
+		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
+		
+		Expression nome = root.get("nome");
+		criteria.select(root).where(criteriaBuilder.like(nome, "%" + nomeASerConsultado + "%"));
+		Query query = session.createQuery(criteria);
+		List<GrauInstrucaoModel> lista = query.getResultList();
+		return (ArrayList<GrauInstrucaoModel>)lista;
+		
+	}
 
 	/***
 	 * Atualizar um objeto do tipo {@link GrauInstrucaoModel}.
