@@ -82,9 +82,27 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		return results;
 	}
 
-	public boolean update(int id, CBO2002Model obj) {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * Atualizar um registro de CBO 2002.
+	 * 
+	 * Realiza a atualizacao de um registro CBO 2002, conforme o codigo
+	 * informado como parametro.
+	 * 
+	 * @param int           codigoCBO2002 Identificacao do registro que sera alterado
+	 * @param CBO2002Model cbo2002Alterado novo objeto com os dados alterados.
+	 * @return boolean
+	 */
+	public boolean update(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
+		CBO2002Model original = retrieve(codigoCBO2002);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setDescricao(cbo2002Alterado.getDescricao());
+		original.setPercentualInsalubridade(cbo2002Alterado.getPercentualInsalubridade());
+		original.setPercentualPericulosidade(cbo2002Alterado.getPercentualPericulosidade());
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	public boolean delete(int id) {

@@ -40,15 +40,17 @@ public class CBO2002DAOTest {
     }
 
     @Test
+    public void update() {
+    	CBO2002Model novoCBO = new CBO2002Model(223405, "Farmacêutico", 0.2, 0.0);
+    	
+    }
+    
+    @Test
     public void readAll() {
     }
 
     @Test
     public void delete() {
-    }
-
-    @Test
-    public void update() {
     }
 
     @Test
