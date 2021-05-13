@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
@@ -43,7 +43,7 @@ public class ConnectionHibernate {
 					.setProperty("hibernate.format_sql", "false")
 					.setProperty("hibernate.hbm2ddl.auto", "update")
 					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(CargoModel.class)
-					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(Cbo1994Model.class)
+					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(CBO1994Model.class)
 					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(CBO2002Model.class)
 					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(GrauInstrucaoModel.class)
 					.setProperty("hibernate.connection.autocommit", "true").addAnnotatedClass(HorasMesModel.class)
