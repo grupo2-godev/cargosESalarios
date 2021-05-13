@@ -71,7 +71,11 @@ public class CBO1994DAOTest {
 
 	@Test
 	public void testDeleteCBO1994() {
-		fail("Not yet implemented");
+		int size_inicial = CBO1994Dao.getAll().size();
+		CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4);
+		int codigo_CBO1994 = CBO1994Dao.create(CBO1994);
+		CBO1994Dao.delete(codigo_CBO1994);
+		assertEquals(size_inicial, CBO1994Dao.getAll().size());
 	}
 
 	@Test

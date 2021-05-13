@@ -96,10 +96,25 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return true;
 	}
-
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	/**
+	 * Deletar um CBO1994
+	 * 
+	 * Metodo deleta um CBO1994, conforme codigo CBO1994 informado
+	 * 
+	 * @param int codigo_CBO1994
+	 * @return boolean
+	 */
+	public boolean delete(int codigo_CBO1994) {
+		CBO1994Model objeto_deletar = retrieve(codigo_CBO1994);
+		
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		
+		ConnectionHibernate.getSession().delete(objeto_deletar);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
