@@ -1,10 +1,18 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -83,8 +91,16 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param String nomeSetor
 	 * @return SetorModel
 	 */
-	public SetorModel retrieve(String nomeSetor) {
-
+	public ArrayList<SetorModel> retrieveByName(String nomeSetor) {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
+		Root<SetorModel> root = criteria.from(SetorModel.class);
+		Query query = session.createQuery(criteria);
+		Expression registroSetor = (Expression) root.get("nomeSetor");
+		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomeSetor + "%'"));
+		List<SetorModel> resultado = query.getResultList();
+		return new ArrayList<SetorModel> (resultado);
 	}
 
 	/**
@@ -97,8 +113,16 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param SetorModel setorModel
 	 * @return boolean
 	 */
-	public boolean update(int idSetor, SetorModel setorModel) {
-
+	public boolean update(int idSetor, SetorModel setorAtualizado) {
+		SetorModel original = retrieve(idSetor);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setNomeSetor(setorAtualizado.getNomeSetor());
+		original.setIdPermissao(setorAtualizado.getIdPermissao());
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**

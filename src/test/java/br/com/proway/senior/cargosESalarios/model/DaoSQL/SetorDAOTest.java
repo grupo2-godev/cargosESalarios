@@ -38,6 +38,15 @@ public class SetorDAOTest {
 		assertEquals(novoSetor.getNomeSetor(), setorRetornado.getNomeSetor());
 		assertEquals(novoSetor.getIdPermissao(), setorRetornado.getIdPermissao());
 	}
+	
+	@Test
+	public void testBuscarSetorPorNome() {
+		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
+		setorDAO.create(novoSetor);
+		ArrayList<SetorModel> setorRetornado = setorDAO.retrieveByName("tão");
+		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(1).getNomeSetor());
+		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(1).getIdPermissao());
+	}
 
 	@Test
 	public void testUpdateSql() {
