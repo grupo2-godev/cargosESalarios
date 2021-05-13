@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import org.junit.After;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
@@ -17,13 +18,15 @@ public class CBO1994DAOTest {
 	String descricao = "descricao";
 	Double percentual_insalubridade = 0.3;
 	Double percentual_periculosidade = 0.2;
-	CBO1994DAO cbo1994Sql = new CBO1994DAO();	
+	CBO1994DAO cbo1994Sql = CBO1994DAO.getInstance(ConnectionHibernate.getSession());	
 	FactoryConexao conexao = new FactoryPostgres();
-	
-	@After
-	public void limparTabela() throws SQLException {
-			cbo1994Sql.limparTabela();
-	}
+
+	@Test
+	public void testGetInstance() {
+		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
+		CBO1994DAO test_getInstance2 = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
+		assertEquals(test_getInstance1, test_getInstance2);		
+	}			
 	
 	@Test
 	public void testCreate() {

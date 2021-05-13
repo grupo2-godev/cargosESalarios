@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.Cbo1994Model;
@@ -18,8 +20,25 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class CBO1994DAO implements InterfaceDAOCRUD<Cbo1994Model>{
 
+	private static CBO1994DAO instance;
 	FactoryConexao conexao = new FactoryPostgres();
-
+	
+	/**
+	 * Singleton da classe CBO1994DAO
+	 * 
+	 * @param Session session
+	 * @return CBO1994DAO instance
+	 */
+	public static CBO1994DAO getInstance(Session session) {
+		if (instance == null)
+			instance = new CBO1994DAO(session);
+		return instance;
+	}
+	
+	private CBO1994DAO(Session session) {
+	}
+	
+	
 	/**
 	 * Insere no DB o registro de um Cbo1994Model
 	 * 
@@ -104,6 +123,11 @@ public class CBO1994DAO implements InterfaceDAOCRUD<Cbo1994Model>{
 		String limpar = "delete from grupo2.cbo1994";	
 		conexao.criarConexao().createStatement().executeUpdate(limpar);	
 		System.out.println("Limpeza realizada.");
+	}
+
+	public boolean deleteAll() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
