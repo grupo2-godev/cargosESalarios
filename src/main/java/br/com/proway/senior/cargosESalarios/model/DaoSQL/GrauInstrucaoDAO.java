@@ -61,16 +61,17 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	}
 
 	/**
-	 * Busca um objeto do tipo {@link GrauInstrucaoModel} através do Id.
+	 * Busca um objeto do tipo {@link GrauInstrucaoModel} atraves do Id.
 	 * 
 	 * Consulta no banco de dados grupo2.grau_instrucao um objeto do tipo
 	 * {@link GrauInstrucaoModel} que contenha o ID igual ao id recebido no
-	 * parâmetro.
+	 * parametro.
 	 * 
 	 * @param id int Id do objeto a ser consultado.
 	 */
 	public GrauInstrucaoModel retrieve(int id) {
-		return null;
+		GrauInstrucaoModel grauInstrucao = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class, id);
+		return grauInstrucao;
 	}
 
 	/**

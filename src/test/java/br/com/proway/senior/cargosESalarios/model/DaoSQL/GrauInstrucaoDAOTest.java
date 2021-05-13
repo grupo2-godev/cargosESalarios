@@ -30,7 +30,7 @@ public class GrauInstrucaoDAOTest {
 	}
 
 	@Test
-	void testRetriveId() {
+	public void testRetriveId() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
 		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.retrieve(grauInstrucaoDAO.create(grauInstrucao));
 		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
