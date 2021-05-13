@@ -26,14 +26,10 @@ public class HoraMesDAOTest {
 	
 	@Test
 	public void testInserirHoraMes() {
-		try {
 			HorasMesModel novaHoraMes = new HorasMesModel(5, 220.0);
 			Integer idObjetoCadastrado = horasMesDao.create(novaHoraMes);
 			Object horasMesConsultado = ConnectionHibernate.getSession().get(HorasMesModel.class, idObjetoCadastrado);
 			assertEquals(idObjetoCadastrado, ((HorasMesModel) horasMesConsultado).getIdHorasMes());
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
 	}
 	
 	@Test
