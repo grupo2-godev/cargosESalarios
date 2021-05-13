@@ -76,4 +76,12 @@ public class HoraMesDAOTest {
 		//assertTrue(ret);
 		assertTrue(horasMesDao.getAll().isEmpty());
 	}
+	
+	@Test
+	public void testDeletarTodosRegistrosSemRegistrosADeletar() {
+		horasMesDao.deleteAll();
+		Boolean itensDeletados = horasMesDao.deleteAll();
+		assertFalse(itensDeletados);
+		assertTrue(horasMesDao.getAll().isEmpty());
+	}
 }
