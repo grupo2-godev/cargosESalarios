@@ -32,7 +32,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	private Session session;
 
 	/**
-	 * Singleton da classe GrauInstrucaoDAO
+	 * Singleton da classe GrauInstrucaoDAO.
 	 * 
 	 * @param session Session
 	 * @return instance GrauInstrucaoDAO
@@ -56,7 +56,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * Cadastra um novo grau de instrucao.
 	 * 
 	 * @param grauInstrucao
-	 * @return id do objetoCriado
+	 * @return int Id do objeto inserido.
 	 */
 	public int create(GrauInstrucaoModel grauInstrucao) {
 		if (!ConnectionHibernate.getSession().getTransaction().isActive())
