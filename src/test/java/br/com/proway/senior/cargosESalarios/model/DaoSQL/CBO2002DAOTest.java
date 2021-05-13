@@ -23,6 +23,7 @@ public class CBO2002DAOTest {
 	
     @Test
     public void testInserirCBO2002() {
+        cbo2002DAO.delete(784205);
         CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de "
         		+ "linha de produção", 0.0, 0.2);
         Integer codigoCboCadastrado = cbo2002DAO.create(novoCBO);
@@ -32,6 +33,7 @@ public class CBO2002DAOTest {
 
     @Test
     public void testBuscarCBO2002PorID() {
+    	cbo2002DAO.delete(765010);
     	CBO2002Model novoCBO = new CBO2002Model(765010, "Padronista de chapéus", 0.0, 0.0);
     	CBO2002Model cboRetornado = cbo2002DAO.retrieve(cbo2002DAO.create(novoCBO));
     	assertEquals(novoCBO.getDescricao(), cboRetornado.getDescricao());
@@ -40,7 +42,8 @@ public class CBO2002DAOTest {
     }
 
     @Test
-    public void update() {
+    public void testAtualizarCBO2002() {
+    	cbo2002DAO.delete(223405);
     	CBO2002Model novoCBO = new CBO2002Model(223405, "Farmacêutico", 0.2, 0.0);
     	CBO2002Model cboAlterado = new CBO2002Model(223405, "Farmacêutico(a)", 0.2, 0.0);
     	int codigo = cbo2002DAO.create(novoCBO);
@@ -52,7 +55,7 @@ public class CBO2002DAOTest {
     }
     
     @Test
-    public void delete() {
+    public void testDeletarCBO() {
     	int size = cbo2002DAO.getAll().size();
     	CBO2002Model novoCBO = new CBO2002Model(351415, "Tabelião substituto", 0.0, 0.0);
     	int codigoCbo = cbo2002DAO.create(novoCBO);
@@ -61,7 +64,8 @@ public class CBO2002DAOTest {
     }
     
     @Test
-    public void readAll() {
+    public void testListarTodosCBOs2002() {
+    	assertFalse(cbo2002DAO.getAll().isEmpty());
     }  
 
     @Test
