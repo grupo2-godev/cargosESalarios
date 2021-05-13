@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
@@ -87,5 +88,20 @@ public class CBO1994DAOTest {
 		assertFalse(CBO1994Dao.getAll().isEmpty());
 		assertEquals(3, CBO1994Dao.getAll().size());
 	}
+	
+	@Test
+	public void testDeleteAllCBO1994() {
+		CBO1994Dao.create(new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4));
+		CBO1994Dao.create(new CBO1994Model(44577, "desenvolvedor pleno", 0.3, 0.4));
+		CBO1994Dao.create(new CBO1994Model(44578, "desenvolvedor senior", 0.3, 0.4));
 
+		CBO1994Dao.deleteAll();
+		
+		assertTrue(CBO1994Dao.getAll().isEmpty());
+	}
+	
+	@Before
+	public void limparBancoDeDados() {
+		CBO1994Dao.deleteAll();
+	}
 }

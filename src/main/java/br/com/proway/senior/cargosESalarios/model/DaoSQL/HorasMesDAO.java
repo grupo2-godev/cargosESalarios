@@ -81,7 +81,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Buscar horas mes por ID.
 	 * 
-	 * Método busca o objeto horas mes no banco de dados conforme parametro
+	 * MÃ©todo busca o objeto horas mes no banco de dados conforme parametro
 	 * informado.
 	 * 
 	 * @param int id
@@ -99,7 +99,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * Realiza a atualizacao de um registro HorasMesModel, conforme a Id informada
 	 * como parametro.
 	 * 
-	 * @param int           id Identificacao do registro que será alterado
+	 * @param int           id Identificacao do registro que serÃ¡ alterado
 	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
@@ -117,7 +117,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Deletar um registro de horas mes.
 	 * 
-	 * Método deleta um registro de horas mes no banco de dados, conforme Id
+	 * MÃ©todo deleta um registro de horas mes no banco de dados, conforme Id
 	 * informada.
 	 * 
 	 * @param int id Identificao do registro a ser deletado
@@ -137,7 +137,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Buscar todos os registros de horas mes.
 	 * 
-	 * Método busca todos os registros de horas mes que constam no banco de dados e
+	 * MÃ©todo busca todos os registros de horas mes que constam no banco de dados e
 	 * retorna em um ArrayList.
 	 * 
 	 * @return ArrayList HorasMesModel

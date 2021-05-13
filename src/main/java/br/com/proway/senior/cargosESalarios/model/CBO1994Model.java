@@ -23,9 +23,6 @@ public class CBO1994Model {
 	private Double percentualInsalubridade;
 	public Double percentualPericulosidade;
 
-	public CBO1994Model() {
-	}
-
 	public CBO1994Model(Integer codigo_cbo, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
 		this.codigo_cbo = codigo_cbo;

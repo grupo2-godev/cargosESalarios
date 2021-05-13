@@ -136,28 +136,31 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
+		
 		Root<CBO1994Model> root = criteria.from(CBO1994Model.class);
+		
 		Query query = session.createQuery(criteria);
+		
 		List<CBO1994Model> results = query.getResultList();
+		
 		return new ArrayList<CBO1994Model>(results);
 	}
 
 	/**
-	 * Metodo realiza a limpeza da tabela do DB, detalando os registros. Foi feito
-	 * para ser utilizado nos testes unitarios.
+	 * Deleta todos os CBO1994 no banco de dados
 	 * 
-	 * @throws SQLException
-	 * @return void
+	 * Metodo remove todos os CBO1994 presentes na tabela no banco de dados
+	 * 
+	 * @return boolean
 	 */
-	public void limparTabela() throws SQLException {
-		String limpar = "delete from grupo2.cbo1994";
-		conexao.criarConexao().createStatement().executeUpdate(limpar);
-		System.out.println("Limpeza realizada.");
-	}
-
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cbo1994").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		ConnectionHibernate.getSession().clear();
+		return modificados > 0 ? true : false;
 	}
 
 }
