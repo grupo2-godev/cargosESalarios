@@ -1,17 +1,17 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Classes de testes para o SetorDAO.
@@ -42,10 +42,10 @@ public class SetorDAOTest {
 	@Test
 	public void testBuscarSetorPorNome() {
 		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
-		setorDAO.create(novoSetor);
+		int idCriada = setorDAO.create(novoSetor);
 		ArrayList<SetorModel> setorRetornado = setorDAO.retrieveByName("tão");
-		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(1).getNomeSetor());
-		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(1).getIdPermissao());
+		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(0).getNomeSetor());
+		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(0).getIdPermissao());
 	}
 
 	@Test
@@ -59,7 +59,6 @@ public class SetorDAOTest {
 		assertEquals(setorAlterado.getIdPermissao(), atualizado.getIdPermissao());
 	}
 
-
 	@Test
 	public void testDeletarSetorPorID() {
 		int size = setorDAO.getAll().size();
@@ -71,16 +70,23 @@ public class SetorDAOTest {
 	
 	@Test
 	public void testDeletarTodosSetores() {
-		
+		setorDAO.deleteAll();
+		assertTrue(setorDAO.getAll().isEmpty());
 	}
 
 	@Test
 	public void testBuscarTodosSetores() {
-	
+		SetorModel setor1 = new SetorModel("Cobrança", 3);
+		setorDAO.create(setor1);
+		SetorModel setor2 = new SetorModel("Atendimento", 3);
+		setorDAO.create(setor2);
+		
+		assertFalse(setorDAO.getAll().isEmpty());
 	}
 
-//	@After
-//	public void limparTabela() throws SQLException {
-//		
-//	}
+	@Before
+	public void limparTabela() {
+		setorDAO.deleteAll();
+	}
+	
 }

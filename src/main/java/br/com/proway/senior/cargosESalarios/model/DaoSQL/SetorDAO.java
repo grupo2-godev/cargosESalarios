@@ -170,8 +170,12 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM setor").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
 	}
 
 }
