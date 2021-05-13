@@ -17,8 +17,11 @@ import javax.persistence.Table;
 @Table(name = "CBO2002")
 public class CBO2002Model {
 
+	/**
+	 * A identificacao do CBO não é auto incrementada. O proprio 
+	 * codigo do CBO sera a PrimaryKey.
+	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer codigoId;
 	private String descricao;
 	private Double percentualInsalubridade;

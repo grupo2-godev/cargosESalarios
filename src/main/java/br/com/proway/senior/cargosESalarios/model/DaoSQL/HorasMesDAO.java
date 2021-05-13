@@ -81,7 +81,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	/**
 	 * Buscar horas mes por ID.
 	 * 
-	 * Método busca o objeto horas mes no banco de dados conforme parametro
+	 * Metodo busca o objeto horas mes no banco de dados conforme parametro
 	 * informado.
 	 * 
 	 * @param int id

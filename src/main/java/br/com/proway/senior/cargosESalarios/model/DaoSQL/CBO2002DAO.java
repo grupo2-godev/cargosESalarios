@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
@@ -57,18 +58,28 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param CBO2002Model Cbo2002 Objeto a ser inserido.
 	 * @return int id Id do registro.
 	 */
-	public int create(CBO2002Model Cbo2002) {
+	public int create(CBO2002Model cbo2002) {
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(CBO2002);
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(cbo2002);
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return idCadastrado;
 	}
 
-	public CBO2002Model retrieve(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Buscar CBO 2002 por ID.
+	 * 
+	 * Metodo busca um objeto CBO 2002 no banco de dados, conforme
+	 * codigo informado no parametro.
+	 * 
+	 * @param int codigoCBO
+	 * @return CBO2002Model
+	 */
+	public CBO2002Model retrieve(int codigoCBO) {
+		CBO2002Model results = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCBO);
+		System.out.println(results.toString());
+		return results;
 	}
 
 	public boolean update(int id, CBO2002Model obj) {
