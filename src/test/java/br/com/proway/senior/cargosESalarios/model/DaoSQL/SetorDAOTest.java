@@ -30,7 +30,7 @@ public class SetorDAOTest {
 	ConnectionPostgres conexao = new ConnectionPostgres();
 	
 	@Test
-	public void testCreateSql() throws SQLException {
+	public void testIserirSetor() throws SQLException {
 		assertEquals(1, setorSQL.create(setor1));
 	}
 	
