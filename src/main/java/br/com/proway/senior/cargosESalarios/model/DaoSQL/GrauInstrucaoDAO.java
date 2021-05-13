@@ -155,17 +155,6 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 		return new ArrayList<GrauInstrucaoModel>(listaDeGrauDeInstrucao);
 	}
 
-	/**
-	 * Limpar ArrayList de Graus de instrucao
-	 * 
-	 * M�todo realiza a limpeza do ArrayList de garuInstrucao na classe Dados.
-	 * Utilizado para os testes unit�rios.
-	 *
-	 * @return void
-	 */
-	public void limparArray() {
-	}
-
 	public boolean deleteAll() {
 		// TODO Auto-generated method stub
 		return false;

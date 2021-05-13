@@ -68,6 +68,13 @@ public class GrauInstrucaoDAOTest {
 		assertEquals(2, lista.size());
 	}
 
-
+	@Test
+	public void testDeleteAll() {
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Mestrado completo");
+		grauInstrucaoDAO.create(grauInstrucao);
+		assertEquals(1, grauInstrucaoDAO.getAll().size());
+		grauInstrucaoDAO.deleteAll();
+		assertEquals(0, grauInstrucaoDAO.getAll().size());
+	}
 
 }
