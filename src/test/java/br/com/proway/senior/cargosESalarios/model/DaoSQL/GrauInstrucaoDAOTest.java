@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
@@ -57,17 +59,14 @@ public class GrauInstrucaoDAOTest {
 	}
 
 
-//	@Ignore
-//	void testGetAll() {
-//		ArrayList<GrauInstrucaoModel> listaGI = new ArrayList<GrauInstrucaoModel>();
-//		GrauInstrucaoModel gi1 = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi1);
-//		GrauInstrucaoModel gi2 = new GrauInstrucaoModel("Ensino Superior Incompleto");
-//		dao.create(gi2);
-//		listaGI.add(gi1);
-//		listaGI.add(gi2);
-//		assertEquals(listaGI.get(0).getInstrucao(), db.get(0).getInstrucao());
-//	}
+	@Test
+	public void testGetAll() {
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
+		grauInstrucaoDAO.create(grauInstrucao);
+		grauInstrucaoDAO.create(grauInstrucao);
+		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.getAll();
+		assertEquals(2, lista.size());
+	}
 
 
 

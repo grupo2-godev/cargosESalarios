@@ -101,7 +101,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 */
 	public boolean update(int id, GrauInstrucaoModel grauInstrucaoNovo) {
 		GrauInstrucaoModel grauInstrucao = retrieve(id);
-		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
 		grauInstrucao.setNome(grauInstrucaoNovo.getNome());
@@ -111,15 +111,24 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	}
 
 	/**
-	 * Deleta um grau de instrucao
+	 * Deleta do banco de dados um objeto do tipo {@link GrauInstrucaoModel}.
 	 * 
-	 * Deleta o respectivo Grau de Instrucao passado como parametro o seu id
+	 * Consulta no banco de dados um objeto do tipo {@link GrauInstrucaoModel} cujo
+	 * id eh igual ao id recebido no parametro.
 	 * 
-	 * @param id do Grau desejado
-	 * @return true/false caso consiga excluir
+	 * @param id int Id do objeto a ser deletado.
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
 	 */
 	public boolean delete(int id) {
-		return false;
+		GrauInstrucaoModel grauIntrucao = retrieve(id);
+		
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(grauIntrucao);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
