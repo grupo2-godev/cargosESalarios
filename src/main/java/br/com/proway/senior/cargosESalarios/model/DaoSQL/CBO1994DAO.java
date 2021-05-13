@@ -5,8 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
@@ -16,14 +22,14 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
- * Implementar os metodos CRUD para o DB 
+ * Implementar os metodos CRUD para o DB
  * 
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
-public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
+public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 
 	private static CBO1994DAO instance;
-	
+
 	/**
 	 * Singleton da classe CBO1994DAO
 	 * 
@@ -35,14 +41,15 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 			instance = new CBO1994DAO(session);
 		return instance;
 	}
+
 	/**
 	 * Construtor da classe CBO1994DAO, utilizado no Singleton
 	 * 
 	 * @param Session session
 	 */
 	private CBO1994DAO(Session session) {
-	}	
-	
+	}
+
 	/**
 	 * Inserir CBO1994.
 	 * 
@@ -77,10 +84,11 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 	/**
 	 * Atualiza um CBO1994
 	 * 
-	 * Realiza a atualizacao de um CBO1994Model, conforme codigo informado como parametro
+	 * Realiza a atualizacao de um CBO1994Model, conforme codigo informado como
+	 * parametro
 	 * 
-	 * @param int codigo_CBO1994
-	 * @param CBO1994Model objetoAlterado 
+	 * @param int          codigo_CBO1994
+	 * @param CBO1994Model objetoAlterado
 	 */
 	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
 		CBO1994Model original = retrieve(codigo_CBO1994);
@@ -91,12 +99,12 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 		original.setDescricao(objetoAlterado.getDescricao());
 		original.setPercentualInsalubridade(objetoAlterado.getPercentualInsalubridade());
 		original.setPercentualPericulosidade(objetoAlterado.getPercentualPericulosidade());
-		
+
 		ConnectionHibernate.getSession().update(original);
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return true;
 	}
-	
+
 	/**
 	 * Deletar um CBO1994
 	 * 
@@ -107,54 +115,43 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 	 */
 	public boolean delete(int codigo_CBO1994) {
 		CBO1994Model objeto_deletar = retrieve(codigo_CBO1994);
-		
+
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
-		
+
 		ConnectionHibernate.getSession().delete(objeto_deletar);
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return true;
 	}
 
 	/**
-	 * Lista todos os registro da tabela, salvando em uma ArrayList
+	 * Busca todos os CBO1994 cadastrados
+	 * 
+	 * Metodo busca todos os CBO1994 cadastrados que constam no banco de dados e retorna no formate de ArrayList
 	 * 
 	 * @return ArrayList<Cbo1994Model>
 	 */
-	public ArrayList<CBO1994Model> getAll() {
-
-		ArrayList<CBO1994Model> list = new ArrayList<CBO1994Model>();
-		String sqlSelectAll = "SELECT * FROM grupo2.cbo1994";
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlSelectAll);
-			CBO1994Model cbo1994Model = new CBO1994Model();
-			while (rs.next()) {
-
-				cbo1994Model.setCodigo_cbo(rs.getInt(1));
-				cbo1994Model.setDescricao(rs.getString(2));
-				cbo1994Model.setPercentualInsalubridade(rs.getDouble(3));
-				cbo1994Model.setPercentualPericulosidade(rs.getDouble(4));
-				System.out.println(cbo1994Model.toString());
-				list.add(cbo1994Model);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+	public ArrayList<CBO1994Model> getAll() {		
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
+		Root<CBO1994Model> root = criteria.from(CBO1994Model.class);
+		Query query = session.createQuery(criteria);
+		List<CBO1994Model> results = query.getResultList();
+		return new ArrayList<CBO1994Model>(results);
 	}
-	
+
 	/**
-	 * Metodo realiza a limpeza da tabela do DB, detalando os registros.
-	 * Foi feito para ser utilizado nos testes unitarios.
+	 * Metodo realiza a limpeza da tabela do DB, detalando os registros. Foi feito
+	 * para ser utilizado nos testes unitarios.
 	 * 
 	 * @throws SQLException
 	 * @return void
 	 */
 	public void limparTabela() throws SQLException {
-		String limpar = "delete from grupo2.cbo1994";	
-		conexao.criarConexao().createStatement().executeUpdate(limpar);	
+		String limpar = "delete from grupo2.cbo1994";
+		conexao.criarConexao().createStatement().executeUpdate(limpar);
 		System.out.println("Limpeza realizada.");
 	}
 
@@ -162,5 +159,5 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

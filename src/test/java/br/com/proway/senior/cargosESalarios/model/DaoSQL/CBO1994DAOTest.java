@@ -80,7 +80,12 @@ public class CBO1994DAOTest {
 
 	@Test
 	public void testGetAllCBO1994() {
-		fail("Not yet implemented");
+		CBO1994Dao.create(new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4));
+		CBO1994Dao.create(new CBO1994Model(44577, "desenvolvedor pleno", 0.3, 0.4));
+		CBO1994Dao.create(new CBO1994Model(44578, "desenvolvedor senior", 0.3, 0.4));
+		
+		assertFalse(CBO1994Dao.getAll().isEmpty());
+		assertEquals(3, CBO1994Dao.getAll().size());
 	}
 
 }
