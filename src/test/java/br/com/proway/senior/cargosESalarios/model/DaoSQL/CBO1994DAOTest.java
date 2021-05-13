@@ -55,7 +55,18 @@ public class CBO1994DAOTest {
 
 	@Test
 	public void testUpdateCBO1994() {
-		fail("Not yet implemented");
+		CBO1994Model CBO1994_cadastrado = new CBO1994Model(44576, "desenvolvedor", 0.3, 0.4);
+		CBO1994Model CBO1994_alterado = new CBO1994Model(44576, "desenvolvedor senior", 0.3, 0.4);
+		
+		int codigo_CBO1994 = CBO1994Dao.create(CBO1994_cadastrado);
+		
+		CBO1994Dao.update(codigo_CBO1994, CBO1994_alterado);
+		
+		CBO1994Model novo_CBO1994 = CBO1994Dao.retrieve(codigo_CBO1994);
+		assertEquals(CBO1994_alterado.getCodigo_cbo(), novo_CBO1994.getCodigo_cbo());
+		assertEquals(CBO1994_alterado.getDescricao(), novo_CBO1994.getDescricao());
+		assertEquals(CBO1994_alterado.getPercentualInsalubridade(), novo_CBO1994.getPercentualInsalubridade());
+		assertEquals(CBO1994_alterado.getPercentualPericulosidade(), novo_CBO1994.getPercentualPericulosidade());
 	}
 
 	@Test

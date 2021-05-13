@@ -74,9 +74,27 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model>{
 		return results;
 	}
 
+	/**
+	 * Atualiza um CBO1994
+	 * 
+	 * Realiza a atualizacao de um CBO1994Model, conforme codigo informado como parametro
+	 * 
+	 * @param int codigo_CBO1994
+	 * @param CBO1994Model objetoAlterado 
+	 */
 	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
-		// TODO Auto-generated method stub
-		return false;
+		CBO1994Model original = retrieve(codigo_CBO1994);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		original.setCodigo_cbo(objetoAlterado.getCodigo_cbo());
+		original.setDescricao(objetoAlterado.getDescricao());
+		original.setPercentualInsalubridade(objetoAlterado.getPercentualInsalubridade());
+		original.setPercentualPericulosidade(objetoAlterado.getPercentualPericulosidade());
+		
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	public boolean delete(int id) {
