@@ -45,6 +45,17 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.retrieve(idObjetoCadastrado);
 		assertEquals(grauInstrucaoNovo.getNome(), grauInstrucaoAtualizado.getNome());
 	}
+	
+	@Test
+	public void testDelete() {
+		int totalRegistros = grauInstrucaoDAO.getAll().size();
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Fundamental Completo");
+		int idObjetoCriado = grauInstrucaoDAO.create(grauInstrucao);
+		assertEquals(totalRegistros + 1, grauInstrucaoDAO.getAll().size());
+		grauInstrucaoDAO.delete(idObjetoCriado);
+		assertEquals(totalRegistros, grauInstrucaoDAO.getAll().size());
+	}
+
 
 //	@Ignore
 //	void testGetAll() {
@@ -58,22 +69,6 @@ public class GrauInstrucaoDAOTest {
 //		assertEquals(listaGI.get(0).getInstrucao(), db.get(0).getInstrucao());
 //	}
 
-//	@Ignore
-//	void testDeleteTrue() {
-////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi);
-//		assertTrue(dao.delete(0));
-//		assertEquals(0, db.size());
-//	}
-//	
-//	@Ignore
-//	void testDeleteFalse() {
-////		dao.limparArray();
-//		GrauInstrucaoModel gi = new GrauInstrucaoModel("Ensino M�dio Incompleto");
-//		dao.create(gi);
-//		assertTrue(dao.delete(1));
-//		assertEquals(1, db.size());
-//	}
+
 
 }
