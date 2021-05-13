@@ -92,7 +92,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("delete from nivel").executeUpdate();
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM nivelmodel").executeUpdate();
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
