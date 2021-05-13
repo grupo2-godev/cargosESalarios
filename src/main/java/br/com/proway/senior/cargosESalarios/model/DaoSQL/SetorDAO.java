@@ -71,7 +71,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return SetorModel
 	 */
 	public SetorModel retrieve(int idSetor) {
-
+		return ConnectionHibernate.getSession().get(SetorModel.class, idSetor);
 	}
 
 	/**
