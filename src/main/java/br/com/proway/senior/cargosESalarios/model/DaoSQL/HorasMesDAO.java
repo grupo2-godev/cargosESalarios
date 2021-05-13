@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
@@ -75,19 +76,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		return idCadastrado;
 	}
 
-	/**
-	 * Deletar todos os registros do banco de dados.
-	 * 
-	 * Comando limpa a tabela de horas mes no banco de dados.
-	 */
-	public void deleteAll() {
-		String query = "DELETE FROM grupo2.horas_mes";
-		try {
-			ConnectionPostgres.executeUpdate(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Buscar horas mes por ID.
@@ -163,4 +152,19 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		return new ArrayList<HorasMesModel>(results);
 	}
 
+	/**
+	 * Deletar todos os registros do banco de dados.
+	 * 
+	 * Comando limpa a tabela de horas mes no banco de dados.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteAll() {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM horas_mes").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
+	}
 }

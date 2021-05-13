@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -66,4 +67,13 @@ public class HoraMesDAOTest {
 		assertFalse(horasMesDao.getAll().isEmpty());
 	}
 	
+	@Test
+	public void testDeletarTodosRegistros() {
+		HorasMesModel horasModel = new HorasMesModel(220.0);
+		horasMesDao.create(horasModel);
+		
+		Boolean ret = horasMesDao.deleteAll();
+		//assertTrue(ret);
+		assertTrue(horasMesDao.getAll().isEmpty());
+	}
 }

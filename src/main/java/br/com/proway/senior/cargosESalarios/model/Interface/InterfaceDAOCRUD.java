@@ -22,6 +22,8 @@ public interface InterfaceDAOCRUD<T> {
 		public boolean delete(int id);
 		
 		public ArrayList<T> getAll();
+		
+		public boolean deleteAll();
 
 	}
 
