@@ -6,8 +6,14 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
@@ -115,13 +121,32 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return boolean
 	 */
 	public boolean delete(int codigoCBO2002) {
-		// TODO Auto-generated method stub
-		return false;
+		CBO2002Model entry = retrieve(codigoCBO2002);
+
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
+	/**
+	 * Buscar todos os registros de CBO 2002.
+	 * 
+	 * Metodo busca todos os registros de CBO 2002 que constam no banco de dados e
+	 * retorna em um ArrayList.
+	 * 
+	 * @return ArrayList CBO2002Model
+	 */
 	public ArrayList<CBO2002Model> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
+		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
+		Query query = session.createQuery(criteria);
+		List<CBO2002Model> results = query.getResultList();
+		return new ArrayList<CBO2002Model>(results);
 	}
 
 	public boolean deleteAll() {

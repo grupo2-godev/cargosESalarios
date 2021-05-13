@@ -53,6 +53,8 @@ public class CBO2002DAOTest {
     
     @Test
     public void delete() {
+    	CBO2002Model novoCBO = new CBO2002Model(351415, "Tabelião substituto", 0.0, 0.0);
+    	
     }
     
     @Test
