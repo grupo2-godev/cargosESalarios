@@ -72,38 +72,14 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	}
 
 	/***
-	 * Retorna um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
+	 * Retorna um objeto do tipo {@link CargoModel} pelo idCargo. Realiza uma busca no banco de dados pelo
 	 * ID informado e retorna a tupla com os dados correspondentes.
 	 * 
 	 * @param idCargo int Id do cargo a ser consultado.
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel retrieve(int idCargo) {
-		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
-		CargoModel cargo = null;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(retrieveById);
-			while (rs.next()) {
-				cargo = new CargoModel();
-				cargo.setIdCargo(rs.getInt(1));
-				cargo.setNomeCargo(rs.getString(2));
-				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
-				cargo.setCbo2002(rs.getInt(5));
-				cargo.setCbo94(rs.getInt(6));
-				cargo.setHoraMes(rs.getInt(7));
-				cargo.setGrauInstrucao(rs.getInt(8));
-				cargo.setExperienciaMinima(rs.getString(9));
-				cargo.setAtribuicoes(rs.getString(10));
-				cargo.setStatus(rs.getBoolean(11));
-				cargo.setIdPermissao(rs.getInt(12));
-				System.out.println(cargo.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		CargoModel cargo = ConnectionHibernate.getSession().get(CargoModel.class, idCargo);
 		return cargo;
 	}
 

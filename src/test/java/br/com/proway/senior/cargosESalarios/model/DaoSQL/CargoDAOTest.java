@@ -43,16 +43,15 @@ public class CargoDAOTest {
 		assertEquals(idObjetoCadastrado, ((CargoModel) cargoConsultado).getIdCargo());
 	}
 
-//	@Test
-//	public void testRetrieveId() {
-//		
-//	}
-//	
-//	@Test
-//	public void testRetrieveWithEmptyDatabase() {
-//		assertEquals(null, cargoSql.retrieve(5));
-//	}
-//
+	@Test
+	public void testRetrieveId() {
+		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
+		Integer idObjetoCadastrado = cargoDAO.create(cargo);
+		CargoModel cargoConsultado = cargoDAO.retrieve(idObjetoCadastrado);
+		assertEquals(cargo.getNomeCargo(), cargoConsultado.getNomeCargo());
+	}
+
 //	@Test
 //	public void testUpdate() {
 //		String queryCriar = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
