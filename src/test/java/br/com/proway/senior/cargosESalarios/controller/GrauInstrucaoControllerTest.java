@@ -47,6 +47,20 @@ public class GrauInstrucaoControllerTest {
 		controller.buscarPorId(0);
 	}
 
+	@Test
+	public void buscarPorNomeQueContenha() throws Exception {
+		controller.cadastrar("Ensino Medio Completo");
+		controller.cadastrar("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarPorNomeQueContenha("Ensino Medio").size());
+		assertNull(controller.buscarPorNomeQueContenha("Palavra aleatória").size());
+	}
+	
+	@Test(expected = Exception.class)
+	public void buscarPorNomeQueContenhaInvalido() throw Exception {
+		controller.buscarPorNomeQueContenha("Ensino@!#");
+	}
+	
+	
 //	@Test
 //	void testDeletarGraunstrucao() {
 //		controller.cadastrarGrauInstrucao("Ensino Medio");
