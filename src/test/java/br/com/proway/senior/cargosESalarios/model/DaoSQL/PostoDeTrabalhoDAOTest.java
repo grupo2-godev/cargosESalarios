@@ -90,8 +90,17 @@ public class PostoDeTrabalhoDAOTest {
 		assertFalse(postoDAO.getAll().isEmpty());		
 	}
 	
+	@Test
+	public void testDeletarTodosOsPostosDeTrabalho() {
+		PostoDeTrabalhoModel novoPosto1 = new PostoDeTrabalhoModel("", 4, 6, 3, 6000.0);
+		postoDAO.create(novoPosto1);
+		postoDAO.deleteAll();
+		assertTrue(postoDAO.getAll().isEmpty());
+	}
+	
 	@After
 	public void limparTabela() throws SQLException {
+		postoDAO.deleteAll();
 			
 	}
 }

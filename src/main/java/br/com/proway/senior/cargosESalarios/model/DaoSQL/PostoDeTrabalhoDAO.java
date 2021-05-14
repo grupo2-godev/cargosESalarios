@@ -176,28 +176,21 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 		return new ArrayList<PostoDeTrabalhoModel>(results);
 	}
 
-	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	/**
-	 * Metodo limparTabela
+	 * Deletar todos os postos de trabalho.
 	 * 
-	 * Metodo realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco eh ser utilizado nos testes. É necessário
-	 * criar as sequences no banco, pois eh partir delas que a Primary Key é
-	 * resetada.
+	 * Metodo limpa a tabela posto de trabalho no banco de dados.
 	 * 
-	 * @throws SQLException
-	 * @return void
+	 * @return boolean
 	 */
-	public void limparTabela() throws SQLException {
-		String limpar = "delete from grupo2.posto_de_trabalho";
-		String removerIncremento = "ALTER SEQUENCE grupo2.posto_de_trabalho_increment RESTART";
-		conexao.criarConexao().createStatement().executeUpdate(limpar);
-		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
-		System.out.println("Limpeza realizada.");
+	public boolean deleteAll() {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM posto_de_trabalho").
+				executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return modificados > 0 ? true : false;
 	}
 
 }
