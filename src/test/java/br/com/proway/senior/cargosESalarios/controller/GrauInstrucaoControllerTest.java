@@ -69,19 +69,25 @@ public class GrauInstrucaoControllerTest {
 		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
 	}
 	
-//	@Test
-//	void testDeletarGraunstrucao() {
-//		controller.cadastrarGrauInstrucao("Ensino Medio");
-//		assertTrue(controller.deletarGrauInstrucao(0));
-//		assertEquals(0, dao.getAll().size());
-//	}
-//	
-//	@Test
-//	void testDeletarGraunstrucaoFalse() {
-//		controller.cadastrarGrauInstrucao("Ensino Medio");
-//		assertFalse(controller.deletarGrauInstrucao(1));
-//		assertEquals(1, dao.getAll().size());
-//	}
+	@Test
+	public void testDeletarPorId() throws Exception {
+		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
+		assertEquals(1, controller.buscarTodos().size());
+		controller.deletarPorId(idCadastrado);
+		assertNull(controller.buscarTodos());
+	}
+	
+	@Test(expected = Exception.class)
+	public void testDeletarPorIdInexistente() {
+		assertNull(controller.buscarTodos());
+		controller.deletarPorId(2);
+	}
+	
+	@Test(expected = Exception.class)
+	public void testDeletarPorIdIgualAZero() {
+		assertNull(controller.buscarTodos());
+		controller.deletarPorId(0);
+	}
 
 	@Test
 	public void testBuscarTodos() throws Exception {

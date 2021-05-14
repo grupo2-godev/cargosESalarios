@@ -87,6 +87,7 @@ public class GrauInstrucaoController {
 	 * @throws Exception 
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
+		
 		if(this.buscarPorId(idObjetoASerAlterado) == null) {
 			throw(new Exception("O objeto não existe no banco de dados."));
 		}
