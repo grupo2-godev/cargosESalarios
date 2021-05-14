@@ -9,7 +9,9 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 public class HibernateMethodsTest {
 
@@ -34,7 +36,7 @@ public class HibernateMethodsTest {
 
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
 		List<HorasMesModel> tableEntries = 
-			methods.listarPorValorDeColuna(HorasMesModel.class, "idhorasmes", savedId);
+			methods.listarPorValorDeColunaExato(HorasMesModel.class, "idhorasmes", savedId);
 		HorasMesModel lastObjectInList = tableEntries.get(tableEntries.size()-1);
 		assertEquals((int)lastObjectInList.getIdHorasMes(), savedId);
 		assertEquals(lastObjectInList.getQuantidade(), entry.getQuantidade());
@@ -50,7 +52,19 @@ public class HibernateMethodsTest {
 		
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
 		List<HorasMesModel> tableEntries = 
-			methods.listarPorValorDeColuna(HorasMesModel.class, "quantidade", 525.525);
+			methods.listarPorValorDeColunaExato(HorasMesModel.class, "quantidade", 525.525);
+		assertTrue(tableEntries.contains(entry));
+	}
+	
+	@Test
+	public void listarPorSelecaoDeColunaString() {
+		SetorDAO dao = SetorDAO.getInstance(ConnectionHibernate.getSession());
+		SetorModel entry = new SetorModel("Setor legal", 42);
+		dao.create(entry);
+		
+		HibernateMethods<SetorModel> methods = new HibernateMethods<SetorModel>();
+		List<SetorModel> tableEntries = 
+			methods.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "quantidade", "Set");
 		assertTrue(tableEntries.contains(entry));
 	}
 

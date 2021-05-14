@@ -39,6 +39,25 @@ public class HibernateMethods<T> {
 		return new ArrayList<T>(results);
 	}
 	
+	public List<T> listarPorValorDeColunaComStringIncompleta(
+			Class<T> classeTabela, String nomeColuna, String valorColuna) 
+		{
+			Session session = ConnectionHibernate.getSession();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
+			
+			Root<T> root = criteria.from(classeTabela);
+			Expression<String> selectedColumn = root.get(nomeColuna);
+			
+			String filter = "%" + valorColuna + "%";
+			criteria.select(root)
+				.where(criteriaBuilder.like(selectedColumn, filter));
+				
+			Query<T> query = session.createQuery(criteria);
+			List<T> results = query.getResultList();
+			return new ArrayList<T>(results);
+		}
+	
 	
 	/**
 	 * Funcoes e suas respectivas Overloads para poder selecionar entradas de 
@@ -59,7 +78,7 @@ public class HibernateMethods<T> {
 	 * @param Integer : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColunaExatoExato(
+	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Integer valorColuna) 
 	{
 		Session session = ConnectionHibernate.getSession();
