@@ -72,8 +72,9 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	}
 
 	/***
-	 * Retorna um objeto do tipo {@link CargoModel} pelo idCargo. Realiza uma busca no banco de dados pelo
-	 * ID informado e retorna a tupla com os dados correspondentes.
+	 * Retorna um objeto do tipo {@link CargoModel} pelo idCargo. Realiza uma busca
+	 * no banco de dados pelo ID informado e retorna a tupla com os dados
+	 * correspondentes.
 	 * 
 	 * @param idCargo int Id do cargo a ser consultado.
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
@@ -83,40 +84,37 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		return cargo;
 	}
 
-	/**
-	 * Atualizar um registro no banco de dados. Realiza a atualização dos dados no
-	 * registro cujo o id_cargo seja idêntico ao IdCargo informado no parâmetro.
+	/***
+	 * Atualizar um objeto do tipo {@link CargoModel}.
 	 * 
-	 * @param idCargo int Id do objeto a ser atualizado.
-	 * @param obj     CargoModel Objeto que possui as informações que serão setadas
-	 *                no objeto que possui o id informado.
-	 * @return boolean True se a atualização for efetuada e False caso contrário.
+	 * Recebe um objeto do tipo {@link CargoModel} que sera a atualizacao do objeto
+	 * no banco de dados que possui o id recebido no parametro.
+	 * 
+	 * @param cargoNovo CargoModel Novo objeto que sera inserido no banco de dados.
+	 * @param idCargo   int Id do objeto a ser atualizado.
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
 	 */
-	public boolean update(int idCargo, CargoModel obj) {
-		String updateDB = "UPDATE grupo2.cargo SET nome_cargo = ?, data_cadastro = ?,"
-				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo1994 = ?, horas_mes = ?,"
-				+ "grau_de_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_cargo = "
-				+ idCargo;
-		PreparedStatement prepStmt;
-		try {
-			prepStmt = conexao.criarConexao().prepareStatement(updateDB);
-			prepStmt.setString(1, obj.getNomeCargo());
-			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
-			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
-			prepStmt.setInt(4, obj.getCbo2002());
-			prepStmt.setInt(5, obj.getCbo94());
-			prepStmt.setInt(6, obj.getHoraMes());
-			prepStmt.setInt(7, obj.getGrauInstrucao());
-			prepStmt.setString(8, obj.getExperienciaMinima());
-			prepStmt.setString(9, obj.getAtribuicoes());
-			prepStmt.setBoolean(10, obj.getStatus());
-			prepStmt.setInt(11, obj.getIdPermissao());
-			prepStmt.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public boolean update(int idCargo, CargoModel cargoNovo) {
+		CargoModel cargo = retrieve(idCargo);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		cargo.setNomeCargo(cargoNovo.getNomeCargo());
+		cargo.setDataCadastro(cargoNovo.getDataCadastro());
+		cargo.setDataUltimaRevisao(cargoNovo.getDataUltimaRevisao());
+		cargo.setCbo2002(cargoNovo.getCbo2002());
+		cargo.setCbo94(cargoNovo.getCbo94());
+		cargo.setHoraMes(cargoNovo.getHoraMes());
+		cargo.setGrauInstrucao(cargoNovo.getGrauInstrucao());
+		cargo.setExperienciaMinima(cargoNovo.getExperienciaMinima());
+		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
+		cargo.setStatus(cargoNovo.getStatus());
+		cargo.setIdPermissao(cargoNovo.getIdPermissao());
+		ConnectionHibernate.getSession().update(cargo);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/***
@@ -159,7 +157,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 * 
-	 * @return boolean Retorna true caso algum registro seja deletado, se der algum erro ou se nao houverem registros, retorna false.
+	 * @return boolean Retorna true caso algum registro seja deletado, se der algum
+	 *         erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deleteAll() {
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {

@@ -52,38 +52,18 @@ public class CargoDAOTest {
 		assertEquals(cargo.getNomeCargo(), cargoConsultado.getNomeCargo());
 	}
 
-//	@Test
-//	public void testUpdate() {
-//		String queryCriar = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
-//				+ "cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) "
-//				+ "VALUES ('CargoParaTesteUnitario', '" + Date.valueOf(LocalDateTime.now().toLocalDate()) + "', '"
-//				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "', " + cbo2002 + ", " + cbo1994 + ", " + horasmes
-//				+ ", " + grauinstrucao + ", '12', 'Desenvolvedor', true, 1)";
-//		String queryConsultaId = "SELECT * FROM grupo2.cargo WHERE nome_cargo = 'CargoParaTesteUnitario' AND data_cadastro = '"
-//				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "' AND data_ultima_revisao = '"
-//				+ Date.valueOf(LocalDateTime.now().toLocalDate()) + "' AND cbo2002 = " + cbo2002 + " AND cbo1994 = "
-//				+ cbo1994 + " AND horas_mes = " + horasmes + " AND grau_de_instrucao = " + grauinstrucao
-//				+ " AND experiencia_minima = '12'"
-//				+ " AND atribuicoes = 'Desenvolvedor' AND status = true AND id_permissao = 1";
-//		CargoModel novoCargo = new CargoModel("NovoCargoParaTesteUnitario", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
-//				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-//		boolean registroAlterado = false;
-//		try {
-//			conexao.conectar();
-//			ConnectionPostgres.executeUpdate(queryCriar);
-//			conexao.conectar();
-//			ResultSet resultSet = ConnectionPostgres.executeQuery(queryConsultaId);
-//			int idObjetoASerAlterado = 0;
-//			if (resultSet.next()) {
-//				idObjetoASerAlterado = resultSet.getInt("id_cargo");
-//			}
-//			registroAlterado = cargoSql.update(idObjetoASerAlterado, novoCargo);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		assertTrue(registroAlterado);
-//	}
-//	
+	@Test
+	public void testUpdate() {
+		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+				horasmes, grauinstrucao, "12", "Desenvolvedor 1", true, 1);
+		Integer idObjetoCadastrado = cargoDAO.create(cargo);
+		CargoModel novoCargo = new CargoModel("Inspetor", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+				horasmes, grauinstrucao, "12", "Desenvolvedor 2", true, 1);
+		cargoDAO.update(idObjetoCadastrado, novoCargo);
+		CargoModel cargoAlterado = cargoDAO.retrieve(idObjetoCadastrado);
+		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
+	}
+	
 //	@Test
 //	public void testDelete() {
 //		String queryCriar = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, "
