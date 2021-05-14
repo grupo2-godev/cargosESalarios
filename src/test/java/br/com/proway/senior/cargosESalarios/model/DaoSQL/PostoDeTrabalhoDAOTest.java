@@ -72,10 +72,18 @@ public class PostoDeTrabalhoDAOTest {
 	}
 	
 	@Test
-	public void testUpdateSql() {
+	public void testAtualizarPostoDeTrabalho() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("AnalistaFinanceiroo", 3, 2, 2, 2750.00);
+		PostoDeTrabalhoModel postoAlterado = new PostoDeTrabalhoModel("Analista Financeiro", 3, 2, 2, 2800.00);
+		Integer idCriado = postoDAO.create(novoPosto);
+		postoDAO.update(idCriado, postoAlterado);
+		PostoDeTrabalhoModel atualizado = postoDAO.retrieve(idCriado);
+		assertEquals(novoPosto.getNomePosto(), atualizado.getNomePosto());		
+		assertEquals(novoPosto.getIdCargo(), atualizado.getIdCargo());		
+		assertEquals(novoPosto.getIdSetor(), atualizado.getIdSetor());		
+		assertEquals(novoPosto.getIdNivel(), atualizado.getIdNivel());		
+		assertEquals(novoPosto.getSalario(), atualizado.getSalario());	
 	}
-	
-
 	
 	@Test
 	public void testDeleteSql() {
