@@ -74,18 +74,17 @@ public class GrauInstrucaoControllerTest {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
 		assertEquals(1, controller.buscarTodos().size());
 		controller.deletarPorId(idCadastrado);
-		assertNull(controller.buscarTodos());
+		assertEquals(0, controller.buscarTodos().size());
 	}
 	
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdInexistente() {
-		assertNull(controller.buscarTodos());
+	public void testDeletarPorIdInexistente() throws Exception {
+		assertEquals(0, controller.buscarTodos().size());
 		controller.deletarPorId(2);
 	}
 	
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdIgualAZero() {
-		assertNull(controller.buscarTodos());
+	public void testDeletarPorIdIgualAZero() throws Exception {
 		controller.deletarPorId(0);
 	}
 

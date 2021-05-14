@@ -84,17 +84,40 @@ public class GrauInstrucaoController {
 	 *                             dados.
 	 * @return boolean Retorna true caso nao encontre nenhum erro durante a
 	 *         verificacao, inclusive a busca pelo objeto no banco de dados pelo id.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
-		
-		if(this.buscarPorId(idObjetoASerAlterado) == null) {
-			throw(new Exception("O objeto não existe no banco de dados."));
+
+		if (this.buscarPorId(idObjetoASerAlterado) == null) {
+			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		if(novoObjeto == null) {
-			throw(new Exception("O objeto não pode ser nulo."));
+		if (novoObjeto == null) {
+			throw (new Exception("O objeto não pode ser nulo."));
 		}
 		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
+		return true;
+	}
+
+	/**
+	 * Deleta um registro do banco de dados que corresponde ao id recebido no
+	 * parametro.
+	 * 
+	 * Verifica se o id eh valido (diferente de zero, diferente de nulo). Verifica
+	 * se existe um objeto no banco de dados com o id recebido no parametro.
+	 * 
+	 * @param id Integer Id do objeto a ser deletado.
+	 * @return boolean Retorna true caso o objeto seja localizado no banco de dados.
+	 *         Retorna false caso o id seja invalido conforme validacao.
+	 * @throws Exception 
+	 */
+	public boolean deletarPorId(Integer id) throws Exception {
+		if (this.buscarPorId(id) == null) {
+			throw (new Exception("O objeto não existe no banco de dados."));
+		}
+		if (id == null || id == 0) {
+			throw (new Exception("O id não pode ser nulo ou igual a zero."));
+		}
+		grauInstrucaoDAO.delete(id);
 		return true;
 	}
 
