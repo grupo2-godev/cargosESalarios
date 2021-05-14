@@ -18,18 +18,14 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 class GrauInstrucaoControllerTest {
 
 	GrauInstrucaoController controller = new GrauInstrucaoController();
-//	GrauInstrucaoDao dao = new GrauInstrucaoDao();
-//	
-//	@Before
-//	void testDelete() {
-//		dao.limparArray();
-//	}
-//	
-//	@Test
-//	void testCadastrarGrauInstrucao() {
-//		assertEquals((Integer)0, controller.cadastrarGrauInstrucao("Ensino medio"));		
-//	}
-//
+
+	@Test
+	void testCadastrar() {
+		controller.cadastrar("Ensino Medio Completo");
+		controller.cadastrar("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarTodos().size());
+	}
+
 //	@Test
 //	void testCadastrarGrauInstrucaoNull() {
 //		controller.cadastrarGrauInstrucao("Ensino medio");
