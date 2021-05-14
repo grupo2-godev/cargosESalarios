@@ -1,20 +1,30 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * Classe PostoDeTrabalhoModel
  * 
- * Classe posto de trabalho, cria os atributos necessários para
- * um posto de trabalho, que posteriormente será vinculado a um
- * colaborador com os dados de cargo e setor necessários para
- * os demais módulos.
+ * Classe posto de trabalho, cria os atributos necessarios para
+ * um posto de trabalho, que posteriormente sera vinculado a um
+ * colaborador com os dados de cargo e setor necessarios para
+ * os demais modulos.
  * 
- * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  *
  */
 
+@Entity
+@Table (name = "posto_de_trabalho")
 public class PostoDeTrabalhoModel {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idPosto;
 	private String nomePosto;
 	private Integer idCargo;
@@ -34,8 +44,8 @@ public class PostoDeTrabalhoModel {
 	}
 
 	/**
-	 * Construtor secundário onde a Id não é obrigatória para criação do posto.
-	 * A Id será auto incrementada no banco de dados.
+	 * Construtor secundario onde a Id nao eh obrigatoria para criacao do posto.
+	 * A Id sera auto incrementada no banco de dados.
 	 * 
 	 * @param nomePosto
 	 * @param idCargo
