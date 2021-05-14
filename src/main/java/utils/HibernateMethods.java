@@ -59,7 +59,7 @@ public class HibernateMethods<T> {
 	 * @param Integer : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColuna(
+	public List<T> listarPorValorDeColunaExatoExato(
 		Class<T> classeTabela, String nomeColuna, Integer valorColuna) 
 	{
 		Session session = ConnectionHibernate.getSession();
@@ -94,7 +94,7 @@ public class HibernateMethods<T> {
 	 * @param String : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColuna(
+	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, String valorColuna) 
 	{
 		Session session = ConnectionHibernate.getSession();
@@ -129,7 +129,7 @@ public class HibernateMethods<T> {
 	 * @param char : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColuna(
+	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, char valorColuna) 
 	{
 		Session session = ConnectionHibernate.getSession();
@@ -164,7 +164,7 @@ public class HibernateMethods<T> {
 	 * @param boolean : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColuna(
+	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
 		{
 		Session session = ConnectionHibernate.getSession();
@@ -199,7 +199,7 @@ public class HibernateMethods<T> {
 	 * @param Double : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColuna(
+	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
 	{
 		Session session = ConnectionHibernate.getSession();
