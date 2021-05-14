@@ -81,25 +81,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel retrieve(int idPosto) {
-		String sqlRetrieveId = "SELECT * FROM grupo2.posto_de_trabalho WHERE id_posto = " + idPosto;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlRetrieveId);
-			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
-			while (rs.next()) {
-				posto.setIdCargo(rs.getInt(1));
-				posto.setIdNivel(rs.getInt(2));
-				posto.setIdSetor(rs.getInt(3));
-				posto.setNomePosto(rs.getString(4));
-				posto.setSalario(rs.getDouble(5));
-				posto.setIdPosto(rs.getInt(6));
-				System.out.println(posto.toString());
-			}
-			return posto;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return ConnectionHibernate.getSession().get(PostoDeTrabalhoModel.class, idPosto);
 	}
 
 	/**
