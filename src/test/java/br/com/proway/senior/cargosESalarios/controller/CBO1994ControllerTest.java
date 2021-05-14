@@ -73,37 +73,37 @@ public class CBO1994ControllerTest {
 	}
 	
 	@Test(expected = Exception.class)
-	public void testAtualizarNivelInexistente() throws Exception {
-		int idInexistente = controller.buscarTodosNiveis().size() + 1;
-		NivelModel ObjetoAtualizado = new NivelModel("Moto");
-		
-		controller.atualizarNivel(idInexistente, ObjetoAtualizado);
+	public void testAtualizarCBO1994Inexistente() throws Exception {
+		int codigo_CBO1994 = controller.cadastrarCBO1994(44576, "desenvolvedor senior", Insalubridade.Zero, Periculosidade.Zero);
+
+		controller.atualizarCBO1994(10000, controller.buscarCBO1994(codigo_CBO1994));
 	}
 
 	@Test
-	public void testDeletarNivel() throws Exception {
-		int sizeAntesDoTest = controller.buscarTodosNiveis().size();
+	public void testDeletarCBO1994() throws Exception {
+		int sizeAntesDoTest = controller.buscarTodosCBO1994().size();
 		
-		int idTest = controller.cadastrarNivel("OutroNivel");
-		controller.deletarNivel(idTest);
-		assertEquals(sizeAntesDoTest, controller.buscarTodosNiveis().size());
+		int codigo_CBO1994 = controller.cadastrarCBO1994(44576, "desenvolvedor senior", Insalubridade.Zero, Periculosidade.Zero);
+		controller.deletarCBO1994(codigo_CBO1994);
+		assertEquals(sizeAntesDoTest, controller.buscarTodosCBO1994().size());
 	}
 	
 	@Test(expected = Exception.class)
-	public void testDeletarNivelInexistente() throws Exception {
-		int idInvalido = controller.buscarTodosNiveis().size();
-		controller.deletarNivel(idInvalido);
+	public void testDeletarCBO1994Inexistente() throws Exception {
+		controller.cadastrarCBO1994(44576, "desenvolvedor senior", Insalubridade.Zero, Periculosidade.Zero);
+		controller.deletarCBO1994(10000);
 	}
 
 	@Test
-	public void testBuscarTodosNiveis() throws Exception {
-		int sizeAntesDoTest = controller.buscarTodosNiveis().size();
+	public void testBuscarTodosCBO1994() throws Exception {
+		int sizeAntesDoTest = controller.buscarTodosCBO1994().size();
 		
-		controller.cadastrarNivel("Um");
-		controller.cadastrarNivel("Dois");
-		controller.cadastrarNivel("Tres");
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Vinte, Periculosidade.Trinta);
+		controller.cadastrarCBO1994(44577, "desenvolvedor pleno", Insalubridade.Vinte, Periculosidade.Trinta);
+		controller.cadastrarCBO1994(44578, "desenvolvedor senior", Insalubridade.Vinte, Periculosidade.Trinta);
 		
-		ArrayList<NivelModel> listaRetornada = controller.buscarTodosNiveis();
+		
+		ArrayList<CBO1994Model> listaRetornada = controller.buscarTodosCBO1994();
 		int sizeDepoisDoTest = listaRetornada.size();
 	
 		assertFalse(listaRetornada.isEmpty());
@@ -111,19 +111,20 @@ public class CBO1994ControllerTest {
 	}
 	
 	@Test
-	public void testBuscarTodosNiveisSemNiveis() throws Exception {
-		controller.deletarTodosNiveis();
-		ArrayList<NivelModel> listaRetornada = controller.buscarTodosNiveis();
+	public void testBuscarTodosCBO1994SemCBO1994Registrados() throws Exception {
+		controller.deletarTodosCBO1994();
+		ArrayList<CBO1994Model> listaRetornada = controller.buscarTodosCBO1994();
 		assertTrue(listaRetornada.isEmpty());
 	}
 
 	@Test
-	public void testDeletarTodosNiveis() throws Exception {
-		controller.cadastrarNivel("Um");
-		controller.cadastrarNivel("Dois");
-		controller.cadastrarNivel("Tres");
-		controller.deletarTodosNiveis();
-		ArrayList<NivelModel> listaRetornada = controller.buscarTodosNiveis();
+	public void testDeletarTodosCBO1994() throws Exception {
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Vinte, Periculosidade.Trinta);
+		controller.cadastrarCBO1994(44577, "desenvolvedor pleno", Insalubridade.Vinte, Periculosidade.Trinta);
+		controller.cadastrarCBO1994(44578, "desenvolvedor senior", Insalubridade.Vinte, Periculosidade.Trinta);
+		
+		controller.deletarTodosCBO1994();
+		ArrayList<CBO1994Model> listaRetornada = controller.buscarTodosCBO1994();
 		assertTrue(listaRetornada.isEmpty());
 	}
 
