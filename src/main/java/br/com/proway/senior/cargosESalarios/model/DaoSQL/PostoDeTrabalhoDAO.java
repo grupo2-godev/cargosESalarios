@@ -148,7 +148,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return boolean
 	 */
 	public boolean delete(int idPosto) {
-		SetorModel entry = retrieve(idPosto);
+		PostoDeTrabalhoModel entry = retrieve(idPosto);
 
 		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
@@ -167,26 +167,13 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return ArrayList<PostoDeTrabalhoModel>
 	 */
 	public ArrayList<PostoDeTrabalhoModel> getAll() {
-		ArrayList<PostoDeTrabalhoModel> results = new ArrayList<PostoDeTrabalhoModel>();
-		String sqlSelectAll = "SELECT * FROM grupo2.posto_de_trabalho";
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlSelectAll);
-			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
-			while (rs.next()) {
-				posto.setIdCargo(rs.getInt(1));
-				posto.setIdNivel(rs.getInt(2));
-				posto.setIdSetor(rs.getInt(3));
-				posto.setNomePosto(rs.getString(4));
-				posto.setSalario(rs.getDouble(5));
-				posto.setIdPosto(rs.getInt(6));
-				System.out.println(posto.toString());
-				results.add(posto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return results;
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
+		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
+		Query query = session.createQuery(criteria);
+		List<PostoDeTrabalhoModel> results = query.getResultList();
+		return new ArrayList<PostoDeTrabalhoModel>(results);
 	}
 
 	public boolean deleteAll() {

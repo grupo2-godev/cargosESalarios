@@ -13,6 +13,7 @@ import org.junit.Test;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 
 /**
@@ -86,8 +87,12 @@ public class PostoDeTrabalhoDAOTest {
 	}
 	
 	@Test
-	public void testDeleteSql() {
-	
+	public void testDeletarPostoDeTrabalho() {
+		int size = postoDAO.getAll().size();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Gerente de Marketing Marcas", 3, 5, 3, 9000.0);
+		int idCriada = postoDAO.create(novoPosto);
+		postoDAO.delete(idCriada);
+		assertEquals(size, postoDAO.getAll().size());
 	}
 	
 	@Test
