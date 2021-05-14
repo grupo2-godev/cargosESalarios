@@ -181,17 +181,16 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	}
 
 	/**
-	 * Método limparTabela
+	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 * 
-	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes. É necessário
-	 * implementar no banco as sequences.
-	 * 
-	 * @throws SQLException
-	 * @return void
+	 * @return boolean Retorna true caso algum registro seja deletado, se der algum erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int registrosModificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cargo").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return registrosModificados > 0 ? true : false;
 	}
 }

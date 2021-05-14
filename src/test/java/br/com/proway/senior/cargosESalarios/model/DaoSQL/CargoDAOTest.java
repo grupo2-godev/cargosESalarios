@@ -139,7 +139,7 @@ public class CargoDAOTest {
 
 	@Before
 	public void limparTabela() throws SQLException {
-		cargoDAO.limparTabela();
+		cargoDAO.deleteAll();
 		assertEquals(0, cargoDAO.getAll().size());
 	}
 }
