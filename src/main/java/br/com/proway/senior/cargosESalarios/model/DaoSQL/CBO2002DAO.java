@@ -58,11 +58,11 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return int id Id do registro.
 	 */
 	public int create(CBO2002Model cbo2002) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		Integer codigoCadastrado = (Integer) ConnectionHibernate.getSession().save(cbo2002);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer codigoCadastrado = (Integer) session.save(cbo2002);
+		session.getTransaction().commit();
 		return codigoCadastrado;
 	}
 
@@ -76,7 +76,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return CBO2002Model
 	 */
 	public CBO2002Model retrieve(int codigoCBO2002) {
-		CBO2002Model results = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCBO2002);
+		CBO2002Model results = session.get(CBO2002Model.class, codigoCBO2002);
 		System.out.println(results.toString());
 		return results;
 	}
@@ -93,14 +93,14 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 */
 	public boolean update(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
 		CBO2002Model original = retrieve(codigoCBO2002);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		original.setDescricao(cbo2002Alterado.getDescricao());
 		original.setPercentualInsalubridade(cbo2002Alterado.getPercentualInsalubridade());
 		original.setPercentualPericulosidade(cbo2002Alterado.getPercentualPericulosidade());
-		ConnectionHibernate.getSession().update(original);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(original);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -116,11 +116,11 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	public boolean delete(int codigoCBO2002) {
 		CBO2002Model entry = retrieve(codigoCBO2002);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(entry);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(entry);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -133,7 +133,6 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return ArrayList CBO2002Model
 	 */
 	public ArrayList<CBO2002Model> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
 		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
@@ -150,11 +149,11 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cbo2002").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		int modificados = session.createSQLQuery("DELETE FROM cbo2002").executeUpdate();
+		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

@@ -60,12 +60,12 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return id do setor cadastrado
 	 */
 	public int create(SetorModel novoSetor) {
-		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(novoSetor);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer idCadastrado = (Integer) session.save(novoSetor);
+		session.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -79,7 +79,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return SetorModel
 	 */
 	public SetorModel retrieve(int idSetor) {
-		return ConnectionHibernate.getSession().get(SetorModel.class, idSetor);
+		return session.get(SetorModel.class, idSetor);
 	}
 
 	/**
@@ -93,7 +93,6 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return SetorModel
 	 */
 	public ArrayList<SetorModel> retrieveByName(String nomeSetor) {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
@@ -116,13 +115,13 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 */
 	public boolean update(int idSetor, SetorModel setorAtualizado) {
 		SetorModel original = retrieve(idSetor);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		original.setNomeSetor(setorAtualizado.getNomeSetor());
 		original.setIdPermissao(setorAtualizado.getIdPermissao());
-		ConnectionHibernate.getSession().update(original);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(original);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -137,11 +136,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	public boolean delete(int idSetor) {
 		SetorModel entry = retrieve(idSetor);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(entry);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(entry);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -154,7 +153,6 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return ArrayList SetorModel
 	 */
 	public ArrayList<SetorModel> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
@@ -171,11 +169,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM setor").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		int modificados = session.createSQLQuery("DELETE FROM setor").executeUpdate();
+		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 
