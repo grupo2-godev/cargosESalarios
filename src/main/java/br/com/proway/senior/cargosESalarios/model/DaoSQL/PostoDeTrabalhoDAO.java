@@ -124,23 +124,19 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return boolean
 	 */
-	public boolean update(int idPosto, PostoDeTrabalhoModel postoModel) {
-		String sqlUpdate = "UPDATE grupo2.posto_de_trabalho SET nome_posto = ?, id_cargo = ?, "
-				+ "id_setor = ?, id_nivel = ?, salario = ? WHERE id_posto = " + idPosto;
-		PreparedStatement pstmt;
-		try {
-			pstmt = conexao.criarConexao().prepareStatement(sqlUpdate);
-			pstmt.setString(1, postoModel.getNomePosto());
-			pstmt.setInt(2, postoModel.getIdCargo());
-			pstmt.setInt(3, postoModel.getIdSetor());
-			pstmt.setInt(4, postoModel.getIdNivel());
-			pstmt.setDouble(5, postoModel.getSalario());
-			pstmt.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public boolean update(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
+		PostoDeTrabalhoModel original = retrieve(idPosto);
+		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		original.setNomePosto(postoAtualizado.getNomePosto());
+		original.setIdCargo(postoAtualizado.getIdCargo());
+		original.setIdSetor(postoAtualizado.getIdSetor());
+		original.setIdNivel(postoAtualizado.getIdNivel());
+		original.setSalario(postoAtualizado.getSalario());
+		ConnectionHibernate.getSession().update(original);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
