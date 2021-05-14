@@ -26,20 +26,6 @@ public class PostoDeTrabalhoDAOTest {
 	
 	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(ConnectionHibernate.getSession());
 
-	String nomePosto = "Desenvolvedor(a)";
-	Integer idCargo = 3;
-	Integer idSetor = 4;
-	Integer idNivel = 1;
-	Double salario = 1800.00;
-	PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
-	String nomePosto2 = "Scrum Master";
-	Integer idCargo2 = 6;
-	Integer idSetor2 = 3;
-	Integer idNivel2 = 4;
-	Double salario2 = 3000.00;
-	PostoDeTrabalhoModel posto2 = new PostoDeTrabalhoModel(nomePosto2, idCargo2, idSetor2, idNivel2, salario2);
-	
-	
 	@Test
 	public void testInserirNovoPostoDeTrabalho() throws SQLException {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor HCM", 213, 33, 2, 2500.00);
@@ -96,8 +82,12 @@ public class PostoDeTrabalhoDAOTest {
 	}
 	
 	@Test
-	public void testGetAll() {
-	
+	public void testBuscarTodosOsPostosDeTrabalho() {
+		PostoDeTrabalhoModel novoPosto1 = new PostoDeTrabalhoModel("Coordenador de Suporte", 4, 6, 3, 6000.0);
+		PostoDeTrabalhoModel novoPosto2 = new PostoDeTrabalhoModel("Coordenador de Atendimento", 3, 6, 3, 6500.0);
+		postoDAO.create(novoPosto1);
+		postoDAO.create(novoPosto2);
+		assertFalse(postoDAO.getAll().isEmpty());		
 	}
 	
 	@After
