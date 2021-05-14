@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
@@ -18,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 public class SetorController {
 
-	SetorDAO setorDAO = new SetorDAO();
+	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
 
 	/**
 	 * Cadastra na tabela setor um objeto do tipo {@link CargoModel}.
@@ -31,11 +32,11 @@ public class SetorController {
 	 * @return Integer/null id do setor se foi possivel ser criado
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		if (setorDAO.retrieve(nomeSetor).toString().isEmpty()) {
+		if (setorDAO.retrieveByName(nomeSetor).toString().isEmpty()) {
 			return null;
 		} else {
-			SetorModel newSetor = new SetorModel(nomeSetor, idPermissao);
-			int quantidadeRegistros = setorDAO.create(newSetor);
+			SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
+			int quantidadeRegistros = setorDAO.create(novoSetor);
 			return quantidadeRegistros;
 		}
 	}
@@ -100,8 +101,8 @@ public class SetorController {
 	 * @param idSetor
 	 * @return SetorModel
 	 */
-	public SetorModel buscarSetor(String nomeSetor) {
-		return setorDAO.retrieve(nomeSetor);
+	public ArrayList<SetorModel> buscarSetor(String nomeSetor) {
+		return setorDAO.retrieveByName(nomeSetor);
 	}
 
 }

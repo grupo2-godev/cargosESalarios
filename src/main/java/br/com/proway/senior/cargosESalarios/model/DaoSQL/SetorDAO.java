@@ -17,7 +17,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
- * Classe SetoroDaoSql
+ * Classe SetorDAO
  * 
  * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
  * banco de dados.
@@ -42,6 +42,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 		return instance;
 	}
 
+	public SetorDAO() {}
+	
 	/**
 	 * Construtor da classe SetorDAO, utilizado no Singleton.
 	 * 
