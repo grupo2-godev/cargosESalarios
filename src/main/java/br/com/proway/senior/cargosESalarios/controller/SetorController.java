@@ -89,7 +89,7 @@ public class SetorController {
 	 * @param idSetor
 	 * @return SetorModel
 	 */
-	public SetorModel buscarSetor(Integer idSetor) {
+	public SetorModel buscarSetorPorId(Integer idSetor) {
 		return setorDAO.retrieve(idSetor);
 	}
 
@@ -101,8 +101,24 @@ public class SetorController {
 	 * @param idSetor
 	 * @return SetorModel
 	 */
-	public ArrayList<SetorModel> buscarSetor(String nomeSetor) {
+	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
 		return setorDAO.retrieveByName(nomeSetor);
 	}
 
+	/**
+	 * Deletar todos os setores.
+	 * 
+	 * Realiza a exclusão no banco de dados de todos os registros de setores
+	 * cadastrados.
+	 * 
+	 * @return boolean
+	 */
+	public boolean deletarTodosSetores() {
+		setorDAO.deleteAll();
+		if(!setorDAO.getAll().isEmpty()) {
+			return false;
+		}	
+		return true;
+	}
+	
 }
