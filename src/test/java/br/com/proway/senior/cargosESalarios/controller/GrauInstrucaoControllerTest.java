@@ -48,15 +48,15 @@ public class GrauInstrucaoControllerTest {
 	}
 
 	@Test
-	public void buscarPorNomeQueContenha() throws Exception {
+	public void testBuscarPorNomeQueContenha() throws Exception {
 		controller.cadastrar("Ensino Medio Completo");
 		controller.cadastrar("Ensino Medio Incompleto");
 		assertEquals(2, controller.buscarPorNomeQueContenha("Ensino Medio").size());
-		assertNull(controller.buscarPorNomeQueContenha("Palavra aleatória").size());
+		assertEquals(0, controller.buscarPorNomeQueContenha("Palavra aleatória").size());
 	}
 	
 	@Test(expected = Exception.class)
-	public void buscarPorNomeQueContenhaInvalido() throw Exception {
+	public void testBuscarPorNomeQueContenhaInvalido() throws Exception {
 		controller.buscarPorNomeQueContenha("Ensino@!#");
 	}
 	
@@ -95,8 +95,7 @@ public class GrauInstrucaoControllerTest {
 		controller.cadastrar("Ensino Medio Completo");
 		controller.cadastrar("Ensino Medio Incompleto");
 		assertEquals(2, controller.buscarTodos().size());
-		boolean sucesso = controller.deletarTodos();
-		assertTrue(sucesso);
+		controller.deletarTodos();
 		ArrayList<GrauInstrucaoModel> lista = controller.buscarTodos();
 		assertTrue(lista.isEmpty());
 	}

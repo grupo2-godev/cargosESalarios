@@ -36,11 +36,39 @@ public class GrauInstrucaoController {
 		return grauInstrucaoDAO.create(grauInstrucaoModel);
 	}
 
+	/**
+	 * Retorna objeto do tipo {@link GrauInstrucaoModel} que contenha o id igual ao
+	 * id recebido no parametro.
+	 * 
+	 * Verifica se o id eh valido, nao pode ser nulo ou igual a zero.
+	 * 
+	 * @param id Integer Id do objeto a ser consultado.
+	 * @return GrauInstrucaoModel Objeto encontrado no banco de dados.
+	 * @throws Exception
+	 */
 	public GrauInstrucaoModel buscarPorId(Integer id) throws Exception {
 		if (id == null || id == 0) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
 		return grauInstrucaoDAO.retrieve(id);
+	}
+
+	/**
+	 * Retorna ArrayList de objetos do tipo {@link GrauInstrucaoModel} que possuam a
+	 * palavra recebida no parametro na coluna instrucao.
+	 * 
+	 * Verifica se a palavra nao contem caracteres especias antes de consultar no
+	 * banco de dados.
+	 * 
+	 * @param nome String Palavra a ser consultada.
+	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos encontrados.
+	 * @throws Exception
+	 */
+	public ArrayList<GrauInstrucaoModel> buscarPorNomeQueContenha(String nome) throws Exception {
+		if (!Validators.onlyValidChars(nome)) {
+			throw (new Exception("A palavra de consulta não pode ter caracteres especiais."));
+		}
+		return grauInstrucaoDAO.retrieveNameCountains(nome);
 	}
 
 	/**
@@ -55,16 +83,9 @@ public class GrauInstrucaoController {
 
 	/**
 	 * Deleta todos os registros da tabela.
-	 * 
-	 * @return boolean Retorna false caso a validacao apos o comando de deletarTodos
-	 *         retorne algum registro da tabela. Caso contrario, retorna true.
 	 */
-	public boolean deletarTodos() {
+	public void deletarTodos() {
 		grauInstrucaoDAO.deleteAll();
-		if (this.buscarTodos().size() > 0) {
-			return false;
-		}
-		return true;
 	}
 
 }
