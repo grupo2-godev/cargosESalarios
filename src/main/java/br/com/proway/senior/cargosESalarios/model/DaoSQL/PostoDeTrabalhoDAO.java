@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
@@ -59,32 +60,15 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * Recebe um objeto cargo para inserir no banco de dados.
 	 * 
 	 * @param PostoDeTrabalhoModel postoModel
-	 * @return quantidade
+	 * @return Id do posto de trabalho cadastrado
 	 */
 	public int create(PostoDeTrabalhoModel postoModel) {
-		String sqlInsert = "INSERT INTO grupo2.posto_de_trabalho (nome_posto, id_cargo, id_setor, id_nivel, salario) "
-				+ "VALUES (?, ?, ?, ?, ?)";
-		int quantidadeRegistros = 0;
-		try {
-			PreparedStatement pstmt = conexao.criarConexao().prepareStatement(sqlInsert);
-			pstmt.setString(1, postoModel.getNomePosto());
-			pstmt.setInt(2, postoModel.getIdCargo());
-			pstmt.setInt(3, postoModel.getIdSetor());
-			pstmt.setInt(4, postoModel.getIdNivel());
-			pstmt.setDouble(5, postoModel.getSalario());
-			pstmt.execute();
-			pstmt.close();
-			String sqlCount = "SELECT COUNT(*) FROM grupo2.posto_de_trabalho";
-			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
-			rs.next();
-			quantidadeRegistros = rs.getInt(1);
-			System.out.println("Posto de Trabalho cadastrado com sucesso.");
-			return quantidadeRegistros;
-		} catch (SQLException e) {
-			System.out.println("Falha ao cadastrar Posto de Trabalho");
-			e.printStackTrace();
+		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return quantidadeRegistros;
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(postoModel);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return idCadastrado;
 	}
 
 	/**
