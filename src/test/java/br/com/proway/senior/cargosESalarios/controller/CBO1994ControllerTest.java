@@ -48,28 +48,28 @@ public class CBO1994ControllerTest {
 	}
 	
 	@Test (expected = Exception.class)
-	public void testBuscarNivelInvalido() throws Exception {
-		controller.cadastrarNivel("Invalidando");
-		controller.cadastrarNivel("Invalidandooo");
-		int ultimoId = controller.cadastrarNivel("Invalidandoooooooo");
-		
-		controller.buscarNivel(ultimoId+ 1);
+	public void testBuscarCBO1994Invalido() throws Exception {
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Zero, Periculosidade.Zero);		
+		controller.cadastrarCBO1994(44578, "desenvolvedor senior", Insalubridade.Dez, Periculosidade.Trinta);
+
+		controller.buscarCBO1994(54000);
 	}
 
 	@Test
-	public void testAtualizarNivel() throws Exception {
-		int idASerAtualizado = controller.cadastrarNivel("Carro");
-		NivelModel ObjetoAtualizado = new NivelModel("Moto");
+	public void testAtualizarCBO1994() throws Exception {
+		int codigo_CBO1994 = controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Zero, Periculosidade.Zero);
 		
-		assertTrue(controller.atualizarNivel(idASerAtualizado, ObjetoAtualizado));
+		CBO1994Model objetoAtualizado = new CBO1994Model(44576, "desenvolvedor senior", Insalubridade.Zero.getValor(), Periculosidade.Zero.getValor());
+		
+		assertTrue(controller.atualizarCBO1994(codigo_CBO1994, objetoAtualizado));
 	}
 	
 	@Test
-	public void testAtualizarNivelObjetosIguais() throws Exception {
-		int idASerAtualizado = controller.cadastrarNivel("Moto");
-		NivelModel ObjetoAtualizado = new NivelModel("Moto");
+	public void testAtualizarCBO1994ObjetosIguais() throws Exception {
+		int codigo_CBO1994 = controller.cadastrarCBO1994(44576, "desenvolvedor senior", Insalubridade.Zero, Periculosidade.Zero);
+		CBO1994Model objetoAtualizado = new CBO1994Model(44576, "desenvolvedor senior", Insalubridade.Zero.getValor(), Periculosidade.Zero.getValor());
 		
-		assertFalse(controller.atualizarNivel(idASerAtualizado, ObjetoAtualizado));
+		assertFalse(controller.atualizarCBO1994(codigo_CBO1994, objetoAtualizado));
 	}
 	
 	@Test(expected = Exception.class)

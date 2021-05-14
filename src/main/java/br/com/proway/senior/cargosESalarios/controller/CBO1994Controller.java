@@ -85,10 +85,10 @@ public class CBO1994Controller {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
 		
-		if(original.getCodigo_cbo() == objetoAlterado.getCodigo_cbo() &&
+		if((int) original.getCodigo_cbo() == (int) objetoAlterado.getCodigo_cbo() &&
 		   original.getDescricao() == objetoAlterado.getDescricao() &&
-		   original.getPercentualInsalubridade() == objetoAlterado.getPercentualInsalubridade() &&
-		   original.getPercentualPericulosidade() == objetoAlterado.getPercentualInsalubridade()) {
+		   (double) original.getPercentualInsalubridade() == (double) objetoAlterado.getPercentualInsalubridade() &&
+		   (double) original.getPercentualPericulosidade() == (double) objetoAlterado.getPercentualInsalubridade()) {
 			return false;
 		}
 		
