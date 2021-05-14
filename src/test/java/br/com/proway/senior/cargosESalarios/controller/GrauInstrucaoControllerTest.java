@@ -60,6 +60,14 @@ public class GrauInstrucaoControllerTest {
 		controller.buscarPorNomeQueContenha("Ensino@!#");
 	}
 	
+	@Test
+	public void testAlterar() throws Exception {
+		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel();
+		grauInstrucao.setNome("Ensino Alterado");
+		controller.alterar(idCadastrado, grauInstrucao);
+		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
+	}
 	
 //	@Test
 //	void testDeletarGraunstrucao() {
@@ -73,13 +81,6 @@ public class GrauInstrucaoControllerTest {
 //		controller.cadastrarGrauInstrucao("Ensino Medio");
 //		assertFalse(controller.deletarGrauInstrucao(1));
 //		assertEquals(1, dao.getAll().size());
-//	}
-//	
-//	@Test
-//	void testAtualizarGrauInstrucao( ) {
-//		controller.cadastrarGrauInstrucao("Ensino Medio");
-//		assertTrue(controller.atualizarGrauInstrucao(0, "Ensino Superior"));
-//		assertEquals(dao.retrieve(0).getInstrucao(), "Ensino Superior");
 //	}
 
 	@Test
