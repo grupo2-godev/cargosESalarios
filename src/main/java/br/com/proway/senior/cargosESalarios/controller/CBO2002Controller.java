@@ -1,0 +1,54 @@
+package br.com.proway.senior.cargosESalarios.controller;
+
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
+import utils.Insalubridade;
+import utils.Periculosidade;
+import utils.Validators;
+
+/**
+ * Classe CBO2002Controller
+ * 
+ * Faz contato com a classe DAO, faz as devidas tratativas com entrada e saida
+ * de dados.
+ * 
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ *
+ */
+public class CBO2002Controller {
+
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
+
+	
+	/**
+	 * /**
+	 * Cadastrar na banco de dados um CBO 2002.
+	 *  
+	 * Verifica se ja existe um CBO 2002 com o mesmo codigo, se nao existir, registra o
+	 * objeto. Se ja existir um CBO 2002 com o mesmo codigo, retorna nulo. Valida tambem
+	 * a quantidade de caracteres do codigoCBO, visto que o padrao eh 6.
+	 * 
+	 * @param codigoCBO
+	 * @param descricao
+	 * @param percentualInsalubridade
+	 * @param percentualPericulosidade
+	 * @return
+	 */
+	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
+			Periculosidade percentualPericulosidade) {
+		if (cbo2002DAO.retrieve(codigoCBO).toString().isEmpty()) {
+			System.out.println("Código de CBO 2002 informado já cadastrado.");
+			return null;
+		}
+		if (Validators.validarCodigoCBO2002(codigoCBO) == true) {
+			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
+					percentualPericulosidade.getValor());
+			cbo2002DAO.create(novoCBO2002);
+			return codigoCBO;
+
+		} else {
+			return 0;
+		}
+	}
+}

@@ -6,7 +6,7 @@ package utils;
  * Esta classe é utilizada para definir métodos que são utilitários de diversas
  * partes do sistema.
  * 
- * @author * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
@@ -25,6 +25,23 @@ public class Validators {
 	static public boolean onlyValidChars(String verify) {
 		return !verify.matches(
 				".*[0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]+.*");
+	}
+	
+	/**
+	 * Validar a quantidade de caracteres do CBO 2002.
+	 * 
+	 * Metodo verifica se o codigo de CBO 2002 informado eh valido, o padrao
+	 * sao 6 caracteres.
+	 * 
+	 * @param Integer codigoCBO2002
+	 * @return boolean
+	 */
+	static public boolean validarCodigoCBO2002(Integer codigoCBO2002) {
+		if(codigoCBO2002.SIZE > 6) {
+			System.out.println("Inválido, o CBO 2002 possui é composto por 6 múmeros.");
+			return false;
+		}
+		return true;
 	}
 }
 
