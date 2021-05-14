@@ -72,6 +72,32 @@ public class GrauInstrucaoController {
 	}
 
 	/**
+	 * Altera o objeto no banco de dados que possui o id recebido no parametro.
+	 * 
+	 * Verifica se existe no banco de dados um objeto com o id informado e verifica
+	 * tambem se o objeto recebido no parametro nao eh nulo. Localizando o objeto no
+	 * banco, efetua a alteracao para o objeto recebido no parametro.
+	 * 
+	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado
+	 * @param novoObjeto           GrauInstrucaoModel Objeto que possui as
+	 *                             alteracoes que substituirao o objeto do banco de
+	 *                             dados.
+	 * @return boolean Retorna true caso nao encontre nenhum erro durante a
+	 *         verificacao, inclusive a busca pelo objeto no banco de dados pelo id.
+	 * @throws Exception 
+	 */
+	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
+		if(this.buscarPorId(idObjetoASerAlterado) == null) {
+			throw(new Exception("O objeto não existe no banco de dados."));
+		}
+		if(novoObjeto == null) {
+			throw(new Exception("O objeto não pode ser nulo."));
+		}
+		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
+		return true;
+	}
+
+	/**
 	 * Retorna um ArrayList com todos os registros da tabela.
 	 * 
 	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos do tipo
