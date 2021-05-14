@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
+import utils.Insalubridade;
+import utils.Periculosidade;
 
 public class CBO1994ControllerTest {
 	
@@ -24,7 +26,7 @@ public class CBO1994ControllerTest {
 	public void testCadastrarUmCBO1994() throws Exception {
 		int sizeOriginal = controller.buscarTodosCBO1994().size();
 		
-		controller.cadastrarCBO1994(44576, "desenvolvedor", 0.3, 0.4);
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Quarenta, Periculosidade.Zero);
 		
 		assertEquals(sizeOriginal+1, controller.buscarTodosCBO1994().size());
 	}
@@ -36,9 +38,9 @@ public class CBO1994ControllerTest {
 
 	@Test
 	public void testBuscarCBO1994() throws Exception {
-		controller.cadastrarCBO1994(44576, "desenvolvedor", 0.3, 0.4);
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Zero, Periculosidade.Zero);
 		
-		int codigo_CBO1994 = controller.cadastrarCBO1994(44578, "desenvolvedor senior", 0.3, 0.4);
+		int codigo_CBO1994 = controller.cadastrarCBO1994(44578, "desenvolvedor senior", Insalubridade.Dez, Periculosidade.Trinta);
 		
 		assertEquals(controller.buscarCBO1994(codigo_CBO1994).getCodigo_cbo(), (Integer) 44578);		
 		assertEquals(controller.buscarCBO1994(codigo_CBO1994).getDescricao(), "desenvolvedor senior");
