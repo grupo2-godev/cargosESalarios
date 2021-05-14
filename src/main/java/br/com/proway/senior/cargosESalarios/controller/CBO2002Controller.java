@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
 import utils.Insalubridade;
 import utils.Periculosidade;
@@ -51,4 +52,18 @@ public class CBO2002Controller {
 			return 0;
 		}
 	}
+	
+	
+	/**
+	 * Buscar CBO 2002 por codigo.
+	 * 
+	 * Realiza a busca do CBO 2002 conforme codigo informado e retorna o objeto do mesmo.
+	 * 
+	 * @param Integer codigoCBO Identificacao do CBO 2002 procurado.
+	 * @return CBO2002Model objeto localizado ou null caso nao conste no banco.
+	 */
+	public CBO2002Model buscarSetorPorId(Integer codigoCBO) {
+		return cbo2002DAO.retrieve(codigoCBO);
+	}
+	
 }
