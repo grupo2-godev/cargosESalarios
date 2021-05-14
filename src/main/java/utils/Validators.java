@@ -54,8 +54,8 @@ public class Validators {
 	 * @param Integer codigoCBO2002
 	 * @return boolean
 	 */
-	static public boolean validarCodigoCBO2002(Integer codigoCBO2002) {
-		if(codigoCBO2002.toString().length() > 6) {
+	static public boolean isCBO2002Valid(Integer codigoCBO2002) {
+		if(codigoCBO2002.toString().length() != 6) {
 			return false;
 		}
 		return true;

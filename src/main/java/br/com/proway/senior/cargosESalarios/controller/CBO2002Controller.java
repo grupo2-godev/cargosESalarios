@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
 import utils.Insalubridade;
 import utils.Periculosidade;
@@ -37,16 +36,19 @@ public class CBO2002Controller {
 	 */
 	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
 			Periculosidade percentualPericulosidade) {
-		if (Validators.validarCodigoCBO2002(codigoCBO) == false
-				|| !cbo2002DAO.retrieve(codigoCBO)) {
-			System.out.println("Código de CBO 2002 informado já cadastrado ou inválido.");
+		if (Validators.isCBO2002Valid(codigoCBO) == false) {
+			System.out.println("Código de CBO 2002 informado inválido.");
 			return null;
-		} else {
+		} 
+		if (!(cbo2002DAO.retrieve(codigoCBO) == null)) {
+			System.out.println("Código de CBO 2002 informado já cadastrado.");
+			return null;
+		} 
 			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
 					percentualPericulosidade.getValor());
 			cbo2002DAO.create(novoCBO2002);
 			return codigoCBO;
-		}
+		
 	}
 
 	/**

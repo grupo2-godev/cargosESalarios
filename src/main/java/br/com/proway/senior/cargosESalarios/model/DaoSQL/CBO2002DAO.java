@@ -77,7 +77,6 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 */
 	public CBO2002Model retrieve(int codigoCBO2002) {
 		CBO2002Model results = session.get(CBO2002Model.class, codigoCBO2002);
-		System.out.println(results.toString());
 		return results;
 	}
 
