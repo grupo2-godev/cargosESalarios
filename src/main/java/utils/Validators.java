@@ -37,8 +37,7 @@ public class Validators {
 	 * @return boolean
 	 */
 	static public boolean validarCodigoCBO2002(Integer codigoCBO2002) {
-		if(codigoCBO2002.SIZE > 6) {
-			System.out.println("Inválido, o CBO 2002 possui é composto por 6 múmeros.");
+		if(codigoCBO2002.toString().length() > 6) {
 			return false;
 		}
 		return true;
