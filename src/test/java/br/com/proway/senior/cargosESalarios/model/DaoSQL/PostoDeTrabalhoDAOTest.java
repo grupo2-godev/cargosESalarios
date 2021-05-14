@@ -10,17 +10,20 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 
 /**
- * Classes de testes para o PostoDeTrabalhoDaoSql.
+ * Classes de testes para o PostoDeTrabalhoDAO.
  * 
- * @author Sarah Brito, sarah.brito@senior.com.br
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> 
  */
 
 public class PostoDeTrabalhoDAOTest {
+	
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(ConnectionHibernate.getSession());
 
 	String nomePosto = "Desenvolvedor(a)";
 	Integer idCargo = 3;
@@ -34,59 +37,43 @@ public class PostoDeTrabalhoDAOTest {
 	Integer idNivel2 = 4;
 	Double salario2 = 3000.00;
 	PostoDeTrabalhoModel posto2 = new PostoDeTrabalhoModel(nomePosto2, idCargo2, idSetor2, idNivel2, salario2);
-	PostoDeTrabalhoDAO postoSql = new PostoDeTrabalhoDAO();
-	ConnectionPostgres conexao = new ConnectionPostgres();
 	
 	
 	@Test
-	public void testCreateSql() throws SQLException {
-		assertEquals(1, postoSql.create(posto));
+	public void testInserirNovoPostoDeTrabalho() throws SQLException {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor I", 213, 33, 2, 2500.00);
+		Integer idPostoCadastrado = postoDAO.create(novoPosto);
+		Object postoConsultado = ConnectionHibernate.getSession().get(PostoDeTrabalhoModel.class, idPostoCadastrado);
+		assertEquals(idPostoCadastrado, ((PostoDeTrabalhoModel) postoConsultado).getIdPosto());
 	}
 	
 	@Test
 	public void testRetrieveSqlId() {
-		postoSql.create(posto);
-		postoSql.create(posto2);
-		PostoDeTrabalhoModel postoRecuperado = new PostoDeTrabalhoModel();
-		postoRecuperado = postoSql.retrieve(2);
-		assertEquals(nomePosto2, postoRecuperado.getNomePosto());
+	
 	}
 		
 	@Test
 	public void testUpdateSql() {
-		postoSql.create(posto);
-		postoSql.create(posto2);
-		assertTrue(postoSql.update(2, posto2));	
+
 	}
 	
 	@Test
 	public void testRetrieveSqlNome() {
-		postoSql.create(posto);
-		postoSql.create(posto2);
-		PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
-		posto = postoSql.retrieve("Scrum Master");
-		assertEquals(idSetor2, posto.getIdSetor());
+	
 	}
 	
 	@Test
 	public void testDeleteSql() {
-		postoSql.create(posto);
-		postoSql.create(posto2);
-		assertTrue(postoSql.delete(1));
+	
 	}
 	
 	@Test
 	public void testGetAll() {
-		postoSql.create(posto);
-		postoSql.create(posto2);
-		ArrayList<PostoDeTrabalhoModel> listaPostos = new ArrayList<PostoDeTrabalhoModel>();
-		listaPostos = postoSql.getAll();
-		assertFalse(listaPostos.isEmpty());
-		assertEquals(2, listaPostos.size());
+	
 	}
 	
 	@After
 	public void limparTabela() throws SQLException {
-			postoSql.limparTabela();
+			
 	}
 }
