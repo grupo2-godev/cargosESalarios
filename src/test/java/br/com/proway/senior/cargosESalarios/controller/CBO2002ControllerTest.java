@@ -25,6 +25,12 @@ public class CBO2002ControllerTest {
 	}
 
 	@Test
-	public void testBuscarCBO2002PorCodigo() {}
-	
+	public void testBuscarCBO2002PorCodigo() {
+		Integer codigo = cboController.cadastrarCBO2002(123456, "Gerente de Loja", Insalubridade.Dez, Periculosidade.Zero);
+		CBO2002Model cboRecuperado = cboController.buscarSetorPorId(codigo);
+		assertEquals((Integer) 123456, cboRecuperado.getCodigoCBO2002());
+		assertEquals("Gerente de Loja", cboRecuperado.getDescricao());
+		assertEquals(0.1, cboRecuperado.getPercentualInsalubridade(), 0.01);
+		assertEquals(0.0, cboRecuperado.getPercentualPericulosidade(), 0.01);
+	}
 }
