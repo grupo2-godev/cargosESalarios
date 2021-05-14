@@ -14,6 +14,8 @@ public class NivelModel {
 	
 	private String nomeNivel;
 	
+	public NivelModel() {}
+	
 	public NivelModel(String nome) {
 		this.nomeNivel = nome;
 	}
