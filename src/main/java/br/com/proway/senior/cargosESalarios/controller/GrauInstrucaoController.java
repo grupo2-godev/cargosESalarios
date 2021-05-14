@@ -47,7 +47,7 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public GrauInstrucaoModel buscarPorId(Integer id) throws Exception {
-		if (id == null || id == 0) {
+		if (Validators.isZeroOrNull(id)) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
 		return grauInstrucaoDAO.retrieve(id);
@@ -87,10 +87,10 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
-		if (novoObjeto.getNome() == null) {
+		if (Validators.isNullObject(novoObjeto.getNome())) {
 			throw (new Exception("O objeto não pode ser nulo."));
 		}
-		if (this.buscarPorId(idObjetoASerAlterado) == null) {
+		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 		
@@ -111,13 +111,10 @@ public class GrauInstrucaoController {
 	 * @throws Exception 
 	 */
 	public boolean deletarPorId(Integer id) throws Exception {
-		if (id == null) {
-			throw (new Exception("O id não pode ser nulo."));
+		if (Validators.isZeroOrNull(id)) {
+			throw (new Exception("O id não pode ser nulo ou igual a zero."));
 		}
-		if (id == 0) {
-			throw (new Exception("O id não pode ser igual a zero."));
-		}
-		if (this.buscarPorId(id) == null) {
+		if (Validators.isNullObject(this.buscarPorId(id))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 		grauInstrucaoDAO.delete(id);
