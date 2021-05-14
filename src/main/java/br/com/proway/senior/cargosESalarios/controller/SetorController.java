@@ -120,12 +120,8 @@ public class SetorController {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deletarTodosSetores() {
+	public void deletarTodosSetores() {
 		setorDAO.deleteAll();
-		if (!setorDAO.getAll().isEmpty()) {
-			return false;
-		}
-		return true;
 	}
 
 }

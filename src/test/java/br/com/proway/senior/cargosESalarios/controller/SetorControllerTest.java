@@ -38,6 +38,12 @@ public class SetorControllerTest {
 	}
 	
 	@Test
+	public void testCadastrarSetorNull() {
+		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		assertNull(setorController.cadastrarSetor(nomeSetor1, idPermissao1));
+	}
+	
+	@Test
 	public void testDeletarSetor() {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		assertTrue(setorController.deletarSetor(idCadastrada));
