@@ -41,7 +41,7 @@ public class PostoDeTrabalhoDAOTest {
 	
 	@Test
 	public void testInserirNovoPostoDeTrabalho() throws SQLException {
-		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor I", 213, 33, 2, 2500.00);
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor HCM", 213, 33, 2, 2500.00);
 		Integer idPostoCadastrado = postoDAO.create(novoPosto);
 		Object postoConsultado = ConnectionHibernate.getSession().get(PostoDeTrabalhoModel.class, idPostoCadastrado);
 		assertEquals(idPostoCadastrado, ((PostoDeTrabalhoModel) postoConsultado).getIdPosto());
@@ -49,7 +49,14 @@ public class PostoDeTrabalhoDAOTest {
 	
 	@Test
 	public void testRetrieveSqlId() {
-	
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor ERP", 23, 5, 1, 2900.00);
+		Integer idPostoCadastrado = postoDAO.create(novoPosto);
+		PostoDeTrabalhoModel postoConsultado = postoDAO.retrieve(idPostoCadastrado);
+		assertEquals(novoPosto.getNomePosto(), postoConsultado.getNomePosto());
+		assertEquals(novoPosto.getIdCargo(), postoConsultado.getIdCargo());
+		assertEquals(novoPosto.getIdSetor(), postoConsultado.getIdSetor());
+		assertEquals(novoPosto.getIdNivel(), postoConsultado.getIdNivel());
+		assertEquals(novoPosto.getSalario(), postoConsultado.getSalario());
 	}
 		
 	@Test
