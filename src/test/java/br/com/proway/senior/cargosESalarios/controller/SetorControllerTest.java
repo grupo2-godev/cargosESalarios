@@ -71,7 +71,7 @@ public class SetorControllerTest {
 	public void testBuscarSetorNome() {
 		SetorModel novoSetor = new SetorModel("Financeiro", 2);
 		setorController.cadastrarSetor(novoSetor.getNomeSetor(), novoSetor.getIdPermissao());
-		ArrayList<SetorModel> setorProcurado = setorController.buscarSetorPorNome(novoSetor.getNomeSetor());
+		ArrayList<SetorModel> setorProcurado = setorController.buscarSetorPorNome("Finan");
 		assertEquals(1, setorProcurado.size());	
 	}
 	
