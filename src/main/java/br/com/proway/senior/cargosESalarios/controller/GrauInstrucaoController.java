@@ -1,5 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
+import java.util.ArrayList;
+
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
@@ -32,6 +34,14 @@ public class GrauInstrucaoController {
 		GrauInstrucaoModel grauInstrucaoModel = new GrauInstrucaoModel();
 		grauInstrucaoModel.setNome(grauInstrucao);
 		return grauInstrucaoDAO.create(grauInstrucaoModel);
+	}
+	
+	/**
+	 * Retorna um ArrayList com todos os registros da tabela.
+	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos do tipo {@link GrauInstrucaoModel}
+	 */
+	public ArrayList<GrauInstrucaoModel> buscarTodos() {
+		return grauInstrucaoDAO.getAll();
 	}
 
 }
