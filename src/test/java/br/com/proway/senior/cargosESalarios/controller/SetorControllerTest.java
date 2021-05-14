@@ -28,12 +28,12 @@ public class SetorControllerTest {
 	String nomeSetor2 = "Gestao de Pessoas";
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomeSetor2, idPermissao2);
-	SetorController controller = new SetorController();
+	SetorController setorController = new SetorController();
 	SetorDAO setorSQL = new SetorDAO();
 
 	@Test
 	public void cadastrarPostoDeTrabalhoTest() {
-		Integer idCadastrada = controller.cadastrarSetor(nomeSetor1, idPermissao1);
+		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		SetorModel setorRcuperado = setorSQL.retrieve(idCadastrada);
 		assertEquals(nomeSetor1, setorRcuperado.getNomeSetor());
 		assertEquals(idPermissao1, setorRcuperado.getIdPermissao());
@@ -41,14 +41,14 @@ public class SetorControllerTest {
 	
 	@Test
 	public void deletarPostoDeTrabalhoTest() {
-		Integer idCadastrada = controller.cadastrarSetor(nomeSetor1, idPermissao1);
-		assertTrue(controller.deletarSetor(idCadastrada));
+		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		assertTrue(setorController.deletarSetor(idCadastrada));
 	}
 	
 	@Test
 	public void atualizarPostoDeTrabalhoTest() {
-		Integer idCadastrada = controller.cadastrarSetor(nomeSetor1, idPermissao1);
-		controller.atualizarSetor(idCadastrada, nomeSetor2, idPermissao2);
+		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		setorController.atualizarSetor(idCadastrada, nomeSetor2, idPermissao2);
 		SetorModel setorAtualizado = setorSQL.retrieve(idCadastrada);
 		assertEquals(nomeSetor2, setorAtualizado.getNomeSetor());
 		assertEquals(idPermissao2, setorAtualizado.getIdPermissao());
@@ -56,7 +56,7 @@ public class SetorControllerTest {
 
 	@Test
 	public void buscarPostoDeTrabalhoIdTest() {
-		Integer idCadastrada = controller.cadastrarSetor(nomeSetor1, idPermissao1);
+		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		SetorModel setorProcurado = setorSQL.retrieve(idCadastrada);
 		assertEquals(idCadastrada, setorProcurado.getId());
 		assertEquals(nomeSetor1, setorProcurado.getNomeSetor());
@@ -65,21 +65,30 @@ public class SetorControllerTest {
 	
 	@Test
 	public void buscarPostoDeTrabalhoNomeTest() {
-		Integer idCadastrada = controller.cadastrarSetor(setor2.getNomeSetor(), setor2.getIdPermissao());
+		Integer idCadastrada = setorController.cadastrarSetor(setor2.getNomeSetor(), setor2.getIdPermissao());
 		ArrayList<SetorModel> setorProcurado = setorSQL.retrieveByName(nomeSetor2);
 		assertEquals(setor2.getNomeSetor(), setorProcurado.get(0).getNomeSetor());	
 	}
 	
 	@Test
 	public void buscarTodosPostosDeTrabalhoTest() {
-		controller.cadastrarSetor(nomeSetor1, idPermissao1);
-		controller.cadastrarSetor(nomeSetor2, idPermissao2);
-		controller.cadastrarSetor("Financeiro", 3);
-		assertFalse(controller.buscarTodosSetores().isEmpty());
+		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		setorController.cadastrarSetor(nomeSetor2, idPermissao2);
+		setorController.cadastrarSetor("Financeiro", 3);
+		assertFalse(setorController.buscarTodosSetores().isEmpty());
 	}
+
+	@Test
+	public void deletarTodosOsSetores() {
+		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		setorController.cadastrarSetor(nomeSetor2, idPermissao2);
+		setorController.deletarTodosSetores();
+		assertTrue(setorController.buscarTodosSetores().isEmpty());
+	}
+	
 	
 	@Before
 	public void limparTabela() {
-		setorSQL.deleteAll();
+		setorController.deletarTodosSetores();
 	}
 }
