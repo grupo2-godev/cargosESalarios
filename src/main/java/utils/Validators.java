@@ -26,6 +26,15 @@ public class Validators {
 		return !verify.matches(
 				".*[0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]+.*");
 	}
+	
+	/**
+	 * Utilizar no HorasMesController, create
+	 */
+	static public boolean onlyValidNumber(String verify) {
+		return verify.matches(
+				"(([0-9]*[.])?[0-9]+)");		
+	}
+	
 }
 
 
