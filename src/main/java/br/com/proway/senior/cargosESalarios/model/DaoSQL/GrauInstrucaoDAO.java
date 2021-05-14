@@ -59,11 +59,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int create(GrauInstrucaoModel grauInstrucao) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive())
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive())
+			session.beginTransaction();
 
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(grauInstrucao);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer idCadastrado = (Integer) session.save(grauInstrucao);
+		session.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -77,7 +77,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @param id int Id do objeto a ser consultado.
 	 */
 	public GrauInstrucaoModel retrieve(int id) {
-		GrauInstrucaoModel grauInstrucao = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class, id);
+		GrauInstrucaoModel grauInstrucao = session.get(GrauInstrucaoModel.class, id);
 		return grauInstrucao;
 	}
 
@@ -92,8 +92,8 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return lista ArrayList<GrayIndtrucaoModel> Lista dos objetos localizados.
 	 */
 	public ArrayList<GrauInstrucaoModel> retrieveNameCountains(String nomeASerConsultado) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
@@ -122,12 +122,12 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 */
 	public boolean update(int id, GrauInstrucaoModel grauInstrucaoNovo) {
 		GrauInstrucaoModel grauInstrucao = retrieve(id);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		grauInstrucao.setNome(grauInstrucaoNovo.getNome());
-		ConnectionHibernate.getSession().update(grauInstrucao);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(grauInstrucao);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -144,11 +144,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	public boolean delete(int id) {
 		GrauInstrucaoModel grauIntrucao = retrieve(id);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(grauIntrucao);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(grauIntrucao);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -161,7 +161,6 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return listaDeGrauDeInstrucao ArrayList<GrauInstrucaoModel> Lista com objetos do tipo {@link GrauInstrucaoModel}.
 	 */
 	public ArrayList<GrauInstrucaoModel> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
 		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
@@ -176,11 +175,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return boolean Retorna true caso algum registro seja deletado, se der algum erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int registrosModificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM grau_instrucao").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		int registrosModificados = session.createSQLQuery("DELETE FROM grau_instrucao").executeUpdate();
+		session.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 

@@ -62,12 +62,12 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return int id Id do registro.
 	 */
 	public int create(HorasMesModel horasMes) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(horasMes);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer idCadastrado = (Integer) session.save(horasMes);
+		session.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -83,7 +83,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return results retorna um objeto HorasMesModel
 	 */
 	public HorasMesModel retrieve(int id) {
-		return ConnectionHibernate.getSession().get(HorasMesModel.class, id);
+		return session.get(HorasMesModel.class, id);
 	}
 
 	/**
@@ -98,12 +98,12 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 */
 	public boolean update(int id, HorasMesModel objetoAlterado) {
 		HorasMesModel original = retrieve(id);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		original.setQuantidade(objetoAlterado.getQuantidade());
-		ConnectionHibernate.getSession().update(original);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(original);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -119,11 +119,11 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	public boolean delete(int id) {
 		HorasMesModel entry = retrieve(id);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(entry);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(entry);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -136,7 +136,6 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return ArrayList HorasMesModel
 	 */
 	public ArrayList<HorasMesModel> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
 		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
@@ -153,11 +152,11 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM horas_mes").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		int modificados = session.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
+		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 }

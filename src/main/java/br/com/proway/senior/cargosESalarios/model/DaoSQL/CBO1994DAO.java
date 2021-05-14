@@ -29,6 +29,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 
 	private static CBO1994DAO instance;
+	private Session session;
 
 	/**
 	 * Singleton da classe CBO1994DAO
@@ -48,6 +49,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param Session session
 	 */
 	private CBO1994DAO(Session session) {
+		this.session = session;
 	}
 
 	/**
@@ -59,11 +61,11 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @return int codigoCBO
 	 */
 	public int create(CBO1994Model CBO1994) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		Integer codigoCBO = (Integer) ConnectionHibernate.getSession().save(CBO1994);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer codigoCBO = (Integer) session.save(CBO1994);
+		session.getTransaction().commit();
 		return codigoCBO;
 	}
 
@@ -76,7 +78,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @return results retorna objeto CBO1994Model
 	 */
 	public CBO1994Model retrieve(int codigo_CBO1994) {
-		CBO1994Model results = ConnectionHibernate.getSession().get(CBO1994Model.class, codigo_CBO1994);
+		CBO1994Model results = session.get(CBO1994Model.class, codigo_CBO1994);
 		System.out.println(results.toString());
 		return results;
 	}
@@ -92,16 +94,16 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 */
 	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
 		CBO1994Model original = retrieve(codigo_CBO1994);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		original.setCodigo_cbo(objetoAlterado.getCodigo_cbo());
 		original.setDescricao(objetoAlterado.getDescricao());
 		original.setPercentualInsalubridade(objetoAlterado.getPercentualInsalubridade());
 		original.setPercentualPericulosidade(objetoAlterado.getPercentualPericulosidade());
 
-		ConnectionHibernate.getSession().update(original);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(original);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -116,12 +118,12 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	public boolean delete(int codigo_CBO1994) {
 		CBO1994Model objeto_deletar = retrieve(codigo_CBO1994);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 
-		ConnectionHibernate.getSession().delete(objeto_deletar);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(objeto_deletar);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -132,8 +134,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @return ArrayList<Cbo1994Model>
 	 */
-	public ArrayList<CBO1994Model> getAll() {		
-		Session session = ConnectionHibernate.getSession();
+	public ArrayList<CBO1994Model> getAll() {	
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
 		
@@ -154,12 +155,12 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cbo1994").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
-		ConnectionHibernate.getSession().clear();
+		int modificados = session.createSQLQuery("DELETE FROM cbo1994").executeUpdate();
+		session.getTransaction().commit();
+		session.clear();
 		return modificados > 0 ? true : false;
 	}
 

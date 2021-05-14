@@ -62,11 +62,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return Id do posto de trabalho cadastrado
 	 */
 	public int create(PostoDeTrabalhoModel postoModel) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(postoModel);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer idCadastrado = (Integer) session.save(postoModel);
+		session.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -80,7 +80,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel retrieve(int idPosto) {
-		return ConnectionHibernate.getSession().get(PostoDeTrabalhoModel.class, idPosto);
+		return session.get(PostoDeTrabalhoModel.class, idPosto);
 	}
 
 	/**
@@ -94,7 +94,6 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> retrieveByName(String nomePosto) {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
@@ -117,16 +116,16 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 */
 	public boolean update(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
 		PostoDeTrabalhoModel original = retrieve(idPosto);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		original.setNomePosto(postoAtualizado.getNomePosto());
 		original.setIdCargo(postoAtualizado.getIdCargo());
 		original.setIdSetor(postoAtualizado.getIdSetor());
 		original.setIdNivel(postoAtualizado.getIdNivel());
 		original.setSalario(postoAtualizado.getSalario());
-		ConnectionHibernate.getSession().update(original);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(original);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -141,11 +140,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	public boolean delete(int idPosto) {
 		PostoDeTrabalhoModel entry = retrieve(idPosto);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(entry);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(entry);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -158,7 +157,6 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return ArrayList<PostoDeTrabalhoModel>
 	 */
 	public ArrayList<PostoDeTrabalhoModel> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
@@ -175,12 +173,12 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return boolean
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int modificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM posto_de_trabalho")
+		int modificados = session.createSQLQuery("DELETE FROM posto_de_trabalho")
 				.executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 
