@@ -2,16 +2,15 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Classes de testes para o SetorController.
@@ -29,49 +28,49 @@ public class SetorControllerTest {
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomeSetor2, idPermissao2);
 	SetorController setorController = new SetorController();
-	SetorDAO setorSQL = new SetorDAO();
 
 	@Test
-	public void cadastrarPostoDeTrabalhoTest() {
+	public void testCadastrarSetorCorreto() {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
-		SetorModel setorRcuperado = setorSQL.retrieve(idCadastrada);
+		SetorModel setorRcuperado = setorController.buscarSetorPorId(idCadastrada);
 		assertEquals(nomeSetor1, setorRcuperado.getNomeSetor());
 		assertEquals(idPermissao1, setorRcuperado.getIdPermissao());
 	}
 	
 	@Test
-	public void deletarPostoDeTrabalhoTest() {
+	public void testDeletarSetor() {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		assertTrue(setorController.deletarSetor(idCadastrada));
 	}
 	
 	@Test
-	public void atualizarPostoDeTrabalhoTest() {
+	public void testAtualizarSetor() {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		setorController.atualizarSetor(idCadastrada, nomeSetor2, idPermissao2);
-		SetorModel setorAtualizado = setorSQL.retrieve(idCadastrada);
+		SetorModel setorAtualizado = setorController.buscarSetorPorId(idCadastrada);
 		assertEquals(nomeSetor2, setorAtualizado.getNomeSetor());
 		assertEquals(idPermissao2, setorAtualizado.getIdPermissao());
 	}
 
 	@Test
-	public void buscarPostoDeTrabalhoIdTest() {
+	public void testBuscarSetorId() {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
-		SetorModel setorProcurado = setorSQL.retrieve(idCadastrada);
+		SetorModel setorProcurado = setorController.buscarSetorPorId(idCadastrada);
 		assertEquals(idCadastrada, setorProcurado.getId());
 		assertEquals(nomeSetor1, setorProcurado.getNomeSetor());
 		assertEquals(idPermissao1, setorProcurado.getIdPermissao());
 	}
 	
 	@Test
-	public void buscarPostoDeTrabalhoNomeTest() {
-		Integer idCadastrada = setorController.cadastrarSetor(setor2.getNomeSetor(), setor2.getIdPermissao());
-		ArrayList<SetorModel> setorProcurado = setorSQL.retrieveByName(nomeSetor2);
-		assertEquals(setor2.getNomeSetor(), setorProcurado.get(0).getNomeSetor());	
+	public void testBuscarSetorNome() {
+		SetorModel novoSetor = new SetorModel("Financeiro", 2);
+		setorController.cadastrarSetor(novoSetor.getNomeSetor(), novoSetor.getIdPermissao());
+		ArrayList<SetorModel> setorProcurado = setorController.buscarSetorPorNome(novoSetor.getNomeSetor());
+		assertEquals(1, setorProcurado.size());	
 	}
 	
 	@Test
-	public void buscarTodosPostosDeTrabalhoTest() {
+	public void testBuscarTodosPostosDeTrabalho() {
 		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		setorController.cadastrarSetor(nomeSetor2, idPermissao2);
 		setorController.cadastrarSetor("Financeiro", 3);
@@ -79,11 +78,19 @@ public class SetorControllerTest {
 	}
 
 	@Test
-	public void deletarTodosOsSetores() {
+	public void testDeletarTodosOsSetoresTrue() {
 		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		setorController.cadastrarSetor(nomeSetor2, idPermissao2);
 		setorController.deletarTodosSetores();
 		assertTrue(setorController.buscarTodosSetores().isEmpty());
+	}
+		
+		@Test
+		public void testDeletarTodosOsSetoresFalse() {
+			setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+			setorController.deletarTodosSetores();
+			setorController.cadastrarSetor(nomeSetor2, idPermissao2);
+			assertFalse(setorController.buscarTodosSetores().isEmpty());
 	}
 	
 	

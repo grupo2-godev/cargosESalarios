@@ -32,13 +32,17 @@ public class SetorController {
 	 * @return Integer|null id do setor se foi possivel ser criado.
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		if (setorDAO.retrieveByName(nomeSetor).toString().isEmpty()) {
-			return null;
-		} else {
-			SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
-			int idCadastrado = setorDAO.create(novoSetor);
-			return idCadastrado;
+		ArrayList<SetorModel> setoresConsultados = setorDAO.retrieveByName(nomeSetor);
+		for (SetorModel setorModel : setoresConsultados) {
+			if (setorModel.getNomeSetor().equals(nomeSetor)) {
+				System.out.println("Setor informado já cadastrado.");
+				return null;
+			}
 		}
+
+		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
+		int idCadastrado = setorDAO.create(novoSetor);
+		return idCadastrado;
 	}
 
 	/**
