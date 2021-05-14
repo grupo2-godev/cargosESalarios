@@ -13,12 +13,17 @@ import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 
+/**
+ * Classe Generica com Metodos de interacao com a HibernateConnection
+ * @author Willian Kenji Nishizawa
+ *
+ * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
+ */
 public class HibernateMethods<T> {
 
 	/**
 	 * Retorna todas as linhas da coluna 'nomeTabela' desejada.
 	 * 
-	 * @author Willian Kenji Nishizawa
 	 * 
 	 * @param nomeTabela : String que representa o nome da tabela representada 
 	 * no banco de dados;
