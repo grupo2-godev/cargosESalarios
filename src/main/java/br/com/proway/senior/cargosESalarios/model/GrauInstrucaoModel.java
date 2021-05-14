@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Classe que cuida do grau de instrução, no banco eh referenciada pela classe
- * {@link CargoModel}
+ * Classe que cuida do grau de instrucaoo, no banco eh referenciada pela classe
+ * {@link CargoModel}.
  * 
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  *
@@ -33,8 +33,8 @@ public class GrauInstrucaoModel {
 	}
 
 	/**
-	 * Construtor scundário sem o ID, que é auto 
-	 * incrementada no banco de dados.
+	 * Construtor secundario sem o ID, que eh auto 
+	 * incrementado no banco de dados.
 	 * 
 	 * @param instrucao
 	 */

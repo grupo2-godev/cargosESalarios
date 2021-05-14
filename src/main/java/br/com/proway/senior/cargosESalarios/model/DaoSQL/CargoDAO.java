@@ -7,199 +7,167 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
- * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os métodos
- * necessários para a interação com o banco de dados.
+ * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os metodos
+ * necessarios para a intercao com o banco de dados.
  * 
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 
-	FactoryConexao conexao = new FactoryPostgres();
+	private static CargoDAO instance;
+	private Session session;
 
-	/***
-	 * Insere no banco de dados o registro de um CargoModel.
-	 *
-	 * @param obj CargoModel Objeto a ser inserido.
-	 * @return int Quantidade de registros inseridos.
+	/**
+	 * Singleton da classe CargoDAO.
+	 * 
+	 * @param session Session
+	 * @return instance GrauInstrucaoDAO
 	 */
-	public int create(CargoModel obj) {
-		String insertDB = "INSERT INTO grupo2.cargo (nome_cargo, data_cadastro, data_ultima_revisao, cbo2002, cbo1994, horas_mes, grau_de_instrucao, experiencia_minima, atribuicoes, status, id_permissao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		int qtd = 0;
-		try {
-			PreparedStatement prepStmt = conexao.criarConexao().prepareStatement(insertDB);
-			prepStmt.setString(1, obj.getNomeCargo());
-			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
-			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
-			prepStmt.setInt(4, obj.getCbo2002());
-			prepStmt.setInt(5, obj.getCbo94());
-			prepStmt.setInt(6, obj.getHoraMes());
-			prepStmt.setInt(7, obj.getGrauInstrucao());
-			prepStmt.setString(8, obj.getExperienciaMinima());
-			prepStmt.setString(9, obj.getAtribuicoes());
-			prepStmt.setBoolean(10, obj.getStatus());
-			prepStmt.setInt(11, obj.getIdPermissao());
-			prepStmt.execute();
-			String sqlCount = "SELECT COUNT(*) FROM grupo2.cargo";
-			ResultSet rs = conexao.criarConexao().createStatement().executeQuery(sqlCount);
-			rs.next();
-			qtd = rs.getInt(1);
-			System.out.println("Cargo cadastrado com sucesso.");
-		} catch (Exception e) {
-			System.out.println("Falha ao cadastrar Cargo");
-			e.printStackTrace();
-			return -1;
-		}
-		return qtd;
+	public static CargoDAO getInstance(Session session) {
+		if (instance == null)
+			instance = new CargoDAO(session);
+		return instance;
+	}
+
+	/**
+	 * Construtor da classe CargoDAO, utilizado no Singleton.
+	 * 
+	 * @param session Session
+	 */
+	private CargoDAO(Session session) {
+		this.session = session;
 	}
 
 	/***
-	 * Retorna um cargo pelo ID do cargo. Realiza uma busca no banco de dados pelo
-	 * ID informado e retorna a tupla com os dados correspondentes.
+	 * Insere no banco de dados o registro de um objeto do tipo {@link CargoModel}.
+	 *
+	 * @param obj CargoModel Objeto a ser inserido.
+	 * @return int Id do objeto inserido.
+	 */
+	public int create(CargoModel cargo) {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive())
+			ConnectionHibernate.getSession().beginTransaction();
+
+		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(cargo);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return idCadastrado;
+	}
+
+	/***
+	 * Retorna um objeto do tipo {@link CargoModel} pelo idCargo. Realiza uma busca
+	 * no banco de dados pelo ID informado e retorna a tupla com os dados
+	 * correspondentes.
 	 * 
 	 * @param idCargo int Id do cargo a ser consultado.
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel retrieve(int idCargo) {
-		String retrieveById = "SELECT * FROM grupo2.cargo WHERE id_cargo = " + idCargo;
-		CargoModel cargo = null;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(retrieveById);
-			while (rs.next()) {
-				cargo = new CargoModel();
-				cargo.setIdCargo(rs.getInt(1));
-				cargo.setNomeCargo(rs.getString(2));
-				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
-				cargo.setCbo2002(rs.getInt(5));
-				cargo.setCbo94(rs.getInt(6));
-				cargo.setHoraMes(rs.getInt(7));
-				cargo.setGrauInstrucao(rs.getInt(8));
-				cargo.setExperienciaMinima(rs.getString(9));
-				cargo.setAtribuicoes(rs.getString(10));
-				cargo.setStatus(rs.getBoolean(11));
-				cargo.setIdPermissao(rs.getInt(12));
-				System.out.println(cargo.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		CargoModel cargo = ConnectionHibernate.getSession().get(CargoModel.class, idCargo);
 		return cargo;
 	}
 
-	/**
-	 * Atualizar um registro no banco de dados. Realiza a atualização dos dados no
-	 * registro cujo o id_cargo seja idêntico ao IdCargo informado no parâmetro.
+	/***
+	 * Atualizar um objeto do tipo {@link CargoModel}.
 	 * 
-	 * @param idCargo int Id do objeto a ser atualizado.
-	 * @param obj     CargoModel Objeto que possui as informações que serão setadas no objeto que possui o id informado.
-	 * @return boolean True se a atualização for efetuada e False caso contrário.
+	 * Recebe um objeto do tipo {@link CargoModel} que sera a atualizacao do objeto
+	 * no banco de dados que possui o id recebido no parametro.
+	 * 
+	 * @param cargoNovo CargoModel Novo objeto que sera inserido no banco de dados.
+	 * @param idCargo   int Id do objeto a ser atualizado.
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
 	 */
-	public boolean update(int idCargo, CargoModel obj) {
-		String updateDB = "UPDATE grupo2.cargo SET nome_cargo = ?, data_cadastro = ?,"
-				+ "data_ultima_revisao = ?, cbo2002 = ?, cbo1994 = ?, horas_mes = ?,"
-				+ "grau_de_instrucao = ?, experiencia_minima = ?, atribuicoes = ?, status = ?, id_permissao = ? WHERE id_cargo = "
-				+ idCargo;
-		PreparedStatement prepStmt;
-		try {
-			prepStmt = conexao.criarConexao().prepareStatement(updateDB);
-			prepStmt.setString(1, obj.getNomeCargo());
-			prepStmt.setDate(2, Date.valueOf(obj.getDataCadastro().toLocalDate()));
-			prepStmt.setDate(3, Date.valueOf(obj.getDataUltimaRevisao().toLocalDate()));
-			prepStmt.setInt(4, obj.getCbo2002());
-			prepStmt.setInt(5, obj.getCbo94());
-			prepStmt.setInt(6, obj.getHoraMes());
-			prepStmt.setInt(7, obj.getGrauInstrucao());
-			prepStmt.setString(8, obj.getExperienciaMinima());
-			prepStmt.setString(9, obj.getAtribuicoes());
-			prepStmt.setBoolean(10, obj.getStatus());
-			prepStmt.setInt(11, obj.getIdPermissao());
-			prepStmt.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public boolean update(int idCargo, CargoModel cargoNovo) {
+		CargoModel cargo = retrieve(idCargo);
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		cargo.setNomeCargo(cargoNovo.getNomeCargo());
+		cargo.setDataCadastro(cargoNovo.getDataCadastro());
+		cargo.setDataUltimaRevisao(cargoNovo.getDataUltimaRevisao());
+		cargo.setCbo2002(cargoNovo.getCbo2002());
+		cargo.setCbo94(cargoNovo.getCbo94());
+		cargo.setHoraMes(cargoNovo.getHoraMes());
+		cargo.setGrauInstrucao(cargoNovo.getGrauInstrucao());
+		cargo.setExperienciaMinima(cargoNovo.getExperienciaMinima());
+		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
+		cargo.setStatus(cargoNovo.getStatus());
+		cargo.setIdPermissao(cargoNovo.getIdPermissao());
+		ConnectionHibernate.getSession().update(cargo);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
-	/***
-	 * Deleta um registro da tabela. Busca no banco o registro cujo ID seja igual
-	 * ao informado no parâmetro e exclui a tupla.
+	/**
+	 * Deleta do banco de dados um objeto do tipo {@link CargoModel}.
 	 * 
-	 * @param idCargo int Id do registro a ser deletado.
-	 * @return boolean True se o registro for apagado e False em caso de falha.
+	 * Consulta no banco de dados um objeto do tipo {@link CargoModel} cujo
+	 * id eh igual ao id recebido no parametro.
+	 * 
+	 * @param idCargo int Id do objeto a ser deletado.
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
 	 */
 	public boolean delete(int idCargo) {
-		String deleteDB = "DELETE FROM grupo2.cargo WHERE id_cargo = " + idCargo;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			stmt.execute(deleteDB);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		CargoModel cargo = retrieve(idCargo);
+
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		ConnectionHibernate.getSession().delete(cargo);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
 	 * Listar todos os registros da tabela. Busca todos os registros do banco, salva
-	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo CargoModel.
+	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo
+	 * {@link CargoModel}.
 	 * 
-	 * @return list ArrayList<CargoModel>
+	 * @return cargos ArrayList<CargoModel> Todos os registros da tabela
+	 *         {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> getAll() {
-		ArrayList<CargoModel> list = new ArrayList<CargoModel>();
-		String sqlSelectAll = "SELECT * FROM grupo2.cargo";
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlSelectAll);
-			CargoModel cargo = new CargoModel();
-			while (rs.next()) {
-				cargo.setIdCargo(rs.getInt(1));
-				cargo.setNomeCargo(rs.getString(2));
-				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
-				cargo.setCbo2002(rs.getInt(5));
-				cargo.setCbo94(rs.getInt(6));
-				cargo.setHoraMes(rs.getInt(7));
-				cargo.setGrauInstrucao(rs.getInt(8));
-				cargo.setExperienciaMinima(rs.getString(9));
-				cargo.setAtribuicoes(rs.getString(10));
-				cargo.setStatus(rs.getBoolean(11));
-				cargo.setIdPermissao(rs.getInt(12));
-				System.out.println(cargo.toString());
-				list.add(cargo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
+		Root<CargoModel> root = criteria.from(CargoModel.class);
+		Query query = session.createQuery(criteria);
+		List<CargoModel> cargos = query.getResultList();
+		return new ArrayList<CargoModel>(cargos);
 	}
 
 	/**
-	 * Método limparTabela
+	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 * 
-	 * Método realiza a limpeza da tabela no banco de dados, deletando os registros
-	 * e resetando a PrimaryKey. O foco é ser utilizado nos testes. É necessário
-	 * implementar no banco as sequences.
-	 * 
-	 * @throws SQLException
-	 * @return void
+	 * @return boolean Retorna true caso algum registro seja deletado, se der algum
+	 *         erro ou se nao houverem registros, retorna false.
 	 */
-	public void limparTabela() throws SQLException {
-		String limpar = "delete from grupo2.cargo";
-		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";
-		conexao.criarConexao().createStatement().executeUpdate(limpar);
-		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
-		System.out.println("Limpeza realizada.");
+	public boolean deleteAll() {
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
+		}
+		int registrosModificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cargo").executeUpdate();
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return registrosModificados > 0 ? true : false;
 	}
 }

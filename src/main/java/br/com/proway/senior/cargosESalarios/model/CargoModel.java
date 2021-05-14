@@ -2,15 +2,23 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
- * Classe de modelo Cargo.
- * @author Sprint 1
- * @version Sprint3:
- * 	- Alteração dos tipo primitivo int para Integer.
- * 	- Adição do hash e Equals.
+ * Classe cargo.
+ * 
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
+@Entity
+@Table(name = "cargo")
 public class CargoModel {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idCargo;
 	private String nomeCargo;
 	private LocalDateTime dataCadastro;
@@ -23,22 +31,10 @@ public class CargoModel {
 	private String atribuicoes;
 	private Boolean status;
 	private Integer idPermissao;
-
-	/**
-	 * @param idCargo
-	 * @param nomeCargo
-	 * @param dataCadastro
-	 * @param dataUltimaRevisao
-	 * @param cbo2002
-	 * @param cbo94
-	 * @param horaMes
-	 * @param grauDeInstrucao
-	 * @param experienciaMinima
-	 * @param atribuicoes
-	 * @param status
-	 * @param idPermissao
-	 */
 	
+	public CargoModel() {
+		
+	}
 
 	/**
 	 * @param idCargo
@@ -77,9 +73,6 @@ public class CargoModel {
 		this.atribuicoes = atribuicoes;
 		this.status = status;
 		this.idPermissao = idPermissao;
-	}
-
-	public CargoModel() {
 	}
 
 
