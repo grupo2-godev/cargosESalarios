@@ -1,7 +1,6 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -12,13 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 
 /**
- * Classe dependente da finaliza��o do GrauInstrucaoController. Pode ser
- * exluida. att
+ * Classe que testa os metodos da classe {@link GrauInstrucaoController}.
+ * 
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ *
  */
-
 public class GrauInstrucaoControllerTest {
 
 	GrauInstrucaoController controller = new GrauInstrucaoController();
@@ -41,8 +40,8 @@ public class GrauInstrucaoControllerTest {
 		assertNotNull(grauInstrucao);
 		assertEquals("Ensino Medio Completo", grauInstrucao.getNome());
 	}
-	
-	@Test (expected = Exception.class)
+
+	@Test(expected = Exception.class)
 	public void testBuscarPorIdInvalido() throws Exception {
 		controller.buscarPorId(0);
 	}
@@ -54,12 +53,13 @@ public class GrauInstrucaoControllerTest {
 		assertEquals(2, controller.buscarPorNomeQueContenha("Ensino Medio").size());
 		assertEquals(0, controller.buscarPorNomeQueContenha("Palavra aleatória").size());
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testBuscarPorNomeQueContenhaInvalido() throws Exception {
 		controller.buscarPorNomeQueContenha("Ensino@!#");
+		
 	}
-	
+
 	@Test
 	public void testAlterar() throws Exception {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
@@ -68,7 +68,21 @@ public class GrauInstrucaoControllerTest {
 		controller.alterar(idCadastrado, grauInstrucao);
 		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
 	}
+
+	@Test(expected = Exception.class)
+	public void testAlterarObjetoNulo() throws Exception {
+		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
+		GrauInstrucaoModel objetoNulo = new GrauInstrucaoModel();
+		controller.alterar(idCadastrado, objetoNulo);
+	}
 	
+	@Test(expected = Exception.class)
+	public void testAlterarObjetoIdInexistente() throws Exception {
+		controller.cadastrar("Ensino Superior Completo");
+		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino básico completo");
+		controller.alterar(2, grauInstrucao);
+	}
+
 	@Test
 	public void testDeletarPorId() throws Exception {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
@@ -76,18 +90,24 @@ public class GrauInstrucaoControllerTest {
 		controller.deletarPorId(idCadastrado);
 		assertEquals(0, controller.buscarTodos().size());
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testDeletarPorIdInexistente() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
 		controller.deletarPorId(2);
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testDeletarPorIdIgualAZero() throws Exception {
-		controller.deletarPorId(0);
+		assertNull(controller.deletarPorId(0));
 	}
 
+	@Test(expected = Exception.class) 
+	public void testDeletarPorIdNulo() throws Exception {
+		Integer idNulo = null;
+		assertNull(controller.deletarPorId(idNulo));
+	}
+	
 	@Test
 	public void testBuscarTodos() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
