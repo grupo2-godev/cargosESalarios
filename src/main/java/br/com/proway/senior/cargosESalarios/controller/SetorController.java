@@ -2,107 +2,126 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 
 /**
  * Classe SetorController
  * 
- * Implementa os m�todos do DAO para as devidas trataivas necess�rias
- *  
- * @author Sprint 4
+ * Faz contato com a classe DAO, faz as devidas tratativas com entrada e saida
+ * de dados.
+ * 
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  *
  */
 
 public class SetorController {
 
-	SetorDAO setorSQL = new SetorDAO();
-	
+	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
+
 	/**
-	 * Cadastra um novo setor
+	 * Cadastra na tabela setor um objeto do tipo {@link SetorModel}.
 	 * 
-	 * Verifica se j� existe um setor com o mesmo nome
-	 * e se n�o exister cria o setor e envia para o SetorDaoAl
+	 * Verifica se ja existe um setor com o mesmo nome, se nao existir, registra o
+	 * objeto. Se ja existir um setor com o mesmo nome, retorna nulo.
 	 * 
-	 * @param nomeSetor
-	 * @return Integer/null id do setor se foi possivel ser criado
+	 * @param nomeSetor   String nome do setor.
+	 * @param idPermissao int Id da permissao.
+	 * @return Integer|null id do setor se foi possivel ser criado.
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		if (setorSQL.retrieve(nomeSetor).toString().isEmpty()) {
-			return null;
+		ArrayList<SetorModel> setoresConsultados = setorDAO.retrieveByName(nomeSetor);
+		for (SetorModel setorModel : setoresConsultados) {
+			if (setorModel.getNomeSetor().equals(nomeSetor)) {
+				System.out.println("Setor informado já cadastrado.");
+				return null;
+			}
 		}
-		else {
-		SetorModel newSetor = new SetorModel(nomeSetor, idPermissao);
-		int quantidadeRegistros = setorSQL.create(newSetor);
-		return quantidadeRegistros;
-		}
+
+		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
+		int idCadastrado = setorDAO.create(novoSetor);
+		return idCadastrado;
 	}
-	
+
 	/**
-	 * Deleta um setor
+	 * Buscar setor por ID.
 	 * 
-	 * Envia o id do setor para o dao deletar 
+	 * Realiza a busca do setor conforme Id informada e retorna o objeto do mesmo.
 	 * 
-	 * @param idSetor
+	 * @param Integer idSetor Identificacao do setor procurado.
+	 * @return SetorModel objeto localizado ou null caso nao conste no banco.
+	 */
+	public SetorModel buscarSetorPorId(Integer idSetor) {
+		return setorDAO.retrieve(idSetor);
+	}
+
+	/**
+	 * Buscar setor por nome.
+	 * 
+	 * Realiza a busca do setor conforme nome informado e retorna a lista de
+	 * objetos. O texto pode ser informado parcial, pois ira buscar no banco todos
+	 * os registros que possuem os caracteres informados.
+	 * 
+	 * @param idSetor a ser procurado.
+	 * @return rrayList SetorModel lista de registros localizados.
+	 */
+	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
+		return setorDAO.retrieveByName(nomeSetor);
+	}
+
+	/**
+	 * Atualizar setor.
+	 * 
+	 * Metodo realiza a atualizacao do setor conforme modificacoes informadas via
+	 * parametros.
+	 * 
+	 * @param idSetor  a ser alterado
+	 * @param novoNome
+	 * @paramar novaIdPermissão
+	 * @return boolean
+	 */
+	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) {
+		SetorModel setorRecuperado = setorDAO.retrieve(idSetor);
+		setorRecuperado.setNomeSetor(novoNome);
+		setorRecuperado.setIdPermissao(novaIdPermissao);
+		return setorDAO.update(idSetor, setorRecuperado);
+	}
+
+	/**
+	 * Deleta um setor.
+	 * 
+	 * Envia o id do setor para o dao deletar
+	 * 
+	 * @param Integer idSetor Identificacao do setor que sera deletado.
 	 * @return boolean
 	 */
 	public boolean deletarSetor(Integer idSetor) {
-		return setorSQL.delete(idSetor);
+		return setorDAO.delete(idSetor);
 	}
-	
+
 	/**
-	 * Atualizar Setor
+	 * Buscar todos os setores.
 	 * 
-	 * M�todo realiza a atualiza��o do setor
-	 *  
-	 * @param idSetor
-	 * @param novoNome
+	 * Realiza a busca de todos os setores cadastrados e retorna em um ArrayList.
+	 * 
+	 * @return ArrayList SetorModel lista de todos os setores cadastrados.
+	 */
+	public ArrayList<SetorModel> buscarTodosSetores() {
+		return setorDAO.getAll();
+	}
+
+	/**
+	 * Deletar todos os setores.
+	 * 
+	 * Realiza a exclusao no banco de dados de todos os registros de setores
+	 * cadastrados.
+	 * 
 	 * @return boolean
 	 */
-	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer IdPermissao) {
-		SetorModel setor = setorSQL.retrieve(idSetor);
-		setor.setNomeSetor(novoNome);
-		setor.setIdPermissao(IdPermissao);
-		return setorSQL.update(idSetor, setor);
+	public void deletarTodosSetores() {
+		setorDAO.deleteAll();
 	}
-	
-	
-	/**
-	 * M�todo buscarTodosSetores
-	 * 
-	 * M�todo realiza a busca de todos os setores cadastrados
-	 * e retorna em um ArrayList.
-	 * 
-	 * @return ArrayList<SetorModel>
-	 */
-	public ArrayList<SetorModel> buscarTodosSetores(){
-		return setorSQL.getAll();
-	}
-	
-	/**
-	 * Buscar setor por ID
-	 * 
-	 * Realiza a busca do setor conforme Id informada
-	 * e retorna o objeto do mesmo.
-	 * 
-	 * @param idSetor
-	 * @return SetorModel
-	 */
-	public SetorModel buscarSetor(Integer idSetor) {
-		return setorSQL.retrieve(idSetor);
-	}
-	
-	/**
-	 * Buscar setor por ID
-	 * 
-	 * Realiza a busca do setor conforme Id informada
-	 * e retorna o objeto do mesmo.
-	 * 
-	 * @param idSetor
-	 * @return SetorModel
-	 */
-	public SetorModel buscarSetor(String nomeSetor) {
-		return setorSQL.retrieve(nomeSetor);
-	}
-	
+
 }

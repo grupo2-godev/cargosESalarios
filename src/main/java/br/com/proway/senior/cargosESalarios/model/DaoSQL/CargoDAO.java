@@ -63,11 +63,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int create(CargoModel cargo) {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive())
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive())
+			session.beginTransaction();
 
-		Integer idCadastrado = (Integer) ConnectionHibernate.getSession().save(cargo);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		Integer idCadastrado = (Integer) session.save(cargo);
+		session.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -80,7 +80,7 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel retrieve(int idCargo) {
-		CargoModel cargo = ConnectionHibernate.getSession().get(CargoModel.class, idCargo);
+		CargoModel cargo = session.get(CargoModel.class, idCargo);
 		return cargo;
 	}
 
@@ -98,8 +98,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 */
 	public boolean update(int idCargo, CargoModel cargoNovo) {
 		CargoModel cargo = retrieve(idCargo);
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
 		cargo.setNomeCargo(cargoNovo.getNomeCargo());
 		cargo.setDataCadastro(cargoNovo.getDataCadastro());
@@ -112,8 +112,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
 		cargo.setStatus(cargoNovo.getStatus());
 		cargo.setIdPermissao(cargoNovo.getIdPermissao());
-		ConnectionHibernate.getSession().update(cargo);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.update(cargo);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -130,11 +130,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	public boolean delete(int idCargo) {
 		CargoModel cargo = retrieve(idCargo);
 
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		ConnectionHibernate.getSession().delete(cargo);
-		ConnectionHibernate.getSession().getTransaction().commit();
+		session.delete(cargo);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -147,7 +147,6 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> getAll() {
-		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
 		Root<CargoModel> root = criteria.from(CargoModel.class);
@@ -163,11 +162,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deleteAll() {
-		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
-			ConnectionHibernate.getSession().beginTransaction();
+		if (!session.getTransaction().isActive()) {
+			session.beginTransaction();
 		}
-		int registrosModificados = ConnectionHibernate.getSession().createSQLQuery("DELETE FROM cargo").executeUpdate();
-		ConnectionHibernate.getSession().getTransaction().commit();
+		int registrosModificados = session.createSQLQuery("DELETE FROM cargo").executeUpdate();
+		session.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 }
