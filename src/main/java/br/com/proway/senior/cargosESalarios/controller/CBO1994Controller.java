@@ -2,12 +2,11 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
-
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
-import utils.Validators;
+import utils.Insalubridade;
+import utils.Periculosidade;
 
 /** Controller que interage com o CBO1994DAO.
  * 
@@ -40,12 +39,12 @@ public class CBO1994Controller {
 	 * @return int codigo_CBO
 	 * @throws Exception
 	 */
-	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Double percentualInsalubridade,
-			Double percentualPericulosidade) throws Exception {
+	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Insalubridade percentualInsalubridade,
+			Periculosidade percentualPericulosidade) throws Exception {
 //		if(!Validators.onlyValidChars(nome)) {
 //			throw(new Exception("Nome invalido para o CBO1994"));
 //		}
-		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade, percentualPericulosidade);
+		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), percentualPericulosidade.getValor());
 		return CBO1994Dao.create(CBO1994Model);
 	} 
 	

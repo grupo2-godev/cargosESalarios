@@ -40,7 +40,8 @@ public class CBO1994ControllerTest {
 		
 		int codigo_CBO1994 = controller.cadastrarCBO1994(44578, "desenvolvedor senior", 0.3, 0.4);
 		
-		assertNotNull(controller.buscarCBO1994(codigo_CBO1994));
+		assertEquals(controller.buscarCBO1994(codigo_CBO1994).getCodigo_cbo(), (Integer) 44578);		
+		assertEquals(controller.buscarCBO1994(codigo_CBO1994).getDescricao(), "desenvolvedor senior");
 		assertTrue(controller.buscarTodosCBO1994().size() > 1);
 	}
 	
