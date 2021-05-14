@@ -47,7 +47,7 @@ public class HibernateMethods<T> {
 	 * ex: 
 	 * <br>
 	 * <br>
-	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
 	 * <br>
 	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
 	 * <br>
@@ -82,7 +82,7 @@ public class HibernateMethods<T> {
 	 * ex: 
 	 * <br>
 	 * <br>
-	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
 	 * <br>
 	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
 	 * <br>
@@ -117,7 +117,7 @@ public class HibernateMethods<T> {
 	 * ex: 
 	 * <br>
 	 * <br>
-	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
 	 * <br>
 	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
 	 * <br>
@@ -152,7 +152,7 @@ public class HibernateMethods<T> {
 	 * ex: 
 	 * <br>
 	 * <br>
-	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
 	 * <br>
 	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
 	 * <br>
@@ -187,7 +187,7 @@ public class HibernateMethods<T> {
 	 * ex: 
 	 * <br>
 	 * <br>
-	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
 	 * <br>
 	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
 	 * <br>
