@@ -5,9 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 
 /**
@@ -20,10 +23,9 @@ class GrauInstrucaoControllerTest {
 	GrauInstrucaoController controller = new GrauInstrucaoController();
 
 	@Test
-	void testCadastrar() {
+	public void testCadastrar() {
 		controller.cadastrar("Ensino Medio Completo");
-		controller.cadastrar("Ensino Medio Incompleto");
-		assertEquals(2, controller.buscarTodos().size());
+		assertEquals(1, controller.buscarTodos().size());
 	}
 
 //	@Test
@@ -52,5 +54,29 @@ class GrauInstrucaoControllerTest {
 //		assertTrue(controller.atualizarGrauInstrucao(0, "Ensino Superior"));
 //		assertEquals(dao.retrieve(0).getInstrucao(), "Ensino Superior");
 //	}
+	
+	@Test
+	public void testBuscarTodos() {
+		asserEquals(0, controller.buscarTodos().size());
+		controller.cadastrar("Ensino Medio Completo");
+		controller.cadastrar("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarTodos().size());
+	}
+	
+	@Test
+	public void testDeletarTodos() {
+		controller.cadastrar("Ensino Medio Completo");
+		controller.cadastrar("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarTodos().size());
+		boolean sucesso = controller.deletarTodos();
+		assertTrue(sucesso);
+		ArrayList<GrauInstrucaoModel> lista = controller.pegarTodos();
+		assertTrue(lista.isEmpty());	
+	}
+	
+	@Before
+	public void beforeAll() {
+		controller.deletarTodos();
+	}
 	
 }
