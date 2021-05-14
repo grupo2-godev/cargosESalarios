@@ -60,7 +60,8 @@ public class HibernateMethodsTest {
 	public void listarPorSelecaoDeColunaString() {
 		SetorDAO dao = SetorDAO.getInstance(ConnectionHibernate.getSession());
 		SetorModel entry = new SetorModel("Setor legal", 42);
-		dao.create(entry);
+		int id = dao.create(entry);
+		entry.setId(id);
 		
 		HibernateMethods<SetorModel> methods = new HibernateMethods<SetorModel>();
 		List<SetorModel> tableEntries = 
