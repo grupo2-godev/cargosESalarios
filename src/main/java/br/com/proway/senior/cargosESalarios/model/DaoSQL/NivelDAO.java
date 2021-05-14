@@ -14,22 +14,22 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
+/**
+ * Classe DAO para a tabela de NivelModel
+ * 
+ *  @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ *  @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
+ *
+ */
 public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 
 	private static NivelDAO instance;
 	private Session session;
 	
-	/** Palavras chaves
-	 * 
-	 * private - public   <- Define quem pode acessar - OBRIGATORIO
-	 * Static <- por onde o acesso é feito (classe ou objeto) : OPCIONAL ... NivelDAO.getInstance
-	 * Void - Boolean - int - String - etc.... <- O que a funcao retorna - OBRIGATORIO
-	 *
-	 * se nao fosse static teriaos que fazer:
-	 * 
-	 * NiveoDAO objeto = NivelDAO.getInstance() -< funcao estatica que nos retorna o objeto
-	 * 
-	 * objeto.funcaoSemStatic() - com o objeto em maos podemos chamar as funcoes nao estaticas
+	/**
+	 * Obtem a instancia do Singleton DAO.
+	 * @param session : HibernateSession a ser utilizada
+	 * @return
 	 */
 	public static NivelDAO getInstance(Session session) {
 		if(instance == null) {
