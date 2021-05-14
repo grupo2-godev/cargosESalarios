@@ -36,7 +36,7 @@ public class HibernateMethodsTest {
 
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
 		List<HorasMesModel> tableEntries = 
-			methods.listarPorValorDeColunaExato(HorasMesModel.class, "idhorasmes", savedId);
+			methods.listarPorValorDeColunaExato(HorasMesModel.class, "idHorasMes", savedId);
 		HorasMesModel lastObjectInList = tableEntries.get(tableEntries.size()-1);
 		assertEquals((int)lastObjectInList.getIdHorasMes(), savedId);
 		assertEquals(lastObjectInList.getQuantidade(), entry.getQuantidade());
@@ -64,7 +64,7 @@ public class HibernateMethodsTest {
 		
 		HibernateMethods<SetorModel> methods = new HibernateMethods<SetorModel>();
 		List<SetorModel> tableEntries = 
-			methods.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "quantidade", "Set");
+			methods.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor", "Set");
 		assertTrue(tableEntries.contains(entry));
 	}
 
