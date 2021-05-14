@@ -18,12 +18,12 @@ import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
  * Pode ser exluida. att
  */
 
-class GrauInstrucaoControllerTest {
+public class GrauInstrucaoControllerTest {
 
 	GrauInstrucaoController controller = new GrauInstrucaoController();
 
 	@Test
-	public void testCadastrar() {
+	public void testCadastrar() throws Exception {
 		controller.cadastrar("Ensino Medio Completo");
 		assertEquals(1, controller.buscarTodos().size());
 	}
@@ -56,21 +56,21 @@ class GrauInstrucaoControllerTest {
 //	}
 	
 	@Test
-	public void testBuscarTodos() {
-		asserEquals(0, controller.buscarTodos().size());
+	public void testBuscarTodos() throws Exception {
+		assertEquals(0, controller.buscarTodos().size());
 		controller.cadastrar("Ensino Medio Completo");
 		controller.cadastrar("Ensino Medio Incompleto");
 		assertEquals(2, controller.buscarTodos().size());
 	}
 	
 	@Test
-	public void testDeletarTodos() {
+	public void testDeletarTodos() throws Exception {
 		controller.cadastrar("Ensino Medio Completo");
 		controller.cadastrar("Ensino Medio Incompleto");
 		assertEquals(2, controller.buscarTodos().size());
 		boolean sucesso = controller.deletarTodos();
 		assertTrue(sucesso);
-		ArrayList<GrauInstrucaoModel> lista = controller.pegarTodos();
+		ArrayList<GrauInstrucaoModel> lista = controller.buscarTodos();
 		assertTrue(lista.isEmpty());	
 	}
 	
