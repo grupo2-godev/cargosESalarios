@@ -148,15 +148,14 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return boolean
 	 */
 	public boolean delete(int idPosto) {
-		String sqlDelete = "DELETE FROM grupo2.posto_de_trabalho WHERE id_posto = " + idPosto;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			stmt.execute(sqlDelete);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		SetorModel entry = retrieve(idPosto);
+
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		ConnectionHibernate.getSession().delete(entry);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
