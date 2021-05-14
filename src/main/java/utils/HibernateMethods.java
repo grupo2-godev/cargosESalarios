@@ -39,6 +39,27 @@ public class HibernateMethods<T> {
 		return new ArrayList<T>(results);
 	}
 	
+	/**
+	 * Seleciona entradas de 
+	 * tabelas utilizando uma de suas colunas e seu valor como filtro.
+	 * 
+	 * A variavel valorColuna pode ser uma string parcial do resultado desejado.
+	 * <br>
+	 * ex: 
+	 * <br>
+	 * <br>
+	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
+	 * <br>
+	 * instancia.listarPorValorDeColima(HorasMesModel.class, "quantidade", 2)
+	 * <br>
+	 * <br>
+	 * retorna todas as entradas da Tabela HorasMesModel com quantidade=2;
+	 * 
+	 * @param classeTabela: XXXModel.class
+	 * @param String : nomeColuna
+	 * @param String : valorColuna
+	 * @return
+	 */
 	public List<T> listarPorValorDeColunaComStringIncompleta(
 			Class<T> classeTabela, String nomeColuna, String valorColuna) 
 		{
