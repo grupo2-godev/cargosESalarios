@@ -38,6 +38,10 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		return instance;
 	}
 	
+	/**
+	 * 
+	 * @param session
+	 */
 	private NivelDAO(Session session) {
 		this.session = session;
 	}
@@ -76,6 +80,19 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		return true;
 	}
 
+	/**
+	 * <h1> Obtem todos os registros da Tabela.</h1>
+	 * 
+	 * Abre uma conecao
+	 * Cria uma 'criteriaBuilder', para ter acesso as funcionalidades de uma criteria
+	 * Cria uma 'criteria', utilizando uma funcionalidade de referencia a objetos da classe NivelModel
+	 * Determinada de qual tabela deseja fazer algo, aos referidos objetos NvelModel
+	 * Cria uma 'query' a partir das criterias desejadas, para poder ter acesso aos dados (poder retorna-os)
+	 * Cria uma lista que contem em cada posicao uma entrada contida na tabela
+	 * Retorna a lista no formato ArrayList
+	 * 
+	 * @return ArrayList<NivelModel> contendo as entradas da tabela.
+	 */
 	public ArrayList<NivelModel> getAll() {
 		Session session = ConnectionHibernate.getSession();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -88,6 +105,14 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		return new ArrayList<NivelModel>(results);
 	}
 
+	/** <h1>Remove todas as entradas da Tabela</h1>
+	 * 
+	 * Verifica se ha uma conexão aberta, caso nao, abre uma
+	 * Deleta da tabela 'nivelmodel' todos os dados, e "pega" a quantidade de linhas que foram deletadas
+	 * Retorna o sucesso caso uma ou mais entradas tenham sido deletadas
+	 * 
+	 * @return Boolean : true/false para itens deletados.
+	 */
 	public boolean deleteAll() {
 		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
