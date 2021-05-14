@@ -86,7 +86,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * Buscar setor por nome.
 	 * 
 	 * Metodo realiza a busca dos dados do posto no banco de dados, conforme
-	 * nomeSetor informado.
+	 * nomeSetor informado. O nome pode ser parcial, pois realizara a busca de
+	 * todos os setores que contenham determinado texto.
 	 * 
 	 * @param String nomeSetor
 	 * @return SetorModel
