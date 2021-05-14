@@ -117,23 +117,25 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		return true;
 	}
 
-	/***
-	 * Deleta um registro da tabela. Busca no banco o registro cujo ID seja igual ao
-	 * informado no parâmetro e exclui a tupla.
+	/**
+	 * Deleta do banco de dados um objeto do tipo {@link CargoModel}.
 	 * 
-	 * @param idCargo int Id do registro a ser deletado.
-	 * @return boolean True se o registro for apagado e False em caso de falha.
+	 * Consulta no banco de dados um objeto do tipo {@link CargoModel} cujo
+	 * id eh igual ao id recebido no parametro.
+	 * 
+	 * @param idCargo int Id do objeto a ser deletado.
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
 	 */
 	public boolean delete(int idCargo) {
-		String deleteDB = "DELETE FROM grupo2.cargo WHERE id_cargo = " + idCargo;
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			stmt.execute(deleteDB);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		CargoModel cargo = retrieve(idCargo);
+
+		if (!ConnectionHibernate.getSession().getTransaction().isActive()) {
+			ConnectionHibernate.getSession().beginTransaction();
 		}
-		return false;
+		ConnectionHibernate.getSession().delete(cargo);
+		ConnectionHibernate.getSession().getTransaction().commit();
+		return true;
 	}
 
 	/**
