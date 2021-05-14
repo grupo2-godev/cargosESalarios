@@ -1,8 +1,17 @@
 package br.com.proway.senior.cargosESalarios.model;
 
-public class NivelModel {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class NivelModel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int idNivel;
+	
 	private String nomeNivel;
 	
 	public NivelModel(String nome) {

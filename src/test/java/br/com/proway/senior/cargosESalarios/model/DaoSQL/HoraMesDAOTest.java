@@ -60,6 +60,8 @@ public class HoraMesDAOTest {
 	
 	@Test
 	public void testBuscarTodosHorarios() {
+		HorasMesModel horasModel = new HorasMesModel(220.0);
+		horasMesDao.create(horasModel);
 		assertFalse(horasMesDao.getAll().isEmpty());
 	}
 	
@@ -69,7 +71,7 @@ public class HoraMesDAOTest {
 		horasMesDao.create(horasModel);
 		
 		Boolean ret = horasMesDao.deleteAll();
-		//assertTrue(ret);
+		
 		assertTrue(horasMesDao.getAll().isEmpty());
 	}
 	
