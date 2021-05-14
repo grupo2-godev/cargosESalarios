@@ -14,22 +14,22 @@ import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
+/**
+ * Classe DAO para a tabela de NivelModel
+ * 
+ *  @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ *  @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
+ *
+ */
 public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 
 	private static NivelDAO instance;
 	private Session session;
 	
-	/** Palavras chaves
-	 * 
-	 * private - public   <- Define quem pode acessar - OBRIGATORIO
-	 * Static <- por onde o acesso é feito (classe ou objeto) : OPCIONAL ... NivelDAO.getInstance
-	 * Void - Boolean - int - String - etc.... <- O que a funcao retorna - OBRIGATORIO
-	 *
-	 * se nao fosse static teriaos que fazer:
-	 * 
-	 * NiveoDAO objeto = NivelDAO.getInstance() -< funcao estatica que nos retorna o objeto
-	 * 
-	 * objeto.funcaoSemStatic() - com o objeto em maos podemos chamar as funcoes nao estaticas
+	/**
+	 * Obtem a instancia do Singleton DAO.
+	 * @param session : HibernateSession a ser utilizada
+	 * @return
 	 */
 	public static NivelDAO getInstance(Session session) {
 		if(instance == null) {
@@ -45,6 +45,14 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	private NivelDAO(Session session) {
 		this.session = session;
 	}
+	
+	/**
+	 * Cria uma nova entrada na tabela NivelModel.
+	 *
+	 * 
+	 * @param NivelModel : Objeto que vai ser salvo no banco de dados
+	 * @return int : id do objeto cadastrado no banco de dados
+	 */
 	public int create(NivelModel nivelModel) {
 		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
 			ConnectionHibernate.getSession().beginTransaction();
@@ -54,11 +62,27 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		return idCadastrado;
 	}
 	
-
+	/**
+	 * Retorna o registro de NivelModel com o id providenciado ou null caso nao
+	 * exista
+	 * 
+	 * @param int id Identificacao do registro desejado
+	 * @return NivelModel objeto requisitado / null
+	 */
 	public NivelModel retrieve(int id) {
 		return ConnectionHibernate.getSession().get(NivelModel.class, id);
 	}
 
+	/**
+	 * Atualizar um registro de NivelModel.
+	 * 
+	 * Realiza a atualizacao de um registro NivelModel, conforme a Id informada
+	 * como parametro e o objetoAlterado com os valores a serem modificados.
+	 * 
+	 * @param int id Identificacao do registro que será alterado
+	 * @param NivelModel objetoAlterado objeto com os dados a serem inseridos.
+	 * @return boolean : sucesso da operacao
+	 */
 	public boolean update(int id, NivelModel objetoAlterado) {
 		NivelModel original = retrieve(id);
 		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
@@ -69,7 +93,13 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 		ConnectionHibernate.getSession().getTransaction().commit();
 		return true;
 	}
-
+	
+	/**
+	 * Deleta o registro do banco de dados com a id informada.
+	 * 
+	 * @param int id Identificacao do registro que será removido
+	 * @return boolean : sucesso da operacao
+	 */
 	public boolean delete(int id) {
 		NivelModel entry = retrieve(id);
 		if(!ConnectionHibernate.getSession().getTransaction().isActive()) {
