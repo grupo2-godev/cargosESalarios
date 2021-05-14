@@ -25,32 +25,43 @@ public class GrauInstrucaoController {
 	 * @param grauInstrucao String Descricao do grau de instrucao.
 	 * @return Integer/Exception Retorna o id do objeto caso ele seja cadastrado com
 	 *         sucesso. Caso a validacao retorne false, retorna Exception.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Integer cadastrar(String grauInstrucao) throws Exception {
-		if(!Validators.onlyValidChars(grauInstrucao)) {
-			throw(new Exception("O grau de instrução possui caracteres inválidos."));
+		if (!Validators.onlyValidChars(grauInstrucao)) {
+			throw (new Exception("O grau de instrução possui caracteres inválidos."));
 		}
 		GrauInstrucaoModel grauInstrucaoModel = new GrauInstrucaoModel();
 		grauInstrucaoModel.setNome(grauInstrucao);
 		return grauInstrucaoDAO.create(grauInstrucaoModel);
 	}
-	
+
+	public GrauInstrucaoModel buscarPorId(Integer id) throws Exception {
+		if (id == null || id == 0) {
+			throw (new Exception("O Id não pode ser nulo ou zero."));
+		}
+		return grauInstrucaoDAO.retrieve(id);
+	}
+
 	/**
 	 * Retorna um ArrayList com todos os registros da tabela.
-	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos do tipo {@link GrauInstrucaoModel}
+	 * 
+	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos do tipo
+	 *         {@link GrauInstrucaoModel}
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
 		return grauInstrucaoDAO.getAll();
 	}
-	
+
 	/**
 	 * Deleta todos os registros da tabela.
-	 * @return boolean Retorna false caso a validacao apos o comando de deletarTodos retorne algum registro da tabela. Caso contrario, retorna true.
+	 * 
+	 * @return boolean Retorna false caso a validacao apos o comando de deletarTodos
+	 *         retorne algum registro da tabela. Caso contrario, retorna true.
 	 */
 	public boolean deletarTodos() {
 		grauInstrucaoDAO.deleteAll();
-		if(this.buscarTodos().size() > 0) {
+		if (this.buscarTodos().size() > 0) {
 			return false;
 		}
 		return true;
