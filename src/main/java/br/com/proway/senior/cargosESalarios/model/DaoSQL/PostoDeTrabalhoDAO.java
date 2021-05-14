@@ -5,14 +5,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.ConnectionPostgres;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /**
@@ -88,31 +96,22 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * Metodo retrieve por nomePosto
 	 * 
 	 * Metodo realiza a busca dos dados do posto no banco de dados, conforme
-	 * nomePosto informado.
+	 * nomePosto informado. O nome pode ser parcial, pois realizara a busca de
+	 * todos os postos que contenham determinado texto.
 	 * 
 	 * @param String nomePosto
 	 * @return PostoDeTrabalhoModel
 	 */
-	public PostoDeTrabalhoModel retrieve(String nomePosto) {
-		String sqlRetrieveNome = "SELECT * FROM grupo2.posto_de_trabalho WHERE nome_posto = " + "'" + nomePosto + "'";
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlRetrieveNome);
-			PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel();
-			while (rs.next()) {
-				posto.setIdCargo(rs.getInt(1));
-				posto.setIdNivel(rs.getInt(2));
-				posto.setIdSetor(rs.getInt(3));
-				posto.setNomePosto(rs.getString(4));
-				posto.setSalario(rs.getDouble(5));
-				posto.setIdPosto(rs.getInt(6));
-				System.out.println(posto.toString());
-			}
-			return posto;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public ArrayList<PostoDeTrabalhoModel> retrieveByName(String nomePosto) {
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
+		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
+		Query query = session.createQuery(criteria);
+		Expression registroSetor = (Expression) root.get("nomePosto");
+		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomePosto + "%'"));
+		List<PostoDeTrabalhoModel> resultado = query.getResultList();
+		return new ArrayList<PostoDeTrabalhoModel> (resultado);
 	}
 
 	/**

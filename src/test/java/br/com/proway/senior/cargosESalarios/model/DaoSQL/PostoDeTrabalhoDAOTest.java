@@ -48,7 +48,7 @@ public class PostoDeTrabalhoDAOTest {
 	}
 	
 	@Test
-	public void testRetrieveSqlId() {
+	public void testBuscarPostoPorID() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor ERP", 23, 5, 1, 2900.00);
 		Integer idPostoCadastrado = postoDAO.create(novoPosto);
 		PostoDeTrabalhoModel postoConsultado = postoDAO.retrieve(idPostoCadastrado);
@@ -60,14 +60,22 @@ public class PostoDeTrabalhoDAOTest {
 	}
 		
 	@Test
-	public void testUpdateSql() {
-
+	public void testBuscarPostoPorNome() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Gestão de Pessoas", 15, 10, 2, 2700.00);
+		postoDAO.create(novoPosto);
+		ArrayList<PostoDeTrabalhoModel> listaRetornada = postoDAO.retrieveByName("Analist");
+		assertEquals(novoPosto.getNomePosto(), listaRetornada.get(0).getNomePosto());		
+		assertEquals(novoPosto.getIdCargo(), listaRetornada.get(0).getIdCargo());		
+		assertEquals(novoPosto.getIdSetor(), listaRetornada.get(0).getIdSetor());		
+		assertEquals(novoPosto.getIdNivel(), listaRetornada.get(0).getIdNivel());		
+		assertEquals(novoPosto.getSalario(), listaRetornada.get(0).getSalario());		
 	}
 	
 	@Test
-	public void testRetrieveSqlNome() {
-	
+	public void testUpdateSql() {
 	}
+	
+
 	
 	@Test
 	public void testDeleteSql() {
