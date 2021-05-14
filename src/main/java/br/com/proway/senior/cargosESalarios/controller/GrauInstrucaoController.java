@@ -43,5 +43,17 @@ public class GrauInstrucaoController {
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
 		return grauInstrucaoDAO.getAll();
 	}
+	
+	/**
+	 * Deleta todos os registros da tabela.
+	 * @return boolean Retorna false caso a validacao apos o comando de deletarTodos retorne algum registro da tabela. Caso contrario, retorna true.
+	 */
+	public boolean deletarTodos() {
+		grauInstrucaoDAO.deleteAll();
+		if(this.buscarTodos().size() > 0) {
+			return false;
+		}
+		return true;
+	}
 
 }
