@@ -7,13 +7,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
 import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
@@ -157,37 +164,20 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 
 	/**
 	 * Listar todos os registros da tabela. Busca todos os registros do banco, salva
-	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo CargoModel.
+	 * em um ArrayLis e retorna o ArrayList contendo objetos do tipo
+	 * {@link CargoModel}.
 	 * 
-	 * @return list ArrayList<CargoModel>
+	 * @return cargos ArrayList<CargoModel> Todos os registros da tabela
+	 *         {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> getAll() {
-		ArrayList<CargoModel> list = new ArrayList<CargoModel>();
-		String sqlSelectAll = "SELECT * FROM grupo2.cargo";
-		try {
-			Statement stmt = conexao.criarConexao().createStatement();
-			ResultSet rs = stmt.executeQuery(sqlSelectAll);
-			CargoModel cargo = new CargoModel();
-			while (rs.next()) {
-				cargo.setIdCargo(rs.getInt(1));
-				cargo.setNomeCargo(rs.getString(2));
-				cargo.setDataCadastro(new Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-				cargo.setDataUltimaRevisao(new Timestamp(rs.getDate(4).getTime()).toLocalDateTime());
-				cargo.setCbo2002(rs.getInt(5));
-				cargo.setCbo94(rs.getInt(6));
-				cargo.setHoraMes(rs.getInt(7));
-				cargo.setGrauInstrucao(rs.getInt(8));
-				cargo.setExperienciaMinima(rs.getString(9));
-				cargo.setAtribuicoes(rs.getString(10));
-				cargo.setStatus(rs.getBoolean(11));
-				cargo.setIdPermissao(rs.getInt(12));
-				System.out.println(cargo.toString());
-				list.add(cargo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+		Session session = ConnectionHibernate.getSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
+		Root<CargoModel> root = criteria.from(CargoModel.class);
+		Query query = session.createQuery(criteria);
+		List<CargoModel> cargos = query.getResultList();
+		return new ArrayList<CargoModel>(cargos);
 	}
 
 	/**
@@ -200,14 +190,6 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @throws SQLException
 	 * @return void
 	 */
-	public void limparTabela() throws SQLException {
-		String limpar = "delete from grupo2.cargo";
-		String removerIncremento = "ALTER SEQUENCE grupo2.cargo_increment RESTART";
-		conexao.criarConexao().createStatement().executeUpdate(limpar);
-		conexao.criarConexao().createStatement().executeUpdate(removerIncremento);
-		System.out.println("Limpeza realizada.");
-	}
-
 	public boolean deleteAll() {
 		// TODO Auto-generated method stub
 		return false;
