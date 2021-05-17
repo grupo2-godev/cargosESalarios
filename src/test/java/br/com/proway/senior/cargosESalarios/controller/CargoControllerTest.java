@@ -1,16 +1,12 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 /**
  * Classe que testa os metodos da classe {@link CargoController}.
@@ -35,7 +31,7 @@ public class CargoControllerTest {
 	Integer idPermissao = 1;
 	
 	@Test
-	public void testCadastrar() {
+	public void testCadastrar() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
 
 		assertNotNull(controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
@@ -99,7 +95,7 @@ public class CargoControllerTest {
 	}
 	
 	@Test
-	public void buscarTodos() {
+	public void buscarTodos() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
 		controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		controller.cadastrar("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
