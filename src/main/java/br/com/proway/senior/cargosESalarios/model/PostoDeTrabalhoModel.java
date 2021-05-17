@@ -30,13 +30,13 @@ public class PostoDeTrabalhoModel {
 	private Integer idPosto;
 	private String nomePosto;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private CargoModel idCargo;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private SetorModel idSetor;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private NivelModel idNivel;
 	private Double salario;
 	
