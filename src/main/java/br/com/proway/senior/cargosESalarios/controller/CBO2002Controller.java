@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
-import utils.Insalubridade;
-import utils.Periculosidade;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Classe CBO2002Controller
@@ -39,13 +39,13 @@ public class CBO2002Controller {
 	 */
 	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
 			Periculosidade percentualPericulosidade) throws Exception {
-		if (Validators.isCBO2002Valid(codigoCBO) == false) {
+		if (Validadores.ehValidoCBO2002(codigoCBO) == false) {
 			throw new Exception("Código de CBO 2002 informado inválido.");
 		} 
-		if (!Validators.isNullObject(cbo2002DAO.buscar(codigoCBO))) {
+		if (!Validadores.ehObjetoNulo(cbo2002DAO.buscar(codigoCBO))) {
 			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
-		if (!Validators.onlyValidChars(descricao)) {
+		if (!Validadores.apenasCaracteresValidos(descricao)) {
 			throw new Exception("A descrição deve conter apenas caracteres válidos.");
 		} 
 			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
@@ -100,7 +100,7 @@ public class CBO2002Controller {
 	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade, 
 			Periculosidade novaPericulosidade) throws Exception {
 		CBO2002Model cboRecuperado = cbo2002DAO.buscar(codigoCBO);
-		if(Validators.isNullObject(cboRecuperado)) {
+		if(Validadores.ehObjetoNulo(cboRecuperado)) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
 		cboRecuperado.setDescricao(novaDescricao);
@@ -120,7 +120,7 @@ public class CBO2002Controller {
 	 * @throws Exception
 	 */
 	public boolean deletarCBO2002(Integer codigoCBO) throws Exception {
-		if(Validators.isNullObject(cbo2002DAO.buscar(codigoCBO))) {
+		if(Validadores.ehObjetoNulo(cbo2002DAO.buscar(codigoCBO))) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
 		cbo2002DAO.deletar(codigoCBO);

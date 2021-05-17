@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.NivelDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o NivelDAO.
  * 
@@ -26,7 +26,7 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public Integer cadastrarNivel(String nome) throws Exception {
-		if(!Validators.onlyValidChars(nome)) {
+		if(!Validadores.apenasCaracteresValidos(nome)) {
 			throw(new Exception("Nome invalido para o Nivel"));
 		}
 		NivelModel nivelModel = new NivelModel(nome);

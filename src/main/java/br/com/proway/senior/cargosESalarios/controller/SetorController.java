@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Classe SetorController
@@ -86,7 +86,7 @@ public class SetorController {
 	 */
 	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
 		SetorModel setorRecuperado = setorDAO.buscar(idSetor);
-		if(Validators.isNullObject(setorRecuperado)) {
+		if(Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		setorRecuperado.setNomeSetor(novoNome);
@@ -104,7 +104,7 @@ public class SetorController {
 	 * @throws Exception 
 	 */
 	public boolean deletarSetor(Integer idSetor) throws Exception {
-		if(Validators.isNullObject(setorDAO.buscar(idSetor))) {
+		if(Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		return setorDAO.deletar(idSetor);

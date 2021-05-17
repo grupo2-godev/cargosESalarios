@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Controller que interage com o CargoDAO.
@@ -52,23 +52,23 @@ public class CargoController {
 			Integer cbo2002, Integer cbo94, Integer horasMes, Integer grauInstrucao, String experienciaMinima,
 			String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
 
-		if (Validators.isNullObject(nomeCargo) || nomeCargo.isEmpty())
+		if (Validadores.ehObjetoNulo(nomeCargo) || nomeCargo.isEmpty())
 			throw (new Exception("O nome do cargo não foi informado."));
-		if (Validators.isZeroOrNull(cbo2002))
+		if (Validadores.ehZeroOuNulo(cbo2002))
 			throw (new Exception("O cbo2002 não foi informado."));
-		if (Validators.isZeroOrNull(cbo94))
+		if (Validadores.ehZeroOuNulo(cbo94))
 			throw (new Exception("O cbo94 não foi informado."));
-		if (Validators.isZeroOrNull(horasMes))
+		if (Validadores.ehZeroOuNulo(horasMes))
 			throw (new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero."));
-		if (Validators.isZeroOrNull(grauInstrucao))
+		if (Validadores.ehZeroOuNulo(grauInstrucao))
 			throw (new Exception("O grau de instrução não foi informado."));
-		if (Validators.isNullObject(experienciaMinima) || experienciaMinima.isEmpty())
+		if (Validadores.ehObjetoNulo(experienciaMinima) || experienciaMinima.isEmpty())
 			throw (new Exception("A experiencia mínima não foi informada."));
-		if (Validators.isNullObject(atribuicoes) || atribuicoes.isEmpty())
+		if (Validadores.ehObjetoNulo(atribuicoes) || atribuicoes.isEmpty())
 			throw (new Exception("As atribuicoes não foram informadas."));
-		if (Validators.isNullObject(status))
+		if (Validadores.ehObjetoNulo(status))
 			throw (new Exception("O status não foi informado."));
-		if (Validators.isZeroOrNull(idPermissao))
+		if (Validadores.ehZeroOuNulo(idPermissao))
 			throw (new Exception("A permissao não foi informada."));
 
 		CargoModel cargo = new CargoModel();
@@ -107,7 +107,7 @@ public class CargoController {
 	 * @throws Exception
 	 */
 	public CargoModel buscarPorId(Integer id) throws Exception {
-		if (Validators.isZeroOrNull(id))
+		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
 		return cargoDAO.buscar(id);
 	}
@@ -127,9 +127,9 @@ public class CargoController {
 	 * @throws Exception
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
-		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado)))
+		if (Validadores.ehObjetoNulo(this.buscarPorId(idObjetoASerAlterado)))
 			throw (new Exception("O objeto não existe no banco de dados."));
-		if (Validators.isNullObject(novoCargo))
+		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
 
 		cargoDAO.atualizar(idObjetoASerAlterado, novoCargo);
@@ -149,9 +149,9 @@ public class CargoController {
 	 * @throws Exception
 	 */
 	public boolean deletarPorId(Integer id) throws Exception {
-		if (Validators.isZeroOrNull(id))
+		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou igual a zero."));
-		if (Validators.isNullObject(this.buscarPorId(id)))
+		if (Validadores.ehObjetoNulo(this.buscarPorId(id)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 
 		cargoDAO.deletar(id);

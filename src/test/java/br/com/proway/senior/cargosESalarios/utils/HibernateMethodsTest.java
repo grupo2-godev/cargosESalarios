@@ -1,4 +1,4 @@
-package utils;
+package br.com.proway.senior.cargosESalarios.utils;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
+import br.com.proway.senior.cargosESalarios.utils.HibernateMethods;
 
 public class HibernateMethodsTest {
 

@@ -8,7 +8,7 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Classe PostoDeTrabalhoController
@@ -38,8 +38,9 @@ public class PostoDeTrabalhoController {
 	 * @return null ou idNovoPosto
 	 * @throws Exception 
 	 */
-	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, Double salario) throws Exception {		
-		if (!Validators.onlyValidChars(nomePosto)) {
+	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, 
+			Double salario) throws Exception {		
+		if (!Validadores.apenasCaracteresValidos(nomePosto)) {
 			throw new Exception("Nome invalido para Posto de Trabalho!!!");
 		}
 
@@ -77,7 +78,7 @@ public class PostoDeTrabalhoController {
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novoCargo, SetorModel novoSetor,
 			NivelModel novoNivel, Double novoSalario) {
 		PostoDeTrabalhoModel posto = this.postoDAO.buscar(idPosto);
-		if (Validators.onlyValidChars(novoNome)) {
+		if (Validadores.apenasCaracteresValidos(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
 		posto.setCargo(novoCargo);
