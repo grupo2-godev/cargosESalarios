@@ -108,6 +108,25 @@ public class CargoControllerTest {
 	public void testBuscarPorIdInvalido() throws Exception {
 		controller.buscarPorId(0);
 	}
+	
+	@Test
+	public void testAlterar() throws Exception {
+		Integer idCadastrado = controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargoNovo = new CargoModel();
+		cargoNovo.setNomeCargo("Novo cargo");
+		cargoNovo.setDataCadastro(dataCadastro);
+		cargoNovo.setDataUltimaRevisao(dataUltimaRevisao);
+		cargoNovo.setCbo2002(cbo2002);
+		cargoNovo.setCbo94(cbo94);
+		cargoNovo.setHoraMes(horasMes);
+		cargoNovo.setGrauInstrucao(grauInstrucao);
+		cargoNovo.setExperienciaMinima(experienciaMinima);
+		cargoNovo.setAtribuicoes(atribuicoes);
+		cargoNovo.setStatus(status);
+		cargoNovo.setIdPermissao(idPermissao);
+		controller.alterar(idCadastrado, cargoNovo);
+		assertEquals("Novo cargo", controller.buscarPorId(idCadastrado).getNomeCargo());
+	}
 
 	@Test
 	public void buscarTodos() throws Exception {
