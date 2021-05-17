@@ -33,22 +33,20 @@ public class CBO2002Controller {
 	 * @param percentualInsalubridade
 	 * @param percentualPericulosidade
 	 * @return
+	 * @throws Exception 
 	 */
 	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
-			Periculosidade percentualPericulosidade) {
+			Periculosidade percentualPericulosidade) throws Exception {
 		if (Validators.isCBO2002Valid(codigoCBO) == false) {
-			System.out.println("Código de CBO 2002 informado inválido.");
-			return null;
+			throw new Exception("Código de CBO 2002 informado inválido.");
 		} 
 		if (!(cbo2002DAO.retrieve(codigoCBO) == null)) {
-			System.out.println("Código de CBO 2002 informado já cadastrado.");
-			return null;
+			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
 			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
 					percentualPericulosidade.getValor());
 			cbo2002DAO.create(novoCBO2002);
 			return codigoCBO;
-		
 	}
 
 	/**
