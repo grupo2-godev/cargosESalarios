@@ -131,8 +131,30 @@ public class CargoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validators.isNullObject(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
-		
+
 		cargoDAO.update(idObjetoASerAlterado, novoCargo);
+		return true;
+	}
+
+	/**
+	 * Deleta um registro do banco de dados que corresponde ao id recebido no
+	 * parametro.
+	 * 
+	 * Verifica se o id eh valido (diferente de zero, diferente de nulo). Verifica
+	 * se existe um objeto no banco de dados com o id recebido no parametro.
+	 * 
+	 * @param id Integer Id do objeto a ser deletado.
+	 * @return boolean Retorna true caso o objeto seja localizado no banco de dados.
+	 *         Retorna false caso o id seja invalido conforma validacao.
+	 * @throws Exception
+	 */
+	public boolean deletarPorId(Integer id) throws Exception {
+		if (Validators.isZeroOrNull(id))
+			throw (new Exception("O id não pode ser nulo ou igual a zero."));
+		if (Validators.isNullObject(this.buscarPorId(id)))
+			throw (new Exception("O objeto não existe no banco de dados."));
+
+		cargoDAO.delete(id);
 		return true;
 	}
 
