@@ -10,7 +10,7 @@ import utils.Validators;
 /**
  * Classe PostoDeTrabalhoController
  * 
- * Implementa os metodos do DAO para as devidas trataivas necess�rias
+ * Implementa os metodos do DAO para as devidas trataivas necessarias
  * 
  * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
@@ -50,7 +50,7 @@ public class PostoDeTrabalhoController {
 	/**
 	 * Deletar Posto de Trabalho
 	 * 
-	 * Realiza a exclusao do posto de trabalho conforme id de par�metro.
+	 * Realiza a exclusao do posto de trabalho conforme id de parametro.
 	 * 
 	 * @param idPosto
 	 * @return boolean
@@ -62,7 +62,7 @@ public class PostoDeTrabalhoController {
 	/**
 	 * Atualizar Posto de Trabalho
 	 * 
-	 * M�todo realiza a atualiza��o do posto de trabalho conforme par�metros.
+	 * Metodo realiza a atualizacao do posto de trabalho conforme parametros.
 	 * 
 	 * @param idPosto
 	 * @param novoNome

@@ -41,6 +41,11 @@ public class PostoDeTrabalhoControllerTest {
 		assertEquals(salario, postoRecuperado.getSalario());
 	}
 	
+	@Test(expected = Exception.class)
+	public void cadastrarPostoDeTrabalhoTestNomeInvalido() throws Exception {
+		int id = controller.cadastrarPostoDeTrabalho("Inval1d0!", idCargo, idSetor, idNivel, salario);
+	}
+	
 	@Test
 	public void deletarPostoDeTrabalhoTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
