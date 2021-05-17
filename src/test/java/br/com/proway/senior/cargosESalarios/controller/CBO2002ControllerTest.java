@@ -28,7 +28,7 @@ public class CBO2002ControllerTest {
 	public void testCadastrarCBO2002Correto() throws Exception {
 		Integer codigo = cboController.cadastrarCBO2002(252515, "Analista de Cobrança Instituições Financeiras", 
 				Insalubridade.Dez, Periculosidade.Zero);
-		CBO2002Model cboRecuperado = cboController.buscarSetorPorId(codigo);
+		CBO2002Model cboRecuperado = cboController.buscarCBO2002PorCodigo(codigo);
 		assertEquals((Integer) 252515, cboRecuperado.getCodigoCBO2002());
 		assertEquals("Analista de Cobrança Instituições Financeiras", cboRecuperado.getDescricao());
 		assertEquals(0.1, cboRecuperado.getPercentualInsalubridade(), 0.01);
@@ -57,7 +57,7 @@ public class CBO2002ControllerTest {
 	public void testBuscarCBO2002PorCodigo() throws Exception {
 		Integer codigo = cboController.cadastrarCBO2002(375125, "Assistente de Produção Moda", Insalubridade.Zero, 
 				Periculosidade.Zero);
-		CBO2002Model cboRecuperado = cboController.buscarSetorPorId(codigo);
+		CBO2002Model cboRecuperado = cboController.buscarCBO2002PorCodigo(codigo);
 		assertEquals((Integer) 375125, cboRecuperado.getCodigoCBO2002());
 		assertEquals("Assistente de Produção Moda", cboRecuperado.getDescricao());
 		assertEquals(0.0, cboRecuperado.getPercentualInsalubridade(), 0.01);
@@ -82,7 +82,7 @@ public class CBO2002ControllerTest {
 		Insalubridade novaInsalubridade = Insalubridade.Zero;
 		Periculosidade novaPericulosidade = Periculosidade.Trinta;
 		cboController.atualizarCBO2002(codigoCadastrado, novaDescricao, novaInsalubridade, novaPericulosidade);
-		CBO2002Model cboAtualizado = cboController.buscarSetorPorId(codigoCadastrado);
+		CBO2002Model cboAtualizado = cboController.buscarCBO2002PorCodigo(codigoCadastrado);
 		assertEquals(novaDescricao, cboAtualizado.getDescricao());
 		assertEquals(novaInsalubridade.getValor(), cboAtualizado.getPercentualInsalubridade(), 0.01);
 		assertEquals(novaPericulosidade.getValor(), cboAtualizado.getPercentualPericulosidade(), 0.01);

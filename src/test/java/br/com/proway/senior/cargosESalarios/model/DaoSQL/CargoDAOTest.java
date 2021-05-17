@@ -21,7 +21,9 @@ import utils.Periculosidade;
 /**
  * Testes referentes aos métodos da classe {@link CargoDAO}.
  * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 public class CargoDAOTest {
 	static CargoDAO cargoDAO = CargoDAO.getInstance(ConnectionHibernate.getSession());
@@ -53,10 +55,10 @@ public class CargoDAOTest {
 		cbo2002DAO.deleteAll();
 		cbo1994DAO.deleteAll();
 		horasMesDAO.deleteAll();
-		
+
 		popularTabelas();
 	}
-	
+
 	@Before
 	public void limparTabelas() {
 		cargoDAO.deleteAll();
@@ -73,7 +75,7 @@ public class CargoDAOTest {
 		codigoCbo1994 = cbo1994DAO.create(new CBO1994Model(55555, "Desenvolvedor", Insalubridade.Dez.getValor(),
 				Periculosidade.Trinta.getValor()));
 		cbo1994 = cbo1994DAO.retrieve(codigoCbo1994);
-		
+
 		idHorasMes = horasMesDAO.create(new HorasMesModel(240d));
 		horasMes = horasMesDAO.retrieve(idHorasMes);
 	}

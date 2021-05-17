@@ -31,6 +31,9 @@ public class CBO1994Model {
 		this.percentualPericulosidade = percentualPericulosidade;
 	}
 
+	public CBO1994Model() {
+	}
+
 	public Integer getCodigo_cbo() {
 		return codigo_cbo;
 	}

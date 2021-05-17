@@ -18,7 +18,9 @@ import utils.Validators;
 /**
  * Controller que interage com o CargoDAO.
  * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  *
  */
 public class CargoController {

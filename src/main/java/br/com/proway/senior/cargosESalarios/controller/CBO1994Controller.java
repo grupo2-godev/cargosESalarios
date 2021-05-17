@@ -27,7 +27,7 @@ public class CBO1994Controller {
 		return instance;
 	}
 
-	private CBO1994Controller() {}	
+	CBO1994Controller() {}	
 	
 		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
 	

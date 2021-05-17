@@ -63,7 +63,7 @@ public class CBO2002Controller {
 	 * @param Integer codigoCBO Identificacao do CBO 2002 procurado.
 	 * @return CBO2002Model objeto localizado ou null caso nao conste no banco.
 	 */
-	public CBO2002Model buscarSetorPorId(Integer codigoCBO) {
+	public CBO2002Model buscarCBO2002PorCodigo(Integer codigoCBO) {
 		return cbo2002DAO.retrieve(codigoCBO);
 	}
 	
