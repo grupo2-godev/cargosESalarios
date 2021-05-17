@@ -2,24 +2,30 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
+import utils.Validators;
 
 /**
  * Classe PostoDeTrabalhoController
  * 
- * Implementa os m�todos do DAO para as devidas trataivas necess�rias
+ * Implementa os metodos do DAO para as devidas trataivas necess�rias
  * 
- * @author Sarah Brito, sarah.brito@senior.com.br 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDAO postoSQL = new PostoDeTrabalhoDAO();
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(
+		ConnectionHibernate.getSession()
+	);
 	
 	/**
 	 * Cadastro Posto de Trabalho
 	 * 
-	 * Recebe os par�metros necessarios para a criacao de um posto de
+	 * Recebe os parametros necessarios para a criacao de um posto de
 	 * trabalho, as valida e envia para o DAO.
 	 * @param nomePosto
 	 * @param idCargo
@@ -29,26 +35,27 @@ public class PostoDeTrabalhoController {
 	 * @return null ou idNovoPosto
 	 */
 	public Integer cadastrarPostoDeTrabalho(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) {		
-		if (postoSQL.retrieve(nomePosto).toString().isEmpty()) {
+		if (!Validators.onlyValidChars(nomePosto)) {
 			return null;
 		}
+
 		else {
 			PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
-			int quantidadeRegistros = postoSQL.create(novoPosto);
-			return quantidadeRegistros;
+			int idRegistrado = this.postoDAO.create(novoPosto);
+			return idRegistrado;
 		}
 	}
 	
 	/**
 	 * Deletar Posto de Trabalho
 	 * 
-	 * Realiza a exclus�o do posto de trabalho conforme id de par�metro.
+	 * Realiza a exclusao do posto de trabalho conforme id de par�metro.
 	 * 
 	 * @param idPosto
 	 * @return boolean
 	 */
 	public boolean deletarPostoDeTrabalho(Integer idPosto) {
-		return postoSQL.delete(idPosto);
+		return this.postoDAO.delete(idPosto);
 	}
 	
 	/**
@@ -66,13 +73,15 @@ public class PostoDeTrabalhoController {
 	 */
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, Integer novaIdCargo, Integer novaIdSetor,
 			Integer novoIdNivel, Double novoSalario) {
-		PostoDeTrabalhoModel posto = postoSQL.retrieve(idPosto);
-		posto.setNomePosto(novoNome);
+		PostoDeTrabalhoModel posto = this.postoDAO.retrieve(idPosto);
+		if (Validators.onlyValidChars(novoNome)) {
+			posto.setNomePosto(novoNome);
+		}
 		posto.setIdCargo(novaIdCargo);
 		posto.setIdSetor(novaIdSetor);
 		posto.setIdNivel(novoIdNivel);
 		posto.setSalario(novoSalario);
-		return postoSQL.update(idPosto, posto);
+		return this.postoDAO.update(idPosto, posto);
 	}
 	
 	/**
@@ -85,7 +94,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoId(Integer idPosto) {
-		return postoSQL.retrieve(idPosto);
+		return this.postoDAO.retrieve(idPosto);
 	}
 	
 	/**
@@ -97,8 +106,8 @@ public class PostoDeTrabalhoController {
 	 * @param nomePosto
 	 * @return PostoDeTrabalhoModel
 	 */
-	public PostoDeTrabalhoModel buscarPostoDeTrabalhoNome(String nomePosto) {
-		return postoSQL.retrieve(nomePosto);
+	public ArrayList<PostoDeTrabalhoModel> buscarPostoDeTrabalhoNome(String nomePosto) {
+		return this.postoDAO.retrieveByName(nomePosto);
 	}
 	
 	/**
@@ -107,7 +116,7 @@ public class PostoDeTrabalhoController {
 	 * @return ArrayList
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodosPostosDeTrabalho() {
-		return postoSQL.getAll();
+		return this.postoDAO.getAll();
 		
 	}
 
