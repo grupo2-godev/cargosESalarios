@@ -132,7 +132,7 @@ public class GrauInstrucaoController {
 	}
 
 	/**
-	 * Deleta todos os registros da tabela.
+	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
 	public void deletarTodos() {
 		grauInstrucaoDAO.deleteAll();

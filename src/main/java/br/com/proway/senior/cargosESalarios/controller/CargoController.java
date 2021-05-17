@@ -86,5 +86,12 @@ public class CargoController {
 		Integer idCargoCadastrado = cargoDAO.create(cargo);
 		return idCargoCadastrado;
 	}
+	
+	/**
+	 * Deleta todos os registros da tabela {@link CargoModel}.
+	 */
+	public void deletarTodos() {
+		cargoDAO.deleteAll();
+	}
 
 }
