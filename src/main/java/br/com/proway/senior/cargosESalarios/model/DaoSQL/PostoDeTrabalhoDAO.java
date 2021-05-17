@@ -11,7 +11,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -62,11 +61,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return Id do posto de trabalho cadastrado
 	 */
 	public int criar(PostoDeTrabalhoModel postoModel) {
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		Integer idCadastrado = (Integer) sessao.save(postoModel);
-		sessao.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(postoModel);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -80,7 +79,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscar(int idPosto) {
-		return sessao.get(PostoDeTrabalhoModel.class, idPosto);
+		return this.sessao.get(PostoDeTrabalhoModel.class, idPosto);
 	}
 
 	/**
@@ -94,10 +93,10 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarPorNome(String nomePosto) {
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
-		Query query = sessao.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		Expression registroSetor = (Expression) root.get("nomePosto");
 		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomePosto + "%'"));
 		List<PostoDeTrabalhoModel> resultado = query.getResultList();
@@ -116,16 +115,16 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 */
 	public boolean atualizar(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
 		PostoDeTrabalhoModel original = buscar(idPosto);
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setNomePosto(postoAtualizado.getNomePosto());
 		original.setCargo(postoAtualizado.getCargo());
 		original.setSetor(postoAtualizado.getSetor());
 		original.setNivel(postoAtualizado.getNivel());
 		original.setSalario(postoAtualizado.getSalario());
-		sessao.update(original);
-		sessao.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -140,11 +139,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	public boolean deletar(int idPosto) {
 		PostoDeTrabalhoModel entry = buscar(idPosto);
 
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		sessao.delete(entry);
-		sessao.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -157,10 +156,10 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return ArrayList<PostoDeTrabalhoModel>
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
-		Query query = sessao.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<PostoDeTrabalhoModel> results = query.getResultList();
 		return new ArrayList<PostoDeTrabalhoModel>(results);
 	}
@@ -173,12 +172,12 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @return boolean
 	 */
 	public boolean deletarTodos() {
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = sessao.createSQLQuery("DELETE FROM posto_de_trabalho")
+		int modificados = this.sessao.createSQLQuery("DELETE FROM posto_de_trabalho")
 				.executeUpdate();
-		sessao.getTransaction().commit();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

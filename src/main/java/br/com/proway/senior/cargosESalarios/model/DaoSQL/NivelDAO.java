@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -54,11 +53,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return int : id do objeto cadastrado no banco de dados
 	 */
 	public int criar(NivelModel nivelModel) {
-		if(!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if(!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		Integer idCadastrado = (Integer) sessao.save(nivelModel);
-		sessao.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(nivelModel);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 	
@@ -70,7 +69,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return NivelModel objeto requisitado / null
 	 */
 	public NivelModel buscar(int id) {
-		return sessao.get(NivelModel.class, id);
+		return this.sessao.get(NivelModel.class, id);
 	}
 
 	/**
@@ -85,12 +84,12 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 */
 	public boolean atualizar(int id, NivelModel objetoAlterado) {
 		NivelModel original = buscar(id);
-		if(!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if(!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setNome(objetoAlterado.getNome());
-		sessao.update(original);
-		sessao.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 	
@@ -102,11 +101,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 */
 	public boolean deletar(int id) {
 		NivelModel entry = buscar(id);
-		if(!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if(!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		sessao.delete(entry);
-		sessao.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -124,11 +123,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return ArrayList<NivelModel> contendo as entradas da tabela.
 	 */
 	public ArrayList<NivelModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<NivelModel> criteria = criteriaBuilder.createQuery(NivelModel.class);
 		
 		Root<NivelModel> root = criteria.from(NivelModel.class);
-		Query query = sessao.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		
 		List<NivelModel> results = query.getResultList();
 		return new ArrayList<NivelModel>(results);
@@ -143,11 +142,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return Boolean : true/false para itens deletados.
 	 */
 	public boolean deletarTodos() {
-		if(!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if(!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = sessao.createSQLQuery("DELETE FROM nivelmodel").executeUpdate();
-		sessao.getTransaction().commit();
+		int modificados = this.sessao.createSQLQuery("DELETE FROM nivelmodel").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 	

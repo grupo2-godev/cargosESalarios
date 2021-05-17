@@ -1,11 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +10,12 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
  * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os metodos
- * necessarios para a intercao com o banco de dados.
+ * necessarios para a interacao com o banco de dados.
  * 
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
@@ -61,11 +53,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int criar(CargoModel cargo) {
-		if (!sessao.getTransaction().isActive())
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive())
+			this.sessao.beginTransaction();
 
-		Integer idCadastrado = (Integer) sessao.save(cargo);
-		sessao.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(cargo);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -78,8 +70,7 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel buscar(int idCargo) {
-		CargoModel cargo = sessao.get(CargoModel.class, idCargo);
-		return cargo;
+		return this.sessao.get(CargoModel.class, idCargo);
 	}
 
 	/***
@@ -96,8 +87,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 */
 	public boolean atualizar(int idCargo, CargoModel cargoNovo) {
 		CargoModel cargo = buscar(idCargo);
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		cargo.setNomeCargo(cargoNovo.getNomeCargo());
 		cargo.setDataCadastro(cargoNovo.getDataCadastro());
@@ -110,8 +101,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
 		cargo.setStatus(cargoNovo.getStatus());
 		cargo.setIdPermissao(cargoNovo.getIdPermissao());
-		sessao.update(cargo);
-		sessao.getTransaction().commit();
+		this.sessao.update(cargo);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -128,11 +119,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	public boolean deletar(int idCargo) {
 		CargoModel cargo = buscar(idCargo);
 
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		sessao.delete(cargo);
-		sessao.getTransaction().commit();
+		this.sessao.delete(cargo);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -145,10 +136,10 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
 		Root<CargoModel> root = criteria.from(CargoModel.class);
-		Query query = sessao.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<CargoModel> cargos = query.getResultList();
 		return new ArrayList<CargoModel>(cargos);
 	}
@@ -160,11 +151,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deletarTodos() {
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int registrosModificados = sessao.createSQLQuery("DELETE FROM cargo").executeUpdate();
-		sessao.getTransaction().commit();
+		int registrosModificados = this.sessao.createSQLQuery("DELETE FROM cargo").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 }
