@@ -45,6 +45,9 @@ public class CBO2002Controller {
 		if (!(cbo2002DAO.retrieve(codigoCBO) == null)) {
 			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
+		if (!Validators.onlyValidChars(descricao)) {
+			throw new Exception("A descrição deve conter apenas caracteres válidos.");
+		} 
 			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
 					percentualPericulosidade.getValor());
 			cbo2002DAO.create(novoCBO2002);
