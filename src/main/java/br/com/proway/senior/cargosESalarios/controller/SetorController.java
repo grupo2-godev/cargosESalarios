@@ -82,11 +82,11 @@ public class SetorController {
 	 * @param novoNome
 	 * @paramar novaIdPermissão
 	 * @return boolean
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
 		SetorModel setorRecuperado = setorDAO.buscar(idSetor);
-		if(Validadores.ehObjetoNulo(setorRecuperado)) {
+		if (Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		setorRecuperado.setNomeSetor(novoNome);
@@ -101,10 +101,10 @@ public class SetorController {
 	 * 
 	 * @param Integer idSetor Identificacao do setor que sera deletado.
 	 * @return boolean
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean deletarSetor(Integer idSetor) throws Exception {
-		if(Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
+		if (Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		return setorDAO.deletar(idSetor);
