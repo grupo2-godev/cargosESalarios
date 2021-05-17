@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -95,6 +96,19 @@ public class CargoControllerTest {
 	public void testCadastrarIdPermissaoInvalido() throws Exception {
 		controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, 0);
+	}
+	
+	@Test
+	public void testDeletarTodos() throws Exception {
+		controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		assertEquals(1, controller.buscarTodos().size());
+		controller.deletarTodos();
+		assertEquals(0, controller.buscarTodos().size());
+	}
+	
+	@Before
+	public void beforeAll() {
+		controller.deletarTodos();
 	}
 }
 
