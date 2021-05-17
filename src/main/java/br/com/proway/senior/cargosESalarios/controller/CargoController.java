@@ -22,7 +22,7 @@ public class CargoController {
 	CargoDAO cargoDAO = CargoDAO.getInstance(ConnectionHibernate.getSession());
 
 	/**
-	 * Cadastra um objeto do tipo {@link CargoModel} no banco de dados.
+	 * Valida os atributos do objeto a ser criado.
 	 * 
 	 * Valida se eh vazio ou nulo: nomeCargo, experienciaMinima, atribuicoes e
 	 * status. Valida se eh nullo ou igual a zero: cbo2002, cbo94, horasMes,
@@ -48,7 +48,7 @@ public class CargoController {
 	 * @throws Exception Retorna uma excessao caso algum dos valores recebidos no
 	 *                   parametro nao estejam de acordo conforme validacoes.
 	 */
-	public Integer cadastrar(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
+	public CargoModel construir(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
 			Integer cbo2002, Integer cbo94, Integer horasMes, Integer grauInstrucao, String experienciaMinima,
 			String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
 
@@ -84,6 +84,16 @@ public class CargoController {
 		cargo.setStatus(status);
 		cargo.setIdPermissao(idPermissao);
 
+		return cargo;
+	}
+	
+	/**
+	 * Cadastra um objeto do tipo {@link CargoModel} no banco de dados.
+	 * 
+	 * @param cargo CargoModel Objeto a ser cadastrado.
+	 * @return Integer: id do objeto cadastrado.
+	 */
+	public Integer cadastrar(CargoModel cargo) {
 		Integer idCargoCadastrado = cargoDAO.create(cargo);
 		return idCargoCadastrado;
 	}
@@ -102,6 +112,11 @@ public class CargoController {
 		return cargoDAO.retrieve(id);
 	}
 
+	
+//	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) {
+//		
+//	}
+	
 	/**
 	 * Retorna um ArrayList com todos os registros da tabela {@link CargoModel}.
 	 * 
