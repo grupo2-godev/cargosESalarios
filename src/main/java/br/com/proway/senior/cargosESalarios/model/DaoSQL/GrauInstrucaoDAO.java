@@ -1,8 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -59,11 +55,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int criar(GrauInstrucaoModel grauInstrucao) {
-		if (!sessao.getTransaction().isActive())
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive())
+			this.sessao.beginTransaction();
 
-		Integer idCadastrado = (Integer) sessao.save(grauInstrucao);
-		sessao.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(grauInstrucao);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -77,7 +73,7 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @param id int Id do objeto a ser consultado.
 	 */
 	public GrauInstrucaoModel buscar(int id) {
-		GrauInstrucaoModel grauInstrucao = sessao.get(GrauInstrucaoModel.class, id);
+		GrauInstrucaoModel grauInstrucao = this.sessao.get(GrauInstrucaoModel.class, id);
 		return grauInstrucao;
 	}
 
@@ -92,16 +88,16 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return lista ArrayList<GrayIndtrucaoModel> Lista dos objetos localizados.
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarPorNome(String nomeASerConsultado) {
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
 		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
 		
 		Expression nome = (Expression) root.get("instrucao");
 		criteria.select(root).where(criteriaBuilder.like(nome, "%" + nomeASerConsultado + "%"));
-		Query<GrauInstrucaoModel> query = sessao.createQuery(criteria);
+		Query<GrauInstrucaoModel> query = this.sessao.createQuery(criteria);
 		List<GrauInstrucaoModel> lista = query.getResultList();
 		return (ArrayList<GrauInstrucaoModel>)lista;
 		
@@ -122,12 +118,12 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 */
 	public boolean atualizar(int id, GrauInstrucaoModel grauInstrucaoNovo) {
 		GrauInstrucaoModel grauInstrucao = buscar(id);
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		grauInstrucao.setNome(grauInstrucaoNovo.getNome());
-		sessao.update(grauInstrucao);
-		sessao.getTransaction().commit();
+		this.sessao.update(grauInstrucao);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -144,11 +140,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	public boolean deletar(int id) {
 		GrauInstrucaoModel grauIntrucao = buscar(id);
 
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		sessao.delete(grauIntrucao);
-		sessao.getTransaction().commit();
+		this.sessao.delete(grauIntrucao);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -161,10 +157,10 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return listaDeGrauDeInstrucao ArrayList<GrauInstrucaoModel> Lista com objetos do tipo {@link GrauInstrucaoModel}.
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<GrauInstrucaoModel> criteria = criteriaBuilder.createQuery(GrauInstrucaoModel.class);
 		Root<GrauInstrucaoModel> root = criteria.from(GrauInstrucaoModel.class);
-		Query query = sessao.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<GrauInstrucaoModel> listaDeGrauDeInstrucao = query.getResultList();
 		return new ArrayList<GrauInstrucaoModel>(listaDeGrauDeInstrucao);
 	}
@@ -175,11 +171,11 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 	 * @return boolean Retorna true caso algum registro seja deletado, se der algum erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deletarTodos() {
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int registrosModificados = sessao.createSQLQuery("DELETE FROM grau_instrucao").executeUpdate();
-		sessao.getTransaction().commit();
+		int registrosModificados = this.sessao.createSQLQuery("DELETE FROM grau_instrucao").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 
