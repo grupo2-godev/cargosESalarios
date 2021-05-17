@@ -34,7 +34,7 @@ public class ConnectionHibernate {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			return new Configuration().setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/grupo22")
+					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/grupo2")
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.connection.password", dbPassword)
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
