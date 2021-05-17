@@ -1,11 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
