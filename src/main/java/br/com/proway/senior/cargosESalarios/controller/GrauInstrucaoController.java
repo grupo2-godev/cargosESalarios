@@ -93,7 +93,7 @@ public class GrauInstrucaoController {
 		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		
+
 		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
 		return true;
 	}
@@ -108,7 +108,7 @@ public class GrauInstrucaoController {
 	 * @param id Integer Id do objeto a ser deletado.
 	 * @return boolean Retorna true caso o objeto seja localizado no banco de dados.
 	 *         Retorna false caso o id seja invalido conforme validacao.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean deletarPorId(Integer id) throws Exception {
 		if (Validators.isZeroOrNull(id)) {

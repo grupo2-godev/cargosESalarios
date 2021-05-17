@@ -4,6 +4,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -42,7 +43,7 @@ public class CargoController {
 	 * @param status            Boolean Cargo ativo(true) ou inativo(false).
 	 * @param idPermissao       Integer Id do nivel de acesso permitido para esse
 	 *                          tipo de colaborador.
-	 *                          
+	 * 
 	 * @return Id do objeto cadastrado.
 	 * @throws Exception Retorna uma excessao caso algum dos valores recebidos no
 	 *                   parametro nao estejam de acordo conforme validacoes.
@@ -86,7 +87,16 @@ public class CargoController {
 		Integer idCargoCadastrado = cargoDAO.create(cargo);
 		return idCargoCadastrado;
 	}
-	
+
+	/**
+	 * Retorna um ArrayList com todos os registros da tabela {@link CargoModel}.
+	 * 
+	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
+	 */
+	public ArrayList<CargoModel> buscarTodos() {
+		return cargoDAO.getAll();
+	}
+
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
