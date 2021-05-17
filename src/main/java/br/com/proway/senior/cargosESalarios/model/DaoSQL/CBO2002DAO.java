@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -78,6 +78,27 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	public CBO2002Model retrieve(int codigoCBO2002) {
 		CBO2002Model results = session.get(CBO2002Model.class, codigoCBO2002);
 		return results;
+	}
+	
+	/**
+	 * Buscar CBO 2002 por descricao.
+	 * 
+	 * Metodo realiza a busca dos dados do CBO 2002 no banco de dados, conforme
+	 * descricaoCBO informada. A descricao pode ser parcial, pois realizara a busca de
+	 * todos os CBOs 2002 que contenham determinado texto.
+	 * 
+	 * @param descricaoCBO
+	 * @return ArrayList CBO2002Model lista de CBOs 2002 que possuam a descricao pesquisada.
+	 */
+	public ArrayList<CBO2002Model> retrieveByName(String descricaoCBO) {
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
+		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
+		Query query = session.createQuery(criteria);
+		Expression registroCBO2002 = (Expression) root.get("descricao");
+		criteria.select(root).where(criteriaBuilder.like(registroCBO2002, "'%" + descricaoCBO + "%'"));
+		List<CBO2002Model> resultado = query.getResultList();
+		return new ArrayList<CBO2002Model> (resultado);
 	}
 
 	/**
