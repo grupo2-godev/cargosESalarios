@@ -86,7 +86,7 @@ public class CargoController {
 
 		return cargo;
 	}
-	
+
 	/**
 	 * Cadastra um objeto do tipo {@link CargoModel} no banco de dados.
 	 * 
@@ -104,19 +104,38 @@ public class CargoController {
 	 * 
 	 * @param id Integer Id do objeto a ser consultado.
 	 * @return CargoModel: objeto encontrado no banco de dados.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public CargoModel buscarPorId(Integer id) throws Exception {
-		if(Validators.isZeroOrNull(id)) 
-			throw(new Exception("O id não pode ser nulo ou zero."));
+		if (Validators.isZeroOrNull(id))
+			throw (new Exception("O id não pode ser nulo ou zero."));
 		return cargoDAO.retrieve(id);
 	}
 
-	
-//	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) {
-//		
-//	}
-	
+	/**
+	 * Altera o objeto no banco de dados que possui o id recebido no parametro.
+	 * 
+	 * Verifica se existe no banco de dados um objeto com o id informado e verifica
+	 * tambem se o objeto recebido no parametro nao eh nulo. Localizando o objeto no
+	 * banco, efetua a alteracao para o objeto recebido no parametro.
+	 * 
+	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado.
+	 * @param novoCargo            CargoModel Objeto que possui as alteracoes que
+	 *                             substituirao o objeto do banco de dados.
+	 * @return boolean: Retorna true caso nao encontre erro durante a validacao,
+	 *         inclusive a busca pelo objeto no banco de dados pelo id.
+	 * @throws Exception
+	 */
+	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
+		if (Validators.isNullObject(novoCargo))
+			throw (new Exception("O objeto não pode ser nulo."));
+		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado)))
+			throw (new Exception("O objeto não existe no banco de dados."));
+		
+		cargoDAO.update(idObjetoASerAlterado, novoCargo);
+		return true;
+	}
+
 	/**
 	 * Retorna um ArrayList com todos os registros da tabela {@link CargoModel}.
 	 * 

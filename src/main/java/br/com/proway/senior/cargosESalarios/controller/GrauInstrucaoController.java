@@ -78,7 +78,7 @@ public class GrauInstrucaoController {
 	 * tambem se o objeto recebido no parametro nao eh nulo. Localizando o objeto no
 	 * banco, efetua a alteracao para o objeto recebido no parametro.
 	 * 
-	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado
+	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado.
 	 * @param novoObjeto           GrauInstrucaoModel Objeto que possui as
 	 *                             alteracoes que substituirao o objeto do banco de
 	 *                             dados.
