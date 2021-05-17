@@ -31,22 +31,21 @@ public class PostoDeTrabalhoController {
 	 * Recebe os parametros necessarios para a criacao de um posto de
 	 * trabalho, as valida e envia para o DAO.
 	 * @param nomePosto
-	 * @param idCargo
-	 * @param idSetor
-	 * @param idNivel
+	 * @param cargo
+	 * @param setor
+	 * @param nivel
 	 * @param salario
 	 * @return null ou idNovoPosto
 	 * @throws Exception 
 	 */
-	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel, Double salario) throws Exception {		
+	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, Double salario) throws Exception {		
 		if (!Validators.onlyValidChars(nomePosto)) {
 			throw new Exception("Nome invalido para Posto de Trabalho!!!");
 		}
 
 		else {
-			PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
-			int idRegistrado = this.postoDAO.create(novoPosto);
-			return idRegistrado;
+			PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(nomePosto, cargo, setor, nivel, salario);
+			return this.postoDAO.create(novoPosto);
 		}
 	}
 	
@@ -69,21 +68,21 @@ public class PostoDeTrabalhoController {
 	 * 
 	 * @param idPosto
 	 * @param novoNome
-	 * @param novaIdCargo
-	 * @param novaIdSetor
-	 * @param novoIdNivel
+	 * @param novoCargo
+	 * @param novoSetor
+	 * @param novoNivel
 	 * @param novoSalario
 	 * @return boolean
 	 */
-	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novaIdCargo, SetorModel novaIdSetor,
-			NivelModel novoIdNivel, Double novoSalario) {
+	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novoCargo, SetorModel novoSetor,
+			NivelModel novoNivel, Double novoSalario) {
 		PostoDeTrabalhoModel posto = this.postoDAO.retrieve(idPosto);
 		if (Validators.onlyValidChars(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
-		posto.setCargo(novaIdCargo);
-		posto.setSetor(novaIdSetor);
-		posto.setNivel(novoIdNivel);
+		posto.setCargo(novoCargo);
+		posto.setSetor(novoSetor);
+		posto.setNivel(novoNivel);
 		posto.setSalario(novoSalario);
 		return this.postoDAO.update(idPosto, posto);
 	}
@@ -123,6 +122,11 @@ public class PostoDeTrabalhoController {
 		return this.postoDAO.getAll();
 		
 	}
-
-
+	
+	/**
+	 * Deleta todos os registros
+	 */
+	public boolean deletarTodosPostosDeTrabalho() {
+		return this.postoDAO.deleteAll();
+	}
 }
