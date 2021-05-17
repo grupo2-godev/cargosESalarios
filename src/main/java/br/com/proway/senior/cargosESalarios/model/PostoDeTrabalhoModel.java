@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,8 +28,14 @@ public class PostoDeTrabalhoModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idPosto;
 	private String nomePosto;
+	
+	@OneToOne(mappedBy = "idCargo")
 	private Integer idCargo;
+	
+	@OneToOne(mappedBy = "idSetor")
 	private Integer idSetor;
+	
+	@OneToOne(mappedBy = "idNivel")
 	private Integer idNivel;
 	private Double salario;
 	
