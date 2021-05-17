@@ -12,7 +12,7 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelDAOTest {
 
-	NivelDAO nivelDAO = NivelDAO.getInstance(ConexaoHibernate.getSessao());
+	NivelDAO nivelDAO = NivelDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	@Test
 	public void testInserirNivel() {

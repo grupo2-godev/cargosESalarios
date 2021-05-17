@@ -15,7 +15,7 @@ import utils.Validators;
  */
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConexaoHibernate.getSessao());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra um objeto do tipo {@link GrauInstrucaoModel} no banco de dados.
@@ -68,7 +68,7 @@ public class GrauInstrucaoController {
 		if (!Validators.onlyValidChars(nome)) {
 			throw (new Exception("A palavra de consulta não pode ter caracteres especiais."));
 		}
-		return grauInstrucaoDAO.retrieveNameCountains(nome);
+		return grauInstrucaoDAO.buscarPorNome(nome);
 	}
 
 	/**

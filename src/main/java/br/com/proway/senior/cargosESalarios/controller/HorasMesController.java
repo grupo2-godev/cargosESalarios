@@ -13,7 +13,7 @@ import utils.Validators;
  */
 public class HorasMesController {
 
-	HorasMesDAO horasMesDAO = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
+	HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido no BD.

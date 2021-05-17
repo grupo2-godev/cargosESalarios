@@ -24,7 +24,7 @@ import utils.Periculosidade;
  */
 public class CBO2002DAOTest {
         
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConexaoHibernate.getSessao());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
 	
     @Test
     public void testInserirCBO2002() {

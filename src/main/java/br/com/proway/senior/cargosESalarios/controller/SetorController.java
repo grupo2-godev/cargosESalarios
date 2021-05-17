@@ -20,7 +20,7 @@ import utils.Validators;
 
 public class SetorController {
 
-	SetorDAO setorDAO = SetorDAO.getInstance(ConexaoHibernate.getSessao());
+	SetorDAO setorDAO = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra na tabela setor um objeto do tipo {@link SetorModel}.
@@ -33,7 +33,7 @@ public class SetorController {
 	 * @return Integer|null id do setor se foi possivel ser criado.
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		ArrayList<SetorModel> setoresConsultados = setorDAO.retrieveByName(nomeSetor);
+		ArrayList<SetorModel> setoresConsultados = setorDAO.buscarPorNome(nomeSetor);
 		for (SetorModel setorModel : setoresConsultados) {
 			if (setorModel.getNomeSetor().equals(nomeSetor)) {
 				System.out.println("Setor informado já cadastrado.");
@@ -69,7 +69,7 @@ public class SetorController {
 	 * @return rrayList SetorModel lista de registros localizados.
 	 */
 	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
-		return setorDAO.retrieveByName(nomeSetor);
+		return setorDAO.buscarPorNome(nomeSetor);
 	}
 
 	/**

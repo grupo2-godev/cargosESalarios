@@ -29,8 +29,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 
-	private static HorasMesDAO instance;
-	private Session session;
+	private static HorasMesDAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe HorasMesDAO.
@@ -38,10 +38,10 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param Session session
 	 * @return HorasMesDAO instance
 	 */
-	public static HorasMesDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new HorasMesDAO(session);
-		return instance;
+	public static HorasMesDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new HorasMesDAO(sessao);
+		return instancia;
 	}
 
 	/**
@@ -49,8 +49,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @param Session session
 	 */
-	private HorasMesDAO(Session session) {
-		this.session = session;
+	private HorasMesDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/**
@@ -62,12 +62,12 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return int id Id do registro.
 	 */
 	public int criar(HorasMesModel horasMes) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(horasMes);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) sessao.save(horasMes);
+		sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -83,7 +83,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return results retorna um objeto HorasMesModel
 	 */
 	public HorasMesModel buscar(int id) {
-		return session.get(HorasMesModel.class, id);
+		return sessao.get(HorasMesModel.class, id);
 	}
 
 	/**
@@ -98,12 +98,12 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 */
 	public boolean atualizar(int id, HorasMesModel objetoAlterado) {
 		HorasMesModel original = buscar(id);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 		original.setQuantidade(objetoAlterado.getQuantidade());
-		session.update(original);
-		session.getTransaction().commit();
+		sessao.update(original);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -119,11 +119,11 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	public boolean deletar(int id) {
 		HorasMesModel entry = buscar(id);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		sessao.delete(entry);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -136,10 +136,10 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return ArrayList HorasMesModel
 	 */
 	public ArrayList<HorasMesModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
 		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
 		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = sessao.createQuery(criteria);
 		List<HorasMesModel> results = query.getResultList();
 		return new ArrayList<HorasMesModel>(results);
 	}
@@ -152,11 +152,11 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return boolean
 	 */
 	public boolean deletarTodos() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = sessao.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
+		sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 }

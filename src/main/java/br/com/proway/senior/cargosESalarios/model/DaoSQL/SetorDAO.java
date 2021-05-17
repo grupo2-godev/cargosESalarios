@@ -27,8 +27,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 
-	private static SetorDAO instance;
-	private Session session;
+	private static SetorDAO instancia;
+	private Session sessao;
 	
 	/**
 	 * Singleton da classe SetorDAO.
@@ -36,10 +36,10 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param Session session
 	 * @return SetorDAO instance
 	 */
-	public static SetorDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new SetorDAO(session);
-		return instance;
+	public static SetorDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new SetorDAO(sessao);
+		return instancia;
 	}
 
 	public SetorDAO() {}
@@ -49,8 +49,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @param Session session
 	 */
-	private SetorDAO(Session session) {
-		this.session = session;
+	private SetorDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 	
 	/***
@@ -62,12 +62,12 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return id do setor cadastrado
 	 */
 	public int criar(SetorModel novoSetor) {
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(novoSetor);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) sessao.save(novoSetor);
+		sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -81,7 +81,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return SetorModel
 	 */
 	public SetorModel buscar(int idSetor) {
-		return session.get(SetorModel.class, idSetor);
+		return sessao.get(SetorModel.class, idSetor);
 	}
 
 	/**
@@ -94,11 +94,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param String nomeSetor
 	 * @return SetorModel
 	 */
-	public ArrayList<SetorModel> retrieveByName(String nomeSetor) {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<SetorModel> buscarPorNome(String nomeSetor) {
+		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = sessao.createQuery(criteria);
 		Expression registroSetor = (Expression) root.get("nomeSetor");
 		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomeSetor + "%'"));
 		List<SetorModel> resultado = query.getResultList();
@@ -117,13 +117,13 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 */
 	public boolean atualizar(int idSetor, SetorModel setorAtualizado) {
 		SetorModel original = buscar(idSetor);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 		original.setNomeSetor(setorAtualizado.getNomeSetor());
 		original.setIdPermissao(setorAtualizado.getIdPermissao());
-		session.update(original);
-		session.getTransaction().commit();
+		sessao.update(original);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -138,11 +138,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	public boolean deletar(int idSetor) {
 		SetorModel entry = buscar(idSetor);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		sessao.delete(entry);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -155,10 +155,10 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return ArrayList SetorModel
 	 */
 	public ArrayList<SetorModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = sessao.createQuery(criteria);
 		List<SetorModel> results = query.getResultList();
 		return new ArrayList<SetorModel>(results);
 	}
@@ -171,11 +171,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @return boolean
 	 */
 	public boolean deletarTodos() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM setor").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = sessao.createSQLQuery("DELETE FROM setor").executeUpdate();
+		sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

@@ -30,28 +30,28 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 
-	private static CargoDAO instance;
-	private Session session;
+	private static CargoDAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe CargoDAO.
 	 * 
-	 * @param session Session
+	 * @param sessao Session
 	 * @return instance GrauInstrucaoDAO
 	 */
-	public static CargoDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new CargoDAO(session);
-		return instance;
+	public static CargoDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new CargoDAO(sessao);
+		return instancia;
 	}
 
 	/**
 	 * Construtor da classe CargoDAO, utilizado no Singleton.
 	 * 
-	 * @param session Session
+	 * @param sessao Session
 	 */
-	private CargoDAO(Session session) {
-		this.session = session;
+	private CargoDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/***
@@ -61,11 +61,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int criar(CargoModel cargo) {
-		if (!session.getTransaction().isActive())
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive())
+			sessao.beginTransaction();
 
-		Integer idCadastrado = (Integer) session.save(cargo);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) sessao.save(cargo);
+		sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -78,7 +78,7 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
 	public CargoModel buscar(int idCargo) {
-		CargoModel cargo = session.get(CargoModel.class, idCargo);
+		CargoModel cargo = sessao.get(CargoModel.class, idCargo);
 		return cargo;
 	}
 
@@ -96,8 +96,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 */
 	public boolean atualizar(int idCargo, CargoModel cargoNovo) {
 		CargoModel cargo = buscar(idCargo);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 		cargo.setNomeCargo(cargoNovo.getNomeCargo());
 		cargo.setDataCadastro(cargoNovo.getDataCadastro());
@@ -110,8 +110,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
 		cargo.setStatus(cargoNovo.getStatus());
 		cargo.setIdPermissao(cargoNovo.getIdPermissao());
-		session.update(cargo);
-		session.getTransaction().commit();
+		sessao.update(cargo);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -128,11 +128,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	public boolean deletar(int idCargo) {
 		CargoModel cargo = buscar(idCargo);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		session.delete(cargo);
-		session.getTransaction().commit();
+		sessao.delete(cargo);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -145,10 +145,10 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
 		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
 		Root<CargoModel> root = criteria.from(CargoModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = sessao.createQuery(criteria);
 		List<CargoModel> cargos = query.getResultList();
 		return new ArrayList<CargoModel>(cargos);
 	}
@@ -160,11 +160,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         erro ou se nao houverem registros, retorna false.
 	 */
 	public boolean deletarTodos() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		int registrosModificados = session.createSQLQuery("DELETE FROM cargo").executeUpdate();
-		session.getTransaction().commit();
+		int registrosModificados = sessao.createSQLQuery("DELETE FROM cargo").executeUpdate();
+		sessao.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 }

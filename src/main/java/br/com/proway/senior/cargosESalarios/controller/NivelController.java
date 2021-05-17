@@ -15,7 +15,7 @@ import utils.Validators;
  */
 public class NivelController {
 
-	NivelDAO nivelDAO = NivelDAO.getInstance(ConexaoHibernate.getSessao());
+	NivelDAO nivelDAO = NivelDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto NivelModel e o passa para o DAO para que seja inserido no BD.

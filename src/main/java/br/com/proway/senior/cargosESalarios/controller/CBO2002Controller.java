@@ -20,7 +20,7 @@ import utils.Validators;
  */
 public class CBO2002Controller {
 
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConexaoHibernate.getSessao());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * /** Cadastrar na banco de dados um CBO 2002.

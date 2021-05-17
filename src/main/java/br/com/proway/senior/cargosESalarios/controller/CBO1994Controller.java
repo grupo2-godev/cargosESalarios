@@ -29,7 +29,7 @@ public class CBO1994Controller {
 
 	private CBO1994Controller() {}	
 	
-		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
+		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.

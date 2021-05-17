@@ -17,12 +17,12 @@ public class CBO1994DAOTest {
 
 	Integer codigo_cbo = 345678;
 	String descricao = "descricao";
-	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());	
+	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());	
 
 	@Test
 	public void testGetInstance() {
-		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
-		CBO1994DAO test_getInstance2 = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
+		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
+		CBO1994DAO test_getInstance2 = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
 		assertEquals(test_getInstance1, test_getInstance2);		
 	}			
 	

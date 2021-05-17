@@ -18,7 +18,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDAOTest {
-	CargoDAO cargoDAO = CargoDAO.getInstance(ConexaoHibernate.getSessao());
+	CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	Integer grauinstrucao = 0;
 	Integer cbo2002 = 0;

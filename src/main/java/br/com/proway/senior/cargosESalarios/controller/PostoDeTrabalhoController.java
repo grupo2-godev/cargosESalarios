@@ -21,7 +21,7 @@ import utils.Validators;
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(
 		ConexaoHibernate.getSessao()
 	);
 	
@@ -110,7 +110,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarPostoDeTrabalhoNome(String nomePosto) {
-		return this.postoDAO.retrieveByName(nomePosto);
+		return this.postoDAO.buscarPorNome(nomePosto);
 	}
 	
 	/**

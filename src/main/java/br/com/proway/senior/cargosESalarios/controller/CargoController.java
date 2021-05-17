@@ -19,7 +19,7 @@ import utils.Validators;
  */
 public class CargoController {
 
-	CargoDAO cargoDAO = CargoDAO.getInstance(ConexaoHibernate.getSessao());
+	CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * Valida os atributos do objeto a ser criado.

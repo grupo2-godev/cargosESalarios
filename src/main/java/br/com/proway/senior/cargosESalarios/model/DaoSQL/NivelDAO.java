@@ -23,27 +23,27 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 
-	private static NivelDAO instance;
-	private Session session;
+	private static NivelDAO instancia;
+	private Session sessao;
 	
 	/**
 	 * Obtem a instancia do Singleton DAO.
-	 * @param session : HibernateSession a ser utilizada
+	 * @param sessao : HibernateSession a ser utilizada
 	 * @return
 	 */
-	public static NivelDAO getInstance(Session session) {
-		if(instance == null) {
-			instance = new NivelDAO(session);
+	public static NivelDAO getInstancia(Session sessao) {
+		if(instancia == null) {
+			instancia = new NivelDAO(sessao);
 		}
-		return instance;
+		return instancia;
 	}
 	
 	/**
 	 * 
-	 * @param session
+	 * @param sessao
 	 */
-	private NivelDAO(Session session) {
-		this.session = session;
+	private NivelDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 	
 	/**
@@ -54,11 +54,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return int : id do objeto cadastrado no banco de dados
 	 */
 	public int criar(NivelModel nivelModel) {
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		Integer idCadastrado = (Integer) session.save(nivelModel);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) sessao.save(nivelModel);
+		sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 	
@@ -70,7 +70,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return NivelModel objeto requisitado / null
 	 */
 	public NivelModel buscar(int id) {
-		return session.get(NivelModel.class, id);
+		return sessao.get(NivelModel.class, id);
 	}
 
 	/**
@@ -85,12 +85,12 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 */
 	public boolean atualizar(int id, NivelModel objetoAlterado) {
 		NivelModel original = buscar(id);
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
 		original.setNome(objetoAlterado.getNome());
-		session.update(original);
-		session.getTransaction().commit();
+		sessao.update(original);
+		sessao.getTransaction().commit();
 		return true;
 	}
 	
@@ -102,11 +102,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 */
 	public boolean deletar(int id) {
 		NivelModel entry = buscar(id);
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		sessao.delete(entry);
+		sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -124,11 +124,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return ArrayList<NivelModel> contendo as entradas da tabela.
 	 */
 	public ArrayList<NivelModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = sessao.getCriteriaBuilder();
 		CriteriaQuery<NivelModel> criteria = criteriaBuilder.createQuery(NivelModel.class);
 		
 		Root<NivelModel> root = criteria.from(NivelModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = sessao.createQuery(criteria);
 		
 		List<NivelModel> results = query.getResultList();
 		return new ArrayList<NivelModel>(results);
@@ -143,11 +143,11 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @return Boolean : true/false para itens deletados.
 	 */
 	public boolean deletarTodos() {
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM nivelmodel").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = sessao.createSQLQuery("DELETE FROM nivelmodel").executeUpdate();
+		sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 	

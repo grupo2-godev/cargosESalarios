@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 public class SetorDAOTest {
 
-	SetorDAO setorDAO = SetorDAO.getInstance(ConexaoHibernate.getSessao());
+	SetorDAO setorDAO = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	@Test
 	public void testIserirSetor() throws SQLException {
@@ -43,7 +43,7 @@ public class SetorDAOTest {
 	public void testBuscarSetorPorNome() {
 		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
 		int idCriada = setorDAO.criar(novoSetor);
-		ArrayList<SetorModel> setorRetornado = setorDAO.retrieveByName("tão");
+		ArrayList<SetorModel> setorRetornado = setorDAO.buscarPorNome("tão");
 		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(0).getNomeSetor());
 		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(0).getIdPermissao());
 	}

@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
  */
 public class GrauInstrucaoDAOTest {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConexaoHibernate.getSessao());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	@Test
 	public void testCreate() {
@@ -42,7 +42,7 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
 		grauInstrucaoDAO.criar(grauInstrucao);
 		assertEquals(1, grauInstrucaoDAO.buscarTodos().size());
-		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.retrieveNameCountains("Comple");
+		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.buscarPorNome("Comple");
 		assertEquals(1, lista.size());
 	}
 

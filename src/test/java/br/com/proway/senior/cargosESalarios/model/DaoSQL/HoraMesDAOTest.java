@@ -22,7 +22,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
  */
 public class HoraMesDAOTest {
 
-	HorasMesDAO horasMesDao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
+	HorasMesDAO horasMesDao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	@Test
 	public void testInserirHoraMes() {

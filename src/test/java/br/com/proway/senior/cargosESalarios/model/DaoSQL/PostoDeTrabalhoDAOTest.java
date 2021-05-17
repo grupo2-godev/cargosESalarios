@@ -42,7 +42,7 @@ public class PostoDeTrabalhoDAOTest {
 	static SetorModel setor2;
 	static NivelModel nivel;
 	
-	static PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(ConexaoHibernate.getSessao());
+	static PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -53,7 +53,7 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deletarTodos();
+		CargoDAO.getInstancia(ConexaoHibernate.getSessao()).deletarTodos();
 		
 		popularTabelas();
 	}
@@ -74,12 +74,12 @@ public class PostoDeTrabalhoDAOTest {
 		
 		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
 				20, 1, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).criar(cargo);
+		idCargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).criar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargoRecuperado = CargoDAO.getInstance(ConexaoHibernate.getSessao()).buscar(idCargo);
+		cargoRecuperado = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).buscar(idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);
@@ -118,7 +118,7 @@ public class PostoDeTrabalhoDAOTest {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Gestão de Pessoas", cargo, setor, nivel, 
 				2700.00);
 		postoDAO.criar(novoPosto);
-		ArrayList<PostoDeTrabalhoModel> listaRetornada = postoDAO.retrieveByName("Analist");
+		ArrayList<PostoDeTrabalhoModel> listaRetornada = postoDAO.buscarPorNome("Analist");
 		assertEquals(novoPosto.getNomePosto(), listaRetornada.get(0).getNomePosto());
 		assertEquals(novoPosto.getCargo().getIdCargo(), listaRetornada.get(0).getCargo().getIdCargo());
 		assertEquals(novoPosto.getSetor().getId(), listaRetornada.get(0).getSetor().getId());
