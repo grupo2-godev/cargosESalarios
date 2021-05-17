@@ -99,6 +99,15 @@ public class CargoControllerTest {
 	}
 	
 	@Test
+	public void buscarTodos() {
+		assertEquals(0, controller.buscarTodos().size());
+		controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		controller.cadastrar("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		assertEquals(2, controller.buscarTodos().size());
+	}
+	
+	
+	@Test
 	public void testDeletarTodos() throws Exception {
 		controller.cadastrar(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		assertEquals(1, controller.buscarTodos().size());
