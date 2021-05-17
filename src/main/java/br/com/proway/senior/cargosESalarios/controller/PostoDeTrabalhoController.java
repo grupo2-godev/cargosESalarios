@@ -3,7 +3,10 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 import utils.Validators;
 
@@ -35,7 +38,7 @@ public class PostoDeTrabalhoController {
 	 * @return null ou idNovoPosto
 	 * @throws Exception 
 	 */
-	public Integer cadastrarPostoDeTrabalho(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) throws Exception {		
+	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel, Double salario) throws Exception {		
 		if (!Validators.onlyValidChars(nomePosto)) {
 			throw new Exception("Nome invalido para Posto de Trabalho!!!");
 		}
@@ -72,8 +75,8 @@ public class PostoDeTrabalhoController {
 	 * @param novoSalario
 	 * @return boolean
 	 */
-	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, Integer novaIdCargo, Integer novaIdSetor,
-			Integer novoIdNivel, Double novoSalario) {
+	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novaIdCargo, SetorModel novaIdSetor,
+			NivelModel novoIdNivel, Double novoSalario) {
 		PostoDeTrabalhoModel posto = this.postoDAO.retrieve(idPosto);
 		if (Validators.onlyValidChars(novoNome)) {
 			posto.setNomePosto(novoNome);
@@ -120,5 +123,6 @@ public class PostoDeTrabalhoController {
 		return this.postoDAO.getAll();
 		
 	}
+
 
 }

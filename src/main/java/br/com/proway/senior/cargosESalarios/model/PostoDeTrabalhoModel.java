@@ -1,5 +1,6 @@
 package br.com.proway.senior.cargosESalarios.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,17 +30,17 @@ public class PostoDeTrabalhoModel {
 	private Integer idPosto;
 	private String nomePosto;
 	
-	@OneToOne(mappedBy = "idCargo")
-	private Integer idCargo;
+	@OneToOne(cascade=CascadeType.ALL)
+	private CargoModel idCargo;
 	
-	@OneToOne(mappedBy = "idSetor")
-	private Integer idSetor;
+	@OneToOne(cascade=CascadeType.ALL)
+	private SetorModel idSetor;
 	
-	@OneToOne(mappedBy = "idNivel")
-	private Integer idNivel;
+	@OneToOne(cascade=CascadeType.ALL)
+	private NivelModel idNivel;
 	private Double salario;
 	
-	public PostoDeTrabalhoModel(Integer idPosto, String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel,
+	public PostoDeTrabalhoModel(Integer idPosto, String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel,
 			Double salario) {
 		super();
 		this.idPosto = idPosto;
@@ -60,7 +61,7 @@ public class PostoDeTrabalhoModel {
 	 * @param idNivel
 	 * @param salario
 	 */
-	public PostoDeTrabalhoModel(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) {
+	public PostoDeTrabalhoModel(String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel, Double salario) {
 		super();
 		this.nomePosto = nomePosto;
 		this.idCargo = idCargo;
@@ -88,27 +89,27 @@ public class PostoDeTrabalhoModel {
 		this.nomePosto = nomePosto;
 	}
 
-	public Integer getIdCargo() {
+	public CargoModel getIdCargo() {
 		return idCargo;
 	}
 
-	public void setIdCargo(Integer idCargo) {
+	public void setIdCargo(CargoModel idCargo) {
 		this.idCargo = idCargo;
 	}
 
-	public Integer getIdSetor() {
+	public SetorModel getIdSetor() {
 		return idSetor;
 	}
 
-	public void setIdSetor(Integer idSetor) {
+	public void setIdSetor(SetorModel idSetor) {
 		this.idSetor = idSetor;
 	}
 
-	public Integer getIdNivel() {
+	public NivelModel getIdNivel() {
 		return idNivel;
 	}
 
-	public void setIdNivel(Integer idNivel) {
+	public void setIdNivel(NivelModel idNivel) {
 		this.idNivel = idNivel;
 	}
 

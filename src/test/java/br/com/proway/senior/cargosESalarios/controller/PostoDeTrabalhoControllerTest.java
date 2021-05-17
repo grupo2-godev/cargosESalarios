@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import org.junit.After;
 
@@ -15,30 +16,47 @@ import org.junit.After;
 
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 
 public class PostoDeTrabalhoControllerTest {
 	
 	//static Integer idPosto = 1;
 	static String nomePosto = "Desenvolvedor(a)";
-	static Integer idCargo = 3;
-	static Integer idSetor = 4;
-	static Integer idNivel = 1;
+	
 	static Double salario = 1800.00;
 	
-	static PostoDeTrabalhoModel postoModel = new PostoDeTrabalhoModel(nomePosto, idCargo, idSetor, idNivel, salario);
 	
-	static PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
 	
 	@Test
 	public void cadastrarPostoDeTrabalhoTest() throws Exception {
-		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
+
+		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
+				20, 1, "12", "HACKER DE HIBERNATE", true, 1);
+		int idCargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).create(cargo);
+		int idNivel = new NivelController().cadastrarNivel("supremo");
+		int idSetor = new SetorController().cadastrarSetor("Setor bom", idCargo);
+		
+		CargoModel Cargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).retrieve(idCargo);
+		SetorModel Setor = new SetorController().buscarSetorPorId(idSetor);
+		NivelModel Nivel = new NivelController().buscarNivel(idNivel);
+		
+		/// Teste de fato
+		PostoDeTrabalhoModel postoModel = new PostoDeTrabalhoModel(nomePosto, Cargo, Setor, Nivel, salario);
+		
+		PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
+		
+		int id = controller.cadastrarPostoDeTrabalho(nomePosto, Cargo, Setor, Nivel, salario);
 		PostoDeTrabalhoModel postoRecuperado = controller.buscarPostoDeTrabalhoId(id);
 		assertEquals("Desenvolvedor(a)", postoRecuperado.getNomePosto());
-		assertEquals(idCargo, postoRecuperado.getIdCargo());
-		assertEquals(idSetor, postoRecuperado.getIdSetor());
-		assertEquals(idNivel, postoRecuperado.getIdNivel());
-		assertEquals(salario, postoRecuperado.getSalario());
+		assertEquals((Integer) idCargo, postoRecuperado.getIdCargo().getIdCargo());
+		assertEquals((Integer) idSetor, postoRecuperado.getIdSetor().getId());
+		assertEquals((Integer) idNivel, postoRecuperado.getIdNivel().getId());
+		assertEquals((Double) salario, postoRecuperado.getSalario());
 	}
 	
 	@Test(expected = Exception.class)
@@ -91,10 +109,10 @@ public class PostoDeTrabalhoControllerTest {
 		assertEquals(before+3, controller.buscarTodosPostosDeTrabalho().size());
 	}
 	
-	@After
-	public void limparTabela() throws SQLException {
-		controller.postoDAO.deleteAll();
-		//assertEquals(0, controller.buscarTodosPostosDeTrabalho().size());
-	}
+//	@After
+//	public void limparTabela() throws SQLException {
+//		controller.postoDAO.deleteAll();
+//		//assertEquals(0, controller.buscarTodosPostosDeTrabalho().size());
+//	}
 	
 }
