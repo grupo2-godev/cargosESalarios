@@ -1,6 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -79,5 +80,19 @@ public class CBO2002ControllerTest {
 		assertEquals(novaInsalubridade.getValor(), cboAtualizado.getPercentualInsalubridade(), 0.01);
 		assertEquals(novaPericulosidade.getValor(), cboAtualizado.getPercentualPericulosidade(), 0.01);
 	}
+	
+	@Test
+	public void testDeletarCBO2002Existente() throws Exception {
+		Integer codigoCadastrado = cboController.cadastrarCBO2002(612510, "Abacaxicultor", Insalubridade.Zero, 
+				Periculosidade.Zero);
+		assertTrue(cboController.deletarCBO2002(codigoCadastrado));
+	}
+	
+	@Test (expected = Exception.class)
+	public void testDeletarCBO2002Inexistente() throws Exception {
+		cboController.deletarCBO2002(789456);
+	}
+	
+	
 	
 }
