@@ -94,7 +94,7 @@ public class CargoController {
 	 * @return Integer: id do objeto cadastrado.
 	 */
 	public Integer cadastrar(CargoModel cargo) {
-		Integer idCargoCadastrado = cargoDAO.create(cargo);
+		Integer idCargoCadastrado = cargoDAO.criar(cargo);
 		return idCargoCadastrado;
 	}
 
@@ -109,7 +109,7 @@ public class CargoController {
 	public CargoModel buscarPorId(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
-		return cargoDAO.retrieve(id);
+		return cargoDAO.buscar(id);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class CargoController {
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
 
-		cargoDAO.update(idObjetoASerAlterado, novoCargo);
+		cargoDAO.atualizar(idObjetoASerAlterado, novoCargo);
 		return true;
 	}
 
@@ -154,7 +154,7 @@ public class CargoController {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(id)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 
-		cargoDAO.delete(id);
+		cargoDAO.deletar(id);
 		return true;
 	}
 
@@ -164,14 +164,14 @@ public class CargoController {
 	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> buscarTodos() {
-		return cargoDAO.getAll();
+		return cargoDAO.buscarTodos();
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
 	public void deletarTodos() {
-		cargoDAO.deleteAll();
+		cargoDAO.deletarTodos();
 	}
 
 }

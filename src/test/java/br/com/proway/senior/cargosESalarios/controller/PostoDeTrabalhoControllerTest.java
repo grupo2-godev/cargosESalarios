@@ -49,10 +49,10 @@ public class PostoDeTrabalhoControllerTest{
 		
 		salario = 1800.00;
 		
-		controller.postoDAO.deleteAll(); 
+		controller.postoDAO.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deleteAll();
+		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deletarTodos();
 		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
@@ -72,7 +72,7 @@ public class PostoDeTrabalhoControllerTest{
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		Cargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).retrieve(idCargo);
+		Cargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).buscar(idCargo);
 		Setor = new SetorController().buscarSetorPorId(idSetor);
 		Setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		Nivel = new NivelController().buscarNivel(idNivel);
@@ -80,7 +80,7 @@ public class PostoDeTrabalhoControllerTest{
 	
 	@Before
 	public void before() throws Exception {
-		controller.postoDAO.deleteAll(); 
+		controller.postoDAO.deletarTodos(); 
 		
 	}
 	

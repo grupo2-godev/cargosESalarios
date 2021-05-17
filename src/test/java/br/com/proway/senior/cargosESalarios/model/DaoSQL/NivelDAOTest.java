@@ -18,7 +18,7 @@ public class NivelDAOTest {
 	public void testInserirNivel() {
 		try {
 			NivelModel nivel = new NivelModel("Willian");
-			Integer idObjetoCadastrado = nivelDAO.create(nivel);
+			Integer idObjetoCadastrado = nivelDAO.criar(nivel);
 			Object nivelConsultado = ConexaoHibernate.getSessao().get(NivelModel.class, idObjetoCadastrado);
 			assertEquals(idObjetoCadastrado, ((NivelModel) nivelConsultado).getId());
 		} catch (Exception e) {
@@ -29,7 +29,7 @@ public class NivelDAOTest {
 	@Test
 	public void testBuscarNivelPorId() {
 		NivelModel novoModel = new NivelModel("Willian");
-		NivelModel nivelRetornado = nivelDAO.retrieve(nivelDAO.create(novoModel));
+		NivelModel nivelRetornado = nivelDAO.buscar(nivelDAO.criar(novoModel));
 		assertEquals(novoModel.getNome(), nivelRetornado.getNome());
 	}
 
@@ -37,45 +37,45 @@ public class NivelDAOTest {
 	public void testAtualizarNivel() {
 		NivelModel modelAntigo = new NivelModel("...");
 		NivelModel modelAlterado = new NivelModel("Willian");
-		int id = nivelDAO.create(modelAntigo);
-		nivelDAO.update(id, modelAlterado);
-		NivelModel atualizado = nivelDAO.retrieve(id);
+		int id = nivelDAO.criar(modelAntigo);
+		nivelDAO.atualizar(id, modelAlterado);
+		NivelModel atualizado = nivelDAO.buscar(id);
 		assertEquals(atualizado.getNome(), modelAlterado.getNome());
 	}
 	
 	@Test
 	public void testDeletarNivel() {
-		int size = nivelDAO.getAll().size();
+		int size = nivelDAO.buscarTodos().size();
 		NivelModel nivelModel = new NivelModel("Willian");
-		int id = nivelDAO.create(nivelModel);
-		nivelDAO.delete(id);
-		assertEquals(size, nivelDAO.getAll().size());
+		int id = nivelDAO.criar(nivelModel);
+		nivelDAO.deletar(id);
+		assertEquals(size, nivelDAO.buscarTodos().size());
 	}
 	
 	@Test
 	public void testBuscarTodosNiveis() {
 		NivelModel nivelModel = new NivelModel("Willian");
-		nivelDAO.create(nivelModel);
+		nivelDAO.criar(nivelModel);
 		
-		assertFalse(nivelDAO.getAll().isEmpty());
+		assertFalse(nivelDAO.buscarTodos().isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistros() {
 		NivelModel nivelModel = new NivelModel("Willian");
-		nivelDAO.create(nivelModel);
+		nivelDAO.criar(nivelModel);
 		
-		Boolean ret = nivelDAO.deleteAll();
+		Boolean ret = nivelDAO.deletarTodos();
 		
-		assertTrue(nivelDAO.getAll().isEmpty());
+		assertTrue(nivelDAO.buscarTodos().isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistrosSemRegistrosADeletar() {
-		nivelDAO.deleteAll();
-		Boolean itensDeletados = nivelDAO.deleteAll();
+		nivelDAO.deletarTodos();
+		Boolean itensDeletados = nivelDAO.deletarTodos();
 		assertFalse(itensDeletados);
-		assertTrue(nivelDAO.getAll().isEmpty());
+		assertTrue(nivelDAO.buscarTodos().isEmpty());
 	}
 	
 }

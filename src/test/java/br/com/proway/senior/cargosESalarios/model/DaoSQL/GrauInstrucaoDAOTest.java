@@ -24,7 +24,7 @@ public class GrauInstrucaoDAOTest {
 	@Test
 	public void testCreate() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino Medio");
-		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucao);
+		Integer idObjetoCadastrado = grauInstrucaoDAO.criar(grauInstrucao);
 		Object grauInstrucaoConsultado = ConexaoHibernate.getSessao().get(GrauInstrucaoModel.class,
 				idObjetoCadastrado);
 		assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
@@ -33,15 +33,15 @@ public class GrauInstrucaoDAOTest {
 	@Test
 	public void testRetriveId() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
-		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.retrieve(grauInstrucaoDAO.create(grauInstrucao));
+		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.buscar(grauInstrucaoDAO.criar(grauInstrucao));
 		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
 	}
 	
 	@Test
 	public void testRetrieveNameCountains() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
-		grauInstrucaoDAO.create(grauInstrucao);
-		assertEquals(1, grauInstrucaoDAO.getAll().size());
+		grauInstrucaoDAO.criar(grauInstrucao);
+		assertEquals(1, grauInstrucaoDAO.buscarTodos().size());
 		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.retrieveNameCountains("Comple");
 		assertEquals(1, lista.size());
 	}
@@ -50,20 +50,20 @@ public class GrauInstrucaoDAOTest {
 	public void testUpdate() {
 		GrauInstrucaoModel grauInstrucaoAntigo = new GrauInstrucaoModel("Tecnologia Antigo");
 		GrauInstrucaoModel grauInstrucaoNovo = new GrauInstrucaoModel("Tecnologia Novo");
-		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucaoAntigo);
-		grauInstrucaoDAO.update(idObjetoCadastrado, grauInstrucaoNovo);
-		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.retrieve(idObjetoCadastrado);
+		Integer idObjetoCadastrado = grauInstrucaoDAO.criar(grauInstrucaoAntigo);
+		grauInstrucaoDAO.atualizar(idObjetoCadastrado, grauInstrucaoNovo);
+		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.buscar(idObjetoCadastrado);
 		assertEquals(grauInstrucaoNovo.getNome(), grauInstrucaoAtualizado.getNome());
 	}
 	
 	@Test
 	public void testDelete() {
-		int totalRegistros = grauInstrucaoDAO.getAll().size();
+		int totalRegistros = grauInstrucaoDAO.buscarTodos().size();
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Fundamental Completo");
-		int idObjetoCriado = grauInstrucaoDAO.create(grauInstrucao);
-		assertEquals(totalRegistros + 1, grauInstrucaoDAO.getAll().size());
-		grauInstrucaoDAO.delete(idObjetoCriado);
-		assertEquals(totalRegistros, grauInstrucaoDAO.getAll().size());
+		int idObjetoCriado = grauInstrucaoDAO.criar(grauInstrucao);
+		assertEquals(totalRegistros + 1, grauInstrucaoDAO.buscarTodos().size());
+		grauInstrucaoDAO.deletar(idObjetoCriado);
+		assertEquals(totalRegistros, grauInstrucaoDAO.buscarTodos().size());
 	}
 
 
@@ -71,29 +71,29 @@ public class GrauInstrucaoDAOTest {
 	public void testGetAll() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Incompleto");
 		GrauInstrucaoModel grauInstrucao2 = new GrauInstrucaoModel("Superior Completo");
-		grauInstrucaoDAO.create(grauInstrucao);
-		grauInstrucaoDAO.create(grauInstrucao2);
-		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.getAll();
+		grauInstrucaoDAO.criar(grauInstrucao);
+		grauInstrucaoDAO.criar(grauInstrucao2);
+		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.buscarTodos();
 		assertEquals(2, lista.size());
 	}
 
 	@Test
 	public void testDeleteAll() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Mestrado completo");
-		grauInstrucaoDAO.create(grauInstrucao);
-		assertEquals(1, grauInstrucaoDAO.getAll().size());
-		grauInstrucaoDAO.deleteAll();
-		assertEquals(0, grauInstrucaoDAO.getAll().size());
+		grauInstrucaoDAO.criar(grauInstrucao);
+		assertEquals(1, grauInstrucaoDAO.buscarTodos().size());
+		grauInstrucaoDAO.deletarTodos();
+		assertEquals(0, grauInstrucaoDAO.buscarTodos().size());
 	}
 	
 	@Before
 	public void beforeAll() {
-		grauInstrucaoDAO.deleteAll();
+		grauInstrucaoDAO.deletarTodos();
 	}
 	
 	@After
 	public void afterAll() {
-		grauInstrucaoDAO.deleteAll();
+		grauInstrucaoDAO.deletarTodos();
 	}
 	
 	

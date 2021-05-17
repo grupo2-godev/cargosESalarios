@@ -20,7 +20,7 @@ public class HibernateMethodsTest {
 	public void listarTabela() {
 		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(240.042);
-		int savedId = dao.create(entry);
+		int savedId = dao.criar(entry);
 		
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
 		List<HorasMesModel> tableEntries = methods.listarPorTabela(HorasMesModel.class);
@@ -33,7 +33,7 @@ public class HibernateMethodsTest {
 	public void listarPorSelecaoDeId() {
 		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(525.525);
-		int savedId = dao.create(entry);
+		int savedId = dao.criar(entry);
 
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
 		List<HorasMesModel> tableEntries = 
@@ -48,7 +48,7 @@ public class HibernateMethodsTest {
 	public void listarPorSelecaoDeColuna() {
 		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(525.525);
-		int savedId = dao.create(entry);
+		int savedId = dao.criar(entry);
 		entry.setIdHorasMes(savedId);
 		
 		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
@@ -61,7 +61,7 @@ public class HibernateMethodsTest {
 	public void listarPorSelecaoDeColunaString() {
 		SetorDAO dao = SetorDAO.getInstance(ConexaoHibernate.getSessao());
 		SetorModel entry = new SetorModel("Setor legal", 42);
-		int id = dao.create(entry);
+		int id = dao.criar(entry);
 		entry.setId(id);
 		
 		HibernateMethods<SetorModel> methods = new HibernateMethods<SetorModel>();

@@ -42,7 +42,7 @@ public class SetorController {
 		}
 
 		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
-		int idCadastrado = setorDAO.create(novoSetor);
+		int idCadastrado = setorDAO.criar(novoSetor);
 		return idCadastrado;
 	}
 
@@ -55,7 +55,7 @@ public class SetorController {
 	 * @return SetorModel objeto localizado ou null caso nao conste no banco.
 	 */
 	public SetorModel buscarSetorPorId(Integer idSetor) {
-		return setorDAO.retrieve(idSetor);
+		return setorDAO.buscar(idSetor);
 	}
 
 	/**
@@ -85,13 +85,13 @@ public class SetorController {
 	 * @throws Exception 
 	 */
 	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
-		SetorModel setorRecuperado = setorDAO.retrieve(idSetor);
+		SetorModel setorRecuperado = setorDAO.buscar(idSetor);
 		if(Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		setorRecuperado.setNomeSetor(novoNome);
 		setorRecuperado.setIdPermissao(novaIdPermissao);
-		return setorDAO.update(idSetor, setorRecuperado);
+		return setorDAO.atualizar(idSetor, setorRecuperado);
 	}
 
 	/**
@@ -104,10 +104,10 @@ public class SetorController {
 	 * @throws Exception 
 	 */
 	public boolean deletarSetor(Integer idSetor) throws Exception {
-		if(Validadores.ehObjetoNulo(setorDAO.retrieve(idSetor))) {
+		if(Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
-		return setorDAO.delete(idSetor);
+		return setorDAO.deletar(idSetor);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class SetorController {
 	 * @return ArrayList SetorModel lista de todos os setores cadastrados.
 	 */
 	public ArrayList<SetorModel> buscarTodosSetores() {
-		return setorDAO.getAll();
+		return setorDAO.buscarTodos();
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class SetorController {
 	 * cadastrados.
 	 */
 	public void deletarTodosSetores() {
-		setorDAO.deleteAll();
+		setorDAO.deletarTodos();
 	}
 
 }

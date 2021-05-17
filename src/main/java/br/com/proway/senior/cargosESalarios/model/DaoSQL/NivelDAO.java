@@ -53,7 +53,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @param NivelModel : Objeto que vai ser salvo no banco de dados
 	 * @return int : id do objeto cadastrado no banco de dados
 	 */
-	public int create(NivelModel nivelModel) {
+	public int criar(NivelModel nivelModel) {
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -69,7 +69,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @param int id Identificacao do registro desejado
 	 * @return NivelModel objeto requisitado / null
 	 */
-	public NivelModel retrieve(int id) {
+	public NivelModel buscar(int id) {
 		return session.get(NivelModel.class, id);
 	}
 
@@ -83,8 +83,8 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @param NivelModel objetoAlterado objeto com os dados a serem inseridos.
 	 * @return boolean : sucesso da operacao
 	 */
-	public boolean update(int id, NivelModel objetoAlterado) {
-		NivelModel original = retrieve(id);
+	public boolean atualizar(int id, NivelModel objetoAlterado) {
+		NivelModel original = buscar(id);
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -100,8 +100,8 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * @param int id Identificacao do registro que será removido
 	 * @return boolean : sucesso da operacao
 	 */
-	public boolean delete(int id) {
-		NivelModel entry = retrieve(id);
+	public boolean deletar(int id) {
+		NivelModel entry = buscar(id);
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -123,7 +123,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * 
 	 * @return ArrayList<NivelModel> contendo as entradas da tabela.
 	 */
-	public ArrayList<NivelModel> getAll() {
+	public ArrayList<NivelModel> buscarTodos() {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<NivelModel> criteria = criteriaBuilder.createQuery(NivelModel.class);
 		
@@ -142,7 +142,7 @@ public class NivelDAO  implements InterfaceDAOCRUD<NivelModel>{
 	 * 
 	 * @return Boolean : true/false para itens deletados.
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}

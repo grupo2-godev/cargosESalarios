@@ -61,7 +61,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param HorasMesModel horasMes Objeto a ser inserido.
 	 * @return int id Id do registro.
 	 */
-	public int create(HorasMesModel horasMes) {
+	public int criar(HorasMesModel horasMes) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -82,7 +82,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param int id
 	 * @return results retorna um objeto HorasMesModel
 	 */
-	public HorasMesModel retrieve(int id) {
+	public HorasMesModel buscar(int id) {
 		return session.get(HorasMesModel.class, id);
 	}
 
@@ -96,8 +96,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
-	public boolean update(int id, HorasMesModel objetoAlterado) {
-		HorasMesModel original = retrieve(id);
+	public boolean atualizar(int id, HorasMesModel objetoAlterado) {
+		HorasMesModel original = buscar(id);
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -116,8 +116,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param int id Identificao do registro a ser deletado
 	 * @return boolean
 	 */
-	public boolean delete(int id) {
-		HorasMesModel entry = retrieve(id);
+	public boolean deletar(int id) {
+		HorasMesModel entry = buscar(id);
 
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -135,7 +135,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @return ArrayList HorasMesModel
 	 */
-	public ArrayList<HorasMesModel> getAll() {
+	public ArrayList<HorasMesModel> buscarTodos() {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
 		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
@@ -151,7 +151,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}

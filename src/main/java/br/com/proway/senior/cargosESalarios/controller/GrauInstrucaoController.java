@@ -33,7 +33,7 @@ public class GrauInstrucaoController {
 		}
 		GrauInstrucaoModel grauInstrucaoModel = new GrauInstrucaoModel();
 		grauInstrucaoModel.setNome(grauInstrucao);
-		return grauInstrucaoDAO.create(grauInstrucaoModel);
+		return grauInstrucaoDAO.criar(grauInstrucaoModel);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class GrauInstrucaoController {
 		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
-		return grauInstrucaoDAO.retrieve(id);
+		return grauInstrucaoDAO.buscar(id);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class GrauInstrucaoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 
-		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
+		grauInstrucaoDAO.atualizar(idObjetoASerAlterado, novoObjeto);
 		return true;
 	}
 
@@ -117,7 +117,7 @@ public class GrauInstrucaoController {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(id))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		grauInstrucaoDAO.delete(id);
+		grauInstrucaoDAO.deletar(id);
 		return true;
 	}
 
@@ -128,14 +128,14 @@ public class GrauInstrucaoController {
 	 *         {@link GrauInstrucaoModel}
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
-		return grauInstrucaoDAO.getAll();
+		return grauInstrucaoDAO.buscarTodos();
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
 	public void deletarTodos() {
-		grauInstrucaoDAO.deleteAll();
+		grauInstrucaoDAO.deletarTodos();
 	}
 
 }

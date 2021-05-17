@@ -38,14 +38,15 @@ public class PostoDeTrabalhoController {
 	 * @return null ou idNovoPosto
 	 * @throws Exception 
 	 */
-	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, Double salario) throws Exception {		
+	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, 
+			Double salario) throws Exception {		
 		if (!Validadores.apenasCaracteresValidos(nomePosto)) {
 			throw new Exception("Nome invalido para Posto de Trabalho!!!");
 		}
 
 		else {
 			PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(nomePosto, cargo, setor, nivel, salario);
-			return this.postoDAO.create(novoPosto);
+			return this.postoDAO.criar(novoPosto);
 		}
 	}
 	
@@ -58,7 +59,7 @@ public class PostoDeTrabalhoController {
 	 * @return boolean
 	 */
 	public boolean deletarPostoDeTrabalho(Integer idPosto) {
-		return this.postoDAO.delete(idPosto);
+		return this.postoDAO.deletar(idPosto);
 	}
 	
 	/**
@@ -76,7 +77,7 @@ public class PostoDeTrabalhoController {
 	 */
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novoCargo, SetorModel novoSetor,
 			NivelModel novoNivel, Double novoSalario) {
-		PostoDeTrabalhoModel posto = this.postoDAO.retrieve(idPosto);
+		PostoDeTrabalhoModel posto = this.postoDAO.buscar(idPosto);
 		if (Validadores.apenasCaracteresValidos(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
@@ -84,7 +85,7 @@ public class PostoDeTrabalhoController {
 		posto.setSetor(novoSetor);
 		posto.setNivel(novoNivel);
 		posto.setSalario(novoSalario);
-		return this.postoDAO.update(idPosto, posto);
+		return this.postoDAO.atualizar(idPosto, posto);
 	}
 	
 	/**
@@ -97,7 +98,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoId(Integer idPosto) {
-		return this.postoDAO.retrieve(idPosto);
+		return this.postoDAO.buscar(idPosto);
 	}
 	
 	/**
@@ -119,7 +120,7 @@ public class PostoDeTrabalhoController {
 	 * @return ArrayList
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodosPostosDeTrabalho() {
-		return this.postoDAO.getAll();
+		return this.postoDAO.buscarTodos();
 		
 	}
 	
@@ -127,6 +128,6 @@ public class PostoDeTrabalhoController {
 	 * Deleta todos os registros
 	 */
 	public boolean deletarTodosPostosDeTrabalho() {
-		return this.postoDAO.deleteAll();
+		return this.postoDAO.deletarTodos();
 	}
 }

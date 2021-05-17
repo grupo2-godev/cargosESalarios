@@ -52,7 +52,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param CBO1994Model CBO1994
 	 * @return int codigoCBO
 	 */
-	public int create(CBO1994Model CBO1994) {
+	public int criar(CBO1994Model CBO1994) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -69,7 +69,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int codigo_CBO1994
 	 * @return results retorna objeto CBO1994Model
 	 */
-	public CBO1994Model retrieve(int codigo_CBO1994) {
+	public CBO1994Model buscar(int codigo_CBO1994) {
 		CBO1994Model results = session.get(CBO1994Model.class, codigo_CBO1994);
 		//System.out.println(results.toString());
 		return results;
@@ -84,8 +84,8 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int          codigo_CBO1994
 	 * @param CBO1994Model objetoAlterado
 	 */
-	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
-		CBO1994Model original = retrieve(codigo_CBO1994);
+	public boolean atualizar(int codigo_CBO1994, CBO1994Model objetoAlterado) {
+		CBO1994Model original = buscar(codigo_CBO1994);
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -107,8 +107,8 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int codigo_CBO1994
 	 * @return boolean
 	 */
-	public boolean delete(int codigo_CBO1994) {
-		CBO1994Model objeto_deletar = retrieve(codigo_CBO1994);
+	public boolean deletar(int codigo_CBO1994) {
+		CBO1994Model objeto_deletar = buscar(codigo_CBO1994);
 
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -126,7 +126,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @return ArrayList<Cbo1994Model>
 	 */
-	public ArrayList<CBO1994Model> getAll() {	
+	public ArrayList<CBO1994Model> buscarTodos() {	
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
 		
@@ -146,7 +146,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
