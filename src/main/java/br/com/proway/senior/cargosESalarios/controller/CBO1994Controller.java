@@ -7,6 +7,7 @@ import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
 import utils.Insalubridade;
 import utils.Periculosidade;
+import utils.Validators;
 
 /** Controller que interage com o CBO1994DAO.
  * 
@@ -26,6 +27,8 @@ public class CBO1994Controller {
 		return instance;
 	}
 
+	private CBO1994Controller() {}	
+	
 		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
 	
 	/**
@@ -41,9 +44,15 @@ public class CBO1994Controller {
 	 */
 	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Insalubridade percentualInsalubridade,
 			Periculosidade percentualPericulosidade) throws Exception {
-//		if(!Validators.onlyValidChars(nome)) {
-//			throw(new Exception("Nome invalido para o CBO1994"));
-//		}
+		
+		if(!Validators.isCBO1994Valid(codigo_CBO1994) || !Validators.isCBODescricaoValid(descricao)) {
+			throw(new Exception("Codigo e/ou descricao invalidos para o CBO1994"));
+		}
+		
+		if(!(CBO1994Dao.retrieve(codigo_CBO1994) == null)) {
+			throw(new Exception("CBO1994 já existe no banco de dados"));
+		}
+		
 		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), percentualPericulosidade.getValor());
 		return CBO1994Dao.create(CBO1994Model);
 	} 
@@ -59,6 +68,7 @@ public class CBO1994Controller {
 	 * @throws Exception
 	 */
 	public CBO1994Model buscarCBO1994(int codigo_CBO1994) throws Exception {
+		
 		if(CBO1994Dao.retrieve(codigo_CBO1994) == null) {
 			throw(new Exception("Entrada com o codigo_CBO1994 requisitado nao existe!"));
 		}
@@ -78,21 +88,31 @@ public class CBO1994Controller {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizarCBO1994(int codigo_CBO1994, CBO1994Model objetoAlterado) throws Exception {
-		CBO1994Model original = CBO1994Dao.retrieve(codigo_CBO1994);
-		
-		if(original == null) {
-			throw(new Exception("Entrada com o id requisitado nao existe!"));
+	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, Insalubridade novoPercentualInsalubridade,
+			Periculosidade novoPercentualPericulosidade) throws Exception {
+
+		if(!Validators.isCBODescricaoValid(novaDescricao)) {
+			throw(new Exception("Descricao invalida para atualizacao do CBO1994"));
 		}
 		
-		if((int) original.getCodigo_cbo() == (int) objetoAlterado.getCodigo_cbo() &&
-		   original.getDescricao() == objetoAlterado.getDescricao() &&
-		   (double) original.getPercentualInsalubridade() == (double) objetoAlterado.getPercentualInsalubridade() &&
-		   (double) original.getPercentualPericulosidade() == (double) objetoAlterado.getPercentualInsalubridade()) {
+		CBO1994Model objetoParaAtualizar = CBO1994Dao.retrieve(codigo_CBO1994);
+		
+		if(Validators.isNullObject(objetoParaAtualizar)) {
+			throw(new Exception("Entrada com o codigo CBO1994 requisitado nao existe!"));
+		}
+		
+		if(objetoParaAtualizar.getDescricao() == novaDescricao &&
+		   (double) objetoParaAtualizar.getPercentualInsalubridade() == (double) novoPercentualInsalubridade.getValor() &&
+		   (double) objetoParaAtualizar.getPercentualPericulosidade() == (double) novoPercentualPericulosidade.getValor()) {
 			return false;
 		}
 		
-		return CBO1994Dao.update(codigo_CBO1994, objetoAlterado);
+		objetoParaAtualizar.setCodigo_cbo(codigo_CBO1994);
+		objetoParaAtualizar.setDescricao(novaDescricao);
+		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade.getValor());
+		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade.getValor());
+				
+		return CBO1994Dao.update(codigo_CBO1994, objetoParaAtualizar);
 	}
 	
 	/**
@@ -106,9 +126,11 @@ public class CBO1994Controller {
 	 * @throws Exception
 	 */
 	public boolean deletarCBO1994(int codigo_CBO1994) throws Exception {
-		if(CBO1994Dao.retrieve(codigo_CBO1994) == null) {
+		
+		if(Validators.isNullObject(CBO1994Dao.retrieve(codigo_CBO1994))) {
 			throw(new Exception("Entrada com o codigo_CBO1994 requisitado nao existe!"));
 		}
+		
 		return CBO1994Dao.delete(codigo_CBO1994);
 	}
 	

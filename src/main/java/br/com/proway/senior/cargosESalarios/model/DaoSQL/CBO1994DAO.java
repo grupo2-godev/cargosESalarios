@@ -71,7 +71,7 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 */
 	public CBO1994Model retrieve(int codigo_CBO1994) {
 		CBO1994Model results = session.get(CBO1994Model.class, codigo_CBO1994);
-		System.out.println(results.toString());
+		//System.out.println(results.toString());
 		return results;
 	}
 
