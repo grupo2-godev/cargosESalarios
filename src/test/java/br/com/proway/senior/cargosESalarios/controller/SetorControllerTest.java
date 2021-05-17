@@ -44,18 +44,29 @@ public class SetorControllerTest {
 	}
 	
 	@Test
-	public void testDeletarSetor() {
+	public void testDeletarSetorExistente() throws Exception {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		assertTrue(setorController.deletarSetor(idCadastrada));
 	}
 	
+	@Test (expected = Exception.class)
+	public void testDeletarSetorInexistente() throws Exception {
+		setorController.deletarSetor(456);
+	}
+	
 	@Test
-	public void testAtualizarSetor() {
+	public void testAtualizarSetorExistente() throws Exception {
 		Integer idCadastrada = setorController.cadastrarSetor(nomeSetor1, idPermissao1);
 		setorController.atualizarSetor(idCadastrada, nomeSetor2, idPermissao2);
 		SetorModel setorAtualizado = setorController.buscarSetorPorId(idCadastrada);
 		assertEquals(nomeSetor2, setorAtualizado.getNomeSetor());
 		assertEquals(idPermissao2, setorAtualizado.getIdPermissao());
+	}
+	
+	@Test (expected = Exception.class)
+	public void testAtualizarSetorInexistente() throws Exception {
+		setorController.atualizarSetor(123, nomeSetor2, idPermissao2);
+
 	}
 
 	@Test

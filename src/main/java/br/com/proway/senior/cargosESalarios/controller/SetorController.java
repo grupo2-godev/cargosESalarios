@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
+import utils.Validators;
 
 /**
  * Classe SetorController
@@ -81,9 +82,13 @@ public class SetorController {
 	 * @param novoNome
 	 * @paramar novaIdPermissão
 	 * @return boolean
+	 * @throws Exception 
 	 */
-	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) {
+	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
 		SetorModel setorRecuperado = setorDAO.retrieve(idSetor);
+		if(Validators.isNullObject(setorRecuperado)) {
+			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
+		}
 		setorRecuperado.setNomeSetor(novoNome);
 		setorRecuperado.setIdPermissao(novaIdPermissao);
 		return setorDAO.update(idSetor, setorRecuperado);
@@ -96,8 +101,12 @@ public class SetorController {
 	 * 
 	 * @param Integer idSetor Identificacao do setor que sera deletado.
 	 * @return boolean
+	 * @throws Exception 
 	 */
-	public boolean deletarSetor(Integer idSetor) {
+	public boolean deletarSetor(Integer idSetor) throws Exception {
+		if(Validators.isNullObject(setorDAO.retrieve(idSetor))) {
+			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
+		}
 		return setorDAO.delete(idSetor);
 	}
 
