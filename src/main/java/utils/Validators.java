@@ -46,6 +46,17 @@ public class Validators {
 	}
 	
 	/**
+	 * Verifica se há caracteres invalidos CBO1994
+	 * 
+	 * @param verify String a ser verificada
+	 * @return boolean 
+	 */
+	static public boolean isCBODescricaoValid(String verify) {
+		return !verify.matches(
+				".*[!@#$%^*_+\\=\\[\\]{};':\"\\\\|.<>\\/?]+.*");
+	}
+	
+	/**
 	 * Validar a quantidade de caracteres do CBO 2002.
 	 * 
 	 * Metodo verifica se o codigo de CBO 2002 informado eh valido, o padrao
