@@ -91,14 +91,13 @@ public class SetorControllerTest {
 		assertTrue(setorController.buscarTodosSetores().isEmpty());
 	}
 		
-		@Test
-		public void testDeletarTodosOsSetoresFalse() {
-			setorController.cadastrarSetor(nomeSetor1, idPermissao1);
-			setorController.deletarTodosSetores();
-			setorController.cadastrarSetor(nomeSetor2, idPermissao2);
-			assertFalse(setorController.buscarTodosSetores().isEmpty());
+	@Test
+	public void testDeletarTodosOsSetoresFalse() {
+		setorController.cadastrarSetor(nomeSetor1, idPermissao1);
+		setorController.deletarTodosSetores();
+		setorController.cadastrarSetor(nomeSetor2, idPermissao2);
+		assertFalse(setorController.buscarTodosSetores().isEmpty());
 	}
-	
 	
 	@Before
 	public void limparTabela() {

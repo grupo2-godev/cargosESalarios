@@ -12,7 +12,7 @@ import utils.Validators;
 /**
  * Classe CBO2002Controller
  * 
- * Faz contato com a classe DAO, faz as devidas tratativas com entrada e saida
+ * Faz contato com a classe DAO {@link CBO2002DAO} e realiza as devidas tratativas com entrada e saida
  * de dados.
  * 
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
@@ -118,6 +118,18 @@ public class CBO2002Controller {
 		}
 		cbo2002DAO.delete(codigoCBO);
 		return true;
+	}
+	
+	/**
+	 * Buscar todos os CBOs 2002.
+	 * 
+	 * Realiza a busca de todos os registros de CBO 2002 constantes no banco de dados e retorna um
+	 * ArrayList de CBO2002Model.
+	 * 
+	 * @return ArrayList CBO2002Model lista de registros localizados.
+	 */
+	public ArrayList<CBO2002Model> buscarTodosCBO2002() {
+		return cbo2002DAO.getAll();
 	}
 	
 }
