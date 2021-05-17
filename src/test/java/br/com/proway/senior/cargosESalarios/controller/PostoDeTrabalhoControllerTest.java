@@ -49,18 +49,13 @@ public class PostoDeTrabalhoControllerTest{
 		
 		salario = 1800.00;
 		
-		limparTabelas();
+		controller.postoDAO.deleteAll(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		CargoDAO.getInstance(ConnectionHibernate.getSession()).deleteAll();
 		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
-	}
-	
-	public static void limparTabelas() throws SQLException {
-		controller.postoDAO.deleteAll(); 
-		
 	}
 	
 	/**
@@ -86,8 +81,8 @@ public class PostoDeTrabalhoControllerTest{
 	}
 	
 	@Before
-	public void herewegoagain() throws Exception {
-		limparTabelas();
+	public void before() throws Exception {
+		controller.postoDAO.deleteAll(); 
 		
 	}
 	
