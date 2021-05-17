@@ -60,13 +60,29 @@ public class Validators {
 		}
 		return true;
 	}
+	
+	/**
+	 * Validar a quantidade de caracteres do CBO 1994.
+	 * 
+	 * Metodo verifica se o codigo de CBO 1994 informado eh valido, o padrao
+	 * sao 5 caracteres.
+	 * 
+	 * @param Integer codigo1994
+	 * @return boolean
+	 */
+	static public boolean isCBO1994Valid(Integer codigoCBO2002) {
+		if(codigoCBO2002.toString().length() != 5) {
+			return false;
+		}
+		return true;
+	}
 
 	/*
 	 * Utilizar no HorasMesController, create
 	 */
 	static public boolean onlyValidNumber(String verify) {
 		return verify.matches(
-				"(([0-9]*[.])?[0-9]+)");		
+				"(([0-9]*[.])?[0-9]+)");
 	}
 	
 
