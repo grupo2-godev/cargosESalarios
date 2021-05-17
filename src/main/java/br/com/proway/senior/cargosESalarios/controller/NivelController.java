@@ -9,9 +9,9 @@ import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o NivelDAO.
  * 
-* @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
-* @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
-* @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5*
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5*
  */
 public class NivelController {
 

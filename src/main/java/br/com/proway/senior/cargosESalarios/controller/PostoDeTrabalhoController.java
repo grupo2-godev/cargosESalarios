@@ -21,21 +21,23 @@ import br.com.proway.senior.cargosESalarios.utils.Validadores;
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(
-		ConexaoHibernate.getSessao()
-	);
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cadastro Posto de Trabalho
 	 * 
 	 * Recebe os parametros necessarios para a criacao de um posto de
 	 * trabalho, as valida e envia para o DAO.
-	 * @param nomePosto
-	 * @param cargo
-	 * @param setor
-	 * @param nivel
-	 * @param salario
-	 * @return null ou idNovoPosto
+	 * @param nomePosto nome que sera atribuido ao posto de trabalho.
+	 * @param cargo {@link CargoModel}, que sera atrabuido ao posto, eh
+	 * chave estrangeira.
+	 * @param setor {@link SetorModel}, que sera atribuido ao posto, eh 
+	 * chave estrangeira.
+	 * @param nivel {@link NivelModel}, que sera atribuido ao posto, eh
+	 * chave estrangeira.
+	 * @param Double salario correspondente ao posto de trabalho.
+	 * @return null nulo ou idNovoPosto a identificao do novo posto de 
+	 * trabalho.
 	 * @throws Exception 
 	 */
 	public Integer cadastrarPostoDeTrabalho(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel, 
@@ -55,7 +57,8 @@ public class PostoDeTrabalhoController {
 	 * 
 	 * Realiza a exclusao do posto de trabalho conforme id de parametro.
 	 * 
-	 * @param idPosto
+	 * @param Integer idPosto Identificacao do posto de trabalho que sera 
+	 * excluido.
 	 * @return boolean
 	 */
 	public boolean deletarPostoDeTrabalho(Integer idPosto) {
@@ -67,12 +70,12 @@ public class PostoDeTrabalhoController {
 	 * 
 	 * Metodo realiza a atualizacao do posto de trabalho conforme parametros.
 	 * 
-	 * @param idPosto
-	 * @param novoNome
-	 * @param novoCargo
-	 * @param novoSetor
-	 * @param novoNivel
-	 * @param novoSalario
+	 * @param Integer idPosto Identificacao do posto de trabalho que sera alterado.
+	 * @param String novoNome nome que sera atribuido na atualizacao.
+	 * @param CargoModel novoCargo cargo que sera atribuido na atualizacao {@link CargoModel}.
+	 * @param SetorModel novoSetor setor que sera atribuido na atualizacao {@link SetorModel}.
+	 * @param NivelModel novoNivel nivel que sera atribuido na atualizacao {@link NivelModel}.
+	 * @param Double novoSalario novo salario que sera atribuido na atualizacao.
 	 * @return boolean
 	 */
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novoCargo, SetorModel novoSetor,
@@ -89,12 +92,12 @@ public class PostoDeTrabalhoController {
 	}
 	
 	/**
-	 * Buscar posto de trabalho por ID
+	 * Buscar posto de trabalho por ID.
 	 * 
 	 * Realiza a busca do posto de trabalho conforme Id informada
 	 * e retorna o objeto da mesma.
 	 * 
-	 * @param idPosto
+	 * @param Integer idPosto Identificacao do posto de trabalho procurado.
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoId(Integer idPosto) {
@@ -102,12 +105,12 @@ public class PostoDeTrabalhoController {
 	}
 	
 	/**
-	 * Buscar posto de trabalho por nome
+	 * Buscar posto de trabalho por nome.
 	 * 
-	 * Realiza a busca do posto de trabalho conforme nome informado
+	 * Realiza a busca do posto de trabalho conforme nome informado via parametro
 	 * e retorna o objeto do mesmo.
 	 * 
-	 * @param nomePosto
+	 * @param String nomePosto nome do posto de trabalho procurado.
 	 * @return PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarPostoDeTrabalhoNome(String nomePosto) {
@@ -115,9 +118,10 @@ public class PostoDeTrabalhoController {
 	}
 	
 	/**
-	 * Buscar todos os postos de trabalho cadastrados.
+	 * Buscar todos os postos de trabalho cadastrados no banco de dados e os
+	 * retorna em uma lista.
 	 *  
-	 * @return ArrayList
+	 * @return ArrayList PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodosPostosDeTrabalho() {
 		return this.postoDAO.buscarTodos();
@@ -125,7 +129,9 @@ public class PostoDeTrabalhoController {
 	}
 	
 	/**
-	 * Deleta todos os registros
+	 * Deletar todos os registros de postos de trabalho do banco de dados.
+	 * 
+	 * @return boolean
 	 */
 	public boolean deletarTodosPostosDeTrabalho() {
 		return this.postoDAO.deletarTodos();

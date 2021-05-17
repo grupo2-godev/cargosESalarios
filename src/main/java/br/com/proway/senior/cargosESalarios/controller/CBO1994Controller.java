@@ -14,22 +14,8 @@ import br.com.proway.senior.cargosESalarios.utils.Validadores;
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 public class CBO1994Controller {
-
-	private static CBO1994Controller instance;
-	/**
-	 * Singleton da classe CBO1994Controller
-	 * 
-	 * @return CBO1994Controller instance
-	 */
-	public static CBO1994Controller getInstance() {
-		if (instance == null)
-			instance = new CBO1994Controller();
-		return instance;
-	}
-
-	private CBO1994Controller() {}	
 	
-		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
+	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.
@@ -53,7 +39,8 @@ public class CBO1994Controller {
 			throw(new Exception("CBO1994 já existe no banco de dados"));
 		}
 		
-		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), percentualPericulosidade.getValor());
+		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), 
+				percentualPericulosidade.getValor());
 		return CBO1994Dao.criar(CBO1994Model);
 	} 
 	

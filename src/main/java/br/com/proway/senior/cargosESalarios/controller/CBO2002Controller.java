@@ -23,7 +23,7 @@ public class CBO2002Controller {
 	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
-	 * /** Cadastrar na banco de dados um CBO 2002.
+	 * Cadastrar na banco de dados um CBO 2002.
 	 * 
 	 * Verifica se ja existe um CBO 2002 com o mesmo codigo, se nao existir,
 	 * registra o objeto. Se ja existir um CBO 2002 com o mesmo codigo, retorna

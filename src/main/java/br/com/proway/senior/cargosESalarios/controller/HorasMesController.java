@@ -9,7 +9,7 @@ import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o HorasMesDAO.
  * 
-* @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5* 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  */
 public class HorasMesController {
 
@@ -17,7 +17,7 @@ public class HorasMesController {
 	
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido no BD.
-	 * () Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.
+	 * Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.
 	 * 
 	 * @param quantidade : String
 	 * @return Integer : id do objeto correspondente no BD
@@ -106,7 +106,7 @@ public class HorasMesController {
 	}
 	
 	/**
-	 * Retorna todas as entradas de HorasMesModels no BD em uma ArrayList;
+	 * Retorna todas as entradas de HorasMesModels no BD em uma ArrayList.
 	 * 
 	 * @return ArrayList<HorasMesModel> : lista de entradas
 	 */
@@ -115,7 +115,7 @@ public class HorasMesController {
 	}
 	
 	/**
-	 * Deleta todas as entradas de HorasMesModels no BD;
+	 * Deleta todas as entradas de HorasMesModels no BD.
 	 * 
 	 * @return boolean : true/false para sucesso da operacao
 	 */
