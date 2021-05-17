@@ -33,10 +33,11 @@ public class PostoDeTrabalhoController {
 	 * @param idNivel
 	 * @param salario
 	 * @return null ou idNovoPosto
+	 * @throws Exception 
 	 */
-	public Integer cadastrarPostoDeTrabalho(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) {		
+	public Integer cadastrarPostoDeTrabalho(String nomePosto, Integer idCargo, Integer idSetor, Integer idNivel, Double salario) throws Exception {		
 		if (!Validators.onlyValidChars(nomePosto)) {
-			return null;
+			throw new Exception("Nome invalido para Posto de Trabalho!!!");
 		}
 
 		else {

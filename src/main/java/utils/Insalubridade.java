@@ -13,4 +13,5 @@ public enum Insalubridade {
 	public double getValor() {
 		return this.valor;
 	}
+	
 }

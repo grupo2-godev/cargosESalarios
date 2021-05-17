@@ -1,6 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 
@@ -15,7 +16,6 @@ import org.junit.After;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
 
 public class PostoDeTrabalhoControllerTest {
 	
@@ -31,7 +31,7 @@ public class PostoDeTrabalhoControllerTest {
 	static PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
 	
 	@Test
-	public void cadastrarPostoDeTrabalhoTest() {
+	public void cadastrarPostoDeTrabalhoTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		PostoDeTrabalhoModel postoRecuperado = controller.buscarPostoDeTrabalhoId(id);
 		assertEquals("Desenvolvedor(a)", postoRecuperado.getNomePosto());
@@ -42,13 +42,13 @@ public class PostoDeTrabalhoControllerTest {
 	}
 	
 	@Test
-	public void deletarPostoDeTrabalhoTest() {
+	public void deletarPostoDeTrabalhoTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		assertTrue(controller.deletarPostoDeTrabalho(id));
 	}
 	
 	@Test
-	public void atualizarPostoDeTrabalhoTest() {
+	public void atualizarPostoDeTrabalhoTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		controller.atualizarPostoDeTrabalho(id, "Desenvolvedor(a) Junior", idCargo, 7, idNivel, salario);
 		PostoDeTrabalhoModel postoAtualizado = controller.buscarPostoDeTrabalhoId(id);
@@ -58,10 +58,10 @@ public class PostoDeTrabalhoControllerTest {
 	}
 
 	@Test
-	public void buscarPostoDeTrabalhoIdTest() {
+	public void buscarPostoDeTrabalhoIdTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		PostoDeTrabalhoModel postoProcurado = controller.buscarPostoDeTrabalhoId(id);
-		assertEquals((Integer) 1, postoProcurado.getIdPosto());
+		assertEquals((Object)id, postoProcurado.getIdPosto());
 		assertEquals(nomePosto, postoProcurado.getNomePosto());
 		assertEquals(idCargo, postoProcurado.getIdCargo());
 		assertEquals(idSetor, postoProcurado.getIdSetor());
@@ -70,7 +70,7 @@ public class PostoDeTrabalhoControllerTest {
 	}
 	
 	@Test
-	public void buscarPostoDeTrabalhoNomeTest() {
+	public void buscarPostoDeTrabalhoNomeTest() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		PostoDeTrabalhoModel postoProcurado = controller.buscarPostoDeTrabalhoId(id);
 		assertEquals(postoProcurado.getNomePosto(),
@@ -78,7 +78,7 @@ public class PostoDeTrabalhoControllerTest {
 	}
 	
 	@Test
-	public void buscarTodosPostosDeTrabalhoTest() {
+	public void buscarTodosPostosDeTrabalhoTest() throws Exception {
 		int before = controller.buscarTodosPostosDeTrabalho().size();
 		controller.cadastrarPostoDeTrabalho(nomePosto, idCargo, idSetor, idNivel, salario);
 		controller.cadastrarPostoDeTrabalho("Analista de Sistemas", 8, 2, 2, 3000.00);
