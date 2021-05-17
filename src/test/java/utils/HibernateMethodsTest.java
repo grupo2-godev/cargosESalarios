@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
@@ -17,7 +17,7 @@ public class HibernateMethodsTest {
 
 	@Test
 	public void listarTabela() {
-		HorasMesDAO dao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(240.042);
 		int savedId = dao.create(entry);
 		
@@ -30,7 +30,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeId() {
-		HorasMesDAO dao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(525.525);
 		int savedId = dao.create(entry);
 
@@ -45,7 +45,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColuna() {
-		HorasMesDAO dao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+		HorasMesDAO dao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(525.525);
 		int savedId = dao.create(entry);
 		entry.setIdHorasMes(savedId);
@@ -58,7 +58,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaString() {
-		SetorDAO dao = SetorDAO.getInstance(ConnectionHibernate.getSession());
+		SetorDAO dao = SetorDAO.getInstance(ConexaoHibernate.getSessao());
 		SetorModel entry = new SetorModel("Setor legal", 42);
 		int id = dao.create(entry);
 		entry.setId(id);

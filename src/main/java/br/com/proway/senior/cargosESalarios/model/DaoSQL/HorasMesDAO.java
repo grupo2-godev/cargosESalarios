@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 

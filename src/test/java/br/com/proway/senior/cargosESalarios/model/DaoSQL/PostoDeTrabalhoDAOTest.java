@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.controller.NivelController;
 import br.com.proway.senior.cargosESalarios.controller.SetorController;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -42,7 +42,7 @@ public class PostoDeTrabalhoDAOTest {
 	static SetorModel setor2;
 	static NivelModel nivel;
 	
-	static PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(ConnectionHibernate.getSession());
+	static PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(ConexaoHibernate.getSessao());
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -53,7 +53,7 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstance(ConnectionHibernate.getSession()).deleteAll();
+		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deleteAll();
 		
 		popularTabelas();
 	}
@@ -74,12 +74,12 @@ public class PostoDeTrabalhoDAOTest {
 		
 		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
 				20, 1, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).create(cargo);
+		idCargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).create(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargoRecuperado = CargoDAO.getInstance(ConnectionHibernate.getSession()).retrieve(idCargo);
+		cargoRecuperado = CargoDAO.getInstance(ConexaoHibernate.getSessao()).retrieve(idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);
@@ -97,7 +97,7 @@ public class PostoDeTrabalhoDAOTest {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Gerente Gestão de Pessoas", cargo, setor, nivel, 
 				salario);
 		Integer idPostoCadastrado = postoDAO.create(novoPosto);
-		Object postoConsultado = ConnectionHibernate.getSession().get(PostoDeTrabalhoModel.class, idPostoCadastrado);
+		Object postoConsultado = ConexaoHibernate.getSessao().get(PostoDeTrabalhoModel.class, idPostoCadastrado);
 		assertEquals(idPostoCadastrado, ((PostoDeTrabalhoModel) postoConsultado).getIdPosto());
 	}
 

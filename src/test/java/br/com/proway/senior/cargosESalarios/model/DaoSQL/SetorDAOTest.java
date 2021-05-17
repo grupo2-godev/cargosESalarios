@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 /**
@@ -21,13 +21,13 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 public class SetorDAOTest {
 
-	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
+	SetorDAO setorDAO = SetorDAO.getInstance(ConexaoHibernate.getSessao());
 
 	@Test
 	public void testIserirSetor() throws SQLException {
 		SetorModel novoSetor = new SetorModel("Financeiro", 15);
 		Integer idSetorCadastrado = setorDAO.create(novoSetor);
-		Object setorConsultado = ConnectionHibernate.getSession().get(SetorModel.class, idSetorCadastrado);
+		Object setorConsultado = ConexaoHibernate.getSessao().get(SetorModel.class, idSetorCadastrado);
 		assertEquals(idSetorCadastrado, ((SetorModel) setorConsultado).getId());
 	}
 

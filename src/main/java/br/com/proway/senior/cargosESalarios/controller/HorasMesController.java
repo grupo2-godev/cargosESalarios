@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
 import utils.Validators;
@@ -13,7 +13,7 @@ import utils.Validators;
  */
 public class HorasMesController {
 
-	HorasMesDAO horasMesDAO = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+	HorasMesDAO horasMesDAO = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido no BD.

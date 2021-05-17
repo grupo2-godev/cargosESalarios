@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
 import utils.Insalubridade;
@@ -29,7 +29,7 @@ public class CBO1994Controller {
 
 	private CBO1994Controller() {}	
 	
-		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
+		CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.

@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.NivelDAO;
 import utils.Validators;
@@ -15,7 +15,7 @@ import utils.Validators;
  */
 public class NivelController {
 
-	NivelDAO nivelDAO = NivelDAO.getInstance(ConnectionHibernate.getSession());
+	NivelDAO nivelDAO = NivelDAO.getInstance(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto NivelModel e o passa para o DAO para que seja inserido no BD.

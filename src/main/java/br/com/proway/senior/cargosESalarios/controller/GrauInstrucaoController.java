@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
 import utils.Validators;
@@ -15,7 +15,7 @@ import utils.Validators;
  */
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConnectionHibernate.getSession());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra um objeto do tipo {@link GrauInstrucaoModel} no banco de dados.

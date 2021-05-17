@@ -8,7 +8,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import utils.Insalubridade;
 import utils.Periculosidade;
@@ -17,12 +17,12 @@ public class CBO1994DAOTest {
 
 	Integer codigo_cbo = 345678;
 	String descricao = "descricao";
-	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());	
+	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());	
 
 	@Test
 	public void testGetInstance() {
-		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
-		CBO1994DAO test_getInstance2 = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
+		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
+		CBO1994DAO test_getInstance2 = CBO1994DAO.getInstance(ConexaoHibernate.getSessao());
 		assertEquals(test_getInstance1, test_getInstance2);		
 	}			
 	
@@ -31,7 +31,7 @@ public class CBO1994DAOTest {
 		try {
 			CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", Insalubridade.Quarenta.getValor(), Periculosidade.Trinta.getValor());
 			Integer codigo_CBO1994 = CBO1994Dao.create(CBO1994);
-			Object CBO1994Consultado = ConnectionHibernate.getSession().get(CBO1994Model.class, codigo_CBO1994);
+			Object CBO1994Consultado = ConexaoHibernate.getSessao().get(CBO1994Model.class, codigo_CBO1994);
 			assertEquals(codigo_CBO1994, ((CBO1994Model) CBO1994Consultado).getCodigo_cbo());
 		} catch (Exception e) {
 			fail(e.getMessage());

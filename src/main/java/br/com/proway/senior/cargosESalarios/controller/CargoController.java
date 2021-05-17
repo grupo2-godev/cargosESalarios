@@ -6,7 +6,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 import utils.Validators;
@@ -19,7 +19,7 @@ import utils.Validators;
  */
 public class CargoController {
 
-	CargoDAO cargoDAO = CargoDAO.getInstance(ConnectionHibernate.getSession());
+	CargoDAO cargoDAO = CargoDAO.getInstance(ConexaoHibernate.getSessao());
 
 	/**
 	 * Valida os atributos do objeto a ser criado.

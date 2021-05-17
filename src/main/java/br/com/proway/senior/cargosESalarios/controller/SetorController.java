@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 import utils.Validators;
@@ -20,7 +20,7 @@ import utils.Validators;
 
 public class SetorController {
 
-	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
+	SetorDAO setorDAO = SetorDAO.getInstance(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra na tabela setor um objeto do tipo {@link SetorModel}.

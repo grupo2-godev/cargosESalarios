@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 
 /**
@@ -19,13 +19,13 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
  */
 public class GrauInstrucaoDAOTest {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConnectionHibernate.getSession());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConexaoHibernate.getSessao());
 
 	@Test
 	public void testCreate() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino Medio");
 		Integer idObjetoCadastrado = grauInstrucaoDAO.create(grauInstrucao);
-		Object grauInstrucaoConsultado = ConnectionHibernate.getSession().get(GrauInstrucaoModel.class,
+		Object grauInstrucaoConsultado = ConexaoHibernate.getSessao().get(GrauInstrucaoModel.class,
 				idObjetoCadastrado);
 		assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
 	}

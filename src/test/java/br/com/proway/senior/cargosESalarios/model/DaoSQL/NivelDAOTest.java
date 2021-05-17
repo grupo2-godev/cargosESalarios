@@ -7,19 +7,19 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelDAOTest {
 
-	NivelDAO nivelDAO = NivelDAO.getInstance(ConnectionHibernate.getSession());
+	NivelDAO nivelDAO = NivelDAO.getInstance(ConexaoHibernate.getSessao());
 	
 	@Test
 	public void testInserirNivel() {
 		try {
 			NivelModel nivel = new NivelModel("Willian");
 			Integer idObjetoCadastrado = nivelDAO.create(nivel);
-			Object nivelConsultado = ConnectionHibernate.getSession().get(NivelModel.class, idObjetoCadastrado);
+			Object nivelConsultado = ConexaoHibernate.getSessao().get(NivelModel.class, idObjetoCadastrado);
 			assertEquals(idObjetoCadastrado, ((NivelModel) nivelConsultado).getId());
 		} catch (Exception e) {
 			fail(e.getMessage());

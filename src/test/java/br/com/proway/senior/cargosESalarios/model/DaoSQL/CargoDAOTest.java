@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 /**
@@ -18,7 +18,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDAOTest {
-	CargoDAO cargoDAO = CargoDAO.getInstance(ConnectionHibernate.getSession());
+	CargoDAO cargoDAO = CargoDAO.getInstance(ConexaoHibernate.getSessao());
 
 	Integer grauinstrucao = 0;
 	Integer cbo2002 = 0;
@@ -30,7 +30,7 @@ public class CargoDAOTest {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.create(cargo);
-		Object cargoConsultado = ConnectionHibernate.getSession().get(CargoModel.class, idObjetoCadastrado);
+		Object cargoConsultado = ConexaoHibernate.getSessao().get(CargoModel.class, idObjetoCadastrado);
 		assertEquals(idObjetoCadastrado, ((CargoModel) cargoConsultado).getIdCargo());
 	}
 

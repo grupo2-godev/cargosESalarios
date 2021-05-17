@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
@@ -22,7 +22,7 @@ import utils.Validators;
 public class PostoDeTrabalhoController {
 	
 	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstance(
-		ConnectionHibernate.getSession()
+		ConexaoHibernate.getSessao()
 	);
 	
 	/**

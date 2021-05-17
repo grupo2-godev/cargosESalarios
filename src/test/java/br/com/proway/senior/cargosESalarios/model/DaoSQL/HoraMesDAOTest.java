@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 /**
  * Classe HoraMesDAOTest
@@ -22,13 +22,13 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
  */
 public class HoraMesDAOTest {
 
-	HorasMesDAO horasMesDao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+	HorasMesDAO horasMesDao = HorasMesDAO.getInstance(ConexaoHibernate.getSessao());
 	
 	@Test
 	public void testInserirHoraMes() {
 			HorasMesModel novaHoraMes = new HorasMesModel(5, 220.0);
 			Integer idObjetoCadastrado = horasMesDao.create(novaHoraMes);
-			Object horasMesConsultado = ConnectionHibernate.getSession().get(HorasMesModel.class, idObjetoCadastrado);
+			Object horasMesConsultado = ConexaoHibernate.getSessao().get(HorasMesModel.class, idObjetoCadastrado);
 			assertEquals(idObjetoCadastrado, ((HorasMesModel) horasMesConsultado).getIdHorasMes());
 	}
 	

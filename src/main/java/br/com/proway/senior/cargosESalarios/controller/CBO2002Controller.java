@@ -2,7 +2,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
 import utils.Insalubridade;
@@ -20,7 +20,7 @@ import utils.Validators;
  */
 public class CBO2002Controller {
 
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConexaoHibernate.getSessao());
 
 	/**
 	 * /** Cadastrar na banco de dados um CBO 2002.

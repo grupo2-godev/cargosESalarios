@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import utils.Insalubridade;
 import utils.Periculosidade;
@@ -24,14 +24,14 @@ import utils.Periculosidade;
  */
 public class CBO2002DAOTest {
         
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConexaoHibernate.getSessao());
 	
     @Test
     public void testInserirCBO2002() {
         CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de "
         		+ "linha de produção", Insalubridade.Zero.getValor(), Periculosidade.Trinta.getValor());
         Integer codigoCboCadastrado = cbo2002DAO.create(novoCBO);
-        Object CBOConsultado = ConnectionHibernate.getSession().get(CBO2002Model.class, codigoCboCadastrado);
+        Object CBOConsultado = ConexaoHibernate.getSessao().get(CBO2002Model.class, codigoCboCadastrado);
         assertEquals(codigoCboCadastrado, ((CBO2002Model) CBOConsultado).getCodigoCBO2002());   
     }
 
