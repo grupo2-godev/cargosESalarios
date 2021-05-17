@@ -34,10 +34,10 @@ public class CargoControllerTest {
 	@Test
 	public void testconstruir() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
-		
+
 		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		
+
 		assertNotNull(controller.cadastrar(cargo));
 		assertEquals(1, controller.buscarTodos().size());
 	}
@@ -114,8 +114,8 @@ public class CargoControllerTest {
 
 	@Test
 	public void testAlterar() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94,
-				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		Integer idCadastrado = controller.cadastrar(cargo);
 		CargoModel cargoNovo = new CargoModel();
 		cargoNovo.setNomeCargo("Novo cargo");
@@ -133,22 +133,38 @@ public class CargoControllerTest {
 		assertEquals("Novo cargo", controller.buscarPorId(idCadastrado).getNomeCargo());
 	}
 
+	@Test(expected = Exception.class)
+	public void testAlterarObjetoNulo() throws Exception {
+		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		Integer idCadastrado = controller.cadastrar(cargo);
+		CargoModel cargoNovo = null;
+
+		controller.alterar(idCadastrado, cargoNovo);
+	}
+	
+	@Test(expected = Exception.class) 
+	public void testAlterarIdInexistente() throws Exception {
+		CargoModel cargoModel = new CargoModel();
+		controller.alterar(2, cargoModel);
+	}
+
 	@Test
 	public void buscarTodos() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
-		CargoModel cargo1 = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao,
-				experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo1 = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		controller.cadastrar(cargo1);
-		CargoModel cargo2 = controller.construir("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao,
-				experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo2 = controller.construir("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo94,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		controller.cadastrar(cargo2);
 		assertEquals(2, controller.buscarTodos().size());
 	}
 
 	@Test
 	public void testDeletarTodos() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes, grauInstrucao,
-				experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		controller.cadastrar(cargo);
 		assertEquals(1, controller.buscarTodos().size());
 		controller.deletarTodos();

@@ -127,10 +127,10 @@ public class CargoController {
 	 * @throws Exception
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
-		if (Validators.isNullObject(novoCargo))
-			throw (new Exception("O objeto não pode ser nulo."));
 		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado)))
 			throw (new Exception("O objeto não existe no banco de dados."));
+		if (Validators.isNullObject(novoCargo))
+			throw (new Exception("O objeto não pode ser nulo."));
 		
 		cargoDAO.update(idObjetoASerAlterado, novoCargo);
 		return true;

@@ -78,7 +78,6 @@ public class GrauInstrucaoControllerTest {
 	
 	@Test(expected = Exception.class)
 	public void testAlterarObjetoIdInexistente() throws Exception {
-		controller.cadastrar("Ensino Superior Completo");
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino básico completo");
 		controller.alterar(2, grauInstrucao);
 	}
