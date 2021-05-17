@@ -49,18 +49,13 @@ public class PostoDeTrabalhoControllerTest{
 		
 		salario = 1800.00;
 		
-		limparTabelas();
+		controller.postoDAO.deleteAll(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		CargoDAO.getInstance(ConnectionHibernate.getSession()).deleteAll();
 		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
-	}
-	
-	public static void limparTabelas() throws SQLException {
-		controller.postoDAO.deleteAll(); 
-		
 	}
 	
 	/**
@@ -70,11 +65,9 @@ public class PostoDeTrabalhoControllerTest{
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		//TODO: Utilizar o novo CargoController ao inves do DAO.
-		
 		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
 				20, 1, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).create(cargo);
+		idCargo = new CargoController().cadastrar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
@@ -86,8 +79,8 @@ public class PostoDeTrabalhoControllerTest{
 	}
 	
 	@Before
-	public void herewegoagain() throws Exception {
-		limparTabelas();
+	public void before() throws Exception {
+		controller.postoDAO.deleteAll(); 
 		
 	}
 	
