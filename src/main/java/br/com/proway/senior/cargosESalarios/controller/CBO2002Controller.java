@@ -102,5 +102,22 @@ public class CBO2002Controller {
 		return cbo2002DAO.update(codigoCBO, cboRecuperado);
 	}
 	
+	/**
+	 * Deletar um CBO 2002.
+	 * 
+	 * Metodo exclui o registro do CBO 2002, conforme codigo informado. Antes de realizar o procedimento, 
+	 * verifica se o registro realmente existe no banco de dados.
+	 * 
+	 * @param codigoCBO codigo do CBO 2002 que sera excluido.
+	 * @return boolean true, caso haja a exclusao.
+	 * @throws Exception
+	 */
+	public boolean deletarCBO2002(Integer codigoCBO) throws Exception {
+		if(Validators.isNullObject(cbo2002DAO.retrieve(codigoCBO))) {
+			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
+		}
+		cbo2002DAO.delete(codigoCBO);
+		return true;
+	}
 	
 }
