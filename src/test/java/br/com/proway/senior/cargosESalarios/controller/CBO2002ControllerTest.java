@@ -66,4 +66,18 @@ public class CBO2002ControllerTest {
 		assertEquals(0.0, cboRecuperado.get(0).getPercentualPericulosidade(), 0.01);
 	}
 	
+	@Test
+	public void testAtualizarCBO2002() throws Exception {
+		Integer codigoCadastrado = cboController.cadastrarCBO2002(517105, "Bombeiro", Insalubridade.Zero, 
+				Periculosidade.Zero);
+		String novaDescricao = "Bombeiro de Aeroporto";
+		Insalubridade novaInsalubridade = Insalubridade.Zero;
+		Periculosidade novaPericulosidade = Periculosidade.Trinta;
+		cboController.atualizarCBO2002(codigoCadastrado, novaDescricao, novaInsalubridade, novaPericulosidade);
+		CBO2002Model cboAtualizado = cboController.buscarSetorPorId(codigoCadastrado);
+		assertEquals(novaDescricao, cboAtualizado.getDescricao());
+		assertEquals(novaInsalubridade.getValor(), cboAtualizado.getPercentualInsalubridade(), 0.01);
+		assertEquals(novaPericulosidade.getValor(), cboAtualizado.getPercentualPericulosidade(), 0.01);
+	}
+	
 }
