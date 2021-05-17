@@ -10,19 +10,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
-import utils.Insalubridade;
-import utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 
 /**
  * Classe que testa os metodos da classe {@link CargoController}.

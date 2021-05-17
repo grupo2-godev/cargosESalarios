@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -29,8 +28,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 
-	private static HorasMesDAO instance;
-	private Session session;
+	private static HorasMesDAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe HorasMesDAO.
@@ -38,10 +37,10 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param Session session
 	 * @return HorasMesDAO instance
 	 */
-	public static HorasMesDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new HorasMesDAO(session);
-		return instance;
+	public static HorasMesDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new HorasMesDAO(sessao);
+		return instancia;
 	}
 
 	/**
@@ -49,8 +48,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @param Session session
 	 */
-	private HorasMesDAO(Session session) {
-		this.session = session;
+	private HorasMesDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/**
@@ -61,13 +60,13 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param HorasMesModel horasMes Objeto a ser inserido.
 	 * @return int id Id do registro.
 	 */
-	public int create(HorasMesModel horasMes) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public int criar(HorasMesModel horasMes) {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(horasMes);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(horasMes);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -82,8 +81,8 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param int id
 	 * @return results retorna um objeto HorasMesModel
 	 */
-	public HorasMesModel retrieve(int id) {
-		return session.get(HorasMesModel.class, id);
+	public HorasMesModel buscar(int id) {
+		return this.sessao.get(HorasMesModel.class, id);
 	}
 
 	/**
@@ -96,14 +95,14 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
-	public boolean update(int id, HorasMesModel objetoAlterado) {
-		HorasMesModel original = retrieve(id);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int id, HorasMesModel objetoAlterado) {
+		HorasMesModel original = buscar(id);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setQuantidade(objetoAlterado.getQuantidade());
-		session.update(original);
-		session.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -116,14 +115,14 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param int id Identificao do registro a ser deletado
 	 * @return boolean
 	 */
-	public boolean delete(int id) {
-		HorasMesModel entry = retrieve(id);
+	public boolean deletar(int id) {
+		HorasMesModel entry = buscar(id);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -135,11 +134,11 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @return ArrayList HorasMesModel
 	 */
-	public ArrayList<HorasMesModel> getAll() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<HorasMesModel> buscarTodos() {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
 		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<HorasMesModel> results = query.getResultList();
 		return new ArrayList<HorasMesModel>(results);
 	}
@@ -151,12 +150,12 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = this.sessao.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 }

@@ -11,8 +11,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -27,8 +25,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 
-	private static SetorDAO instance;
-	private Session session;
+	private static SetorDAO instancia;
+	private Session sessao;
 	
 	/**
 	 * Singleton da classe SetorDAO.
@@ -36,10 +34,10 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param Session session
 	 * @return SetorDAO instance
 	 */
-	public static SetorDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new SetorDAO(session);
-		return instance;
+	public static SetorDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new SetorDAO(sessao);
+		return instancia;
 	}
 
 	public SetorDAO() {}
@@ -49,8 +47,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @param Session session
 	 */
-	private SetorDAO(Session session) {
-		this.session = session;
+	private SetorDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 	
 	/***
@@ -61,13 +59,13 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param SetorModel setorModel
 	 * @return id do setor cadastrado
 	 */
-	public int create(SetorModel novoSetor) {
-		if(!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public int criar(SetorModel novoSetor) {
+		if(!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 
-		Integer idCadastrado = (Integer) session.save(novoSetor);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(novoSetor);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -80,8 +78,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param int idSetor
 	 * @return SetorModel
 	 */
-	public SetorModel retrieve(int idSetor) {
-		return session.get(SetorModel.class, idSetor);
+	public SetorModel buscar(int idSetor) {
+		return this.sessao.get(SetorModel.class, idSetor);
 	}
 
 	/**
@@ -94,11 +92,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param String nomeSetor
 	 * @return SetorModel
 	 */
-	public ArrayList<SetorModel> retrieveByName(String nomeSetor) {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<SetorModel> buscarPorNome(String nomeSetor) {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		Expression registroSetor = (Expression) root.get("nomeSetor");
 		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomeSetor + "%'"));
 		List<SetorModel> resultado = query.getResultList();
@@ -115,15 +113,15 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param SetorModel setorModel
 	 * @return boolean
 	 */
-	public boolean update(int idSetor, SetorModel setorAtualizado) {
-		SetorModel original = retrieve(idSetor);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int idSetor, SetorModel setorAtualizado) {
+		SetorModel original = buscar(idSetor);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setNomeSetor(setorAtualizado.getNomeSetor());
 		original.setIdPermissao(setorAtualizado.getIdPermissao());
-		session.update(original);
-		session.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -135,14 +133,14 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param int idSetor identificacao do setor que sera deletado
 	 * @return boolean
 	 */
-	public boolean delete(int idSetor) {
-		SetorModel entry = retrieve(idSetor);
+	public boolean deletar(int idSetor) {
+		SetorModel entry = buscar(idSetor);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -154,11 +152,11 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @return ArrayList SetorModel
 	 */
-	public ArrayList<SetorModel> getAll() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<SetorModel> buscarTodos() {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<SetorModel> results = query.getResultList();
 		return new ArrayList<SetorModel>(results);
 	}
@@ -170,12 +168,12 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM setor").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = this.sessao.createSQLQuery("DELETE FROM setor").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
@@ -49,18 +49,13 @@ public class PostoDeTrabalhoControllerTest{
 		
 		salario = 1800.00;
 		
-		limparTabelas();
+		controller.postoDAO.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstance(ConnectionHibernate.getSession()).deleteAll();
+		CargoDAO.getInstancia(ConexaoHibernate.getSessao()).deletarTodos();
 		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
-	}
-	
-	public static void limparTabelas() throws SQLException {
-		controller.postoDAO.deleteAll(); 
-		
 	}
 	
 	/**
@@ -70,24 +65,22 @@ public class PostoDeTrabalhoControllerTest{
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		//TODO: Utilizar o novo CargoController ao inves do DAO.
-		
 		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
 				20, 1, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).create(cargo);
+		idCargo = new CargoController().cadastrar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		Cargo = CargoDAO.getInstance(ConnectionHibernate.getSession()).retrieve(idCargo);
+		Cargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).buscar(idCargo);
 		Setor = new SetorController().buscarSetorPorId(idSetor);
 		Setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		Nivel = new NivelController().buscarNivel(idNivel);
 	}
 	
 	@Before
-	public void herewegoagain() throws Exception {
-		limparTabelas();
+	public void before() throws Exception {
+		controller.postoDAO.deletarTodos(); 
 		
 	}
 	

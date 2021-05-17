@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import utils.Insalubridade;
-import utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 
 /**
  * Classe CBO2002ControllerTest

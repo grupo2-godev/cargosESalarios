@@ -2,22 +2,22 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o HorasMesDAO.
  * 
-* @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5* 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  */
 public class HorasMesController {
 
-	HorasMesDAO horasMesDAO = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+	HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido no BD.
-	 * () Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.
+	 * Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.
 	 * 
 	 * @param quantidade : String
 	 * @return Integer : id do objeto correspondente no BD
@@ -25,18 +25,18 @@ public class HorasMesController {
 	 */
 	public Integer cadastrarHorasMes(String quantidade) throws Exception {
 		quantidade = quantidade.replaceAll( "," , "." );
-		if(!Validators.onlyValidNumber(quantidade)) {
+		if(!Validadores.apenasNumerosValidos(quantidade)) {
 			throw(new Exception("Informação passada incorreta"));
 		}
 		
 		Double quantidadeDouble = Double.parseDouble(quantidade);
 		HorasMesModel horaMesModel = new HorasMesModel(quantidadeDouble);
-		return horasMesDAO.create(horaMesModel);
+		return horasMesDAO.criar(horaMesModel);
 	} 
 	
 	public Integer cadastrarHorasMes(Double quantidade) {			
 		HorasMesModel horaMesModel = new HorasMesModel(quantidade);
-		return horasMesDAO.create(horaMesModel);
+		return horasMesDAO.criar(horaMesModel);
 	} 
 	
 	/**
@@ -50,10 +50,10 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public HorasMesModel buscarHorasMes(int id) throws Exception {
-		if(horasMesDAO.retrieve(id) == null) {
+		if(horasMesDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.retrieve(id);
+		return horasMesDAO.buscar(id);
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean atualizarHorasMes(int id, HorasMesModel objetoAlterado) throws Exception {
-		HorasMesModel original = horasMesDAO.retrieve(id);
+		HorasMesModel original = horasMesDAO.buscar(id);
 		if(original == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
@@ -85,7 +85,7 @@ public class HorasMesController {
 		if(compareDouble == 0) {
 			return false;
 		}
-		return horasMesDAO.update(id, objetoAlterado);
+		return horasMesDAO.atualizar(id, objetoAlterado);
 	}
 	
 	/**
@@ -99,28 +99,28 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean deletarHorasMes(int id) throws Exception {
-		if(horasMesDAO.retrieve(id) == null) {
+		if(horasMesDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.delete(id);
+		return horasMesDAO.deletar(id);
 	}
 	
 	/**
-	 * Retorna todas as entradas de HorasMesModels no BD em uma ArrayList;
+	 * Retorna todas as entradas de HorasMesModels no BD em uma ArrayList.
 	 * 
 	 * @return ArrayList<HorasMesModel> : lista de entradas
 	 */
 	public ArrayList<HorasMesModel> buscarTodosHorasMes(){
-		return horasMesDAO.getAll();
+		return horasMesDAO.buscarTodos();
 	}
 	
 	/**
-	 * Deleta todas as entradas de HorasMesModels no BD;
+	 * Deleta todas as entradas de HorasMesModels no BD.
 	 * 
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosHorasMes() {
-		return horasMesDAO.deleteAll();
+		return horasMesDAO.deletarTodos();
 	}
 	
 	

@@ -13,30 +13,44 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
-public class ConnectionHibernate {
-	private static SessionFactory sessionFactory;
+
+/**
+ * Classe ConexaoHibernate.
+ * 
+ * Classe de conexao com o banco com o banco de dados Postgres.
+ * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
+ */
+
+public class ConexaoHibernate {
 	
-	private static String dbPassword = "admin";
+	private static SessionFactory sessaoFactory;
+	
+	private static String senha = "admin";
 	/**
 	 * Define a senha a ser utilizada na conexao com o banco de dados.
 	 * Por padrao a senha esta definida como "admin"
 	 * @param pass - Novo password
 	 */
-	public static void setPassword(String pass) {dbPassword = pass;}
+	public static void setSenha(String novaSenha) {senha = novaSenha;}
 
 	/**
 	 * Exclui a instancia da Factory de Session para que possamos instancia-la novamente.
 	 */
-	public static void clearFactory() {sessionFactory = null;}
+	public static void limparFactory() {sessaoFactory = null;}
 
-	private static Session session;
+	private static Session sessao;
 
-	private static SessionFactory buildSessionFactory() {
+	private static SessionFactory construirSessaoFactory() {
 		try {
 			return new Configuration().setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/grupo2")
 					.setProperty("hibernate.connection.username", "postgres")
-					.setProperty("hibernate.connection.password", dbPassword)
+					.setProperty("hibernate.connection.password", senha)
 					.setProperty("hibernate.jdbc.time_zone", "UTC")
 					.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.show_sql", "true")
@@ -57,21 +71,20 @@ public class ConnectionHibernate {
 		}
 	}
 
-	public static SessionFactory getSessionFactory() {
-		if (sessionFactory == null)
-			sessionFactory = buildSessionFactory();
-		return sessionFactory;
+	public static SessionFactory getSessaoFactory() {
+		if (sessaoFactory == null)
+			sessaoFactory = construirSessaoFactory();
+		return sessaoFactory;
 	}
 
-	public static void shutdown() {
-		session.close();
-		getSessionFactory().close();
+	public static void fecharSessao() {
+		getSessaoFactory().close();
 	}
 
-	public static Session getSession() {
-		getSessionFactory();
-		if (session == null)
-			session = sessionFactory.openSession();
-		return session;
+	public static Session getSessao() {
+		getSessaoFactory();
+		if (sessao == null)
+			sessao = sessaoFactory.openSession();
+		return sessao;
 	}
 }

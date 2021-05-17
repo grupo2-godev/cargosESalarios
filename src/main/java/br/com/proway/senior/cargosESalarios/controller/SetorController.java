@@ -2,10 +2,10 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Classe SetorController
@@ -20,7 +20,7 @@ import utils.Validators;
 
 public class SetorController {
 
-	SetorDAO setorDAO = SetorDAO.getInstance(ConnectionHibernate.getSession());
+	SetorDAO setorDAO = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra na tabela setor um objeto do tipo {@link SetorModel}.
@@ -33,7 +33,7 @@ public class SetorController {
 	 * @return Integer|null id do setor se foi possivel ser criado.
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		ArrayList<SetorModel> setoresConsultados = setorDAO.retrieveByName(nomeSetor);
+		ArrayList<SetorModel> setoresConsultados = setorDAO.buscarPorNome(nomeSetor);
 		for (SetorModel setorModel : setoresConsultados) {
 			if (setorModel.getNomeSetor().equals(nomeSetor)) {
 				System.out.println("Setor informado já cadastrado.");
@@ -42,7 +42,7 @@ public class SetorController {
 		}
 
 		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
-		int idCadastrado = setorDAO.create(novoSetor);
+		int idCadastrado = setorDAO.criar(novoSetor);
 		return idCadastrado;
 	}
 
@@ -55,7 +55,7 @@ public class SetorController {
 	 * @return SetorModel objeto localizado ou null caso nao conste no banco.
 	 */
 	public SetorModel buscarSetorPorId(Integer idSetor) {
-		return setorDAO.retrieve(idSetor);
+		return setorDAO.buscar(idSetor);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class SetorController {
 	 * @return rrayList SetorModel lista de registros localizados.
 	 */
 	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
-		return setorDAO.retrieveByName(nomeSetor);
+		return setorDAO.buscarPorNome(nomeSetor);
 	}
 
 	/**
@@ -82,16 +82,16 @@ public class SetorController {
 	 * @param novoNome
 	 * @paramar novaIdPermissão
 	 * @return boolean
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
-		SetorModel setorRecuperado = setorDAO.retrieve(idSetor);
-		if(Validators.isNullObject(setorRecuperado)) {
+		SetorModel setorRecuperado = setorDAO.buscar(idSetor);
+		if (Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
 		setorRecuperado.setNomeSetor(novoNome);
 		setorRecuperado.setIdPermissao(novaIdPermissao);
-		return setorDAO.update(idSetor, setorRecuperado);
+		return setorDAO.atualizar(idSetor, setorRecuperado);
 	}
 
 	/**
@@ -101,13 +101,13 @@ public class SetorController {
 	 * 
 	 * @param Integer idSetor Identificacao do setor que sera deletado.
 	 * @return boolean
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean deletarSetor(Integer idSetor) throws Exception {
-		if(Validators.isNullObject(setorDAO.retrieve(idSetor))) {
+		if (Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
-		return setorDAO.delete(idSetor);
+		return setorDAO.deletar(idSetor);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class SetorController {
 	 * @return ArrayList SetorModel lista de todos os setores cadastrados.
 	 */
 	public ArrayList<SetorModel> buscarTodosSetores() {
-		return setorDAO.getAll();
+		return setorDAO.buscarTodos();
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class SetorController {
 	 * cadastrados.
 	 */
 	public void deletarTodosSetores() {
-		setorDAO.deleteAll();
+		setorDAO.deletarTodos();
 	}
 
 }

@@ -12,33 +12,33 @@ public class ConnectionHibernateTest {
 
 	@Before
 	public void init() {
-		ConnectionHibernate.setPassword("admin");
+		ConexaoHibernate.setSenha("admin");
 	}
 	
 	@Test
 	public void testShutdown() throws Exception {
-		ConnectionHibernate.getSession();
-		ConnectionHibernate.shutdown();
-		assertFalse(ConnectionHibernate.getSession().isConnected());
+		ConexaoHibernate.getSessao();
+		ConexaoHibernate.fecharSessao();
+		assertFalse(ConexaoHibernate.getSessao().isConnected());
 	}
 	
 	@Test
 	public void testFactory() throws Exception {
-		SessionFactory fac = ConnectionHibernate.getSessionFactory();
+		SessionFactory fac = ConexaoHibernate.getSessaoFactory();
 		assertTrue(fac.isOpen());
 	}
 	
 	@Test
 	public void testConstrutor() {
-		ConnectionHibernate con = new ConnectionHibernate();
+		ConexaoHibernate con = new ConexaoHibernate();
 		assertNotNull(con);
 	}
 	
 	@Test (expected = ExceptionInInitializerError.class)
 	public void testFalhaAoCriarConnection() throws Exception {
-		ConnectionHibernate.clearFactory(); // Para podermos rodar o FactoryBuilder
-		ConnectionHibernate.setPassword("oPiorPassword"); // Password errado vai causar a excessao
-		ConnectionHibernate.getSessionFactory(); // Vamos obter o ExceptionInInitializerError esperado
+		ConexaoHibernate.limparFactory(); // Para podermos rodar o FactoryBuilder
+		ConexaoHibernate.setSenha("oPiorPassword"); // Password errado vai causar a excessao
+		ConexaoHibernate.getSessaoFactory(); // Vamos obter o ExceptionInInitializerError esperado
 		
 	}
 

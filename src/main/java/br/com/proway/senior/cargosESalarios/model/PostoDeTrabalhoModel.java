@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,13 +30,13 @@ public class PostoDeTrabalhoModel {
 	private Integer idPosto;
 	private String nomePosto;
 	
-	@OneToOne(cascade=CascadeType.REFRESH)
+	@ManyToOne(cascade=CascadeType.REFRESH)
 	private CargoModel cargo;
 	
-	@OneToOne(cascade=CascadeType.REFRESH)
+	@ManyToOne(cascade=CascadeType.REFRESH)
 	private SetorModel setor;
 	
-	@OneToOne(cascade=CascadeType.REFRESH)
+	@ManyToOne(cascade=CascadeType.REFRESH)
 	private NivelModel nivel;
 	
 	private Double salario;

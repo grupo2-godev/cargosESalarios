@@ -2,10 +2,10 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Controller que interage com o GrauIntrucaoDAO.
@@ -15,7 +15,7 @@ import utils.Validators;
  */
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConnectionHibernate.getSession());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
 
 	/**
 	 * Cadastra um objeto do tipo {@link GrauInstrucaoModel} no banco de dados.
@@ -28,12 +28,12 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public Integer cadastrar(String grauInstrucao) throws Exception {
-		if (!Validators.onlyValidChars(grauInstrucao)) {
+		if (!Validadores.apenasCaracteresValidos(grauInstrucao)) {
 			throw (new Exception("O grau de instrução possui caracteres inválidos."));
 		}
 		GrauInstrucaoModel grauInstrucaoModel = new GrauInstrucaoModel();
 		grauInstrucaoModel.setNome(grauInstrucao);
-		return grauInstrucaoDAO.create(grauInstrucaoModel);
+		return grauInstrucaoDAO.criar(grauInstrucaoModel);
 	}
 
 	/**
@@ -47,10 +47,10 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public GrauInstrucaoModel buscarPorId(Integer id) throws Exception {
-		if (Validators.isZeroOrNull(id)) {
+		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
-		return grauInstrucaoDAO.retrieve(id);
+		return grauInstrucaoDAO.buscar(id);
 	}
 
 	/**
@@ -65,10 +65,10 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarPorNomeQueContenha(String nome) throws Exception {
-		if (!Validators.onlyValidChars(nome)) {
+		if (!Validadores.apenasCaracteresValidos(nome)) {
 			throw (new Exception("A palavra de consulta não pode ter caracteres especiais."));
 		}
-		return grauInstrucaoDAO.retrieveNameCountains(nome);
+		return grauInstrucaoDAO.buscarPorNome(nome);
 	}
 
 	/**
@@ -87,14 +87,14 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
-		if (Validators.isNullObject(novoObjeto.getNome())) {
+		if (Validadores.ehObjetoNulo(novoObjeto.getNome())) {
 			throw (new Exception("O objeto não pode ser nulo."));
 		}
-		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado))) {
+		if (Validadores.ehObjetoNulo(this.buscarPorId(idObjetoASerAlterado))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 
-		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
+		grauInstrucaoDAO.atualizar(idObjetoASerAlterado, novoObjeto);
 		return true;
 	}
 
@@ -111,13 +111,13 @@ public class GrauInstrucaoController {
 	 * @throws Exception
 	 */
 	public boolean deletarPorId(Integer id) throws Exception {
-		if (Validators.isZeroOrNull(id)) {
+		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O id não pode ser nulo ou igual a zero."));
 		}
-		if (Validators.isNullObject(this.buscarPorId(id))) {
+		if (Validadores.ehObjetoNulo(this.buscarPorId(id))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		grauInstrucaoDAO.delete(id);
+		grauInstrucaoDAO.deletar(id);
 		return true;
 	}
 
@@ -128,14 +128,14 @@ public class GrauInstrucaoController {
 	 *         {@link GrauInstrucaoModel}
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
-		return grauInstrucaoDAO.getAll();
+		return grauInstrucaoDAO.buscarTodos();
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
 	public void deletarTodos() {
-		grauInstrucaoDAO.deleteAll();
+		grauInstrucaoDAO.deletarTodos();
 	}
 
 }
