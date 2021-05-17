@@ -78,7 +78,7 @@ public class GrauInstrucaoController {
 	 * tambem se o objeto recebido no parametro nao eh nulo. Localizando o objeto no
 	 * banco, efetua a alteracao para o objeto recebido no parametro.
 	 * 
-	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado
+	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado.
 	 * @param novoObjeto           GrauInstrucaoModel Objeto que possui as
 	 *                             alteracoes que substituirao o objeto do banco de
 	 *                             dados.
@@ -93,7 +93,7 @@ public class GrauInstrucaoController {
 		if (Validators.isNullObject(this.buscarPorId(idObjetoASerAlterado))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		
+
 		grauInstrucaoDAO.update(idObjetoASerAlterado, novoObjeto);
 		return true;
 	}
@@ -108,7 +108,7 @@ public class GrauInstrucaoController {
 	 * @param id Integer Id do objeto a ser deletado.
 	 * @return boolean Retorna true caso o objeto seja localizado no banco de dados.
 	 *         Retorna false caso o id seja invalido conforme validacao.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean deletarPorId(Integer id) throws Exception {
 		if (Validators.isZeroOrNull(id)) {
@@ -132,7 +132,7 @@ public class GrauInstrucaoController {
 	}
 
 	/**
-	 * Deleta todos os registros da tabela.
+	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
 	public void deletarTodos() {
 		grauInstrucaoDAO.deleteAll();
