@@ -42,7 +42,7 @@ public class CBO2002Controller {
 		if (Validators.isCBO2002Valid(codigoCBO) == false) {
 			throw new Exception("Código de CBO 2002 informado inválido.");
 		} 
-		if (!Validators.isNullObject(cbo2002DAO.retrieve(codigoCBO))) {
+		if (!Validators.isNullObject(cbo2002DAO.buscar(codigoCBO))) {
 			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
 		if (!Validators.onlyValidChars(descricao)) {
@@ -50,7 +50,7 @@ public class CBO2002Controller {
 		} 
 			CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
 					percentualPericulosidade.getValor());
-			cbo2002DAO.create(novoCBO2002);
+			cbo2002DAO.criar(novoCBO2002);
 			return codigoCBO;
 	}
 
@@ -64,7 +64,7 @@ public class CBO2002Controller {
 	 * @return CBO2002Model objeto localizado ou null caso nao conste no banco.
 	 */
 	public CBO2002Model buscarSetorPorId(Integer codigoCBO) {
-		return cbo2002DAO.retrieve(codigoCBO);
+		return cbo2002DAO.buscar(codigoCBO);
 	}
 	
 	
@@ -99,14 +99,14 @@ public class CBO2002Controller {
 	 */
 	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade, 
 			Periculosidade novaPericulosidade) throws Exception {
-		CBO2002Model cboRecuperado = cbo2002DAO.retrieve(codigoCBO);
+		CBO2002Model cboRecuperado = cbo2002DAO.buscar(codigoCBO);
 		if(Validators.isNullObject(cboRecuperado)) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
 		cboRecuperado.setDescricao(novaDescricao);
 		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
 		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());
-		return cbo2002DAO.update(codigoCBO, cboRecuperado);
+		return cbo2002DAO.atualizar(codigoCBO, cboRecuperado);
 	}
 	
 	/**
@@ -120,10 +120,10 @@ public class CBO2002Controller {
 	 * @throws Exception
 	 */
 	public boolean deletarCBO2002(Integer codigoCBO) throws Exception {
-		if(Validators.isNullObject(cbo2002DAO.retrieve(codigoCBO))) {
+		if(Validators.isNullObject(cbo2002DAO.buscar(codigoCBO))) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
-		cbo2002DAO.delete(codigoCBO);
+		cbo2002DAO.deletar(codigoCBO);
 		return true;
 	}
 	
@@ -136,7 +136,7 @@ public class CBO2002Controller {
 	 * @return ArrayList CBO2002Model lista de registros localizados.
 	 */
 	public ArrayList<CBO2002Model> buscarTodosCBO2002() {
-		return cbo2002DAO.getAll();
+		return cbo2002DAO.buscarTodos();
 	}
 	
 	/**
@@ -145,7 +145,7 @@ public class CBO2002Controller {
 	 * Realiza a exclusao de todos os registros de CBO 2002 cadastrados no banco de dados.
 	 */
 	public void deletarTodosCBO2002() {
-		cbo2002DAO.deleteAll();
+		cbo2002DAO.deletarTodos();
 	}
 	
 }

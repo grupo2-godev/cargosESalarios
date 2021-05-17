@@ -53,13 +53,13 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deleteAll();
+		CargoDAO.getInstance(ConexaoHibernate.getSessao()).deletarTodos();
 		
 		popularTabelas();
 	}
 	
 	public static void limparTabelas() throws SQLException {
-		postoDAO.deleteAll(); 
+		postoDAO.deletarTodos(); 
 		
 	}
 	
@@ -74,12 +74,12 @@ public class PostoDeTrabalhoDAOTest {
 		
 		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
 				20, 1, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).create(cargo);
+		idCargo = CargoDAO.getInstance(ConexaoHibernate.getSessao()).criar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargoRecuperado = CargoDAO.getInstance(ConexaoHibernate.getSessao()).retrieve(idCargo);
+		cargoRecuperado = CargoDAO.getInstance(ConexaoHibernate.getSessao()).buscar(idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);
@@ -96,7 +96,7 @@ public class PostoDeTrabalhoDAOTest {
 	public void testInserirNovoPostoDeTrabalho() throws SQLException {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Gerente Gestão de Pessoas", cargo, setor, nivel, 
 				salario);
-		Integer idPostoCadastrado = postoDAO.create(novoPosto);
+		Integer idPostoCadastrado = postoDAO.criar(novoPosto);
 		Object postoConsultado = ConexaoHibernate.getSessao().get(PostoDeTrabalhoModel.class, idPostoCadastrado);
 		assertEquals(idPostoCadastrado, ((PostoDeTrabalhoModel) postoConsultado).getIdPosto());
 	}
@@ -104,8 +104,8 @@ public class PostoDeTrabalhoDAOTest {
 	@Test
 	public void testBuscarPostoPorID() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor ERP", cargo, setor, nivel, 2900.00);
-		Integer idPostoCadastrado = postoDAO.create(novoPosto);
-		PostoDeTrabalhoModel postoConsultado = postoDAO.retrieve(idPostoCadastrado);
+		Integer idPostoCadastrado = postoDAO.criar(novoPosto);
+		PostoDeTrabalhoModel postoConsultado = postoDAO.buscar(idPostoCadastrado);
 		assertEquals(novoPosto.getNomePosto(), postoConsultado.getNomePosto());
 		assertEquals(novoPosto.getCargo().getIdCargo(), postoConsultado.getCargo().getIdCargo());
 		assertEquals(novoPosto.getSetor().getId(), postoConsultado.getSetor().getId());
@@ -117,7 +117,7 @@ public class PostoDeTrabalhoDAOTest {
 	public void testBuscarPostoPorNome() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Gestão de Pessoas", cargo, setor, nivel, 
 				2700.00);
-		postoDAO.create(novoPosto);
+		postoDAO.criar(novoPosto);
 		ArrayList<PostoDeTrabalhoModel> listaRetornada = postoDAO.retrieveByName("Analist");
 		assertEquals(novoPosto.getNomePosto(), listaRetornada.get(0).getNomePosto());
 		assertEquals(novoPosto.getCargo().getIdCargo(), listaRetornada.get(0).getCargo().getIdCargo());
@@ -131,9 +131,9 @@ public class PostoDeTrabalhoDAOTest {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("AnalistaFinanceiroo", cargo, setor, nivel, 2750.00);
 		PostoDeTrabalhoModel postoAlterado = new PostoDeTrabalhoModel("Analista Financeiro", cargo, setor2, nivel, 
 				2800.00);
-		Integer idCriado = postoDAO.create(novoPosto);
-		postoDAO.update(idCriado, postoAlterado);
-		PostoDeTrabalhoModel atualizado = postoDAO.retrieve(idCriado);
+		Integer idCriado = postoDAO.criar(novoPosto);
+		postoDAO.atualizar(idCriado, postoAlterado);
+		PostoDeTrabalhoModel atualizado = postoDAO.buscar(idCriado);
 		assertEquals(novoPosto.getNomePosto(), atualizado.getNomePosto());
 		assertEquals(novoPosto.getCargo().getIdCargo(), atualizado.getCargo().getIdCargo());
 		assertEquals(novoPosto.getSetor().getId(), atualizado.getSetor().getId());
@@ -143,12 +143,12 @@ public class PostoDeTrabalhoDAOTest {
 
 	@Test
 	public void testDeletarPostoDeTrabalho() {
-		int size = postoDAO.getAll().size();
+		int size = postoDAO.buscarTodos().size();
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Gerente de Marketing Marcas", cargo, setor, nivel, 
 				9000.0);
-		int idCriada = postoDAO.create(novoPosto);
-		postoDAO.delete(idCriada);
-		assertEquals(size, postoDAO.getAll().size());
+		int idCriada = postoDAO.criar(novoPosto);
+		postoDAO.deletar(idCriada);
+		assertEquals(size, postoDAO.buscarTodos().size());
 	}
 
 	@Test
@@ -157,22 +157,22 @@ public class PostoDeTrabalhoDAOTest {
 				6000.0);
 		PostoDeTrabalhoModel novoPosto2 = new PostoDeTrabalhoModel("Coordenador de Atendimento", cargo, setor, nivel, 
 				6500.0);
-		postoDAO.create(novoPosto1);
-		postoDAO.create(novoPosto2);
-		assertFalse(postoDAO.getAll().isEmpty());
+		postoDAO.criar(novoPosto1);
+		postoDAO.criar(novoPosto2);
+		assertFalse(postoDAO.buscarTodos().isEmpty());
 	}
 
 	@Test
 	public void testDeletarTodosOsPostosDeTrabalho() {
 		PostoDeTrabalhoModel novoPosto1 = new PostoDeTrabalhoModel("Técnico(a) Segurança do Trabalho", cargo, setor, 
 				nivel, 6000.0);
-		postoDAO.create(novoPosto1);
-		postoDAO.deleteAll();
-		assertTrue(postoDAO.getAll().isEmpty());
+		postoDAO.criar(novoPosto1);
+		postoDAO.deletarTodos();
+		assertTrue(postoDAO.buscarTodos().isEmpty());
 	}
 
 	@After
 	public void limparTabela() throws SQLException {
-		postoDAO.deleteAll();
+		postoDAO.deletarTodos();
 	}
 }

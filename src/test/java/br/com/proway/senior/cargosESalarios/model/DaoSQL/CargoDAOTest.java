@@ -29,7 +29,7 @@ public class CargoDAOTest {
 	public void testCreate() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-		Integer idObjetoCadastrado = cargoDAO.create(cargo);
+		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
 		Object cargoConsultado = ConexaoHibernate.getSessao().get(CargoModel.class, idObjetoCadastrado);
 		assertEquals(idObjetoCadastrado, ((CargoModel) cargoConsultado).getIdCargo());
 	}
@@ -38,8 +38,8 @@ public class CargoDAOTest {
 	public void testRetrieveId() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-		Integer idObjetoCadastrado = cargoDAO.create(cargo);
-		CargoModel cargoConsultado = cargoDAO.retrieve(idObjetoCadastrado);
+		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
+		CargoModel cargoConsultado = cargoDAO.buscar(idObjetoCadastrado);
 		assertEquals(cargo.getNomeCargo(), cargoConsultado.getNomeCargo());
 	}
 
@@ -47,23 +47,23 @@ public class CargoDAOTest {
 	public void testUpdate() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor 1", true, 1);
-		Integer idObjetoCadastrado = cargoDAO.create(cargo);
+		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
 		CargoModel novoCargo = new CargoModel("Inspetor", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor 2", true, 1);
-		cargoDAO.update(idObjetoCadastrado, novoCargo);
-		CargoModel cargoAlterado = cargoDAO.retrieve(idObjetoCadastrado);
+		cargoDAO.atualizar(idObjetoCadastrado, novoCargo);
+		CargoModel cargoAlterado = cargoDAO.buscar(idObjetoCadastrado);
 		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
 	}
 	
 	@Test
 	public void testDelete() {
-		int totalRegistros = cargoDAO.getAll().size();
+		int totalRegistros = cargoDAO.buscarTodos().size();
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor 1", true, 1);
-		Integer idObjetoCadastrado = cargoDAO.create(cargo);
-		assertEquals(totalRegistros + 1, cargoDAO.getAll().size());
-		cargoDAO.delete(idObjetoCadastrado);
-		assertEquals(totalRegistros, cargoDAO.getAll().size());
+		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
+		assertEquals(totalRegistros + 1, cargoDAO.buscarTodos().size());
+		cargoDAO.deletar(idObjetoCadastrado);
+		assertEquals(totalRegistros, cargoDAO.buscarTodos().size());
 	}
 	
 	@Test
@@ -72,9 +72,9 @@ public class CargoDAOTest {
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
 		CargoModel cargo2 = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-		cargoDAO.create(cargo);
-		cargoDAO.create(cargo2);
-		ArrayList<CargoModel> lista = cargoDAO.getAll();
+		cargoDAO.criar(cargo);
+		cargoDAO.criar(cargo2);
+		ArrayList<CargoModel> lista = cargoDAO.buscarTodos();
 		assertEquals(2, lista.size());
 	}
 
@@ -82,15 +82,15 @@ public class CargoDAOTest {
 	public void deleteAll() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasmes, grauinstrucao, "12", "Desenvolvedor", true, 1);
-		cargoDAO.create(cargo);
-		assertEquals(1, cargoDAO.getAll().size());
-		cargoDAO.deleteAll();
-		assertEquals(0, cargoDAO.getAll().size());
+		cargoDAO.criar(cargo);
+		assertEquals(1, cargoDAO.buscarTodos().size());
+		cargoDAO.deletarTodos();
+		assertEquals(0, cargoDAO.buscarTodos().size());
 	}
 
 	@Before
 	public void limparTabela() throws SQLException {
-		cargoDAO.deleteAll();
-		assertEquals(0, cargoDAO.getAll().size());
+		cargoDAO.deletarTodos();
+		assertEquals(0, cargoDAO.buscarTodos().size());
 	}
 }

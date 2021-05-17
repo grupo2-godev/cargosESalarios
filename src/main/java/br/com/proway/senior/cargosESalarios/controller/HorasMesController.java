@@ -31,12 +31,12 @@ public class HorasMesController {
 		
 		Double quantidadeDouble = Double.parseDouble(quantidade);
 		HorasMesModel horaMesModel = new HorasMesModel(quantidadeDouble);
-		return horasMesDAO.create(horaMesModel);
+		return horasMesDAO.criar(horaMesModel);
 	} 
 	
 	public Integer cadastrarHorasMes(Double quantidade) {			
 		HorasMesModel horaMesModel = new HorasMesModel(quantidade);
-		return horasMesDAO.create(horaMesModel);
+		return horasMesDAO.criar(horaMesModel);
 	} 
 	
 	/**
@@ -50,10 +50,10 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public HorasMesModel buscarHorasMes(int id) throws Exception {
-		if(horasMesDAO.retrieve(id) == null) {
+		if(horasMesDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.retrieve(id);
+		return horasMesDAO.buscar(id);
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean atualizarHorasMes(int id, HorasMesModel objetoAlterado) throws Exception {
-		HorasMesModel original = horasMesDAO.retrieve(id);
+		HorasMesModel original = horasMesDAO.buscar(id);
 		if(original == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
@@ -85,7 +85,7 @@ public class HorasMesController {
 		if(compareDouble == 0) {
 			return false;
 		}
-		return horasMesDAO.update(id, objetoAlterado);
+		return horasMesDAO.atualizar(id, objetoAlterado);
 	}
 	
 	/**
@@ -99,10 +99,10 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean deletarHorasMes(int id) throws Exception {
-		if(horasMesDAO.retrieve(id) == null) {
+		if(horasMesDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.delete(id);
+		return horasMesDAO.deletar(id);
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class HorasMesController {
 	 * @return ArrayList<HorasMesModel> : lista de entradas
 	 */
 	public ArrayList<HorasMesModel> buscarTodosHorasMes(){
-		return horasMesDAO.getAll();
+		return horasMesDAO.buscarTodos();
 	}
 	
 	/**
@@ -120,7 +120,7 @@ public class HorasMesController {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosHorasMes() {
-		return horasMesDAO.deleteAll();
+		return horasMesDAO.deletarTodos();
 	}
 	
 	

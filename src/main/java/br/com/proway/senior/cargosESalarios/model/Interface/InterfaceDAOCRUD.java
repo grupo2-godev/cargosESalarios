@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 public interface InterfaceDAOCRUD<T> {
 	
-		public int create(T obj);
+		public int criar(T obj);
 
-		public T retrieve(int id);
+		public T buscar(int id);
 
-		public boolean update(int id, T obj);
+		public boolean atualizar(int id, T obj);
 
-		public boolean delete(int id);
+		public boolean deletar(int id);
 		
-		public ArrayList<T> getAll();
+		public ArrayList<T> buscarTodos();
 		
-		public boolean deleteAll();
+		public boolean deletarTodos();
 
 	}
 

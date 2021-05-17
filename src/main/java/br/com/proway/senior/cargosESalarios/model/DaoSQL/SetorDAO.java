@@ -61,7 +61,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param SetorModel setorModel
 	 * @return id do setor cadastrado
 	 */
-	public int create(SetorModel novoSetor) {
+	public int criar(SetorModel novoSetor) {
 		if(!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -80,7 +80,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param int idSetor
 	 * @return SetorModel
 	 */
-	public SetorModel retrieve(int idSetor) {
+	public SetorModel buscar(int idSetor) {
 		return session.get(SetorModel.class, idSetor);
 	}
 
@@ -115,8 +115,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param SetorModel setorModel
 	 * @return boolean
 	 */
-	public boolean update(int idSetor, SetorModel setorAtualizado) {
-		SetorModel original = retrieve(idSetor);
+	public boolean atualizar(int idSetor, SetorModel setorAtualizado) {
+		SetorModel original = buscar(idSetor);
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -135,8 +135,8 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * @param int idSetor identificacao do setor que sera deletado
 	 * @return boolean
 	 */
-	public boolean delete(int idSetor) {
-		SetorModel entry = retrieve(idSetor);
+	public boolean deletar(int idSetor) {
+		SetorModel entry = buscar(idSetor);
 
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -154,7 +154,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @return ArrayList SetorModel
 	 */
-	public ArrayList<SetorModel> getAll() {
+	public ArrayList<SetorModel> buscarTodos() {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<SetorModel> criteria = criteriaBuilder.createQuery(SetorModel.class);
 		Root<SetorModel> root = criteria.from(SetorModel.class);
@@ -170,7 +170,7 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}

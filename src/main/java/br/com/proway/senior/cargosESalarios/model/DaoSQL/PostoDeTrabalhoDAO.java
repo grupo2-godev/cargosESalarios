@@ -61,7 +61,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return Id do posto de trabalho cadastrado
 	 */
-	public int create(PostoDeTrabalhoModel postoModel) {
+	public int criar(PostoDeTrabalhoModel postoModel) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -79,7 +79,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param int idPosto
 	 * @return PostoDeTrabalhoModel
 	 */
-	public PostoDeTrabalhoModel retrieve(int idPosto) {
+	public PostoDeTrabalhoModel buscar(int idPosto) {
 		return session.get(PostoDeTrabalhoModel.class, idPosto);
 	}
 
@@ -114,8 +114,8 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return boolean
 	 */
-	public boolean update(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
-		PostoDeTrabalhoModel original = retrieve(idPosto);
+	public boolean atualizar(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
+		PostoDeTrabalhoModel original = buscar(idPosto);
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -137,8 +137,8 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param int idPosto
 	 * @return boolean
 	 */
-	public boolean delete(int idPosto) {
-		PostoDeTrabalhoModel entry = retrieve(idPosto);
+	public boolean deletar(int idPosto) {
+		PostoDeTrabalhoModel entry = buscar(idPosto);
 
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -156,7 +156,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * 
 	 * @return ArrayList<PostoDeTrabalhoModel>
 	 */
-	public ArrayList<PostoDeTrabalhoModel> getAll() {
+	public ArrayList<PostoDeTrabalhoModel> buscarTodos() {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
@@ -172,7 +172,7 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}

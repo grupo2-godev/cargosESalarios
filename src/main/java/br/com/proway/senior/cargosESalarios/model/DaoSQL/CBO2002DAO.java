@@ -57,7 +57,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param CBO2002Model Cbo2002 Objeto a ser inserido.
 	 * @return int id Id do registro.
 	 */
-	public int create(CBO2002Model cbo2002) {
+	public int criar(CBO2002Model cbo2002) {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -75,7 +75,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param int codigoCBO
 	 * @return CBO2002Model
 	 */
-	public CBO2002Model retrieve(int codigoCBO2002) {
+	public CBO2002Model buscar(int codigoCBO2002) {
 		CBO2002Model results = session.get(CBO2002Model.class, codigoCBO2002);
 		return results;
 	}
@@ -111,8 +111,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param CBO2002Model cbo2002Alterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
-	public boolean update(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
-		CBO2002Model original = retrieve(codigoCBO2002);
+	public boolean atualizar(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
+		CBO2002Model original = buscar(codigoCBO2002);
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
@@ -133,8 +133,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
 	 * @return boolean
 	 */
-	public boolean delete(int codigoCBO2002) {
-		CBO2002Model entry = retrieve(codigoCBO2002);
+	public boolean deletar(int codigoCBO2002) {
+		CBO2002Model entry = buscar(codigoCBO2002);
 
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
@@ -152,7 +152,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @return ArrayList CBO2002Model
 	 */
-	public ArrayList<CBO2002Model> getAll() {
+	public ArrayList<CBO2002Model> buscarTodos() {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
 		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
@@ -168,7 +168,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
+	public boolean deletarTodos() {
 		if (!session.getTransaction().isActive()) {
 			session.beginTransaction();
 		}
