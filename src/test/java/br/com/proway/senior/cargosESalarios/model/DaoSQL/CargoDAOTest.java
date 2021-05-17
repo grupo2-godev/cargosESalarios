@@ -7,10 +7,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
+import utils.Insalubridade;
+import utils.Periculosidade;
 
 /**
  * Testes referentes aos métodos da classe {@link CargoDAO}.
@@ -19,11 +26,53 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
  */
 public class CargoDAOTest {
 	CargoDAO cargoDAO = CargoDAO.getInstance(ConnectionHibernate.getSession());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstance(ConnectionHibernate.getSession());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstance(ConnectionHibernate.getSession());
+	CBO1994DAO cbo1994DAO = CBO1994DAO.getInstance(ConnectionHibernate.getSession());
+	HorasMesDAO horasMesDAO = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
 
-	Integer grauinstrucao = 0;
-	Integer cbo2002 = 0;
-	Integer cbo1994 = 0;
-	Integer horasmes = 0;
+	LocalDateTime dataCadastro;
+	LocalDateTime dataUltimaRevisao;
+	Integer codigoCbo2002;
+	Integer codigoCbo1994;
+	Integer idHorasMes;
+	Integer idGrauInstrucao;
+	String experienciaMinima;
+	String atribuicoes;
+	Boolean status;
+	Integer idPermissao;
+
+	GrauInstrucaoModel grauInstrucao;
+	CBO2002Model cbo2002;
+	CBO1994Model cbo1994;
+	HorasMesModel horasMes;
+
+	@BeforeClass
+	public void setUpBeforeClass() {
+		cargoDAO.deleteAll();
+		grauInstrucaoDAO.deleteAll();
+		cbo2002DAO.deleteAll();
+		cbo1994DAO.deleteAll();
+		horasMesDAO.deleteAll();
+		
+		popularTabelas();
+	}
+
+	public void popularTabelas() {
+		idGrauInstrucao = grauInstrucaoDAO.create(new GrauInstrucaoModel("Ensino superior completo"));
+		grauInstrucao = grauInstrucaoDAO.retrieve(idGrauInstrucao);
+
+		codigoCbo2002 = cbo2002DAO.create(new CBO2002Model(666666, "Desenvolvedor", Insalubridade.Dez.getValor(),
+				Periculosidade.Trinta.getValor()));
+		cbo2002 = cbo2002DAO.retrieve(codigoCbo2002);
+
+		codigoCbo1994 = cbo1994DAO.create(new CBO1994Model(55555, "Desenvolvedor", Insalubridade.Dez.getValor(),
+				Periculosidade.Trinta.getValor()));
+		cbo1994 = cbo1994DAO.retrieve(codigoCbo1994);
+		
+		idHorasMes = horasMesDAO.create(new HorasMesModel(240d));
+		horasMes = horasMesDAO.retrieve(idHorasMes);
+	}
 
 	@Test
 	public void testCreate() {
@@ -54,7 +103,7 @@ public class CargoDAOTest {
 		CargoModel cargoAlterado = cargoDAO.retrieve(idObjetoCadastrado);
 		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
 	}
-	
+
 	@Test
 	public void testDelete() {
 		int totalRegistros = cargoDAO.getAll().size();
@@ -65,7 +114,7 @@ public class CargoDAOTest {
 		cargoDAO.delete(idObjetoCadastrado);
 		assertEquals(totalRegistros, cargoDAO.getAll().size());
 	}
-	
+
 	@Test
 	public void testGetAll() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
@@ -88,9 +137,4 @@ public class CargoDAOTest {
 		assertEquals(0, cargoDAO.getAll().size());
 	}
 
-	@Before
-	public void limparTabela() throws SQLException {
-		cargoDAO.deleteAll();
-		assertEquals(0, cargoDAO.getAll().size());
-	}
 }
