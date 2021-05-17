@@ -42,7 +42,7 @@ public class CBO2002Controller {
 		if (Validators.isCBO2002Valid(codigoCBO) == false) {
 			throw new Exception("Código de CBO 2002 informado inválido.");
 		} 
-		if (!(cbo2002DAO.retrieve(codigoCBO) == null)) {
+		if (!Validators.isNullObject(cbo2002DAO.retrieve(codigoCBO))) {
 			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
 		if (!Validators.onlyValidChars(descricao)) {
@@ -91,14 +91,18 @@ public class CBO2002Controller {
 	 * Caso o codigo CBO seja diferente, eh recomendado cadastrar novo registro.
 	 * 
 	 * @param codigoCBO codigo de CBO que sera alterado.
-	 * @param novaDescricao
-	 * @param novaInsalubridade
-	 * @param novaPericulosidade
-	 * @return
+	 * @param novaDescricao.
+	 * @param novaInsalubridade.
+	 * @param novaPericulosidade.
+	 * @return boolean true, se o registro foi atualizado.
+	 * @throws Exception 
 	 */
 	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade, 
-			Periculosidade novaPericulosidade) {
+			Periculosidade novaPericulosidade) throws Exception {
 		CBO2002Model cboRecuperado = cbo2002DAO.retrieve(codigoCBO);
+		if(Validators.isNullObject(cboRecuperado)) {
+			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
+		}
 		cboRecuperado.setDescricao(novaDescricao);
 		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
 		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());
