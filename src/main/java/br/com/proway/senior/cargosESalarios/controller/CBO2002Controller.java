@@ -65,8 +65,18 @@ public class CBO2002Controller {
 	}
 	
 	
+	/**
+	 * Buscar CBO 2002 por descricao.
+	 * 
+	 * Realiza a busca do CBO 2002 conforme nome informado e retorna a lista de objetos
+	 * CBO2002Model localizados. O texto pode ser parcial, pois ira buscar no banco todos
+	 * os registros que contenham o texto informado.
+	 * 
+	 * @param descricaoCBO2002 descricao | nome parcial do CBO 2002 que esta sendo procurado.
+	 * @return ArrayList CBO2002Model lista de CBO 2002 localizados.
+	 */
 	public ArrayList<CBO2002Model> buscarCBO2002PorNome(String descricaoCBO2002) {
-		return cbo2002DAO.
+		return cbo2002DAO.retrieveByName(descricaoCBO2002);
 	}
 
 }
