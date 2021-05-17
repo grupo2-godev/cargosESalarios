@@ -1,14 +1,22 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.BeforeClass;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import utils.Insalubridade;
 import utils.Periculosidade;
 
+/**
+ * Classe CBO2002ControllerTest
+ * 
+ * Realiza os testes dos metodos da classe CBO2002Controller {@link CBO2002Controller}.
+ * 
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
+ */
 public class CBO2002ControllerTest {
 
 	CBO2002Controller cboController = new CBO2002Controller();
@@ -47,4 +55,15 @@ public class CBO2002ControllerTest {
 		assertEquals(0.1, cboRecuperado.getPercentualInsalubridade(), 0.01);
 		assertEquals(0.0, cboRecuperado.getPercentualPericulosidade(), 0.01);
 	}
+	
+	@Test
+	public void testBuscarCBO2002PorDescricao() throws Exception {
+		cboController.cadastrarCBO2002(375115, "Visual Merchandiser", Insalubridade.Dez, Periculosidade.Zero);
+		ArrayList<CBO2002Model> cboRecuperado = cboController.buscarCBO2002PorNome("Mer");
+		assertEquals((Integer) 375115, cboRecuperado.get(0).getCodigoCBO2002());
+		assertEquals("Visual Merchandiser", cboRecuperado.get(0).getDescricao());
+		assertEquals(0.1, cboRecuperado.get(0).getPercentualInsalubridade(), 0.01);
+		assertEquals(0.0, cboRecuperado.get(0).getPercentualPericulosidade(), 0.01);
+	}
+	
 }

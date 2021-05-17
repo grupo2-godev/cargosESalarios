@@ -79,4 +79,28 @@ public class CBO2002Controller {
 		return cbo2002DAO.retrieveByName(descricaoCBO2002);
 	}
 
+	/**
+	 * Atualizar CBO 2002.
+	 * 
+	 * Realiza a alteracao das informacoes do CBO 2002 conforme codigo informado.
+	 * Eh possivel alterar: descricao, percentual insalubridade e percentual periculosidade.
+	 * Nao eh possivel alterar o codigo do CBO 2002, pois se trata de identificacao unica. 
+	 * Caso o codigo CBO seja diferente, eh recomendado cadastrar novo registro.
+	 * 
+	 * @param codigoCBO codigo de CBO que sera alterado.
+	 * @param novaDescricao
+	 * @param novaInsalubridade
+	 * @param novaPericulosidade
+	 * @return
+	 */
+	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade, 
+			Periculosidade novaPericulosidade) {
+		CBO2002Model cboRecuperado = cbo2002DAO.retrieve(codigoCBO);
+		cboRecuperado.setDescricao(novaDescricao);
+		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
+		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());
+		return cbo2002DAO.update(codigoCBO, cboRecuperado);
+	}
+	
+	
 }
