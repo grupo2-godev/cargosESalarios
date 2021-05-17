@@ -1,4 +1,4 @@
-package utils;
+package br.com.proway.senior.cargosESalarios.utils;
 
 /**
  * Enum considerando checkbox de clique

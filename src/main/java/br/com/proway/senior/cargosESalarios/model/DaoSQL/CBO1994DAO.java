@@ -20,8 +20,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 
-	private static CBO1994DAO instance;
-	private Session session;
+	private static CBO1994DAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe CBO1994DAO
@@ -29,10 +29,10 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param Session session
 	 * @return CBO1994DAO instance
 	 */
-	public static CBO1994DAO getInstance(Session session) {
-		if (instance == null)
-			instance = new CBO1994DAO(session);
-		return instance;
+	public static CBO1994DAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new CBO1994DAO(sessao);
+		return instancia;
 	}
 
 	/**
@@ -40,8 +40,8 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @param Session session
 	 */
-	private CBO1994DAO(Session session) {
-		this.session = session;
+	private CBO1994DAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/**
@@ -52,12 +52,12 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param CBO1994Model CBO1994
 	 * @return int codigoCBO
 	 */
-	public int create(CBO1994Model CBO1994) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public int criar(CBO1994Model CBO1994) {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		Integer codigoCBO = (Integer) session.save(CBO1994);
-		session.getTransaction().commit();
+		Integer codigoCBO = (Integer) this.sessao.save(CBO1994);
+		this.sessao.getTransaction().commit();
 		return codigoCBO;
 	}
 
@@ -69,8 +69,8 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int codigo_CBO1994
 	 * @return results retorna objeto CBO1994Model
 	 */
-	public CBO1994Model retrieve(int codigo_CBO1994) {
-		CBO1994Model results = session.get(CBO1994Model.class, codigo_CBO1994);
+	public CBO1994Model buscar(int codigo_CBO1994) {
+		CBO1994Model results = this.sessao.get(CBO1994Model.class, codigo_CBO1994);
 		//System.out.println(results.toString());
 		return results;
 	}
@@ -84,18 +84,18 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int          codigo_CBO1994
 	 * @param CBO1994Model objetoAlterado
 	 */
-	public boolean update(int codigo_CBO1994, CBO1994Model objetoAlterado) {
-		CBO1994Model original = retrieve(codigo_CBO1994);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int codigo_CBO1994, CBO1994Model objetoAlterado) {
+		CBO1994Model original = buscar(codigo_CBO1994);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setCodigo_cbo(objetoAlterado.getCodigo_cbo());
 		original.setDescricao(objetoAlterado.getDescricao());
 		original.setPercentualInsalubridade(objetoAlterado.getPercentualInsalubridade());
 		original.setPercentualPericulosidade(objetoAlterado.getPercentualPericulosidade());
 
-		session.update(original);
-		session.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -107,15 +107,15 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param int codigo_CBO1994
 	 * @return boolean
 	 */
-	public boolean delete(int codigo_CBO1994) {
-		CBO1994Model objeto_deletar = retrieve(codigo_CBO1994);
+	public boolean deletar(int codigo_CBO1994) {
+		CBO1994Model objetoDeletar = buscar(codigo_CBO1994);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 
-		session.delete(objeto_deletar);
-		session.getTransaction().commit();
+		this.sessao.delete(objetoDeletar);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -126,13 +126,13 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @return ArrayList<Cbo1994Model>
 	 */
-	public ArrayList<CBO1994Model> getAll() {	
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<CBO1994Model> buscarTodos() {	
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
 		
 		Root<CBO1994Model> root = criteria.from(CBO1994Model.class);
 		
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		
 		List<CBO1994Model> results = query.getResultList();
 		
@@ -146,13 +146,13 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM cbo1994").executeUpdate();
-		session.getTransaction().commit();
-		session.clear();
+		int modificados = this.sessao.createSQLQuery("DELETE FROM cbo1994").executeUpdate();
+		this.sessao.getTransaction().commit();
+		this.sessao.clear();
 		return modificados > 0 ? true : false;
 	}
 

@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
-import utils.Insalubridade;
-import utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 
 public class CBO1994ControllerTest {
 	

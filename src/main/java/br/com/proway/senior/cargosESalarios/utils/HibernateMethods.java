@@ -1,4 +1,4 @@
-package utils;
+package br.com.proway.senior.cargosESalarios.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection
@@ -30,7 +30,7 @@ public class HibernateMethods<T> {
 	 * @return 
 	 */
 	public List<T> listarPorTabela(Class<T> classeTabela) {
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		criteria.from(classeTabela);
@@ -63,7 +63,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaComStringIncompleta(
 			Class<T> classeTabela, String nomeColuna, String valorColuna) 
 		{
-			Session session = ConnectionHibernate.getSession();
+			Session session = ConexaoHibernate.getSessao();
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 			
@@ -102,7 +102,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Integer valorColuna) 
 	{
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -137,7 +137,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, String valorColuna) 
 	{
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -172,7 +172,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, char valorColuna) 
 	{
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -207,7 +207,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
 		{
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -242,7 +242,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
 	{
-		Session session = ConnectionHibernate.getSession();
+		Session session = ConexaoHibernate.getSessao();
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);

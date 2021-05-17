@@ -2,20 +2,20 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.NivelDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o NivelDAO.
  * 
-* @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
-* @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
-* @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5*
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
+ * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5*
  */
 public class NivelController {
 
-	NivelDAO nivelDAO = NivelDAO.getInstance(ConnectionHibernate.getSession());
+	NivelDAO nivelDAO = NivelDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	/**
 	 * Cria um novo objeto NivelModel e o passa para o DAO para que seja inserido no BD.
@@ -26,11 +26,11 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public Integer cadastrarNivel(String nome) throws Exception {
-		if(!Validators.onlyValidChars(nome)) {
+		if(!Validadores.apenasCaracteresValidos(nome)) {
 			throw(new Exception("Nome invalido para o Nivel"));
 		}
 		NivelModel nivelModel = new NivelModel(nome);
-		return nivelDAO.create(nivelModel);
+		return nivelDAO.criar(nivelModel);
 	} 
 	
 	/**
@@ -44,10 +44,10 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public NivelModel buscarNivel(int id) throws Exception {
-		if(nivelDAO.retrieve(id) == null) {
+		if(nivelDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return nivelDAO.retrieve(id);
+		return nivelDAO.buscar(id);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public boolean atualizarNivel(int id, NivelModel objetoAlterado) throws Exception {
-		NivelModel original = nivelDAO.retrieve(id);
+		NivelModel original = nivelDAO.buscar(id);
 		if(original == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
@@ -72,7 +72,7 @@ public class NivelController {
 		if(original.getNome() == objetoAlterado.getNome()) {
 			return false;
 		}
-		return nivelDAO.update(id, objetoAlterado);
+		return nivelDAO.atualizar(id, objetoAlterado);
 	}
 	
 	/**
@@ -86,10 +86,10 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public boolean deletarNivel(int id) throws Exception {
-		if(nivelDAO.retrieve(id) == null) {
+		if(nivelDAO.buscar(id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return nivelDAO.delete(id);
+		return nivelDAO.deletar(id);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class NivelController {
 	 * @return ArrayList<NivelModel> : lista de entradas
 	 */
 	public ArrayList<NivelModel> buscarTodosNiveis(){
-		return nivelDAO.getAll();
+		return nivelDAO.buscarTodos();
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class NivelController {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosNiveis() {
-		return nivelDAO.deleteAll();
+		return nivelDAO.deletarTodos();
 	}
 	
 	

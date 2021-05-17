@@ -11,7 +11,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -28,20 +27,20 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel> {
 
-	private static PostoDeTrabalhoDAO instance;
-	private Session session;
+	private static PostoDeTrabalhoDAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe PostoDeTrabalhoDAO.
 	 * 
-	 * @param session
+	 * @param sessao
 	 * @return PostoDeTrabalhoDAO
 	 */
-	public static PostoDeTrabalhoDAO getInstance(Session session) {
-		if (instance == null) {
-			instance = new PostoDeTrabalhoDAO(session);
+	public static PostoDeTrabalhoDAO getInstancia(Session sessao) {
+		if (instancia == null) {
+			instancia = new PostoDeTrabalhoDAO(sessao);
 		}
-		return instance;
+		return instancia;
 	}
 
 	/**
@@ -49,8 +48,8 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * 
 	 * @param Session session
 	 */
-	private PostoDeTrabalhoDAO(Session session) {
-		this.session = session;
+	private PostoDeTrabalhoDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/***
@@ -61,12 +60,12 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return Id do posto de trabalho cadastrado
 	 */
-	public int create(PostoDeTrabalhoModel postoModel) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public int criar(PostoDeTrabalhoModel postoModel) {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		Integer idCadastrado = (Integer) session.save(postoModel);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(postoModel);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -79,8 +78,8 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param int idPosto
 	 * @return PostoDeTrabalhoModel
 	 */
-	public PostoDeTrabalhoModel retrieve(int idPosto) {
-		return session.get(PostoDeTrabalhoModel.class, idPosto);
+	public PostoDeTrabalhoModel buscar(int idPosto) {
+		return this.sessao.get(PostoDeTrabalhoModel.class, idPosto);
 	}
 
 	/**
@@ -93,11 +92,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param String nomePosto
 	 * @return PostoDeTrabalhoModel
 	 */
-	public ArrayList<PostoDeTrabalhoModel> retrieveByName(String nomePosto) {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<PostoDeTrabalhoModel> buscarPorNome(String nomePosto) {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		Expression registroSetor = (Expression) root.get("nomePosto");
 		criteria.select(root).where(criteriaBuilder.like(registroSetor, "'%" + nomePosto + "%'"));
 		List<PostoDeTrabalhoModel> resultado = query.getResultList();
@@ -114,18 +113,18 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param PostoDeTrabalhoModel postoModel
 	 * @return boolean
 	 */
-	public boolean update(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
-		PostoDeTrabalhoModel original = retrieve(idPosto);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
+		PostoDeTrabalhoModel original = buscar(idPosto);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setNomePosto(postoAtualizado.getNomePosto());
 		original.setCargo(postoAtualizado.getCargo());
 		original.setSetor(postoAtualizado.getSetor());
 		original.setNivel(postoAtualizado.getNivel());
 		original.setSalario(postoAtualizado.getSalario());
-		session.update(original);
-		session.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -137,14 +136,14 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * @param int idPosto
 	 * @return boolean
 	 */
-	public boolean delete(int idPosto) {
-		PostoDeTrabalhoModel entry = retrieve(idPosto);
+	public boolean deletar(int idPosto) {
+		PostoDeTrabalhoModel entry = buscar(idPosto);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -156,11 +155,11 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * 
 	 * @return ArrayList<PostoDeTrabalhoModel>
 	 */
-	public ArrayList<PostoDeTrabalhoModel> getAll() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<PostoDeTrabalhoModel> buscarTodos() {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<PostoDeTrabalhoModel> criteria = criteriaBuilder.createQuery(PostoDeTrabalhoModel.class);
 		Root<PostoDeTrabalhoModel> root = criteria.from(PostoDeTrabalhoModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<PostoDeTrabalhoModel> results = query.getResultList();
 		return new ArrayList<PostoDeTrabalhoModel>(results);
 	}
@@ -172,13 +171,13 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM posto_de_trabalho")
+		int modificados = this.sessao.createSQLQuery("DELETE FROM posto_de_trabalho")
 				.executeUpdate();
-		session.getTransaction().commit();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

@@ -25,8 +25,8 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  */
 public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 
-	private static CBO2002DAO instance;
-	private Session session;
+	private static CBO2002DAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe CBO2002DAO.
@@ -34,10 +34,10 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param Session session
 	 * @return CBO2002DAO instance
 	 */
-	public static CBO2002DAO getInstance(Session session) {
-		if (instance == null)
-			instance = new CBO2002DAO(session);
-		return instance;
+	public static CBO2002DAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new CBO2002DAO(sessao);
+		return instancia;
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @param Session session
 	 */
-	private CBO2002DAO(Session session) {
-		this.session = session;
+	private CBO2002DAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/**
@@ -57,12 +57,12 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param CBO2002Model Cbo2002 Objeto a ser inserido.
 	 * @return int id Id do registro.
 	 */
-	public int create(CBO2002Model cbo2002) {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public int criar(CBO2002Model cbo2002) {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		Integer codigoCadastrado = (Integer) session.save(cbo2002);
-		session.getTransaction().commit();
+		Integer codigoCadastrado = (Integer) this.sessao.save(cbo2002);
+		this.sessao.getTransaction().commit();
 		return codigoCadastrado;
 	}
 
@@ -75,8 +75,8 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param int codigoCBO
 	 * @return CBO2002Model
 	 */
-	public CBO2002Model retrieve(int codigoCBO2002) {
-		CBO2002Model results = session.get(CBO2002Model.class, codigoCBO2002);
+	public CBO2002Model buscar(int codigoCBO2002) {
+		CBO2002Model results = this.sessao.get(CBO2002Model.class, codigoCBO2002);
 		return results;
 	}
 	
@@ -91,10 +91,10 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return ArrayList CBO2002Model lista de CBOs 2002 que possuam a descricao pesquisada.
 	 */
 	public ArrayList<CBO2002Model> retrieveByName(String descricaoCBO) {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
 		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		Expression registroCBO2002 = (Expression) root.get("descricao");
 		criteria.select(root).where(criteriaBuilder.like(registroCBO2002, "'%" + descricaoCBO + "%'"));
 		List<CBO2002Model> resultado = query.getResultList();
@@ -111,16 +111,16 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param CBO2002Model cbo2002Alterado novo objeto com os dados alterados.
 	 * @return boolean
 	 */
-	public boolean update(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
-		CBO2002Model original = retrieve(codigoCBO2002);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
+		CBO2002Model original = buscar(codigoCBO2002);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		original.setDescricao(cbo2002Alterado.getDescricao());
 		original.setPercentualInsalubridade(cbo2002Alterado.getPercentualInsalubridade());
 		original.setPercentualPericulosidade(cbo2002Alterado.getPercentualPericulosidade());
-		session.update(original);
-		session.getTransaction().commit();
+		this.sessao.update(original);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -133,14 +133,14 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
 	 * @return boolean
 	 */
-	public boolean delete(int codigoCBO2002) {
-		CBO2002Model entry = retrieve(codigoCBO2002);
+	public boolean deletar(int codigoCBO2002) {
+		CBO2002Model entry = buscar(codigoCBO2002);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		session.delete(entry);
-		session.getTransaction().commit();
+		this.sessao.delete(entry);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -152,11 +152,11 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @return ArrayList CBO2002Model
 	 */
-	public ArrayList<CBO2002Model> getAll() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<CBO2002Model> buscarTodos() {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
 		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<CBO2002Model> results = query.getResultList();
 		return new ArrayList<CBO2002Model>(results);
 	}
@@ -168,12 +168,12 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int modificados = session.createSQLQuery("DELETE FROM cbo2002").executeUpdate();
-		session.getTransaction().commit();
+		int modificados = this.sessao.createSQLQuery("DELETE FROM cbo2002").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return modificados > 0 ? true : false;
 	}
 

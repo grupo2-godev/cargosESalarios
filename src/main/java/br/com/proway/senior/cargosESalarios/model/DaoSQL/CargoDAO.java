@@ -1,11 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,42 +10,40 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
 /***
  * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os metodos
- * necessarios para a intercao com o banco de dados.
+ * necessarios para a interacao com o banco de dados.
  * 
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
 public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 
-	private static CargoDAO instance;
-	private Session session;
+	private static CargoDAO instancia;
+	private Session sessao;
 
 	/**
 	 * Singleton da classe CargoDAO.
 	 * 
-	 * @param session Session
+	 * @param sessao Session
 	 * @return instance GrauInstrucaoDAO
 	 */
-	public static CargoDAO getInstance(Session session) {
-		if (instance == null)
-			instance = new CargoDAO(session);
-		return instance;
+	public static CargoDAO getInstancia(Session sessao) {
+		if (instancia == null)
+			instancia = new CargoDAO(sessao);
+		return instancia;
 	}
 
 	/**
 	 * Construtor da classe CargoDAO, utilizado no Singleton.
 	 * 
-	 * @param session Session
+	 * @param sessao Session
 	 */
-	private CargoDAO(Session session) {
-		this.session = session;
+	private CargoDAO(Session sessao) {
+		this.sessao = sessao;
 	}
 
 	/***
@@ -60,12 +52,12 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @param obj CargoModel Objeto a ser inserido.
 	 * @return int Id do objeto inserido.
 	 */
-	public int create(CargoModel cargo) {
-		if (!session.getTransaction().isActive())
-			session.beginTransaction();
+	public int criar(CargoModel cargo) {
+		if (!this.sessao.getTransaction().isActive())
+			this.sessao.beginTransaction();
 
-		Integer idCadastrado = (Integer) session.save(cargo);
-		session.getTransaction().commit();
+		Integer idCadastrado = (Integer) this.sessao.save(cargo);
+		this.sessao.getTransaction().commit();
 		return idCadastrado;
 	}
 
@@ -77,9 +69,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @param idCargo int Id do cargo a ser consultado.
 	 * @return cargo CargoModel Objeto encontrado no banco de dados.
 	 */
-	public CargoModel retrieve(int idCargo) {
-		CargoModel cargo = session.get(CargoModel.class, idCargo);
-		return cargo;
+	public CargoModel buscar(int idCargo) {
+		return this.sessao.get(CargoModel.class, idCargo);
 	}
 
 	/***
@@ -94,10 +85,10 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
 	 *         durante a atualizacao.
 	 */
-	public boolean update(int idCargo, CargoModel cargoNovo) {
-		CargoModel cargo = retrieve(idCargo);
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean atualizar(int idCargo, CargoModel cargoNovo) {
+		CargoModel cargo = buscar(idCargo);
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
 		cargo.setNomeCargo(cargoNovo.getNomeCargo());
 		cargo.setDataCadastro(cargoNovo.getDataCadastro());
@@ -110,8 +101,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
 		cargo.setStatus(cargoNovo.getStatus());
 		cargo.setIdPermissao(cargoNovo.getIdPermissao());
-		session.update(cargo);
-		session.getTransaction().commit();
+		this.sessao.update(cargo);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -125,14 +116,14 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
 	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
 	 */
-	public boolean delete(int idCargo) {
-		CargoModel cargo = retrieve(idCargo);
+	public boolean deletar(int idCargo) {
+		CargoModel cargo = buscar(idCargo);
 
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		session.delete(cargo);
-		session.getTransaction().commit();
+		this.sessao.delete(cargo);
+		this.sessao.getTransaction().commit();
 		return true;
 	}
 
@@ -144,11 +135,11 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return cargos ArrayList<CargoModel> Todos os registros da tabela
 	 *         {@link CargoModel}.
 	 */
-	public ArrayList<CargoModel> getAll() {
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	public ArrayList<CargoModel> buscarTodos() {
+		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
 		CriteriaQuery<CargoModel> criteria = criteriaBuilder.createQuery(CargoModel.class);
 		Root<CargoModel> root = criteria.from(CargoModel.class);
-		Query query = session.createQuery(criteria);
+		Query query = this.sessao.createQuery(criteria);
 		List<CargoModel> cargos = query.getResultList();
 		return new ArrayList<CargoModel>(cargos);
 	}
@@ -159,12 +150,12 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @return boolean Retorna true caso algum registro seja deletado, se der algum
 	 *         erro ou se nao houverem registros, retorna false.
 	 */
-	public boolean deleteAll() {
-		if (!session.getTransaction().isActive()) {
-			session.beginTransaction();
+	public boolean deletarTodos() {
+		if (!this.sessao.getTransaction().isActive()) {
+			this.sessao.beginTransaction();
 		}
-		int registrosModificados = session.createSQLQuery("DELETE FROM cargo").executeUpdate();
-		session.getTransaction().commit();
+		int registrosModificados = this.sessao.createSQLQuery("DELETE FROM cargo").executeUpdate();
+		this.sessao.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
 }

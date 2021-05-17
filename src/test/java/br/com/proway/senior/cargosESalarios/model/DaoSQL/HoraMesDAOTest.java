@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
+import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 /**
  * Classe HoraMesDAOTest
@@ -22,20 +22,20 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
  */
 public class HoraMesDAOTest {
 
-	HorasMesDAO horasMesDao = HorasMesDAO.getInstance(ConnectionHibernate.getSession());
+	HorasMesDAO horasMesDao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
 	
 	@Test
 	public void testInserirHoraMes() {
 			HorasMesModel novaHoraMes = new HorasMesModel(5, 220.0);
-			Integer idObjetoCadastrado = horasMesDao.create(novaHoraMes);
-			Object horasMesConsultado = ConnectionHibernate.getSession().get(HorasMesModel.class, idObjetoCadastrado);
+			Integer idObjetoCadastrado = horasMesDao.criar(novaHoraMes);
+			Object horasMesConsultado = ConexaoHibernate.getSessao().get(HorasMesModel.class, idObjetoCadastrado);
 			assertEquals(idObjetoCadastrado, ((HorasMesModel) horasMesConsultado).getIdHorasMes());
 	}
 	
 	@Test
 	public void testBuscarHorarioPorId() {
 		HorasMesModel novoModel = new HorasMesModel(215.0);
-		HorasMesModel horasRetornado = horasMesDao.retrieve(horasMesDao.create(novoModel));
+		HorasMesModel horasRetornado = horasMesDao.buscar(horasMesDao.criar(novoModel));
 		assertEquals(novoModel.getQuantidade(), horasRetornado.getQuantidade());
 	}
 
@@ -43,43 +43,43 @@ public class HoraMesDAOTest {
 	public void testAtualizarHorario() {
 		HorasMesModel modelAntigo = new HorasMesModel(220.0);
 		HorasMesModel modelAlterado = new HorasMesModel(100.0);
-		int id = horasMesDao.create(modelAntigo);
-		horasMesDao.update(id, modelAlterado);
-		HorasMesModel atualizado = horasMesDao.retrieve(id);
+		int id = horasMesDao.criar(modelAntigo);
+		horasMesDao.atualizar(id, modelAlterado);
+		HorasMesModel atualizado = horasMesDao.buscar(id);
 		assertEquals(atualizado.getQuantidade(), modelAlterado.getQuantidade());
 	}
 	
 	@Test
 	public void testDeletarHorario() {
-		int size = horasMesDao.getAll().size();
+		int size = horasMesDao.buscarTodos().size();
 		HorasMesModel horasModel = new HorasMesModel(220.0);
-		int id = horasMesDao.create(horasModel);
-		horasMesDao.delete(id);
-		assertEquals(size, horasMesDao.getAll().size());
+		int id = horasMesDao.criar(horasModel);
+		horasMesDao.deletar(id);
+		assertEquals(size, horasMesDao.buscarTodos().size());
 	}
 	
 	@Test
 	public void testBuscarTodosHorarios() {
 		HorasMesModel horasModel = new HorasMesModel(220.0);
-		horasMesDao.create(horasModel);
-		assertFalse(horasMesDao.getAll().isEmpty());
+		horasMesDao.criar(horasModel);
+		assertFalse(horasMesDao.buscarTodos().isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistros() {
 		HorasMesModel horasModel = new HorasMesModel(220.0);
-		horasMesDao.create(horasModel);
+		horasMesDao.criar(horasModel);
 		
-		Boolean ret = horasMesDao.deleteAll();
+		Boolean ret = horasMesDao.deletarTodos();
 		
-		assertTrue(horasMesDao.getAll().isEmpty());
+		assertTrue(horasMesDao.buscarTodos().isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistrosSemRegistrosADeletar() {
-		horasMesDao.deleteAll();
-		Boolean itensDeletados = horasMesDao.deleteAll();
+		horasMesDao.deletarTodos();
+		Boolean itensDeletados = horasMesDao.deletarTodos();
 		assertFalse(itensDeletados);
-		assertTrue(horasMesDao.getAll().isEmpty());
+		assertTrue(horasMesDao.buscarTodos().isEmpty());
 	}
 }
