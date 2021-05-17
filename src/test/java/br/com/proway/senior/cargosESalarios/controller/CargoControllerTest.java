@@ -2,6 +2,8 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.time.LocalDateTime;
 
 import org.junit.Before;
@@ -149,8 +151,35 @@ public class CargoControllerTest {
 		controller.alterar(2, cargoModel);
 	}
 
+	
 	@Test
-	public void buscarTodos() throws Exception {
+	public void testDeletarPorId() throws Exception {
+		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		Integer idCadastrado = controller.cadastrar(cargo);
+		assertEquals(1, controller.buscarTodos().size());
+		controller.deletarPorId(idCadastrado);
+		assertEquals(0, controller.buscarTodos().size());
+	}
+	
+	@Test(expected = Exception.class)
+	public void testDeletarPorIdInexistente() throws Exception {
+		assertEquals(0, controller.buscarTodos().size());
+		controller.deletarPorId(2);
+	}
+	
+	@Test(expected = Exception.class)
+	public void testDeletarPorIdIgualAZero() throws Exception {
+		assertNull(controller.deletarPorId(0));
+	}
+	
+	@Test(expected = Exception.class) 
+	public void testDeletarPorIdNulo() throws Exception {
+		assertNull(controller.deletarPorId(null));
+	}
+	
+	@Test
+	public void testBuscarTodos() throws Exception {
 		assertEquals(0, controller.buscarTodos().size());
 		CargoModel cargo1 = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo94, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
