@@ -105,7 +105,7 @@ public class CargoControllerTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void testBuscarPorIdInvalido() {
+	public void testBuscarPorIdInvalido() throws Exception {
 		controller.buscarPorId(0);
 	}
 

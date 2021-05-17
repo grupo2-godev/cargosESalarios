@@ -89,6 +89,20 @@ public class CargoController {
 	}
 
 	/**
+	 * Retorna um objeto do tipo {@link CargoModel} que contenha o id igual ao id
+	 * recebido no parameto.
+	 * 
+	 * @param id Integer Id do objeto a ser consultado.
+	 * @return CargoModel: objeto encontrado no banco de dados.
+	 * @throws Exception 
+	 */
+	public CargoModel buscarPorId(Integer id) throws Exception {
+		if(Validators.isZeroOrNull(id)) 
+			throw(new Exception("O id não pode ser nulo ou zero."));
+		return cargoDAO.retrieve(id);
+	}
+
+	/**
 	 * Retorna um ArrayList com todos os registros da tabela {@link CargoModel}.
 	 * 
 	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
