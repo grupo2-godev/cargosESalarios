@@ -22,7 +22,7 @@ public class ValidatorsTest {
 
 	@Test
 	public void testOnlyValidChars() {
-		String validChars = "valido";
+		String validChars = "vali do";
 		String invalidChars = "1nv4l!d0";
 		assertTrue(Validators.onlyValidChars(validChars));
 		assertFalse(Validators.onlyValidChars(invalidChars));

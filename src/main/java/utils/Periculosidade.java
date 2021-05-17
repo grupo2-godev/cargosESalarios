@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Enum considerando checkbox de clique
+ */
 public enum Periculosidade {
 	
 	Zero(0.0), Trinta(0.3);
