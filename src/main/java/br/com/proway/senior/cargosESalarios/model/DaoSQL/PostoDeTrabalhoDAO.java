@@ -120,9 +120,9 @@ public class PostoDeTrabalhoDAO implements InterfaceDAOCRUD<PostoDeTrabalhoModel
 			session.beginTransaction();
 		}
 		original.setNomePosto(postoAtualizado.getNomePosto());
-		original.setIdCargo(postoAtualizado.getIdCargo());
-		original.setIdSetor(postoAtualizado.getIdSetor());
-		original.setIdNivel(postoAtualizado.getIdNivel());
+		original.setCargo(postoAtualizado.getCargo());
+		original.setSetor(postoAtualizado.getSetor());
+		original.setNivel(postoAtualizado.getNivel());
 		original.setSalario(postoAtualizado.getSalario());
 		session.update(original);
 		session.getTransaction().commit();
