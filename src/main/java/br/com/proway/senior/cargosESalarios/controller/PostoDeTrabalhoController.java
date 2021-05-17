@@ -81,9 +81,9 @@ public class PostoDeTrabalhoController {
 		if (Validators.onlyValidChars(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
-		posto.setIdCargo(novaIdCargo);
-		posto.setIdSetor(novaIdSetor);
-		posto.setIdNivel(novoIdNivel);
+		posto.setCargo(novaIdCargo);
+		posto.setSetor(novaIdSetor);
+		posto.setNivel(novoIdNivel);
 		posto.setSalario(novoSalario);
 		return this.postoDAO.update(idPosto, posto);
 	}

@@ -24,107 +24,155 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "posto_de_trabalho")
 public class PostoDeTrabalhoModel {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idPosto;
 	private String nomePosto;
 	
 	@OneToOne(cascade=CascadeType.REFRESH)
-	private CargoModel idCargo;
+	private CargoModel cargo;
 	
 	@OneToOne(cascade=CascadeType.REFRESH)
-	private SetorModel idSetor;
+	private SetorModel setor;
 	
 	@OneToOne(cascade=CascadeType.REFRESH)
-	private NivelModel idNivel;
+	private NivelModel nivel;
+	
 	private Double salario;
 	
-	public PostoDeTrabalhoModel(Integer idPosto, String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel,
+	public PostoDeTrabalhoModel() {}
+	
+	public PostoDeTrabalhoModel(Integer idPosto, String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel,
 			Double salario) {
 		super();
 		this.idPosto = idPosto;
 		this.nomePosto = nomePosto;
-		this.idCargo = idCargo;
-		this.idSetor = idSetor;
-		this.idNivel = idNivel;
+		this.cargo = cargo;
+		this.setor = setor;
+		this.nivel = nivel;
 		this.salario = salario;
 	}
-
+	
 	/**
 	 * Construtor secundario onde a Id nao eh obrigatoria para criacao do posto.
 	 * A Id sera auto incrementada no banco de dados.
 	 * 
 	 * @param nomePosto
-	 * @param idCargo
-	 * @param idSetor
-	 * @param idNivel
+	 * @param cargo
+	 * @param setor
+	 * @param nivel
 	 * @param salario
 	 */
-	public PostoDeTrabalhoModel(String nomePosto, CargoModel idCargo, SetorModel idSetor, NivelModel idNivel, Double salario) {
+	public PostoDeTrabalhoModel(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel,
+			Double salario) {
 		super();
 		this.nomePosto = nomePosto;
-		this.idCargo = idCargo;
-		this.idSetor = idSetor;
-		this.idNivel = idNivel;
+		this.cargo = cargo;
+		this.setor = setor;
+		this.nivel = nivel;
 		this.salario = salario;
 	}
 
-	public PostoDeTrabalhoModel() {
-	}
-
+	/**
+	 * @return the idPosto
+	 */
 	public Integer getIdPosto() {
 		return idPosto;
 	}
 
+
+	/**
+	 * @param idPosto the idPosto to set
+	 */
 	public void setIdPosto(Integer idPosto) {
 		this.idPosto = idPosto;
 	}
 
+
+	/**
+	 * @return the nomePosto
+	 */
 	public String getNomePosto() {
 		return nomePosto;
 	}
 
+
+	/**
+	 * @param nomePosto the nomePosto to set
+	 */
 	public void setNomePosto(String nomePosto) {
 		this.nomePosto = nomePosto;
 	}
 
-	public CargoModel getIdCargo() {
-		return idCargo;
+
+	/**
+	 * @return the cargo
+	 */
+	public CargoModel getCargo() {
+		return cargo;
 	}
 
-	public void setIdCargo(CargoModel idCargo) {
-		this.idCargo = idCargo;
+
+	/**
+	 * @param cargo the cargo to set
+	 */
+	public void setCargo(CargoModel cargo) {
+		this.cargo = cargo;
 	}
 
-	public SetorModel getIdSetor() {
-		return idSetor;
+
+	/**
+	 * @return the setor
+	 */
+	public SetorModel getSetor() {
+		return setor;
 	}
 
-	public void setIdSetor(SetorModel idSetor) {
-		this.idSetor = idSetor;
+
+	/**
+	 * @param setor the setor to set
+	 */
+	public void setSetor(SetorModel setor) {
+		this.setor = setor;
 	}
 
-	public NivelModel getIdNivel() {
-		return idNivel;
+
+	/**
+	 * @return the nivel
+	 */
+	public NivelModel getNivel() {
+		return nivel;
 	}
 
-	public void setIdNivel(NivelModel idNivel) {
-		this.idNivel = idNivel;
+
+	/**
+	 * @param nivel the nivel to set
+	 */
+	public void setNivel(NivelModel nivel) {
+		this.nivel = nivel;
 	}
 
+
+	/**
+	 * @return the salario
+	 */
 	public Double getSalario() {
 		return salario;
 	}
 
+
+	/**
+	 * @param salario the salario to set
+	 */
 	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 
+
 	@Override
 	public String toString() {
-		return "PostoDeTrabalhoModel [idPosto=" + idPosto + ", nomePosto=" + nomePosto + ", idCargo=" + idCargo
-				+ ", idSetor=" + idSetor + ", idNivel=" + idNivel + ", salario=" + salario + "]";
+		return "PostoDeTrabalhoModel [idPosto=" + idPosto + ", nomePosto=" + nomePosto + ", cargo=" + cargo
+				+ ", setor=" + setor + ", nivel=" + nivel + ", salario=" + salario + "]";
 	}	
 
 }
