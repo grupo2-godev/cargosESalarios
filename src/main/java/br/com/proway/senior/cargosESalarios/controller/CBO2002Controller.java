@@ -132,4 +132,13 @@ public class CBO2002Controller {
 		return cbo2002DAO.getAll();
 	}
 	
+	/**
+	 * Deletar todos os CBOs 2002.
+	 * 
+	 * Realiza a exclusao de todos os registros de CBO 2002 cadastrados no banco de dados.
+	 */
+	public void deletarTodosCBO2002() {
+		cbo2002DAO.deleteAll();
+	}
+	
 }

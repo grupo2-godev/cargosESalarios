@@ -104,4 +104,12 @@ public class CBO2002ControllerTest {
 		assertEquals(2, cboController.buscarTodosCBO2002().size());
 	}
 
+	@Test
+	public void testDeletarTodosCBO2002() throws Exception {
+		cboController.cadastrarCBO2002(376320, "Apresentador Animador de Programas de Televisão", Insalubridade.Zero, 
+				Periculosidade.Zero);
+		cboController.deletarTodosCBO2002();
+		assertTrue(cboController.buscarTodosCBO2002().isEmpty());
+	}
+	
 }

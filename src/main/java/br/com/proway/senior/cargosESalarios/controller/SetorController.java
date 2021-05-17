@@ -117,8 +117,6 @@ public class SetorController {
 	 * 
 	 * Realiza a exclusao no banco de dados de todos os registros de setores
 	 * cadastrados.
-	 * 
-	 * @return boolean
 	 */
 	public void deletarTodosSetores() {
 		setorDAO.deleteAll();
