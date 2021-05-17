@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryConexao;
-import br.com.proway.senior.cargosESalarios.connection.antigo.FactoryPostgres;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import utils.Insalubridade;
 import utils.Periculosidade;
@@ -20,7 +18,6 @@ public class CBO1994DAOTest {
 	Integer codigo_cbo = 345678;
 	String descricao = "descricao";
 	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstance(ConnectionHibernate.getSession());	
-	FactoryConexao conexao = new FactoryPostgres();
 
 	@Test
 	public void testGetInstance() {
