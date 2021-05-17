@@ -1,5 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
+import java.util.ArrayList;
+
 import br.com.proway.senior.cargosESalarios.connection.ConnectionHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
@@ -28,12 +30,12 @@ public class CBO2002Controller {
 	 * nulo. Valida tambem a quantidade de caracteres do codigoCBO, visto que o
 	 * padrao eh 6.
 	 * 
-	 * @param codigoCBO
-	 * @param descricao
-	 * @param percentualInsalubridade
-	 * @param percentualPericulosidade
-	 * @return
-	 * @throws Exception 
+	 * @param Integer codigoCBO codigo do CBO 2002 que sera cadastrado.
+	 * @param String descricao descricao | nome do CBO 2002 que sera cadastrado.
+	 * @param Insalubridade percentualInsalubridade.
+	 * @param Periculosidade percentualPericulosidade.
+	 * @return Integer codigoCBO codigo do CBO 2002 cadastrado.
+	 * @throws Exception.
 	 */
 	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
 			Periculosidade percentualPericulosidade) throws Exception {
@@ -60,6 +62,11 @@ public class CBO2002Controller {
 	 */
 	public CBO2002Model buscarSetorPorId(Integer codigoCBO) {
 		return cbo2002DAO.retrieve(codigoCBO);
+	}
+	
+	
+	public ArrayList<CBO2002Model> buscarCBO2002PorNome(String descricaoCBO2002) {
+		return cbo2002DAO.
 	}
 
 }
