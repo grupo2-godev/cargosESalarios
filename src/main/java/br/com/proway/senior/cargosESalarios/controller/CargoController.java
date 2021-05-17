@@ -7,14 +7,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Controller que interage com o CargoDAO.
  * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  *
  */
 public class CargoController {
@@ -31,12 +37,13 @@ public class CargoController {
 	 * @param nomeCargo         String Nome do cargo.
 	 * @param dataCadastro      LocalDateTime Data de cadastro do cargo.
 	 * @param dataUltimaRevisao LocalDateTime Data da ultima alteracao do cargo.
-	 * @param cbo2002           Integer Definicao CBO (Classificacao Brasileira de
-	 *                          Ocupacoes) de 2002.
-	 * @param cbo94             Integer Definicao CBO (Classificacao Brasileira de
-	 *                          Ocupacoes) de 1994.
-	 * @param horasMes          Integer Quantidade de horas trabalhada por mes.
-	 * @param grauInstrucao     Integer Id do {@link GrauInstrucaoModel}.
+	 * @param cbo2002           CBO2002Model Definicao CBO (Classificacao Brasileira
+	 *                          de Ocupacoes) de 2002.
+	 * @param cbo94             CBO1994Model Definicao CBO (Classificacao Brasileira
+	 *                          de Ocupacoes) de 1994.
+	 * @param horasMes          HorasMesModel Quantidade de horas trabalhadas por
+	 *                          mes.
+	 * @param grauInstrucao     GrauInstrucaoModel Grau de instrucao do cargo.
 	 * @param experienciaMinima Integer Experiencia minima em anos.
 	 * @param atribuicoes       String Descricao das atividades que serao
 	 *                          executadas.
@@ -49,18 +56,18 @@ public class CargoController {
 	 *                   parametro nao estejam de acordo conforme validacoes.
 	 */
 	public CargoModel construir(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			Integer cbo2002, Integer cbo94, Integer horasMes, Integer grauInstrucao, String experienciaMinima,
-			String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
+			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horasMes, GrauInstrucaoModel grauInstrucao,
+			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
 
 		if (Validadores.ehObjetoNulo(nomeCargo) || nomeCargo.isEmpty())
 			throw (new Exception("O nome do cargo não foi informado."));
-		if (Validadores.ehZeroOuNulo(cbo2002))
+		if (Validadores.ehObjetoNulo(cbo2002))
 			throw (new Exception("O cbo2002 não foi informado."));
-		if (Validadores.ehZeroOuNulo(cbo94))
+		if (Validadores.ehObjetoNulo(cbo94))
 			throw (new Exception("O cbo94 não foi informado."));
-		if (Validadores.ehZeroOuNulo(horasMes))
+		if (Validadores.ehObjetoNulo(horasMes))
 			throw (new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero."));
-		if (Validadores.ehZeroOuNulo(grauInstrucao))
+		if (Validadores.ehObjetoNulo(grauInstrucao))
 			throw (new Exception("O grau de instrução não foi informado."));
 		if (Validadores.ehObjetoNulo(experienciaMinima) || experienciaMinima.isEmpty())
 			throw (new Exception("A experiencia mínima não foi informada."));

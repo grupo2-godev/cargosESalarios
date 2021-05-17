@@ -2,16 +2,20 @@ package br.com.proway.senior.cargosESalarios.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  * Classe cargo.
  * 
+ * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
+ * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 @Entity
 @Table(name = "cargo")
@@ -23,17 +27,25 @@ public class CargoModel {
 	private String nomeCargo;
 	private LocalDateTime dataCadastro;
 	private LocalDateTime dataUltimaRevisao;
-	private Integer cbo2002;
-	private Integer cbo94;
-	private Integer horaMes;
-	private Integer grauInstrucao;
+
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	private CBO2002Model cbo2002;
+
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	private CBO1994Model cbo94;
+
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	private HorasMesModel horaMes;
+
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	private GrauInstrucaoModel grauInstrucao;
 	private String experienciaMinima;
 	private String atribuicoes;
 	private Boolean status;
 	private Integer idPermissao;
-	
+
 	public CargoModel() {
-		
+
 	}
 
 	/**
@@ -57,10 +69,10 @@ public class CargoModel {
 	 * @param atribuicoes
 	 * @param status
 	 * @param idPermissao
-	 * @param grauInstrucao 
+	 * @param grauInstrucao
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			Integer cbo2002, Integer cbo94, Integer horaMes, Integer grauInstrucao,
+			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
@@ -74,7 +86,6 @@ public class CargoModel {
 		this.status = status;
 		this.idPermissao = idPermissao;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -235,56 +246,56 @@ public class CargoModel {
 	/**
 	 * @return the cbo2002
 	 */
-	public Integer getCbo2002() {
+	public CBO2002Model getCbo2002() {
 		return cbo2002;
 	}
 
 	/**
 	 * @param cbo2002 the cbo2002 to set
 	 */
-	public void setCbo2002(Integer cbo2002) {
+	public void setCbo2002(CBO2002Model cbo2002) {
 		this.cbo2002 = cbo2002;
 	}
 
 	/**
 	 * @return the cbo94
 	 */
-	public Integer getCbo94() {
+	public CBO1994Model getCbo94() {
 		return cbo94;
 	}
 
 	/**
 	 * @param cbo94 the cbo94 to set
 	 */
-	public void setCbo94(Integer cbo94) {
+	public void setCbo94(CBO1994Model cbo94) {
 		this.cbo94 = cbo94;
 	}
 
 	/**
 	 * @return the horaMes
 	 */
-	public Integer getHoraMes() {
+	public HorasMesModel getHoraMes() {
 		return horaMes;
 	}
 
 	/**
 	 * @param horaMes the horaMes to set
 	 */
-	public void setHoraMes(Integer horaMes) {
+	public void setHoraMes(HorasMesModel horaMes) {
 		this.horaMes = horaMes;
 	}
 
 	/**
 	 * @return the grauInstrucao
 	 */
-	public Integer getGrauInstrucao() {
+	public GrauInstrucaoModel getGrauInstrucao() {
 		return grauInstrucao;
 	}
 
 	/**
 	 * @param grauInstrucao the grauInstrucao to set
 	 */
-	public void setGrauInstrucao(Integer grauInstrucao) {
+	public void setGrauInstrucao(GrauInstrucaoModel grauInstrucao) {
 		this.grauInstrucao = grauInstrucao;
 	}
 
@@ -344,5 +355,4 @@ public class CargoModel {
 		this.idPermissao = idPermissao;
 	}
 
-	
 }
