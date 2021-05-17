@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o HorasMesDAO.
  * 
@@ -25,7 +25,7 @@ public class HorasMesController {
 	 */
 	public Integer cadastrarHorasMes(String quantidade) throws Exception {
 		quantidade = quantidade.replaceAll( "," , "." );
-		if(!Validators.onlyValidNumber(quantidade)) {
+		if(!Validadores.apenasNumerosValidos(quantidade)) {
 			throw(new Exception("Informação passada incorreta"));
 		}
 		

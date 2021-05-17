@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import utils.Insalubridade;
-import utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 
 /**
  * Classe CBO2002DAOTest.

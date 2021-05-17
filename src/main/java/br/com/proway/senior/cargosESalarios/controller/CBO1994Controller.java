@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
-import utils.Insalubridade;
-import utils.Periculosidade;
-import utils.Validators;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /** Controller que interage com o CBO1994DAO.
  * 
@@ -45,7 +45,7 @@ public class CBO1994Controller {
 	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Insalubridade percentualInsalubridade,
 			Periculosidade percentualPericulosidade) throws Exception {
 		
-		if(!Validators.isCBO1994Valid(codigo_CBO1994) || !Validators.isCBODescricaoValid(descricao)) {
+		if(!Validadores.ehValidoCBO1994(codigo_CBO1994) || !Validadores.ehValidoCBODescricao(descricao)) {
 			throw(new Exception("Codigo e/ou descricao invalidos para o CBO1994"));
 		}
 		
@@ -91,13 +91,13 @@ public class CBO1994Controller {
 	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, Insalubridade novoPercentualInsalubridade,
 			Periculosidade novoPercentualPericulosidade) throws Exception {
 
-		if(!Validators.isCBODescricaoValid(novaDescricao)) {
+		if(!Validadores.ehValidoCBODescricao(novaDescricao)) {
 			throw(new Exception("Descricao invalida para atualizacao do CBO1994"));
 		}
 		
 		CBO1994Model objetoParaAtualizar = CBO1994Dao.retrieve(codigo_CBO1994);
 		
-		if(Validators.isNullObject(objetoParaAtualizar)) {
+		if(Validadores.ehObjetoNulo(objetoParaAtualizar)) {
 			throw(new Exception("Entrada com o codigo CBO1994 requisitado nao existe!"));
 		}
 		
@@ -127,7 +127,7 @@ public class CBO1994Controller {
 	 */
 	public boolean deletarCBO1994(int codigo_CBO1994) throws Exception {
 		
-		if(Validators.isNullObject(CBO1994Dao.retrieve(codigo_CBO1994))) {
+		if(Validadores.ehObjetoNulo(CBO1994Dao.retrieve(codigo_CBO1994))) {
 			throw(new Exception("Entrada com o codigo_CBO1994 requisitado nao existe!"));
 		}
 		

@@ -1,4 +1,4 @@
-package utils;
+package br.com.proway.senior.cargosESalarios.utils;
 
 import java.util.ArrayList;
 import java.util.List;
