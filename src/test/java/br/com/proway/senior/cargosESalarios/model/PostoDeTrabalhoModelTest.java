@@ -50,4 +50,11 @@ public class PostoDeTrabalhoModelTest {
 		novoPosto.setIdPosto(3);
 		assertEquals((Integer) 3, novoPosto.getIdPosto());
 	}
+	
+	@Test
+	public void testGetESetNomePosto() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setNomePosto("Assistente de E-commerce");;
+		assertEquals("Assistente de E-commerce", novoPosto.getNomePosto());
+	}
 }
