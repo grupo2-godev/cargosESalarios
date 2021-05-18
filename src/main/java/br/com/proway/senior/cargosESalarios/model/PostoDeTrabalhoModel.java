@@ -44,7 +44,6 @@ public class PostoDeTrabalhoModel {
 	
 	public PostoDeTrabalhoModel(Integer idPosto, String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel,
 			Double salario) {
-		super();
 		this.idPosto = idPosto;
 		this.nomePosto = nomePosto;
 		this.cargo = cargo;
@@ -65,7 +64,6 @@ public class PostoDeTrabalhoModel {
 	 */
 	public PostoDeTrabalhoModel(String nomePosto, CargoModel cargo, SetorModel setor, NivelModel nivel,
 			Double salario) {
-		super();
 		this.nomePosto = nomePosto;
 		this.cargo = cargo;
 		this.setor = setor;
