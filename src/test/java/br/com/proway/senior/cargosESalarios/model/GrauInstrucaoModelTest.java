@@ -22,4 +22,17 @@ public class GrauInstrucaoModelTest {
 		assertEquals("Ensino Médio Completo", novoGI.getNome());
 	}
 
+	@Test
+	public void testConstrutorComId() {
+		GrauInstrucaoModel novoGI = new GrauInstrucaoModel(3, "Ensino Superior Completo");
+		assertEquals((Integer) 2, novoGI.getId());
+		assertEquals("Ensino Superior Completo", novoGI.getNome());
+	}
+	
+	@Test
+	public void testConstrutorSemId() {
+		GrauInstrucaoModel novoGI = new GrauInstrucaoModel("Pós Graduação");
+		assertEquals("Pós Graduação", novoGI.getNome());
+	}
+	
 }
