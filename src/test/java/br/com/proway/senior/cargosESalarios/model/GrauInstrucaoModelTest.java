@@ -12,7 +12,6 @@ import org.junit.Test;
  */
 public class GrauInstrucaoModelTest {
 
-
 	@Test
 	public void testConstrutorVazio() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
@@ -28,11 +27,24 @@ public class GrauInstrucaoModelTest {
 		assertEquals((Integer) 2, novoGI.getId());
 		assertEquals("Ensino Superior Completo", novoGI.getNome());
 	}
-	
+
 	@Test
 	public void testConstrutorSemId() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel("Pós Graduação");
 		assertEquals("Pós Graduação", novoGI.getNome());
 	}
-	
+
+	@Test
+	public void testSetEGetId() {
+		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
+		novoGI.setId(1);
+		assertEquals((Integer) 1, novoGI.getId());
+	}
+
+	@Test
+	public void testSetEGetNome() {
+		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
+		novoGI.setNome("Ensino Fundamental Completo");
+		assertEquals("Ensino Fundamental Completo", novoGI.getNome());
+	}
 }
