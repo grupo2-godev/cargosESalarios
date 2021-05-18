@@ -54,7 +54,17 @@ public class PostoDeTrabalhoModelTest {
 	@Test
 	public void testGetESetNomePosto() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
-		novoPosto.setNomePosto("Assistente de E-commerce");;
+		novoPosto.setNomePosto("Assistente de E-commerce");
 		assertEquals("Assistente de E-commerce", novoPosto.getNomePosto());
 	}
+	
+	@Test
+	public void testGetESetCargo() {
+		CargoModel cargo = new CargoModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setCargo(cargo);
+		assertEquals(cargo, novoPosto.getCargo());
+	}
+	
+	
 }
