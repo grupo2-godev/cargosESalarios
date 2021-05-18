@@ -40,14 +40,10 @@ public class CBO1994DAOTest {
 	
 	@Test
 	public void testCriaUmCBO1994() {
-		try {
 			CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", Insalubridade.Quarenta.getValor(), Periculosidade.Trinta.getValor());
 			Integer codigo_CBO1994 = CBO1994Dao.criar(CBO1994);
 			Object CBO1994Consultado = ConexaoHibernate.getSessao().get(CBO1994Model.class, codigo_CBO1994);
 			assertEquals(codigo_CBO1994, ((CBO1994Model) CBO1994Consultado).getCodigo_cbo());
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
 	}
 
 	@Test
