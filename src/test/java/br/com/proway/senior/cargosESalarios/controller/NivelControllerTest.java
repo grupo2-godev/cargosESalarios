@@ -118,5 +118,12 @@ public class NivelControllerTest {
 		ArrayList<NivelModel> listaRetornada = controller.buscarTodosNiveis();
 		assertTrue(listaRetornada.isEmpty());
 	}
+	
+	@Test
+	public void testSetId() throws Exception {
+		NivelModel nivel = new NivelModel("teste");	
+		nivel.setId(1);
+		assertNotNull(nivel.getId());
+	}
 
 }

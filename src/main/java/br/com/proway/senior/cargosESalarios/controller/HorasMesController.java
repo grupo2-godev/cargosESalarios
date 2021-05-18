@@ -121,7 +121,6 @@ public class HorasMesController {
 	 */
 	public boolean deletarTodosHorasMes() {
 		return horasMesDAO.deletarTodos();
-	}
-	
+	}	
 	
 }
