@@ -169,21 +169,21 @@ public class HibernateMethods<T> {
 	 * @param char : valorColuna
 	 * @return
 	 */
-	public List<T> listarPorValorDeColunaExato(
-		Class<T> classeTabela, String nomeColuna, char valorColuna) 
-	{
-		Session session = ConexaoHibernate.getSessao();
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
-		Root<T> root = criteria.from(classeTabela);
-		Expression<T> selectedColumn = root.get(nomeColuna);
-		criteria.select(root)
-			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
-			
-		Query<T> query = session.createQuery(criteria);
-		List<T> results = query.getResultList();
-		return new ArrayList<T>(results);
-	}
+//	public List<T> listarPorValorDeColunaExato(
+//		Class<T> classeTabela, String nomeColuna, char valorColuna) 
+//	{
+//		Session session = ConexaoHibernate.getSessao();
+//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
+//		Root<T> root = criteria.from(classeTabela);
+//		Expression<T> selectedColumn = root.get(nomeColuna);
+//		criteria.select(root)
+//			.where(criteriaBuilder.equal(selectedColumn, valorColuna));
+//			
+//		Query<T> query = session.createQuery(criteria);
+//		List<T> results = query.getResultList();
+//		return new ArrayList<T>(results);
+//	}
 	
 	/**
 	 * Funcoes e suas respectivas Overloads para poder selecionar entradas de 
