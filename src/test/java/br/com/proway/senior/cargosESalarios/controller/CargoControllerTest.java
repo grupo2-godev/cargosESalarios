@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNull;
 
 import java.time.LocalDateTime;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,6 +58,15 @@ public class CargoControllerTest {
 		new HorasMesController().deletarTodosHorasMes();
 
 		popularTabelas();
+	}
+
+	@AfterClass
+	public static void setUpAfterClass() throws Exception {
+		controller.deletarTodos();
+		new GrauInstrucaoController().deletarTodos();
+		new CBO2002Controller().deletarTodosCBO2002();
+		new CBO1994Controller().deletarTodosCBO1994();
+		new HorasMesController().deletarTodosHorasMes();
 	}
 
 	@Before

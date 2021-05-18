@@ -9,17 +9,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
+import br.com.proway.senior.cargosESalarios.controller.CBO2002Controller;
+import br.com.proway.senior.cargosESalarios.controller.CargoController;
+import br.com.proway.senior.cargosESalarios.controller.GrauInstrucaoController;
+import br.com.proway.senior.cargosESalarios.controller.HorasMesController;
 import br.com.proway.senior.cargosESalarios.controller.NivelController;
 import br.com.proway.senior.cargosESalarios.controller.SetorController;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 
 /**
  * Classes de testes para o PostoDeTrabalhoDAO.
@@ -41,6 +53,18 @@ public class PostoDeTrabalhoDAOTest {
 	static SetorModel setor;
 	static SetorModel setor2;
 	static NivelModel nivel;
+	static Integer codigoCbo2002;
+	static Integer codigoCbo1994;
+	static Integer idHorasMes;
+	static Integer idGrauInstrucao;
+	static String experienciaMinima = "1";
+	static String atribuicoes = "Desenvolvedor";
+	static Boolean status = true;
+	static Integer idPermissao = 1;
+	static GrauInstrucaoModel grauInstrucao;
+	static CBO2002Model cbo2002;
+	static CBO1994Model cbo1994;
+	static HorasMesModel horasMes;
 	
 	static PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(ConexaoHibernate.getSessao());
 	
@@ -53,9 +77,26 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		CargoDAO.getInstancia(ConexaoHibernate.getSessao()).deletarTodos();
+		new CargoController().deletarTodos();
+		new GrauInstrucaoController().deletarTodos();
+		new CBO2002Controller().deletarTodosCBO2002();
+		new CBO1994Controller().deletarTodosCBO1994();
+		new HorasMesController().deletarTodosHorasMes();
 		
 		popularTabelas();
+	}
+	
+	@AfterClass
+	public static void setUpAfterClass() throws Exception {
+		
+		limparTabelas();
+		new NivelController().deletarTodosNiveis();
+		new SetorController().deletarTodosSetores();
+		new CargoController().deletarTodos();
+		new GrauInstrucaoController().deletarTodos();
+		new CBO2002Controller().deletarTodosCBO2002();
+		new CBO1994Controller().deletarTodosCBO1994();
+		new HorasMesController().deletarTodosHorasMes();
 	}
 	
 	public static void limparTabelas() throws SQLException {
@@ -70,10 +111,22 @@ public class PostoDeTrabalhoDAOTest {
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		//TODO: Utilizar o novo CargoController ao inves do DAO.
+		idGrauInstrucao = new GrauInstrucaoController().cadastrar("Ensino superior completo");
+		grauInstrucao = new GrauInstrucaoController().buscarPorId(idGrauInstrucao);
+
+		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
+				Periculosidade.Trinta);
+		cbo2002 = new CBO2002Controller().buscarCBO2002PorCodigo(codigoCbo2002);
+
+		codigoCbo1994 = new CBO1994Controller().cadastrarCBO1994(55555, "Desenvolvedor", Insalubridade.Dez,
+				Periculosidade.Trinta);
+		cbo1994 = new CBO1994Controller().buscarCBO1994(codigoCbo1994);
+
+		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
+		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
 		
-		cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), 123456, 12345,
-				20, 1, "12", "Administrar Equipes", true, 1);
+		cargo = new CargoController().construir("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+				horasMes, grauInstrucao, "12", "Administrar Equipes", true, 1);
 		idCargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).criar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
