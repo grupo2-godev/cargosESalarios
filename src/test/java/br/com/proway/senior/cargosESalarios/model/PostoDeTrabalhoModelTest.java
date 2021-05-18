@@ -74,5 +74,13 @@ public class PostoDeTrabalhoModelTest {
 		assertEquals(setor, novoPosto.getSetor());
 	}
 	
+	@Test
+	public void testGetESetNivel() {
+		NivelModel nivel = new NivelModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setNivel(nivel);
+		assertEquals(nivel, novoPosto.getNivel());
+	}
+	
 	
 }
