@@ -82,5 +82,12 @@ public class PostoDeTrabalhoModelTest {
 		assertEquals(nivel, novoPosto.getNivel());
 	}
 	
+	@Test
+	public void testGetESetSalario() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setSalario(15000.00);
+		assertEquals(15000.00, novoPosto.getSalario(), 0.01);
+	}
+	
 	
 }
