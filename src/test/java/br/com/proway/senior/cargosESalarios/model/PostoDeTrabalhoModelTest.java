@@ -66,5 +66,13 @@ public class PostoDeTrabalhoModelTest {
 		assertEquals(cargo, novoPosto.getCargo());
 	}
 	
+	@Test
+	public void testGetESetSetor() {
+		SetorModel setor = new SetorModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setSetor(setor);
+		assertEquals(setor, novoPosto.getSetor());
+	}
+	
 	
 }
