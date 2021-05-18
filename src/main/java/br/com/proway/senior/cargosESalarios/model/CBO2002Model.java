@@ -40,7 +40,7 @@ public class CBO2002Model {
 		return codigoCBO2002;
 	}
 
-	public void setCodigoId(Integer codigoCBO2002) {
+	public void setCodigoCBO2002(Integer codigoCBO2002) {
 		this.codigoCBO2002 = codigoCBO2002;
 	}
 
@@ -70,8 +70,8 @@ public class CBO2002Model {
 
 	@Override
 	public String toString() {
-		return "Cbo2002Model [codigoId=" + codigoCBO2002 + ", descricao=" + descricao + ", percentualInsalubridade="
-				+ percentualInsalubridade + ", percentualPericulosidade=" + percentualPericulosidade + "]";
+		return "CBO2002Model [codigoCBO2002=" + codigoCBO2002 + ", descricao=" + descricao
+				+ ", percentualInsalubridade=" + percentualInsalubridade + ", percentualPericulosidade="
+				+ percentualPericulosidade + "]";
 	}
-
 }

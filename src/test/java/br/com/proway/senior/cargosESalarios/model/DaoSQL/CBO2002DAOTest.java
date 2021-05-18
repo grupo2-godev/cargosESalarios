@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -11,8 +12,10 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
 /**
  * Classe CBO2002DAOTest.
@@ -25,6 +28,16 @@ import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
 public class CBO2002DAOTest {
         
 	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
+	
+	@Test
+	public void testCriarObjetoVazio() {
+		CBO2002Model CBO2002 = new CBO2002Model();
+		assertNull(CBO2002.getCodigoCBO2002());
+		assertNull(CBO2002.getDescricao());
+		assertNull(CBO2002.getPercentualInsalubridade());
+		assertNull(CBO2002.getPercentualPericulosidade());
+		assertEquals("CBO2002Model [codigoCBO2002=null, descricao=null, percentualInsalubridade=null, percentualPericulosidade=null]", CBO2002.toString());
+	}       
 	
     @Test
     public void testInserirCBO2002() {

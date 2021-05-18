@@ -104,6 +104,7 @@ public class CBO2002Controller {
 		if(Validadores.ehObjetoNulo(cboRecuperado)) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
+		cboRecuperado.setCodigoCBO2002(codigoCBO);
 		cboRecuperado.setDescricao(novaDescricao);
 		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
 		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());

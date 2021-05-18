@@ -83,9 +83,4 @@ public class SetorModel {
 		this.idPermissao = idPermissao;
 	}
 
-	@Override
-	public String toString() {
-		return "Setor [idSetor=" + idSetor + ", nomeSetor=" + nomeSetor + ", idPermissao=" + idPermissao + "]";
-	}
-
 }
