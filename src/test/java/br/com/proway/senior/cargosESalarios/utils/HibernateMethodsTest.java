@@ -168,7 +168,7 @@ public class HibernateMethodsTest {
 		
 		HibernateMethods<SetorModel> methods = new HibernateMethods<SetorModel>();
 		List<SetorModel> tableEntries = 
-			methods.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor", "Set");
+			methods.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor", "Com");
 		assertTrue(tableEntries.contains(entry));
 	}
 

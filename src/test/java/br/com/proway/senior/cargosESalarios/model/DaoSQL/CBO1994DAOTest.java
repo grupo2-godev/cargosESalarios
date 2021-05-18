@@ -108,12 +108,6 @@ public class CBO1994DAOTest {
 		assertTrue(CBO1994Dao.buscarTodos().isEmpty());
 	}
 	
-	@Test
-	public void testConstrutorVazio() {
-		CBO1994Model cbo1994 = new CBO1994Model();
-		assertNotNull(cbo1994);
-	}
-	
 	@Before
 	public void limparBancoDeDados() {
 		CBO1994Dao.deletarTodos();
