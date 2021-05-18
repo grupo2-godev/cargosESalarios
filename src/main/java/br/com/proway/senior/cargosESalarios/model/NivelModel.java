@@ -18,12 +18,7 @@ public class NivelModel {
 	
 	public NivelModel(String nome) {
 		this.nomeNivel = nome;
-	}	
-	
-	public NivelModel(int id, String nome) {
-		this.idNivel = id;
-		this.nomeNivel = nome;
-	}	
+	}			
 	
 	/**
 	 * @return the id
