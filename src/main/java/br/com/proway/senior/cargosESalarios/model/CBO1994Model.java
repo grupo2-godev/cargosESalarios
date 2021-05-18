@@ -8,7 +8,7 @@ import javax.persistence.Table;
  * Classe de apoio para persistencia via banco de dados. Sera chamado seu ID na
  * classe Cargo.
  * 
- * @author Sarah Brito - Sprint 4
+ * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 4
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 
