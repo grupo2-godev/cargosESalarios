@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -94,6 +95,12 @@ public class CBO1994DAOTest {
 		CBO1994Dao.deletarTodos();
 		
 		assertTrue(CBO1994Dao.buscarTodos().isEmpty());
+	}
+	
+	@Test
+	public void testConstrutorVazio() {
+		CBO1994Model cbo1994 = new CBO1994Model();
+		assertNotNull(cbo1994);
 	}
 	
 	@Before
