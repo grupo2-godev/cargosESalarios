@@ -66,4 +66,9 @@ public class CBO1994Model {
 		this.percentualPericulosidade = percentualPericulosidade;
 	}
 
+	@Override
+	public String toString() {
+		return "CBO1994Model [codigo_cbo=" + codigo_cbo + ", descricao=" + descricao + ", percentualInsalubridade="
+				+ percentualInsalubridade + ", percentualPericulosidade=" + percentualPericulosidade + "]";
+	}	
 }

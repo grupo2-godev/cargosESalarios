@@ -3,6 +3,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -20,6 +21,16 @@ public class CBO1994DAOTest {
 	String descricao = "descricao";
 	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());	
 
+	@Test
+	public void testCriarObjetoVazio() {
+		CBO1994Model CBO1994 = new CBO1994Model();
+		assertNull(CBO1994.getCodigo_cbo());
+		assertNull(CBO1994.getDescricao());
+		assertNull(CBO1994.getPercentualInsalubridade());
+		assertNull(CBO1994.getPercentualPericulosidade());
+		assertEquals("CBO1994Model [codigo_cbo=null, descricao=null, percentualInsalubridade=null, percentualPericulosidade=null]", CBO1994.toString());
+	}   
+	
 	@Test
 	public void testGetInstance() {
 		CBO1994DAO test_getInstance1 = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
