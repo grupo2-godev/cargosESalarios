@@ -39,8 +39,6 @@ public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 			instancia = new SetorDAO(sessao);
 		return instancia;
 	}
-
-	public SetorDAO() {}
 	
 	/**
 	 * Construtor da classe SetorDAO, utilizado no Singleton.

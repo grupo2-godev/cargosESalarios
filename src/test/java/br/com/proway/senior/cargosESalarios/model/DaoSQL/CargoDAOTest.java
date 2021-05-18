@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -57,6 +58,15 @@ public class CargoDAOTest {
 		horasMesDAO.deletarTodos();
 
 		popularTabelas();
+	}
+	
+	@AfterClass
+	public static void setUpAfterClass() {
+		cargoDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos();
+		cbo2002DAO.deletarTodos();
+		cbo1994DAO.deletarTodos();
+		horasMesDAO.deletarTodos();
 	}
 
 	@Before

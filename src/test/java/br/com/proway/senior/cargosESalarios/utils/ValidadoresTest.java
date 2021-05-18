@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.utils.Validadores;
 
-public class ValidatorsTest {
+public class ValidadoresTest {
 
 	@Test
 	public void testIsZeroOrNull() {

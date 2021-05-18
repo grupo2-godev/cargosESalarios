@@ -77,9 +77,11 @@ public class ConexaoHibernate {
 		return sessaoFactory;
 	}
 
-	public static void fecharSessao() {
-		getSessaoFactory().close();
-	}
+//	public static void fecharSessao() {
+//		getSessao().disconnect();
+//		getSessao().close();
+//		
+//	}
 
 	public static Session getSessao() {
 		getSessaoFactory();
