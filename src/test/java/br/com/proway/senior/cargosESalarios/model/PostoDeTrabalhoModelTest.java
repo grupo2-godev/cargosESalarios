@@ -89,5 +89,13 @@ public class PostoDeTrabalhoModelTest {
 		assertEquals(15000.00, novoPosto.getSalario(), 0.01);
 	}
 	
+	@Test
+	public void testToString() {
+		PostoDeTrabalhoModel postoVazio = new PostoDeTrabalhoModel();
+		postoVazio.setSalario(3000.00);
+		System.out.println(postoVazio);
+		assertEquals("PostoDeTrabalhoModel [idPosto=null, nomePosto=null, cargo=null, setor=null, "
+				+ "nivel=null, salario=3000.0]", postoVazio.toString());
+	}
 	
 }
