@@ -24,12 +24,21 @@ public class ValidadoresTest {
 
 	@Test
 	public void testOnlyValidChars() {
-		String validChars = "vali do";
+		String validChars = "val1do";
 		String invalidChars = "1nv4l!d0";
 		assertTrue(Validadores.apenasCaracteresValidos(validChars));
 		assertFalse(Validadores.apenasCaracteresValidos(invalidChars));
 	}
 
+	@Test
+	public void testOnlyNonSpecialChars() {
+		String validChars = "vali do";
+		String invalidChars = "1nv4l!d0";
+		assertTrue(Validadores.apenasCaracteresNaoEspeciais(validChars));
+		assertFalse(Validadores.apenasCaracteresNaoEspeciais(invalidChars));
+	}
+
+	
 	@Test
 	public void testIsCBO2002Valid() {
 		Integer CBOFake = 123456789;
