@@ -53,11 +53,6 @@ public class HorasMesModel {
 
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	@Override
-	public String toString() {
-		return "HorasMesModel [idHorasMes=" + idHorasMes + ", quantidade=" + quantidade + "]";
-	}
+	}	
 
 }
