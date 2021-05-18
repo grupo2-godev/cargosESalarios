@@ -14,8 +14,12 @@ public class GrauInstrucaoModelTest {
 
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testConstrutorVazio() {
+		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
+		novoGI.setId(1);
+		novoGI.setNome("Ensino Médio Completo");
+		assertEquals((Integer) 1, novoGI.getId());
+		assertEquals("Ensino Médio Completo", novoGI.getNome());
 	}
 
 }
