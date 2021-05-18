@@ -18,31 +18,39 @@ public class NivelModel {
 	
 	public NivelModel(String nome) {
 		this.nomeNivel = nome;
-	}
+	}	
+	
+	public NivelModel(int id, String nome) {
+		this.idNivel = id;
+		this.nomeNivel = nome;
+	}	
 	
 	/**
 	 * @return the id
 	 */
 	public Integer getId() {
 		return idNivel;
-	}
+	}	
+	
 	/**
-	 * @param id the id to set
+	 * @param nome the nome to set
 	 */
-	public void setId(Integer id) {
-		this.idNivel = id;
+	public void setId(int id) {
+			this.idNivel = id;
 	}
+	
 	/**
 	 * @return the nome
 	 */
 	public String getNome() {
 		return nomeNivel;
 	}
+	
 	/**
 	 * @param nome the nome to set
 	 */
 	public void setNome(String nome) {
-		this.nomeNivel = nome;
+			this.nomeNivel = nome;
 	}
 	
 }
