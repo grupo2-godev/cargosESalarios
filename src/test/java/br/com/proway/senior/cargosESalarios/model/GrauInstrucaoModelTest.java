@@ -24,7 +24,7 @@ public class GrauInstrucaoModelTest {
 	@Test
 	public void testConstrutorComId() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel(3, "Ensino Superior Completo");
-		assertEquals((Integer) 2, novoGI.getId());
+		assertEquals((Integer) 3, novoGI.getId());
 		assertEquals("Ensino Superior Completo", novoGI.getNome());
 	}
 
