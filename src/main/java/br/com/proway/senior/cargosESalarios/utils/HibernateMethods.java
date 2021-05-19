@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection
@@ -20,13 +21,60 @@ import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
  * @param <T> : Classe que serve de base para a Tabela do Hibernate (@Entity)
  */
 public class HibernateMethods<T> {
+	
+	/***
+	 * Insere no banco de dados o registro de um objeto.
+	 *
+	 * @param obj Objeto a ser inserido.
+	 * @return int Id do objeto inserido.
+	 */
+	public int criar(T entidade) {
+		Session sessao = ConexaoHibernate.getSessao();
+		if (!sessao.getTransaction().isActive())
+			sessao.beginTransaction();
 
+		Integer idCadastrado = (Integer) sessao.save(entidade);
+		sessao.getTransaction().commit();
+		return idCadastrado;
+	}
+	
+	/***
+	 * Realiza uma busca no banco de dados pelo ID informado e retorna a 
+	 * tupla com os dados correspondentes.
+	 * 
+	 * @param idCargo int Id do cargo a ser consultado.
+	 * @param classeTabela Class classe da entidade
+	 * @return cargo Objeto encontrado no banco de dados.
+	 */
+	public T buscar(Class<T> classeTabela, int idCargo) {
+		return ConexaoHibernate.getSessao().get(classeTabela, idCargo);
+	}
+	
+	/**
+	 * Deleta do banco de dados um objeto.
+	 * 
+	 * 
+	 * @param int Id do objeto a ser deletado.
+	 * @param classeTabela Class classe da entidade
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
+	 */
+	public boolean deletar(Class<T> classeTabela,int idCargo) {
+		T cargo = buscar(classeTabela,idCargo);
+
+		if (!ConexaoHibernate.getSessao().getTransaction().isActive()) {
+			ConexaoHibernate.getSessao().beginTransaction();
+		}
+		ConexaoHibernate.getSessao().delete(cargo);
+		ConexaoHibernate.getSessao().getTransaction().commit();
+		return true;
+	}
+	
 	/**
 	 * Retorna todas as linhas da coluna 'nomeTabela' desejada.
 	 * 
 	 * 
-	 * @param nomeTabela : String que representa o nome da tabela representada 
-	 * no banco de dados;
+	 * @param classeTabela Class classe da entidade
 	 * @return 
 	 */
 	public List<T> listarPorTabela(Class<T> classeTabela) {
