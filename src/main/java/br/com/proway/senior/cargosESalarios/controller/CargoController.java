@@ -96,6 +96,10 @@ public class CargoController {
 
 	/**
 	 * Cadastra um objeto do tipo {@link CargoModel} no banco de dados.
+	 * <p>
+	 * <b>Atenção:</b> Para cadastrar um cargo eh necessario chamar o metodo construir() 
+	 * primeiro, para validacao e criacao do objeto CargoModel {@link CargoModel}. 
+	 * 
 	 * 
 	 * @param cargo CargoModel Objeto a ser cadastrado.
 	 * @return Integer: id do objeto cadastrado.
@@ -125,6 +129,9 @@ public class CargoController {
 	 * Verifica se existe no banco de dados um objeto com o id informado e verifica
 	 * tambem se o objeto recebido no parametro nao eh nulo. Localizando o objeto no
 	 * banco, efetua a alteracao para o objeto recebido no parametro.
+	 * <p>
+	 * <b>Atenção:</b> Para cadastrar um cargo eh necessario chamar o metodo construir() 
+	 * primeiro, para validacao e criacao do objeto CargoModel {@link CargoModel}. 
 	 * 
 	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado.
 	 * @param novoCargo            CargoModel Objeto que possui as alteracoes que
