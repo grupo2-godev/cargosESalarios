@@ -84,6 +84,26 @@ public class HibernateMethodsTest {
 	}
 	
 	@Test
+	public void salvarEBuscarObjeto() {
+		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
+		HorasMesModel entry = new HorasMesModel(240.042);
+		int savedId = methods.criar(entry);
+		
+		HorasMesModel created = methods.buscar(HorasMesModel.class, savedId);
+		assertEquals((Integer) savedId, created.getIdHorasMes());
+	}
+	
+	@Test
+	public void deletarObjeto() {
+		HibernateMethods<HorasMesModel> methods = new HibernateMethods<HorasMesModel>();
+		HorasMesModel entry = new HorasMesModel(240.042);
+		int savedId = methods.criar(entry);
+		
+		boolean success = methods.deletar(HorasMesModel.class, savedId);
+		assertTrue(success);
+	}
+	
+	@Test
 	public void listarTabela() {
 		HorasMesDAO dao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
 		HorasMesModel entry = new HorasMesModel(240.042);
