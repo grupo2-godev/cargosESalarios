@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.utils;
+package br.com.proway.senior.cargosESalarios.utilidades;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
 import br.com.proway.senior.cargosESalarios.controller.CBO2002Controller;
 import br.com.proway.senior.cargosESalarios.controller.CargoController;
@@ -25,7 +25,9 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
-import br.com.proway.senior.cargosESalarios.utils.HibernateMethods;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 public class HibernateMethodsTest {
 	static String nomeCargo = "Desenvolvedor 2";

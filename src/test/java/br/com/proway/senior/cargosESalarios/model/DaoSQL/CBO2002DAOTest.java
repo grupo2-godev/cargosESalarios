@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
-import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
-import br.com.proway.senior.cargosESalarios.utils.Validadores;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
  * Classe CBO2002DAOTest.

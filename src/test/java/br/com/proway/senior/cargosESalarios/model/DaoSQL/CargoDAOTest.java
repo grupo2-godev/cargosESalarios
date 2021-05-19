@@ -10,14 +10,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
-import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 /**
  * Testes referentes aos métodos da classe {@link CargoDAO}.

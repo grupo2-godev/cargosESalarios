@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -28,8 +28,8 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
-import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
-import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 public class PostoDeTrabalhoControllerTest{
 	

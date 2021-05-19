@@ -6,14 +6,14 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
-import br.com.proway.senior.cargosESalarios.utils.Validadores;
+import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
  * Controller que interage com o CargoDAO.

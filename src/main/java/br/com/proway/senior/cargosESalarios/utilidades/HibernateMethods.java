@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.utils;
+package br.com.proway.senior.cargosESalarios.utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import br.com.proway.senior.cargosESalarios.connection.ConexaoHibernate;
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection

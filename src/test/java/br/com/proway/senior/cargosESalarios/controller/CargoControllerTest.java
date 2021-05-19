@@ -17,8 +17,8 @@ import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.utils.Insalubridade;
-import br.com.proway.senior.cargosESalarios.utils.Periculosidade;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 /**
  * Classe que testa os metodos da classe {@link CargoController}.

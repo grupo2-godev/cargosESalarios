@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.utils;
+package br.com.proway.senior.cargosESalarios.utilidades;
 
 /**
  * Utilitarios do sistema

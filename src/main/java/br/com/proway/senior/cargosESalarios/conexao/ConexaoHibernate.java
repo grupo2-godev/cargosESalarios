@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.connection;
+package br.com.proway.senior.cargosESalarios.conexao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

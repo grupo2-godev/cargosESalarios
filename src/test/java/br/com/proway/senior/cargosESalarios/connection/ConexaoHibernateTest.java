@@ -9,6 +9,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
+
 public class ConexaoHibernateTest {
 
 	@Before

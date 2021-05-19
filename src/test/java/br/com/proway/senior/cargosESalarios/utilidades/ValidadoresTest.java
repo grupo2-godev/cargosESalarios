@@ -1,10 +1,10 @@
-package br.com.proway.senior.cargosESalarios.utils;
+package br.com.proway.senior.cargosESalarios.utilidades;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.utils.Validadores;
+import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 public class ValidadoresTest {
 
