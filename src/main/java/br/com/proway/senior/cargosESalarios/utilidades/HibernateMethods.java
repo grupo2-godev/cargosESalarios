@@ -41,12 +41,12 @@ public class HibernateMethods<T> {
 	 * Realiza uma busca no banco de dados pelo ID informado e retorna a 
 	 * tupla com os dados correspondentes.
 	 * 
-	 * @param idCargo int Id do cargo a ser consultado.
+	 * @param int Id do cargo a ser consultado.
 	 * @param classeTabela Class classe da entidade
-	 * @return cargo Objeto encontrado no banco de dados.
+	 * @return Objeto encontrado no banco de dados.
 	 */
-	public T buscar(Class<T> classeTabela, int idCargo) {
-		return ConexaoHibernate.getSessao().get(classeTabela, idCargo);
+	public T buscar(Class<T> classeTabela, int id) {
+		return ConexaoHibernate.getSessao().get(classeTabela, id);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class HibernateMethods<T> {
 	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
 	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
 	 */
-	public boolean deletar(Class<T> classeTabela,int idCargo) {
-		T cargo = buscar(classeTabela,idCargo);
+	public boolean deletar(Class<T> classeTabela,int id) {
+		T cargo = buscar(classeTabela,id);
 
 		if (!ConexaoHibernate.getSessao().getTransaction().isActive()) {
 			ConexaoHibernate.getSessao().beginTransaction();
