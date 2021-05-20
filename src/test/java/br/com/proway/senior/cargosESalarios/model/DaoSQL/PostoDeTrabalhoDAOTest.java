@@ -127,12 +127,12 @@ public class PostoDeTrabalhoDAOTest {
 		
 		cargo = new CargoController().construir("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Administrar Equipes", true, 1);
-		idCargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).criar(cargo);
+		idCargo = CargoDAO.getInstancia().criar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargoRecuperado = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).buscar(idCargo);
+		cargoRecuperado = CargoDAO.getInstancia().buscar(CargoModel.class, idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);

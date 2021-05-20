@@ -106,6 +106,7 @@ public class HibernateMethods<T> {
 	}
 	
 	/**
+	 * 
 	 * Atualiza um objeto no banco de dados.
 	 * 
 	 * Recebe um objeto que sera atualizado no banco de dados.
@@ -115,6 +116,7 @@ public class HibernateMethods<T> {
 	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
 	 *         durante a atualizacao.
 	 */
+	@Deprecated
 	public boolean atualizar(T objeto) {
 		if(!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();

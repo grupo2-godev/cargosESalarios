@@ -123,7 +123,7 @@ public class PostoDeTrabalhoControllerTest{
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).buscar(idCargo);
+		cargo = CargoDAO.getInstancia().buscar(CargoModel.class, idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);

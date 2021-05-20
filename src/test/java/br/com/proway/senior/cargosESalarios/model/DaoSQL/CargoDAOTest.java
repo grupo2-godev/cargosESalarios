@@ -27,7 +27,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 public class CargoDAOTest {
-	static CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
+	static CargoDAO cargoDAO = CargoDAO.getInstancia();
 	static GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
 	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
 	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
@@ -51,7 +51,7 @@ public class CargoDAOTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		cargoDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
 		grauInstrucaoDAO.deletarTodos();
 		cbo2002DAO.deletarTodos();
 		cbo1994DAO.deletarTodos();
@@ -62,7 +62,7 @@ public class CargoDAOTest {
 	
 	@AfterClass
 	public static void setUpAfterClass() {
-		cargoDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
 		grauInstrucaoDAO.deletarTodos();
 		cbo2002DAO.deletarTodos();
 		cbo1994DAO.deletarTodos();
@@ -71,7 +71,7 @@ public class CargoDAOTest {
 
 	@Before
 	public void limparTabelas() {
-		cargoDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
 	}
 
 	public static void popularTabelas() {
@@ -104,7 +104,7 @@ public class CargoDAOTest {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
-		CargoModel cargoConsultado = cargoDAO.buscar(idObjetoCadastrado);
+		CargoModel cargoConsultado = cargoDAO.buscar(CargoModel.class, idObjetoCadastrado);
 		assertEquals(cargo.getNomeCargo(), cargoConsultado.getNomeCargo());
 	}
 
@@ -116,19 +116,19 @@ public class CargoDAOTest {
 		CargoModel novoCargo = new CargoModel("Inspetor", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 2", true, 1);
 		cargoDAO.atualizar(idObjetoCadastrado, novoCargo);
-		CargoModel cargoAlterado = cargoDAO.buscar(idObjetoCadastrado);
+		CargoModel cargoAlterado = cargoDAO.buscar(CargoModel.class, idObjetoCadastrado);
 		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
 	}
 
 	@Test
 	public void testDelete() {
-		int totalRegistros = cargoDAO.buscarTodos().size();
+		int totalRegistros = cargoDAO.listarPorTabela(CargoModel.class).size();
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 1", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
-		assertEquals(totalRegistros + 1, cargoDAO.buscarTodos().size());
-		cargoDAO.deletar(idObjetoCadastrado);
-		assertEquals(totalRegistros, cargoDAO.buscarTodos().size());
+		assertEquals(totalRegistros + 1, cargoDAO.listarPorTabela(CargoModel.class).size());
+		cargoDAO.deletar(CargoModel.class, idObjetoCadastrado);
+		assertEquals(totalRegistros, cargoDAO.listarPorTabela(CargoModel.class).size());
 
 	}
 
@@ -140,7 +140,7 @@ public class CargoDAOTest {
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		cargoDAO.criar(cargo);
 		cargoDAO.criar(cargo2);
-		ArrayList<CargoModel> lista = cargoDAO.buscarTodos();
+		ArrayList<CargoModel> lista = (ArrayList<CargoModel>) cargoDAO.listarPorTabela(CargoModel.class);
 
 		assertEquals(2, lista.size());
 	}
@@ -150,8 +150,8 @@ public class CargoDAOTest {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		cargoDAO.criar(cargo);
-		assertEquals(1, cargoDAO.buscarTodos().size());
-		cargoDAO.deletarTodos();
-		assertEquals(0, cargoDAO.buscarTodos().size());
+		assertEquals(1, cargoDAO.listarPorTabela(CargoModel.class).size());
+		cargoDAO.deletarTodos("cargo");
+		assertEquals(0, cargoDAO.listarPorTabela(CargoModel.class).size());
 	}
 }

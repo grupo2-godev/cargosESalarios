@@ -6,14 +6,12 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
-import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
@@ -26,8 +24,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CargoController {
 
-	@SuppressWarnings("unchecked")
-	HibernateMethods<CargoModel> cargoDAO = HibernateMethods.getInstancia();
+	CargoDAO cargoDAO = CargoDAO.getInstancia();
 
 	/**
 	 * Valida os atributos do objeto a ser criado.
@@ -147,7 +144,7 @@ public class CargoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
-
+		novoCargo.setIdCargo(idObjetoASerAlterado);
 		cargoDAO.atualizar(idObjetoASerAlterado, novoCargo);
 		return true;
 	}
@@ -187,7 +184,7 @@ public class CargoController {
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
 	public boolean deletarTodos() {
-		cargoDAO.deletarTodos("cargo");
+		return cargoDAO.deletarTodos("cargo");
 	}
 	
 	/**
