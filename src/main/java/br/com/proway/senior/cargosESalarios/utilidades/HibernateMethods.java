@@ -21,6 +21,17 @@ import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
  */
 public class HibernateMethods<T> {
 	
+	private HibernateMethods<T> hibernateMethods;
+	
+	public HibernateMethods<T> getInstance() {
+		if(hibernateMethods == null) {
+			hibernateMethods = new HibernateMethods<T>();
+		}
+		return this.hibernateMethods;
+	}
+	
+	private HibernateMethods() {}
+	
 	/***
 	 * Insere no banco de dados o registro de um objeto.
 	 *
@@ -271,7 +282,7 @@ public class HibernateMethods<T> {
 	 * Funcoes e suas respectivas Overloads para poder selecionar entradas de 
 	 * tabelas utilizando uma de suas colunas e seu valor como filtro.
 	 * <br>
-	 * ex: 
+	 * ex: =
 	 * <br>
 	 * <br>
 	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
