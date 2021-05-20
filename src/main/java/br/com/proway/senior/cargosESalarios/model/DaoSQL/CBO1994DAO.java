@@ -10,18 +10,19 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
  * Implementar os metodos CRUD para o DB
  * 
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
-public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
+public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 
 	private static CBO1994DAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe CBO1994DAO
@@ -29,9 +30,9 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * @param Session session
 	 * @return CBO1994DAO instance
 	 */
-	public static CBO1994DAO getInstancia(Session sessao) {
+	public static CBO1994DAO getInstancia() {
 		if (instancia == null)
-			instancia = new CBO1994DAO(sessao);
+			instancia = new CBO1994DAO();
 		return instancia;
 	}
 
@@ -40,26 +41,9 @@ public class CBO1994DAO implements InterfaceDAOCRUD<CBO1994Model> {
 	 * 
 	 * @param Session session
 	 */
-	private CBO1994DAO(Session sessao) {
-		this.sessao = sessao;
+	private CBO1994DAO() {
 	}
 
-	/**
-	 * Inserir CBO1994.
-	 * 
-	 * Recebe um objeto CBO1994Model para inserir no banco de dados.
-	 * 
-	 * @param CBO1994Model CBO1994
-	 * @return int codigoCBO
-	 */
-	public int criar(CBO1994Model CBO1994) {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		Integer codigoCBO = (Integer) this.sessao.save(CBO1994);
-		this.sessao.getTransaction().commit();
-		return codigoCBO;
-	}
 
 	/**
 	 * Busca CBO1994 pelo seu codigo

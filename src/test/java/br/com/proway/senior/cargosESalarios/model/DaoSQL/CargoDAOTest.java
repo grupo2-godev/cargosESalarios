@@ -32,7 +32,6 @@ public class CargoDAOTest {
 	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
 	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
 	static HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
-
 	static LocalDateTime dataCadastro;
 	static LocalDateTime dataUltimaRevisao;
 	static Integer codigoCbo2002;
