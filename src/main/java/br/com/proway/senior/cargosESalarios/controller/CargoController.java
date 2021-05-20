@@ -186,8 +186,12 @@ public class CargoController {
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
-	public void deletarTodos() {
-		cargoDAO.deletarTodos();
+	public boolean deletarTodos() {
+		cargoDAO.deletarTodos("cargo");
 	}
+	
+	/**
+	 * 
+	 */
 
 }

@@ -10,8 +10,10 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /***
  * CargoDaoSQL Classe DAO que implementa a InterfaceDaoCrud, com os metodos
@@ -20,10 +22,9 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  * @author Samuel Levi <b>samuel.levi@senior.com.br</b> - Sprint 4
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  */
-public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
+public class CargoDAO extends HibernateMethods<CargoModel> {
 
 	private static CargoDAO instancia;
-	private Session sessao;
 
 	/**
 	 * Singleton da classe CargoDAO.
@@ -31,9 +32,9 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * @param sessao Session
 	 * @return instance GrauInstrucaoDAO
 	 */
-	public static CargoDAO getInstancia(Session sessao) {
+	public static CargoDAO getInstancia() {
 		if (instancia == null)
-			instancia = new CargoDAO(sessao);
+			instancia = new CargoDAO();
 		return instancia;
 	}
 
@@ -42,8 +43,8 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 	 * 
 	 * @param sessao Session
 	 */
-	private CargoDAO(Session sessao) {
-		this.sessao = sessao;
+	private CargoDAO() {
+		
 	}
 
 	/***
@@ -90,18 +91,7 @@ public class CargoDAO implements InterfaceDAOCRUD<CargoModel> {
 		if (!this.sessao.getTransaction().isActive()) {
 			this.sessao.beginTransaction();
 		}
-		cargo.setNomeCargo(cargoNovo.getNomeCargo());
-		cargo.setDataCadastro(cargoNovo.getDataCadastro());
-		cargo.setDataUltimaRevisao(cargoNovo.getDataUltimaRevisao());
-		cargo.setCbo2002(cargoNovo.getCbo2002());
-		cargo.setCbo94(cargoNovo.getCbo94());
-		cargo.setHoraMes(cargoNovo.getHoraMes());
-		cargo.setGrauInstrucao(cargoNovo.getGrauInstrucao());
-		cargo.setExperienciaMinima(cargoNovo.getExperienciaMinima());
-		cargo.setAtribuicoes(cargoNovo.getAtribuicoes());
-		cargo.setStatus(cargoNovo.getStatus());
-		cargo.setIdPermissao(cargoNovo.getIdPermissao());
-		this.sessao.update(cargo);
+		this.sessao.update(cargoNovo);
 		this.sessao.getTransaction().commit();
 		return true;
 	}

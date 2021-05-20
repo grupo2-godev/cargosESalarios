@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
@@ -12,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection
@@ -24,7 +26,7 @@ public class HibernateMethods<T> {
 	@SuppressWarnings("rawtypes")
 	private static HibernateMethods hibernateMethods;
 	
-	private static Session sessao = ConexaoHibernate.getSessao();
+	protected static Session sessao = ConexaoHibernate.getSessao();
 	
 	@SuppressWarnings("rawtypes")
 	public static HibernateMethods getInstancia() {
@@ -34,7 +36,9 @@ public class HibernateMethods<T> {
 		return hibernateMethods;
 	}
 	
-	private HibernateMethods() {}
+	protected HibernateMethods() {
+		
+	}
 	
 	/***
 	 * Insere no banco de dados o registro de um objeto.
@@ -79,6 +83,43 @@ public class HibernateMethods<T> {
 			sessao.beginTransaction();
 		}
 		sessao.delete(cargo);
+		sessao.getTransaction().commit();
+		return true;
+	}
+	
+	/**
+	 * Deleta do banco de dados todos os objetos
+	 * 
+	 * 
+	 * @param classeTabela Class classe da entidade
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
+	 */
+	public boolean deletarTodos(String nomeDaTabela) {
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
+		}
+		int registrosModificados = sessao.createSQLQuery("DELETE FROM " + nomeDaTabela).executeUpdate();
+		sessao.clear();
+		sessao.getTransaction().commit();
+		return registrosModificados > 0 ? true : false;
+	}
+	
+	/**
+	 * Atualiza um objeto no banco de dados.
+	 * 
+	 * Recebe um objeto que sera atualizado no banco de dados.
+	 *  
+	 * @param objeto T A instancia a ser atualizada
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
+	 */
+	public boolean atualizar(T objeto) {
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
+		}
+		sessao.update(objeto);
 		sessao.getTransaction().commit();
 		return true;
 	}
