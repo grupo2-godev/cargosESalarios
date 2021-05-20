@@ -13,6 +13,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
@@ -25,7 +26,8 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CargoController {
 
-	CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
+	@SuppressWarnings("unchecked")
+	HibernateMethods<CargoModel> cargoDAO = HibernateMethods.getInstancia();
 
 	/**
 	 * Valida os atributos do objeto a ser criado.
@@ -120,7 +122,7 @@ public class CargoController {
 	public CargoModel buscarPorId(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
-		return cargoDAO.buscar(id);
+		return cargoDAO.buscar(CargoModel.class, id);
 	}
 
 	/**
@@ -168,7 +170,7 @@ public class CargoController {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(id)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 
-		cargoDAO.deletar(id);
+		cargoDAO.deletar(CargoModel.class, id);
 		return true;
 	}
 
@@ -178,7 +180,7 @@ public class CargoController {
 	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> buscarTodos() {
-		return cargoDAO.buscarTodos();
+		return (ArrayList<CargoModel>) cargoDAO.listarPorTabela(CargoModel.class);
 	}
 
 	/**

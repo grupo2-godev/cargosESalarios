@@ -21,13 +21,17 @@ import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
  */
 public class HibernateMethods<T> {
 	
-	private HibernateMethods<T> hibernateMethods;
+	@SuppressWarnings("rawtypes")
+	private static HibernateMethods hibernateMethods;
 	
-	public HibernateMethods<T> getInstance() {
+	private static Session sessao = ConexaoHibernate.getSessao();
+	
+	@SuppressWarnings("rawtypes")
+	public static HibernateMethods getInstancia() {
 		if(hibernateMethods == null) {
-			hibernateMethods = new HibernateMethods<T>();
+			hibernateMethods = new HibernateMethods();
 		}
-		return this.hibernateMethods;
+		return hibernateMethods;
 	}
 	
 	private HibernateMethods() {}
@@ -39,7 +43,6 @@ public class HibernateMethods<T> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int criar(T entidade) {
-		Session sessao = ConexaoHibernate.getSessao();
 		if (!sessao.getTransaction().isActive())
 			sessao.beginTransaction();
 
@@ -57,7 +60,7 @@ public class HibernateMethods<T> {
 	 * @return Objeto encontrado no banco de dados.
 	 */
 	public T buscar(Class<T> classeTabela, int id) {
-		return ConexaoHibernate.getSessao().get(classeTabela, id);
+		return sessao.get(classeTabela, id);
 	}
 	
 	/**
@@ -72,11 +75,11 @@ public class HibernateMethods<T> {
 	public boolean deletar(Class<T> classeTabela,int id) {
 		T cargo = buscar(classeTabela,id);
 
-		if (!ConexaoHibernate.getSessao().getTransaction().isActive()) {
-			ConexaoHibernate.getSessao().beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		ConexaoHibernate.getSessao().delete(cargo);
-		ConexaoHibernate.getSessao().getTransaction().commit();
+		sessao.delete(cargo);
+		sessao.getTransaction().commit();
 		return true;
 	}
 	
@@ -88,7 +91,7 @@ public class HibernateMethods<T> {
 	 * @return 
 	 */
 	public List<T> listarPorTabela(Class<T> classeTabela) {
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		criteria.from(classeTabela);
@@ -121,7 +124,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaComStringIncompleta(
 			Class<T> classeTabela, String nomeColuna, String valorColuna) 
 		{
-			Session session = ConexaoHibernate.getSessao();
+			Session session = sessao;
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 			
@@ -160,7 +163,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Integer valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -195,7 +198,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, String valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -230,7 +233,7 @@ public class HibernateMethods<T> {
 //	public List<T> listarPorValorDeColunaExato(
 //		Class<T> classeTabela, String nomeColuna, char valorColuna) 
 //	{
-//		Session session = ConexaoHibernate.getSessao();
+//		Session session = sessao;
 //		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 //		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 //		Root<T> root = criteria.from(classeTabela);
@@ -265,7 +268,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
 		{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -300,7 +303,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
