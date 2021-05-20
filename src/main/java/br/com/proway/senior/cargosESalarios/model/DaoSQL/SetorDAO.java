@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 
@@ -26,7 +27,7 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 public class SetorDAO implements InterfaceDAOCRUD<SetorModel> {
 
 	private static SetorDAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 	
 	/**
 	 * Singleton da classe SetorDAO.

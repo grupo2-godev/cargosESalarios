@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
@@ -13,7 +12,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class HorasMesController {
 
-	HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+	HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia();
 	
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido no BD.
@@ -50,10 +49,10 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public HorasMesModel buscarHorasMes(int id) throws Exception {
-		if(horasMesDAO.buscar(id) == null) {
+		if(horasMesDAO.buscar(HorasMesModel.class, id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.buscar(id);
+		return horasMesDAO.buscar(HorasMesModel.class, id);
 	}
 	
 	/**
@@ -70,7 +69,7 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean atualizarHorasMes(int id, HorasMesModel objetoAlterado) throws Exception {
-		HorasMesModel original = horasMesDAO.buscar(id);
+		HorasMesModel original = horasMesDAO.buscar(HorasMesModel.class, id);
 		if(original == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
@@ -99,10 +98,10 @@ public class HorasMesController {
 	 * @throws Exception
 	 */
 	public boolean deletarHorasMes(int id) throws Exception {
-		if(horasMesDAO.buscar(id) == null) {
+		if(horasMesDAO.buscar(HorasMesModel.class, id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return horasMesDAO.deletar(id);
+		return horasMesDAO.deletar(HorasMesModel.class, id);
 	}
 	
 	/**
@@ -111,7 +110,7 @@ public class HorasMesController {
 	 * @return ArrayList<HorasMesModel> : lista de entradas
 	 */
 	public ArrayList<HorasMesModel> buscarTodosHorasMes(){
-		return horasMesDAO.buscarTodos();
+		return (ArrayList<HorasMesModel>) horasMesDAO.listarPorTabela(HorasMesModel.class);
 	}
 	
 	/**
@@ -120,7 +119,7 @@ public class HorasMesController {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosHorasMes() {
-		return horasMesDAO.deletarTodos();
+		return horasMesDAO.deletarTodos("horas_mes");
 	}	
 	
 }

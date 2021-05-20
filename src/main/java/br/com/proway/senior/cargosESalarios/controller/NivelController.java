@@ -15,7 +15,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class NivelController {
 
-	NivelDAO nivelDAO = NivelDAO.getInstancia(ConexaoHibernate.getSessao());
+	NivelDAO nivelDAO = NivelDAO.getInstancia();
 	
 	/**
 	 * Cria um novo objeto NivelModel e o passa para o DAO para que seja inserido no BD.
@@ -44,10 +44,10 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public NivelModel buscarNivel(int id) throws Exception {
-		if(nivelDAO.buscar(id) == null) {
+		if(nivelDAO.buscar(NivelModel.class, id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return nivelDAO.buscar(id);
+		return nivelDAO.buscar(NivelModel.class, id);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public boolean atualizarNivel(int id, NivelModel objetoAlterado) throws Exception {
-		NivelModel original = nivelDAO.buscar(id);
+		NivelModel original = nivelDAO.buscar(NivelModel.class, id);
 		if(original == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
@@ -86,10 +86,10 @@ public class NivelController {
 	 * @throws Exception
 	 */
 	public boolean deletarNivel(int id) throws Exception {
-		if(nivelDAO.buscar(id) == null) {
+		if(nivelDAO.buscar(NivelModel.class, id) == null) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
-		return nivelDAO.deletar(id);
+		return nivelDAO.deletar(NivelModel.class, id);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class NivelController {
 	 * @return ArrayList<NivelModel> : lista de entradas
 	 */
 	public ArrayList<NivelModel> buscarTodosNiveis(){
-		return nivelDAO.buscarTodos();
+		return (ArrayList<NivelModel>) nivelDAO.listarPorTabela(NivelModel.class);
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class NivelController {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosNiveis() {
-		return nivelDAO.deletarTodos();
+		return nivelDAO.deletarTodos("nivelmodel");
 	}
 	
 	

@@ -20,7 +20,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CBO2002Controller {
 
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia();
 
 	/**
 	 * Cadastrar na banco de dados um CBO 2002.
@@ -42,7 +42,7 @@ public class CBO2002Controller {
 		if (Validadores.ehValidoCBO2002(codigoCBO) == false) {
 			throw new Exception("Código de CBO 2002 informado inválido.");
 		} 
-		if (!Validadores.ehObjetoNulo(cbo2002DAO.buscar(codigoCBO))) {
+		if (!Validadores.ehObjetoNulo(cbo2002DAO.buscar(CBO2002Model.class, codigoCBO))) {
 			throw new Exception("Código de CBO 2002 informado já cadastrado.");
 		} 
 		if (!Validadores.apenasCaracteresValidos(descricao)) {
@@ -65,7 +65,7 @@ public class CBO2002Controller {
 	 */
 
 	public CBO2002Model buscarCBO2002PorCodigo(Integer codigoCBO) {
-		return cbo2002DAO.buscar(codigoCBO);
+		return cbo2002DAO.buscar(CBO2002Model.class, codigoCBO);
 	}
 	
 	
@@ -80,7 +80,7 @@ public class CBO2002Controller {
 	 * @return ArrayList CBO2002Model lista de CBO 2002 localizados.
 	 */
 	public ArrayList<CBO2002Model> buscarCBO2002PorNome(String descricaoCBO2002) {
-		return cbo2002DAO.retrieveByName(descricaoCBO2002);
+		return (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "cbo2002", descricaoCBO2002);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class CBO2002Controller {
 	 */
 	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade, 
 			Periculosidade novaPericulosidade) throws Exception {
-		CBO2002Model cboRecuperado = cbo2002DAO.buscar(codigoCBO);
+		CBO2002Model cboRecuperado = cbo2002DAO.buscar(CBO2002Model.class, codigoCBO);
 		if(Validadores.ehObjetoNulo(cboRecuperado)) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
@@ -122,10 +122,10 @@ public class CBO2002Controller {
 	 * @throws Exception
 	 */
 	public boolean deletarCBO2002(Integer codigoCBO) throws Exception {
-		if(Validadores.ehObjetoNulo(cbo2002DAO.buscar(codigoCBO))) {
+		if(Validadores.ehObjetoNulo(cbo2002DAO.buscar(CBO2002Model.class, codigoCBO))) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
-		cbo2002DAO.deletar(codigoCBO);
+		cbo2002DAO.deletar(CBO2002Model.class, codigoCBO);
 		return true;
 	}
 	
@@ -138,7 +138,7 @@ public class CBO2002Controller {
 	 * @return ArrayList CBO2002Model lista de registros localizados.
 	 */
 	public ArrayList<CBO2002Model> buscarTodosCBO2002() {
-		return cbo2002DAO.buscarTodos();
+		return (ArrayList<CBO2002Model>) cbo2002DAO.listarPorTabela(CBO2002Model.class);
 	}
 	
 	/**
@@ -147,7 +147,7 @@ public class CBO2002Controller {
 	 * Realiza a exclusao de todos os registros de CBO 2002 cadastrados no banco de dados.
 	 */
 	public void deletarTodosCBO2002() {
-		cbo2002DAO.deletarTodos();
+		cbo2002DAO.deletarTodos("cbo2002");
 	}
 	
 }

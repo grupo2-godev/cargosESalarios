@@ -117,7 +117,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarTabela() {
-		HorasMesDAO dao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+		HorasMesDAO dao = HorasMesDAO.getInstancia();
 		HorasMesModel entry = new HorasMesModel(240.042);
 		int savedId = dao.criar(entry);
 		
@@ -130,7 +130,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeId() {
-		HorasMesDAO dao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+		HorasMesDAO dao = HorasMesDAO.getInstancia();
 		HorasMesModel entry = new HorasMesModel(525.525);
 		int savedId = dao.criar(entry);
 
@@ -145,7 +145,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaDouble() {
-		HorasMesDAO dao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+		HorasMesDAO dao = HorasMesDAO.getInstancia();
 		HorasMesModel entry = new HorasMesModel(525.525);
 		int savedId = dao.criar(entry);
 		entry.setIdHorasMes(savedId);

@@ -28,10 +28,10 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  */
 public class CargoDAOTest {
 	static CargoDAO cargoDAO = CargoDAO.getInstancia();
-	static GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
-	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
-	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
-	static HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+	static GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia();
+	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia();
+	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia();
+	static HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia();
 	static LocalDateTime dataCadastro;
 	static LocalDateTime dataUltimaRevisao;
 	static Integer codigoCbo2002;
@@ -51,10 +51,10 @@ public class CargoDAOTest {
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		cargoDAO.deletarTodos("cargo");
-		grauInstrucaoDAO.deletarTodos();
-		cbo2002DAO.deletarTodos();
-		cbo1994DAO.deletarTodos();
-		horasMesDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
+		cbo2002DAO.deletarTodos("cbo2002");
+		cbo1994DAO.deletarTodos("cbo1994");
+		horasMesDAO.deletarTodos("horas_mes");
 
 		popularTabelas();
 	}
@@ -62,10 +62,10 @@ public class CargoDAOTest {
 	@AfterClass
 	public static void setUpAfterClass() {
 		cargoDAO.deletarTodos("cargo");
-		grauInstrucaoDAO.deletarTodos();
-		cbo2002DAO.deletarTodos();
-		cbo1994DAO.deletarTodos();
-		horasMesDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
+		cbo2002DAO.deletarTodos("cbo2002");
+		cbo1994DAO.deletarTodos("cbo1994");
+		horasMesDAO.deletarTodos("horas_mes");
 	}
 
 	@Before
@@ -75,18 +75,18 @@ public class CargoDAOTest {
 
 	public static void popularTabelas() {
 		idGrauInstrucao = grauInstrucaoDAO.criar(new GrauInstrucaoModel("Ensino superior completo"));
-		grauInstrucao = grauInstrucaoDAO.buscar(idGrauInstrucao);
+		grauInstrucao = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, idGrauInstrucao);
 
 		codigoCbo2002 = cbo2002DAO.criar(new CBO2002Model(666666, "Desenvolvedor", Insalubridade.Dez.getValor(),
 				Periculosidade.Trinta.getValor()));
-		cbo2002 = cbo2002DAO.buscar(codigoCbo2002);
+		cbo2002 = cbo2002DAO.buscar(CBO2002Model.class, codigoCbo2002);
 
 		codigoCbo1994 = cbo1994DAO.criar(new CBO1994Model(55555, "Desenvolvedor", Insalubridade.Dez.getValor(),
 				Periculosidade.Trinta.getValor()));
-		cbo1994 = cbo1994DAO.buscar(codigoCbo1994);
+		cbo1994 = cbo1994DAO.buscar(CBO1994Model.class, codigoCbo1994);
 
 		idHorasMes = horasMesDAO.criar(new HorasMesModel(240d));
-		horasMes = horasMesDAO.buscar(idHorasMes);
+		horasMes = horasMesDAO.buscar(HorasMesModel.class, idHorasMes);
 	}
 
 	@Test

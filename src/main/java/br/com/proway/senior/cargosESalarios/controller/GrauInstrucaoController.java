@@ -15,7 +15,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class GrauInstrucaoController {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia();
 
 	/**
 	 * Cadastra um objeto do tipo {@link GrauInstrucaoModel} no banco de dados.
@@ -50,7 +50,7 @@ public class GrauInstrucaoController {
 		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
-		return grauInstrucaoDAO.buscar(id);
+		return grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, id);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class GrauInstrucaoController {
 		if (!Validadores.apenasCaracteresValidos(nome)) {
 			throw (new Exception("A palavra de consulta não pode ter caracteres especiais."));
 		}
-		return grauInstrucaoDAO.buscarPorNome(nome);
+		return (ArrayList<GrauInstrucaoModel>) grauInstrucaoDAO.listarPorValorDeColunaComStringIncompleta(GrauInstrucaoModel.class, "instrucao", nome);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class GrauInstrucaoController {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(id))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
-		grauInstrucaoDAO.deletar(id);
+		grauInstrucaoDAO.deletar(GrauInstrucaoModel.class, id);
 		return true;
 	}
 
@@ -128,14 +128,14 @@ public class GrauInstrucaoController {
 	 *         {@link GrauInstrucaoModel}
 	 */
 	public ArrayList<GrauInstrucaoModel> buscarTodos() {
-		return grauInstrucaoDAO.buscarTodos();
+		return (ArrayList<GrauInstrucaoModel>) grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class);
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
 	public void deletarTodos() {
-		grauInstrucaoDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
 	}
 
 }

@@ -44,21 +44,6 @@ public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 	private CBO1994DAO() {
 	}
 
-
-	/**
-	 * Busca CBO1994 pelo seu codigo
-	 * 
-	 * Metodo busca o objeto CBO1994 no banco de dados conforme codigo informado
-	 * 
-	 * @param int codigo_CBO1994
-	 * @return results retorna objeto CBO1994Model
-	 */
-	public CBO1994Model buscar(int codigo_CBO1994) {
-		CBO1994Model results = this.sessao.get(CBO1994Model.class, codigo_CBO1994);
-		//System.out.println(results.toString());
-		return results;
-	}
-
 	/**
 	 * Atualiza um CBO1994
 	 * 
@@ -69,7 +54,7 @@ public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 	 * @param CBO1994Model objetoAlterado
 	 */
 	public boolean atualizar(int codigo_CBO1994, CBO1994Model objetoAlterado) {
-		CBO1994Model original = buscar(codigo_CBO1994);
+		CBO1994Model original = buscar(CBO1994Model.class, codigo_CBO1994);
 		if (!this.sessao.getTransaction().isActive()) {
 			this.sessao.beginTransaction();
 		}
@@ -83,61 +68,5 @@ public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 		return true;
 	}
 
-	/**
-	 * Deletar um CBO1994
-	 * 
-	 * Metodo deleta um CBO1994, conforme codigo CBO1994 informado
-	 * 
-	 * @param int codigo_CBO1994
-	 * @return boolean
-	 */
-	public boolean deletar(int codigo_CBO1994) {
-		CBO1994Model objetoDeletar = buscar(codigo_CBO1994);
-
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-
-		this.sessao.delete(objetoDeletar);
-		this.sessao.getTransaction().commit();
-		return true;
-	}
-
-	/**
-	 * Busca todos os CBO1994 cadastrados
-	 * 
-	 * Metodo busca todos os CBO1994 cadastrados que constam no banco de dados e retorna no formate de ArrayList
-	 * 
-	 * @return ArrayList<Cbo1994Model>
-	 */
-	public ArrayList<CBO1994Model> buscarTodos() {	
-		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
-		CriteriaQuery<CBO1994Model> criteria = criteriaBuilder.createQuery(CBO1994Model.class);
-		
-		Root<CBO1994Model> root = criteria.from(CBO1994Model.class);
-		
-		Query query = this.sessao.createQuery(criteria);
-		
-		List<CBO1994Model> results = query.getResultList();
-		
-		return new ArrayList<CBO1994Model>(results);
-	}
-
-	/**
-	 * Deleta todos os CBO1994 no banco de dados
-	 * 
-	 * Metodo remove todos os CBO1994 presentes na tabela no banco de dados
-	 * 
-	 * @return boolean
-	 */
-	public boolean deletarTodos() {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		int modificados = this.sessao.createSQLQuery("DELETE FROM cbo1994").executeUpdate();
-		this.sessao.getTransaction().commit();
-		this.sessao.clear();
-		return modificados > 0 ? true : false;
-	}
 
 }
