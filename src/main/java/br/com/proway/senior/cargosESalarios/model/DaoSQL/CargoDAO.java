@@ -65,6 +65,7 @@ public class CargoDAO extends HibernateMethods<CargoModel> {
 			sessao.beginTransaction();
 		}
 		cargoNovo.setIdCargo(idCargo);
+		sessao.clear();
 		sessao.update(cargoNovo);
 		sessao.getTransaction().commit();
 		return true;
