@@ -178,5 +178,4 @@ public class GrauInstrucaoDAO implements InterfaceDAOCRUD<GrauInstrucaoModel> {
 		this.sessao.getTransaction().commit();
 		return registrosModificados > 0 ? true : false;
 	}
-
 }
