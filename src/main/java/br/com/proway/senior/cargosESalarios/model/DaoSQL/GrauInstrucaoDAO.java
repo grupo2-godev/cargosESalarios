@@ -4,7 +4,6 @@ import org.hibernate.Session;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
