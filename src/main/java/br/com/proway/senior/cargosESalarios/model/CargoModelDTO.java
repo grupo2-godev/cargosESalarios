@@ -38,7 +38,7 @@ public class CargoModelDTO {
 		return nomeCargo;
 	}
 
-	public CBO2002Model getCbo2002() {
+	public String getCbo2002() {
 		return cbo2002;
 	}
 

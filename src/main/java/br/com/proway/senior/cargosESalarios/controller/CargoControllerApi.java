@@ -10,6 +10,7 @@ import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.CargoModelDTO;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
@@ -117,10 +118,8 @@ public class CargoControllerApi {
 	 * @return CargoModel: objeto encontrado no banco de dados.
 	 * @throws Exception
 	 */
-	public CargoModel buscarPorId(Integer id) throws Exception {
-		if (Validadores.ehZeroOuNulo(id))
-			throw (new Exception("O id não pode ser nulo ou zero."));
-		return cargoDAO.buscar(id);
+	public CargoModelDTO buscarPorId(Integer id){
+		return new CargoModelDTO(cargoDAO.buscar(id));
 	}
 
 	/**
