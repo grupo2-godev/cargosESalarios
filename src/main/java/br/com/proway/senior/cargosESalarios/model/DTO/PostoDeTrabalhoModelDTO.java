@@ -20,9 +20,10 @@ public class PostoDeTrabalhoModelDTO {
 	 * as informações para o usuário.
 	 * 
 	 * @param postoDeTrabalhoModel
+	 * @author Bruno Marques
+	 * @author Vanderlei Kleinschmidt
 	 */
 	public PostoDeTrabalhoModelDTO(PostoDeTrabalhoModel postoDeTrabalhoModel) {
-		super();
 		this.nomePosto = postoDeTrabalhoModel.getNomePosto();
 		this.cargo = postoDeTrabalhoModel.getCargo();
 		this.setor = postoDeTrabalhoModel.getSetor();
