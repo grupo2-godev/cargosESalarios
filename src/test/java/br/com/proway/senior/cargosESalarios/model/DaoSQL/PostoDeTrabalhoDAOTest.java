@@ -171,7 +171,7 @@ public class PostoDeTrabalhoDAOTest {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Gestão de Pessoas", cargo, setor, nivel, 
 				2700.00);
 		postoDAO.criar(novoPosto);
-		ArrayList<PostoDeTrabalhoModel> listaRetornada = (ArrayList<PostoDeTrabalhoModel>) postoDAO.listarPorValorDeColunaComStringIncompleta(PostoDeTrabalhoModel.class, "nomeposto", "Analist");
+		ArrayList<PostoDeTrabalhoModel> listaRetornada = (ArrayList<PostoDeTrabalhoModel>) postoDAO.listarPorValorDeColunaComStringIncompleta(PostoDeTrabalhoModel.class, "nomePosto", "Analist");
 		assertEquals(novoPosto.getNomePosto(), listaRetornada.get(0).getNomePosto());
 		assertEquals(novoPosto.getCargo().getIdCargo(), listaRetornada.get(0).getCargo().getIdCargo());
 		assertEquals(novoPosto.getSetor().getId(), listaRetornada.get(0).getSetor().getId());

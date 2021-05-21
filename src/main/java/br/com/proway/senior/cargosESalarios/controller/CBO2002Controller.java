@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO2002DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
@@ -80,7 +79,7 @@ public class CBO2002Controller {
 	 * @return ArrayList CBO2002Model lista de CBO 2002 localizados.
 	 */
 	public ArrayList<CBO2002Model> buscarCBO2002PorNome(String descricaoCBO2002) {
-		return (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "cbo2002", descricaoCBO2002);
+		return (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "descricao", descricaoCBO2002);
 	}
 
 	/**

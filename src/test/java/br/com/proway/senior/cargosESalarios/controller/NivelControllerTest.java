@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelControllerTest {
@@ -14,9 +15,9 @@ public class NivelControllerTest {
 	
 	@Before
 	public void resetarSequencia(){
-		// TODO: Incluir um @Before  para resetarmos a sequencia da tabela
-	}
-	
+		controller.deletarTodosNiveis();
+		ConexaoHibernate.getSessao();
+	}	
 	
 	@Test
 	public void testCadastrarNivel() throws Exception {
@@ -70,6 +71,7 @@ public class NivelControllerTest {
 		NivelModel ObjetoAtualizado = new NivelModel("Moto");
 		
 		controller.atualizarNivel(idInexistente, ObjetoAtualizado);
+		
 	}
 
 	@Test

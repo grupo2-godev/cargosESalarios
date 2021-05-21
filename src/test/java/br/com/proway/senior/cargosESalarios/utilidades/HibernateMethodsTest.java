@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.controller.CargoController;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
@@ -182,7 +181,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaString() {
-		SetorDAO dao = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
+		SetorDAO dao = SetorDAO.getInstancia();
 		SetorModel entry = new SetorModel("RH", 42);
 		int id = dao.criar(entry);
 		entry.setId(id);
@@ -195,7 +194,7 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaStringIncompleta() {
-		SetorDAO dao = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
+		SetorDAO dao = SetorDAO.getInstancia();
 		SetorModel entry = new SetorModel("Compras", 44);
 		int id = dao.criar(entry);
 		entry.setId(id);

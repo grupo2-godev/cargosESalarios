@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
@@ -13,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
 
 /**
  * Classe Generica com Metodos de interacao com a HibernateConnection
@@ -49,7 +47,7 @@ public class HibernateMethods<T> {
 	public int criar(T entidade) {
 		if (!sessao.getTransaction().isActive())
 			sessao.beginTransaction();
-
+		sessao.clear();
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
 		return idCadastrado;

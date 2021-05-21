@@ -1,18 +1,9 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**

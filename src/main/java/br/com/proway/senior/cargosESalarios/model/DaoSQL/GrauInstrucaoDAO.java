@@ -2,6 +2,7 @@ package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
 import org.hibernate.Session;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
@@ -16,8 +17,9 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
  */
 
 public class GrauInstrucaoDAO extends HibernateMethods<GrauInstrucaoModel>{
+	
 	private static GrauInstrucaoDAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe GrauInstrucaoDAO.

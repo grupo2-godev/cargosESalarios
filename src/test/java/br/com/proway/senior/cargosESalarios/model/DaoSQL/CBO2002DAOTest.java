@@ -63,7 +63,7 @@ public class CBO2002DAOTest {
     	CBO2002Model novoCBO = new CBO2002Model(261305, "Administrador de Arquivos", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(novoCBO);
-    	ArrayList<CBO2002Model> cboRetornado = (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "cbo2002", "Arqu");
+    	ArrayList<CBO2002Model> cboRetornado = (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "descricao", "Arqu");
     	assertEquals(novoCBO.getDescricao(), cboRetornado.get(0).getDescricao());
     	assertEquals(novoCBO.getPercentualInsalubridade(), cboRetornado.get(0).getPercentualInsalubridade());
     	assertEquals(novoCBO.getPercentualPericulosidade(), cboRetornado.get(0).getPercentualPericulosidade());

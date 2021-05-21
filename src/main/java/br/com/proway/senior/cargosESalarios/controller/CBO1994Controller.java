@@ -1,9 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller;
 
-import java.util.List;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
@@ -137,6 +135,6 @@ public class CBO1994Controller {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosCBO1994() {
-		return CBO1994Dao.deletarTodos("");
+		return CBO1994Dao.deletarTodos("cbo1994");
 	}	
 }

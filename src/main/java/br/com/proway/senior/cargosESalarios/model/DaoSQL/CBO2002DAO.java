@@ -1,18 +1,9 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
@@ -27,7 +18,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 public class CBO2002DAO extends HibernateMethods<CBO2002Model> {
 
 	private static CBO2002DAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe CBO2002DAO.

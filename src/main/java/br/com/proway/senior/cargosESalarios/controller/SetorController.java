@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
@@ -20,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 public class SetorController {
 
-	SetorDAO setorDAO = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
+	SetorDAO setorDAO = SetorDAO.getInstancia();
 
 	/**
 	 * Cadastra na tabela setor um objeto do tipo {@link SetorModel}.
@@ -33,7 +32,7 @@ public class SetorController {
 	 * @return Integer|null id do setor se foi possivel ser criado.
 	 */
 	public Integer cadastrarSetor(String nomeSetor, Integer idPermissao) {
-		ArrayList<SetorModel> setoresConsultados = setorDAO.buscarPorNome(nomeSetor);
+		ArrayList<SetorModel> setoresConsultados = (ArrayList<SetorModel>) setorDAO.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor", nomeSetor);
 		for (SetorModel setorModel : setoresConsultados) {
 			if (setorModel.getNomeSetor().equals(nomeSetor)) {
 				System.out.println("Setor informado já cadastrado.");
@@ -55,7 +54,7 @@ public class SetorController {
 	 * @return SetorModel objeto localizado ou null caso nao conste no banco.
 	 */
 	public SetorModel buscarSetorPorId(Integer idSetor) {
-		return setorDAO.buscar(idSetor);
+		return setorDAO.buscar(SetorModel.class, idSetor);
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class SetorController {
 	 * @return rrayList SetorModel lista de registros localizados.
 	 */
 	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
-		return setorDAO.buscarPorNome(nomeSetor);
+		return (ArrayList<SetorModel>) setorDAO.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor",nomeSetor);
 	}
 
 	/**
@@ -85,7 +84,7 @@ public class SetorController {
 	 * @throws Exception
 	 */
 	public boolean atualizarSetor(Integer idSetor, String novoNome, Integer novaIdPermissao) throws Exception {
-		SetorModel setorRecuperado = setorDAO.buscar(idSetor);
+		SetorModel setorRecuperado = setorDAO.buscar(SetorModel.class, idSetor);
 		if (Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
@@ -104,10 +103,10 @@ public class SetorController {
 	 * @throws Exception
 	 */
 	public boolean deletarSetor(Integer idSetor) throws Exception {
-		if (Validadores.ehObjetoNulo(setorDAO.buscar(idSetor))) {
+		if (Validadores.ehObjetoNulo(setorDAO.buscar(SetorModel.class, idSetor))) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
-		return setorDAO.deletar(idSetor);
+		return setorDAO.deletar(SetorModel.class, idSetor);
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class SetorController {
 	 * @return ArrayList SetorModel lista de todos os setores cadastrados.
 	 */
 	public ArrayList<SetorModel> buscarTodosSetores() {
-		return setorDAO.buscarTodos();
+		return (ArrayList<SetorModel>) setorDAO.listarPorTabela(SetorModel.class);
 	}
 
 	/**
@@ -128,7 +127,7 @@ public class SetorController {
 	 * cadastrados.
 	 */
 	public void deletarTodosSetores() {
-		setorDAO.deletarTodos();
+		setorDAO.deletarTodos("setor");
 	}
 
 }
