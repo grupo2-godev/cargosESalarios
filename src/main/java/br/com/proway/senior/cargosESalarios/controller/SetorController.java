@@ -39,7 +39,6 @@ public class SetorController {
 				return null;
 			}
 		}
-
 		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
 		int idCadastrado = setorDAO.criar(novoSetor);
 		return idCadastrado;

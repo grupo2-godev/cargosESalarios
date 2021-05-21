@@ -8,13 +8,21 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 public class HorasMesControllerTest {
 	
-	HorasMesController controller = new HorasMesController();	
+	static HorasMesController controller = new HorasMesController();	
+	
+	@BeforeClass
+	public static void limparBanco() {
+		ConexaoHibernate.getSessao().clear();
+		new CargoController().deletarTodos();
+	}
 		
 	@Test
 	public void testCadastrarHorasMes() throws Exception {
