@@ -18,7 +18,6 @@ import org.junit.BeforeClass;
 
 import org.junit.Test;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -123,7 +122,7 @@ public class PostoDeTrabalhoControllerTest{
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
 		
-		cargo = CargoDAO.getInstancia(ConexaoHibernate.getSessao()).buscar(idCargo);
+		cargo = CargoDAO.getInstancia().buscar(CargoModel.class, idCargo);
 		setor = new SetorController().buscarSetorPorId(idSetor);
 		setor2 = new SetorController().buscarSetorPorId(idSetor2);
 		nivel = new NivelController().buscarNivel(idNivel);
@@ -131,7 +130,7 @@ public class PostoDeTrabalhoControllerTest{
 	
 	@Before
 	public void before() throws Exception {
-		controller.postoDAO.deletarTodos(); 
+		controller.postoDAO.deletarTodos("posto_de_trabalho"); 
 		
 	}
 	
@@ -194,8 +193,5 @@ public class PostoDeTrabalhoControllerTest{
 		controller.cadastrarPostoDeTrabalho("Analista de Sistemas", cargo, setor, nivel, 3000.00);
 		controller.cadastrarPostoDeTrabalho("Coordenador de RH", cargo, setor, nivel, 7000.00);
 		assertEquals(3, controller.buscarTodosPostosDeTrabalho().size());
-	}
-	
-	
-	
+	}	
 }

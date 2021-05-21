@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
 public class SetorDAOTest {
 
-	SetorDAO setorDAO = SetorDAO.getInstancia(ConexaoHibernate.getSessao());
+	SetorDAO setorDAO = SetorDAO.getInstancia();
 
 	@Test
 	public void testIserirSetor() throws SQLException {
@@ -34,7 +34,7 @@ public class SetorDAOTest {
 	@Test
 	public void testBuscarSetorPorID() {
 		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
-		SetorModel setorRetornado = setorDAO.buscar(setorDAO.criar(novoSetor));
+		SetorModel setorRetornado = setorDAO.buscar(SetorModel.class, setorDAO.criar(novoSetor));
 		assertEquals(novoSetor.getNomeSetor(), setorRetornado.getNomeSetor());
 		assertEquals(novoSetor.getIdPermissao(), setorRetornado.getIdPermissao());
 	}
@@ -43,7 +43,7 @@ public class SetorDAOTest {
 	public void testBuscarSetorPorNome() {
 		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
 		int idCriada = setorDAO.criar(novoSetor);
-		ArrayList<SetorModel> setorRetornado = setorDAO.buscarPorNome("tão");
+		ArrayList<SetorModel> setorRetornado = (ArrayList<SetorModel>) setorDAO.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor","tão");
 		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(0).getNomeSetor());
 		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(0).getIdPermissao());
 	}
@@ -54,24 +54,24 @@ public class SetorDAOTest {
 		SetorModel setorAlterado = new SetorModel("Desenvolvimento II", 3);
 		Integer idcriado = setorDAO.criar(novoSetor);
 		setorDAO.atualizar(idcriado, setorAlterado);
-		SetorModel atualizado = setorDAO.buscar(idcriado);
+		SetorModel atualizado = setorDAO.buscar(SetorModel.class, idcriado);
 		assertEquals(setorAlterado.getNomeSetor(), atualizado.getNomeSetor());
 		assertEquals(setorAlterado.getIdPermissao(), atualizado.getIdPermissao());
 	}
 
 	@Test
 	public void testDeletarSetorPorID() {
-		int size = setorDAO.buscarTodos().size();
+		int size = setorDAO.listarPorTabela(SetorModel.class).size();
 		SetorModel novoSetor = new SetorModel("Desenvolvimento I", 3);
 		int idCriada = setorDAO.criar(novoSetor);
-		setorDAO.deletar(idCriada);
-		assertEquals(size, setorDAO.buscarTodos().size());
+		setorDAO.deletar(SetorModel.class, idCriada);
+		assertEquals(size, setorDAO.listarPorTabela(SetorModel.class).size());
 	}
 	
 	@Test
 	public void testDeletarTodosSetores() {
-		setorDAO.deletarTodos();
-		assertTrue(setorDAO.buscarTodos().isEmpty());
+		setorDAO.deletarTodos("setor");
+		assertTrue(setorDAO.listarPorTabela(SetorModel.class).isEmpty());
 	}
 
 	@Test
@@ -81,12 +81,12 @@ public class SetorDAOTest {
 		SetorModel setor2 = new SetorModel("Atendimento", 3);
 		setorDAO.criar(setor2);
 		
-		assertFalse(setorDAO.buscarTodos().isEmpty());
+		assertFalse(setorDAO.listarPorTabela(SetorModel.class).isEmpty());
 	}
 
 	@Before
 	public void limparTabela() {
-		setorDAO.deletarTodos();
+		setorDAO.deletarTodos("setor");
 	}
 	
 }

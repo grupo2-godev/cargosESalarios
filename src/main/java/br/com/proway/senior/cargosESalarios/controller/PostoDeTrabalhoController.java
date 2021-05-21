@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
@@ -21,7 +20,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class PostoDeTrabalhoController {
 	
-	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia(ConexaoHibernate.getSessao());
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia();
 	
 	/**
 	 * Cadastro Posto de Trabalho
@@ -62,7 +61,7 @@ public class PostoDeTrabalhoController {
 	 * @return boolean
 	 */
 	public boolean deletarPostoDeTrabalho(Integer idPosto) {
-		return this.postoDAO.deletar(idPosto);
+		return this.postoDAO.deletar(PostoDeTrabalhoModel.class, idPosto);
 	}
 	
 	/**
@@ -80,7 +79,7 @@ public class PostoDeTrabalhoController {
 	 */
 	public boolean atualizarPostoDeTrabalho(Integer idPosto, String novoNome, CargoModel novoCargo, SetorModel novoSetor,
 			NivelModel novoNivel, Double novoSalario) {
-		PostoDeTrabalhoModel posto = this.postoDAO.buscar(idPosto);
+		PostoDeTrabalhoModel posto = this.postoDAO.buscar(PostoDeTrabalhoModel.class, idPosto);
 		if (Validadores.apenasCaracteresValidos(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
@@ -101,7 +100,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public PostoDeTrabalhoModel buscarPostoDeTrabalhoId(Integer idPosto) {
-		return this.postoDAO.buscar(idPosto);
+		return this.postoDAO.buscar(PostoDeTrabalhoModel.class, idPosto);
 	}
 	
 	/**
@@ -114,7 +113,7 @@ public class PostoDeTrabalhoController {
 	 * @return PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarPostoDeTrabalhoNome(String nomePosto) {
-		return this.postoDAO.buscarPorNome(nomePosto);
+		return (ArrayList<PostoDeTrabalhoModel>) this.postoDAO.listarPorValorDeColunaComStringIncompleta(PostoDeTrabalhoModel.class, "nomePosto", nomePosto);
 	}
 	
 	/**
@@ -124,7 +123,7 @@ public class PostoDeTrabalhoController {
 	 * @return ArrayList PostoDeTrabalhoModel
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarTodosPostosDeTrabalho() {
-		return this.postoDAO.buscarTodos();
+		return (ArrayList<PostoDeTrabalhoModel>) this.postoDAO.listarPorTabela(PostoDeTrabalhoModel.class);
 		
 	}
 	
@@ -134,6 +133,6 @@ public class PostoDeTrabalhoController {
 	 * @return boolean
 	 */
 	public boolean deletarTodosPostosDeTrabalho() {
-		return this.postoDAO.deletarTodos();
+		return this.postoDAO.deletarTodos("Posto_de_Trabalho");
 	}
 }

@@ -1,18 +1,10 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
  * Classe CBO2002DAO
@@ -23,10 +15,10 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  * @author Samuel Alves <samuel.levi@senior.com.br> - Sprint 4
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
-public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
+public class CBO2002DAO extends HibernateMethods<CBO2002Model> {
 
 	private static CBO2002DAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe CBO2002DAO.
@@ -34,9 +26,9 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @param Session session
 	 * @return CBO2002DAO instance
 	 */
-	public static CBO2002DAO getInstancia(Session sessao) {
+	public static CBO2002DAO getInstancia() {
 		if (instancia == null)
-			instancia = new CBO2002DAO(sessao);
+			instancia = new CBO2002DAO();
 		return instancia;
 	}
 
@@ -45,60 +37,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * 
 	 * @param Session session
 	 */
-	private CBO2002DAO(Session sessao) {
-		this.sessao = sessao;
-	}
-
-	/**
-	 * Inserir CBO 2002.
-	 * 
-	 * Recebe um objeto CBO2002Model e insere como registro no banco de dados.
-	 * 
-	 * @param CBO2002Model Cbo2002 Objeto a ser inserido.
-	 * @return int id Id do registro.
-	 */
-	public int criar(CBO2002Model cbo2002) {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		Integer codigoCadastrado = (Integer) this.sessao.save(cbo2002);
-		this.sessao.getTransaction().commit();
-		return codigoCadastrado;
-	}
-
-	/**
-	 * Buscar CBO 2002 por ID.
-	 * 
-	 * Metodo busca um objeto CBO 2002 no banco de dados, conforme codigo informado
-	 * no parametro.
-	 * 
-	 * @param int codigoCBO
-	 * @return CBO2002Model
-	 */
-	public CBO2002Model buscar(int codigoCBO2002) {
-		CBO2002Model results = this.sessao.get(CBO2002Model.class, codigoCBO2002);
-		return results;
-	}
-	
-	/**
-	 * Buscar CBO 2002 por descricao.
-	 * 
-	 * Metodo realiza a busca dos dados do CBO 2002 no banco de dados, conforme
-	 * descricaoCBO informada. A descricao pode ser parcial, pois realizara a busca de
-	 * todos os CBOs 2002 que contenham determinado texto.
-	 * 
-	 * @param descricaoCBO
-	 * @return ArrayList CBO2002Model lista de CBOs 2002 que possuam a descricao pesquisada.
-	 */
-	public ArrayList<CBO2002Model> retrieveByName(String descricaoCBO) {
-		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
-		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
-		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
-		Query query = this.sessao.createQuery(criteria);
-		Expression registroCBO2002 = (Expression) root.get("descricao");
-		criteria.select(root).where(criteriaBuilder.like(registroCBO2002, "'%" + descricaoCBO + "%'"));
-		List<CBO2002Model> resultado = query.getResultList();
-		return new ArrayList<CBO2002Model> (resultado);
+	private CBO2002DAO() {
 	}
 
 	/**
@@ -112,7 +51,7 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 	 * @return boolean
 	 */
 	public boolean atualizar(int codigoCBO2002, CBO2002Model cbo2002Alterado) {
-		CBO2002Model original = buscar(codigoCBO2002);
+		CBO2002Model original = buscar(CBO2002Model.class, codigoCBO2002);
 		if (!this.sessao.getTransaction().isActive()) {
 			this.sessao.beginTransaction();
 		}
@@ -123,58 +62,4 @@ public class CBO2002DAO implements InterfaceDAOCRUD<CBO2002Model> {
 		this.sessao.getTransaction().commit();
 		return true;
 	}
-
-	/**
-	 * Deletar um registro de CBO 2002.
-	 * 
-	 * Metodo deleta um registro de CBO 2002 no banco de dados, conforme codigo
-	 * informado.
-	 * 
-	 * @param int codigoCBO2002 Identificacao do registro a ser deletado
-	 * @return boolean
-	 */
-	public boolean deletar(int codigoCBO2002) {
-		CBO2002Model entry = buscar(codigoCBO2002);
-
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		this.sessao.delete(entry);
-		this.sessao.getTransaction().commit();
-		return true;
-	}
-
-	/**
-	 * Buscar todos os registros de CBO 2002.
-	 * 
-	 * Metodo busca todos os registros de CBO 2002 que constam no banco de dados e
-	 * retorna em um ArrayList.
-	 * 
-	 * @return ArrayList CBO2002Model
-	 */
-	public ArrayList<CBO2002Model> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
-		CriteriaQuery<CBO2002Model> criteria = criteriaBuilder.createQuery(CBO2002Model.class);
-		Root<CBO2002Model> root = criteria.from(CBO2002Model.class);
-		Query query = this.sessao.createQuery(criteria);
-		List<CBO2002Model> results = query.getResultList();
-		return new ArrayList<CBO2002Model>(results);
-	}
-
-	/**
-	 * Deletar todos os registros de CBOs 2002 do banco de dados.
-	 * 
-	 * Metodo limpa a tabela cbo2002 no banco de dados.
-	 * 
-	 * @return boolean
-	 */
-	public boolean deletarTodos() {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		int modificados = this.sessao.createSQLQuery("DELETE FROM cbo2002").executeUpdate();
-		this.sessao.getTransaction().commit();
-		return modificados > 0 ? true : false;
-	}
-
 }

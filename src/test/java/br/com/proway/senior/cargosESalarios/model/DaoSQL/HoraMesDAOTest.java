@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
  */
 public class HoraMesDAOTest {
 
-	HorasMesDAO horasMesDao = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
+	HorasMesDAO horasMesDao = HorasMesDAO.getInstancia();
 	
 	@Test
 	public void testInserirHoraMes() {
@@ -34,7 +34,7 @@ public class HoraMesDAOTest {
 	@Test
 	public void testBuscarHorarioPorId() {
 		HorasMesModel novoModel = new HorasMesModel(215.0);
-		HorasMesModel horasRetornado = horasMesDao.buscar(horasMesDao.criar(novoModel));
+		HorasMesModel horasRetornado = horasMesDao.buscar(HorasMesModel.class, horasMesDao.criar(novoModel));
 		assertEquals(novoModel.getQuantidade(), horasRetornado.getQuantidade());
 	}
 
@@ -44,24 +44,24 @@ public class HoraMesDAOTest {
 		HorasMesModel modelAlterado = new HorasMesModel(100.0);
 		int id = horasMesDao.criar(modelAntigo);
 		horasMesDao.atualizar(id, modelAlterado);
-		HorasMesModel atualizado = horasMesDao.buscar(id);
+		HorasMesModel atualizado = horasMesDao.buscar(HorasMesModel.class, id);
 		assertEquals(atualizado.getQuantidade(), modelAlterado.getQuantidade());
 	}
 	
 	@Test
 	public void testDeletarHorario() {
-		int size = horasMesDao.buscarTodos().size();
+		int size = horasMesDao.listarPorTabela(HorasMesModel.class).size();
 		HorasMesModel horasModel = new HorasMesModel(220.0);
 		int id = horasMesDao.criar(horasModel);
-		horasMesDao.deletar(id);
-		assertEquals(size, horasMesDao.buscarTodos().size());
+		horasMesDao.deletar(HorasMesModel.class, id);
+		assertEquals(size, horasMesDao.listarPorTabela(HorasMesModel.class).size());
 	}
 	
 	@Test
 	public void testBuscarTodosHorarios() {
 		HorasMesModel horasModel = new HorasMesModel(220.0);
 		horasMesDao.criar(horasModel);
-		assertFalse(horasMesDao.buscarTodos().isEmpty());
+		assertFalse(horasMesDao.listarPorTabela(HorasMesModel.class).isEmpty());
 	}
 	
 	@Test
@@ -69,16 +69,16 @@ public class HoraMesDAOTest {
 		HorasMesModel horasModel = new HorasMesModel(220.0);
 		horasMesDao.criar(horasModel);
 		
-		Boolean ret = horasMesDao.deletarTodos();
+		Boolean ret = horasMesDao.deletarTodos("horas_mes");
 		
-		assertTrue(horasMesDao.buscarTodos().isEmpty());
+		assertTrue(horasMesDao.listarPorTabela(HorasMesModel.class).isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistrosSemRegistrosADeletar() {
-		horasMesDao.deletarTodos();
-		Boolean itensDeletados = horasMesDao.deletarTodos();
+		horasMesDao.deletarTodos("horas_mes");
+		Boolean itensDeletados = horasMesDao.deletarTodos("horas_mes");
 		assertFalse(itensDeletados);
-		assertTrue(horasMesDao.buscarTodos().isEmpty());
+		assertTrue(horasMesDao.listarPorTabela(HorasMesModel.class).isEmpty());
 	}
 }

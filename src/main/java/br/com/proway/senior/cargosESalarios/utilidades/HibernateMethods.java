@@ -21,6 +21,23 @@ import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
  */
 public class HibernateMethods<T> {
 	
+	@SuppressWarnings("rawtypes")
+	private static HibernateMethods hibernateMethods;
+	
+	protected static Session sessao = ConexaoHibernate.getSessao();
+	
+	@SuppressWarnings("rawtypes")
+	public static HibernateMethods getInstancia() {
+		if(hibernateMethods == null) {
+			hibernateMethods = new HibernateMethods();
+		}
+		return hibernateMethods;
+	}
+	
+	protected HibernateMethods() {
+		
+	}
+	
 	/***
 	 * Insere no banco de dados o registro de um objeto.
 	 *
@@ -28,10 +45,9 @@ public class HibernateMethods<T> {
 	 * @return int Id do objeto inserido.
 	 */
 	public int criar(T entidade) {
-		Session sessao = ConexaoHibernate.getSessao();
 		if (!sessao.getTransaction().isActive())
 			sessao.beginTransaction();
-
+		sessao.clear();
 		Integer idCadastrado = (Integer) sessao.save(entidade);
 		sessao.getTransaction().commit();
 		return idCadastrado;
@@ -46,7 +62,7 @@ public class HibernateMethods<T> {
 	 * @return Objeto encontrado no banco de dados.
 	 */
 	public T buscar(Class<T> classeTabela, int id) {
-		return ConexaoHibernate.getSessao().get(classeTabela, id);
+		return sessao.get(classeTabela, id);
 	}
 	
 	/**
@@ -61,11 +77,50 @@ public class HibernateMethods<T> {
 	public boolean deletar(Class<T> classeTabela,int id) {
 		T cargo = buscar(classeTabela,id);
 
-		if (!ConexaoHibernate.getSessao().getTransaction().isActive()) {
-			ConexaoHibernate.getSessao().beginTransaction();
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
 		}
-		ConexaoHibernate.getSessao().delete(cargo);
-		ConexaoHibernate.getSessao().getTransaction().commit();
+		sessao.delete(cargo);
+		sessao.getTransaction().commit();
+		return true;
+	}
+	
+	/**
+	 * Deleta do banco de dados todos os objetos
+	 * 
+	 * 
+	 * @param classeTabela Class classe da entidade
+	 * @return boolean Retorna true caso o banco de dados encontre um objeto com o
+	 *         id recebido. Retorna false caso ocorra algum erro durante o método.
+	 */
+	public boolean deletarTodos(String nomeDaTabela) {
+		if (!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
+		}
+		int registrosModificados = sessao.createSQLQuery("DELETE FROM " + nomeDaTabela).executeUpdate();
+		sessao.clear();
+		sessao.getTransaction().commit();
+		return registrosModificados > 0 ? true : false;
+	}
+	
+	/**
+	 * 
+	 * Atualiza um objeto no banco de dados.
+	 * 
+	 * Recebe um objeto que sera atualizado no banco de dados.
+	 *  
+	 * @param objeto T A instancia a ser atualizada
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
+	 */
+	@Deprecated
+	public boolean atualizar(T objeto) {
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
+		}
+		sessao.update(objeto);
+		sessao.getTransaction().commit();
 		return true;
 	}
 	
@@ -77,7 +132,7 @@ public class HibernateMethods<T> {
 	 * @return 
 	 */
 	public List<T> listarPorTabela(Class<T> classeTabela) {
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		criteria.from(classeTabela);
@@ -110,7 +165,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaComStringIncompleta(
 			Class<T> classeTabela, String nomeColuna, String valorColuna) 
 		{
-			Session session = ConexaoHibernate.getSessao();
+			Session session = sessao;
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 			
@@ -149,7 +204,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Integer valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -184,7 +239,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, String valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -219,7 +274,7 @@ public class HibernateMethods<T> {
 //	public List<T> listarPorValorDeColunaExato(
 //		Class<T> classeTabela, String nomeColuna, char valorColuna) 
 //	{
-//		Session session = ConexaoHibernate.getSessao();
+//		Session session = sessao;
 //		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 //		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 //		Root<T> root = criteria.from(classeTabela);
@@ -254,7 +309,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 			Class<T> classeTabela, String nomeColuna, boolean valorColuna) 
 		{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);
@@ -271,7 +326,7 @@ public class HibernateMethods<T> {
 	 * Funcoes e suas respectivas Overloads para poder selecionar entradas de 
 	 * tabelas utilizando uma de suas colunas e seu valor como filtro.
 	 * <br>
-	 * ex: 
+	 * ex: =
 	 * <br>
 	 * <br>
 	 * HibernateMethods<HorasMesModel> instancia = new HibernateMethods()<HorasMesModel>
@@ -289,7 +344,7 @@ public class HibernateMethods<T> {
 	public List<T> listarPorValorDeColunaExato(
 		Class<T> classeTabela, String nomeColuna, Double valorColuna) 
 	{
-		Session session = ConexaoHibernate.getSessao();
+		Session session = sessao;
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(classeTabela);
 		Root<T> root = criteria.from(classeTabela);

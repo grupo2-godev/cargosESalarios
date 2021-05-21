@@ -27,12 +27,11 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
 public class CargoDAOTest {
-	static CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
-	static GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
-	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
-	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
-	static HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia(ConexaoHibernate.getSessao());
-
+	static CargoDAO cargoDAO = CargoDAO.getInstancia();
+	static GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia();
+	static CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia();
+	static CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia();
+	static HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia();
 	static LocalDateTime dataCadastro;
 	static LocalDateTime dataUltimaRevisao;
 	static Integer codigoCbo2002;
@@ -51,43 +50,43 @@ public class CargoDAOTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		cargoDAO.deletarTodos();
-		grauInstrucaoDAO.deletarTodos();
-		cbo2002DAO.deletarTodos();
-		cbo1994DAO.deletarTodos();
-		horasMesDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
+		cbo2002DAO.deletarTodos("cbo2002");
+		cbo1994DAO.deletarTodos("cbo1994");
+		horasMesDAO.deletarTodos("horas_mes");
 
 		popularTabelas();
 	}
 	
 	@AfterClass
 	public static void setUpAfterClass() {
-		cargoDAO.deletarTodos();
-		grauInstrucaoDAO.deletarTodos();
-		cbo2002DAO.deletarTodos();
-		cbo1994DAO.deletarTodos();
-		horasMesDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
+		cbo2002DAO.deletarTodos("cbo2002");
+		cbo1994DAO.deletarTodos("cbo1994");
+		horasMesDAO.deletarTodos("horas_mes");
 	}
 
 	@Before
 	public void limparTabelas() {
-		cargoDAO.deletarTodos();
+		cargoDAO.deletarTodos("cargo");
 	}
 
 	public static void popularTabelas() {
 		idGrauInstrucao = grauInstrucaoDAO.criar(new GrauInstrucaoModel("Ensino superior completo"));
-		grauInstrucao = grauInstrucaoDAO.buscar(idGrauInstrucao);
+		grauInstrucao = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, idGrauInstrucao);
 
 		codigoCbo2002 = cbo2002DAO.criar(new CBO2002Model(666666, "Desenvolvedor", Insalubridade.Dez.getValor(),
 				Periculosidade.Trinta.getValor()));
-		cbo2002 = cbo2002DAO.buscar(codigoCbo2002);
+		cbo2002 = cbo2002DAO.buscar(CBO2002Model.class, codigoCbo2002);
 
 		codigoCbo1994 = cbo1994DAO.criar(new CBO1994Model(55555, "Desenvolvedor", Insalubridade.Dez.getValor(),
 				Periculosidade.Trinta.getValor()));
-		cbo1994 = cbo1994DAO.buscar(codigoCbo1994);
+		cbo1994 = cbo1994DAO.buscar(CBO1994Model.class, codigoCbo1994);
 
 		idHorasMes = horasMesDAO.criar(new HorasMesModel(240d));
-		horasMes = horasMesDAO.buscar(idHorasMes);
+		horasMes = horasMesDAO.buscar(HorasMesModel.class, idHorasMes);
 	}
 
 	@Test
@@ -104,7 +103,7 @@ public class CargoDAOTest {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
-		CargoModel cargoConsultado = cargoDAO.buscar(idObjetoCadastrado);
+		CargoModel cargoConsultado = cargoDAO.buscar(CargoModel.class, idObjetoCadastrado);
 		assertEquals(cargo.getNomeCargo(), cargoConsultado.getNomeCargo());
 	}
 
@@ -116,19 +115,19 @@ public class CargoDAOTest {
 		CargoModel novoCargo = new CargoModel("Inspetor", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 2", true, 1);
 		cargoDAO.atualizar(idObjetoCadastrado, novoCargo);
-		CargoModel cargoAlterado = cargoDAO.buscar(idObjetoCadastrado);
+		CargoModel cargoAlterado = cargoDAO.buscar(CargoModel.class, idObjetoCadastrado);
 		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
 	}
 
 	@Test
 	public void testDelete() {
-		int totalRegistros = cargoDAO.buscarTodos().size();
+		int totalRegistros = cargoDAO.listarPorTabela(CargoModel.class).size();
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 1", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
-		assertEquals(totalRegistros + 1, cargoDAO.buscarTodos().size());
-		cargoDAO.deletar(idObjetoCadastrado);
-		assertEquals(totalRegistros, cargoDAO.buscarTodos().size());
+		assertEquals(totalRegistros + 1, cargoDAO.listarPorTabela(CargoModel.class).size());
+		cargoDAO.deletar(CargoModel.class, idObjetoCadastrado);
+		assertEquals(totalRegistros, cargoDAO.listarPorTabela(CargoModel.class).size());
 
 	}
 
@@ -140,7 +139,7 @@ public class CargoDAOTest {
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		cargoDAO.criar(cargo);
 		cargoDAO.criar(cargo2);
-		ArrayList<CargoModel> lista = cargoDAO.buscarTodos();
+		ArrayList<CargoModel> lista = (ArrayList<CargoModel>) cargoDAO.listarPorTabela(CargoModel.class);
 
 		assertEquals(2, lista.size());
 	}
@@ -150,8 +149,8 @@ public class CargoDAOTest {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		cargoDAO.criar(cargo);
-		assertEquals(1, cargoDAO.buscarTodos().size());
-		cargoDAO.deletarTodos();
-		assertEquals(0, cargoDAO.buscarTodos().size());
+		assertEquals(1, cargoDAO.listarPorTabela(CargoModel.class).size());
+		cargoDAO.deletarTodos("cargo");
+		assertEquals(0, cargoDAO.listarPorTabela(CargoModel.class).size());
 	}
 }

@@ -19,7 +19,7 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
  */
 public class GrauInstrucaoDAOTest {
 
-	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia(ConexaoHibernate.getSessao());
+	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia();
 
 	@Test
 	public void testCreate() {
@@ -33,7 +33,7 @@ public class GrauInstrucaoDAOTest {
 	@Test
 	public void testRetriveId() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
-		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.buscar(grauInstrucaoDAO.criar(grauInstrucao));
+		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, grauInstrucaoDAO.criar(grauInstrucao));
 		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
 	}
 	
@@ -41,8 +41,8 @@ public class GrauInstrucaoDAOTest {
 	public void testRetrieveNameCountains() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
 		grauInstrucaoDAO.criar(grauInstrucao);
-		assertEquals(1, grauInstrucaoDAO.buscarTodos().size());
-		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.buscarPorNome("Comple");
+		assertEquals(1, grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size());
+		ArrayList<GrauInstrucaoModel> lista = (ArrayList<GrauInstrucaoModel>) grauInstrucaoDAO.listarPorValorDeColunaComStringIncompleta(GrauInstrucaoModel.class, "instrucao", "Comple");
 		assertEquals(1, lista.size());
 	}
 
@@ -52,18 +52,18 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucaoNovo = new GrauInstrucaoModel("Tecnologia Novo");
 		Integer idObjetoCadastrado = grauInstrucaoDAO.criar(grauInstrucaoAntigo);
 		grauInstrucaoDAO.atualizar(idObjetoCadastrado, grauInstrucaoNovo);
-		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.buscar(idObjetoCadastrado);
+		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, idObjetoCadastrado);
 		assertEquals(grauInstrucaoNovo.getNome(), grauInstrucaoAtualizado.getNome());
 	}
 	
 	@Test
 	public void testDelete() {
-		int totalRegistros = grauInstrucaoDAO.buscarTodos().size();
+		int totalRegistros = grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size();
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Fundamental Completo");
 		int idObjetoCriado = grauInstrucaoDAO.criar(grauInstrucao);
-		assertEquals(totalRegistros + 1, grauInstrucaoDAO.buscarTodos().size());
-		grauInstrucaoDAO.deletar(idObjetoCriado);
-		assertEquals(totalRegistros, grauInstrucaoDAO.buscarTodos().size());
+		assertEquals(totalRegistros + 1, grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size());
+		grauInstrucaoDAO.deletar(GrauInstrucaoModel.class, idObjetoCriado);
+		assertEquals(totalRegistros, grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size());
 	}
 
 
@@ -73,7 +73,7 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucao2 = new GrauInstrucaoModel("Superior Completo");
 		grauInstrucaoDAO.criar(grauInstrucao);
 		grauInstrucaoDAO.criar(grauInstrucao2);
-		ArrayList<GrauInstrucaoModel> lista = grauInstrucaoDAO.buscarTodos();
+		ArrayList<GrauInstrucaoModel> lista = (ArrayList<GrauInstrucaoModel>) grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class);
 		assertEquals(2, lista.size());
 	}
 
@@ -81,19 +81,19 @@ public class GrauInstrucaoDAOTest {
 	public void testDeleteAll() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Mestrado completo");
 		grauInstrucaoDAO.criar(grauInstrucao);
-		assertEquals(1, grauInstrucaoDAO.buscarTodos().size());
-		grauInstrucaoDAO.deletarTodos();
-		assertEquals(0, grauInstrucaoDAO.buscarTodos().size());
+		assertEquals(1, grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size());
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
+		assertEquals(0, grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class).size());
 	}
 	
 	@Before
 	public void beforeAll() {
-		grauInstrucaoDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
 	}
 	
 	@After
 	public void afterAll() {
-		grauInstrucaoDAO.deletarTodos();
+		grauInstrucaoDAO.deletarTodos("grau_instrucao");
 	}
 	
 	

@@ -12,7 +12,7 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelDAOTest {
 
-	NivelDAO nivelDAO = NivelDAO.getInstancia(ConexaoHibernate.getSessao());
+	NivelDAO nivelDAO = NivelDAO.getInstancia();
 	
 	@Test
 	public void testInserirNivel() {
@@ -29,7 +29,7 @@ public class NivelDAOTest {
 	@Test
 	public void testBuscarNivelPorId() {
 		NivelModel novoModel = new NivelModel("Willian");
-		NivelModel nivelRetornado = nivelDAO.buscar(nivelDAO.criar(novoModel));
+		NivelModel nivelRetornado = nivelDAO.buscar(NivelModel.class, nivelDAO.criar(novoModel));
 		assertEquals(novoModel.getNome(), nivelRetornado.getNome());
 	}
 
@@ -39,17 +39,17 @@ public class NivelDAOTest {
 		NivelModel modelAlterado = new NivelModel("Willian");
 		int id = nivelDAO.criar(modelAntigo);
 		nivelDAO.atualizar(id, modelAlterado);
-		NivelModel atualizado = nivelDAO.buscar(id);
+		NivelModel atualizado = nivelDAO.buscar(NivelModel.class, id);
 		assertEquals(atualizado.getNome(), modelAlterado.getNome());
 	}
 	
 	@Test
 	public void testDeletarNivel() {
-		int size = nivelDAO.buscarTodos().size();
+		int size = nivelDAO.listarPorTabela(NivelModel.class).size();
 		NivelModel nivelModel = new NivelModel("Willian");
 		int id = nivelDAO.criar(nivelModel);
-		nivelDAO.deletar(id);
-		assertEquals(size, nivelDAO.buscarTodos().size());
+		nivelDAO.deletar(NivelModel.class, id);
+		assertEquals(size, nivelDAO.listarPorTabela(NivelModel.class).size());
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class NivelDAOTest {
 		NivelModel nivelModel = new NivelModel("Willian");
 		nivelDAO.criar(nivelModel);
 		
-		assertFalse(nivelDAO.buscarTodos().isEmpty());
+		assertFalse(nivelDAO.listarPorTabela(NivelModel.class).isEmpty());
 	}
 	
 	@Test
@@ -65,17 +65,17 @@ public class NivelDAOTest {
 		NivelModel nivelModel = new NivelModel("Willian");
 		nivelDAO.criar(nivelModel);
 		
-		Boolean ret = nivelDAO.deletarTodos();
+		Boolean ret = nivelDAO.deletarTodos("nivelmodel");
 		
-		assertTrue(nivelDAO.buscarTodos().isEmpty());
+		assertTrue(nivelDAO.listarPorTabela(NivelModel.class).isEmpty());
 	}
 	
 	@Test
 	public void testDeletarTodosRegistrosSemRegistrosADeletar() {
-		nivelDAO.deletarTodos();
-		Boolean itensDeletados = nivelDAO.deletarTodos();
+		nivelDAO.deletarTodos("nivelmodel");
+		Boolean itensDeletados = nivelDAO.deletarTodos("nivelmodel");
 		assertFalse(itensDeletados);
-		assertTrue(nivelDAO.buscarTodos().isEmpty());
+		assertTrue(nivelDAO.listarPorTabela(NivelModel.class).isEmpty());
 	}
 	
 }

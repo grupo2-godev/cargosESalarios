@@ -27,7 +27,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CBO2002DAOTest {
         
-	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia(ConexaoHibernate.getSessao());
+	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia();
 	
 	@Test
 	public void testCriarObjetoVazio() {
@@ -52,7 +52,7 @@ public class CBO2002DAOTest {
     public void testBuscarCBO2002PorID() {
     	CBO2002Model novoCBO = new CBO2002Model(765010, "Padronista de chapéus", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
-    	CBO2002Model cboRetornado = cbo2002DAO.buscar(cbo2002DAO.criar(novoCBO));
+    	CBO2002Model cboRetornado = cbo2002DAO.buscar(CBO2002Model.class, cbo2002DAO.criar(novoCBO));
     	assertEquals(novoCBO.getDescricao(), cboRetornado.getDescricao());
     	assertEquals(novoCBO.getPercentualInsalubridade(), cboRetornado.getPercentualInsalubridade());
     	assertEquals(novoCBO.getPercentualPericulosidade(), cboRetornado.getPercentualPericulosidade());
@@ -63,7 +63,7 @@ public class CBO2002DAOTest {
     	CBO2002Model novoCBO = new CBO2002Model(261305, "Administrador de Arquivos", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(novoCBO);
-    	ArrayList<CBO2002Model> cboRetornado = cbo2002DAO.retrieveByName("Arqu");
+    	ArrayList<CBO2002Model> cboRetornado = (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class, "descricao", "Arqu");
     	assertEquals(novoCBO.getDescricao(), cboRetornado.get(0).getDescricao());
     	assertEquals(novoCBO.getPercentualInsalubridade(), cboRetornado.get(0).getPercentualInsalubridade());
     	assertEquals(novoCBO.getPercentualPericulosidade(), cboRetornado.get(0).getPercentualPericulosidade());
@@ -77,7 +77,7 @@ public class CBO2002DAOTest {
     				Periculosidade.Zero.getValor());
     	int codigo = cbo2002DAO.criar(novoCBO);
     	cbo2002DAO.atualizar(codigo, cboAlterado);
-    	CBO2002Model alterado = cbo2002DAO.buscar(codigo);
+    	CBO2002Model alterado = cbo2002DAO.buscar(CBO2002Model.class, codigo);
     	assertEquals(alterado.getDescricao(), cboAlterado.getDescricao());
     	assertEquals(alterado.getPercentualInsalubridade(), cboAlterado.getPercentualInsalubridade());
     	assertEquals(alterado.getPercentualPericulosidade(), cboAlterado.getPercentualPericulosidade());
@@ -85,12 +85,12 @@ public class CBO2002DAOTest {
     
     @Test
     public void testDeletarCBO() {
-    	int size = cbo2002DAO.buscarTodos().size();
+    	int size = cbo2002DAO.listarPorTabela(CBO2002Model.class).size();
     	CBO2002Model novoCBO = new CBO2002Model(351415, "Tabelião substituto", Insalubridade.Zero.getValor(),
     				Periculosidade.Zero.getValor());
     	int codigoCbo = cbo2002DAO.criar(novoCBO);
-    	cbo2002DAO.deletar(codigoCbo);
-    	assertEquals(size, cbo2002DAO.buscarTodos().size());
+    	cbo2002DAO.deletar(CBO2002Model.class, codigoCbo);
+    	assertEquals(size, cbo2002DAO.listarPorTabela(CBO2002Model.class).size());
     }
     
     @Test
@@ -98,7 +98,7 @@ public class CBO2002DAOTest {
     	CBO2002Model novoCBO = new CBO2002Model(262810, "Dançarino", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(novoCBO);
-    	assertFalse(cbo2002DAO.buscarTodos().isEmpty());
+    	assertFalse(cbo2002DAO.listarPorTabela(CBO2002Model.class).isEmpty());
     }  
 
     @Test
@@ -109,12 +109,12 @@ public class CBO2002DAOTest {
     	CBO2002Model cbo2 = new CBO2002Model(234604, "Professor de língua alema", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(cbo2);
-    	cbo2002DAO.deletarTodos();
-    	assertTrue(cbo2002DAO.buscarTodos().isEmpty());
+    	cbo2002DAO.deletarTodos("cbo2002");
+    	assertTrue(cbo2002DAO.listarPorTabela(CBO2002Model.class).isEmpty());
     }
     
     @Before
     public void limparTabela() {
-    	cbo2002DAO.deletarTodos();
+    	cbo2002DAO.deletarTodos("cbo2002");
     }
 }

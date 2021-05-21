@@ -1,17 +1,10 @@
 package br.com.proway.senior.cargosESalarios.model.DaoSQL;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
+import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
+import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
  * Classe HorasMesDao
@@ -26,10 +19,10 @@ import br.com.proway.senior.cargosESalarios.model.Interface.InterfaceDAOCRUD;
  * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
  * @author Lorran Santos, lorran.santos@senior.com.br - Sprint 4
  */
-public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
+public class HorasMesDAO extends HibernateMethods<HorasMesModel> {
 
 	private static HorasMesDAO instancia;
-	private Session sessao;
+	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe HorasMesDAO.
@@ -37,9 +30,9 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @param Session session
 	 * @return HorasMesDAO instance
 	 */
-	public static HorasMesDAO getInstancia(Session sessao) {
+	public static HorasMesDAO getInstancia() {
 		if (instancia == null)
-			instancia = new HorasMesDAO(sessao);
+			instancia = new HorasMesDAO();
 		return instancia;
 	}
 
@@ -48,43 +41,9 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * 
 	 * @param Session session
 	 */
-	private HorasMesDAO(Session sessao) {
-		this.sessao = sessao;
-	}
-
-	/**
-	 * Inserir horas trabalhadas por mes.
-	 * 
-	 * Recebe um objeto HorasMesModel para inserir no banco de dados.
-	 * 
-	 * @param HorasMesModel horasMes Objeto a ser inserido.
-	 * @return int id Id do registro.
-	 */
-	public int criar(HorasMesModel horasMes) {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-
-		Integer idCadastrado = (Integer) this.sessao.save(horasMes);
-		this.sessao.getTransaction().commit();
-		return idCadastrado;
-	}
-
+	private HorasMesDAO() {
+	}	
 	
-
-	/**
-	 * Buscar horas mes por ID.
-	 * 
-	 * Metodo busca o objeto horas mes no banco de dados conforme parametro
-	 * informado.
-	 * 
-	 * @param int id
-	 * @return results retorna um objeto HorasMesModel
-	 */
-	public HorasMesModel buscar(int id) {
-		return this.sessao.get(HorasMesModel.class, id);
-	}
-
 	/**
 	 * Atualizar um registro de horas mes.
 	 * 
@@ -96,7 +55,7 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 	 * @return boolean
 	 */
 	public boolean atualizar(int id, HorasMesModel objetoAlterado) {
-		HorasMesModel original = buscar(id);
+		HorasMesModel original = buscar(HorasMesModel.class, id);
 		if (!this.sessao.getTransaction().isActive()) {
 			this.sessao.beginTransaction();
 		}
@@ -106,56 +65,4 @@ public class HorasMesDAO implements InterfaceDAOCRUD<HorasMesModel> {
 		return true;
 	}
 
-	/**
-	 * Deletar um registro de horas mes.
-	 * 
-	 * MÃ©todo deleta um registro de horas mes no banco de dados, conforme Id
-	 * informada.
-	 * 
-	 * @param int id Identificao do registro a ser deletado
-	 * @return boolean
-	 */
-	public boolean deletar(int id) {
-		HorasMesModel entry = buscar(id);
-
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		this.sessao.delete(entry);
-		this.sessao.getTransaction().commit();
-		return true;
-	}
-
-	/**
-	 * Buscar todos os registros de horas mes.
-	 * 
-	 * MÃ©todo busca todos os registros de horas mes que constam no banco de dados e
-	 * retorna em um ArrayList.
-	 * 
-	 * @return ArrayList HorasMesModel
-	 */
-	public ArrayList<HorasMesModel> buscarTodos() {
-		CriteriaBuilder criteriaBuilder = this.sessao.getCriteriaBuilder();
-		CriteriaQuery<HorasMesModel> criteria = criteriaBuilder.createQuery(HorasMesModel.class);
-		Root<HorasMesModel> root = criteria.from(HorasMesModel.class);
-		Query query = this.sessao.createQuery(criteria);
-		List<HorasMesModel> results = query.getResultList();
-		return new ArrayList<HorasMesModel>(results);
-	}
-
-	/**
-	 * Deletar todos os registros do banco de dados.
-	 * 
-	 * Comando limpa a tabela de horas mes no banco de dados.
-	 * 
-	 * @return boolean
-	 */
-	public boolean deletarTodos() {
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		int modificados = this.sessao.createSQLQuery("DELETE FROM horas_mes").executeUpdate();
-		this.sessao.getTransaction().commit();
-		return modificados > 0 ? true : false;
-	}
 }

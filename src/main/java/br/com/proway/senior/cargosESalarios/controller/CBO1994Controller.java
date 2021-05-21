@@ -2,7 +2,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
@@ -15,7 +14,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CBO1994Controller {
 	
-	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia(ConexaoHibernate.getSessao());
+	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia();
 	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.
@@ -35,7 +34,7 @@ public class CBO1994Controller {
 			throw(new Exception("Codigo e/ou descricao invalidos para o CBO1994"));
 		}
 		
-		if(!(CBO1994Dao.buscar(codigo_CBO1994) == null)) {
+		if(!(CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994) == null)) {
 			throw(new Exception("CBO1994 já existe no banco de dados"));
 		}
 		
@@ -56,10 +55,10 @@ public class CBO1994Controller {
 	 */
 	public CBO1994Model buscarCBO1994(int codigo_CBO1994) throws Exception {
 		
-		if(CBO1994Dao.buscar(codigo_CBO1994) == null) {
+		if(CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994) == null) {
 			throw(new Exception("Entrada com o codigo_CBO1994 requisitado nao existe!"));
 		}
-		return CBO1994Dao.buscar(codigo_CBO1994);
+		return CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994);
 	}
 	
 	/**
@@ -82,7 +81,7 @@ public class CBO1994Controller {
 			throw(new Exception("Descricao invalida para atualizacao do CBO1994"));
 		}
 		
-		CBO1994Model objetoParaAtualizar = CBO1994Dao.buscar(codigo_CBO1994);
+		CBO1994Model objetoParaAtualizar = CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994);
 		
 		if(Validadores.ehObjetoNulo(objetoParaAtualizar)) {
 			throw(new Exception("Entrada com o codigo CBO1994 requisitado nao existe!"));
@@ -113,11 +112,11 @@ public class CBO1994Controller {
 	 * @throws Exception
 	 */
 	public boolean deletarCBO1994(int codigo_CBO1994) throws Exception {
-		if(Validadores.ehObjetoNulo(CBO1994Dao.buscar(codigo_CBO1994))) {
+		if(Validadores.ehObjetoNulo(CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994))) {
 			throw(new Exception("Entrada com o codigo_CBO1994 requisitado nao existe!"));
 		}
 		
-		return CBO1994Dao.deletar(codigo_CBO1994);
+		return CBO1994Dao.deletar(CBO1994Model.class, codigo_CBO1994);
 	}
 	
 	/**
@@ -126,7 +125,8 @@ public class CBO1994Controller {
 	 * @return ArrayList<CBO1994Model> : lista de entradas
 	 */
 	public ArrayList<CBO1994Model> buscarTodosCBO1994(){
-		return CBO1994Dao.buscarTodos();
+		return (ArrayList<CBO1994Model>) CBO1994Dao.listarPorTabela(CBO1994Model.class);
+		
 	}
 	
 	/**
@@ -135,6 +135,6 @@ public class CBO1994Controller {
 	 * @return boolean : true/false para sucesso da operacao
 	 */
 	public boolean deletarTodosCBO1994() {
-		return CBO1994Dao.deletarTodos();
+		return CBO1994Dao.deletarTodos("cbo1994");
 	}	
 }

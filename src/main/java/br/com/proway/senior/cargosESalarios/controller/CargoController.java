@@ -6,7 +6,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -25,7 +24,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class CargoController {
 
-	CargoDAO cargoDAO = CargoDAO.getInstancia(ConexaoHibernate.getSessao());
+	CargoDAO cargoDAO = CargoDAO.getInstancia();
 
 	/**
 	 * Valida os atributos do objeto a ser criado.
@@ -120,7 +119,7 @@ public class CargoController {
 	public CargoModel buscarPorId(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
-		return cargoDAO.buscar(id);
+		return cargoDAO.buscar(CargoModel.class, id);
 	}
 
 	/**
@@ -145,7 +144,6 @@ public class CargoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
-
 		cargoDAO.atualizar(idObjetoASerAlterado, novoCargo);
 		return true;
 	}
@@ -168,7 +166,7 @@ public class CargoController {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(id)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 
-		cargoDAO.deletar(id);
+		cargoDAO.deletar(CargoModel.class, id);
 		return true;
 	}
 
@@ -178,14 +176,18 @@ public class CargoController {
 	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
 	 */
 	public ArrayList<CargoModel> buscarTodos() {
-		return cargoDAO.buscarTodos();
+		return (ArrayList<CargoModel>) cargoDAO.listarPorTabela(CargoModel.class);
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
-	public void deletarTodos() {
-		cargoDAO.deletarTodos();
+	public boolean deletarTodos() {
+		return cargoDAO.deletarTodos("cargo");
 	}
+	
+	/**
+	 * 
+	 */
 
 }
