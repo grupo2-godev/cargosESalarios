@@ -5,6 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Nível do posto de trabalho.
+ * Exemplo: Júnior, Pleno, Sênior.
+ * @author senior
+ *
+ */
 @Entity
 public class NivelModel {
 	
