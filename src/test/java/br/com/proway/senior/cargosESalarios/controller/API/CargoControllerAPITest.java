@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.controller;
+package br.com.proway.senior.cargosESalarios.controller.API;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,6 +12,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
+import br.com.proway.senior.cargosESalarios.controller.CBO2002Controller;
+import br.com.proway.senior.cargosESalarios.controller.CargoController;
+import br.com.proway.senior.cargosESalarios.controller.GrauInstrucaoController;
+import br.com.proway.senior.cargosESalarios.controller.HorasMesController;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;

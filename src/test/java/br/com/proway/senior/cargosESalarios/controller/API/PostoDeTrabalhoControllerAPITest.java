@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.controller;
+package br.com.proway.senior.cargosESalarios.controller.API;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
+import br.com.proway.senior.cargosESalarios.controller.CBO2002Controller;
+import br.com.proway.senior.cargosESalarios.controller.CargoController;
+import br.com.proway.senior.cargosESalarios.controller.GrauInstrucaoController;
+import br.com.proway.senior.cargosESalarios.controller.HorasMesController;
+import br.com.proway.senior.cargosESalarios.controller.NivelController;
+import br.com.proway.senior.cargosESalarios.controller.PostoDeTrabalhoController;
+import br.com.proway.senior.cargosESalarios.controller.SetorController;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -17,8 +25,8 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
+import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
@@ -60,7 +68,7 @@ public class PostoDeTrabalhoControllerAPITest {
 		
 		salario = 1800.00;
 		
-		controller.deletarTodosPostosDeTrabalho(); 
+		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		new CargoController().deletarTodos();
@@ -76,7 +84,7 @@ public class PostoDeTrabalhoControllerAPITest {
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
 		
-		controller.deletarTodosPostosDeTrabalho(); 
+		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		new CargoController().deletarTodos();
@@ -124,7 +132,7 @@ public class PostoDeTrabalhoControllerAPITest {
 	
 	@Before
 	public void before() throws Exception {
-		controller.postoDAO.deletarTodos("posto_de_trabalho"); 
+		controller.deletarTodos(); 
 		
 	}
 	

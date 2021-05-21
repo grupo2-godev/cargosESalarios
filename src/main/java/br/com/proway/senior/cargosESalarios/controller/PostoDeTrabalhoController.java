@@ -6,7 +6,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.PostoDeTrabalhoDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
@@ -132,7 +132,7 @@ public class PostoDeTrabalhoController {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deletarTodosPostosDeTrabalho() {
+	public boolean deletarTodos() {
 		return this.postoDAO.deletarTodos("Posto_de_Trabalho");
 	}
 }

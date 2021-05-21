@@ -3,7 +3,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.SetorDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**

@@ -26,7 +26,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
@@ -66,7 +66,7 @@ public class PostoDeTrabalhoControllerTest{
 		
 		salario = 1800.00;
 		
-		controller.deletarTodosPostosDeTrabalho(); 
+		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		new CargoController().deletarTodos();
@@ -82,7 +82,7 @@ public class PostoDeTrabalhoControllerTest{
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
 		
-		controller.deletarTodosPostosDeTrabalho(); 
+		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
 		new CargoController().deletarTodos();

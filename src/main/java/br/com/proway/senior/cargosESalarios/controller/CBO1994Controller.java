@@ -3,7 +3,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CBO1994DAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;

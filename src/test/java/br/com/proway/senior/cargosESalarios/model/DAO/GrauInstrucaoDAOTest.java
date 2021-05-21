@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model.DaoSQL;
+package br.com.proway.senior.cargosESalarios.model.DAO;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
+import br.com.proway.senior.cargosESalarios.model.DAO.GrauInstrucaoDAO;
 
 /**
  * Testes referentes aos métodos da classe {@link GrauInstrucaoDAO}.

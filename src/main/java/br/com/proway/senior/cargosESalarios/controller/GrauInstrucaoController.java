@@ -3,7 +3,7 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.util.ArrayList;
 
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.GrauInstrucaoDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.GrauInstrucaoDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**

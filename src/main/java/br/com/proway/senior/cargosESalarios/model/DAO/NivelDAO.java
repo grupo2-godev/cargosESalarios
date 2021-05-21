@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model.DaoSQL;
+package br.com.proway.senior.cargosESalarios.model.DAO;
 
 import org.hibernate.Session;
 

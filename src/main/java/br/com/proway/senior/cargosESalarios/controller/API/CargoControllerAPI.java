@@ -1,11 +1,11 @@
-package br.com.proway.senior.cargosESalarios.controller;
+package br.com.proway.senior.cargosESalarios.controller.API;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
+import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.CargoDAO;
 
 /**
  * 

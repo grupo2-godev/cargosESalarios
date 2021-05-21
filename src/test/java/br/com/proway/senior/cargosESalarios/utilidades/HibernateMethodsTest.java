@@ -20,8 +20,8 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.HorasMesDAO;
-import br.com.proway.senior.cargosESalarios.model.DaoSQL.SetorDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.HorasMesDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.SetorDAO;
 
 public class HibernateMethodsTest {
 	static String nomeCargo = "Desenvolvedor 2";

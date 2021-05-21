@@ -1,4 +1,4 @@
-package br.com.proway.senior.cargosESalarios.model.DaoSQL;
+package br.com.proway.senior.cargosESalarios.model.DAO;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,6 +16,11 @@ import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
+import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.CBO2002DAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.GrauInstrucaoDAO;
+import br.com.proway.senior.cargosESalarios.model.DAO.HorasMesDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
