@@ -6,52 +6,53 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Nível do posto de trabalho.
- * Exemplo: Júnior, Pleno, Sênior.
- * @author senior
+ * Nível do posto de trabalho. Exemplo: Júnior, Pleno, Sênior.
+ * 
+ * @author anonimo (estava como senior antes ¯\_(ツ)_/¯)
  *
  */
 @Entity
 public class NivelModel {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idNivel;
-	
+
 	private String nomeNivel;
-	
-	public NivelModel() {}
-	
+
+	public NivelModel() {
+	}
+
 	public NivelModel(String nome) {
 		this.nomeNivel = nome;
-	}			
-	
+	}
+
 	/**
 	 * @return the id
 	 */
 	public Integer getId() {
-		return idNivel;
-	}	
-	
+		return this.idNivel;
+	}
+
 	/**
 	 * @param nome the nome to set
 	 */
 	public void setId(int id) {
-			this.idNivel = id;
+		this.idNivel = id;
 	}
-	
+
 	/**
 	 * @return the nome
 	 */
 	public String getNome() {
-		return nomeNivel;
+		return this.nomeNivel;
 	}
-	
+
 	/**
 	 * @param nome the nome to set
 	 */
 	public void setNome(String nome) {
-			this.nomeNivel = nome;
+		this.nomeNivel = nome;
 	}
-	
+
 }

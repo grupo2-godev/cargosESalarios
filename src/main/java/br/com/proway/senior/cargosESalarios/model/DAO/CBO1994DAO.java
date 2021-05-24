@@ -7,7 +7,8 @@ import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
- * Implementar os metodos CRUD para o DB
+ * Classe DAO que extende a classe HybernateMethods para interacao com o
+ * banco de dados.
  * 
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */

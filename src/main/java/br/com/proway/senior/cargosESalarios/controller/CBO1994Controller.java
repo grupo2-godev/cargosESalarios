@@ -70,7 +70,9 @@ public class CBO1994Controller {
 	 * Se os novos atributos sao iguais os antigos, a funcao retorna false.
 	 * 
 	 * @param int codigo_CBO1994 ou primary key do objeto original no BD
-	 * @param CBO1994Model : objetoAlterado - Objeto com os atributos a serem substituidos no BD
+	 * @param String novaDescricao : nova descrição do CBO1994
+	 * @param Insalubridade novoPercentualInsalubridade : novo percentual de Insalubridade, sendo limitado aos valores 0, 10, 20 e 40 %
+	 * @param Periculosidade novoPercentualPericulosidade : novo percentual de Periculosidade, sendo limitado aos valores 0 e e 30 %
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */

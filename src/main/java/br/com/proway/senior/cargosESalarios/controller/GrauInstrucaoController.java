@@ -78,9 +78,8 @@ public class GrauInstrucaoController {
 	 * banco, efetua a alteracao para o objeto recebido no parametro.
 	 * 
 	 * @param idObjetoASerAlterado Integer Id do objeto a ser alterado.
-	 * @param novoObjeto           GrauInstrucaoModel Objeto que possui as
-	 *                             alteracoes que substituirao o objeto do banco de
-	 *                             dados.
+	 * @param novaInstrucao        String Parametro recebido que será inserido/alterado
+	 * no objeto recebido para alteracao
 	 * @return boolean Retorna true caso nao encontre nenhum erro durante a
 	 *         verificacao, inclusive a busca pelo objeto no banco de dados pelo id.
 	 * @throws Exception

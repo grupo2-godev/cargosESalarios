@@ -17,7 +17,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  * @author Willian Kenji Nishizawa <b>willian.kenji@senior.com.br</b> - Sprint 5
- * @author Lorran Santos, lorran.santos@senior.com.br - Sprint 4
+ * @author Lorran Santos, <b>lorran.santos@senior.com.br<b> - Sprint 4
  */
 public class HorasMesDAO extends HibernateMethods<HorasMesModel> {
 
@@ -38,12 +38,10 @@ public class HorasMesDAO extends HibernateMethods<HorasMesModel> {
 
 	/**
 	 * Construtor da classe HorasMesDAO, utilizado no Singleton.
-	 * 
-	 * @param Session session
 	 */
 	private HorasMesDAO() {
-	}	
-	
+	}
+
 	/**
 	 * Atualizar um registro de horas mes.
 	 * 
