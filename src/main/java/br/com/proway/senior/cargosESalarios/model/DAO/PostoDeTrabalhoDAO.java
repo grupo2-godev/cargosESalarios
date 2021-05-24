@@ -9,8 +9,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 /**
  * Classe PostoDeTrabalhoDAO
  * 
- * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
- * banco de dados.
+ * Classe DAO que extende o HibernateMethodos para interacao com o banco de dados.
  * 
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 4 e 5
  * @author Lorran Santos, lorran.santos@senior.com.br - Sprint 4
@@ -44,13 +43,13 @@ public class PostoDeTrabalhoDAO extends HibernateMethods<PostoDeTrabalhoModel> {
 	}
 
 	/**
-	 * Metodo upadate
+	 * Metodo atualizar
 	 * 
 	 * Metodo realiza a atualizacao dos dados no banco de dados para o posto
 	 * informado, conforme idPosto.
 	 * 
 	 * @param int                  idPosto
-	 * @param PostoDeTrabalhoModel postoModel
+	 * @param PostoDeTrabalhoModel postoAtualizado
 	 * @return boolean
 	 */
 	public boolean atualizar(int idPosto, PostoDeTrabalhoModel postoAtualizado) {
