@@ -8,32 +8,58 @@ import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 
 /**
+ * <h1>Classe responsavel pela interação com a API</h1>
  * 
- * Controller que interage com o API, expondo os atributos necessários do CargoModel
+ * <p>Controller que interage com a API,
+ * expondo os atributos necessários do
+ * {@link CargoModel}</p>
  * 
  * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
  * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
  * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
  *
+ * @see CargoModel
  */
 public class CargoControllerAPI {
 
 	CargoDAO cargoDAO = CargoDAO.getInstancia();
 	
 	/**
-	 * Método que gera um CargoModelDTO a partir de um CargoModel buscado pelo seu respectivo ID
+	 * <h1>Método que gera um CargoModelDTO.</h1> 
 	 * 
-	 * @param idCargo
-	 * @return CargoModelDTO
+	 * <p> Recebe um id de um {@link CargoModel}
+	 * e busca o registro do mesmo no banco de dados.</p>
+	 * 
+	 * @param idCargo int - Referente ao id do {@link CargoModel}
+	 * 
+	 * @return {@link CargoModelDTO} - Referente ao {@link CargoModel} encontrado
+	 * 
+	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
+	 * 
+	 * @see CargoModel
+	 * @see CargoModelDTO
 	 */
 	public CargoModelDTO buscarPorID(int idCargo) {
 		return new CargoModelDTO(cargoDAO.buscar(CargoModel.class, idCargo));
 	}
 		
 	/**
-	 * Método que gera uma lista de CargoModelDTO com bas em todos os CargoModel
+	 * <h1>Busca todos os {@link CargoModelDTO}</h1>
 	 * 
-	 * @return cargosDTO List<CargoModelDTO>
+	 * <p>Busca todos os {@link CargoModelDTO}, e
+	 * coloca-los em uma lista. Retorna essa lista
+	 * ao final da operação.</p>
+	 * 
+	 * @return List<CargoModelDTO> - Referente aos {@link CargoModelDTO}
+	 * encontrados
+	 * 
+	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
+	 * 
+	 * @see CargoModelDTO
 	 */
 	public List<CargoModelDTO> buscarTodos(){
 		List<CargoModelDTO> cargosDTO = new ArrayList<CargoModelDTO>();
