@@ -21,7 +21,7 @@ public class HorasMesControllerTest {
 	@BeforeClass
 	public static void limparBanco() {
 		ConexaoHibernate.getSessao().clear();
-		new CargoController().deletarTodos();
+		new CargoController().deletarTodosCargos();
 	}
 		
 	@Test
@@ -75,21 +75,21 @@ public class HorasMesControllerTest {
 	public void testAtualizarHorasMes() throws Exception {
 		int idASerAtualizado = controller.cadastrarHorasMes(1000.0);
 		
-		assertTrue(controller.atualizar(idASerAtualizado, 2000.0));
+		assertTrue(controller.atualizarHorasMes(idASerAtualizado, 2000.0));
 	}
 	
 	@Test
 	public void testAtualizarHorasMesObjetosIguais() throws Exception {
 		int idASerAtualizado = controller.cadastrarHorasMes(1000.0);
 		
-		assertFalse(controller.atualizar(idASerAtualizado, 1000.0));
+		assertFalse(controller.atualizarHorasMes(idASerAtualizado, 1000.0));
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAtualizarHorasMesInexistente() throws Exception {
 		int idInexistente = controller.buscarTodosHorasMes().size() + 1;
 		
-		controller.atualizar(idInexistente, 2000.0);
+		controller.atualizarHorasMes(idInexistente, 2000.0);
 	}
 
 	@Test

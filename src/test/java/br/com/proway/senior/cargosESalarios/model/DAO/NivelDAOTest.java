@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.NivelDAO;
 
 public class NivelDAOTest {
 
@@ -31,7 +31,7 @@ public class NivelDAOTest {
 	public void testBuscarNivelPorId() {
 		NivelModel novoModel = new NivelModel("Willian");
 		NivelModel nivelRetornado = nivelDAO.buscar(NivelModel.class, nivelDAO.criar(novoModel));
-		assertEquals(novoModel.getNome(), nivelRetornado.getNome());
+		assertTrue(novoModel.getNome().equals(nivelRetornado.getNome()));
 	}
 
 	@Test
@@ -39,9 +39,11 @@ public class NivelDAOTest {
 		NivelModel modelAntigo = new NivelModel("...");
 		NivelModel modelAlterado = new NivelModel("Willian");
 		int id = nivelDAO.criar(modelAntigo);
-		nivelDAO.atualizar(id, modelAlterado);
+		modelAlterado.setId(id);
+		
+		nivelDAO.atualizar(modelAlterado);
 		NivelModel atualizado = nivelDAO.buscar(NivelModel.class, id);
-		assertEquals(atualizado.getNome(), modelAlterado.getNome());
+		assertTrue(atualizado.getNome().equals(modelAlterado.getNome()));
 	}
 	
 	@Test
@@ -66,7 +68,7 @@ public class NivelDAOTest {
 		NivelModel nivelModel = new NivelModel("Willian");
 		nivelDAO.criar(nivelModel);
 		
-		Boolean ret = nivelDAO.deletarTodos("nivelmodel");
+		nivelDAO.deletarTodos("nivelmodel");
 		
 		assertTrue(nivelDAO.listarPorTabela(NivelModel.class).isEmpty());
 	}
@@ -78,6 +80,14 @@ public class NivelDAOTest {
 		assertFalse(itensDeletados);
 		assertTrue(nivelDAO.listarPorTabela(NivelModel.class).isEmpty());
 	}
+	
+	@Test
+	public void testSetNome() {
+		NivelModel nivelModel = new NivelModel();
+		nivelModel.setNome("Junior");
+		assertTrue(nivelModel.getNome().equals("Junior"));
+	}
+
 	
 }
 	

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,8 +29,6 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
-import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
@@ -79,8 +76,8 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		new CargoController().deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -94,8 +91,8 @@ public class PostoDeTrabalhoDAOTest {
 		limparTabelas();
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		new CargoController().deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -113,8 +110,8 @@ public class PostoDeTrabalhoDAOTest {
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		idGrauInstrucao = new GrauInstrucaoController().cadastrar("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarPorId(idGrauInstrucao);
+		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
 
 		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
 				Periculosidade.Trinta);
@@ -127,7 +124,7 @@ public class PostoDeTrabalhoDAOTest {
 		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
 		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
 		
-		cargo = new CargoController().construir("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+		cargo = new CargoController().construirCargo("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Administrar Equipes", true, 1);
 		idCargo = CargoDAO.getInstancia().criar(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
@@ -141,14 +138,8 @@ public class PostoDeTrabalhoDAOTest {
 		
 	}
 	
-	@Before
-	public void herewegoagain() throws Exception {
-		limparTabelas();
-		}
-		
-	
 	@Test
-	public void testInserirNovoPostoDeTrabalho() throws SQLException {
+	public void testCriarPostoDeTrabalho() throws SQLException {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Gerente Gestão de Pessoas", cargo, setor, nivel, 
 				salario);
 		Integer idPostoCadastrado = postoDAO.criar(novoPosto);
@@ -157,7 +148,7 @@ public class PostoDeTrabalhoDAOTest {
 	}
 
 	@Test
-	public void testBuscarPostoPorID() {
+	public void testBuscarPostoDeTrabalhoPorID() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Desenvolvedor ERP", cargo, setor, nivel, 2900.00);
 		Integer idPostoCadastrado = postoDAO.criar(novoPosto);
 		PostoDeTrabalhoModel postoConsultado = postoDAO.buscar(PostoDeTrabalhoModel.class, idPostoCadastrado);
@@ -169,7 +160,7 @@ public class PostoDeTrabalhoDAOTest {
 	}
 
 	@Test
-	public void testBuscarPostoPorNome() {
+	public void testBuscarPostoDeTrabalhoPorNome() {
 		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Gestão de Pessoas", cargo, setor, nivel, 
 				2700.00);
 		postoDAO.criar(novoPosto);
@@ -183,17 +174,21 @@ public class PostoDeTrabalhoDAOTest {
 
 	@Test
 	public void testAtualizarPostoDeTrabalho() {
-		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("AnalistaFinanceiroo", cargo, setor, nivel, 2750.00);
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Analista Financeiro", cargo, setor, nivel, 2750.00);
 		PostoDeTrabalhoModel postoAlterado = new PostoDeTrabalhoModel("Analista Financeiro", cargo, setor2, nivel, 
 				2800.00);
 		Integer idCriado = postoDAO.criar(novoPosto);
-		postoDAO.atualizar(idCriado, postoAlterado);
+		postoAlterado.setIdPosto(idCriado);
+		
+		postoDAO.atualizar(postoAlterado);
 		PostoDeTrabalhoModel atualizado = postoDAO.buscar(PostoDeTrabalhoModel.class, idCriado);
-		assertEquals(novoPosto.getNomePosto(), atualizado.getNomePosto());
-		assertEquals(novoPosto.getCargo().getIdCargo(), atualizado.getCargo().getIdCargo());
-		assertEquals(novoPosto.getSetor().getId(), atualizado.getSetor().getId());
-		assertEquals(novoPosto.getNivel().getId(), atualizado.getNivel().getId());
-		assertEquals(novoPosto.getSalario(), atualizado.getSalario());
+		
+		System.out.println();
+		assertEquals(postoAlterado.getNomePosto(), atualizado.getNomePosto());
+		assertEquals(postoAlterado.getCargo().getIdCargo(), atualizado.getCargo().getIdCargo());
+		assertEquals(postoAlterado.getSetor().getId(), atualizado.getSetor().getId());
+		assertEquals(postoAlterado.getNivel().getId(), atualizado.getNivel().getId());
+		assertEquals(postoAlterado.getSalario(), atualizado.getSalario());
 	}
 
 	@Test
@@ -224,6 +219,92 @@ public class PostoDeTrabalhoDAOTest {
 		postoDAO.criar(novoPosto1);
 		postoDAO.deletarTodos("posto_de_trabalho");
 		assertTrue(postoDAO.listarPorTabela(PostoDeTrabalhoModel.class).isEmpty());
+	}
+	
+	@Test
+	public void testConstrutorVazio() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setNomePosto("Vendedor de Loja");
+		novoPosto.setSalario(1700.00);
+		assertEquals("Vendedor de Loja", novoPosto.getNomePosto());
+		assertEquals(1700.00, novoPosto.getSalario(), 0.01);
+	}
+
+	@Test
+	public void testConstrutorComID() {
+		CargoModel cargo = new CargoModel();
+		SetorModel setor = new SetorModel();
+		NivelModel nivel = new NivelModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel(1, "Coordenador de Suporte", cargo, setor, nivel, 
+				7000.00);
+		assertEquals((Integer) 1, novoPosto.getIdPosto());
+		assertEquals("Coordenador de Suporte", novoPosto.getNomePosto());
+		assertEquals(7000.00, novoPosto.getSalario(), 0.01);	
+	}
+	
+	@Test
+	public void testConstrutorSemID() {
+		CargoModel cargo = new CargoModel();
+		SetorModel setor = new SetorModel();
+		NivelModel nivel = new NivelModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel("Coordenador de Suporte", cargo, setor, nivel, 
+				7000.00);
+		assertEquals("Coordenador de Suporte", novoPosto.getNomePosto());
+		assertEquals(7000.00, novoPosto.getSalario(), 0.01);	
+	}
+	
+	@Test
+	public void testGetESetIdPosto() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setIdPosto(3);
+		assertEquals((Integer) 3, novoPosto.getIdPosto());
+	}
+	
+	@Test
+	public void testGetESetNomePosto() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setNomePosto("Assistente de E-commerce");
+		assertEquals("Assistente de E-commerce", novoPosto.getNomePosto());
+	}
+	
+	@Test
+	public void testGetESetCargo() {
+		CargoModel cargo = new CargoModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setCargo(cargo);
+		assertEquals(cargo, novoPosto.getCargo());
+	}
+	
+	@Test
+	public void testGetESetSetor() {
+		SetorModel setor = new SetorModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setSetor(setor);
+		assertEquals(setor, novoPosto.getSetor());
+	}
+	
+	@Test
+	public void testGetESetNivel() {
+		NivelModel nivel = new NivelModel();
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setNivel(nivel);
+		assertEquals(nivel, novoPosto.getNivel());
+	}
+	
+	@Test
+	public void testGetESetSalario() {
+		PostoDeTrabalhoModel novoPosto = new PostoDeTrabalhoModel();
+		novoPosto.setSalario(15000.00);
+		assertEquals(15000.00, novoPosto.getSalario(), 0.01);
+	}
+	
+	@Test
+	public void testToString() {
+		PostoDeTrabalhoModel postoVazio = new PostoDeTrabalhoModel();
+		postoVazio.setSalario(3000.00);
+		System.out.println(postoVazio);
+		assertEquals("PostoDeTrabalhoModel [idPosto=null, nomePosto=null, cargo=null, setor=null, "
+				+ "nivel=null, salario=3000.0]", postoVazio.toString());
 	}
 
 	@After

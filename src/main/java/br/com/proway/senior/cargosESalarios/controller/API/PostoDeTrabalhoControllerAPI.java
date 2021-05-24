@@ -19,7 +19,7 @@ public class PostoDeTrabalhoControllerAPI {
 	 * @author Bruno Marques
 	 * @author Vanderlei Kleinschmidt
 	 */
-	public PostoDeTrabalhoModelDTO buscarPorId(Integer id){
+	public PostoDeTrabalhoModelDTO buscarPorID(Integer id){
 		return new PostoDeTrabalhoModelDTO(postoDeTrabalhoDAO.buscar(PostoDeTrabalhoModel.class, id));
 	}
 	

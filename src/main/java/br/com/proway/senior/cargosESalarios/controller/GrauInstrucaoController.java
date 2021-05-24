@@ -26,7 +26,7 @@ public class GrauInstrucaoController {
 	 *         sucesso. Caso a validacao retorne false, retorna Exception.
 	 * @throws Exception
 	 */
-	public Integer cadastrar(String grauInstrucao) throws Exception {
+	public Integer cadastrarInstrucao(String grauInstrucao) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(grauInstrucao)) {
 			throw (new Exception("O grau de instrução possui caracteres inválidos."));
 		}
@@ -45,7 +45,7 @@ public class GrauInstrucaoController {
 	 * @return GrauInstrucaoModel Objeto encontrado no banco de dados.
 	 * @throws Exception
 	 */
-	public GrauInstrucaoModel buscarPorId(Integer id) throws Exception {
+	public GrauInstrucaoModel buscarInstrucaoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O Id não pode ser nulo ou zero."));
 		}
@@ -63,7 +63,7 @@ public class GrauInstrucaoController {
 	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos encontrados.
 	 * @throws Exception
 	 */
-	public ArrayList<GrauInstrucaoModel> buscarPorNomeQueContenha(String nome) throws Exception {
+	public ArrayList<GrauInstrucaoModel> buscarInstrucaoPorNomeQueContenha(String nome) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(nome)) {
 			throw (new Exception("A palavra de consulta não pode ter caracteres especiais."));
 		}
@@ -84,7 +84,7 @@ public class GrauInstrucaoController {
 	 *         verificacao, inclusive a busca pelo objeto no banco de dados pelo id.
 	 * @throws Exception
 	 */
-	public boolean atualizar(Integer idObjetoASerAlterado, String novaInstrucao) throws Exception {
+	public boolean atualizarInstrucao(Integer idObjetoASerAlterado, String novaInstrucao) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(novaInstrucao)) {
 			throw (new Exception("Instrucao invalida para atualizacao do Grau de Instrucao"));
 		}
@@ -119,11 +119,11 @@ public class GrauInstrucaoController {
 	 *         Retorna false caso o id seja invalido conforme validacao.
 	 * @throws Exception
 	 */
-	public boolean deletarPorId(Integer id) throws Exception {
+	public boolean deletarInstrucaoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id)) {
 			throw (new Exception("O id não pode ser nulo ou igual a zero."));
 		}
-		if (Validadores.ehObjetoNulo(this.buscarPorId(id))) {
+		if (Validadores.ehObjetoNulo(this.buscarInstrucaoPorID(id))) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 		grauInstrucaoDAO.deletar(GrauInstrucaoModel.class, id);
@@ -136,14 +136,14 @@ public class GrauInstrucaoController {
 	 * @return ArrayList<GrauInstrucaoModel> Lista de objetos do tipo
 	 *         {@link GrauInstrucaoModel}
 	 */
-	public ArrayList<GrauInstrucaoModel> buscarTodos() {
+	public ArrayList<GrauInstrucaoModel> buscarTodasInstrucoes() {
 		return (ArrayList<GrauInstrucaoModel>) grauInstrucaoDAO.listarPorTabela(GrauInstrucaoModel.class);
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link GrauInstrucaoModel}.
 	 */
-	public void deletarTodos() {
+	public void deletarTodasInstrucoes() {
 		grauInstrucaoDAO.deletarTodos("grau_instrucao");
 	}
 

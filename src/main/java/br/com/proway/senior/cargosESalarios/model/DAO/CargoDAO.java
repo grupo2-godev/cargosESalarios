@@ -1,8 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DAO;
 
-import org.hibernate.Session;
-
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
@@ -16,7 +13,6 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 public class CargoDAO extends HibernateMethods<CargoModel> {
 
 	private static CargoDAO instancia;
-	private Session sessao = ConexaoHibernate.getSessao();
 	
 	/**
 	 * Singleton da classe CargoDAO.
@@ -37,29 +33,5 @@ public class CargoDAO extends HibernateMethods<CargoModel> {
 	 */
 	private CargoDAO() {
 		
-	}
-
-	/***
-	 * Atualizar um objeto do tipo {@link CargoModel}.
-	 * 
-	 * Recebe um objeto do tipo {@link CargoModel} que sera a atualizacao do objeto
-	 * no banco de dados que possui o id recebido no parametro.
-	 * 
-	 * @param cargoNovo CargoModel Novo objeto que sera inserido no banco de dados.
-	 * @param idCargo   int Id do objeto a ser atualizado.
-	 * @return boolean Retorna true caso o objeto seja localizado no banco e
-	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
-	 *         durante a atualizacao.
-	 */
-	public boolean atualizar(int idCargo, CargoModel cargoNovo) {
-		CargoModel cargo = buscar(CargoModel.class, idCargo);
-		if (!sessao.getTransaction().isActive()) {
-			sessao.beginTransaction();
-		}
-		cargoNovo.setIdCargo(idCargo);
-		sessao.clear();
-		sessao.update(cargoNovo);
-		sessao.getTransaction().commit();
-		return true;
 	}
 }

@@ -1,6 +1,6 @@
 package br.com.proway.senior.cargosESalarios.controller.API;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +23,6 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
@@ -71,8 +70,8 @@ public class PostoDeTrabalhoControllerAPITest {
 		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		new CargoController().deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -87,8 +86,8 @@ public class PostoDeTrabalhoControllerAPITest {
 		controller.deletarTodos(); 
 		new NivelController().deletarTodosNiveis();
 		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		new CargoController().deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -102,8 +101,8 @@ public class PostoDeTrabalhoControllerAPITest {
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		idGrauInstrucao = new GrauInstrucaoController().cadastrar("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarPorId(idGrauInstrucao);
+		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
 
 		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
 				Periculosidade.Trinta);
@@ -116,10 +115,10 @@ public class PostoDeTrabalhoControllerAPITest {
 		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
 		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
 		
-		cargo = new CargoController().construir("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+		cargo = new CargoController().construirCargo("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Administrar Equipes", true, 1);
 		
-		idCargo = new CargoController().cadastrar(cargo);
+		idCargo = new CargoController().cadastrarCargo(cargo);
 		idNivel = new NivelController().cadastrarNivel("Junior");
 		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
 		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
@@ -139,9 +138,9 @@ public class PostoDeTrabalhoControllerAPITest {
 	
 
 	@Test
-	public void testBuscarPorId() throws Exception {
+	public void testBuscarPostoDeTrabalhoPorId() throws Exception {
 		int id = controller.cadastrarPostoDeTrabalho(nomePosto, cargo, setor, nivel, salario);
-		PostoDeTrabalhoModelDTO postoProcurado = controllerApi.buscarPorId(id) ;
+		PostoDeTrabalhoModelDTO postoProcurado = controllerApi.buscarPorID(id) ;
 		assertEquals(nomePosto, postoProcurado.getNomePosto());
 		assertEquals((Integer) idCargo, postoProcurado.getCargo().getIdCargo());
 		assertEquals((Integer) idSetor, postoProcurado.getSetor().getId());
@@ -150,7 +149,7 @@ public class PostoDeTrabalhoControllerAPITest {
 	}
 
 	@Test
-	public void testBuscarTodos() throws Exception {
+	public void testBuscarTodosPostosDeTrabalho() throws Exception {
 		controller.cadastrarPostoDeTrabalho(nomePosto, cargo, setor, nivel, salario);
 		controller.cadastrarPostoDeTrabalho("Analista de Sistemas", cargo, setor, nivel, 3000.00);
 		controller.cadastrarPostoDeTrabalho("Coordenador de RH", cargo, setor, nivel, 7000.00);

@@ -1,8 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DAO;
 
-import org.hibernate.Session;
-
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
@@ -22,7 +19,6 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 public class HorasMesDAO extends HibernateMethods<HorasMesModel> {
 
 	private static HorasMesDAO instancia;
-	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe HorasMesDAO.
@@ -41,26 +37,4 @@ public class HorasMesDAO extends HibernateMethods<HorasMesModel> {
 	 */
 	private HorasMesDAO() {
 	}
-
-	/**
-	 * Atualizar um registro de horas mes.
-	 * 
-	 * Realiza a atualizacao de um registro HorasMesModel, conforme a Id informada
-	 * como parametro.
-	 * 
-	 * @param int           id Identificacao do registro que serÃ¡ alterado
-	 * @param HorasMesModel objetoAlterado novo objeto com os dados alterados.
-	 * @return boolean
-	 */
-	public boolean atualizar(int id, HorasMesModel objetoAlterado) {
-		HorasMesModel original = buscar(HorasMesModel.class, id);
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		original.setQuantidade(objetoAlterado.getQuantidade());
-		this.sessao.update(original);
-		this.sessao.getTransaction().commit();
-		return true;
-	}
-
 }

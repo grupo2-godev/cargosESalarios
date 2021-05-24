@@ -65,7 +65,7 @@ public class NivelController {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizar(int id, String novoNomeNivel) throws Exception {
+	public boolean atualizarNivel(int id, String novoNomeNivel) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(novoNomeNivel)) {
 			throw new Exception("Novo nome informado é inválido");
 		}

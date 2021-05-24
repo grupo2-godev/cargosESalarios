@@ -27,6 +27,6 @@ public class SpringService {
 	@GetMapping("/posto")
 	public PostoDeTrabalhoModelDTO getPosto(@RequestParam(value = "id") int id) {
 		PostoDeTrabalhoControllerAPI api = new PostoDeTrabalhoControllerAPI();
-		return api.buscarPorId(id);
+		return api.buscarPorID(id);
 	}
 }

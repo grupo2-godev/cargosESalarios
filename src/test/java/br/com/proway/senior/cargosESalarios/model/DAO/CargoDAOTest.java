@@ -16,11 +16,6 @@ import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
-import br.com.proway.senior.cargosESalarios.model.DAO.CBO2002DAO;
-import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
-import br.com.proway.senior.cargosESalarios.model.DAO.GrauInstrucaoDAO;
-import br.com.proway.senior.cargosESalarios.model.DAO.HorasMesDAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
@@ -95,7 +90,7 @@ public class CargoDAOTest {
 	}
 
 	@Test
-	public void testCreate() {
+	public void testCriarCargo() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
@@ -104,7 +99,7 @@ public class CargoDAOTest {
 	}
 
 	@Test
-	public void testRetrieveId() {
+	public void testBuscarCargoPorID() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
@@ -113,19 +108,20 @@ public class CargoDAOTest {
 	}
 
 	@Test
-	public void testUpdate() {
+	public void testAtualizarCargo() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 1", true, 1);
 		Integer idObjetoCadastrado = cargoDAO.criar(cargo);
 		CargoModel novoCargo = new CargoModel("Inspetor", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 2", true, 1);
-		cargoDAO.atualizar(idObjetoCadastrado, novoCargo);
+		novoCargo.setIdCargo(idObjetoCadastrado);
+		cargoDAO.atualizar(novoCargo);
 		CargoModel cargoAlterado = cargoDAO.buscar(CargoModel.class, idObjetoCadastrado);
 		assertEquals(novoCargo.getNomeCargo(), cargoAlterado.getNomeCargo());
 	}
 
 	@Test
-	public void testDelete() {
+	public void testDeletarCargo() {
 		int totalRegistros = cargoDAO.listarPorTabela(CargoModel.class).size();
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor 1", true, 1);
@@ -137,7 +133,7 @@ public class CargoDAOTest {
 	}
 
 	@Test
-	public void testGetAll() {
+	public void testBuscarTodosCargos() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		CargoModel cargo2 = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
@@ -150,12 +146,41 @@ public class CargoDAOTest {
 	}
 
 	@Test
-	public void deletarTodos() {
+	public void testDeletarTodosCargos() {
 		CargoModel cargo = new CargoModel("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Desenvolvedor", true, 1);
 		cargoDAO.criar(cargo);
 		assertEquals(1, cargoDAO.listarPorTabela(CargoModel.class).size());
 		cargoDAO.deletarTodos("cargo");
 		assertEquals(0, cargoDAO.listarPorTabela(CargoModel.class).size());
+	}
+	
+	@Test
+	public void testSetId() {
+		CargoModel cargo = new CargoModel();
+		cargo.setIdCargo(2);
+		assertEquals(2, (int) cargo.getIdCargo());
+	}
+	
+	@Test
+	public void testConstrutor() {
+		CargoModel cargo = new CargoModel(2, "Desenvolvedor Junior");
+		assertEquals("Desenvolvedor Junior", cargo.getNomeCargo());
+	}
+
+	@Test
+	public void testDataCadastro() {
+		CargoModel cargo = new CargoModel(2, "Desenvolvedor Junior");
+		cargo.setDataCadastro(LocalDateTime.of(2020, 10, 5, 10, 5));
+		
+		assertEquals(LocalDateTime.of(2020, 10, 5, 10, 5), cargo.getDataCadastro());		
+	}
+	
+	@Test
+	public void testIdPermissao() {
+		CargoModel cargo = new CargoModel(2, "Desenvolvedor Junior");
+		cargo.setIdPermissao(10);
+		
+		assertEquals(10, (int)cargo.getIdPermissao());
 	}
 }

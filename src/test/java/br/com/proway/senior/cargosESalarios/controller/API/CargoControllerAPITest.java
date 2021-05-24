@@ -58,8 +58,8 @@ public class CargoControllerAPITest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		controller.deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		controller.deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -69,8 +69,8 @@ public class CargoControllerAPITest {
 
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
-		controller.deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		controller.deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -78,13 +78,13 @@ public class CargoControllerAPITest {
 
 	@Before
 	public void beforeAll() {
-		controller.deletarTodos();
+		controller.deletarTodosCargos();
 	}
 	
 
 	public static void popularTabelas() throws Exception {
-		idGrauInstrucao = new GrauInstrucaoController().cadastrar("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarPorId(idGrauInstrucao);
+		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
 
 		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
 				Periculosidade.Trinta);
@@ -99,12 +99,12 @@ public class CargoControllerAPITest {
 	}
 	
 	@Test
-	public void testBuscarPorID() throws Exception {
+	public void testBuscarCargoPorID() throws Exception {
 
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 
-		int idCargo = controller.cadastrar(cargo);
+		int idCargo = controller.cadastrarCargo(cargo);
 		
 		CargoModelDTO cargoDTO = cargoAPI.buscarPorID(idCargo);
 		
@@ -122,14 +122,14 @@ public class CargoControllerAPITest {
 	}
 
 	@Test
-	public void testBuscarTodos() throws Exception {
-		CargoModel cargo1 = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testBuscarTodosCargos() throws Exception {
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		CargoModel cargo2 = controller.construir("Desenvolvedor 1", dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+		CargoModel cargo2 = controller.construirCargo("Desenvolvedor 1", dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 				
-		controller.cadastrar(cargo1);
-		controller.cadastrar(cargo2);
+		controller.cadastrarCargo(cargo1);
+		controller.cadastrarCargo(cargo2);
 		
 		assertFalse(cargoAPI.buscarTodos().isEmpty());		
 	}

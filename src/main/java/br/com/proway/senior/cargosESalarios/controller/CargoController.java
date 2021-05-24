@@ -54,7 +54,7 @@ public class CargoController {
 	 * @throws Exception Retorna uma excessao caso algum dos valores recebidos no
 	 *                   parametro nao estejam de acordo conforme validacoes.
 	 */
-	public CargoModel construir(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
+	public CargoModel construirCargo(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
 			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horasMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
 
@@ -103,7 +103,7 @@ public class CargoController {
 	 * @param cargo CargoModel Objeto a ser cadastrado.
 	 * @return Integer: id do objeto cadastrado.
 	 */
-	public Integer cadastrar(CargoModel cargo) {
+	public Integer cadastrarCargo(CargoModel cargo) {
 		Integer idCargoCadastrado = cargoDAO.criar(cargo);
 		return idCargoCadastrado;
 	}
@@ -116,7 +116,7 @@ public class CargoController {
 	 * @return CargoModel: objeto encontrado no banco de dados.
 	 * @throws Exception
 	 */
-	public CargoModel buscarPorId(Integer id) throws Exception {
+	public CargoModel buscarCargoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
 		return cargoDAO.buscar(CargoModel.class, id);
@@ -139,8 +139,8 @@ public class CargoController {
 	 *         inclusive a busca pelo objeto no banco de dados pelo id.
 	 * @throws Exception
 	 */
-	public boolean atualizar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
-		if (Validadores.ehObjetoNulo(this.buscarPorId(idObjetoASerAlterado)))
+	public boolean atualizarCargo(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
+		if (Validadores.ehObjetoNulo(this.buscarCargoPorID(idObjetoASerAlterado)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
@@ -161,10 +161,10 @@ public class CargoController {
 	 *         Retorna false caso o id seja invalido conforma validacao.
 	 * @throws Exception
 	 */
-	public boolean deletarPorId(Integer id) throws Exception {
+	public boolean deletarCargoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou igual a zero."));
-		if (Validadores.ehObjetoNulo(this.buscarPorId(id)))
+		if (Validadores.ehObjetoNulo(this.buscarCargoPorID(id)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 
 		cargoDAO.deletar(CargoModel.class, id);
@@ -176,14 +176,14 @@ public class CargoController {
 	 * 
 	 * @return ArrayList<CargoModel> Lista de ojetos do tipo {@link CargoModel}.
 	 */
-	public ArrayList<CargoModel> buscarTodos() {
+	public ArrayList<CargoModel> buscarTodosCargos() {
 		return (ArrayList<CargoModel>) cargoDAO.listarPorTabela(CargoModel.class);
 	}
 
 	/**
 	 * Deleta todos os registros da tabela {@link CargoModel}.
 	 */
-	public boolean deletarTodos() {
+	public boolean deletarTodosCargos() {
 		return cargoDAO.deletarTodos("cargo");
 	}
 	

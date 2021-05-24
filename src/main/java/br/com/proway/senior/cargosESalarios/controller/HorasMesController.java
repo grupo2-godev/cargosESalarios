@@ -80,7 +80,7 @@ public class HorasMesController {
 	 * @return boolean true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizar(int id, Double novaQuantidade) throws Exception {
+	public boolean atualizarHorasMes(int id, Double novaQuantidade) throws Exception {
 		HorasMesModel objetoParaAtualizar = this.horasMesDAO.buscar(HorasMesModel.class, id);
 
 		if (Validadores.ehObjetoNulo(objetoParaAtualizar)) {

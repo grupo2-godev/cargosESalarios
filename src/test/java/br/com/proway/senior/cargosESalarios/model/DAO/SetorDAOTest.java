@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.SetorDAO;
 
 /**
  * Classes de testes para o SetorDAO.
@@ -43,7 +42,7 @@ public class SetorDAOTest {
 	@Test
 	public void testBuscarSetorPorNome() {
 		SetorModel novoSetor = new SetorModel("Gestão de Pessoas", 3);
-		int idCriada = setorDAO.criar(novoSetor);
+		setorDAO.criar(novoSetor);
 		ArrayList<SetorModel> setorRetornado = (ArrayList<SetorModel>) setorDAO.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor","tão");
 		assertEquals(novoSetor.getNomeSetor(), setorRetornado.get(0).getNomeSetor());
 		assertEquals(novoSetor.getIdPermissao(), setorRetornado.get(0).getIdPermissao());
@@ -54,7 +53,9 @@ public class SetorDAOTest {
 		SetorModel novoSetor = new SetorModel("Desenvolvimento I", 3);
 		SetorModel setorAlterado = new SetorModel("Desenvolvimento II", 3);
 		Integer idcriado = setorDAO.criar(novoSetor);
-		setorDAO.atualizar(idcriado, setorAlterado);
+		setorAlterado.setId(idcriado);		
+		
+		setorDAO.atualizar(setorAlterado);
 		SetorModel atualizado = setorDAO.buscar(SetorModel.class, idcriado);
 		assertEquals(setorAlterado.getNomeSetor(), atualizado.getNomeSetor());
 		assertEquals(setorAlterado.getIdPermissao(), atualizado.getIdPermissao());

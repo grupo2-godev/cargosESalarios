@@ -1,8 +1,5 @@
 package br.com.proway.senior.cargosESalarios.model.DAO;
 
-import org.hibernate.Session;
-
-import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
@@ -15,7 +12,6 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 
 	private static CBO1994DAO instancia;
-	private Session sessao = ConexaoHibernate.getSessao();
 
 	/**
 	 * Singleton da classe CBO1994DAO
@@ -36,30 +32,4 @@ public class CBO1994DAO extends HibernateMethods<CBO1994Model>{
 	 */
 	private CBO1994DAO() {
 	}
-
-	/**
-	 * Atualiza um CBO1994
-	 * 
-	 * Realiza a atualizacao de um CBO1994Model, conforme codigo informado como
-	 * parametro
-	 * 
-	 * @param int          codigo_CBO1994
-	 * @param CBO1994Model objetoAlterado
-	 */
-	public boolean atualizar(int codigo_CBO1994, CBO1994Model objetoAlterado) {
-		CBO1994Model original = buscar(CBO1994Model.class, codigo_CBO1994);
-		if (!this.sessao.getTransaction().isActive()) {
-			this.sessao.beginTransaction();
-		}
-		original.setCodigo_cbo(objetoAlterado.getCodigo_cbo());
-		original.setDescricao(objetoAlterado.getDescricao());
-		original.setPercentualInsalubridade(objetoAlterado.getPercentualInsalubridade());
-		original.setPercentualPericulosidade(objetoAlterado.getPercentualPericulosidade());
-
-		this.sessao.update(original);
-		this.sessao.getTransaction().commit();
-		return true;
-	}
-
-
 }
