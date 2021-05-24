@@ -56,6 +56,12 @@ public class NivelControllerTest {
 		assertTrue(controller.atualizar(idASerAtualizado, "Moto"));
 	}
 	
+	@Test(expected = Exception.class)
+	public void testAtualizarNivelComCaracteresInvalidos() throws Exception {
+		int idASerAtualizado = controller.cadastrarNivel("Carro");
+		controller.atualizar(idASerAtualizado, "Carro|");
+	}
+	
 	@Test
 	public void testAtualizarNivelObjetosIguais() throws Exception {
 		int idASerAtualizado = controller.cadastrarNivel("Moto");
