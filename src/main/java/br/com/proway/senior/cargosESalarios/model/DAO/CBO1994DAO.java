@@ -7,7 +7,7 @@ import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
 /**
- * Implementar os metodos CRUD para o DB
+ * Implementa os metodos CRUD para o Banco de Dados
  * 
  * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 5
  */
