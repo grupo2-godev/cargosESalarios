@@ -114,11 +114,11 @@ public class HibernateMethods<T> {
 	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
 	 *         durante a atualizacao.
 	 */
-	@Deprecated
 	public boolean atualizar(T objeto) {
 		if(!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();
 		}
+		sessao.clear();
 		sessao.update(objeto);
 		sessao.getTransaction().commit();
 		return true;

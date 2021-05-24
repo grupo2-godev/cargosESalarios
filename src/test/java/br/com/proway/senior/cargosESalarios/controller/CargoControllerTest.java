@@ -188,7 +188,7 @@ public class CargoControllerTest {
 		cargoNovo.setAtribuicoes(atribuicoes);
 		cargoNovo.setStatus(status);
 		cargoNovo.setIdPermissao(idPermissao);
-		controller.alterar(idCadastrado, cargoNovo);
+		controller.atualizar(idCadastrado, cargoNovo);
 		assertEquals("Novo cargo", controller.buscarPorId(idCadastrado).getNomeCargo());
 	}
 
@@ -199,13 +199,13 @@ public class CargoControllerTest {
 		Integer idCadastrado = controller.cadastrar(cargo);
 		CargoModel cargoNovo = null;
 
-		controller.alterar(idCadastrado, cargoNovo);
+		controller.atualizar(idCadastrado, cargoNovo);
 	}
 
 	@Test(expected = Exception.class)
 	public void testAlterarIdInexistente() throws Exception {
 		CargoModel cargoModel = new CargoModel();
-		controller.alterar(2, cargoModel);
+		controller.atualizar(2, cargoModel);
 	}
 
 	@Test
