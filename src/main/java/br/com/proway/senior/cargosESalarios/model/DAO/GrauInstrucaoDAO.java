@@ -23,7 +23,6 @@ public class GrauInstrucaoDAO extends HibernateMethods<GrauInstrucaoModel>{
 	/**
 	 * Singleton da classe GrauInstrucaoDAO.
 	 * 
-	 * @param sessao Session
 	 * @return instance GrauInstrucaoDAO
 	 */
 	public static GrauInstrucaoDAO getInstancia() {
@@ -35,7 +34,6 @@ public class GrauInstrucaoDAO extends HibernateMethods<GrauInstrucaoModel>{
 	/**
 	 * Construtor da classe GrauInstrucaoDAO, utilizado no Singleton.
 	 * 
-	 * @param sessao Session
 	 */
 	private GrauInstrucaoDAO() {
 	}
@@ -46,9 +44,9 @@ public class GrauInstrucaoDAO extends HibernateMethods<GrauInstrucaoModel>{
 	 * Recebe um objeto do tipo {@link GrauInstrucaoModel} que sera a atualizacao do
 	 * objeto no banco de dados que possui o id recebido no parametro.
 	 * 
-	 * @param grauInstrucao GrauInstrucaoModel Novo objeto que sera inserido no
-	 *                      banco de dados.
-	 * @param id            int Id do objeto a ser atualizado.
+	 * @param grauInstrucaoNovo GrauInstrucaoModel Novo objeto que sera inserido no
+	 *        banco de dados.
+	 * @param id                int Id do objeto a ser atualizado.
 	 * @return boolean Retorna true caso o objeto seja localizado no banco e
 	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
 	 *         durante a atualizacao.
