@@ -63,23 +63,13 @@ public class GrauInstrucaoControllerTest {
 	@Test
 	public void testAlterar() throws Exception {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel();
-		grauInstrucao.setNome("Ensino Alterado");
-		controller.alterar(idCadastrado, grauInstrucao);
+		controller.atualizar(idCadastrado, "Ensino Alterado");
 		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
-	}
-
-	@Test(expected = Exception.class)
-	public void testAlterarObjetoNulo() throws Exception {
-		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		GrauInstrucaoModel objetoNulo = new GrauInstrucaoModel();
-		controller.alterar(idCadastrado, objetoNulo);
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAlterarObjetoIdInexistente() throws Exception {
-		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino básico completo");
-		controller.alterar(2, grauInstrucao);
+		controller.atualizar(2, "Ensino básico completo");
 	}
 
 	@Test

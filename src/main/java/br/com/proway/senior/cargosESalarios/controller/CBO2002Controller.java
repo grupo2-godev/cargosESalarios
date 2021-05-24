@@ -107,7 +107,7 @@ public class CBO2002Controller {
 		cboRecuperado.setDescricao(novaDescricao);
 		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
 		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());
-		return cbo2002DAO.atualizar(codigoCBO, cboRecuperado);
+		return cbo2002DAO.atualizar(cboRecuperado);
 	}
 	
 	/**

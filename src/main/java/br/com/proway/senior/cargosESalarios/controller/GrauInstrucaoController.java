@@ -85,17 +85,28 @@ public class GrauInstrucaoController {
 	 *         verificacao, inclusive a busca pelo objeto no banco de dados pelo id.
 	 * @throws Exception
 	 */
-	public boolean alterar(Integer idObjetoASerAlterado, GrauInstrucaoModel novoObjeto) throws Exception {
-		if (Validadores.ehObjetoNulo(novoObjeto.getNome())) {
-			throw (new Exception("O objeto não pode ser nulo."));
+	public boolean atualizar(Integer idObjetoASerAlterado, String novaInstrucao) throws Exception {
+		if (!Validadores.apenasCaracteresValidos(novaInstrucao)) {
+			throw (new Exception("Instrucao invalida para atualizacao do Grau de Instrucao"));
 		}
-		if (Validadores.ehObjetoNulo(this.buscarPorId(idObjetoASerAlterado))) {
+		
+		GrauInstrucaoModel objetoParaAtualizar = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, idObjetoASerAlterado);
+		
+		if (Validadores.ehObjetoNulo(objetoParaAtualizar)) {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
+		
+		if(objetoParaAtualizar.getNome() == novaInstrucao) {
+			return false;
+		}
 
-		grauInstrucaoDAO.atualizar(idObjetoASerAlterado, novoObjeto);
+		objetoParaAtualizar.setId(idObjetoASerAlterado);
+		objetoParaAtualizar.setNome(novaInstrucao);
+		
+		grauInstrucaoDAO.atualizar(objetoParaAtualizar);
 		return true;
 	}
+	
 
 	/**
 	 * Deleta um registro do banco de dados que corresponde ao id recebido no
