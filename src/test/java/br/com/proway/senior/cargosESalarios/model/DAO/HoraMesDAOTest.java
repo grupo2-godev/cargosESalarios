@@ -3,12 +3,12 @@ package br.com.proway.senior.cargosESalarios.model.DAO;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.HorasMesDAO;
 /**
  * Classe HoraMesDAOTest
  * 
@@ -44,7 +44,8 @@ public class HoraMesDAOTest {
 		HorasMesModel modelAntigo = new HorasMesModel(220.0);
 		HorasMesModel modelAlterado = new HorasMesModel(100.0);
 		int id = horasMesDao.criar(modelAntigo);
-		horasMesDao.atualizar(id, modelAlterado);
+		modelAlterado.setIdHorasMes(id);
+		horasMesDao.atualizar(modelAlterado);
 		HorasMesModel atualizado = horasMesDao.buscar(HorasMesModel.class, id);
 		assertEquals(atualizado.getQuantidade(), modelAlterado.getQuantidade());
 	}
@@ -70,7 +71,7 @@ public class HoraMesDAOTest {
 		HorasMesModel horasModel = new HorasMesModel(220.0);
 		horasMesDao.criar(horasModel);
 		
-		Boolean ret = horasMesDao.deletarTodos("horas_mes");
+		horasMesDao.deletarTodos("horas_mes");
 		
 		assertTrue(horasMesDao.listarPorTabela(HorasMesModel.class).isEmpty());
 	}
@@ -81,5 +82,12 @@ public class HoraMesDAOTest {
 		Boolean itensDeletados = horasMesDao.deletarTodos("horas_mes");
 		assertFalse(itensDeletados);
 		assertTrue(horasMesDao.listarPorTabela(HorasMesModel.class).isEmpty());
+	}
+	
+	@Test
+	public void testSetQuantidade() {
+		HorasMesModel horasModel = new HorasMesModel();
+		horasModel.setQuantidade(240.0);
+		assertEquals(horasModel.getQuantidade(), 240.0);
 	}
 }

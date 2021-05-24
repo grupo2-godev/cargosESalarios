@@ -157,9 +157,9 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaBoolean() throws Exception {
-		CargoModel cargo = new CargoController().construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+		CargoModel cargo = new CargoController().construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		new CargoController().cadastrar(cargo);
+		new CargoController().cadastrarCargo(cargo);
 		
 		HibernateMethods<CargoModel> methods = new HibernateMethods<CargoModel>();
 		List<CargoModel> tableEntries = 
@@ -169,9 +169,9 @@ public class HibernateMethodsTest {
 	
 	@Test
 	public void listarPorSelecaoDeColunaInteger() throws Exception {
-		CargoModel cargo = new CargoController().construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+		CargoModel cargo = new CargoController().construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		new CargoController().cadastrar(cargo);
+		new CargoController().cadastrarCargo(cargo);
 		
 		HibernateMethods<CargoModel> methods = new HibernateMethods<CargoModel>();
 		List<CargoModel> tableEntries = 

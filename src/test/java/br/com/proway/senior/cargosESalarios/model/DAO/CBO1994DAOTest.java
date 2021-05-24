@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
-import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
@@ -21,7 +20,7 @@ public class CBO1994DAOTest {
 	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia();	
 
 	@Test
-	public void testCriarObjetoVazio() {
+	public void testCriarCBO1994ObjetoVazio() {
 		CBO1994Model CBO1994 = new CBO1994Model();
 		assertNull(CBO1994.getCodigo_cbo());
 		assertNull(CBO1994.getDescricao());
@@ -58,13 +57,14 @@ public class CBO1994DAOTest {
 	}
 
 	@Test
-	public void testUpdateCBO1994() {
+	public void testAtualizarCBO1994() {
 		CBO1994Model CBO1994_cadastrado = new CBO1994Model(44576, "desenvolvedor", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor());
 		CBO1994Model CBO1994_alterado = new CBO1994Model(44576, "desenvolvedor senior", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor());
 		
 		int codigo_CBO1994 = CBO1994Dao.criar(CBO1994_cadastrado);
+		CBO1994_alterado.setCodigo_cbo(codigo_CBO1994);
 		
-		CBO1994Dao.atualizar(codigo_CBO1994, CBO1994_alterado);
+		CBO1994Dao.atualizar(CBO1994_alterado);
 		
 		CBO1994Model novo_CBO1994 = CBO1994Dao.buscar(CBO1994Model.class, codigo_CBO1994);
 		assertEquals(CBO1994_alterado.getCodigo_cbo(), novo_CBO1994.getCodigo_cbo());
@@ -74,7 +74,7 @@ public class CBO1994DAOTest {
 	}
 
 	@Test
-	public void testDeleteCBO1994() {
+	public void testDeletarCBO1994() {
 		int size_inicial = CBO1994Dao.listarPorTabela(CBO1994Model.class).size();
 		CBO1994Model CBO1994 = new CBO1994Model(44576, "desenvolvedor", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor());
 		int codigo_CBO1994 = CBO1994Dao.criar(CBO1994);
@@ -83,7 +83,7 @@ public class CBO1994DAOTest {
 	}
 
 	@Test
-	public void testGetAllCBO1994() {
+	public void testBuscarTodosCBO1994() {
 		CBO1994Dao.criar(new CBO1994Model(44576, "desenvolvedor", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));
 		CBO1994Dao.criar(new CBO1994Model(44577, "desenvolvedor pleno", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));
 		CBO1994Dao.criar(new CBO1994Model(44578, "desenvolvedor senior", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));
@@ -93,7 +93,7 @@ public class CBO1994DAOTest {
 	}
 	
 	@Test
-	public void testDeleteAllCBO1994() {
+	public void testDeletarTodosCBO1994() {
 		CBO1994Dao.criar(new CBO1994Model(44576, "desenvolvedor", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));
 		CBO1994Dao.criar(new CBO1994Model(44577, "desenvolvedor pleno", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));
 		CBO1994Dao.criar(new CBO1994Model(44578, "desenvolvedor senior", Insalubridade.Vinte.getValor(), Periculosidade.Trinta.getValor()));

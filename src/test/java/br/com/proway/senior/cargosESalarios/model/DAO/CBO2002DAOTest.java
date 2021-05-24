@@ -12,11 +12,8 @@ import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
-import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.CBO2002DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
-import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
  * Classe CBO2002DAOTest.
@@ -45,8 +42,8 @@ public class CBO2002DAOTest {
         CBO2002Model novoCBO = new CBO2002Model(784205, "Abastecedor de máquinas de "
         		+ "linha de produção", Insalubridade.Zero.getValor(), Periculosidade.Trinta.getValor());
         Integer codigoCboCadastrado = cbo2002DAO.criar(novoCBO);
-        Object CBOConsultado = ConexaoHibernate.getSessao().get(CBO2002Model.class, codigoCboCadastrado);
-        assertEquals(codigoCboCadastrado, ((CBO2002Model) CBOConsultado).getCodigoCBO2002());   
+        CBO2002Model CBOConsultado = ConexaoHibernate.getSessao().get(CBO2002Model.class, codigoCboCadastrado);
+        assertEquals(codigoCboCadastrado, CBOConsultado.getCodigoCBO2002());   
     }
 
     @Test
@@ -76,8 +73,10 @@ public class CBO2002DAOTest {
     				Periculosidade.Zero.getValor());
     	CBO2002Model cboAlterado = new CBO2002Model(223405, "Farmacêutico(a)", Insalubridade.Vinte.getValor(), 
     				Periculosidade.Zero.getValor());
-    	int codigo = cbo2002DAO.criar(novoCBO);
-    	cbo2002DAO.atualizar(codigo, cboAlterado);
+    	int codigo = cbo2002DAO.criar(novoCBO);    	
+    	cboAlterado.setCodigoCBO2002(codigo);
+    	
+    	cbo2002DAO.atualizar(cboAlterado);
     	CBO2002Model alterado = cbo2002DAO.buscar(CBO2002Model.class, codigo);
     	assertEquals(alterado.getDescricao(), cboAlterado.getDescricao());
     	assertEquals(alterado.getPercentualInsalubridade(), cboAlterado.getPercentualInsalubridade());
@@ -85,7 +84,7 @@ public class CBO2002DAOTest {
     }
     
     @Test
-    public void testDeletarCBO() {
+    public void testDeletarCBO2002() {
     	int size = cbo2002DAO.listarPorTabela(CBO2002Model.class).size();
     	CBO2002Model novoCBO = new CBO2002Model(351415, "Tabelião substituto", Insalubridade.Zero.getValor(),
     				Periculosidade.Zero.getValor());
@@ -95,7 +94,7 @@ public class CBO2002DAOTest {
     }
     
     @Test
-    public void testListarTodosCBOs2002() {
+    public void testListarTodosCBO2002() {
     	CBO2002Model novoCBO = new CBO2002Model(262810, "Dançarino", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(novoCBO);
@@ -103,7 +102,7 @@ public class CBO2002DAOTest {
     }  
 
     @Test
-    public void deleteAll() {
+    public void testDeletarTodosCBO2002() {
     	CBO2002Model cbo1 = new CBO2002Model(241005, "Advogado", Insalubridade.Zero.getValor(), 
     				Periculosidade.Zero.getValor());
     	cbo2002DAO.criar(cbo1);

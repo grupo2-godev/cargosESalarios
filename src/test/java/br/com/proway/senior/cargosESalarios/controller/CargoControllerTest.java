@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 
 import java.time.LocalDateTime;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -51,8 +50,8 @@ public class CargoControllerTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		controller.deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		controller.deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -62,8 +61,8 @@ public class CargoControllerTest {
 
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
-		controller.deletarTodos();
-		new GrauInstrucaoController().deletarTodos();
+		controller.deletarTodosCargos();
+		new GrauInstrucaoController().deletarTodasInstrucoes();
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
@@ -71,12 +70,12 @@ public class CargoControllerTest {
 
 	@Before
 	public void beforeAll() {
-		controller.deletarTodos();
+		controller.deletarTodosCargos();
 	}
 
 	public static void popularTabelas() throws Exception {
-		idGrauInstrucao = new GrauInstrucaoController().cadastrar("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarPorId(idGrauInstrucao);
+		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
 
 		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
 				Periculosidade.Trinta);
@@ -91,91 +90,91 @@ public class CargoControllerTest {
 	}
 
 	@Test
-	public void testconstruir() throws Exception {
-		assertEquals(0, controller.buscarTodos().size());
+	public void testConstruirCargo() throws Exception {
+		assertEquals(0, controller.buscarTodosCargos().size());
 
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 
-		assertNotNull(controller.cadastrar(cargo));
-		assertEquals(1, controller.buscarTodos().size());
+		assertNotNull(controller.cadastrarCargo(cargo));
+		assertEquals(1, controller.buscarTodosCargos().size());
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirNomeInvalido() throws Exception {
+	public void testConstruirCargoComNomeInvalido() throws Exception {
 		String nomeCargoVazio = "";
-		controller.construir(nomeCargoVazio, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
+		controller.construirCargo(nomeCargoVazio, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
 				experienciaMinima, atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirCbo2002Invalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, null, cbo1994, horasMes, grauInstrucao,
+	public void testConstruirCargoComCBO2002Invalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, null, cbo1994, horasMes, grauInstrucao,
 				experienciaMinima, atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirCbo94Invalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, null, horasMes, grauInstrucao,
+	public void testConstruirCargoComCBO94Invalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, null, horasMes, grauInstrucao,
 				experienciaMinima, atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirHorasMesInvalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, null, grauInstrucao,
+	public void testConstruirCargoComHorasMesInvalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, null, grauInstrucao,
 				experienciaMinima, atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirGrauInstrucaoInvalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, null,
+	public void testConstruirCargoComGrauInstrucaoInvalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, null,
 				experienciaMinima, atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirExperienciaMinimaInvalida() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao, "",
+	public void testConstruirCargoComExperienciaMinimaInvalida() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao, "",
 				atribuicoes, status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirAtribuicoesInvalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
+	public void testConstruirCargoComAtribuicoesInvalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
 				experienciaMinima, "", status, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirStatusInvalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
+	public void testConstruirCargoComStatusInvalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
 				experienciaMinima, atribuicoes, null, idPermissao);
 	}
 
 	@Test(expected = Exception.class)
-	public void testconstruirIdPermissaoInvalido() throws Exception {
-		controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
+	public void testConstruirCargoComIdPermissaoInvalido() throws Exception {
+		controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes, grauInstrucao,
 				experienciaMinima, atribuicoes, status, 0);
 	}
 
 	@Test
-	public void testBuscarPorId() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testBuscarCargoPorId() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		Integer idCadastrado = controller.cadastrar(cargo);
-		CargoModel cargoConsultado = controller.buscarPorId(idCadastrado);
+		Integer idCadastrado = controller.cadastrarCargo(cargo);
+		CargoModel cargoConsultado = controller.buscarCargoPorID(idCadastrado);
 		assertNotNull(cargoConsultado);
 		assertEquals("Desenvolvedor 2", cargoConsultado.getNomeCargo());
 	}
 
 	@Test(expected = Exception.class)
-	public void testBuscarPorIdInvalido() throws Exception {
-		controller.buscarPorId(0);
+	public void testBuscarCargoPorIdInvalido() throws Exception {
+		controller.buscarCargoPorID(0);
 	}
 
 	@Test
-	public void testAlterar() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testAtualizarCargo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		Integer idCadastrado = controller.cadastrar(cargo);
+		Integer idCadastrado = controller.cadastrarCargo(cargo);
 		CargoModel cargoNovo = new CargoModel();
 		cargoNovo.setNomeCargo("Novo cargo");
 		cargoNovo.setDataCadastro(dataCadastro);
@@ -188,72 +187,72 @@ public class CargoControllerTest {
 		cargoNovo.setAtribuicoes(atribuicoes);
 		cargoNovo.setStatus(status);
 		cargoNovo.setIdPermissao(idPermissao);
-		controller.atualizar(idCadastrado, cargoNovo);
-		assertEquals("Novo cargo", controller.buscarPorId(idCadastrado).getNomeCargo());
+		controller.atualizarCargo(idCadastrado, cargoNovo);
+		assertEquals("Novo cargo", controller.buscarCargoPorID(idCadastrado).getNomeCargo());
 	}
 
 	@Test(expected = Exception.class)
-	public void testAlterarObjetoNulo() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testAtualizarCargoParaObjetoNulo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		Integer idCadastrado = controller.cadastrar(cargo);
+		Integer idCadastrado = controller.cadastrarCargo(cargo);
 		CargoModel cargoNovo = null;
 
-		controller.atualizar(idCadastrado, cargoNovo);
+		controller.atualizarCargo(idCadastrado, cargoNovo);
 	}
 
 	@Test(expected = Exception.class)
-	public void testAlterarIdInexistente() throws Exception {
+	public void testAtualizarCargoParaIDInexistente() throws Exception {
 		CargoModel cargoModel = new CargoModel();
-		controller.atualizar(2, cargoModel);
+		controller.atualizarCargo(2, cargoModel);
 	}
 
 	@Test
-	public void testDeletarPorId() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testDeletarCargoPorID() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		Integer idCadastrado = controller.cadastrar(cargo);
-		assertEquals(1, controller.buscarTodos().size());
-		controller.deletarPorId(idCadastrado);
-		assertEquals(0, controller.buscarTodos().size());
+		Integer idCadastrado = controller.cadastrarCargo(cargo);
+		assertEquals(1, controller.buscarTodosCargos().size());
+		controller.deletarCargoPorID(idCadastrado);
+		assertEquals(0, controller.buscarTodosCargos().size());
 	}
 
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdInexistente() throws Exception {
-		assertEquals(0, controller.buscarTodos().size());
-		controller.deletarPorId(2);
+	public void testDeletarCargoPorIdInexistente() throws Exception {
+		assertEquals(0, controller.buscarTodosCargos().size());
+		controller.deletarCargoPorID(2);
 	}
 
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdIgualAZero() throws Exception {
-		assertNull(controller.deletarPorId(0));
+	public void testDeletarCargoPorIdIgualAZero() throws Exception {
+		assertNull(controller.deletarCargoPorID(0));
 	}
 
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdNulo() throws Exception {
-		assertNull(controller.deletarPorId(null));
+	public void testDeletarCargoPorIdNulo() throws Exception {
+		assertNull(controller.deletarCargoPorID(null));
 	}
 
 	@Test
-	public void testBuscarTodos() throws Exception {
-		assertEquals(0, controller.buscarTodos().size());
-		CargoModel cargo1 = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testBuscarTodosCargos() throws Exception {
+		assertEquals(0, controller.buscarTodosCargos().size());
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		controller.cadastrar(cargo1);
-		CargoModel cargo2 = controller.construir("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+		controller.cadastrarCargo(cargo1);
+		CargoModel cargo2 = controller.construirCargo("Cargo dois", dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
 				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		controller.cadastrar(cargo2);
-		assertEquals(2, controller.buscarTodos().size());
+		controller.cadastrarCargo(cargo2);
+		assertEquals(2, controller.buscarTodosCargos().size());
 	}
 
 	@Test
-	public void testDeletarTodos() throws Exception {
-		CargoModel cargo = controller.construir(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+	public void testDeletarTodosCargos() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		controller.cadastrar(cargo);
-		assertEquals(1, controller.buscarTodos().size());
-		controller.deletarTodos();
-		assertEquals(0, controller.buscarTodos().size());
+		controller.cadastrarCargo(cargo);
+		assertEquals(1, controller.buscarTodosCargos().size());
+		controller.deletarTodosCargos();
+		assertEquals(0, controller.buscarTodosCargos().size());
 	}
 
 }

@@ -24,114 +24,114 @@ public class GrauInstrucaoControllerTest {
 	GrauInstrucaoController controller = new GrauInstrucaoController();
 
 	@Test
-	public void testCadastrar() throws Exception {
-		controller.cadastrar("Ensino Medio Completo");
-		assertEquals(1, controller.buscarTodos().size());
+	public void testCadastrarGrauDeInstrucao() throws Exception {
+		controller.cadastrarInstrucao("Ensino Medio Completo");
+		assertEquals(1, controller.buscarTodasInstrucoes().size());
 	}
 
 	@Test(expected = Exception.class)
 	public void testCadastrarGrauInstrucaoInvalido() throws Exception {
-		controller.cadastrar("Ensino medio!@.");
+		controller.cadastrarInstrucao("Ensino medio!@.");
 	}
 
 	@Test
-	public void testBuscarPorId() throws Exception {
-		int idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		GrauInstrucaoModel grauInstrucao = controller.buscarPorId(idCadastrado);
+	public void testBuscarGrauDeInstrucaoPorId() throws Exception {
+		int idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
+		GrauInstrucaoModel grauInstrucao = controller.buscarInstrucaoPorID(idCadastrado);
 		assertNotNull(grauInstrucao);
 		assertEquals("Ensino Medio Completo", grauInstrucao.getNome());
 	}
 
 	@Test(expected = Exception.class)
-	public void testBuscarPorIdInvalido() throws Exception {
-		controller.buscarPorId(0);
+	public void testBuscarGrauDeInstrucaoPorIdInvalido() throws Exception {
+		controller.buscarInstrucaoPorID(0);
 	}
 
 	@Test
-	public void testBuscarPorNomeQueContenha() throws Exception {
-		controller.cadastrar("Ensino Medio Completo");
-		controller.cadastrar("Ensino Medio Incompleto");
-		assertEquals(2, controller.buscarPorNomeQueContenha("Ensino Medio").size());
-		assertEquals(0, controller.buscarPorNomeQueContenha("Palavra aleatória").size());
+	public void testBuscarGrauDeInstrucaoPorNomeQueContenha() throws Exception {
+		controller.cadastrarInstrucao("Ensino Medio Completo");
+		controller.cadastrarInstrucao("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarInstrucaoPorNomeQueContenha("Ensino Medio").size());
+		assertEquals(0, controller.buscarInstrucaoPorNomeQueContenha("Palavra aleatória").size());
 	}
 
 	@Test(expected = Exception.class)
-	public void testBuscarPorNomeQueContenhaInvalido() throws Exception {
-		controller.buscarPorNomeQueContenha("Ensino@!#");
+	public void testBuscarGrauDeInstrucaoPorNomeQueContenhaInvalido() throws Exception {
+		controller.buscarInstrucaoPorNomeQueContenha("Ensino@!#");
 		
 	}
 
 	@Test
-	public void testAlterar() throws Exception {
-		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		controller.atualizar(idCadastrado, "Ensino Alterado");
-		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
+	public void testAtualizarGrauDeInstrucao() throws Exception {
+		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
+		controller.atualizarInstrucao(idCadastrado, "Ensino Alterado");
+		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getNome());
 	}
 
 	@Test(expected = Exception.class)
-	public void testAlterarComCaracteresInvalidos() throws Exception {
-		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		controller.atualizar(idCadastrado, "Ensino Alter-+ado");
-		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
+	public void testAtualizarGrauDeInstrucaoComCaracteresInvalidos() throws Exception {
+		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
+		controller.atualizarInstrucao(idCadastrado, "Ensino Alter-+ado");
+		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getNome());
 	}
 
 	@Test
-	public void testAlterarSemMudancaReal() throws Exception {
-		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		assertFalse(controller.atualizar(idCadastrado, "Ensino Medio Completo"));
+	public void testAtualizarGrauDeInstrucaoSemMudancaReal() throws Exception {
+		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
+		assertFalse(controller.atualizarInstrucao(idCadastrado, "Ensino Medio Completo"));
 	}
 	
 	@Test(expected = Exception.class)
-	public void testAlterarObjetoIdInexistente() throws Exception {
-		controller.atualizar(2, "Ensino básico completo");
+	public void testAtualizarGrauDeInstrucaoObjetoIdInexistente() throws Exception {
+		controller.atualizarInstrucao(2, "Ensino básico completo");
 	}
 
 	@Test
-	public void testDeletarPorId() throws Exception {
-		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		assertEquals(1, controller.buscarTodos().size());
-		controller.deletarPorId(idCadastrado);
-		assertEquals(0, controller.buscarTodos().size());
+	public void testDeletarGrauDeInstrucaoPorId() throws Exception {
+		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
+		assertEquals(1, controller.buscarTodasInstrucoes().size());
+		controller.deletarInstrucaoPorID(idCadastrado);
+		assertEquals(0, controller.buscarTodasInstrucoes().size());
 	}
 
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdInexistente() throws Exception {
-		assertEquals(0, controller.buscarTodos().size());
-		controller.deletarPorId(2);
+	public void testDeletarGrauDeInstrucaoPorIdInexistente() throws Exception {
+		assertEquals(0, controller.buscarTodasInstrucoes().size());
+		controller.deletarInstrucaoPorID(2);
 	}
 
 	@Test(expected = Exception.class)
-	public void testDeletarPorIdIgualAZero() throws Exception {
-		assertNull(controller.deletarPorId(0));
+	public void testDeletarGrauDeInstrucaoPorIdIgualAZero() throws Exception {
+		assertNull(controller.deletarInstrucaoPorID(0));
 	}
 
 	@Test(expected = Exception.class) 
-	public void testDeletarPorIdNulo() throws Exception {
+	public void testDeletarGrauDeInstrucaoPorIdNulo() throws Exception {
 		Integer idNulo = null;
-		assertNull(controller.deletarPorId(idNulo));
+		assertNull(controller.deletarInstrucaoPorID(idNulo));
 	}
 	
 	@Test
-	public void testBuscarTodos() throws Exception {
-		assertEquals(0, controller.buscarTodos().size());
-		controller.cadastrar("Ensino Medio Completo");
-		controller.cadastrar("Ensino Medio Incompleto");
-		assertEquals(2, controller.buscarTodos().size());
+	public void testBuscarTodosGrausDeInstrucoes() throws Exception {
+		assertEquals(0, controller.buscarTodasInstrucoes().size());
+		controller.cadastrarInstrucao("Ensino Medio Completo");
+		controller.cadastrarInstrucao("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarTodasInstrucoes().size());
 	}
 
 	@Test
-	public void testDeletarTodos() throws Exception {
-		controller.cadastrar("Ensino Medio Completo");
-		controller.cadastrar("Ensino Medio Incompleto");
-		assertEquals(2, controller.buscarTodos().size());
-		controller.deletarTodos();
-		ArrayList<GrauInstrucaoModel> lista = controller.buscarTodos();
+	public void testDeletarTodosGrausDeInstrucoes() throws Exception {
+		controller.cadastrarInstrucao("Ensino Medio Completo");
+		controller.cadastrarInstrucao("Ensino Medio Incompleto");
+		assertEquals(2, controller.buscarTodasInstrucoes().size());
+		controller.deletarTodasInstrucoes();
+		ArrayList<GrauInstrucaoModel> lista = controller.buscarTodasInstrucoes();
 		assertTrue(lista.isEmpty());
 	}
 
 	@Before
 	public void beforeAll() {
-		controller.deletarTodos();
+		controller.deletarTodasInstrucoes();
 	}
 
 }

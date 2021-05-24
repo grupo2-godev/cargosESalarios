@@ -53,27 +53,27 @@ public class NivelControllerTest {
 	public void testAtualizarNivel() throws Exception {
 		int idASerAtualizado = controller.cadastrarNivel("Carro");
 		
-		assertTrue(controller.atualizar(idASerAtualizado, "Moto"));
+		assertTrue(controller.atualizarNivel(idASerAtualizado, "Moto"));
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAtualizarNivelComCaracteresInvalidos() throws Exception {
 		int idASerAtualizado = controller.cadastrarNivel("Carro");
-		controller.atualizar(idASerAtualizado, "Carro|");
+		controller.atualizarNivel(idASerAtualizado, "Carro|");
 	}
 	
 	@Test
 	public void testAtualizarNivelObjetosIguais() throws Exception {
 		int idASerAtualizado = controller.cadastrarNivel("Moto");
 		
-		assertFalse(controller.atualizar(idASerAtualizado, "Moto"));
+		assertFalse(controller.atualizarNivel(idASerAtualizado, "Moto"));
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAtualizarNivelInexistente() throws Exception {
 		int idInexistente = controller.buscarTodosNiveis().size() + 1;
 		
-		controller.atualizar(idInexistente, "Moto");
+		controller.atualizarNivel(idInexistente, "Moto");
 		
 	}
 

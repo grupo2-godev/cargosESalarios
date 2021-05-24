@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * Cria os atributos necessarios para um setor, que sera vinculado ao um
  * PostodeTrabalhoModel {@link PostoDeTrabalhoModel} e recebe uma chave
  * estrangeira para identificar a permissao de acesso de um usuario para acessar
- * as informacoes da tabela setor. os demais m�dulos.
+ * as informacoes da tabela setor.
  * 
  * @author Sprint 1
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5

@@ -15,10 +15,11 @@ public class PostoDeTrabalhoControllerAPI {
 	 * recebido no parameto.
 	 * @param id Integer Id do objeto a ser consultado.
 	 * @return PostoDeTrabalhoModelDTO: criado a partir do objeto encontrado no banco de dados.
+	 * 
 	 * @author Bruno Marques
 	 * @author Vanderlei Kleinschmidt
 	 */
-	public PostoDeTrabalhoModelDTO buscarPorId(Integer id){
+	public PostoDeTrabalhoModelDTO buscarPorID(Integer id){
 		return new PostoDeTrabalhoModelDTO(postoDeTrabalhoDAO.buscar(PostoDeTrabalhoModel.class, id));
 	}
 	
