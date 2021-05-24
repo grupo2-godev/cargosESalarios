@@ -5,6 +5,15 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 
+/**
+ * Classe PostoDeTrabalhoModelDTO
+ * 
+ * Classe DTO que transfere os dados do posto de trabalho para exibir informações ao usuáro.
+ * 
+ * @author Bruno Marques
+ * @author Vanderlei Kleinschmidt
+ *
+ */
 public class PostoDeTrabalhoModelDTO {
 	
 	private String nomePosto;
@@ -16,12 +25,11 @@ public class PostoDeTrabalhoModelDTO {
 	/**
 	 * Construtor PostoDeTrabalhoDTO
 	 * 
-	 * Construtor que pega as informações do {@link PostoDeTrabalhoModel} e aplica ao DTO para exibir
-	 * as informações para o usuário.
+	 * Construtor que pega as informações do {@link PostoDeTrabalhoModel} e aplica ao DTO para
+	 * exibir as informações para o usuário.
 	 * 
 	 * @param postoDeTrabalhoModel
-	 * @author Bruno Marques
-	 * @author Vanderlei Kleinschmidt
+	 * 
 	 */
 	public PostoDeTrabalhoModelDTO(PostoDeTrabalhoModel postoDeTrabalhoModel) {
 		this.nomePosto = postoDeTrabalhoModel.getNomePosto();
@@ -31,32 +39,23 @@ public class PostoDeTrabalhoModelDTO {
 		this.salario = postoDeTrabalhoModel.getSalario();
 	}
 
-
 	public String getNomePosto() {
 		return nomePosto;
 	}
-
 
 	public CargoModel getCargo() {
 		return cargo;
 	}
 
-
 	public SetorModel getSetor() {
 		return setor;
 	}
-
 
 	public NivelModel getNivel() {
 		return nivel;
 	}
 
-
 	public Double getSalario() {
 		return salario;
 	}
-	
-	
-	
-
 }
