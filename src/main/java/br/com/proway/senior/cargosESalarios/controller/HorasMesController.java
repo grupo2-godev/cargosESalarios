@@ -68,23 +68,25 @@ public class HorasMesController {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizarHorasMes(int id, HorasMesModel objetoAlterado) throws Exception {
-		HorasMesModel original = horasMesDAO.buscar(HorasMesModel.class, id);
-		if(original == null) {
-			throw(new Exception("Entrada com o id requisitado nao existe!"));
+	public boolean atualizar(int id, Double novaQuantidade) throws Exception {
+		HorasMesModel objetoParaAtualizar = horasMesDAO.buscar(HorasMesModel.class, id);
+		
+		if(Validadores.ehObjetoNulo(objetoParaAtualizar)) {
+			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
-		/**
+
+		/*
 		 * A funcao Double.compare recebe como argumentos dois Doubles e os compara.
 		 * O retorno da funcao é um numero inteiro que pode ser positivo, negativo ou nulo.
 		 * Se o retorno for nulo (zero), significa que os doubles sao Iguais
 		 * Se o retorno for maior do que zero, significa que o primeiro Double é maior que o segundo
 		 * Se o retorno for menor que zero, significa que o primeiro Double é menor que o segundo
 		 */
-		int compareDouble = Double.compare(original.getQuantidade(),objetoAlterado.getQuantidade()); 
+		int compareDouble = Double.compare(objetoParaAtualizar.getQuantidade(),novaQuantidade); 
 		if(compareDouble == 0) {
 			return false;
 		}
-		return horasMesDAO.atualizar(id, objetoAlterado);
+		return horasMesDAO.atualizar(objetoParaAtualizar);
 	}
 	
 	/**

@@ -74,25 +74,22 @@ public class HorasMesControllerTest {
 	@Test
 	public void testAtualizarHorasMes() throws Exception {
 		int idASerAtualizado = controller.cadastrarHorasMes(1000.0);
-		HorasMesModel ObjetoAtualizado = new HorasMesModel(2000.0);
 		
-		assertTrue(controller.atualizarHorasMes(idASerAtualizado, ObjetoAtualizado));
+		assertTrue(controller.atualizar(idASerAtualizado, 2000.0));
 	}
 	
 	@Test
 	public void testAtualizarHorasMesObjetosIguais() throws Exception {
 		int idASerAtualizado = controller.cadastrarHorasMes(1000.0);
-		HorasMesModel ObjetoAtualizado = new HorasMesModel(1000.0);
 		
-		assertFalse(controller.atualizarHorasMes(idASerAtualizado, ObjetoAtualizado));
+		assertFalse(controller.atualizar(idASerAtualizado, 1000.0));
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAtualizarHorasMesInexistente() throws Exception {
 		int idInexistente = controller.buscarTodosHorasMes().size() + 1;
-		HorasMesModel ObjetoAtualizado = new HorasMesModel(1000.0);
 		
-		controller.atualizarHorasMes(idInexistente, ObjetoAtualizado);
+		controller.atualizar(idInexistente, 2000.0);
 	}
 
 	@Test
