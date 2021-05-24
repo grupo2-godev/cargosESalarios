@@ -9,8 +9,8 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 /**
  * Classe CBO2002DAO
  * 
- * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
- * banco de dados.
+ * Classe DAO que extende a classe genérica {@link HibernateMethods} para
+ * interacao com o banco de dados.
  * 
  * @author Samuel Alves <samuel.levi@senior.com.br> - Sprint 4
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
@@ -23,7 +23,6 @@ public class CBO2002DAO extends HibernateMethods<CBO2002Model> {
 	/**
 	 * Singleton da classe CBO2002DAO.
 	 * 
-	 * @param Session session
 	 * @return CBO2002DAO instance
 	 */
 	public static CBO2002DAO getInstancia() {

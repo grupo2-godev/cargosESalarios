@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 /**
  * Classe de apoio para persistencia via banco de dados. Sera chave estrangeira
- * na classe Cargo {@link CargoModel}.
+ * na classe {@link CargoModel}.
  * 
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
  */
@@ -16,8 +16,8 @@ import javax.persistence.Table;
 public class CBO2002Model {
 
 	/**
-	 * A identificacao do CBO não é auto incrementada. O proprio 
-	 * codigo do CBO sera a PrimaryKey.
+	 * A identificacao do CBO não é auto incrementada. O proprio codigo do CBO sera
+	 * a PrimaryKey.
 	 */
 	@Id
 	private Integer codigoCBO2002;
@@ -37,7 +37,7 @@ public class CBO2002Model {
 	}
 
 	public Integer getCodigoCBO2002() {
-		return codigoCBO2002;
+		return this.codigoCBO2002;
 	}
 
 	public void setCodigoCBO2002(Integer codigoCBO2002) {
@@ -45,7 +45,7 @@ public class CBO2002Model {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
 
 	public void setDescricao(String descricao) {
@@ -53,7 +53,7 @@ public class CBO2002Model {
 	}
 
 	public Double getPercentualInsalubridade() {
-		return percentualInsalubridade;
+		return this.percentualInsalubridade;
 	}
 
 	public void setPercentualInsalubridade(Double percentualInsalubridade) {
@@ -61,7 +61,7 @@ public class CBO2002Model {
 	}
 
 	public Double getPercentualPericulosidade() {
-		return percentualPericulosidade;
+		return this.percentualPericulosidade;
 	}
 
 	public void setPercentualPericulosidade(Double percentualPericulosidade) {
@@ -70,8 +70,8 @@ public class CBO2002Model {
 
 	@Override
 	public String toString() {
-		return "CBO2002Model [codigoCBO2002=" + codigoCBO2002 + ", descricao=" + descricao
-				+ ", percentualInsalubridade=" + percentualInsalubridade + ", percentualPericulosidade="
-				+ percentualPericulosidade + "]";
+		return "CBO2002Model [codigoCBO2002=" + this.codigoCBO2002 + ", descricao=" + this.descricao
+				+ ", percentualInsalubridade=" + this.percentualInsalubridade + ", percentualPericulosidade="
+				+ this.percentualPericulosidade + "]";
 	}
 }

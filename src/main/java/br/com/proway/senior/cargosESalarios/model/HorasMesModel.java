@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Classe de apoio para persist�ncia via banco de dados. Registra o grau de instru��o e a
- * quantidade de horas trabalhadas por m�s.
+ * Classe de apoio para persistencia via banco de dados. Registra o grau de instrução e a
+ * quantidade de horas trabalhadas por mês.
  * 
  * @author Lorran P. Santos
  */
@@ -40,7 +40,7 @@ public class HorasMesModel {
 	}
 
 	public Integer getIdHorasMes() {
-		return idHorasMes;
+		return this.idHorasMes;
 	}
 
 	public void setIdHorasMes(Integer idHorasMes) {
@@ -48,7 +48,7 @@ public class HorasMesModel {
 	}
 
 	public Double getQuantidade() {
-		return quantidade;
+		return this.quantidade;
 	}
 
 	public void setQuantidade(Double quantidade) {
