@@ -12,7 +12,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 /**
  * Classe PostoDeTrabalhoController
  * 
- * Implementa os metodos do DAO para as devidas tratativas necessarias
+ * Implementa os metodos do DAO para as devidas tratativas necessarias.
  * 
  * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
