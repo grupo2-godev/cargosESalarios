@@ -9,7 +9,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 /**
  * Classe SetorDAO
  * 
- * Classe DAO que implementa a interface InterfaceDAOCRUD para interacao com o
+ * Classe DAO que extende a classe HybernateMethods para interacao com o
  * banco de dados.
  * 
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5

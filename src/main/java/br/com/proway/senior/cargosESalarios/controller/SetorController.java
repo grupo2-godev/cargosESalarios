@@ -14,9 +14,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  * 
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
  * @author Sarah Brito <b>sarah.brito@senior.com.br</b> - Sprint 5
- *
  */
-
 public class SetorController {
 
 	SetorDAO setorDAO = SetorDAO.getInstancia();
@@ -47,7 +45,7 @@ public class SetorController {
 	/**
 	 * Buscar setor por ID.
 	 * 
-	 * Realiza a busca do setor conforme Id informada e retorna o objeto do mesmo.
+	 * Realiza a busca do setor conforme ID informada e retorna o objeto do mesmo.
 	 * 
 	 * @param Integer idSetor Identificacao do setor procurado.
 	 * @return SetorModel objeto localizado ou null caso nao conste no banco.
@@ -63,8 +61,8 @@ public class SetorController {
 	 * objetos. O texto pode ser informado parcial, pois ira buscar no banco todos
 	 * os registros que possuem os caracteres informados.
 	 * 
-	 * @param idSetor a ser procurado.
-	 * @return rrayList SetorModel lista de registros localizados.
+	 * @param String nomeSetor a ser procurado.
+	 * @return ArrayList<SetorModel> lista de registros localizados.
 	 */
 	public ArrayList<SetorModel> buscarSetorPorNome(String nomeSetor) {
 		return (ArrayList<SetorModel>) setorDAO.listarPorValorDeColunaComStringIncompleta(SetorModel.class, "nomeSetor",nomeSetor);
@@ -76,9 +74,9 @@ public class SetorController {
 	 * Metodo realiza a atualizacao do setor conforme modificacoes informadas via
 	 * parametros.
 	 * 
-	 * @param idSetor  a ser alterado
-	 * @param novoNome
-	 * @paramar novaIdPermissão
+	 * @param Integer idSetor  a ser alterado
+	 * @param String novoNome 
+	 * @paramar Integer novaIdPermissão
 	 * @return boolean
 	 * @throws Exception
 	 */
