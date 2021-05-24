@@ -139,12 +139,13 @@ public class CargoController {
 	 *         inclusive a busca pelo objeto no banco de dados pelo id.
 	 * @throws Exception
 	 */
-	public boolean alterar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
+	public boolean atualizar(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
 		if (Validadores.ehObjetoNulo(this.buscarPorId(idObjetoASerAlterado)))
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
-		cargoDAO.atualizar(idObjetoASerAlterado, novoCargo);
+		novoCargo.setIdCargo(idObjetoASerAlterado);
+		cargoDAO.atualizar(novoCargo);
 		return true;
 	}
 

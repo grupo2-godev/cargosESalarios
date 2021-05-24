@@ -39,7 +39,6 @@ public class SetorController {
 				return null;
 			}
 		}
-
 		SetorModel novoSetor = new SetorModel(nomeSetor, idPermissao);
 		int idCadastrado = setorDAO.criar(novoSetor);
 		return idCadastrado;
@@ -88,9 +87,10 @@ public class SetorController {
 		if (Validadores.ehObjetoNulo(setorRecuperado)) {
 			throw new Exception("O setor informado não consta na base de dados, informe um valor válido.");
 		}
+		setorRecuperado.setId(idSetor);
 		setorRecuperado.setNomeSetor(novoNome);
 		setorRecuperado.setIdPermissao(novaIdPermissao);
-		return setorDAO.atualizar(idSetor, setorRecuperado);
+		return setorDAO.atualizar(setorRecuperado);
 	}
 
 	/**

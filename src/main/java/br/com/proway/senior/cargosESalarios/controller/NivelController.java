@@ -62,16 +62,21 @@ public class NivelController {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizarNivel(int id, NivelModel objetoAlterado) throws Exception {
-		NivelModel original = nivelDAO.buscar(NivelModel.class, id);
-		if(original == null) {
+	public boolean atualizar(int id, String novoNomeNivel) throws Exception {
+		if(!Validadores.apenasCaracteresValidos(novoNomeNivel)) {
+			throw new Exception ("Novo nome informado é inválido");
+		}
+		
+		NivelModel objetoParaAtualizar = nivelDAO.buscar(NivelModel.class, id);
+				
+		if(Validadores.ehObjetoNulo(objetoParaAtualizar)) {
 			throw(new Exception("Entrada com o id requisitado nao existe!"));
 		}
 		
-		if(original.getNome() == objetoAlterado.getNome()) {
+		if(objetoParaAtualizar.getNome() == novoNomeNivel) {
 			return false;
 		}
-		return nivelDAO.atualizar(id, objetoAlterado);
+		return nivelDAO.atualizar(objetoParaAtualizar);
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 
@@ -63,23 +64,26 @@ public class GrauInstrucaoControllerTest {
 	@Test
 	public void testAlterar() throws Exception {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel();
-		grauInstrucao.setNome("Ensino Alterado");
-		controller.alterar(idCadastrado, grauInstrucao);
+		controller.atualizar(idCadastrado, "Ensino Alterado");
 		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
 	}
 
 	@Test(expected = Exception.class)
-	public void testAlterarObjetoNulo() throws Exception {
+	public void testAlterarComCaracteresInvalidos() throws Exception {
 		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
-		GrauInstrucaoModel objetoNulo = new GrauInstrucaoModel();
-		controller.alterar(idCadastrado, objetoNulo);
+		controller.atualizar(idCadastrado, "Ensino Alter-+ado");
+		assertEquals("Ensino Alterado", controller.buscarPorId(idCadastrado).getNome());
+	}
+
+	@Test
+	public void testAlterarSemMudancaReal() throws Exception {
+		Integer idCadastrado = controller.cadastrar("Ensino Medio Completo");
+		assertFalse(controller.atualizar(idCadastrado, "Ensino Medio Completo"));
 	}
 	
 	@Test(expected = Exception.class)
 	public void testAlterarObjetoIdInexistente() throws Exception {
-		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Ensino básico completo");
-		controller.alterar(2, grauInstrucao);
+		controller.atualizar(2, "Ensino básico completo");
 	}
 
 	@Test

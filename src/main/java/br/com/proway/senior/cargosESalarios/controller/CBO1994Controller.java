@@ -98,7 +98,7 @@ public class CBO1994Controller {
 		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade.getValor());
 		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade.getValor());
 				
-		return CBO1994Dao.atualizar(codigo_CBO1994, objetoParaAtualizar);
+		return CBO1994Dao.atualizar(objetoParaAtualizar);
 	}
 	
 	/**

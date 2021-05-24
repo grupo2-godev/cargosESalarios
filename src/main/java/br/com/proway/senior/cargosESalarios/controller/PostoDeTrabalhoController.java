@@ -83,11 +83,12 @@ public class PostoDeTrabalhoController {
 		if (Validadores.apenasCaracteresValidos(novoNome)) {
 			posto.setNomePosto(novoNome);
 		}
+		posto.setIdPosto(idPosto);
 		posto.setCargo(novoCargo);
 		posto.setSetor(novoSetor);
 		posto.setNivel(novoNivel);
 		posto.setSalario(novoSalario);
-		return this.postoDAO.atualizar(idPosto, posto);
+		return this.postoDAO.atualizar(posto);
 	}
 	
 	/**
