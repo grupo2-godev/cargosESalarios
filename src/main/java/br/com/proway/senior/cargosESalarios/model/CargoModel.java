@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Classe cargo.
+ * <h1>Classe cargo.</h1>
+ * 
+ * <p>Classe responsável pela representação do
+ * cargo de um colaborador.</p>
  * 
  * @author Enzo Moura <b>enzo.moura@senior.com.br</b> - Sprint 5
  * @author Janaina Mai <b>janaina.mai@senior.com.br</b> - Sprint 5
@@ -44,13 +47,30 @@ public class CargoModel {
 	private Boolean status;
 	private Integer idPermissao;
 
+	/**
+	 * <h1>Construtor vazio do {@link CargoModel}.</h1>
+	 * 
+	 * <p>Construtor sem parametros da classe {@link CargoModel}</p>
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 */
 	public CargoModel() {
-
 	}
 
 	/**
-	 * @param idCargo
-	 * @param nomeCargo
+	 * <h1>Construtor com paramêtros do {@link CargoModel}.</h1>
+	 * 
+	 * <p>Recebe um id do cargo e um nome do cargo
+	 * e constroi um {@link CargoModel} com os mesmos.</p>
+	 * 
+	 * @param idCargo Integer - Referente ao id do {@link CargoModel}
+	 * @param nomeCargo String - Referente ao nome do {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
 	 */
 	public CargoModel(Integer idCargo, String nomeCargo) {
 		this.idCargo = idCargo;
@@ -58,18 +78,37 @@ public class CargoModel {
 	}
 
 	/**
-	 * @param nomeCargo
-	 * @param dataCadastro
-	 * @param dataUltimaRevisao
-	 * @param cbo2002
-	 * @param cbo94
-	 * @param horaMes
-	 * @param grauDeInstrucao
-	 * @param experienciaMinima
-	 * @param atribuicoes
-	 * @param status
-	 * @param idPermissao
-	 * @param grauInstrucao
+	 * <h1>Construtor com paramêtros do {@link CargoModel}.</h1>
+	 * 
+	 * <p>Recebe todos os atributos necessários para
+	 * contruir o {@link CargoModel}.</p>
+	 * 
+	 * @param nomeCargo String - Referente ao {@link CargoModel#nomeCargo} do {@link CargoModel}
+	 * @param dataCadastro LocalDateTime - Referente a {@link CargoModel#dataCadastro} do {@link CargoModel}
+	 * @param dataUltimaRevisao LocalDateTime - Referente a {@link CargoModel#dataUltimaRevisao} do {@link CargoModel}
+	 * @param cbo2002 {@link CBO2002Model} - Referente ao {@link CargoModel#cbo2002} do {@link CargoModel}
+	 * @param cbo94 {@link CBO1994Model} - Referente ao {@link CargoModel#cbo94} do {@link CargoModel}
+	 * @param horaMes {@link HorasMesModel} - Referente as {@link CargoModel#horaMes} do {@link CargoModel}
+	 * @param grauDeInstrucao {@link GrauInstrucaoModel} - Referente ao {@link CargoModel#grauInstrucao} do {@link CargoModel}
+	 * @param experienciaMinima String - Referente a {@link CargoModel#experienciaMinima} do {@link CargoModel}
+	 * @param atribuicoes String - Referente as {@link CargoModel#atribuicoes} do {@link CargoModel}
+	 * @param status Boolean - Referente ao {@link CargoModel#status} do {@link CargoModel}
+	 * @param idPermissao Integer - Referente a {@link CargoModel#idPermissao} do {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#nomeCargo
+	 * @see CargoModel#dataCadastro
+	 * @see CargoModel#dataUltimaRevisao
+	 * @see CargoModel#cbo2002
+	 * @see CargoModel#cbo94
+	 * @see CargoModel#horaMes
+	 * @see CargoModel#grauInstrucao
+	 * @see CargoModel#experienciaMinima
+	 * @see CargoModel#atribuicoes
+	 * @see CargoModel#status
+	 * @see CargoModel#idPermissao
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
 			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
@@ -88,171 +127,418 @@ public class CargoModel {
 	}
 
 	/**
-	 * @return the idCargo
+	 * <h1>Pega o {@link CargoModel#idCargo}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#idCargo}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return Integer - Referente ao {@link CargoModel#idCargo} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#idCargo
 	 */
 	public Integer getIdCargo() {
-		return idCargo;
+		return this.idCargo;
 	}
 
 	/**
-	 * @param idCargo the idCargo to set
+	 * <h1>Seta o {@link CargoModel#idCargo}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#idCargo}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param idCargo Integer - Referente ao {@link CargoModel#idCargo} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#idCargo
 	 */
 	public void setIdCargo(Integer idCargo) {
 		this.idCargo = idCargo;
 	}
 
 	/**
-	 * @return the nomeCargo
+	 * <h1>Pega o {@link CargoModel#nomeCargo}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#nomeCargo}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return String - Referente ao {@link CargoModel#nomeCargo} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#nomeCargo
 	 */
 	public String getNomeCargo() {
-		return nomeCargo;
+		return this.nomeCargo;
 	}
 
 	/**
-	 * @param nomeCargo the nomeCargo to set
+	 * <h1>Seta o {@link CargoModel#nomeCargo}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#nomeCargo}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param nomeCargo String - Referente ao {@link CargoModel#nomeCargo} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#nomeCargo
 	 */
 	public void setNomeCargo(String nomeCargo) {
 		this.nomeCargo = nomeCargo;
 	}
 
 	/**
-	 * @return the dataCadastro
+	 * <h1>Pega a {@link CargoModel#dataCadastro}.</h1>
+	 * 
+	 * <p>Pega a {@link CargoModel#dataCadastro}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return LocalDateTime - Referente a {@link CargoModel#dataCadastro} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#dataCadastro
 	 */
 	public LocalDateTime getDataCadastro() {
-		return dataCadastro;
+		return this.dataCadastro;
 	}
 
 	/**
-	 * @param dataCadastro the dataCadastro to set
+	 * <h1>Seta a {@link CargoModel#dataCadastro}.</h1>
+	 * 
+	 * <p>Seta um valor para a {@link CargoModel#dataCadastro}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param dataCadastro LocalDateTime - Referente a {@link CargoModel#dataCadastro} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#dataCadastro
 	 */
 	public void setDataCadastro(LocalDateTime dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
 	/**
-	 * @return the dataUltimaRevisao
+	 * <h1>Pega a {@link CargoModel#dataUltimaRevisao}.</h1>
+	 * 
+	 * <p>Pega a {@link CargoModel#dataUltimaRevisao}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return LocalDateTime - Referente a {@link CargoModel#dataUltimaRevisao} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#dataUltimaRevisao
 	 */
 	public LocalDateTime getDataUltimaRevisao() {
-		return dataUltimaRevisao;
+		return this.dataUltimaRevisao;
 	}
 
 	/**
-	 * @param dataUltimaRevisao the dataUltimaRevisao to set
+	 * <h1>Seta a {@link CargoModel#dataCadastro}.</h1>
+	 * 
+	 * <p>Seta um valor para a {@link CargoModel#dataCadastro}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param dataCadastro LocalDateTime - Referente a {@link CargoModel#dataCadastro} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#dataCadastro
 	 */
 	public void setDataUltimaRevisao(LocalDateTime dataUltimaRevisao) {
 		this.dataUltimaRevisao = dataUltimaRevisao;
 	}
 
 	/**
-	 * @return the cbo2002
+	 * <h1>Pega o {@link CargoModel#cbo2002}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#cbo2002}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return {@link CBO2002Model} - Referente a {@link CargoModel#cbo2002} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#cbo2002
+	 * @see CBO2002Model
 	 */
 	public CBO2002Model getCbo2002() {
-		return cbo2002;
+		return this.cbo2002;
 	}
 
 	/**
-	 * @param cbo2002 the cbo2002 to set
+	 * <h1>Seta o {@link CargoModel#cbo2002}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#cbo2002}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param cbo2002 {@link CBO2002Model} - Referente a {@link CargoModel#cbo2002} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#cbo2002
+	 * @see CBO2002Model
 	 */
 	public void setCbo2002(CBO2002Model cbo2002) {
 		this.cbo2002 = cbo2002;
 	}
 
 	/**
-	 * @return the cbo94
+	 * <h1>Pega o {@link CargoModel#cbo94}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#cbo94}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return {@link CBO1994Model} - Referente a {@link CargoModel#cbo94} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#cbo94
+	 * @see CBO1994Model
 	 */
 	public CBO1994Model getCbo94() {
-		return cbo94;
+		return this.cbo94;
 	}
 
 	/**
-	 * @param cbo94 the cbo94 to set
+	 * <h1>Seta o {@link CargoModel#cbo94}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#cbo94}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param cbo94 {@link CBO1994Model} - Referente a {@link CargoModel#cbo94} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#cbo94
+	 * @see CBO1994Model
 	 */
 	public void setCbo94(CBO1994Model cbo94) {
 		this.cbo94 = cbo94;
 	}
 
 	/**
-	 * @return the horaMes
+	 * <h1>Pega o {@link CargoModel#horaMes}.</h1>
+	 * 
+	 * <p>Pega a {@link CargoModel#horaMes}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return {@link HorasMesModel} - Referente a {@link CargoModel#horaMes} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#horaMes
+	 * @see HorasMesModel
 	 */
 	public HorasMesModel getHoraMes() {
-		return horaMes;
+		return this.horaMes;
 	}
 
 	/**
-	 * @param horaMes the horaMes to set
+	 * <h1>Seta o {@link CargoModel#horaMes}.</h1>
+	 * 
+	 * <p>Seta um valor para a {@link CargoModel#horaMes}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param horaMes {@link HorasMesModel} - Referente a {@link CargoModel#horaMes} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#horaMes
+	 * @see HorasMesModel
 	 */
 	public void setHoraMes(HorasMesModel horaMes) {
 		this.horaMes = horaMes;
 	}
 
 	/**
-	 * @return the grauInstrucao
+	 * <h1>Pega o {@link CargoModel#grauInstrucao}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#grauInstrucao}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return {@link GrauInstrucaoModel} - Referente a {@link CargoModel#grauInstrucao} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#grauInstrucao
+	 * @see GrauInstrucaoModel
 	 */
 	public GrauInstrucaoModel getGrauInstrucao() {
-		return grauInstrucao;
+		return this.grauInstrucao;
 	}
 
 	/**
-	 * @param grauInstrucao the grauInstrucao to set
+	 * <h1>Seta o {@link CargoModel#grauInstrucao}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#grauInstrucao}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param grauInstrucao {@link GrauInstrucaoModel} - Referente a {@link CargoModel#grauInstrucao} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#grauInstrucao
+	 * @see GrauInstrucaoModel
 	 */
 	public void setGrauInstrucao(GrauInstrucaoModel grauInstrucao) {
 		this.grauInstrucao = grauInstrucao;
 	}
 
 	/**
-	 * @return the experienciaMinima
+	 * <h1>Pega a {@link CargoModel#experienciaMinima}.</h1>
+	 * 
+	 * <p>Pega a {@link CargoModel#experienciaMinima}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return String - Referente a {@link CargoModel#experienciaMinima} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#experienciaMinima
 	 */
 	public String getExperienciaMinima() {
-		return experienciaMinima;
+		return this.experienciaMinima;
 	}
 
 	/**
-	 * @param experienciaMinima the experienciaMinima to set
+	 * <h1>Seta a {@link CargoModel#experienciaMinima}.</h1>
+	 * 
+	 * <p>Seta um valor para a {@link CargoModel#experienciaMinima}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param experienciaMinima String - Referente a {@link CargoModel#experienciaMinima} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#experienciaMinima
 	 */
 	public void setExperienciaMinima(String experienciaMinima) {
 		this.experienciaMinima = experienciaMinima;
 	}
 
 	/**
-	 * @return the atribuicoes
+	 * <h1>Pega a {@link CargoModel#atribuicoes}.</h1>
+	 * 
+	 * <p>Pega a {@link CargoModel#atribuicoes}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return String - Referente a {@link CargoModel#atribuicoes} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#atribuicoes
 	 */
 	public String getAtribuicoes() {
-		return atribuicoes;
+		return this.atribuicoes;
 	}
 
 	/**
-	 * @param atribuicoes the atribuicoes to set
+	 * <h1>Seta a {@link CargoModel#atribuicoes}.</h1>
+	 * 
+	 * <p>Seta um valor para a {@link CargoModel#atribuicoes}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param atribuicoes String - Referente a {@link CargoModel#atribuicoes} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#atribuicoes
 	 */
 	public void setAtribuicoes(String atribuicoes) {
 		this.atribuicoes = atribuicoes;
 	}
 
 	/**
-	 * @return the status
+	 * <h1>Pega o {@link CargoModel#status}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#status}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return Boolean - Referente a {@link CargoModel#status} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#status
 	 */
 	public Boolean getStatus() {
-		return status;
+		return this.status;
 	}
 
 	/**
-	 * @param status the status to set
+	 * <h1>Seta o {@link CargoModel#status}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#status}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param status Boolean - Referente a {@link CargoModel#status} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#status
 	 */
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
 	/**
-	 * @return the idPermissao
+	 * <h1>Pega o {@link CargoModel#idPermissao}.</h1>
+	 * 
+	 * <p>Pega o {@link CargoModel#idPermissao}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @return Integer - Referente a {@link CargoModel#idPermissao} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#idPermissao
 	 */
 	public Integer getIdPermissao() {
-		return idPermissao;
+		return this.idPermissao;
 	}
 
 	/**
-	 * @param idPermissao the idPermissao to set
+	 * <h1>Seta o {@link CargoModel#idPermissao}.</h1>
+	 * 
+	 * <p>Seta um valor para o {@link CargoModel#idPermissao}
+	 * da classe {@link CargoModel}.</p>
+	 * 
+	 * @param idPermissao Integer - Referente a {@link CargoModel#idPermissao} da classe {@link CargoModel}
+	 * 
+	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
+	 * 
+	 * @see CargoModel
+	 * @see CargoModel#idPermissao
 	 */
 	public void setIdPermissao(Integer idPermissao) {
 		this.idPermissao = idPermissao;
 	}
-
 }
