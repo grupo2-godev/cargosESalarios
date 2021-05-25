@@ -3,10 +3,16 @@ package br.com.proway.senior.cargosESalarios.controller.API;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.proway.senior.cargosESalarios.controller.CargoController;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
@@ -28,7 +34,23 @@ import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 @RestController
 public class CargoControllerAPI {
 
-	CargoDAO cargoDAO = CargoDAO.getInstancia();	
+	CargoController cargoController = new CargoController();
+	CargoDAO cargoDAO = CargoDAO.getInstancia();
+	
+	@PostMapping("/cargos")
+	public Integer postCargo(@RequestBody CargoModel cargoModel) {
+		return cargoController.cadastrarCargo(cargoModel);
+	}
+	
+	@DeleteMapping("/cargos/{idCargo}")
+	public boolean deletarCargo(@PathVariable Integer idCargo) throws Exception {
+		return cargoController.deletarCargoPorID(idCargo);
+	}
+	
+	@PutMapping("/cargos/{idCargo}")
+	public boolean atualizarCargo(@PathVariable Integer idCargo, CargoModel cargoModel) throws Exception {
+		return cargoController.atualizarCargo(idCargo, cargoModel);
+	}
 	
 	/**
 	 * <h1>Método que gera um CargoModelDTO.</h1> 
