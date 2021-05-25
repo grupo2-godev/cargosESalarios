@@ -48,7 +48,7 @@ public class CargoControllerAPI {
 	}
 	
 	@PutMapping("/cargos/{idCargo}")
-	public boolean atualizarCargo(@PathVariable Integer idCargo, CargoModel cargoModel) throws Exception {
+	public boolean atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
 		return cargoController.atualizarCargo(idCargo, cargoModel);
 	}
 	
