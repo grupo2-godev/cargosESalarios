@@ -3,6 +3,10 @@ package br.com.proway.senior.cargosESalarios.controller.API;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
@@ -20,9 +24,11 @@ import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
  *
  * @see CargoModel
  */
+
+@RestController
 public class CargoControllerAPI {
 
-	CargoDAO cargoDAO = CargoDAO.getInstancia();
+	CargoDAO cargoDAO = CargoDAO.getInstancia();	
 	
 	/**
 	 * <h1>Método que gera um CargoModelDTO.</h1> 
@@ -41,7 +47,8 @@ public class CargoControllerAPI {
 	 * @see CargoModel
 	 * @see CargoModelDTO
 	 */
-	public CargoModelDTO buscarPorID(int idCargo) {
+	@GetMapping("/cargos/{idCargo}")
+	public CargoModelDTO buscarPorID(@PathVariable int idCargo) {
 		return new CargoModelDTO(cargoDAO.buscar(CargoModel.class, idCargo));
 	}
 		
@@ -61,6 +68,8 @@ public class CargoControllerAPI {
 	 * 
 	 * @see CargoModelDTO
 	 */
+	
+	@GetMapping("/cargos")
 	public List<CargoModelDTO> buscarTodos(){
 		List<CargoModelDTO> cargosDTO = new ArrayList<CargoModelDTO>();
 		for (CargoModel cargoModel : cargoDAO.listarPorTabela(CargoModel.class)) {
