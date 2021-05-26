@@ -36,7 +36,7 @@ public class PostoDeTrabalhoControllerAPITest {
 	static Double salario = 1800.00;
 	
 	static PostoDeTrabalhoControllerAPI controllerApi = new PostoDeTrabalhoControllerAPI();
-	static PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
+	static PostoDeTrabalhoController controller = PostoDeTrabalhoController.getInstancia();
 
 	
 	static CargoModel cargo;
@@ -75,7 +75,6 @@ public class PostoDeTrabalhoControllerAPITest {
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
-		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
 	}

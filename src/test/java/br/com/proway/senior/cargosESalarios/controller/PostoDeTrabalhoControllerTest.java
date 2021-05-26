@@ -36,7 +36,7 @@ public class PostoDeTrabalhoControllerTest{
 	
 	static Double salario = 1800.00;
 	
-	static PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
+	static PostoDeTrabalhoController controller = PostoDeTrabalhoController.getInstancia();
 	
 	static CargoModel cargo;
 	static int idCargo;
@@ -74,7 +74,6 @@ public class PostoDeTrabalhoControllerTest{
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
-		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
 	}
@@ -90,7 +89,6 @@ public class PostoDeTrabalhoControllerTest{
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
-		controller = new PostoDeTrabalhoController();
 	}
 	
 	/**
