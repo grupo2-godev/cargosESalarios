@@ -16,7 +16,7 @@ import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
 
 /**
- * <h1>Responsável por receber requisições RESt</h1>
+ * <h1>Responsável por receber requisições REST</h1>
  * 
  * <p>
  * Classe responsável por receber requisições REST e executa a ligação entre a
@@ -25,12 +25,9 @@ import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
  * 
  * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
  * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
- * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
- *         - Sprint 6
+ * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6
  * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
- * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
- *         Sprint 6
- *
+ * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> - Sprint 6
  */
 @RestController
 public class PostoDeTrabalhoControllerAPI {
@@ -41,19 +38,20 @@ public class PostoDeTrabalhoControllerAPI {
 	/**
 	 * <h1>Busca um {@link PostoDeTrabalhoModelDTO} por id</h1>
 	 * 
-	 * <p>
-	 * </p>
+	 * <p>Recebe um id, busca um {@link PostoDeTrabalhoModel}
+	 * atraves do {@link PostoDeTrabalhoController} e 
+	 * retorna esse {@link PostoDeTrabalhoModel}.</p>
 	 * 
-	 * Retorna um objeto do tipo {@link PostoDeTrabalhoModel} que contenha o id
-	 * igual ao id recebido no parameto.
+	 * @param id Integer - Referente ao id informado
 	 * 
-	 * @param id Integer Id do objeto a ser consultado.
-	 * @return PostoDeTrabalhoModelDTO: criado a partir do objeto encontrado no
-	 *         banco de dados.
+	 * @return {@link PostoDeTrabalhoModel} - Referente ao
+	 * {@link PostoDeTrabalhoModel} encontrado
 	 * 
 	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * 
+	 * @see PostoDeTrabalhoModel
+	 * @see PostoDeTrabalhoController
 	 */
 	@GetMapping("/postos/{id}")
 	public PostoDeTrabalhoModelDTO buscarPorID(@PathVariable Integer id) {
@@ -61,15 +59,20 @@ public class PostoDeTrabalhoControllerAPI {
 	}
 
 	/**
-	 * Retorna um ArrayList com todos os registros da tabela
-	 * {@link PostoDeTrabalhoModel}.
+	 * <h1>Busca todos os {@link PostoDeTrabalhoModel}.</h1>
 	 * 
-	 * Faz uma busca por todos os objetos do tipo {@link PostoDeTrabalhoModel} na
-	 * tabela PostoDeTrabalhoModel.class e adiciona em um
-	 * ArrayList<PostoDeTrabalhoModelDTO> para retornar ao usuário.
+	 * <p>Busca todos os {@link PostoDeTrabalhoModel}
+	 * através do {@link PostoDeTrabalhoController}.
+	 * Retorna um ArrayList de {@link PostoDeTrabalhoModel}.</p>
 	 * 
-	 * @return ArrayList<PostoDeTrabalhoModelDTO> Lista de ojetos do tipo
-	 *         {@link PostoDeTrabalhoModel}.
+	 * @return ArrayList {@link PostoDeTrabalhoModel} - Referente
+	 * a todos os {@link PostoDeTrabalhoModel} encontrados
+	 * 
+	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * 
+	 * @see PostoDeTrabalhoModel
+	 * @see PostoDeTrabalhoController
 	 */
 	@GetMapping("/postos")
 	public ArrayList<PostoDeTrabalhoModelDTO> buscarTodos() {
@@ -80,6 +83,27 @@ public class PostoDeTrabalhoControllerAPI {
 		return postosDTO;
 	}
 
+	/**
+	 * <h1>Insere um {@link PostoDeTrabalhoModel}.</h1>
+	 * 
+	 * <p>Recebe um {@link PostoDeTrabalhoModel}
+	 * e o insere no banco através do {@link PostoDeTrabalhoController}.
+	 * Retorna true caso tudo tenha dado certo.</p>
+	 * 
+	 * @param posto {@link PostoDeTrabalhoModel} - Referente ao
+	 * {@link PostoDeTrabalhoModel} informado
+	 * 
+	 * @return boolean - true caso de certo, false caso
+	 * contrário
+	 * 
+	 * @throws Exception - Caso aconteça algum erro
+	 * 
+	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * 
+	 * @see PostoDeTrabalhoModel
+	 * @see PostoDeTrabalhoController
+	 */
 	@PostMapping("/postos")
 	public boolean inserirPosto(@RequestBody PostoDeTrabalhoModel posto) throws Exception {
 		postoController.cadastrarPostoDeTrabalho(posto.getNomePosto(), posto.getCargo(), posto.getSetor(),
@@ -87,6 +111,26 @@ public class PostoDeTrabalhoControllerAPI {
 		return true;
 	}
 
+	/**
+	 * <h1>Atualiza um {@link PostoDeTrabalhoModel}.</h1>
+	 * 
+	 * <p>Recebe um id e um {@link PostoDeTrabalhoModel},
+	 * atualiza o {@link PostoDeTrabalhoModel} referente
+	 * ao id informado</p>
+	 * 
+	 * @param id Integer - Referente ao id informado
+	 * @param posto {@link PostoDeTrabalhoModel} - Referente ao
+	 * {@link PostoDeTrabalhoModel} informado
+	 * 
+	 * @return boolean - true caso de certo,
+	 * false caso contrário
+	 * 
+	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * 
+	 * @see PostoDeTrabalhoModel
+	 * @see PostoDeTrabalhoController
+	 */
 	@PutMapping("/postos/{id}")
 	public boolean atualizarPosto(@PathVariable Integer id, @RequestBody PostoDeTrabalhoModel posto) {
 		posto.setIdPosto(id);
@@ -95,6 +139,25 @@ public class PostoDeTrabalhoControllerAPI {
 		return true;
 	}
 
+	/**
+	 * <h1>Deleta um {@link PostoDeTrabalhoModel}.</h1>
+	 * 
+	 * <p>Recebe um id e deleta o
+	 * {@link PostoDeTrabalhoModel} referente
+	 * ao id informado. Faz isso usando o
+	 * {@link PostoDeTrabalhoController}.</p>
+	 * 
+	 * @param id Integer - Referente ao id informado
+	 * 
+	 * @return boolean - true caso de certo
+	 * false caso contrário
+	 * 
+	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * 
+	 * @see PostoDeTrabalhoModel
+	 * @see PostoDeTrabalhoController
+	 */
 	@DeleteMapping("/postos/{id}")
 	public boolean deletarPosto(@PathVariable int id) {
 		postoController.deletarPostoDeTrabalho(id);
