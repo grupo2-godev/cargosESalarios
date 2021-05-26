@@ -18,48 +18,58 @@ import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
 /**
  * <h1>Responsável por receber requisições RESt</h1>
  * 
- * <p>Classe responsável por receber
- * requisições REST e executa a ligação
- * entre a API e o serviço.</p>
+ * <p>
+ * Classe responsável por receber requisições REST e executa a ligação entre a
+ * API e o serviço.
+ * </p>
  * 
  * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
  * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
- * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6
+ * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+ *         - Sprint 6
  * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
- * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+ * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+ *         Sprint 6
  *
  */
 @RestController
 public class PostoDeTrabalhoControllerAPI {
-	
+
 	PostoDeTrabalhoController postoController = PostoDeTrabalhoController.getInstancia();
-	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia();	
-	
+	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia();
+
 	/**
 	 * <h1>Busca um {@link PostoDeTrabalhoModelDTO} por id</h1>
 	 * 
-	 * <p></p>
+	 * <p>
+	 * </p>
 	 * 
-	 * Retorna um objeto do tipo {@link PostoDeTrabalhoModel} que contenha o id igual ao id
-	 * recebido no parameto.
+	 * Retorna um objeto do tipo {@link PostoDeTrabalhoModel} que contenha o id
+	 * igual ao id recebido no parameto.
+	 * 
 	 * @param id Integer Id do objeto a ser consultado.
-	 * @return PostoDeTrabalhoModelDTO: criado a partir do objeto encontrado no banco de dados.
+	 * @return PostoDeTrabalhoModelDTO: criado a partir do objeto encontrado no
+	 *         banco de dados.
 	 * 
 	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong> Sprint 6
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+	 *         Sprint 6
 	 */
 	@GetMapping("/postos/{id}")
-	public PostoDeTrabalhoModelDTO buscarPorID(@PathVariable Integer id){
+	public PostoDeTrabalhoModelDTO buscarPorID(@PathVariable Integer id) {
 		return new PostoDeTrabalhoModelDTO(postoController.buscarPostoDeTrabalhoId(id));
 	}
-	
+
 	/**
-	 * Retorna um ArrayList com todos os registros da tabela {@link PostoDeTrabalhoModel}.
+	 * Retorna um ArrayList com todos os registros da tabela
+	 * {@link PostoDeTrabalhoModel}.
 	 * 
-	 * Faz uma busca por todos os objetos do tipo {@link PostoDeTrabalhoModel} na tabela PostoDeTrabalhoModel.class e
-	 * adiciona em um ArrayList<PostoDeTrabalhoModelDTO> para retornar ao usuário.
+	 * Faz uma busca por todos os objetos do tipo {@link PostoDeTrabalhoModel} na
+	 * tabela PostoDeTrabalhoModel.class e adiciona em um
+	 * ArrayList<PostoDeTrabalhoModelDTO> para retornar ao usuário.
 	 * 
-	 * @return ArrayList<PostoDeTrabalhoModelDTO> Lista de ojetos do tipo {@link PostoDeTrabalhoModel}.
+	 * @return ArrayList<PostoDeTrabalhoModelDTO> Lista de ojetos do tipo
+	 *         {@link PostoDeTrabalhoModel}.
 	 */
 	@GetMapping("/postos")
 	public ArrayList<PostoDeTrabalhoModelDTO> buscarTodos() {
@@ -69,30 +79,22 @@ public class PostoDeTrabalhoControllerAPI {
 		}
 		return postosDTO;
 	}
-	
+
 	@PostMapping("/postos")
-	public boolean inserirPosto(@RequestBody PostoDeTrabalhoModel postoDeTrabalhoModel) {
-		try {
-			postoDAO.criar(postoDeTrabalhoModel);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public boolean inserirPosto(@RequestBody PostoDeTrabalhoModel posto) throws Exception {
+		postoController.cadastrarPostoDeTrabalho(posto.getNomePosto(), posto.getCargo(), posto.getSetor(),
+				posto.getNivel(), posto.getSalario());
+		return true;
 	}
-	
+
 	@PutMapping("/postos/{id}")
-	public boolean atualizarPosto(@PathVariable Integer id, @RequestBody PostoDeTrabalhoModel postoDeTrabalhoModel) {
-		try {
-			postoDeTrabalhoModel.setIdPosto(id);
-			postoDAO.atualizar(postoDeTrabalhoModel);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public boolean atualizarPosto(@PathVariable Integer id, @RequestBody PostoDeTrabalhoModel posto) {
+		posto.setIdPosto(id);
+		postoController.atualizarPostoDeTrabalho(id, posto.getNomePosto(), posto.getCargo(), posto.getSetor(),
+				posto.getNivel(), posto.getSalario());
+		return true;
 	}
-	
+
 	@DeleteMapping("/postos/{id}")
 	public boolean deletarPosto(@PathVariable int id) {
 		postoController.deletarPostoDeTrabalho(id);
