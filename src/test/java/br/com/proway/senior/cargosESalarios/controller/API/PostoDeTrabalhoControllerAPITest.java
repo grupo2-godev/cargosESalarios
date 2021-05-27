@@ -1,6 +1,7 @@
 package br.com.proway.senior.cargosESalarios.controller.API;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +24,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
+import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
@@ -36,7 +38,7 @@ public class PostoDeTrabalhoControllerAPITest {
 	static Double salario = 1800.00;
 	
 	static PostoDeTrabalhoControllerAPI controllerApi = new PostoDeTrabalhoControllerAPI();
-	static PostoDeTrabalhoController controller = new PostoDeTrabalhoController();
+	static PostoDeTrabalhoController controller = PostoDeTrabalhoController.getInstancia();
 
 	
 	static CargoModel cargo;
@@ -75,7 +77,6 @@ public class PostoDeTrabalhoControllerAPITest {
 		new CBO2002Controller().deletarTodosCBO2002();
 		new CBO1994Controller().deletarTodosCBO1994();
 		new HorasMesController().deletarTodosHorasMes();
-		controller = new PostoDeTrabalhoController();
 		
 		popularTabelas();
 	}
@@ -156,5 +157,33 @@ public class PostoDeTrabalhoControllerAPITest {
 		assertEquals(3, controllerApi.buscarTodos().size());
 	}	
 	
+	@Test
+	public void testInserirPosto() throws Exception {
+		PostoDeTrabalhoModel posto = new PostoDeTrabalhoModel(nomePosto, cargo, setor, nivel, salario);
+		assertTrue(controllerApi.inserirPosto(posto));
+	}
+	
+	@Test
+	public void testAtualizarPosto() throws Exception {
+		int id = controller.cadastrarPostoDeTrabalho(nomePosto, cargo, setor, nivel, salario);
+		PostoDeTrabalhoModel posto = controller.buscarPostoDeTrabalhoId(id);
+		posto.setNomePosto("Novo nome do Posto");
+		controllerApi.atualizarPosto(id, posto);
+		assertEquals("Novo nome do Posto", posto.getNomePosto());
+	}
+	
+	@Test
+	public void testDeletarPosto() throws Exception {
+		int id = controller.cadastrarPostoDeTrabalho(nomePosto, cargo, setor, nivel, salario);
+		assertTrue(controllerApi.deletarPosto(id));
+	}
+	
+	@Test
+	public void testGetCargoDTO() throws Exception {
+		int id = controller.cadastrarPostoDeTrabalho(nomePosto, cargo, setor, nivel, salario);
+		PostoDeTrabalhoModel posto = controller.buscarPostoDeTrabalhoId(id);
+		PostoDeTrabalhoModelDTO postoDTO = new PostoDeTrabalhoModelDTO(posto);
+		assertEquals(postoDTO.getCargoDTO().getExperienciaMinima(), "12");
+	}
 
 }

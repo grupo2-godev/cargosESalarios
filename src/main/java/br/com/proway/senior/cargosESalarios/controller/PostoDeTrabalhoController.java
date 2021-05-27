@@ -20,6 +20,19 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class PostoDeTrabalhoController {
 	
+	private static PostoDeTrabalhoController postoDeTrabalho;
+	
+	public static PostoDeTrabalhoController getInstancia() {
+		if(postoDeTrabalho == null) {
+			postoDeTrabalho = new PostoDeTrabalhoController();
+		}
+		return postoDeTrabalho;
+	}
+	
+	private PostoDeTrabalhoController() {
+		
+	}
+	
 	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia();
 	
 	/**

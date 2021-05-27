@@ -17,7 +17,7 @@ import br.com.proway.senior.cargosESalarios.model.SetorModel;
 public class PostoDeTrabalhoModelDTO {
 	
 	private String nomePosto;
-	private CargoModel cargo;
+	private CargoModelDTO cargoDTO;
 	private SetorModel setor;
 	private NivelModel nivel;
 	private Double salario;
@@ -33,7 +33,7 @@ public class PostoDeTrabalhoModelDTO {
 	 */
 	public PostoDeTrabalhoModelDTO(PostoDeTrabalhoModel postoDeTrabalhoModel) {
 		this.nomePosto = postoDeTrabalhoModel.getNomePosto();
-		this.cargo = postoDeTrabalhoModel.getCargo();
+		this.cargoDTO = new CargoModelDTO(postoDeTrabalhoModel.getCargo());
 		this.setor = postoDeTrabalhoModel.getSetor();
 		this.nivel = postoDeTrabalhoModel.getNivel();
 		this.salario = postoDeTrabalhoModel.getSalario();
@@ -43,8 +43,8 @@ public class PostoDeTrabalhoModelDTO {
 		return nomePosto;
 	}
 
-	public CargoModel getCargo() {
-		return cargo;
+	public CargoModelDTO getCargo() {
+		return cargoDTO;
 	}
 
 	public SetorModel getSetor() {
@@ -58,4 +58,9 @@ public class PostoDeTrabalhoModelDTO {
 	public Double getSalario() {
 		return salario;
 	}
+
+	public CargoModelDTO getCargoDTO() {
+		return cargoDTO;
+	}
+
 }

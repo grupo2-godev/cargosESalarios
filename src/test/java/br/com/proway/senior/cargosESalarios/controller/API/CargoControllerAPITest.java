@@ -133,4 +133,30 @@ public class CargoControllerAPITest {
 		
 		assertFalse(cargoAPI.buscarTodos().isEmpty());		
 	}
+	
+	@Test
+	public void testPostCargo() throws Exception {
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		int id = cargoAPI.postCargo(cargo1);
+		assertTrue(id > 0);
+	}
+	
+	@Test
+	public void testDeletarCargo() throws Exception {
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		int id = cargoAPI.postCargo(cargo1);
+		assertTrue(cargoAPI.deletarCargo(id));
+	}
+	
+	@Test
+	public void testAtualizarCargo() throws Exception {
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		int id = controller.cadastrarCargo(cargo1);
+		cargo1.setAtribuicoes("Programar em python");
+		cargoAPI.atualizarCargo(id, cargo1);
+		assertTrue(cargoAPI.deletarCargo(id));
+	}
 }
