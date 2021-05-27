@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.PostoDeTrabalhoController;
@@ -76,7 +77,6 @@ public class PostoDeTrabalhoControllerAPI {
 	 * @see PostoDeTrabalhoModel
 	 * @see PostoDeTrabalhoController
 	 */
-	@GetMapping("/postos")
 	public ArrayList<PostoDeTrabalhoModelDTO> buscarTodos() {
 		ArrayList<PostoDeTrabalhoModelDTO> postosDTO = new ArrayList<PostoDeTrabalhoModelDTO>();
 		for (PostoDeTrabalhoModel postoDeTrabalhoModel : postoController.buscarTodosPostosDeTrabalho()) {
@@ -160,7 +160,7 @@ public class PostoDeTrabalhoControllerAPI {
 	 * @see PostoDeTrabalhoModel
 	 * @see PostoDeTrabalhoController
 	 */
-	@DeleteMapping("/postos/id/{id}")
+	@DeleteMapping("/postos/{id}")
 	public boolean deletarPosto(@PathVariable int id) {
 		postoController.deletarPostoDeTrabalho(id);
 		return true;
@@ -190,13 +190,15 @@ public class PostoDeTrabalhoControllerAPI {
 	 * @see PostoDeTrabalhoModelDTO
 	 * @see PostoDeTrabalhoController#buscarPostoPorNomeCargo(String)
 	 */
-	@GetMapping("/postos/nome/{nome}")
-	public ArrayList<PostoDeTrabalhoModelDTO> buscarPostosPeloNome(@PathVariable String nome) throws Exception {
+	@GetMapping("/postos")
+	public ArrayList<PostoDeTrabalhoModelDTO> buscarPostosPeloNome(@RequestParam String nome) throws Exception {
+		if(nome.equals(null)) {
+			return buscarTodos();
+		}
 		ArrayList<PostoDeTrabalhoModelDTO> listaPostosDeTrabalhoModelDTO = new ArrayList<>();
 		for (PostoDeTrabalhoModel postoDeTrabalhoModel : postoController.buscarPostoPorNomeCargo(nome)) {
 			listaPostosDeTrabalhoModelDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
 		}
 		return listaPostosDeTrabalhoModelDTO;
-		
 	}
 }

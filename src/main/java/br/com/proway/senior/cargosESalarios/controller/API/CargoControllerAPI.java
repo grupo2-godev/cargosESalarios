@@ -3,12 +3,14 @@ package br.com.proway.senior.cargosESalarios.controller.API;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.CargoController;
@@ -57,8 +59,13 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@PostMapping("/cargos")
-	public Integer postCargo(@RequestBody CargoModel cargoModel) {
-		return cargoController.cadastrarCargo(cargoModel);
+	public ResponseEntity<?> postCargo(@RequestBody CargoModel cargoModel) {
+		try {
+			Integer cargoId = cargoController.cadastrarCargo(cargoModel);
+			return ResponseEntity.ok(cargoId);
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().body("leia a documentação!!");
+		}		
 	}
 	
 	/**
@@ -129,7 +136,7 @@ public class CargoControllerAPI {
 	 * @see CargoModel
 	 * @see CargoModelDTO
 	 */
-	@GetMapping("/cargos/id/{idCargo}")
+	@GetMapping("/cargos/{idCargo}")
 	public CargoModelDTO buscarPorID(@PathVariable Integer idCargo) throws Exception {
 		return new CargoModelDTO(cargoController.buscarCargoPorID(idCargo));
 	}
@@ -183,9 +190,13 @@ public class CargoControllerAPI {
 	 * 
 	 * @see CargoModelDTO
 	 * @see CargoController#buscarCargoPorNomeCargo(String)
+	 * /cargo?nome=programador
 	 */
-	@GetMapping("/cargos/nome/{nome}")
-	public ArrayList<CargoModelDTO> buscarCargosPeloNome(@PathVariable String nome) throws Exception {
+	@GetMapping("/cargos/")
+	public ArrayList<CargoModelDTO> buscarCargosPeloNome(@RequestParam String nome) throws Exception {
+		if(nome.equals(null)) {
+			return (ArrayList<CargoModelDTO>) buscarTodos();
+		}
 		ArrayList<CargoModelDTO> listaCargosModelDTO = new ArrayList<>();
 		for (CargoModel cargoModel : cargoController.buscarCargoPorNomeCargo(nome)) {
 			listaCargosModelDTO.add(new CargoModelDTO(cargoModel));

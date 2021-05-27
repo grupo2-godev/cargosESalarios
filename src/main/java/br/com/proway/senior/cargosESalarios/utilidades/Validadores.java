@@ -1,5 +1,7 @@
 package br.com.proway.senior.cargosESalarios.utilidades;
 
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
+
 /**
  * Utilitarios do sistema
  * 
@@ -114,4 +116,28 @@ public class Validadores {
 		return verificar.matches("(([0-9]*[.])?[0-9]+)");
 	}
 
+
+	static public boolean validacaoCargo(CargoModel cargo) throws Exception {	
+	
+	if (Validadores.ehObjetoNulo(cargo.getNomeCargo()) || cargo.getNomeCargo().isEmpty())
+		throw (new Exception("O nome do cargo não foi informado."));
+	if (Validadores.ehObjetoNulo(cargo.getCbo2002()))
+		throw (new Exception("O cbo2002 não foi informado."));
+	if (Validadores.ehObjetoNulo(cargo.getCbo94()))
+		throw (new Exception("O cbo94 não foi informado."));
+	if (Validadores.ehObjetoNulo(cargo.getHoraMes()))
+		throw (new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero."));
+	if (Validadores.ehObjetoNulo(cargo.getGrauInstrucao()))
+		throw (new Exception("O grau de instrução não foi informado."));
+	if (Validadores.ehObjetoNulo(cargo.getExperienciaMinima()) || cargo.getExperienciaMinima().isEmpty())
+		throw (new Exception("A experiencia mínima não foi informada."));
+	if (Validadores.ehObjetoNulo(cargo.getAtribuicoes()) || cargo.getAtribuicoes().isEmpty())
+		throw (new Exception("As atribuicoes não foram informadas."));
+	if (Validadores.ehObjetoNulo(cargo.getStatus()))
+		throw (new Exception("O status não foi informado."));
+	if (Validadores.ehZeroOuNulo(cargo.getIdPermissao()))
+		throw (new Exception("A permissao não foi informada."));
+	
+	return true;
+	}
 }

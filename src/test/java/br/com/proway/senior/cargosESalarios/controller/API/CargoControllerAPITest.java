@@ -138,7 +138,7 @@ public class CargoControllerAPITest {
 	public void testPostCargo() throws Exception {
 		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		int id = cargoAPI.postCargo(cargo1);
+		int id = (int) cargoAPI.postCargo(cargo1).getBody();
 		assertTrue(id > 0);
 	}
 	
@@ -146,7 +146,7 @@ public class CargoControllerAPITest {
 	public void testDeletarCargo() throws Exception {
 		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
 				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		int id = cargoAPI.postCargo(cargo1);
+		int id = (int) cargoAPI.postCargo(cargo1).getBody();
 		assertTrue(cargoAPI.deletarCargo(id));
 	}
 	

@@ -3,8 +3,6 @@ package br.com.proway.senior.cargosESalarios.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.sun.xml.txw2.Document;
-
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.CBO2002Model;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
@@ -62,25 +60,6 @@ public class CargoController {
 			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horasMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) throws Exception {
 
-		if (Validadores.ehObjetoNulo(nomeCargo) || nomeCargo.isEmpty())
-			throw (new Exception("O nome do cargo não foi informado."));
-		if (Validadores.ehObjetoNulo(cbo2002))
-			throw (new Exception("O cbo2002 não foi informado."));
-		if (Validadores.ehObjetoNulo(cbo94))
-			throw (new Exception("O cbo94 não foi informado."));
-		if (Validadores.ehObjetoNulo(horasMes))
-			throw (new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero."));
-		if (Validadores.ehObjetoNulo(grauInstrucao))
-			throw (new Exception("O grau de instrução não foi informado."));
-		if (Validadores.ehObjetoNulo(experienciaMinima) || experienciaMinima.isEmpty())
-			throw (new Exception("A experiencia mínima não foi informada."));
-		if (Validadores.ehObjetoNulo(atribuicoes) || atribuicoes.isEmpty())
-			throw (new Exception("As atribuicoes não foram informadas."));
-		if (Validadores.ehObjetoNulo(status))
-			throw (new Exception("O status não foi informado."));
-		if (Validadores.ehZeroOuNulo(idPermissao))
-			throw (new Exception("A permissao não foi informada."));
-
 		CargoModel cargo = new CargoModel();
 		cargo.setNomeCargo(nomeCargo);
 		cargo.setDataCadastro(dataCadastro);
@@ -93,7 +72,8 @@ public class CargoController {
 		cargo.setAtribuicoes(atribuicoes);
 		cargo.setStatus(status);
 		cargo.setIdPermissao(idPermissao);
-
+		
+		Validadores.validacaoCargo(cargo);
 		return cargo;
 	}
 
@@ -112,13 +92,22 @@ public class CargoController {
 	 * @return Integer - Referente ao id do {@link CargoModel}
 	 * 
 	 * @author Janaina Mai <<b>janaina.mai@senior.com.br</b>> - Sprint 5
+	 * @throws Exception 
 	 * 
 	 * @see CargoModel
 	 * @see CargoDAO#criar
 	 */
 	public Integer cadastrarCargo(CargoModel cargo) {
-		Integer idCargoCadastrado = cargoDAO.criar(cargo);
-		return idCargoCadastrado;
+
+		try {
+			Validadores.validacaoCargo(cargo);
+
+			Integer idCargoCadastrado = cargoDAO.criar(cargo);
+			return idCargoCadastrado;
+
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	/**
