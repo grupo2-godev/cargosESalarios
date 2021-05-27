@@ -129,6 +129,12 @@ public class CargoController {
 	public CargoModel buscarCargoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
 			throw (new Exception("O id não pode ser nulo ou zero."));
+		
+		CargoModel cargo = cargoDAO.buscar(CargoModel.class, id);
+		
+		if(cargo == null) {
+			throw (new Exception("Nao ha cargo cadastrado com este ID"));
+		}		
 		return cargoDAO.buscar(CargoModel.class, id);
 	}
 
@@ -252,7 +258,7 @@ public class CargoController {
 	 */
 	public ArrayList<CargoModel> buscarCargoPorNomeCargo(String nomeCargo) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(nomeCargo))
-			throw (new Exception("Nome procurado invalido."));
+			throw (new Exception("Nome procurado invalido"));
 		return (ArrayList<CargoModel>) cargoDAO.listarPorValorDeColunaComStringIncompleta(CargoModel.class, "nomeCargo", nomeCargo);
 	}
 }
