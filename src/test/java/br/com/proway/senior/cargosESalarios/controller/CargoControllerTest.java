@@ -254,5 +254,15 @@ public class CargoControllerTest {
 		controller.deletarTodosCargos();
 		assertEquals(0, controller.buscarTodosCargos().size());
 	}
+	
+	@Test
+	public void testBuscarCargoPeloNomeCargo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		controller.cadastrarCargo(cargo);
+		
+		assertEquals(1, controller.buscarCargoPorNomeCargo("Desenvolvedor 2").size());
+
+	}
 
 }

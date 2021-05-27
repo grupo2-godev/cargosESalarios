@@ -159,4 +159,14 @@ public class CargoControllerAPITest {
 		cargoAPI.atualizarCargo(id, cargo1);
 		assertTrue(cargoAPI.deletarCargo(id));
 	}
+	
+	@Test
+	public void testBuscarCargoPeloNomeCargo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
+				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		controller.cadastrarCargo(cargo);
+		
+		assertEquals(1, cargoAPI.buscarCargosPeloNome("Desenvolvedor 2").size());
+
+	}
 }

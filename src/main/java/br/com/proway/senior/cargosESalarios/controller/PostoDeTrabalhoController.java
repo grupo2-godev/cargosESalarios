@@ -7,6 +7,7 @@ import br.com.proway.senior.cargosESalarios.model.NivelModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
+import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
@@ -148,5 +149,35 @@ public class PostoDeTrabalhoController {
 	 */
 	public boolean deletarTodos() {
 		return this.postoDAO.deletarTodos("Posto_de_Trabalho");
+	}
+	
+	/**
+	 * <h1>Busca {@link PostoDeTrabalhoModel} pelo nome.</h1>
+	 * 
+	 * <p>Recebe uma nome e exibe os registros
+	 * da tabela selecionados por esse nome do 
+	 * {@link PostoDeTrabalhoModel}. Faz isso
+	 * através do 
+	 * {@link PostoDeTrabalhoDAO#listarPorValorDeColunaComStringIncompleta(Class, String, String)}.</p>
+	 * 
+	 * @param nomePosto String - Referente ao nome informado
+	 * 
+	 * @return {@link ArrayList} {@link PostoDeTrabalhoModel} - Referente
+	 * aos {@link PostoDeTrabalhoModel} encontrados
+	 * 
+	 * @throws Exception - Caso o nome for inválido
+	 * 
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong>
+	 * 
+	 * @version sprint7
+	 * 
+	 * @see PostoDeTrabalhoModelDTO
+	 * @see PostoDeTrabalhoDAO#listarPorValorDeColunaComStringIncompleta(Class, String, String)
+	 */
+	public ArrayList<PostoDeTrabalhoModel> buscarPostoPorNomeCargo(String nomePosto) throws Exception {
+		if (!Validadores.apenasCaracteresValidos(nomePosto))
+			throw (new Exception("Nome procurado invalido."));
+		return (ArrayList<PostoDeTrabalhoModel>) postoDAO.listarPorValorDeColunaComStringIncompleta(PostoDeTrabalhoModel.class, "nomePosto", nomePosto);
 	}
 }

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.PostoDeTrabalhoController;
+import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
+import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
 
 /**
@@ -158,9 +160,43 @@ public class PostoDeTrabalhoControllerAPI {
 	 * @see PostoDeTrabalhoModel
 	 * @see PostoDeTrabalhoController
 	 */
-	@DeleteMapping("/postos/{id}")
+	@DeleteMapping("/postos/id/{id}")
 	public boolean deletarPosto(@PathVariable int id) {
 		postoController.deletarPostoDeTrabalho(id);
 		return true;
+	}
+	
+	/**
+	 * <h1>Busca {@link PostoDeTrabalhoModelDTO} pelo nome.</h1>
+	 * 
+	 * <p>Recebe uma nome e exibe os registros
+	 * da tabela selecionados por esse nome do 
+	 * {@link PostoDeTrabalhoModelDTO}. Faz isso
+	 * através do 
+	 * {@link PostoDeTrabalhoController#buscarPostoPorNomeCargo(String)}.</p>
+	 * 
+	 * @param nome String - Referente ao nome informado
+	 * 
+	 * @return {@link ArrayList} {@link PostoDeTrabalhoModelDTO} - Referente
+	 * aos {@link PostoDeTrabalhoModelDTO} encontrados
+	 * 
+	 * @throws Exception - Caso o nome for inválido
+	 * 
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong>
+	 * 
+	 * @version sprint7
+	 * 
+	 * @see PostoDeTrabalhoModelDTO
+	 * @see PostoDeTrabalhoController#buscarPostoPorNomeCargo(String)
+	 */
+	@GetMapping("/postos/nome/{nome}")
+	public ArrayList<PostoDeTrabalhoModelDTO> buscarPostosPeloNome(@PathVariable String nome) throws Exception {
+		ArrayList<PostoDeTrabalhoModelDTO> listaPostosDeTrabalhoModelDTO = new ArrayList<>();
+		for (PostoDeTrabalhoModel postoDeTrabalhoModel : postoController.buscarPostoPorNomeCargo(nome)) {
+			listaPostosDeTrabalhoModelDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
+		}
+		return listaPostosDeTrabalhoModelDTO;
+		
 	}
 }

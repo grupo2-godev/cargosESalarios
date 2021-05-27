@@ -3,7 +3,6 @@ package br.com.proway.senior.cargosESalarios.controller.API;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.CargoController;
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 
 /**
@@ -131,7 +129,7 @@ public class CargoControllerAPI {
 	 * @see CargoModel
 	 * @see CargoModelDTO
 	 */
-	@GetMapping("/cargos/{idCargo}")
+	@GetMapping("/cargos/id/{idCargo}")
 	public CargoModelDTO buscarPorID(@PathVariable Integer idCargo) throws Exception {
 		return new CargoModelDTO(cargoController.buscarCargoPorID(idCargo));
 	}
@@ -160,4 +158,38 @@ public class CargoControllerAPI {
 		}
 		return cargosDTO;		
 	}	
+	
+	/**
+	 * <h1>Busca {@link CargoModelDTO} pelo nome.</h1>
+	 * 
+	 * <p>Recebe um nome e exibe os 
+	 * {@link CargoModelDTO} referente a esse nome.
+	 * Retorna um {@link ArrayList} {@link CargoModelDTO}
+	 * com todos os {@link CargoModelDTO} encontrados
+	 * com o nome informado. Faz isso atráves do
+	 * {@link CargoController#buscarCargoPorNomeCargo(String)}.</p>
+	 * 
+	 * @param nome String - Referente ao nome informado
+	 * 
+	 * @return {@link ArrayList} {@link CargoModelDTO} - Referente
+	 * a todos os {@link CargoModelDTO} encontrados
+	 * 
+	 * @throws Exception - Caso o nome for inválido
+	 * 
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong>
+	 * 
+	 * @version sprint7
+	 * 
+	 * @see CargoModelDTO
+	 * @see CargoController#buscarCargoPorNomeCargo(String)
+	 */
+	@GetMapping("/cargos/nome/{nome}")
+	public ArrayList<CargoModelDTO> buscarCargosPeloNome(@PathVariable String nome) throws Exception {
+		ArrayList<CargoModelDTO> listaCargosModelDTO = new ArrayList<>();
+		for (CargoModel cargoModel : cargoController.buscarCargoPorNomeCargo(nome)) {
+			listaCargosModelDTO.add(new CargoModelDTO(cargoModel));
+		}
+		return listaCargosModelDTO;
+	}
 }

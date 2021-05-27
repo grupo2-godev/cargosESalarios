@@ -11,6 +11,7 @@ import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
 import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CargoDAO;
+import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 
 /**
@@ -232,5 +233,36 @@ public class CargoController {
 	 */
 	public boolean deletarTodosCargos() {
 		return cargoDAO.deletarTodos("cargo");
+	}
+	
+	/**
+	 * <h1>Busca {@link CargoModelDTO} pelo nome.</h1>
+	 * 
+	 * <p>Recebe um nome e exibe os 
+	 * {@link CargoModel} referente a esse nome.
+	 * Retorna um {@link ArrayList} {@link CargoModel}
+	 * com todos os {@link CargoModel} encontrados
+	 * com o nome informado. Faz isso atráves do
+	 * {@link CargoDAO#listarPorValorDeColunaComStringIncompleta(Class, String, String)}.</p>
+	 * 
+	 * @param nomeCargo String - Referente ao nome informado
+	 * 
+	 * @return {@link ArrayList} {@link CargoModel} - Referente
+	 * a todos os {@link CargoModel} encontrados
+	 * 
+	 * @throws Exception - Caso o nome for inválido
+	 * 
+	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
+	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong>
+	 * 
+	 * @version sprint7
+	 * 
+	 * @see CargoModel
+	 * @see CargoDAO#listarPorValorDeColunaComStringIncompleta(Class, String, String)
+	 */
+	public ArrayList<CargoModel> buscarCargoPorNomeCargo(String nomeCargo) throws Exception {
+		if (!Validadores.apenasCaracteresValidos(nomeCargo))
+			throw (new Exception("Nome procurado invalido."));
+		return (ArrayList<CargoModel>) cargoDAO.listarPorValorDeColunaComStringIncompleta(CargoModel.class, "nomeCargo", nomeCargo);
 	}
 }
