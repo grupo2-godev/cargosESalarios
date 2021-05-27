@@ -63,8 +63,8 @@ public class CargoControllerAPI {
 		try {
 			Integer cargoId = cargoController.cadastrarCargo(cargoModel);
 			return ResponseEntity.ok(cargoId);
-		}catch(Exception e) {
-			return ResponseEntity.badRequest().body("leia a documentação!!");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
 		}		
 	}
 	
@@ -91,8 +91,14 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@DeleteMapping("/cargos/{idCargo}")
-	public boolean deletarCargo(@PathVariable Integer idCargo) throws Exception {
-		return cargoController.deletarCargoPorID(idCargo);
+	public ResponseEntity<?> deletarCargo(@PathVariable Integer idCargo) {
+		try {
+			boolean deletou = cargoController.deletarCargoPorID(idCargo);
+			return ResponseEntity.ok(deletou);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
+		+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+		}
 	}
 	
 	/**
@@ -114,8 +120,14 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@PutMapping("/cargos/{idCargo}")
-	public boolean atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
-		return cargoController.atualizarCargo(idCargo, cargoModel);
+	public ResponseEntity<?> atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
+		try {
+			boolean atualizou = cargoController.atualizarCargo(idCargo, cargoModel);
+			return ResponseEntity.ok(atualizou);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
+					+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+		}
 	}
 	
 	/**

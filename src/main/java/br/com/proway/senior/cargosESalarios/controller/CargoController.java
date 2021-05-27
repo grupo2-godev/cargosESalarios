@@ -157,6 +157,7 @@ public class CargoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		if (Validadores.ehObjetoNulo(novoCargo))
 			throw (new Exception("O objeto não pode ser nulo."));
+		Validadores.validacaoCargo(novoCargo);
 		novoCargo.setIdCargo(idObjetoASerAlterado);
 		cargoDAO.atualizar(novoCargo);
 		return true;
