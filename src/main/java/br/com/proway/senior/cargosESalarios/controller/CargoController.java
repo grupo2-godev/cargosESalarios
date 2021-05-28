@@ -128,12 +128,12 @@ public class CargoController {
 	 */
 	public CargoModel buscarCargoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
-			throw (new Exception("O id não pode ser nulo ou zero."));
+			throw new Exception("O id não pode ser nulo ou zero.");
 		
 		CargoModel cargo = cargoDAO.buscar(CargoModel.class, id);
 		
 		if(cargo == null) {
-			throw (new Exception("Nao ha cargo cadastrado com este ID"));
+			throw new Exception("Nao ha cargo cadastrado com este ID");
 		}		
 		return cargoDAO.buscar(CargoModel.class, id);
 	}
@@ -160,9 +160,9 @@ public class CargoController {
 	 */
 	public boolean atualizarCargo(Integer idObjetoASerAlterado, CargoModel novoCargo) throws Exception {
 		if (Validadores.ehObjetoNulo(this.buscarCargoPorID(idObjetoASerAlterado)))
-			throw (new Exception("O objeto não existe no banco de dados."));
+			throw new Exception("O objeto não existe no banco de dados.");
 		if (Validadores.ehObjetoNulo(novoCargo))
-			throw (new Exception("O objeto não pode ser nulo."));
+			throw new Exception("O objeto não pode ser nulo.");
 		Validadores.validacaoCargo(novoCargo);
 		novoCargo.setIdCargo(idObjetoASerAlterado);
 		cargoDAO.atualizar(novoCargo);

@@ -97,9 +97,11 @@ public class HibernateMethods<T> {
 		if (!sessao.getTransaction().isActive()) {
 			sessao.beginTransaction();
 		}
+		sessao.clear();
 		int registrosModificados = sessao.createSQLQuery("DELETE FROM " + nomeDaTabela).executeUpdate();
 		sessao.clear();
 		sessao.getTransaction().commit();
+		sessao.clear();
 		return registrosModificados > 0 ? true : false;
 	}
 	

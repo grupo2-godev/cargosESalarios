@@ -177,7 +177,7 @@ public class PostoDeTrabalhoController {
 	 */
 	public ArrayList<PostoDeTrabalhoModel> buscarPostoPorNomeCargo(String nomePosto) throws Exception {
 		if (!Validadores.apenasCaracteresValidos(nomePosto))
-			throw (new Exception("Nome procurado invalido."));
+			throw new Exception("Nome procurado invalido.");
 		return (ArrayList<PostoDeTrabalhoModel>) postoDAO.listarPorValorDeColunaComStringIncompleta(PostoDeTrabalhoModel.class, "nomePosto", nomePosto);
 	}
 }

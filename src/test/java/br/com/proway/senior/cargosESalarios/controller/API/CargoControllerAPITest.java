@@ -1,11 +1,11 @@
 package br.com.proway.senior.cargosESalarios.controller.API;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,7 +31,8 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  * 
  * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
  * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
- * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
+ * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+ *         - Sprint 6
  *
  */
 public class CargoControllerAPITest {
@@ -52,10 +53,10 @@ public class CargoControllerAPITest {
 	static CBO2002Model cbo2002;
 	static CBO1994Model cbo1994;
 	static HorasMesModel horasMes;
-	
+
 	CargoControllerAPI cargoAPI = new CargoControllerAPI();
 	static CargoController controller = new CargoController();
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		controller.deletarTodosCargos();
@@ -80,7 +81,6 @@ public class CargoControllerAPITest {
 	public void beforeAll() {
 		controller.deletarTodosCargos();
 	}
-	
 
 	public static void popularTabelas() throws Exception {
 		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
@@ -97,76 +97,118 @@ public class CargoControllerAPITest {
 		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
 		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
 	}
-	
+
 	@Test
 	public void testBuscarCargoPorID() throws Exception {
-
-		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		int idCargo = controller.cadastrarCargo(cargo);
-		
-		CargoModelDTO cargoDTO = cargoAPI.buscarPorID(idCargo);
-		
+		CargoModelDTO cargoDTO = (CargoModelDTO) (cargoAPI.buscarPorID(idCargo).getBody());
 		assertNotNull(cargoDTO);
 		assertEquals(cargoDTO.getExperienciaMinima(), experienciaMinima);
 		assertEquals(cargoDTO.getStatus(), status);
 		assertEquals(cargoDTO.getDataUltimaRevisao(), dataUltimaRevisao);
 		assertEquals(cargoDTO.getNomeCargo(), nomeCargo);
-		assertEquals((int)cargoDTO.getIdCargo(), idCargo);		
+		assertEquals((int) cargoDTO.getIdCargo(), idCargo);
 		assertTrue(cargoDTO.getCbo94().equals(cbo1994));
 		assertTrue(cargoDTO.getCbo2002().equals(cbo2002));
 		assertTrue(cargoDTO.getGrauInstrucao().equals(grauInstrucao));
 		assertTrue(cargoDTO.getHoraMes().equals(horasMes));
+	}
 	
+	@Test
+	public void testBuscarCargoPorIDComIDInvalido() throws Exception {
+		String textoDeErro = (String) (cargoAPI.buscarPorID(0).getBody());
+		assertEquals("Nao ha cargo cadastrado com este ID", textoDeErro);
+	}
+	
+	@Test
+	public void testBuscarTodosCargos() throws Exception {
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo2 = controller.construirCargo("Desenvolvedor 1", dataCadastro, dataUltimaRevisao, cbo2002,
+				cbo1994, horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+
+		controller.cadastrarCargo(cargo1);
+		controller.cadastrarCargo(cargo2);
+
+		assertEquals(((ArrayList<CargoModelDTO>) (cargoAPI.buscarTodos().getBody())).size(), 2);
 	}
 
 	@Test
-	public void testBuscarTodosCargos() throws Exception {
-		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		CargoModel cargo2 = controller.construirCargo("Desenvolvedor 1", dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-				
-		controller.cadastrarCargo(cargo1);
-		controller.cadastrarCargo(cargo2);
-		
-		assertFalse(cargoAPI.buscarTodos().isEmpty());		
-	}
-	
-	@Test
 	public void testPostCargo() throws Exception {
-		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		int id = (int) cargoAPI.postCargo(cargo1).getBody();
 		assertTrue(id > 0);
 	}
-	
+
 	@Test
 	public void testDeletarCargo() throws Exception {
-		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		int id = (int) cargoAPI.postCargo(cargo1).getBody();
-		assertTrue(cargoAPI.deletarCargo(id));
+		assertTrue((boolean) cargoAPI.deletarCargo(id).getBody());
 	}
 	
 	@Test
+	public void testDeletarCargoComIdInvalido() throws Exception {
+		assertEquals((String) cargoAPI.deletarCargo(0).getBody(), "Objeto não encontrado! Id: 0, Tipo: CargoModel");
+	}
+
+	@Test
 	public void testAtualizarCargo() throws Exception {
-		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		CargoModel cargo1 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
 		int id = controller.cadastrarCargo(cargo1);
 		cargo1.setAtribuicoes("Programar em python");
 		cargoAPI.atualizarCargo(id, cargo1);
-		assertTrue(cargoAPI.deletarCargo(id));
+		assertTrue((boolean) cargoAPI.deletarCargo(id).getBody());
 	}
 	
 	@Test
-	public void testBuscarCargoPeloNomeCargo() throws Exception {
-		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994, horasMes,
-				grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
-		controller.cadastrarCargo(cargo);
-		
-		assertEquals(1, cargoAPI.buscarCargosPeloNome("Desenvolvedor 2").size());
+	public void testAtualizarCargoComCargoInvalido() throws Exception {
+		CargoModel cargo1 = null;
+		CargoModel cargo2 = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		int id = controller.cadastrarCargo(cargo2);
+		assertEquals((String) cargoAPI.atualizarCargo(id, cargo1).getBody(), "Objeto não encontrado! Id: " + id + ", Tipo: CargoModel");
+	}
 
+	@Test
+	public void testBuscarCargoPeloNomeCargo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		controller.cadastrarCargo(cargo);
+
+		assertEquals(1,
+				((ArrayList<CargoModelDTO>) (cargoAPI.buscarCargosPeloNome("Desenvolvedor 2").getBody())).size());
+	}
+
+	@Test
+	public void testBuscarCargoPeloNomeCargoSemCargosCadastrados() throws Exception {
+		String texto = (String) cargoAPI.buscarCargosPeloNome("Desenvolvedor 2").getBody();
+		assertEquals("Não foram encontrados cargos com o nome informado", texto);
+	}
+	
+	@Test
+	public void testBuscarCargoPeloNomeCargoComNomeInvalido() throws Exception {
+		String texto = (String) cargoAPI.buscarCargosPeloNome("Desenvolvedor./#$").getBody();
+		assertEquals("O nome informado é invalido", texto);
+	}
+	
+	@Test
+	public void testBuscarCargoPeloNomeCargoComNomeNulo() throws Exception {
+		CargoModel cargo = controller.construirCargo(nomeCargo, dataCadastro, dataUltimaRevisao, cbo2002, cbo1994,
+				horasMes, grauInstrucao, experienciaMinima, atribuicoes, status, idPermissao);
+		controller.cadastrarCargo(cargo);
+		ArrayList<CargoModelDTO> listaCargos = (ArrayList<CargoModelDTO>) cargoAPI.buscarCargosPeloNome(null).getBody();
+		assertEquals(1, listaCargos.size());
+	}
+
+	@Test
+	public void testBuscarCargoPeloNomeCargoComNomeNuloESemCargoCadastrado() throws Exception {
+		String texto = (String) cargoAPI.buscarCargosPeloNome(null).getBody();
+		assertEquals("Nao ha cargos cadastrados", texto);
 	}
 }
