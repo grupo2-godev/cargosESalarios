@@ -109,10 +109,10 @@ public class CBO1994ControllerAPI {
 	@PostMapping("/CBO1994")
 	public ResponseEntity<?> inserirCBO1994(@RequestBody CBO1994Model cbo1994Model) throws Exception {
 		try {
-			Integer setorID = cbo1994Controller.cadastrarCBO1994(cbo1994Model.getCodigo_cbo(), 
+			Integer cboID = cbo1994Controller.cadastrarCBO1994(cbo1994Model.getCodigo_cbo(), 
 					cbo1994Model.getDescricao(), Insalubridade.getValor(cbo1994Model.getPercentualInsalubridade()),
 					Periculosidade.getValor(cbo1994Model.getPercentualPericulosidade()));
-			return ResponseEntity.ok(setorID);
+			return ResponseEntity.ok(cboID);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
 		}
@@ -205,14 +205,11 @@ public class CBO1994ControllerAPI {
 		if (descricao == null) {
 			return buscarTodos();
 		}
-		try {
-			ArrayList<CBO1994Model> cbo1994Lista = cbo1994Controller.buscarPorDescricaoParcial(descricao);
-			if(cbo1994Lista.size() == 0) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum cbo1994 cadastrado");
-			}
-			return ResponseEntity.ok(cbo1994Lista);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Descricao invalida");
+		ArrayList<CBO1994Model> cbo1994Lista = cbo1994Controller.buscarPorDescricaoParcial(descricao);
+		if(cbo1994Lista.size() == 0) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum CBO1994 cadastrado");
 		}
+		return ResponseEntity.ok(cbo1994Lista);
+		
 	}
 }
