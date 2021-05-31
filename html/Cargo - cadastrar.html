@@ -20,58 +20,59 @@
 
     <h3>Cadastro de Cargo</h3>
     <!--<h5>Pesquisar</h5-->
+    <div class="container-md">
+        <form class="row g-3">
+            <div class="col-md-3">
+                <label for="nome_cargo" class="form-label">Nome:</label>
+                <input type="text" class="form-control" name="nome_cargo" placeholder="Ex.: Desenvolvedor">
+            </div>
 
-    <form class="row g-3">
-        <div class="col-md-3">
-            <label for="nome_cargo" class="form-label">Nome:</label>
-            <input type="text" class="form-control" name="nome_cargo" placeholder="Ex.: Desenvolvedor">
-        </div>
+            <div class="col-md-1">
+                <label for="horas_mes" class="form-label">Horas/mês:</label>
+                <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240">
+            </div>
 
-        <div class="col-md-1">
-            <label for="horas_mes" class="form-label">Horas/mês:</label>
-            <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240">
-        </div>
+            <div class="col-md-3">
+                <label for="experiencia" class="form-label">Experiência mínima:</label>
+                <input type="text" class="form-control" name="experiencia" placeholder="Ex.: 2 anos">
+            </div>
 
-        <div class="col-md-3">
-            <label for="experiencia" class="form-label">Experiência mínima:</label>
-            <input type="text" class="form-control" name="experiencia" placeholder="Ex.: 2 anos">
-        </div>
+            <div class="col-md-3">
+                <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
+                <input type="text" class="form-control" name="grau_instrucao" placeholder="Ex.: Superior completo">
+            </div>
 
-        <div class="col-md-3">
-            <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-            <input type="text" class="form-control" name="grau_instrucao" placeholder="Ex.: Superior completo">
-        </div>
+            <div class="col-md-5">
+                <label for="CBO2002" class="form-label">CBO2002</label>
+                <select name="CBO2002" class="form-select">
+                    <option value="Exemplo 1">Exemplo 1</option>
+                    <option value="Exemplo 2">Exemplo 2</option>
+                    <option value="Exemplo 3">Exemplo 3</option>
+                    <option value="Exemplo 4">Exemplo 4</option>
+                </select>
+            </div>
 
-        <div class="col-md-5">
-            <label for="CBO2002" class="form-label">CBO2002</label>
-            <select name="CBO2002" class="form-select">
-                <option value="Exemplo 1">Exemplo 1</option>
-                <option value="Exemplo 2">Exemplo 2</option>
-                <option value="Exemplo 3">Exemplo 3</option>
-                <option value="Exemplo 4">Exemplo 4</option>
-            </select>
-        </div>
+            <div class="col-md-5">
+                <label for="CBO1994" class="form-label">CBO1994</label>
+                <select name="CBO1994" class="form-select">
+                    <option value="Exemplo 1">Exemplo 1</option>
+                    <option value="Exemplo 2">Exemplo 2</option>
+                    <option value="Exemplo 3">Exemplo 3</option>
+                    <option value="Exemplo 4">Exemplo 4</option>
+                </select>
+            </div>
 
-        <div class="col-md-5">
-            <label for="CBO1994" class="form-label">CBO1994</label>
-            <select name="CBO1994" class="form-select">
-                <option value="Exemplo 1">Exemplo 1</option>
-                <option value="Exemplo 2">Exemplo 2</option>
-                <option value="Exemplo 3">Exemplo 3</option>
-                <option value="Exemplo 4">Exemplo 4</option>
-            </select>
-        </div>
+            <div class="col-md-10">
+                <label for="atribucoes" class="form-label">Atribuições:</label><br>
+                <textarea name="atribucoes" rows="4" cols="50" class="form-control"
+                    placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."></textarea>
+            </div>
 
-        <div class="col-md-10">
-            <label for="atribucoes" class="form-label">Atribuições:</label><br>
-            <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."></textarea>
-        </div>
+        </form>
 
-    </form>
-
-    <button type="submit" class="btn btn-danger" form="cancelar" value="Cancelar">Cancelar</button>
-    <button type="submit" class="btn btn-success" form="criar" value="Criar">Criar</button>
+        <button type="submit" class="btn btn-danger" form="cancelar" value="Cancelar">Cancelar</button>
+        <button type="submit" class="btn btn-success" form="criar" value="Criar">Criar</button>
+    </div>
 </body>
 
 </html>
