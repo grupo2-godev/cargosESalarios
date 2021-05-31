@@ -11,12 +11,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
+import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
 import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
 import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 public class CBO1994ControllerTest {
 	
 	CBO1994Controller controller = CBO1994Controller.getInstancia();
+	CBO1994DAO dao = CBO1994DAO.getInstancia();
 	
 	@Before
 	public void resetarSequencia(){
@@ -136,6 +138,14 @@ public class CBO1994ControllerTest {
 		controller.deletarTodosCBO1994();
 		ArrayList<CBO1994Model> listaRetornada = controller.buscarTodosCBO1994();
 		assertTrue(listaRetornada.isEmpty());
+	}
+	
+	@Test
+	public void testBuscarTodosCBO1994PorDescricaoParcial() throws Exception {
+		controller.deletarTodosCBO1994();
+		controller.cadastrarCBO1994(44576, "desenvolvedor", Insalubridade.Vinte, Periculosidade.Trinta);
+		ArrayList<CBO1994Model> listaRetornada = controller.buscarPorDescricaoParcial("desenvolvedor");
+		assertEquals(1, listaRetornada.size());
 	}
 
 	@Test

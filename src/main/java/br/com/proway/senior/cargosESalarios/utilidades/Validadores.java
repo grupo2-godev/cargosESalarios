@@ -125,28 +125,27 @@ public class Validadores {
 		return verificar.matches("(([0-9]*[.])?[0-9]+)");
 	}
 
+	static public boolean validacaoCargo(CargoModel cargo) throws Exception {
 
-	static public boolean validacaoCargo(CargoModel cargo) throws Exception {	
-	
-	if (Validadores.ehObjetoNulo(cargo.getNomeCargo()) || cargo.getNomeCargo().isEmpty())
-		throw (new NomeDoCargoInvalidoException("O nome do cargo não foi informado."));
-	if (Validadores.ehObjetoNulo(cargo.getCbo2002()))
-		throw (new CBO2002NuloException("O cbo2002 não foi informado."));
-	if (Validadores.ehObjetoNulo(cargo.getCbo94()))
-		throw (new CBO1994NuloException("O cbo94 não foi informado."));
-	if (Validadores.ehObjetoNulo(cargo.getHoraMes()))
-		throw (new HorasMesNuloException("A quantidade de horas trabalhadas por mês não pode ser igual a zero."));
-	if (Validadores.ehObjetoNulo(cargo.getGrauInstrucao()))
-		throw (new GrauInstrucaoNuloException("O grau de instrução não foi informado."));
-	if (Validadores.ehObjetoNulo(cargo.getExperienciaMinima()) || cargo.getExperienciaMinima().isEmpty())
-		throw (new ExperienciaMinimaNulaException("A experiencia mínima não foi informada."));
-	if (Validadores.ehObjetoNulo(cargo.getAtribuicoes()) || cargo.getAtribuicoes().isEmpty())
-		throw (new AtribuicoesNaoInformadasException("As atribuicoes não foram informadas."));
-	if (Validadores.ehObjetoNulo(cargo.getStatus()))
-		throw (new StatusInvalidoException("O status não foi informado."));
-	if (Validadores.ehZeroOuNulo(cargo.getIdPermissao()))
-		throw (new IdPermissaoNuloException("A permissao não foi informada."));
-	
-	return true;
+		if (Validadores.ehObjetoNulo(cargo.getNomeCargo()) || cargo.getNomeCargo().isEmpty())
+			throw new NomeDoCargoInvalidoException("O nome do cargo não foi informado.");
+		if (Validadores.ehObjetoNulo(cargo.getCbo2002()))
+			throw new CBO2002NuloException("O cbo2002 não foi informado.");
+		if (Validadores.ehObjetoNulo(cargo.getCbo94()))
+			throw new CBO1994NuloException("O cbo94 não foi informado.");
+		if (Validadores.ehObjetoNulo(cargo.getHoraMes()))
+			throw new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero.");
+		if (Validadores.ehObjetoNulo(cargo.getGrauInstrucao()))
+			throw new GrauInstrucaoNuloException("O grau de instrução não foi informado.");
+		if (Validadores.ehObjetoNulo(cargo.getExperienciaMinima()) || cargo.getExperienciaMinima().isEmpty())
+			throw new ExperienciaMinimaNulaException("A experiencia mínima não foi informada.");
+		if (Validadores.ehObjetoNulo(cargo.getAtribuicoes()) || cargo.getAtribuicoes().isEmpty())
+			throw new AtribuicoesNaoInformadasException("As atribuicoes não foram informadas.");
+		if (Validadores.ehObjetoNulo(cargo.getStatus()))
+			throw new StatusInvalidoException("O status não foi informado.");
+		if (Validadores.ehZeroOuNulo(cargo.getIdPermissao()))
+			throw new IdPermissaoNuloException("A permissao não foi informada.");
+
+		return true;
 	}
 }

@@ -30,17 +30,16 @@ public class SetorControllerAPI {
 	 * <h1>Busca um {@link SetorModel} por id</h1>
 	 * 
 	 * <p>
-	 * Recebe um id, busca um {@link SetorModel} atraves do
-	 * {@link SetorController} e retorna esse
-	 * {@link SetorModel}.
+	 * Recebe um id, busca um {@link SetorModel} atraves do {@link SetorController}
+	 * e retorna esse {@link SetorModel}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
 	 * 
-	 * @return {@link SetorModel} - Referente ao
-	 *         {@link SetorModel} encontrado
+	 * @return {@link SetorModel} - Referente ao {@link SetorModel} encontrado
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @see SetorModel
 	 * @see SetorController
@@ -48,8 +47,11 @@ public class SetorControllerAPI {
 	@GetMapping("/setores/{id}")
 	public ResponseEntity<?> buscarPorID(@PathVariable Integer id) {
 		try {
-			SetorModel posto = setorController.buscarSetorPorId(id);
-			return ResponseEntity.ok(posto);
+			SetorModel setor = setorController.buscarSetorPorId(id);
+			if (setor == null) {
+				throw new Exception();
+			}
+			return ResponseEntity.ok(setor);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
 		}
@@ -59,15 +61,15 @@ public class SetorControllerAPI {
 	 * <h1>Busca todos os {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Busca todos os {@link SetorModel} através do
-	 * {@link SetorController}. Retorna um ArrayList de
-	 * {@link SetorModel}.
+	 * Busca todos os {@link SetorModel} através do {@link SetorController}. Retorna
+	 * um ArrayList de {@link SetorModel}.
 	 * </p>
 	 * 
 	 * @return ArrayList {@link SetorModel} - Referente a todos os
 	 *         {@link SetorModel} encontrados
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @see SetorModel
 	 * @see SetorController
@@ -78,13 +80,12 @@ public class SetorControllerAPI {
 		for (SetorModel setorModel : setorController.buscarTodosSetores()) {
 			postosDTO.add(setorModel);
 		}
-		if(postosDTO.size() == 0) {
+		if (postosDTO.size() == 0) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum setor cadastrado");
 		}
 		return ResponseEntity.ok(postosDTO);
 	}
 
-	
 	/**
 	 * <h1>Insere um {@link SetorModel}.</h1>
 	 * 
@@ -93,14 +94,14 @@ public class SetorControllerAPI {
 	 * {@link SetorController}. Retorna true caso tudo tenha dado certo.
 	 * </p>
 	 * 
-	 * @param setor {@link SetorModel} - Referente ao
-	 *              {@link SetorModel} informado
+	 * @param setor {@link SetorModel} - Referente ao {@link SetorModel} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
 	 * @throws Exception - Caso aconteça algum erro
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @see SetorModel
 	 * @see SetorController
@@ -119,17 +120,17 @@ public class SetorControllerAPI {
 	 * <h1>Atualiza um {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e um {@link SetorModel}, atualiza o
-	 * {@link SetorModel} referente ao id informado
+	 * Recebe um id e um {@link SetorModel}, atualiza o {@link SetorModel} referente
+	 * ao id informado
 	 * </p>
 	 * 
 	 * @param id    Integer - Referente ao id informado
-	 * @param setor {@link SetorModel} - Referente ao
-	 *              {@link SetorModel} informado
+	 * @param setor {@link SetorModel} - Referente ao {@link SetorModel} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @see SetorModel
 	 * @see SetorController
@@ -149,15 +150,16 @@ public class SetorControllerAPI {
 	 * <h1>Deleta um {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e deleta o {@link SetorModel} referente ao id
-	 * informado. Faz isso usando o {@link SetorController}.
+	 * Recebe um id e deleta o {@link SetorModel} referente ao id informado. Faz
+	 * isso usando o {@link SetorController}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
 	 * 
 	 * @return boolean - true caso de certo false caso contrário
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @see SetorModel
 	 * @see SetorController
@@ -188,7 +190,8 @@ public class SetorControllerAPI {
 	 * 
 	 * @throws Exception - Caso o nome for inválido
 	 * 
-	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint
+	 *         7
 	 * 
 	 * @version sprint7
 	 * 
@@ -200,18 +203,13 @@ public class SetorControllerAPI {
 		if (nome == null) {
 			return buscarTodos();
 		}
-		try {
-			ArrayList<SetorModel> listaSetoresModel = new ArrayList<>();
-			for (SetorModel setorModel : setorController.buscarSetorPorNome(nome)) {
-				listaSetoresModel.add(setorModel);
-			}
-			if(listaSetoresModel.size() == 0) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há setores cadastrados");
-			}
-			return ResponseEntity.ok(listaSetoresModel);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome Invalido");
+		ArrayList<SetorModel> listaSetoresModel = new ArrayList<>();
+		for (SetorModel setorModel : setorController.buscarSetorPorNome(nome)) {
+			listaSetoresModel.add(setorModel);
 		}
+		if (listaSetoresModel.size() == 0) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há setores cadastrados");
+		}
+		return ResponseEntity.ok(listaSetoresModel);
 	}
-	
 }
