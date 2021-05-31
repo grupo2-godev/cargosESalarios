@@ -67,7 +67,7 @@ public class CBO2002ControllerTest {
 	@Test
 	public void testBuscarCBO2002PorDescricao() throws Exception {
 		cboController.cadastrarCBO2002(375115, "Visual Merchandiser", Insalubridade.Dez, Periculosidade.Zero);
-		ArrayList<CBO2002Model> cboRecuperado = cboController.buscarCBO2002PorNome("Mer");
+		ArrayList<CBO2002Model> cboRecuperado = cboController.buscarCBO2002PorDescricaoParcial("Mer");
 		assertEquals((Integer) 375115, cboRecuperado.get(0).getCodigoCBO2002());
 		assertEquals("Visual Merchandiser", cboRecuperado.get(0).getDescricao());
 		assertEquals(0.1, cboRecuperado.get(0).getPercentualInsalubridade(), 0.01);

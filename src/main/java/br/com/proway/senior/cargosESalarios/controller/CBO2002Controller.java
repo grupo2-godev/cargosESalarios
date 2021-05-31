@@ -92,7 +92,7 @@ public class CBO2002Controller {
 	 *                         procurado.
 	 * @return ArrayList CBO2002Model lista de CBO 2002 localizados.
 	 */
-	public ArrayList<CBO2002Model> buscarCBO2002PorNome(String descricaoCBO2002) {
+	public ArrayList<CBO2002Model> buscarCBO2002PorDescricaoParcial(String descricaoCBO2002) {
 		return (ArrayList<CBO2002Model>) cbo2002DAO.listarPorValorDeColunaComStringIncompleta(CBO2002Model.class,
 				"descricao", descricaoCBO2002);
 	}

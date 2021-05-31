@@ -201,7 +201,7 @@ public class CBO1994ControllerAPI {
 	 * @see CBO1994Controller#buscarPorDescricaoParcial(String)
 	 */
 	@GetMapping("/CBO1994")
-	public ResponseEntity<?> buscarSetoresPeloNome(@RequestParam String descricao) throws Exception {
+	public ResponseEntity<?> buscarCBO1994PelaDescricao(@RequestParam String descricao) throws Exception {
 		if (descricao == null) {
 			return buscarTodos();
 		}
@@ -215,5 +215,4 @@ public class CBO1994ControllerAPI {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Descricao invalida");
 		}
 	}
-
 }
