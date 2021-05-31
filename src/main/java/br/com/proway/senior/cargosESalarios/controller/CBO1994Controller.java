@@ -135,12 +135,24 @@ public class CBO1994Controller {
 	}
 	
 	/**
-	 * Retorna todas as entradas de CBO1994Models no BD em uma ArrayList;
+	 * Retorna todas as entradas de CBO1994Model no BD em uma ArrayList;
 	 * 
 	 * @return ArrayList<CBO1994Model> : lista de entradas
 	 */
 	public ArrayList<CBO1994Model> buscarTodosCBO1994(){
 		return (ArrayList<CBO1994Model>) CBO1994Dao.listarPorTabela(CBO1994Model.class);
+		
+	}
+	
+	/**
+	 * Retorna as entradas de CBO1994Model que contenham a String descricao no BD em uma ArrayList;
+	 * 
+	 * @param descricaoParcial String 
+	 * 
+	 * @return ArrayList<CBO1994Model> : lista de entradas
+	 */
+	public ArrayList<CBO1994Model> buscarPorDescricaoParcial(String descricaoParcial){
+		return (ArrayList<CBO1994Model>) CBO1994Dao.listarPorValorDeColunaComStringIncompleta(CBO1994Model.class, "descricao", descricaoParcial);
 		
 	}
 	

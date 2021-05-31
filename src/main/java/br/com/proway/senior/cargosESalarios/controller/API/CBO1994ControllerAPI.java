@@ -158,19 +158,19 @@ public class CBO1994ControllerAPI {
 	 * informado. Faz isso usando o {@link CBO1994Controller}.
 	 * </p>
 	 * 
-	 * @param id Integer - Referente ao id informado
+	 * @param codigo Integer - Referente ao codigo informado
 	 * 
 	 * @return boolean - true caso de certo false caso contrário
 	 * 
 	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController
+	 * @see CBO1994Model
+	 * @see CBO1994Controller
 	 */
-	@DeleteMapping("/setores/{id}")
-	public ResponseEntity<?> deletarSetor(@PathVariable int id) {
+	@DeleteMapping("/CBO1994/{id}")
+	public ResponseEntity<?> deletarCBO1994(@PathVariable int id) {
 		try {
-			boolean deletou = cbo1994Controller.deletarSetor(id);
+			boolean deletou = cbo1994Controller.deletarCBO1994(id);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -178,18 +178,18 @@ public class CBO1994ControllerAPI {
 	}
 
 	/**
-	 * <h1>Busca {@link SetorModel} pelo nome.</h1>
+	 * <h1>Busca {@link CBO1994Model} pelo nome.</h1>
 	 * 
 	 * <p>
-	 * Recebe uma nome e exibe os registros da tabela selecionados por esse nome do
-	 * {@link SetorModel}. Faz isso através do
-	 * {@link SetorController#buscarSetorPorNome(String)}.
+	 * Recebe uma nome e exibe os registros da tabela selecionados por essa descricao do
+	 * {@link CBO1994Model}. Faz isso através do
+	 * {@link CBO1994Controller#buscarPorDescricaoParcial(String)}.
 	 * </p>
 	 * 
-	 * @param nome String - Referente ao nome informado
+	 * @param descricao String - Referente a descricao informada
 	 * 
-	 * @return {@link ArrayList} {@link SetorModel} - Referente aos
-	 *         {@link SetorModel} encontrados
+	 * @return {@link ArrayList} {@link CBO1994Model} - Referente aos
+	 *         {@link CBO1994Model} encontrados
 	 * 
 	 * @throws Exception - Caso o nome for inválido
 	 * 
@@ -197,25 +197,22 @@ public class CBO1994ControllerAPI {
 	 * 
 	 * @version sprint7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController#buscarSetorPorNome(String)
+	 * @see CBO1994Model
+	 * @see CBO1994Controller#buscarPorDescricaoParcial(String)
 	 */
-	@GetMapping("/setores")
-	public ResponseEntity<?> buscarSetoresPeloNome(@RequestParam String nome) throws Exception {
-		if (nome == null) {
+	@GetMapping("/CBO1994")
+	public ResponseEntity<?> buscarSetoresPeloNome(@RequestParam String descricao) throws Exception {
+		if (descricao == null) {
 			return buscarTodos();
 		}
 		try {
-			ArrayList<SetorModel> listaSetoresModel = new ArrayList<>();
-			for (SetorModel setorModel : cbo1994Controller.buscarSetorPorNome(nome)) {
-				listaSetoresModel.add(setorModel);
+			ArrayList<CBO1994Model> cbo1994Lista = cbo1994Controller.buscarPorDescricaoParcial(descricao);
+			if(cbo1994Lista.size() == 0) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum cbo1994 cadastrado");
 			}
-			if(listaSetoresModel.size() == 0) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há setores cadastrados");
-			}
-			return ResponseEntity.ok(listaSetoresModel);
+			return ResponseEntity.ok(cbo1994Lista);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome Invalido");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Descricao invalida");
 		}
 	}
 
