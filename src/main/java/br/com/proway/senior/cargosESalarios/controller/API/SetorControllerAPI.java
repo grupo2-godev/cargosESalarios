@@ -48,7 +48,7 @@ public class SetorControllerAPI {
 	@GetMapping("/setores/{id}")
 	public ResponseEntity<?> buscarPorID(@PathVariable Integer id) {
 		try {
-			PostoDeTrabalhoModelDTO posto = new PostoDeTrabalhoModelDTO(setorController.buscarPostoDeTrabalhoId(id));
+			SetorModel posto = setorController.buscarSetorPorId(id);
 			return ResponseEntity.ok(posto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -56,96 +56,88 @@ public class SetorControllerAPI {
 	}
 
 	/**
-	 * <h1>Busca todos os {@link PostoDeTrabalhoModel}.</h1>
+	 * <h1>Busca todos os {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Busca todos os {@link PostoDeTrabalhoModel} através do
-	 * {@link PostoDeTrabalhoController}. Retorna um ArrayList de
-	 * {@link PostoDeTrabalhoModel}.
+	 * Busca todos os {@link SetorModel} através do
+	 * {@link SetorController}. Retorna um ArrayList de
+	 * {@link SetorModel}.
 	 * </p>
 	 * 
-	 * @return ArrayList {@link PostoDeTrabalhoModel} - Referente a todos os
-	 *         {@link PostoDeTrabalhoModel} encontrados
+	 * @return ArrayList {@link SetorModel} - Referente a todos os
+	 *         {@link SetorModel} encontrados
 	 * 
-	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see PostoDeTrabalhoModel
-	 * @see PostoDeTrabalhoController
+	 * @see SetorModel
+	 * @see SetorController
 	 */
-	@GetMapping("/postos/all")
+	@GetMapping("/setores/all")
 	public ResponseEntity<?> buscarTodos() {
-		ArrayList<PostoDeTrabalhoModelDTO> postosDTO = new ArrayList<PostoDeTrabalhoModelDTO>();
-		for (PostoDeTrabalhoModel postoDeTrabalhoModel : setorController.buscarTodosPostosDeTrabalho()) {
-			postosDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
+		ArrayList<SetorModel> postosDTO = new ArrayList<SetorModel>();
+		for (SetorModel setorModel : setorController.buscarTodosSetores()) {
+			postosDTO.add(setorModel);
 		}
 		if(postosDTO.size() == 0) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum posto de trabalho cadastrado");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum setor cadastrado");
 		}
 		return ResponseEntity.ok(postosDTO);
 	}
 
 	/**
-	 * <h1>Insere um {@link PostoDeTrabalhoModel}.</h1>
+	 * <h1>Insere um {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um {@link PostoDeTrabalhoModel} e o insere no banco através do
-	 * {@link PostoDeTrabalhoController}. Retorna true caso tudo tenha dado certo.
+	 * Recebe um {@link SetorModel} e o insere no banco através do
+	 * {@link SetorController}. Retorna true caso tudo tenha dado certo.
 	 * </p>
 	 * 
-	 * @param posto {@link PostoDeTrabalhoModel} - Referente ao
-	 *              {@link PostoDeTrabalhoModel} informado
+	 * @param posto {@link SetorModel} - Referente ao
+	 *              {@link SetorModel} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
 	 * @throws Exception - Caso aconteça algum erro
 	 * 
-	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see PostoDeTrabalhoModel
-	 * @see PostoDeTrabalhoController
+	 * @see SetorModel
+	 * @see SetorController
 	 */
-	@PostMapping("/postos")
-	public ResponseEntity<?> inserirPosto(@RequestBody PostoDeTrabalhoModel posto) throws Exception {
+	@PostMapping("/setores")
+	public ResponseEntity<?> inserirSetor(@RequestBody SetorModel setor) throws Exception {
 		try {
-			Integer postoID = setorController.cadastrarPostoDeTrabalho(posto.getNomePosto(), posto.getCargo(),
-					posto.getSetor(), posto.getNivel(), posto.getSalario());
-			return ResponseEntity.ok(postoID);
+			Integer setorID = setorController.cadastrarSetor(setor.getNomeSetor(), setor.getIdPermissao());
+			return ResponseEntity.ok(setorID);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
 		}
 	}
 
 	/**
-	 * <h1>Atualiza um {@link PostoDeTrabalhoModel}.</h1>
+	 * <h1>Atualiza um {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e um {@link PostoDeTrabalhoModel}, atualiza o
-	 * {@link PostoDeTrabalhoModel} referente ao id informado
+	 * Recebe um id e um {@link SetorModel}, atualiza o
+	 * {@link SetorModel} referente ao id informado
 	 * </p>
 	 * 
 	 * @param id    Integer - Referente ao id informado
-	 * @param posto {@link PostoDeTrabalhoModel} - Referente ao
-	 *              {@link PostoDeTrabalhoModel} informado
+	 * @param posto {@link SetorModel} - Referente ao
+	 *              {@link SetorModel} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
-	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see PostoDeTrabalhoModel
-	 * @see PostoDeTrabalhoController
+	 * @see SetorModel
+	 * @see SetorController
 	 */
-	@PutMapping("/postos/{id}")
-	public ResponseEntity<?> atualizarPosto(@PathVariable Integer id, @RequestBody PostoDeTrabalhoModel posto) {
+	@PutMapping("/setores/{id}")
+	public ResponseEntity<?> atualizarSetor(@PathVariable Integer id, @RequestBody SetorModel setor) {
 		try {
-			posto.setIdPosto(id);
-			boolean atualizou = setorController.atualizarPostoDeTrabalho(id, posto.getNomePosto(), posto.getCargo(),
-					posto.getSetor(), posto.getNivel(), posto.getSalario());
+			setor.setId(id);
+			boolean atualizou = setorController.atualizarSetor(id, setor.getNomeSetor(), setor.getIdPermissao());
 			return ResponseEntity.ok(atualizou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -153,28 +145,26 @@ public class SetorControllerAPI {
 	}
 
 	/**
-	 * <h1>Deleta um {@link PostoDeTrabalhoModel}.</h1>
+	 * <h1>Deleta um {@link SetorModel}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e deleta o {@link PostoDeTrabalhoModel} referente ao id
-	 * informado. Faz isso usando o {@link PostoDeTrabalhoController}.
+	 * Recebe um id e deleta o {@link SetorModel} referente ao id
+	 * informado. Faz isso usando o {@link SetorController}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
 	 * 
 	 * @return boolean - true caso de certo false caso contrário
 	 * 
-	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see PostoDeTrabalhoModel
-	 * @see PostoDeTrabalhoController
+	 * @see SetorModel
+	 * @see SetorController
 	 */
-	@DeleteMapping("/postos/{id}")
-	public ResponseEntity<?> deletarPosto(@PathVariable int id) {
+	@DeleteMapping("/setores/{id}")
+	public ResponseEntity<?> deletarSetor(@PathVariable int id) {
 		try {
-			boolean deletou = setorController.deletarPostoDeTrabalho(id);
+			boolean deletou = setorController.deletarSetor(id);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -182,43 +172,42 @@ public class SetorControllerAPI {
 	}
 
 	/**
-	 * <h1>Busca {@link PostoDeTrabalhoModelDTO} pelo nome.</h1>
+	 * <h1>Busca {@link SetorModel} pelo nome.</h1>
 	 * 
 	 * <p>
 	 * Recebe uma nome e exibe os registros da tabela selecionados por esse nome do
-	 * {@link PostoDeTrabalhoModelDTO}. Faz isso através do
-	 * {@link PostoDeTrabalhoController#buscarPostoPorNomeCargo(String)}.
+	 * {@link SetorModel}. Faz isso através do
+	 * {@link SetorController#buscarSetorPorNome(String)}.
 	 * </p>
 	 * 
 	 * @param nome String - Referente ao nome informado
 	 * 
-	 * @return {@link ArrayList} {@link PostoDeTrabalhoModelDTO} - Referente aos
-	 *         {@link PostoDeTrabalhoModelDTO} encontrados
+	 * @return {@link ArrayList} {@link SetorModel} - Referente aos
+	 *         {@link SetorModel} encontrados
 	 * 
 	 * @throws Exception - Caso o nome for inválido
 	 * 
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong>
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
 	 * @version sprint7
 	 * 
-	 * @see PostoDeTrabalhoModelDTO
-	 * @see PostoDeTrabalhoController#buscarPostoPorNomeCargo(String)
+	 * @see SetorModel
+	 * @see SetorController#buscarSetorPorNome(String)
 	 */
-	@GetMapping("/postos")
-	public ResponseEntity<?> buscarPostosPeloNome(@RequestParam String nome) throws Exception {
+	@GetMapping("/setores")
+	public ResponseEntity<?> buscarSetoresPeloNome(@RequestParam String nome) throws Exception {
 		if (nome == null) {
 			return buscarTodos();
 		}
 		try {
-			ArrayList<PostoDeTrabalhoModelDTO> listaPostosDeTrabalhoModelDTO = new ArrayList<>();
-			for (PostoDeTrabalhoModel postoDeTrabalhoModel : setorController.buscarPostoPorNomeCargo(nome)) {
-				listaPostosDeTrabalhoModelDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
+			ArrayList<SetorModel> listaSetoresModel = new ArrayList<>();
+			for (SetorModel setorModel : setorController.buscarSetorPorNome(nome)) {
+				listaSetoresModel.add(setorModel);
 			}
-			if(listaPostosDeTrabalhoModelDTO.size() == 0) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há postos de trabalho cadastrados");
+			if(listaSetoresModel.size() == 0) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há setores cadastrados");
 			}
-			return ResponseEntity.ok(listaPostosDeTrabalhoModelDTO);
+			return ResponseEntity.ok(listaSetoresModel);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome Invalido");
 		}
