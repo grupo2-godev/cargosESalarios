@@ -17,4 +17,14 @@ public enum Periculosidade {
 		return this.valor;
 	}
 	
+	public static Periculosidade getValor(double valor) {
+		if(valor == 0.0) {
+			return Periculosidade.Zero;
+		} else if(valor == 0.3) {
+			return Periculosidade.Trinta;
+		} else {
+			return Periculosidade.Zero;
+		}
+	}
+	
 }

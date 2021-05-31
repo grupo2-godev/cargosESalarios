@@ -13,88 +13,89 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.proway.senior.cargosESalarios.controller.PostoDeTrabalhoController;
+import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
 import br.com.proway.senior.cargosESalarios.controller.SetorController;
-import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
 import br.com.proway.senior.cargosESalarios.model.SetorModel;
-import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
-import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
+import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
+import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
+import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 @RestController
-public class SetorControllerAPI {
-
-	SetorController setorController = SetorController.getInstancia();
-	PostoDeTrabalhoDAO setorDAO = PostoDeTrabalhoDAO.getInstancia();
+public class CBO1994ControllerAPI {
+	
+	CBO1994Controller cbo1994Controller = CBO1994Controller.getInstancia();
+	CBO1994DAO cbo1994DAO = CBO1994DAO.getInstancia();
 
 	/**
-	 * <h1>Busca um {@link SetorModel} por id</h1>
+	 * <h1>Busca um {@link CBO1994Model} por codigo</h1>
 	 * 
 	 * <p>
-	 * Recebe um id, busca um {@link SetorModel} atraves do
-	 * {@link SetorController} e retorna esse
-	 * {@link SetorModel}.
+	 * Recebe um codigo, busca um {@link CBO1994Model} atraves do
+	 * {@link CBO1994Controller} e retorna esse
+	 * {@link CBO1994Model}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
 	 * 
-	 * @return {@link SetorModel} - Referente ao
-	 *         {@link SetorModel} encontrado
+	 * @return {@link CBO1994Model} - Referente ao
+	 *         {@link CBO1994Model} encontrado
 	 * 
 	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController
+	 * @see CBO1994Model
+	 * @see CBO1994Controller
 	 */
-	@GetMapping("/setores/{id}")
-	public ResponseEntity<?> buscarPorID(@PathVariable Integer id) {
+	@GetMapping("/CBO1994/{id}")
+	public ResponseEntity<?> buscarPorCodigo(@PathVariable Integer codigo) {
 		try {
-			SetorModel posto = setorController.buscarSetorPorId(id);
-			return ResponseEntity.ok(posto);
+			CBO1994Model cbo1994 = cbo1994Controller.buscarCBO1994(codigo);
+			return ResponseEntity.ok(cbo1994);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Código do CBO1994 invalido");
 		}
 	}
 
 	/**
-	 * <h1>Busca todos os {@link SetorModel}.</h1>
+	 * <h1>Busca todos os {@link CBO1994Model}.</h1>
 	 * 
 	 * <p>
-	 * Busca todos os {@link SetorModel} através do
-	 * {@link SetorController}. Retorna um ArrayList de
-	 * {@link SetorModel}.
+	 * Busca todos os {@link CBO1994Model} através do
+	 * {@link CBO1994Controller}. Retorna um ArrayList de
+	 * {@link CBO1994Model}.
 	 * </p>
 	 * 
-	 * @return ArrayList {@link SetorModel} - Referente a todos os
-	 *         {@link SetorModel} encontrados
+	 * @return ArrayList {@link CBO1994Model} - Referente a todos os
+	 *         {@link CBO1994Model} encontrados
 	 * 
 	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController
+	 * @see CBO1994Model
+	 * @see CBO1994Controller
 	 */
-	@GetMapping("/setores/all")
+	@GetMapping("/CBO1994/all")
 	public ResponseEntity<?> buscarTodos() {
-		ArrayList<SetorModel> postosDTO = new ArrayList<SetorModel>();
-		for (SetorModel setorModel : setorController.buscarTodosSetores()) {
-			postosDTO.add(setorModel);
+		ArrayList<CBO1994Model> CBO1994 = new ArrayList<CBO1994Model>();
+		for (CBO1994Model cbo1994Model : cbo1994Controller.buscarTodosCBO1994()) {
+			CBO1994.add(cbo1994Model);
 		}
-		if(postosDTO.size() == 0) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum setor cadastrado");
+		if(CBO1994.size() == 0) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum CBO1994 cadastrado");
 		}
-		return ResponseEntity.ok(postosDTO);
+		return ResponseEntity.ok(CBO1994);
 	}
 
 	
 	/**
-	 * <h1>Insere um {@link SetorModel}.</h1>
+	 * <h1>Insere um {@link CBO1994Model}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um {@link SetorModel} e o insere no banco através do
-	 * {@link SetorController}. Retorna true caso tudo tenha dado certo.
+	 * Recebe um {@link CBO1994Model} e o insere no banco através do
+	 * {@link CBO1994Controller}. Retorna true caso tudo tenha dado certo.
 	 * </p>
 	 * 
-	 * @param setor {@link SetorModel} - Referente ao
-	 *              {@link SetorModel} informado
+	 * @param cbo1994Model {@link CBO1994Model} - Referente ao
+	 *              {@link CBO1994Model} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
@@ -102,13 +103,15 @@ public class SetorControllerAPI {
 	 * 
 	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController
+	 * @see CBO1994Model
+	 * @see CBO1994Controller
 	 */
-	@PostMapping("/setores")
-	public ResponseEntity<?> inserirSetor(@RequestBody SetorModel setor) throws Exception {
+	@PostMapping("/CBO1994")
+	public ResponseEntity<?> inserirCBO1994(@RequestBody CBO1994Model cbo1994Model) throws Exception {
 		try {
-			Integer setorID = setorController.cadastrarSetor(setor.getNomeSetor(), setor.getIdPermissao());
+			Integer setorID = cbo1994Controller.cadastrarCBO1994(cbo1994Model.getCodigo_cbo(), 
+					cbo1994Model.getDescricao(), Insalubridade.getValor(cbo1994Model.getPercentualInsalubridade()),
+					Periculosidade.getValor(cbo1994Model.getPercentualPericulosidade()));
 			return ResponseEntity.ok(setorID);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
@@ -116,41 +119,43 @@ public class SetorControllerAPI {
 	}
 
 	/**
-	 * <h1>Atualiza um {@link SetorModel}.</h1>
+	 * <h1>Atualiza um {@link CBO1994Model}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e um {@link SetorModel}, atualiza o
-	 * {@link SetorModel} referente ao id informado
+	 * Recebe um codigo e um {@link CBO1994Model}, atualiza o
+	 * {@link CBO1994Model} referente o codigo informado
 	 * </p>
 	 * 
-	 * @param id    Integer - Referente ao id informado
-	 * @param setor {@link SetorModel} - Referente ao
-	 *              {@link SetorModel} informado
+	 * @param codigo    Integer - Referente ao codigo informado
+	 * @param cbo1994Model {@link CBO1994Model} - Referente ao
+	 *              {@link CBO1994Model} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
 	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see SetorModel
-	 * @see SetorController
+	 * @see CBO1994Model
+	 * @see CBO1994Controller
 	 */
-	@PutMapping("/setores/{id}")
-	public ResponseEntity<?> atualizarSetor(@PathVariable Integer id, @RequestBody SetorModel setor) {
+	@PutMapping("/CBO1994/{id}")
+	public ResponseEntity<?> atualizarCBO1994(@PathVariable Integer codigo, @RequestBody CBO1994Model cbo1994) {
 		try {
-			setor.setId(id);
-			boolean atualizou = setorController.atualizarSetor(id, setor.getNomeSetor(), setor.getIdPermissao());
+			cbo1994.setCodigo_cbo(codigo);
+			boolean atualizou = cbo1994Controller.atualizarCBO1994(codigo, cbo1994.getDescricao(), 
+					Insalubridade.getValor(cbo1994.getPercentualInsalubridade()),
+					Periculosidade.getValor(cbo1994.getPercentualPericulosidade()));
 			return ResponseEntity.ok(atualizou);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo do CBO1994 invalido");
 		}
 	}
 
 	/**
-	 * <h1>Deleta um {@link SetorModel}.</h1>
+	 * <h1>Deleta um {@link CBO1994Model}.</h1>
 	 * 
 	 * <p>
-	 * Recebe um id e deleta o {@link SetorModel} referente ao id
-	 * informado. Faz isso usando o {@link SetorController}.
+	 * Recebe um codigo e deleta o {@link CBO1994Model} referente ao id
+	 * informado. Faz isso usando o {@link CBO1994Controller}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
@@ -165,7 +170,7 @@ public class SetorControllerAPI {
 	@DeleteMapping("/setores/{id}")
 	public ResponseEntity<?> deletarSetor(@PathVariable int id) {
 		try {
-			boolean deletou = setorController.deletarSetor(id);
+			boolean deletou = cbo1994Controller.deletarSetor(id);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -202,7 +207,7 @@ public class SetorControllerAPI {
 		}
 		try {
 			ArrayList<SetorModel> listaSetoresModel = new ArrayList<>();
-			for (SetorModel setorModel : setorController.buscarSetorPorNome(nome)) {
+			for (SetorModel setorModel : cbo1994Controller.buscarSetorPorNome(nome)) {
 				listaSetoresModel.add(setorModel);
 			}
 			if(listaSetoresModel.size() == 0) {
@@ -213,5 +218,5 @@ public class SetorControllerAPI {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome Invalido");
 		}
 	}
-	
+
 }
