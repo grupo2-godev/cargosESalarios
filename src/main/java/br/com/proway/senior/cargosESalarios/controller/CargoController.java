@@ -27,6 +27,15 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 public class CargoController {
 
 	CargoDAO cargoDAO = CargoDAO.getInstancia();
+	
+	private static CargoController cargoController;
+	
+	public static CargoController getInstancia() {
+		if (cargoController == null) {
+			cargoController = new CargoController();
+		}
+		return cargoController;
+	}
 
 	/**
 	 * <h1>Valida os atributos do objeto a ser criado.</h1>

@@ -22,7 +22,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  */
 public class CBO2002ControllerTest {
 
-	CBO2002Controller cboController = new CBO2002Controller();
+	CBO2002Controller cboController = CBO2002Controller.getInstancia();
 
 	@Test
 	public void testCadastrarCBO2002Correto() throws Exception {

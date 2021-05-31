@@ -14,57 +14,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.PostoDeTrabalhoController;
+import br.com.proway.senior.cargosESalarios.controller.SetorController;
 import br.com.proway.senior.cargosESalarios.model.PostoDeTrabalhoModel;
+import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.PostoDeTrabalhoDAO;
 import br.com.proway.senior.cargosESalarios.model.DTO.PostoDeTrabalhoModelDTO;
 
-/**
- * <h1>Responsável por receber requisições REST</h1>
- * 
- * <p>
- * Classe responsável por receber requisições REST e executa a ligação entre a
- * API e o serviço.
- * </p>
- * 
- * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
- * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
- * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
- *         - Sprint 6
- * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
- * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
- *         - Sprint 6
- */
 @RestController
-public class PostoDeTrabalhoControllerAPI {
+public class SetorControllerAPI {
 
-	PostoDeTrabalhoController postoController = PostoDeTrabalhoController.getInstancia();
-	PostoDeTrabalhoDAO postoDAO = PostoDeTrabalhoDAO.getInstancia();
+	SetorController setorController = SetorController.getInstancia();
+	PostoDeTrabalhoDAO setorDAO = PostoDeTrabalhoDAO.getInstancia();
 
 	/**
-	 * <h1>Busca um {@link PostoDeTrabalhoModelDTO} por id</h1>
+	 * <h1>Busca um {@link SetorModel} por id</h1>
 	 * 
 	 * <p>
-	 * Recebe um id, busca um {@link PostoDeTrabalhoModel} atraves do
-	 * {@link PostoDeTrabalhoController} e retorna esse
-	 * {@link PostoDeTrabalhoModel}.
+	 * Recebe um id, busca um {@link SetorModel} atraves do
+	 * {@link SetorController} e retorna esse
+	 * {@link SetorModel}.
 	 * </p>
 	 * 
 	 * @param id Integer - Referente ao id informado
 	 * 
-	 * @return {@link PostoDeTrabalhoModel} - Referente ao
-	 *         {@link PostoDeTrabalhoModel} encontrado
+	 * @return {@link SetorModel} - Referente ao
+	 *         {@link SetorModel} encontrado
 	 * 
-	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong> Sprint 6
-	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
-	 *         Sprint 6
+	 * @author Vitor Gonçalves <strong>vitor.goncalves@senior.com.br</strong> Sprint 7
 	 * 
-	 * @see PostoDeTrabalhoModel
-	 * @see PostoDeTrabalhoController
+	 * @see SetorModel
+	 * @see SetorController
 	 */
-	@GetMapping("/postos/{id}")
+	@GetMapping("/setores/{id}")
 	public ResponseEntity<?> buscarPorID(@PathVariable Integer id) {
 		try {
-			PostoDeTrabalhoModelDTO posto = new PostoDeTrabalhoModelDTO(postoController.buscarPostoDeTrabalhoId(id));
+			PostoDeTrabalhoModelDTO posto = new PostoDeTrabalhoModelDTO(setorController.buscarPostoDeTrabalhoId(id));
 			return ResponseEntity.ok(posto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -93,7 +77,7 @@ public class PostoDeTrabalhoControllerAPI {
 	@GetMapping("/postos/all")
 	public ResponseEntity<?> buscarTodos() {
 		ArrayList<PostoDeTrabalhoModelDTO> postosDTO = new ArrayList<PostoDeTrabalhoModelDTO>();
-		for (PostoDeTrabalhoModel postoDeTrabalhoModel : postoController.buscarTodosPostosDeTrabalho()) {
+		for (PostoDeTrabalhoModel postoDeTrabalhoModel : setorController.buscarTodosPostosDeTrabalho()) {
 			postosDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
 		}
 		if(postosDTO.size() == 0) {
@@ -127,7 +111,7 @@ public class PostoDeTrabalhoControllerAPI {
 	@PostMapping("/postos")
 	public ResponseEntity<?> inserirPosto(@RequestBody PostoDeTrabalhoModel posto) throws Exception {
 		try {
-			Integer postoID = postoController.cadastrarPostoDeTrabalho(posto.getNomePosto(), posto.getCargo(),
+			Integer postoID = setorController.cadastrarPostoDeTrabalho(posto.getNomePosto(), posto.getCargo(),
 					posto.getSetor(), posto.getNivel(), posto.getSalario());
 			return ResponseEntity.ok(postoID);
 		} catch (Exception e) {
@@ -160,7 +144,7 @@ public class PostoDeTrabalhoControllerAPI {
 	public ResponseEntity<?> atualizarPosto(@PathVariable Integer id, @RequestBody PostoDeTrabalhoModel posto) {
 		try {
 			posto.setIdPosto(id);
-			boolean atualizou = postoController.atualizarPostoDeTrabalho(id, posto.getNomePosto(), posto.getCargo(),
+			boolean atualizou = setorController.atualizarPostoDeTrabalho(id, posto.getNomePosto(), posto.getCargo(),
 					posto.getSetor(), posto.getNivel(), posto.getSalario());
 			return ResponseEntity.ok(atualizou);
 		} catch (Exception e) {
@@ -190,7 +174,7 @@ public class PostoDeTrabalhoControllerAPI {
 	@DeleteMapping("/postos/{id}")
 	public ResponseEntity<?> deletarPosto(@PathVariable int id) {
 		try {
-			boolean deletou = postoController.deletarPostoDeTrabalho(id);
+			boolean deletou = setorController.deletarPostoDeTrabalho(id);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
@@ -228,7 +212,7 @@ public class PostoDeTrabalhoControllerAPI {
 		}
 		try {
 			ArrayList<PostoDeTrabalhoModelDTO> listaPostosDeTrabalhoModelDTO = new ArrayList<>();
-			for (PostoDeTrabalhoModel postoDeTrabalhoModel : postoController.buscarPostoPorNomeCargo(nome)) {
+			for (PostoDeTrabalhoModel postoDeTrabalhoModel : setorController.buscarPostoPorNomeCargo(nome)) {
 				listaPostosDeTrabalhoModelDTO.add(new PostoDeTrabalhoModelDTO(postoDeTrabalhoModel));
 			}
 			if(listaPostosDeTrabalhoModelDTO.size() == 0) {
@@ -239,4 +223,5 @@ public class PostoDeTrabalhoControllerAPI {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome Invalido");
 		}
 	}
+	
 }

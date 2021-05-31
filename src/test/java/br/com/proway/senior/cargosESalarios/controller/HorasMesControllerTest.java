@@ -16,7 +16,7 @@ import br.com.proway.senior.cargosESalarios.model.HorasMesModel;
 
 public class HorasMesControllerTest {
 	
-	static HorasMesController controller = new HorasMesController();	
+	static HorasMesController controller = HorasMesController.getInstancia();	
 	
 	@BeforeClass
 	public static void limparBanco() {

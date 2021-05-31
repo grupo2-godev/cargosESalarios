@@ -17,6 +17,19 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 public class NivelController {
 
 	NivelDAO nivelDAO = NivelDAO.getInstancia();
+	
+	private static NivelController nivelController;
+	
+	private NivelController() {
+		
+	}
+	
+	public static NivelController getInstancia() {
+		if(nivelController == null) {
+			nivelController = new NivelController();
+		}
+		return nivelController;
+	}
 
 	/**
 	 * Cria um novo objeto NivelModel e o passa para o DAO para que seja inserido no

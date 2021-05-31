@@ -17,6 +17,19 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
  */
 public class SetorController {
 
+	private static SetorController setorController;
+	
+	public static SetorController getInstancia() {
+		if(setorController==null) {
+			setorController = new SetorController();
+		}
+		return setorController;
+	}
+	
+	private SetorController() {
+		
+	}
+	
 	SetorDAO setorDAO = SetorDAO.getInstancia();
 
 	/**

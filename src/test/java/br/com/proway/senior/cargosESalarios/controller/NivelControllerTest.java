@@ -11,7 +11,7 @@ import br.com.proway.senior.cargosESalarios.conexao.ConexaoHibernate;
 import br.com.proway.senior.cargosESalarios.model.NivelModel;
 
 public class NivelControllerTest {
-	NivelController controller = new NivelController();
+	NivelController controller = NivelController.getInstancia();
 	
 	@Before
 	public void resetarSequencia(){

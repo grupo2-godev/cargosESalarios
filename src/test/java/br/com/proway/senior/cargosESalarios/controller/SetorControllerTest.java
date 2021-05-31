@@ -27,7 +27,7 @@ public class SetorControllerTest {
 	String nomeSetor2 = "Gestao de Pessoas";
 	Integer idPermissao2 = 4;
 	SetorModel setor2 = new SetorModel(nomeSetor2, idPermissao2);
-	SetorController setorController = new SetorController();
+	SetorController setorController = SetorController.getInstancia();
 
 	@Test
 	public void testCadastrarSetorCorreto() {

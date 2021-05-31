@@ -16,6 +16,19 @@ public class CBO1994Controller {
 	
 	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia();
 	
+	private static CBO1994Controller cbo1994Controller;
+	
+	private CBO1994Controller() {
+		
+	}
+	
+	public static CBO1994Controller getInstancia() {
+		if(cbo1994Controller == null) {
+			cbo1994Controller = new CBO1994Controller();
+		}
+		return cbo1994Controller;
+	}
+	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.
 	 * Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.

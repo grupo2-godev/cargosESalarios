@@ -16,7 +16,7 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 public class CBO1994ControllerTest {
 	
-	CBO1994Controller controller = new CBO1994Controller();
+	CBO1994Controller controller = CBO1994Controller.getInstancia();
 	
 	@Before
 	public void resetarSequencia(){

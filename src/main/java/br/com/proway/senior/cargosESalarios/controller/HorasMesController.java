@@ -14,6 +14,19 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 public class HorasMesController {
 
 	HorasMesDAO horasMesDAO = HorasMesDAO.getInstancia();
+	
+	private static HorasMesController horasMesController;
+	
+	private HorasMesController() {
+		
+	}
+	
+	public static HorasMesController getInstancia() {
+		if(horasMesController == null) {
+			horasMesController = new HorasMesController();
+		}
+		return horasMesController;
+	}
 
 	/**
 	 * Cria um novo objeto HorasMesModel e o passa para o DAO para que seja inserido

@@ -20,6 +20,19 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 public class CBO2002Controller {
 
 	CBO2002DAO cbo2002DAO = CBO2002DAO.getInstancia();
+	
+	private static CBO2002Controller cbo2002Controller;
+	
+	private CBO2002Controller() {
+		
+	}
+	
+	public static CBO2002Controller getInstancia() {
+		if(cbo2002Controller == null) {
+			cbo2002Controller = new CBO2002Controller();
+		}
+		return cbo2002Controller;
+	}
 
 	/**
 	 * Cadastrar na banco de dados um CBO 2002.

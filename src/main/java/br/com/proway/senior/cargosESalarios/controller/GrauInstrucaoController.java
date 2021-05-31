@@ -15,7 +15,20 @@ import br.com.proway.senior.cargosESalarios.utilidades.Validadores;
 public class GrauInstrucaoController {
 
 	GrauInstrucaoDAO grauInstrucaoDAO = GrauInstrucaoDAO.getInstancia();
+	
+	private static GrauInstrucaoController grauInstrucaoController;
+	
+	private GrauInstrucaoController() {
+		
+	}
 
+	public static GrauInstrucaoController getInstancia() {
+		if(grauInstrucaoController == null) {
+			grauInstrucaoController = new GrauInstrucaoController();
+		}
+		return grauInstrucaoController;
+	}
+	
 	/**
 	 * Cadastra um objeto do tipo {@link GrauInstrucaoModel} no banco de dados.
 	 * 
