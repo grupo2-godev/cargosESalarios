@@ -25,7 +25,7 @@
                         <h2>Lista de <b>Postos de Trabalho</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#cadastrarCargo" class="btn btn-success" data-toggle="modal"><i
+                        <a href="#cadastrarPosto" class="btn btn-success" data-toggle="modal"><i
                                 class="material-icons">&#xE147;</i> <span>Criar novo posto de trabalho</span></a>
                     </div>
                 </div>
@@ -45,11 +45,11 @@
                         <td>1</td>
                         <td>Pessoa desenvolvedora Junior - Desenvolvimento WEB</td>
                         <td>
-                            <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                            <a href="#visualizarPosto" class="visualizar" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                            <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
+                            <a href="#editarPosto" class="edit" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
+                            <a href="#deletarPosto" class="delete" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -57,11 +57,11 @@
                         <td>2</td>
                         <td>Pessoa desenvolvedora Senior - Desenvolvimento WEB</td>
                         <td>
-                            <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                            <a href="#visualizarPosto" class="visualizar" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                            <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
+                            <a href="#editarPosto" class="edit" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
+                            <a href="#deletarPosto" class="delete" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -70,11 +70,11 @@
                         <td>3</td>
                         <td>Pessoa desenvolvedora Pleno - Desenvolvimento MOBILE</td>
                         <td>
-                            <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                            <a href="#visualizarPosto" class="visualizar" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                            <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
+                            <a href="#editarPosto" class="edit" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
+                            <a href="#deletarPosto" class="delete" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 
                         </td>
@@ -83,11 +83,11 @@
                         <td>4</td>
                         <td>Pessoa recrutadora RH - Recursos Humanos</td>
                         <td>
-                            <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                            <a href="#visualizarPosto" class="visualizar" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                            <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
+                            <a href="#editarPosto" class="edit" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
+                            <a href="#deletarPosto" class="delete" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -95,11 +95,11 @@
                         <td>5</td>
                         <td>Pessoa supervisora de qualidade - Laboratório de Qualidade</td>
                         <td>
-                            <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                            <a href="#visualizarPosto" class="visualizar" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                            <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
+                            <a href="#editarPosto" class="edit" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
+                            <a href="#deletarPosto" class="delete" data-toggle="modal"><i class="material-icons"
                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -125,73 +125,64 @@
 
 
     <!-- Edit Modal HTML -->
-    <div id="cadastrarCargo" class="modal fade">
+    <div id="cadastrarPosto" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <form>
                     <div class="modal-header">
-                        <h4 class="modal-title">Cadastrar Cargo</h4>
+                        <h4 class="modal-title">Cadastrar Posto</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="validationCustom01" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="validationCustom01"
-                                placeholder="Ex.: Desenvolvedor" required>
+                            <label for="nome_posto" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome_posto"
+                                placeholder="Ex.: Programador Junior - Desenvolvimento WEB" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="horas_mes" class="form-label">Horas/mês:</label>
-                            <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240" min="0"
-                                max="730" required>
+                            <label for="horas_mes" class="form-label">Salário (R$):</label>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes" placeholder="Ex.: 2500,00" min="0" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                            <input type="text" class="form-control" name="grau_instrucao"
-                                placeholder="Ex.: Superior completo" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                            <input type="text" class="form-control" name="experiencia_minima" placeholder="Ex.: 2 anos"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="CBO2002" class="form-label">CBO2002</label>
-                            <select name="CBO2002" class="form-control" required>
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <select name="cargo" class="form-control" required>
                                 <option selected disabled value="">Selecione...</option>
-                                <option value="">322230 - Auxiliar de enfermagem</option>
-                                <option value="">223820 - Fonoaudiólogo</option>
-                                <option value="">225135 - Médico dermatologista</option>
-                                <option value="">212405 - Desenvolvedor de TI</option>
+                                <option value="">Auxiliar de enfermagem</option>
+                                <option value="">Fonoaudiólogo</option>
+                                <option value="">Médico dermatologista</option>
+                                <option value="">Desenvolvedor de TI</option>
                             </select>
-                            <a href="#cadastrarCBO2002" class="edit" data-toggle="modal"><input type="submit"
-                                    data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
                         </div>
 
                         <div class="form-group">
-                            <label for="CBO1994" class="form-label">CBO1994</label>
-                            <select name="CBO1994" class="form-control" required>
+                            <label for="setor" class="form-label">Setor</label>
+                            <select name="setor" class="form-control" required>
                                 <option selected disabled value="">Selecione...</option>
-                                <option value="">57210 - Auxiliar de enfermagem</option>
-                                <option value="">07925 - Fonoaudiólogo</option>
-                                <option value="">06119 - Médico dermatologista</option>
-                                <option value="">08320 - Desenvolvedor de TI</option>
+                                <option value="">Desenvolvimento WEB</option>
+                                <option value="">Desenvolvimento MOBILE</option>
+                                <option value="">Laboratório de Qualidade</option>
+                                <option value="">Recursos Humanos</option>
                             </select>
-                            <a href="#cadastrarCBO1994" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>
+                            <a href="#cadastrarSetor" class="edit" data-toggle="modal"><input type="submit"
+                                data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
                         </div>
 
+
                         <div class="form-group">
-                            <label for="atribucoes" class="form-label">Atribuições:</label><br>
-                            <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                                placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
-                                required></textarea>
+                            <label for="nível" class="form-label">Nível</label>
+                            <select name="nível" class="form-control" required>
+                                <option selected disabled value="">Selecione...</option>
+                                <option value="">Júnior</option>
+                                <option value="">Senior</option>
+                                <option value="">Pleno</option>
+                            </select>
+                            <a href="#cadastrarNivel" class="edit" data-toggle="modal"><input type="submit"
+                                data-dismiss="modal" class="btn btn-success" value="Novo Nível"></a>
                         </div>
 
                     </div>
@@ -205,68 +196,61 @@
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="editarCargo" class="modal fade">
+    <div id="editarPosto" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form>
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Cargo</h4>
+                        <h4 class="modal-title">Editar Posto</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="validationCustom01" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="validationCustom01"
-                                placeholder="Ex.: Desenvolvedor" required>
+                            <label for="nome_posto" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome_posto"
+                                placeholder="Ex.: Programador Junior - Desenvolvimento WEB" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="horas_mes" class="form-label">Horas/mês:</label>
-                            <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240" min="0"
-                                max="730" required>
+                            <label for="horas_mes" class="form-label">Salário (R$):</label>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes" placeholder="Ex.: 2500,00" min="0" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                            <input type="text" class="form-control" name="grau_instrucao"
-                                placeholder="Ex.: Superior completo" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                            <input type="text" class="form-control" name="experiencia_minima" placeholder="Ex.: 2 anos"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="CBO2002" class="form-label">CBO2002</label>
-                            <select name="CBO2002" class="form-control" required>
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <select name="cargo" class="form-control" required>
                                 <option selected disabled value="">Selecione...</option>
-                                <option value="">322230 - Auxiliar de enfermagem</option>
-                                <option value="">223820 - Fonoaudiólogo</option>
-                                <option value="">225135 - Médico dermatologista</option>
-                                <option value="">212405 - Desenvolvedor de TI</option>
+                                <option value="">Auxiliar de enfermagem</option>
+                                <option value="">Fonoaudiólogo</option>
+                                <option value="">Médico dermatologista</option>
+                                <option value="">Desenvolvedor de TI</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="CBO1994" class="form-label">CBO1994</label>
-                            <select name="CBO2002" class="form-control" required>
+                            <label for="setor" class="form-label">Setor</label>
+                            <select name="setor" class="form-control" required>
                                 <option selected disabled value="">Selecione...</option>
-                                <option value="">57210 - Auxiliar de enfermagem</option>
-                                <option value="">07925 - Fonoaudiólogo</option>
-                                <option value="">06119 - Médico dermatologista</option>
-                                <option value="">08320 - Desenvolvedor de TI</option>
+                                <option value="">Desenvolvimento WEB</option>
+                                <option value="">Desenvolvimento MOBILE</option>
+                                <option value="">Laboratório de Qualidade</option>
+                                <option value="">Recursos Humanos</option>
                             </select>
+                            <a href="#cadastrarSetor" class="edit" data-toggle="modal"><input type="submit"
+                                data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
                         </div>
 
+
                         <div class="form-group">
-                            <label for="atribucoes" class="form-label">Atribuições:</label><br>
-                            <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                                placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
-                                required></textarea>
+                            <label for="nível" class="form-label">Nível</label>
+                            <select name="nível" class="form-control" required>
+                                <option selected disabled value="">Selecione...</option>
+                                <option value="">Júnior</option>
+                                <option value="">Senior</option>
+                                <option value="">Pleno</option>
+                            </select>
                         </div>
 
                     </div>
@@ -279,16 +263,16 @@
         </div>
     </div>
     <!-- Delete Modal HTML -->
-    <div id="deletarCargo" class="modal fade">
+    <div id="deletarPosto" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form>
                     <div class="modal-header">
-                        <h4 class="modal-title">Deletar Cargo</h4>
+                        <h4 class="modal-title">Deletar Posto</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Você tem certeza que deseja deletar o Cargo selecionado?</p>
+                        <p>Você tem certeza que deseja deletar o Posto selecionado?</p>
                         <p class="text-warning"><small>Ação não pode ser desfeita.</small></p>
                     </div>
                     <div class="modal-footer">
@@ -301,88 +285,67 @@
     </div>
 
     <!-- Edit Modal HTML -->
-    <div id="visualizarCargo" class="modal fade">
+    <div id="visualizarPosto" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <form>
                     <div class="modal-header">
-                        <h4 class="modal-title">Visualizar Cargo</h4>
+                        <h4 class="modal-title">Visualizar Posto</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="validationCustom01" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="validationCustom01" value="Fonoaudiólogo"
-                                disabled>
+                            <label for="nome_posto" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome_posto"
+                                value="Programador Junior - Desenvolvimento WEB" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label for="horas_mes" class="form-label">Horas/mês:</label>
-                            <input type="number" class="form-control" name="horas_mes" value="240" min="0" max="730"
-                                disabled>
+                            <label for="horas_mes" class="form-label">Salário (R$):</label>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes" value="2500.00" min="0" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                            <input type="text" class="form-control" name="grau_instrucao" value="Superior completo"
-                                disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                            <input type="text" class="form-control" name="experiencia_minima" value="2 anos" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="CBO2002" class="form-label">CBO2002</label>
-                            <select name="CBO2002" class="form-control" disabled>
-                                <option value="">322230 - Auxiliar de enfermagem</option>
-                                <option selected value="">223820 - Fonoaudiólogo</option>
-                                <option value="">225135 - Médico dermatologista</option>
-                                <option value="">212405 - Desenvolvedor de TI</option>
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <select name="cargo" class="form-control" disabled>
+                                <option value="">Selecione...</option>
+                                <option value="">Auxiliar de enfermagem</option>
+                                <option value="">Fonoaudiólogo</option>
+                                <option value="">Médico dermatologista</option>
+                                <option selected value="">Desenvolvedor de TI</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="CBO1994" class="form-label">CBO1994</label>
-                            <select name="CBO1994" class="form-control" disabled>
-                                <option value="">57210 - Auxiliar de enfermagem</option>
-                                <option selected value="">07925 - Fonoaudiólogo</option>
-                                <option value="">06119 - Médico dermatologista</option>
-                                <option value="">08320 - Desenvolvedor de TI</option>
+                            <label for="setor" class="form-label">Setor</label>
+                            <select name="setor" class="form-control" disabled>
+                                <option value="">Selecione...</option>
+                                <option selected="">Desenvolvimento WEB</option>
+                                <option value="">Desenvolvimento MOBILE</option>
+                                <option value="">Laboratório de Qualidade</option>
+                                <option value="">Recursos Humanos</option>
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="data_cadastro" class="form-label">Data de Cadastro:</label>
-                            <input type="text" class="form-control" name="data_cadastro" value="31/05/2021" disabled>
-                        </div>
 
                         <div class="form-group">
-                            <label for="ultima_revisao" class="form-label">Última revisão:</label>
-                            <input type="text" class="form-control" name="ultima_revisao" value="01/06/2021" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="status" class="form-label">Status:</label>
-                            <input type="text" class="form-control" name="status" value="Ativo" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="atribucoes" class="form-label">Atribuições:</label><br>
-                            <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                                value="Fazer exames de audiometria." disabled></textarea>
+                            <label for="nível" class="form-label">Nível</label>
+                            <select name="nível" class="form-control" disabled>
+                                <option value="">Selecione...</option>
+                                <option selected value="">Júnior</option>
+                                <option value="">Senior</option>
+                                <option value="">Pleno</option>
+                            </select>
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-
-                        <a href="#editarCargo" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Editar"></a>
+                        <a href="#editarPosto" class="edit" data-toggle="modal"><input type="submit"
+                            data-dismiss="modal" class="btn btn-success" value="Editar"></a>                        
                     </div>
                 </form>
 
@@ -392,46 +355,22 @@
 
 
     <!-- Edit Modal HTML -->
-    <div id="cadastrarCBO1994" class="modal fade">
+    <div id="cadastrarSetor" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <form>
                     <div class="modal-header">
-                        <h4 class="modal-title">Cadastrar CBO1994</h4>
+                        <h4 class="modal-title">Cadastrar Setor</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="codigoCBO1994" class="form-label">Código:</label>
-                            <input type="number" class="form-control" name="codigoCBO1994" placeholder="Ex.: 24000 (cinco dígitos)" min="0"
-                                max="99999" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descricaoCBO1994" class="form-label">Descrição:</label>
-                            <input type="text" class="form-control" name="descricaoCBO1994" placeholder="Ex.: Técnico de informática"
+                            <label for="nomeSetor" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" name="nomeSetor" placeholder="Ex.: Recursos Humanos"
                                 required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="insalubridadeCBO1994" class="form-label">Percentual Insalubridade</label>
-                            <select name="insalubridadeCBO1994" class="form-control" required>
-                                <option value="">0</option>
-                                <option value="">10 %</option>
-                                <option value="">20 %</option>
-                                <option value="">40 %</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="periculosidadeCBO1994" class="form-label">Percentual Periculosidade</label>
-                            <select name="periculosidadeCBO1994" class="form-control" required>
-                                <option value="">0</option>
-                                <option value="">30 %</option>
-                            </select>
                         </div>
 
                     </div>
@@ -445,66 +384,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Edit Modal HTML ----------------------------------------------------------------------------------------------------------------------------------->
-    <div id="cadastrarCBO2002" class="modal fade">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Cadastrar CBO2002</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="codigoCBO2002" class="form-label">Código:</label>
-                            <input type="number" class="form-control" name="codigoCBO2002" placeholder="Ex.: 240010 (seis dígitos)" min="0"
-                                max="999999" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descricaoCBO2002" class="form-label">Descrição:</label>
-                            <input type="text" class="form-control" name="descricaoCBO2002" placeholder="Ex.: Técnico de informática"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="insalubridadeCBO2002" class="form-label">Percentual Insalubridade</label>
-                            <select name="insalubridadeCBO2002" class="form-control" required>
-                                <option value="">0</option>
-                                <option value="">10 %</option>
-                                <option value="">20 %</option>
-                                <option value="">40 %</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="periculosidadeCBO2002" class="form-label">Percentual Periculosidade</label>
-                            <select name="periculosidadeCBO2002" class="form-control" required>
-                                <option value="">0</option>
-                                <option value="">30 %</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-
-                        <input type="submit" data-dismiss="modal" class="btn btn-success" value="Cadastrar"></a>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-    <script>
-
-
-    </script>
 
 </body>
 
