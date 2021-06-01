@@ -42,16 +42,16 @@ public class CBO2002Controller {
 	 * nulo. Valida tambem a quantidade de caracteres do codigoCBO, visto que o
 	 * padrao e 6.
 	 * 
-	 * @param Integer        codigoCBO codigo do CBO 2002 que sera cadastrado.
-	 * @param String         descricao descricao | nome do CBO 2002 que sera
+	 * @param codigoCBO      Integer codigo do CBO 2002 que sera cadastrado.
+	 * @param descricao      String descricao | nome do CBO 2002 que sera
 	 *                       cadastrado.
-	 * @param Insalubridade  percentualInsalubridade.
-	 * @param Periculosidade percentualPericulosidade.
+	 * @param percentualInsalubridade  Double.
+	 * @param percentualPericulosidade Double.
 	 * @return Integer codigoCBO codigo do CBO 2002 cadastrado.
-	 * @throws Exception.
+	 * @throws Exception
 	 */
-	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Insalubridade percentualInsalubridade,
-			Periculosidade percentualPericulosidade) throws Exception {
+	public Integer cadastrarCBO2002(Integer codigoCBO, String descricao, Double percentualInsalubridade,
+									Double percentualPericulosidade) throws Exception {
 		if (Validadores.ehValidoCBO2002(codigoCBO) == false) {
 			throw new Exception("Código de CBO 2002 informado inválido.");
 		}
@@ -61,8 +61,8 @@ public class CBO2002Controller {
 		if (!Validadores.apenasCaracteresValidos(descricao)) {
 			throw new Exception("A descrição deve conter apenas caracteres válidos.");
 		}
-		CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade.getValor(),
-				percentualPericulosidade.getValor());
+		CBO2002Model novoCBO2002 = new CBO2002Model(codigoCBO, descricao, percentualInsalubridade,
+				percentualPericulosidade);
 		cbo2002DAO.criar(novoCBO2002);
 		return codigoCBO;
 	}
@@ -73,8 +73,8 @@ public class CBO2002Controller {
 	 * Realiza a busca do CBO 2002 conforme codigo informado e retorna o objeto do
 	 * mesmo.
 	 * 
-	 * @param Integer codigoCBO Identificacao do CBO 2002 procurado.
-	 * @return CBO2002Model objeto localizado ou null caso nao conste no banco.
+	 * @param codigoCBO Integer Identificacao do CBO 2002 procurado.
+	 * @return objeto CBO2002Model localizado ou null caso nao conste no banco.
 	 */
 
 	public CBO2002Model buscarCBO2002PorCodigo(Integer codigoCBO) {
@@ -107,22 +107,22 @@ public class CBO2002Controller {
 	 * cadastrar novo registro.
 	 * 
 	 * @param codigoCBO           codigo de CBO que sera alterado.
-	 * @param novaDescricao.
-	 * @param novaInsalubridade.
-	 * @param novaPericulosidade.
+	 * @param novaDescricao
+	 * @param novaInsalubridade
+	 * @param novaPericulosidade
 	 * @return boolean true, se o registro foi atualizado.
 	 * @throws Exception
 	 */
-	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Insalubridade novaInsalubridade,
-			Periculosidade novaPericulosidade) throws Exception {
+	public boolean atualizarCBO2002(Integer codigoCBO, String novaDescricao, Double novaInsalubridade,
+			Double novaPericulosidade) throws Exception {
 		CBO2002Model cboRecuperado = this.cbo2002DAO.buscar(CBO2002Model.class, codigoCBO);
 		if (Validadores.ehObjetoNulo(cboRecuperado)) {
 			throw new Exception("O código informado não consta na base de dados, informe um valor válido.");
 		}
 		cboRecuperado.setCodigoCBO2002(codigoCBO);
 		cboRecuperado.setDescricao(novaDescricao);
-		cboRecuperado.setPercentualInsalubridade(novaInsalubridade.getValor());
-		cboRecuperado.setPercentualPericulosidade(novaPericulosidade.getValor());
+		cboRecuperado.setPercentualInsalubridade(novaInsalubridade);
+		cboRecuperado.setPercentualPericulosidade(novaPericulosidade);
 		return this.cbo2002DAO.atualizar(cboRecuperado);
 	}
 

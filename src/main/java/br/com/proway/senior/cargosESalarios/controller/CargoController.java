@@ -199,9 +199,9 @@ public class CargoController {
 	 */
 	public boolean deletarCargoPorID(Integer id) throws Exception {
 		if (Validadores.ehZeroOuNulo(id))
-			throw (new Exception("O id não pode ser nulo ou igual a zero."));
+			throw new Exception("O id não pode ser nulo ou igual a zero.");
 		if (Validadores.ehObjetoNulo(this.buscarCargoPorID(id)))
-			throw (new Exception("O objeto não existe no banco de dados."));
+			throw new Exception("O objeto não existe no banco de dados.");
 
 		cargoDAO.deletar(CargoModel.class, id);
 		return true;
