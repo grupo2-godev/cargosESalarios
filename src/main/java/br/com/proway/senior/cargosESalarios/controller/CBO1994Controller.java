@@ -40,8 +40,8 @@ public class CBO1994Controller {
 	 * @return int codigo_CBO
 	 * @throws Exception
 	 */
-	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Insalubridade percentualInsalubridade,
-			Periculosidade percentualPericulosidade) throws Exception {
+	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Double percentualInsalubridade,
+									Double percentualPericulosidade) throws Exception {
 		
 		if(!Validadores.ehValidoCBO1994(codigo_CBO1994) || !Validadores.ehValidoCBODescricao(descricao)) {
 			throw(new Exception("Codigo e/ou descricao invalidos para o CBO1994"));
@@ -51,8 +51,8 @@ public class CBO1994Controller {
 			throw(new Exception("CBO1994 já existe no banco de dados"));
 		}
 		
-		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), 
-				percentualPericulosidade.getValor());
+		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade,
+				percentualPericulosidade);
 		return CBO1994Dao.criar(CBO1994Model);
 	} 
 	
@@ -89,8 +89,8 @@ public class CBO1994Controller {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, Insalubridade novoPercentualInsalubridade,
-			Periculosidade novoPercentualPericulosidade) throws Exception {
+	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, double novoPercentualInsalubridade,
+			double novoPercentualPericulosidade) throws Exception {
 
 		if(!Validadores.ehValidoCBODescricao(novaDescricao)) {
 			throw(new Exception("Descricao invalida para atualizacao do CBO1994"));
@@ -103,15 +103,15 @@ public class CBO1994Controller {
 		}
 		
 		if(objetoParaAtualizar.getDescricao() == novaDescricao &&
-		   (double) objetoParaAtualizar.getPercentualInsalubridade() == (double) novoPercentualInsalubridade.getValor() &&
-		   (double) objetoParaAtualizar.getPercentualPericulosidade() == (double) novoPercentualPericulosidade.getValor()) {
+		   (double) objetoParaAtualizar.getPercentualInsalubridade() == (double) novoPercentualInsalubridade &&
+		   (double) objetoParaAtualizar.getPercentualPericulosidade() == (double) novoPercentualPericulosidade) {
 			return false;
 		}
 		
 		objetoParaAtualizar.setCodigo_cbo(codigo_CBO1994);
 		objetoParaAtualizar.setDescricao(novaDescricao);
-		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade.getValor());
-		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade.getValor());
+		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade);
+		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade);
 				
 		return CBO1994Dao.atualizar(objetoParaAtualizar);
 	}

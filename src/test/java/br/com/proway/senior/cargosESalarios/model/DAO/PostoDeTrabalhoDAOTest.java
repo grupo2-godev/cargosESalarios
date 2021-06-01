@@ -113,12 +113,12 @@ public class PostoDeTrabalhoDAOTest {
 		idGrauInstrucao = GrauInstrucaoController.getInstancia().cadastrarInstrucao("Ensino superior completo");
 		grauInstrucao = GrauInstrucaoController.getInstancia().buscarInstrucaoPorID(idGrauInstrucao);
 
-		codigoCbo2002 = CBO2002Controller.getInstancia().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
+		codigoCbo2002 = CBO2002Controller.getInstancia().cadastrarCBO2002(666666, "Desenvolvedor", 0.1,
+				0.3);
 		cbo2002 = CBO2002Controller.getInstancia().buscarCBO2002PorCodigo(codigoCbo2002);
 
-		codigoCbo1994 = CBO1994Controller.getInstancia().cadastrarCBO1994(55555, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
+		codigoCbo1994 = CBO1994Controller.getInstancia().cadastrarCBO1994(55555, "Desenvolvedor", 0.1,
+				0.3);
 		cbo1994 = CBO1994Controller.getInstancia().buscarCBO1994(codigoCbo1994);
 
 		idHorasMes = HorasMesController.getInstancia().cadastrarHorasMes(240d);
