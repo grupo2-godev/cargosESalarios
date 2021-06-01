@@ -89,7 +89,7 @@ public class CargoModel {
 	 * @param cbo2002 {@link CBO2002Model} - Referente ao {@link CargoModel#cbo2002} do {@link CargoModel}
 	 * @param cbo94 {@link CBO1994Model} - Referente ao {@link CargoModel#cbo94} do {@link CargoModel}
 	 * @param horaMes {@link HorasMesModel} - Referente as {@link CargoModel#horaMes} do {@link CargoModel}
-	 * @param grauDeInstrucao {@link GrauInstrucaoModel} - Referente ao {@link CargoModel#grauInstrucao} do {@link CargoModel}
+	 * @param grauInstrucao {@link GrauInstrucaoModel} - Referente ao {@link CargoModel#grauInstrucao} do {@link CargoModel}
 	 * @param experienciaMinima String - Referente a {@link CargoModel#experienciaMinima} do {@link CargoModel}
 	 * @param atribuicoes String - Referente as {@link CargoModel#atribuicoes} do {@link CargoModel}
 	 * @param status Boolean - Referente ao {@link CargoModel#status} do {@link CargoModel}

@@ -36,7 +36,7 @@ public class CBO1994ControllerAPI {
 	 * {@link CBO1994Model}.
 	 * </p>
 	 * 
-	 * @param id Integer - Referente ao id informado
+	 * @param codigo Integer - Referente ao id informado
 	 * 
 	 * @return {@link CBO1994Model} - Referente ao
 	 *         {@link CBO1994Model} encontrado
@@ -46,7 +46,7 @@ public class CBO1994ControllerAPI {
 	 * @see CBO1994Model
 	 * @see CBO1994Controller
 	 */
-	@GetMapping("/CBO1994/{id}")
+	@GetMapping("/CBO1994/{codigo}")
 	public ResponseEntity<?> buscarPorCodigo(@PathVariable Integer codigo) {
 		try {
 			CBO1994Model cbo1994 = cbo1994Controller.buscarCBO1994(codigo);
@@ -110,8 +110,8 @@ public class CBO1994ControllerAPI {
 	public ResponseEntity<?> inserirCBO1994(@RequestBody CBO1994Model cbo1994Model) throws Exception {
 		try {
 			Integer cboID = cbo1994Controller.cadastrarCBO1994(cbo1994Model.getCodigo_cbo(), 
-					cbo1994Model.getDescricao(), Insalubridade.getValor(cbo1994Model.getPercentualInsalubridade()),
-					Periculosidade.getValor(cbo1994Model.getPercentualPericulosidade()));
+					cbo1994Model.getDescricao(), cbo1994Model.getPercentualInsalubridade(),
+					cbo1994Model.getPercentualPericulosidade());
 			return ResponseEntity.ok(cboID);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
@@ -127,7 +127,7 @@ public class CBO1994ControllerAPI {
 	 * </p>
 	 * 
 	 * @param codigo    Integer - Referente ao codigo informado
-	 * @param cbo1994Model {@link CBO1994Model} - Referente ao
+	 * @param cbo1994 {@link CBO1994Model} - Referente ao
 	 *              {@link CBO1994Model} informado
 	 * 
 	 * @return boolean - true caso de certo, false caso contrário
@@ -137,13 +137,13 @@ public class CBO1994ControllerAPI {
 	 * @see CBO1994Model
 	 * @see CBO1994Controller
 	 */
-	@PutMapping("/CBO1994/{id}")
+	@PutMapping("/CBO1994/{codigo}")
 	public ResponseEntity<?> atualizarCBO1994(@PathVariable Integer codigo, @RequestBody CBO1994Model cbo1994) {
 		try {
 			cbo1994.setCodigo_cbo(codigo);
-			boolean atualizou = cbo1994Controller.atualizarCBO1994(codigo, cbo1994.getDescricao(), 
-					Insalubridade.getValor(cbo1994.getPercentualInsalubridade()),
-					Periculosidade.getValor(cbo1994.getPercentualPericulosidade()));
+			boolean atualizou = cbo1994Controller.atualizarCBO1994(codigo, cbo1994.getDescricao(),
+					cbo1994.getPercentualInsalubridade(),
+					cbo1994.getPercentualPericulosidade());
 			return ResponseEntity.ok(atualizou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo do CBO1994 invalido");
@@ -167,10 +167,10 @@ public class CBO1994ControllerAPI {
 	 * @see CBO1994Model
 	 * @see CBO1994Controller
 	 */
-	@DeleteMapping("/CBO1994/{id}")
-	public ResponseEntity<?> deletarCBO1994(@PathVariable int id) {
+	@DeleteMapping("/CBO1994/{codigo}")
+	public ResponseEntity<?> deletarCBO1994(@PathVariable int codigo) {
 		try {
-			boolean deletou = cbo1994Controller.deletarCBO1994(id);
+			boolean deletou = cbo1994Controller.deletarCBO1994(codigo);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID invalido");
