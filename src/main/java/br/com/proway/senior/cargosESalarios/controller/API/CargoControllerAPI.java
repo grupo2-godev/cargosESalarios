@@ -3,12 +3,15 @@ package br.com.proway.senior.cargosESalarios.controller.API;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.CargoController;
@@ -57,8 +60,13 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@PostMapping("/cargos")
-	public Integer postCargo(@RequestBody CargoModel cargoModel) {
-		return cargoController.cadastrarCargo(cargoModel);
+	public ResponseEntity<?> postCargo(@RequestBody CargoModel cargoModel) {
+		try {
+			Integer cargoId = cargoController.cadastrarCargo(cargoModel);
+			return ResponseEntity.ok(cargoId);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
+		}		
 	}
 	
 	/**
@@ -84,8 +92,14 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@DeleteMapping("/cargos/{idCargo}")
-	public boolean deletarCargo(@PathVariable Integer idCargo) throws Exception {
-		return cargoController.deletarCargoPorID(idCargo);
+	public ResponseEntity<?> deletarCargo(@PathVariable Integer idCargo) {
+		try {
+			boolean deletou = cargoController.deletarCargoPorID(idCargo);
+			return ResponseEntity.ok(deletou);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
+		+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+		}
 	}
 	
 	/**
@@ -107,8 +121,14 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@PutMapping("/cargos/{idCargo}")
-	public boolean atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
-		return cargoController.atualizarCargo(idCargo, cargoModel);
+	public ResponseEntity<?> atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
+		try {
+			boolean atualizou = cargoController.atualizarCargo(idCargo, cargoModel);
+			return ResponseEntity.ok(atualizou);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
+					+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+		}
 	}
 	
 	/**
@@ -129,11 +149,17 @@ public class CargoControllerAPI {
 	 * @see CargoModel
 	 * @see CargoModelDTO
 	 */
-	@GetMapping("/cargos/id/{idCargo}")
-	public CargoModelDTO buscarPorID(@PathVariable Integer idCargo) throws Exception {
-		return new CargoModelDTO(cargoController.buscarCargoPorID(idCargo));
+	@GetMapping("/cargos/{idCargo}")
+	public ResponseEntity<?> buscarPorID(@PathVariable Integer idCargo) throws Exception {
+		try {
+			CargoModel cargo = cargoController.buscarCargoPorID(idCargo);
+			return ResponseEntity.ok(cargo);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao ha cargo cadastrado com este ID");
+		}
 	}
-		
+	
+	
 	/**
 	 * <h1>Busca todos os {@link CargoModelDTO}</h1>
 	 * 
@@ -151,13 +177,17 @@ public class CargoControllerAPI {
 	 * @see CargoModelDTO
 	 */
 	@GetMapping("/cargos")
-	public List<CargoModelDTO> buscarTodos(){
+	public ResponseEntity<?> buscarTodos() {
 		List<CargoModelDTO> cargosDTO = new ArrayList<CargoModelDTO>();
 		for (CargoModel cargoModel : cargoController.buscarTodosCargos()) {
-			cargosDTO.add(new CargoModelDTO(cargoModel));		
+			cargosDTO.add(new CargoModelDTO(cargoModel));
 		}
-		return cargosDTO;		
-	}	
+		if (cargosDTO.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao ha cargos cadastrados");
+		}
+		return ResponseEntity.ok(cargosDTO);
+	}
+
 	
 	/**
 	 * <h1>Busca {@link CargoModelDTO} pelo nome.</h1>
@@ -183,13 +213,31 @@ public class CargoControllerAPI {
 	 * 
 	 * @see CargoModelDTO
 	 * @see CargoController#buscarCargoPorNomeCargo(String)
+	 * /cargo?nome=programador
 	 */
-	@GetMapping("/cargos/nome/{nome}")
-	public ArrayList<CargoModelDTO> buscarCargosPeloNome(@PathVariable String nome) throws Exception {
-		ArrayList<CargoModelDTO> listaCargosModelDTO = new ArrayList<>();
-		for (CargoModel cargoModel : cargoController.buscarCargoPorNomeCargo(nome)) {
-			listaCargosModelDTO.add(new CargoModelDTO(cargoModel));
+	@GetMapping("/cargos/")
+	public ResponseEntity<?> buscarCargosPeloNome(@RequestParam String nome) throws Exception {
+
+		// Caso o usuario nao insira nome
+		if (nome.equals(null)) {
+			return buscarTodos();
 		}
-		return listaCargosModelDTO;
+
+		try {
+			ArrayList<CargoModelDTO> listaCargosModelDTO = new ArrayList<>();
+			
+			for (CargoModel cargoModel : cargoController.buscarCargoPorNomeCargo(nome)) {
+				listaCargosModelDTO.add(new CargoModelDTO(cargoModel));
+			}
+			
+			if (listaCargosModelDTO.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O nome informado eh invalido");
+			}
+			
+			return ResponseEntity.ok(listaCargosModelDTO);
+		
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O nome informado eh invalido");
+		}
 	}
 }
