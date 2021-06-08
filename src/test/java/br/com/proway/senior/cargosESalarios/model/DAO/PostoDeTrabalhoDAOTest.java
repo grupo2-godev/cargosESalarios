@@ -74,13 +74,13 @@ public class PostoDeTrabalhoDAOTest {
 		salario = 1800.00;
 		
 		limparTabelas();
-		new NivelController().deletarTodosNiveis();
-		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodosCargos();
-		new GrauInstrucaoController().deletarTodasInstrucoes();
-		new CBO2002Controller().deletarTodosCBO2002();
-		new CBO1994Controller().deletarTodosCBO1994();
-		new HorasMesController().deletarTodosHorasMes();
+		NivelController.getInstancia().deletarTodosNiveis();
+		SetorController.getInstancia().deletarTodosSetores();
+		CargoController.getInstancia().deletarTodosCargos();
+		GrauInstrucaoController.getInstancia().deletarTodasInstrucoes();
+		CBO2002Controller.getInstancia().deletarTodosCBO2002();
+		CBO1994Controller.getInstancia().deletarTodosCBO1994();
+		HorasMesController.getInstancia().deletarTodosHorasMes();
 		
 		popularTabelas();
 	}
@@ -89,13 +89,13 @@ public class PostoDeTrabalhoDAOTest {
 	public static void setUpAfterClass() throws Exception {
 		
 		limparTabelas();
-		new NivelController().deletarTodosNiveis();
-		new SetorController().deletarTodosSetores();
-		new CargoController().deletarTodosCargos();
-		new GrauInstrucaoController().deletarTodasInstrucoes();
-		new CBO2002Controller().deletarTodosCBO2002();
-		new CBO1994Controller().deletarTodosCBO1994();
-		new HorasMesController().deletarTodosHorasMes();
+		NivelController.getInstancia().deletarTodosNiveis();
+		SetorController.getInstancia().deletarTodosSetores();
+		CargoController.getInstancia().deletarTodosCargos();
+		GrauInstrucaoController.getInstancia().deletarTodasInstrucoes();
+		CBO2002Controller.getInstancia().deletarTodosCBO2002();
+		CBO1994Controller.getInstancia().deletarTodosCBO1994();
+		HorasMesController.getInstancia().deletarTodosHorasMes();
 	}
 	
 	public static void limparTabelas() throws SQLException {
@@ -110,31 +110,31 @@ public class PostoDeTrabalhoDAOTest {
 	 * @throws Exception
 	 */
 	public static void popularTabelas() throws Exception{
-		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
+		idGrauInstrucao = GrauInstrucaoController.getInstancia().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = GrauInstrucaoController.getInstancia().buscarInstrucaoPorID(idGrauInstrucao);
 
-		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
-		cbo2002 = new CBO2002Controller().buscarCBO2002PorCodigo(codigoCbo2002);
+		codigoCbo2002 = CBO2002Controller.getInstancia().cadastrarCBO2002(666666, "Desenvolvedor", 0.1,
+				0.3);
+		cbo2002 = CBO2002Controller.getInstancia().buscarCBO2002PorCodigo(codigoCbo2002);
 
-		codigoCbo1994 = new CBO1994Controller().cadastrarCBO1994(55555, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
-		cbo1994 = new CBO1994Controller().buscarCBO1994(codigoCbo1994);
+		codigoCbo1994 = CBO1994Controller.getInstancia().cadastrarCBO1994(55555, "Desenvolvedor", 0.1,
+				0.3);
+		cbo1994 = CBO1994Controller.getInstancia().buscarCBO1994(codigoCbo1994);
 
-		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
-		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
+		idHorasMes = HorasMesController.getInstancia().cadastrarHorasMes(240d);
+		horasMes = HorasMesController.getInstancia().buscarHorasMes(idHorasMes);
 		
-		cargo = new CargoController().construirCargo("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
+		cargo = CargoController.getInstancia().construirCargo("Gerente", LocalDateTime.now(), LocalDateTime.now(), cbo2002, cbo1994,
 				horasMes, grauInstrucao, "12", "Administrar Equipes", true, 1);
 		idCargo = CargoDAO.getInstancia().criar(cargo);
-		idNivel = new NivelController().cadastrarNivel("Junior");
-		idSetor = new SetorController().cadastrarSetor("Financeiro", idCargo);
-		int idSetor2 = new SetorController().cadastrarSetor("Recursos Humanos", idCargo);
+		idNivel = NivelController.getInstancia().cadastrarNivel("Junior");
+		idSetor = SetorController.getInstancia().cadastrarSetor("Financeiro", idCargo);
+		int idSetor2 = SetorController.getInstancia().cadastrarSetor("Recursos Humanos", idCargo);
 		
 		cargoRecuperado = CargoDAO.getInstancia().buscar(CargoModel.class, idCargo);
-		setor = new SetorController().buscarSetorPorId(idSetor);
-		setor2 = new SetorController().buscarSetorPorId(idSetor2);
-		nivel = new NivelController().buscarNivel(idNivel);
+		setor = SetorController.getInstancia().buscarSetorPorId(idSetor);
+		setor2 = SetorController.getInstancia().buscarSetorPorId(idSetor2);
+		nivel = NivelController.getInstancia().buscarNivel(idNivel);
 		
 	}
 	

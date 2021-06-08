@@ -16,6 +16,19 @@ public class CBO1994Controller {
 	
 	CBO1994DAO CBO1994Dao = CBO1994DAO.getInstancia();
 	
+	private static CBO1994Controller cbo1994Controller;
+	
+	private CBO1994Controller() {
+		
+	}
+	
+	public static CBO1994Controller getInstancia() {
+		if(cbo1994Controller == null) {
+			cbo1994Controller = new CBO1994Controller();
+		}
+		return cbo1994Controller;
+	}
+	
 	/**
 	 * Cria um novo objeto CBO1994Model e o passa para o DAO para que seja inserido no BD.
 	 * Faz a validacao dos campos do Objeto, caso invalidos retorna uma excessao.
@@ -27,8 +40,8 @@ public class CBO1994Controller {
 	 * @return int codigo_CBO
 	 * @throws Exception
 	 */
-	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Insalubridade percentualInsalubridade,
-			Periculosidade percentualPericulosidade) throws Exception {
+	public Integer cadastrarCBO1994(Integer codigo_CBO1994, String descricao, Double percentualInsalubridade,
+									Double percentualPericulosidade) throws Exception {
 		
 		if(!Validadores.ehValidoCBO1994(codigo_CBO1994) || !Validadores.ehValidoCBODescricao(descricao)) {
 			throw(new Exception("Codigo e/ou descricao invalidos para o CBO1994"));
@@ -38,8 +51,8 @@ public class CBO1994Controller {
 			throw(new Exception("CBO1994 já existe no banco de dados"));
 		}
 		
-		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade.getValor(), 
-				percentualPericulosidade.getValor());
+		CBO1994Model CBO1994Model = new CBO1994Model(codigo_CBO1994, descricao, percentualInsalubridade,
+				percentualPericulosidade);
 		return CBO1994Dao.criar(CBO1994Model);
 	} 
 	
@@ -76,8 +89,8 @@ public class CBO1994Controller {
 	 * @return boolean : true/false para sucesso da operacao
 	 * @throws Exception
 	 */
-	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, Insalubridade novoPercentualInsalubridade,
-			Periculosidade novoPercentualPericulosidade) throws Exception {
+	public boolean atualizarCBO1994(Integer codigo_CBO1994, String novaDescricao, double novoPercentualInsalubridade,
+			double novoPercentualPericulosidade) throws Exception {
 
 		if(!Validadores.ehValidoCBODescricao(novaDescricao)) {
 			throw(new Exception("Descricao invalida para atualizacao do CBO1994"));
@@ -90,15 +103,15 @@ public class CBO1994Controller {
 		}
 		
 		if(objetoParaAtualizar.getDescricao() == novaDescricao &&
-		   (double) objetoParaAtualizar.getPercentualInsalubridade() == (double) novoPercentualInsalubridade.getValor() &&
-		   (double) objetoParaAtualizar.getPercentualPericulosidade() == (double) novoPercentualPericulosidade.getValor()) {
+		   (double) objetoParaAtualizar.getPercentualInsalubridade() == (double) novoPercentualInsalubridade &&
+		   (double) objetoParaAtualizar.getPercentualPericulosidade() == (double) novoPercentualPericulosidade) {
 			return false;
 		}
 		
 		objetoParaAtualizar.setCodigo_cbo(codigo_CBO1994);
 		objetoParaAtualizar.setDescricao(novaDescricao);
-		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade.getValor());
-		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade.getValor());
+		objetoParaAtualizar.setPercentualInsalubridade(novoPercentualInsalubridade);
+		objetoParaAtualizar.setPercentualPericulosidade(novoPercentualPericulosidade);
 				
 		return CBO1994Dao.atualizar(objetoParaAtualizar);
 	}
@@ -122,12 +135,24 @@ public class CBO1994Controller {
 	}
 	
 	/**
-	 * Retorna todas as entradas de CBO1994Models no BD em uma ArrayList;
+	 * Retorna todas as entradas de CBO1994Model no BD em uma ArrayList;
 	 * 
 	 * @return ArrayList<CBO1994Model> : lista de entradas
 	 */
 	public ArrayList<CBO1994Model> buscarTodosCBO1994(){
 		return (ArrayList<CBO1994Model>) CBO1994Dao.listarPorTabela(CBO1994Model.class);
+		
+	}
+	
+	/**
+	 * Retorna as entradas de CBO1994Model que contenham a String descricao no BD em uma ArrayList;
+	 * 
+	 * @param descricaoParcial String 
+	 * 
+	 * @return ArrayList<CBO1994Model> : lista de entradas
+	 */
+	public ArrayList<CBO1994Model> buscarPorDescricaoParcial(String descricaoParcial){
+		return (ArrayList<CBO1994Model>) CBO1994Dao.listarPorValorDeColunaComStringIncompleta(CBO1994Model.class, "descricao", descricaoParcial);
 		
 	}
 	

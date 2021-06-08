@@ -21,7 +21,7 @@ import br.com.proway.senior.cargosESalarios.model.GrauInstrucaoModel;
  */
 public class GrauInstrucaoControllerTest {
 
-	GrauInstrucaoController controller = new GrauInstrucaoController();
+	GrauInstrucaoController controller = GrauInstrucaoController.getInstancia();
 
 	@Test
 	public void testCadastrarGrauDeInstrucao() throws Exception {

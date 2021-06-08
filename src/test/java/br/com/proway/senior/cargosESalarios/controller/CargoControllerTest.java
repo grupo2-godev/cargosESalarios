@@ -51,10 +51,10 @@ public class CargoControllerTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		controller.deletarTodosCargos();
-		new GrauInstrucaoController().deletarTodasInstrucoes();
-		new CBO2002Controller().deletarTodosCBO2002();
-		new CBO1994Controller().deletarTodosCBO1994();
-		new HorasMesController().deletarTodosHorasMes();
+		GrauInstrucaoController.getInstancia().deletarTodasInstrucoes();
+		CBO2002Controller.getInstancia().deletarTodosCBO2002();
+		CBO1994Controller.getInstancia().deletarTodosCBO1994();
+		HorasMesController.getInstancia().deletarTodosHorasMes();
 
 		popularTabelas();
 	}
@@ -62,10 +62,10 @@ public class CargoControllerTest {
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
 		controller.deletarTodosCargos();
-		new GrauInstrucaoController().deletarTodasInstrucoes();
-		new CBO2002Controller().deletarTodosCBO2002();
-		new CBO1994Controller().deletarTodosCBO1994();
-		new HorasMesController().deletarTodosHorasMes();
+		GrauInstrucaoController.getInstancia().deletarTodasInstrucoes();
+		CBO2002Controller.getInstancia().deletarTodosCBO2002();
+		CBO1994Controller.getInstancia().deletarTodosCBO1994();
+		HorasMesController.getInstancia().deletarTodosHorasMes();
 	}
 
 	@Before
@@ -74,19 +74,19 @@ public class CargoControllerTest {
 	}
 
 	public static void popularTabelas() throws Exception {
-		idGrauInstrucao = new GrauInstrucaoController().cadastrarInstrucao("Ensino superior completo");
-		grauInstrucao = new GrauInstrucaoController().buscarInstrucaoPorID(idGrauInstrucao);
+		idGrauInstrucao = GrauInstrucaoController.getInstancia().cadastrarInstrucao("Ensino superior completo");
+		grauInstrucao = GrauInstrucaoController.getInstancia().buscarInstrucaoPorID(idGrauInstrucao);
 
-		codigoCbo2002 = new CBO2002Controller().cadastrarCBO2002(666666, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
-		cbo2002 = new CBO2002Controller().buscarCBO2002PorCodigo(codigoCbo2002);
+		codigoCbo2002 = CBO2002Controller.getInstancia().cadastrarCBO2002(666666, "Desenvolvedor", 0.1,
+				0.3);
+		cbo2002 = CBO2002Controller.getInstancia().buscarCBO2002PorCodigo(codigoCbo2002);
 
-		codigoCbo1994 = new CBO1994Controller().cadastrarCBO1994(55555, "Desenvolvedor", Insalubridade.Dez,
-				Periculosidade.Trinta);
-		cbo1994 = new CBO1994Controller().buscarCBO1994(codigoCbo1994);
+		codigoCbo1994 = CBO1994Controller.getInstancia().cadastrarCBO1994(55555, "Desenvolvedor", 0.1,
+				0.3);
+		cbo1994 = CBO1994Controller.getInstancia().buscarCBO1994(codigoCbo1994);
 
-		idHorasMes = new HorasMesController().cadastrarHorasMes(240d);
-		horasMes = new HorasMesController().buscarHorasMes(idHorasMes);
+		idHorasMes = HorasMesController.getInstancia().cadastrarHorasMes(240d);
+		horasMes = HorasMesController.getInstancia().buscarHorasMes(idHorasMes);
 	}
 
 	@Test

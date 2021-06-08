@@ -17,4 +17,17 @@ public enum Insalubridade {
 		return this.valor;
 	}
 	
+	public static Insalubridade getValor(double valor) {
+		if(valor == 0.0) {
+			return Insalubridade.Zero;
+		} else if(valor == 0.1) {
+			return Insalubridade.Dez;
+		} else if(valor == 0.2) {
+			return Insalubridade.Vinte;
+		} else if(valor == 0.4) {
+			return Insalubridade.Quarenta;
+		} else {
+			return null;
+		}	
+	}
 }

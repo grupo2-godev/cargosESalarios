@@ -22,12 +22,12 @@ import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
  */
 public class CBO2002ControllerTest {
 
-	CBO2002Controller cboController = new CBO2002Controller();
+	CBO2002Controller cboController = CBO2002Controller.getInstancia();
 
 	@Test
 	public void testCadastrarCBO2002Correto() throws Exception {
 		Integer codigo = cboController.cadastrarCBO2002(252515, "Analista de Cobrança Instituições Financeiras", 
-				Insalubridade.Dez, Periculosidade.Zero);
+				0.1, 0.0);
 		CBO2002Model cboRecuperado = cboController.buscarCBO2002PorCodigo(codigo);
 		assertEquals((Integer) 252515, cboRecuperado.getCodigoCBO2002());
 		assertEquals("Analista de Cobrança Instituições Financeiras", cboRecuperado.getDescricao());
@@ -37,26 +37,26 @@ public class CBO2002ControllerTest {
 	
 	@Test (expected = Exception.class)
 	public void testCadastrarCBO2002ExceptionJaCadastrado() throws Exception {
-		cboController.cadastrarCBO2002(141515, "Gerente Administrativo de Lanchonete", Insalubridade.Dez, 
-				Periculosidade.Zero);
-		cboController.cadastrarCBO2002(141515, "Gerente Administrativo e Financeiro", Insalubridade.Dez, 
-				Periculosidade.Zero);
+		cboController.cadastrarCBO2002(141515, "Gerente Administrativo de Lanchonete", 0.1,
+				0.0);
+		cboController.cadastrarCBO2002(141515, "Gerente Administrativo e Financeiro", 0.1,
+				0.0);
 	}
 	
 	@Test (expected = Exception.class)
 	public void testCadastrarCBO2002ExceptionCodigoInvalido() throws Exception {
-		cboController.cadastrarCBO2002(1234567, "Gerente de Loja", Insalubridade.Dez, Periculosidade.Zero);
+		cboController.cadastrarCBO2002(1234567, "Gerente de Loja", 0.1, 0.0);
 	}
 	
 	@Test (expected = Exception.class)
 	public void testCadastrarCBO2002ExceptionDescricaoInvalida() throws Exception {
-		cboController.cadastrarCBO2002(716310, "Vidraceiro $%", Insalubridade.Dez, Periculosidade.Zero);
+		cboController.cadastrarCBO2002(716310, "Vidraceiro $%", 0.1, 0.0);
 	}
 
 	@Test
 	public void testBuscarCBO2002PorCodigo() throws Exception {
-		Integer codigo = cboController.cadastrarCBO2002(375125, "Assistente de Produção Moda", Insalubridade.Zero, 
-				Periculosidade.Zero);
+		Integer codigo = cboController.cadastrarCBO2002(375125, "Assistente de Produção Moda", 0.0,
+				0.0);
 		CBO2002Model cboRecuperado = cboController.buscarCBO2002PorCodigo(codigo);
 		assertEquals((Integer) 375125, cboRecuperado.getCodigoCBO2002());
 		assertEquals("Assistente de Produção Moda", cboRecuperado.getDescricao());
@@ -66,8 +66,8 @@ public class CBO2002ControllerTest {
 	
 	@Test
 	public void testBuscarCBO2002PorDescricao() throws Exception {
-		cboController.cadastrarCBO2002(375115, "Visual Merchandiser", Insalubridade.Dez, Periculosidade.Zero);
-		ArrayList<CBO2002Model> cboRecuperado = cboController.buscarCBO2002PorNome("Mer");
+		cboController.cadastrarCBO2002(375115, "Visual Merchandiser", 0.1, 0.0);
+		ArrayList<CBO2002Model> cboRecuperado = cboController.buscarCBO2002PorDescricaoParcial("Mer");
 		assertEquals((Integer) 375115, cboRecuperado.get(0).getCodigoCBO2002());
 		assertEquals("Visual Merchandiser", cboRecuperado.get(0).getDescricao());
 		assertEquals(0.1, cboRecuperado.get(0).getPercentualInsalubridade(), 0.01);
@@ -76,31 +76,31 @@ public class CBO2002ControllerTest {
 	
 	@Test
 	public void testAtualizarCBO2002Existente() throws Exception {
-		Integer codigoCadastrado = cboController.cadastrarCBO2002(517105, "Bombeiro", Insalubridade.Zero, 
-				Periculosidade.Zero);
+		Integer codigoCadastrado = cboController.cadastrarCBO2002(517105, "Bombeiro", 0.0,
+				0.0);
 		String novaDescricao = "Bombeiro de Aeroporto";
-		Insalubridade novaInsalubridade = Insalubridade.Zero;
-		Periculosidade novaPericulosidade = Periculosidade.Trinta;
+		Double novaInsalubridade = 0.0;
+		Double novaPericulosidade = 0.3;
 		cboController.atualizarCBO2002(codigoCadastrado, novaDescricao, novaInsalubridade, novaPericulosidade);
 		CBO2002Model cboAtualizado = cboController.buscarCBO2002PorCodigo(codigoCadastrado);
 		assertEquals(novaDescricao, cboAtualizado.getDescricao());
-		assertEquals(novaInsalubridade.getValor(), cboAtualizado.getPercentualInsalubridade(), 0.01);
-		assertEquals(novaPericulosidade.getValor(), cboAtualizado.getPercentualPericulosidade(), 0.01);
+		assertEquals(novaInsalubridade, cboAtualizado.getPercentualInsalubridade(), 0.01);
+		assertEquals(novaPericulosidade, cboAtualizado.getPercentualPericulosidade(), 0.01);
 	}
 	
 	@Test (expected = Exception.class)
 	public void testAtualizarCBO2002Inexistente() throws Exception {
 		String novaDescricao = "Bombeiro de Aeroporto";
-		Insalubridade novaInsalubridade = Insalubridade.Zero;
-		Periculosidade novaPericulosidade = Periculosidade.Trinta;
+		Double novaInsalubridade = 0.0;
+		Double novaPericulosidade = 0.3;
 		cboController.atualizarCBO2002(321654, novaDescricao, novaInsalubridade, novaPericulosidade);
 
 	}
 	
 	@Test
 	public void testDeletarCBO2002Existente() throws Exception {
-		Integer codigoCadastrado = cboController.cadastrarCBO2002(612510, "Abacaxicultor", Insalubridade.Zero, 
-				Periculosidade.Zero);
+		Integer codigoCadastrado = cboController.cadastrarCBO2002(612510, "Abacaxicultor", 0.0,
+				0.0);
 		assertTrue(cboController.deletarCBO2002(codigoCadastrado));
 	}
 	
@@ -111,18 +111,18 @@ public class CBO2002ControllerTest {
 	
 	@Test
 	public void testBuscarTodosCBO2002() throws Exception {
-		cboController.cadastrarCBO2002(768125, "Acabador de Chapéus de Palha", Insalubridade.Zero, 
-				Periculosidade.Zero);
-		cboController.cadastrarCBO2002(742105, "Afinador de Instrumentos Musicais", Insalubridade.Zero, 
-				Periculosidade.Zero);
+		cboController.cadastrarCBO2002(768125, "Acabador de Chapéus de Palha", 0.0,
+				0.0);
+		cboController.cadastrarCBO2002(742105, "Afinador de Instrumentos Musicais", 0.0,
+				0.0);
 		assertFalse(cboController.buscarTodosCBO2002().isEmpty());
 		assertEquals(2, cboController.buscarTodosCBO2002().size());
 	}
 
 	@Test
 	public void testDeletarTodosCBO2002() throws Exception {
-		cboController.cadastrarCBO2002(376320, "Apresentador Animador de Programas de Televisão", Insalubridade.Zero, 
-				Periculosidade.Zero);
+		cboController.cadastrarCBO2002(376320, "Apresentador Animador de Programas de Televisão", 0.0,
+				0.0);
 		cboController.deletarTodosCBO2002();
 		assertTrue(cboController.buscarTodosCBO2002().isEmpty());
 	}

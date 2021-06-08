@@ -1,5 +1,7 @@
 package br.com.proway.senior.cargosESalarios.model.DAO;
 
+import java.time.LocalDateTime;
+
 import br.com.proway.senior.cargosESalarios.model.CargoModel;
 import br.com.proway.senior.cargosESalarios.utilidades.HibernateMethods;
 
@@ -35,6 +37,29 @@ public class CargoDAO extends HibernateMethods<CargoModel> {
 		if (instancia == null)
 			instancia = new CargoDAO();
 		return instancia;
+	}
+	
+	 
+	/**
+	 * Atualiza um objeto no banco de dados.
+	 * 
+	 * Recebe um objeto que sera atualizado no banco de dados.
+	 *  
+	 * @param objeto CargoModel A instancia de CargoModel a ser atualizada
+	 * @return boolean Retorna true caso o objeto seja localizado no banco e
+	 *         atualizado com sucesso. Retorna false caso ocorra algum tipo de erro
+	 *         durante a atualizacao.
+	 */
+	@Override
+	public boolean atualizar(CargoModel cargoModel) {
+		if(!sessao.getTransaction().isActive()) {
+			sessao.beginTransaction();
+		}
+		cargoModel.setDataUltimaRevisao(LocalDateTime.now());
+		sessao.clear();
+		sessao.update(cargoModel);
+		sessao.getTransaction().commit();
+		return true;
 	}
 
 	/**

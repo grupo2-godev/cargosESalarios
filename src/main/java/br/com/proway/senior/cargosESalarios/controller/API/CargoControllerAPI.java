@@ -21,13 +21,15 @@ import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 /**
  * <h1>Classe responsavel pela interação com a API</h1>
  * 
- * <p>Controller que interage com a API,
- * expondo os atributos necessários do
- * {@link CargoModel}</p>
+ * <p>
+ * Controller que interage com a API, expondo os atributos necessários do
+ * {@link CargoModel}
+ * </p>
  * 
  * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
  * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
- * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
+ * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+ *         - Sprint 6
  *
  * @see CargoModel
  */
@@ -36,23 +38,24 @@ import br.com.proway.senior.cargosESalarios.model.DTO.CargoModelDTO;
 public class CargoControllerAPI {
 
 	CargoController cargoController = new CargoController();
-	
+
 	/**
 	 * <h1>Inserir um {@link CargoModel}.</h1>
 	 * 
-	 * <p>Recebe um {@link CargoModel} e 
-	 * usa o {@link CargoController} para inserir
-	 * no banco.</p>
+	 * <p>
+	 * Recebe um {@link CargoModel} e usa o {@link CargoController} para inserir no
+	 * banco.
+	 * </p>
 	 * 
-	 * @param cargoModel {@link CargoModel} - Referente ao
-	 * {@link CargoModel} informado
+	 * @param cargoModel {@link CargoModel} - Referente ao {@link CargoModel}
+	 *                   informado
 	 * 
-	 * @return Integer - Referente ao Id do {@link CargoModel}
-	 * casdastrado
+	 * @return Integer - Referente ao Id do {@link CargoModel} casdastrado
 	 * 
 	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
 	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
-	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+	 *         - Sprint 6
 	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong>
 	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
 	 * 
@@ -66,25 +69,26 @@ public class CargoControllerAPI {
 			return ResponseEntity.ok(cargoId);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Confira a sintaxe do JSON no corpo da requisição!");
-		}		
+		}
 	}
-	
+
 	/**
 	 * <h1>Deletar {@link CargoModel}.</h1>
 	 * 
-	 * <p>Recebe um id delete um {@link CargoModel}
-	 * usando o {@link CargoController}.</p>
+	 * <p>
+	 * Recebe um id delete um {@link CargoModel} usando o {@link CargoController}.
+	 * </p>
 	 * 
 	 * @param idCargo Integer - Referente ao id informado
 	 * 
-	 * @return boolean - true caso de certo, false caso
-	 * contrário
+	 * @return boolean - true caso de certo, false caso contrário
 	 * 
 	 * @throws Exception - Caso de errado
 	 * 
 	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
 	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
-	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+	 *         - Sprint 6
 	 * @author Bruno Marques <strong>bruno.marques@senior.com.br</strong>
 	 * @author Vanderlei Kleinschmidt <strong>vanderlei.klein@senior.com.br</strong>
 	 * 
@@ -97,22 +101,23 @@ public class CargoControllerAPI {
 			boolean deletou = cargoController.deletarCargoPorID(idCargo);
 			return ResponseEntity.ok(deletou);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
-		+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+			return ResponseEntity.badRequest()
+					.body("Objeto não encontrado! Id: " + idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
 		}
 	}
-	
+
 	/**
 	 * <h1>Atualiza um {@link CargoModel}.</h1>
 	 * 
-	 * <p>Rece um id e um {@link CargoModel}
-	 * e usa o {@link CargoController} para
-	 * atualizar.</p>
+	 * <p>
+	 * Rece um id e um {@link CargoModel} e usa o {@link CargoController} para
+	 * atualizar.
+	 * </p>
 	 * 
-	 * @param idCargo Integer - Referente ao id informado
+	 * @param idCargo    Integer - Referente ao id informado
 	 * @param cargoModel {@link CargoModel} - Referente ao {@link CargoModel}
-	 * informado
-	 *  
+	 *                   informado
+	 * 
 	 * @return boolean - true caso de certo, false caso contrário
 	 * 
 	 * @throws Exception - Caso alguma coisa de errado
@@ -121,21 +126,24 @@ public class CargoControllerAPI {
 	 * @see CargoController
 	 */
 	@PutMapping("/cargos/{idCargo}")
-	public ResponseEntity<?> atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel) throws Exception {
+	public ResponseEntity<?> atualizarCargo(@PathVariable Integer idCargo, @RequestBody CargoModel cargoModel)
+			throws Exception {
 		try {
 			boolean atualizou = cargoController.atualizarCargo(idCargo, cargoModel);
 			return ResponseEntity.ok(atualizou);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Objeto não encontrado! Id: " 
-					+ idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
+			return ResponseEntity.badRequest()
+					.body("Objeto não encontrado! Id: " + idCargo + ", Tipo: " + CargoModel.class.getSimpleName());
 		}
 	}
-	
+
 	/**
-	 * <h1>Método que gera um CargoModelDTO.</h1> 
+	 * <h1>Método que gera um CargoModelDTO.</h1>
 	 * 
-	 * <p> Recebe um id de um {@link CargoModel}
-	 * e busca o registro do mesmo no banco de dados.</p>
+	 * <p>
+	 * Recebe um id de um {@link CargoModel} e busca o registro do mesmo no banco de
+	 * dados.
+	 * </p>
 	 * 
 	 * @param idCargo int - Referente ao id do {@link CargoModel}
 	 * 
@@ -143,8 +151,9 @@ public class CargoControllerAPI {
 	 * 
 	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
 	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
-	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
-	 * @throws Exception 
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+	 *         - Sprint 6
+	 * @throws Exception
 	 * 
 	 * @see CargoModel
 	 * @see CargoModelDTO
@@ -152,31 +161,31 @@ public class CargoControllerAPI {
 	@GetMapping("/cargos/{idCargo}")
 	public ResponseEntity<?> buscarPorID(@PathVariable Integer idCargo) throws Exception {
 		try {
-			CargoModel cargo = cargoController.buscarCargoPorID(idCargo);
+			CargoModelDTO cargo = new CargoModelDTO(cargoController.buscarCargoPorID(idCargo));
 			return ResponseEntity.ok(cargo);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao ha cargo cadastrado com este ID");
 		}
 	}
-	
-	
+
 	/**
 	 * <h1>Busca todos os {@link CargoModelDTO}</h1>
 	 * 
-	 * <p>Busca todos os {@link CargoModelDTO}, e
-	 * coloca-los em uma lista. Retorna essa lista
-	 * ao final da operação.</p>
+	 * <p>
+	 * Busca todos os {@link CargoModelDTO}, e coloca-los em uma lista. Retorna essa
+	 * lista ao final da operação.
+	 * </p>
 	 * 
-	 * @return List<CargoModelDTO> - Referente aos {@link CargoModelDTO}
-	 * encontrados
+	 * @return List<CargoModelDTO> - Referente aos {@link CargoModelDTO} encontrados
 	 * 
 	 * @author Lucas Ivan <strong>lucas.ivan@senior.com.br</strong> - Sprint 6
 	 * @author Lucas Nunes <strong>lucas.nunes@senior.com.br</strong> - Sprint 6
-	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong> - Sprint 6 
+	 * @author Vitor Nathan Goncalves <strong>vitor.goncalves@senior.com.br</strong>
+	 *         - Sprint 6
 	 * 
 	 * @see CargoModelDTO
 	 */
-	@GetMapping("/cargos")
+	@GetMapping("/cargos/all")
 	public ResponseEntity<?> buscarTodos() {
 		List<CargoModelDTO> cargosDTO = new ArrayList<CargoModelDTO>();
 		for (CargoModel cargoModel : cargoController.buscarTodosCargos()) {
@@ -188,21 +197,20 @@ public class CargoControllerAPI {
 		return ResponseEntity.ok(cargosDTO);
 	}
 
-	
 	/**
 	 * <h1>Busca {@link CargoModelDTO} pelo nome.</h1>
 	 * 
-	 * <p>Recebe um nome e exibe os 
-	 * {@link CargoModelDTO} referente a esse nome.
-	 * Retorna um {@link ArrayList} {@link CargoModelDTO}
-	 * com todos os {@link CargoModelDTO} encontrados
-	 * com o nome informado. Faz isso atráves do
-	 * {@link CargoController#buscarCargoPorNomeCargo(String)}.</p>
+	 * <p>
+	 * Recebe um nome e exibe os {@link CargoModelDTO} referente a esse nome.
+	 * Retorna um {@link ArrayList} {@link CargoModelDTO} com todos os
+	 * {@link CargoModelDTO} encontrados com o nome informado. Faz isso atráves do
+	 * {@link CargoController#buscarCargoPorNomeCargo(String)}.
+	 * </p>
 	 * 
 	 * @param nome String - Referente ao nome informado
 	 * 
-	 * @return {@link ArrayList} {@link CargoModelDTO} - Referente
-	 * a todos os {@link CargoModelDTO} encontrados
+	 * @return {@link ArrayList} {@link CargoModelDTO} - Referente a todos os
+	 *         {@link CargoModelDTO} encontrados
 	 * 
 	 * @throws Exception - Caso o nome for inválido
 	 * 
@@ -212,32 +220,31 @@ public class CargoControllerAPI {
 	 * @version sprint7
 	 * 
 	 * @see CargoModelDTO
-	 * @see CargoController#buscarCargoPorNomeCargo(String)
-	 * /cargo?nome=programador
+	 * @see CargoController#buscarCargoPorNomeCargo(String) /cargo?nome=programador
 	 */
-	@GetMapping("/cargos/")
+	@GetMapping("/cargos")
 	public ResponseEntity<?> buscarCargosPeloNome(@RequestParam String nome) throws Exception {
 
 		// Caso o usuario nao insira nome
-		if (nome.equals(null)) {
+		if (nome == null) {
 			return buscarTodos();
 		}
 
 		try {
 			ArrayList<CargoModelDTO> listaCargosModelDTO = new ArrayList<>();
-			
+
 			for (CargoModel cargoModel : cargoController.buscarCargoPorNomeCargo(nome)) {
 				listaCargosModelDTO.add(new CargoModelDTO(cargoModel));
 			}
-			
+
 			if (listaCargosModelDTO.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O nome informado eh invalido");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foram encontrados cargos com o nome informado");
 			}
-			
+
 			return ResponseEntity.ok(listaCargosModelDTO);
-		
+
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O nome informado eh invalido");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O nome informado é invalido");
 		}
 	}
 }
