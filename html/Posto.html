@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Cargo.css">
+    <link rel="stylesheet" href="css/style.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -24,9 +24,12 @@
                     <div class="col-sm-6">
                         <h2>Lista de <b>Postos de Trabalho</b></h2>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="#cadastrarPosto" class="btn btn-success" data-toggle="modal"><i
-                                class="material-icons">&#xE147;</i> <span>Criar novo posto de trabalho</span></a>
+                    <div class="col-sm-6" style="display: flex; justify-content: flex-end;">
+                        <form class="" style="display: flex;">
+                            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+                            <button type="button" class="btn btn-light" style="background: #0facb8;"><i class="material-icons"
+                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -108,17 +111,24 @@
 
 
 
-            <div class="clearfix">
-                <div class="hint-text">Mostrando <b>5</b> de <b>25</b> postos</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Anterior</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-                </ul>
+            <div class="centralizar_horizontal">
+                <div class="hint-text">Mostrando <b>5</b> de <b>25</b> cargos</div>
+                <div class="clearfix">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Anterior</a></li>
+                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+                    </ul>
+                </div>
+                <a href="#cadastrarPosto" class="btn btn-success" data-toggle="modal">
+                    <div class="centralizar_vertical">
+                        <i class="material-icons">&#xE147;</i> &nbsp; Criar novo posto de trabalho
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -145,7 +155,8 @@
 
                         <div class="form-group">
                             <label for="horas_mes" class="form-label">Salário (R$):</label>
-                            <input type="number" step="0.01" class="form-control" name="horas_mes" placeholder="Ex.: 2500,00" min="0" required>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes"
+                                placeholder="Ex.: 2500,00" min="0" required>
                         </div>
 
                         <div class="form-group">
@@ -169,7 +180,7 @@
                                 <option value="">Recursos Humanos</option>
                             </select>
                             <a href="#cadastrarSetor" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
+                                    data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
                         </div>
 
 
@@ -182,7 +193,7 @@
                                 <option value="">Pleno</option>
                             </select>
                             <a href="#cadastrarNivel" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo Nível"></a>
+                                    data-dismiss="modal" class="btn btn-success" value="Novo Nível"></a>
                         </div>
 
                     </div>
@@ -210,44 +221,42 @@
                         <div class="form-group">
                             <label for="nome_posto" class="form-label">Nome:</label>
                             <input type="text" class="form-control" id="nome_posto"
-                                placeholder="Ex.: Programador Junior - Desenvolvimento WEB" required>
+                                value="Pessoa desenvolvedora Junior - Desenvolvimento WEB" required>
                         </div>
 
                         <div class="form-group">
                             <label for="horas_mes" class="form-label">Salário (R$):</label>
-                            <input type="number" step="0.01" class="form-control" name="horas_mes" placeholder="Ex.: 2500,00" min="0" required>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes" value="2500.00"
+                                min="0" required>
                         </div>
 
                         <div class="form-group">
                             <label for="cargo" class="form-label">Cargo</label>
                             <select name="cargo" class="form-control" required>
-                                <option selected disabled value="">Selecione...</option>
                                 <option value="">Auxiliar de enfermagem</option>
                                 <option value="">Fonoaudiólogo</option>
                                 <option value="">Médico dermatologista</option>
-                                <option value="">Desenvolvedor de TI</option>
+                                <option selected value="">Pessoa Desenvolvedora</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="setor" class="form-label">Setor</label>
                             <select name="setor" class="form-control" required>
-                                <option selected disabled value="">Selecione...</option>
-                                <option value="">Desenvolvimento WEB</option>
+                                <option selected value="">Desenvolvimento WEB</option>
                                 <option value="">Desenvolvimento MOBILE</option>
                                 <option value="">Laboratório de Qualidade</option>
                                 <option value="">Recursos Humanos</option>
                             </select>
                             <a href="#cadastrarSetor" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
+                                    data-dismiss="modal" class="btn btn-success" value="Novo Setor"></a>
                         </div>
 
 
                         <div class="form-group">
                             <label for="nível" class="form-label">Nível</label>
                             <select name="nível" class="form-control" required>
-                                <option selected disabled value="">Selecione...</option>
-                                <option value="">Júnior</option>
+                                <option selected value="">Júnior</option>
                                 <option value="">Senior</option>
                                 <option value="">Pleno</option>
                             </select>
@@ -313,7 +322,8 @@
 
                         <div class="form-group">
                             <label for="horas_mes" class="form-label">Salário (R$):</label>
-                            <input type="number" step="0.01" class="form-control" name="horas_mes" value="2500.00" min="0" disabled>
+                            <input type="number" step="0.01" class="form-control" name="horas_mes" value="2500.00"
+                                min="0" disabled>
                         </div>
 
                         <div class="form-group">
@@ -353,7 +363,7 @@
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                         <a href="#editarPosto" class="edit" data-toggle="modal"><input type="submit"
-                            data-dismiss="modal" class="btn btn-success" value="Editar"></a>                        
+                                data-dismiss="modal" class="btn btn-success" value="Editar"></a>
                     </div>
                 </form>
 

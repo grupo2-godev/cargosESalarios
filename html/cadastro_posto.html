@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro Posto</title>
+    </head>
+
+    <body style="background-color: rgb(170, 231, 255);">
+        <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Cadastro Posto</h1>
+
+        <fieldset style="width: 600px;border-color: black; border-width: 4px; border-radius: 10px;">
+            <legend style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 16pt;">Novo Posto</legend>
+            <form method="POST" action="/postos">
+                <label for="nomePosto">Nome</label>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <label for="salarioPosto">Salário</label>
+
+                <br>
+
+                <input type="text" name="nomePosto" id="nomePosto" placeholder="Nome do Posto" required>&emsp;
+                <input placeholder="R$" type="number" name="salarioPosto" id="salarioPosto" placeholder="Salário do Posto">
+                
+                <br>
+                <br>
+
+                <label for="cargoPosto">Cargo</label>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <label for="setorPosto">Setor</label>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                <label for="nivelPosto">Nível</label>
+
+                <br>
+                    
+                <select name="cargoPosto" id="cargoPosto">
+                    <option value="selecione">Selecione</option>
+                    <option value="desenvolvedorFullStack">Dev.Full Stack</option>
+                    <option value="desenvolvedorBackEnd">Dev.Back-end</option>
+                    <option value="desenvolvedorFrontEnd">Dev.Front-end &emsp;&emsp;&emsp;&emsp;</option>
+                </select>&emsp;
+
+                <select name="setorPosto" id="setorPosto">
+                    <option value="selecione">Selecione</option>
+                    <option value="desenvolvimento">Desenvolvimento</option>
+                    <option value="rh">Recursos Humanos</option>
+                    <option value="analista">Analista &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</option>
+                </select>&emsp;
+
+                <select name="nivelPosto" id="nivelPosto">
+                    <option value="selecione">Selecione</option>
+                    <option value="iniciante">Iniciante</option>
+                    <option value="medio">Médio</option>
+                    <option value="avançado">Avançado&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</option>
+                </select>&emsp;
+
+                <br>
+                <br>
+
+                <div style = "display: flex; width: 100%; justify-content: space-between;">
+                    <button style="border-radius: 5px; background-color: red; color: white; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 12pt;">Cancelar</button>
+                    <button style="border-radius: 5px; background-color: green; color: white; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 12pt;">Salvar</button>
+                </div>
+            </form>
+        </fieldset>
+
+    </body>
+</html>

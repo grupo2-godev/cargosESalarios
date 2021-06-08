@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Cargo.css">
+    <link rel="stylesheet" href="css/style.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -24,9 +24,12 @@
                     <div class="col-sm-6">
                         <h2>Lista de <b>Cargos</b></h2>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="#cadastrarCargo" class="btn btn-success" data-toggle="modal"><i
-                                class="material-icons">&#xE147;</i> <span>Criar novo cargo</span></a>
+                    <div class="col-sm-6" style="display: flex; justify-content: flex-end;">
+                        <form class="" style="display: flex;">
+                            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+                            <button type="button" class="btn btn-light" style="background: #0facb8;"><i class="material-icons"
+                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -45,7 +48,7 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Pessoa desenvolvedora Junior</td>
+                        <td>Pessoa desenvolvedora</td>
                         <td>01/06/2021</td>
                         <td>Ativo</td>
                         <td>
@@ -59,7 +62,7 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Pessoa desenvolvedora Senior</td>
+                        <td>Pessoa desenvolvedora</td>
                         <td>01/06/2021</td>
                         <td>Ativo</td>
                         <td>
@@ -74,7 +77,7 @@
                     <tr>
 
                         <td>3</td>
-                        <td>Pessoa desenvolvedora Pleno</td>
+                        <td>Pessoa desenvolvedora</td>
                         <td>01/06/2021</td>
                         <td>Inativo</td>
                         <td>
@@ -89,7 +92,7 @@
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>Pessoa recrutadora RH</td>
+                        <td>Pessoa recrutadora</td>
                         <td>01/06/2021</td>
                         <td>Ativo</td>
                         <td>
@@ -118,23 +121,30 @@
                 </tbody>
             </table>
 
-
-
-            <div class="clearfix">
+            <div class="centralizar_horizontal">
                 <div class="hint-text">Mostrando <b>5</b> de <b>25</b> cargos</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Anterior</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-                </ul>
+                <div class="clearfix">
+
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Anterior</a></li>
+                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+                    </ul>
+                </div>
+
+
+                <a href="#cadastrarCargo" class="btn btn-success" data-toggle="modal">
+                    <div class="centralizar_vertical">
+                        <i class="material-icons">&#xE147;</i> &nbsp; Criar novo cargo
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-
 
     <!-- Edit Modal HTML -->
     <div id="cadastrarCargo" class="modal fade">
@@ -152,7 +162,7 @@
                         <div class="form-group">
                             <label for="nome_cargo" class="form-label">Nome:</label>
                             <input type="text" class="form-control" id="nome_cargo"
-                                placeholder="Ex.: Desenvolvedor" required>
+                                placeholder="Ex.: Pessoa Desenvolvedora" required>
                         </div>
 
                         <div class="form-group">
@@ -196,7 +206,7 @@
                                 <option value="">08320 - Desenvolvedor de TI</option>
                             </select>
                             <a href="#cadastrarCBO1994" class="edit" data-toggle="modal"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>
+                                    data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>
                         </div>
 
                         <div class="form-group">
@@ -230,36 +240,33 @@
 
                         <div class="form-group">
                             <label for="nome_cargo" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="nome_cargo"
-
-                                placeholder="Ex.: Desenvolvedor" required>
+                            <input type="text" class="form-control" id="nome_cargo" value="Pessoa Desenvolvedora"
+                                required>
                         </div>
 
                         <div class="form-group">
                             <label for="horas_mes" class="form-label">Horas/mês:</label>
-                            <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240" min="0"
-                                max="730" required>
+                            <input type="number" class="form-control" name="horas_mes" value="240" min="0" max="730"
+                                required>
                         </div>
 
                         <div class="form-group">
                             <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                            <input type="text" class="form-control" name="grau_instrucao"
-                                placeholder="Ex.: Superior completo" required>
+                            <input type="text" class="form-control" name="grau_instrucao" value="Superior completo"
+                                required>
                         </div>
 
                         <div class="form-group">
                             <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                            <input type="text" class="form-control" name="experiencia_minima" placeholder="Ex.: 2 anos"
-                                required>
+                            <input type="text" class="form-control" name="experiencia_minima" value="2 anos" required>
                         </div>
                         <div class="form-group">
                             <label for="CBO2002" class="form-label">CBO2002</label>
                             <select name="CBO2002" class="form-control" required>
-                                <option selected disabled value="">Selecione...</option>
                                 <option value="">322230 - Auxiliar de enfermagem</option>
                                 <option value="">223820 - Fonoaudiólogo</option>
                                 <option value="">225135 - Médico dermatologista</option>
-                                <option value="">212405 - Desenvolvedor de TI</option>
+                                <option selected value="">212405 - Desenvolvedor de TI</option>
                             </select>
                         </div>
 
@@ -267,19 +274,18 @@
 
                             <label for="CBO1994" class="form-label">CBO1994</label>
                             <select name="CBO2002" class="form-control" required>
-                                <option selected disabled value="">Selecione...</option>
                                 <option value="">57210 - Auxiliar de enfermagem</option>
                                 <option value="">07925 - Fonoaudiólogo</option>
                                 <option value="">06119 - Médico dermatologista</option>
-                                <option value="">08320 - Desenvolvedor de TI</option>
+                                <option selected value="">08320 - Desenvolvedor de TI</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="atribucoes" class="form-label">Atribuições:</label><br>
                             <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                                placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
-                                required></textarea>
+                                value="Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
+                                required>Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end.</textarea>
                         </div>
 
                     </div>
@@ -329,9 +335,7 @@
                         <div class="form-group">
 
                             <label for="nome_cargo" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="nome_cargo" value="Fonoaudiólogo"
-
-                                disabled>
+                            <input type="text" class="form-control" id="nome_cargo" value="Fonoaudiólogo" disabled>
                         </div>
 
                         <div class="form-group">
@@ -389,7 +393,7 @@
                         <div class="form-group">
                             <label for="atribucoes" class="form-label">Atribuições:</label><br>
                             <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                                value="Fazer exames de audiometria." disabled></textarea>
+                                value="Fazer exames de audiometria." disabled>Fazer exames de audiometria.</textarea>
                         </div>
 
                     </div>
@@ -421,14 +425,14 @@
 
                         <div class="form-group">
                             <label for="codigoCBO1994" class="form-label">Código:</label>
-                            <input type="number" class="form-control" name="codigoCBO1994" placeholder="Ex.: 24000 (cinco dígitos)" min="0"
-                                max="99999" required>
+                            <input type="number" class="form-control" name="codigoCBO1994"
+                                placeholder="Ex.: 24000 (cinco dígitos)" min="0" max="99999" required>
                         </div>
 
                         <div class="form-group">
                             <label for="descricaoCBO1994" class="form-label">Descrição:</label>
-                            <input type="text" class="form-control" name="descricaoCBO1994" placeholder="Ex.: Técnico de informática"
-                                required>
+                            <input type="text" class="form-control" name="descricaoCBO1994"
+                                placeholder="Ex.: Técnico de informática" required>
                         </div>
 
                         <div class="form-group">
@@ -475,14 +479,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="codigoCBO2002" class="form-label">Código:</label>
-                            <input type="number" class="form-control" name="codigoCBO2002" placeholder="Ex.: 240010 (seis dígitos)" min="0"
-                                max="999999" required>
+                            <input type="number" class="form-control" name="codigoCBO2002"
+                                placeholder="Ex.: 240010 (seis dígitos)" min="0" max="999999" required>
                         </div>
 
                         <div class="form-group">
                             <label for="descricaoCBO2002" class="form-label">Descrição:</label>
-                            <input type="text" class="form-control" name="descricaoCBO2002" placeholder="Ex.: Técnico de informática"
-                                required>
+                            <input type="text" class="form-control" name="descricaoCBO2002"
+                                placeholder="Ex.: Técnico de informática" required>
                         </div>
 
                         <div class="form-group">
