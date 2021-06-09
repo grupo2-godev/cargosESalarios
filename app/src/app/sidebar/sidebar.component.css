@@ -1,0 +1,32 @@
+#menuHamburguer a {
+    padding: 20px;
+    text-align: center;
+}
+
+#menuHamburguer a:hover{
+    background-color: #303030;
+    border-radius: 0px 10px 10px 0px;
+}
+
+#menuHamburguer {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+}
+
+#divIcones{
+    display: flex;
+    flex-direction: column;
+    background-color: #454545;
+    width: 80px;
+    height: calc(100vh - 80px);
+}
+
+.icones{
+    transition: width 2s;
+    z-index: 1;
+}
+
+.icones:hover{
+    width: 90px;
+}
