@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,14 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.proway.senior.cargosESalarios.controller.CBO1994Controller;
-import br.com.proway.senior.cargosESalarios.controller.SetorController;
 import br.com.proway.senior.cargosESalarios.model.CBO1994Model;
-import br.com.proway.senior.cargosESalarios.model.SetorModel;
 import br.com.proway.senior.cargosESalarios.model.DAO.CBO1994DAO;
-import br.com.proway.senior.cargosESalarios.utilidades.Insalubridade;
-import br.com.proway.senior.cargosESalarios.utilidades.Periculosidade;
 
 @RestController
+@CrossOrigin
 public class CBO1994ControllerAPI {
 	
 	CBO1994Controller cbo1994Controller = CBO1994Controller.getInstancia();
