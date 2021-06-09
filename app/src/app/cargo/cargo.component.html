@@ -127,12 +127,12 @@
     </div>
 </div>
 
-<!-- Edit Modal HTML -->
+<!--------------------------- Cadastrar --------------------------->
 <div id="cadastrarCargo" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Cadastrar Cargo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -141,58 +141,58 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="nome_cargo" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome_cargo"
+                        <label for="nomeCargo" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" formControlName="nomeCargo"
                             placeholder="Ex.: Pessoa Desenvolvedora" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="horas_mes" class="form-label">Horas/mês:</label>
-                        <input type="number" class="form-control" name="horas_mes" placeholder="Ex.: 240" min="0"
+                        <label for="horasMes" class="form-label">Horas/mês:</label>
+                        <input type="number" class="form-control" formControlName="horasMes" placeholder="Ex.: 240" min="0"
                             max="730" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                        <input type="text" class="form-control" name="grau_instrucao"
+                        <label for="grauInstrucao" class="form-label">Grau de Instrução:</label>
+                        <input type="text" class="form-control" formControlName="grauInstrucao"
                             placeholder="Ex.: Superior completo" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                        <input type="text" class="form-control" name="experiencia_minima" placeholder="Ex.: 2 anos"
+                        <label for="experienciaMinima" class="form-label">Experiência mínima:</label>
+                        <input type="text" class="form-control" formControlName="experienciaMinima" placeholder="Ex.: 2 anos"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label for="CBO2002" class="form-label">CBO2002</label>
-                        <select name="CBO2002" class="form-control" required>
-                            <option selected disabled value="">Selecione...</option>
+                        <label for="cbo2002" class="form-label">CBO2002</label>
+                        <!-- <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
+                            <option *ngFor="let cbo of cbos94" value="cbo.">Selecione...</option>
                             <option value="">322230 - Auxiliar de enfermagem</option>
                             <option value="">223820 - Fonoaudiólogo</option>
                             <option value="">225135 - Médico dermatologista</option>
                             <option value="">212405 - Desenvolvedor de TI</option>
-                        </select>
+                        </select> -->
                         <a href="#cadastrarCBO2002" class="edit" data-toggle="modal"><input type="submit"
                                 data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
                     </div>
 
                     <div class="form-group">
-                        <label for="CBO1994" class="form-label">CBO1994</label>
-                        <select name="CBO1994" class="form-control" required>
+                        <label for="cbo94" class="form-label">CBO1994</label>
+                        <!-- <select name="cbo94" class="form-control" formControlName="cbo94" required>
                             <option selected disabled value="">Selecione...</option>
                             <option value="">57210 - Auxiliar de enfermagem</option>
                             <option value="">07925 - Fonoaudiólogo</option>
                             <option value="">06119 - Médico dermatologista</option>
                             <option value="">08320 - Desenvolvedor de TI</option>
-                        </select>
+                        </select> -->
                         <a href="#cadastrarCBO1994" class="edit" data-toggle="modal"><input type="submit"
                                 data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>
                     </div>
 
                     <div class="form-group">
-                        <label for="atribucoes" class="form-label">Atribuições:</label><br>
-                        <textarea name="atribucoes" rows="4" cols="50" class="form-control"
+                        <label for="atribuicoes" class="form-label">Atribuições:</label><br>
+                        <textarea name="atribuicoes" rows="4" cols="50" class="form-control" formControlName="atribuicoes"
                             placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
                             required></textarea>
                     </div>
@@ -200,18 +200,19 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                    <input type="submit" class="btn btn-success" value="Cadastrar">
+                    <button type="submit" class="btn btn-success" (click)="create()">Cadastrar</button>
                 </div>
             </form>
 
         </div>
     </div>
 </div>
-<!-- Edit Modal HTML -->
+
+<!--------------------------- Editar --------------------------->
 <div id="editarCargo" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Editar Cargo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -278,11 +279,12 @@
         </div>
     </div>
 </div>
-<!-- Delete Modal HTML -->
+
+<!--------------------------- Deletar --------------------------->
 <div id="deletarCargo" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Deletar Cargo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -300,12 +302,12 @@
     </div>
 </div>
 
-<!-- Edit Modal HTML -->
+<!--------------------------- Visualizar --------------------------->
 <div id="visualizarCargo" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Visualizar Cargo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -391,12 +393,12 @@
 </div>
 
 
-<!-- Edit Modal HTML -->
+<!--------------------------- Cadastrar CBO1994 --------------------------->
 <div id="cadastrarCBO1994" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Cadastrar CBO1994</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -446,12 +448,12 @@
     </div>
 </div>
 
-<!-- Edit Modal HTML ----------------------------------------------------------------------------------------------------------------------------------->
+<!--------------------------- Cadastrar CBO2002 --------------------------->
 <div id="cadastrarCBO2002" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form>
+            <form [formGroup]="form">
                 <div class="modal-header">
                     <h4 class="modal-title">Cadastrar CBO2002</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

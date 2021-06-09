@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment'
 })
 export class CargoService {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: HttpClient) { }
 
   get(): Observable<Cargo[]> {
     return this.http.get<Cargo[]>(environment.baseUrl + 'cargos/all');
@@ -18,6 +18,10 @@ export class CargoService {
 
   getById(id: number): Observable<Cargo> {
     return this.http.get<Cargo>(environment.baseUrl + 'cargos/'+id);
+  }
+
+  getByName(nome: String): Observable<Cargo> {
+    return this.http.get<Cargo>(environment.baseUrl + 'cargos?nome='+nome);
   }
 
   post(cargo: Cargo): Observable<Cargo[]> {

@@ -541,4 +541,15 @@ public class CargoModel {
 	public void setIdPermissao(Integer idPermissao) {
 		this.idPermissao = idPermissao;
 	}
+
+	@Override
+	public String toString() {
+		return "CargoModel [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", dataCadastro=" + dataCadastro
+				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
+				+ ", horaMes=" + horaMes + ", grauInstrucao=" + grauInstrucao + ", experienciaMinima="
+				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", status=" + status + ", idPermissao="
+				+ idPermissao + "]";
+	}
+	
+	
 }

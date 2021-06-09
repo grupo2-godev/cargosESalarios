@@ -66,6 +66,8 @@ public class CargoControllerAPI {
 	 */
 	@PostMapping("/cargos")
 	public ResponseEntity<?> postCargo(@RequestBody CargoModel cargoModel) {
+		System.err.print(cargoModel.toString());
+		
 		try {
 			Integer cargoId = cargoController.cadastrarCargo(cargoModel);
 			return ResponseEntity.ok(cargoId);

@@ -109,13 +109,14 @@ public class CargoController {
 	public Integer cadastrarCargo(CargoModel cargo) {
 
 		try {
-			Validadores.validacaoCargo(cargo);
+			//Validadores.validacaoCargo(cargo);
 
 			Integer idCargoCadastrado = cargoDAO.criar(cargo);
 			return idCargoCadastrado;
 
 		} catch (Exception e) {
-			return null;
+			System.err.println(e.getMessage());
+			return null; // retorna erro
 		}
 	}
 

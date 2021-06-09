@@ -6,15 +6,15 @@ import { GrauInstrucao } from 'src/app/model/grauinstrucao/grauinstrucao';
 
 export interface Cargo {
     idCargo?: number;
-	nomeCargo: String;
-	 dataCadastro: String;
-	 dataUltimaRevisao: String;
-	 cbo2002: CBO2002;
-	 cbo94: CBO1994;
-	 horaMes: HorasMes;
-	 grauInstrucao: GrauInstrucao;
-	 experienciaMinima: String;
-	 atribuicoes: String;
-	 status: boolean;
-	 idPermissao: number;
+    nomeCargo: String;
+    dataCadastro: String;
+    dataUltimaRevisao: String;
+    cbo2002: CBO2002;
+    cbo94: CBO1994;
+    horaMes: HorasMes;
+    grauInstrucao: GrauInstrucao;
+    experienciaMinima: String;
+    atribuicoes: String;
+    status: boolean;
+    idPermissao: number;
 }
