@@ -1,0 +1,28 @@
+#divCabecalho{
+    height: 80px;
+    background-color: #0facb8;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#imagemSenior{
+    height: 50px;
+    width: 150px;
+}
+
+#imagemSenior:hover {
+    width: 155px;
+    transition: 0.4s;
+}
+
+#divImagemSenior{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    align-self: flex-start;
+    width: 400px;
+}
