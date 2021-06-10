@@ -112,7 +112,7 @@ public class CargoControllerAPITest {
 		assertTrue(cargoDTO.getCbo94().equals(cbo1994));
 		assertTrue(cargoDTO.getCbo2002().equals(cbo2002));
 		assertTrue(cargoDTO.getGrauInstrucao().equals(grauInstrucao));
-		assertTrue(cargoDTO.getHoraMes().equals(horasMes));
+		assertTrue(cargoDTO.getHorasMes().equals(horasMes));
 	}
 	
 	@Test

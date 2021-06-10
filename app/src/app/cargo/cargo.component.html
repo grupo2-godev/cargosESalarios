@@ -115,7 +115,7 @@
                         <div style="display: flex;">
                             <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
                                 <option selected disabled value="">Selecione...</option>
-                                <option *ngFor="let cbo2002 of cbos02" [ngValue]="cbo2002.codigoCBO2002">{{cbo2002.codigoCBO2002}} - {{cbo2002.descricao}}</option>
+                                <option *ngFor="let cbo2002 of cbos02" [ngValue]="cbo2002">{{cbo2002.codigoCBO2002}} - {{cbo2002.descricao}}</option>
                             </select>
                             <a routerLink="/cbo2002" class="edit" style="margin-left: 10px;"><input type="submit"
                                     data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
@@ -259,16 +259,15 @@
                 </div>
 
                 <div class="modal-body">
-
                         
                     <div class="form-group">
                         <label for="nomeCargo" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nomeCargo" value="{{cargoModal.nomeCargo}}" disabled>
+                        <input type="text" class="form-control" name="nomeCargo" value="{{cargoModal.nomeCargo}}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="horaMes" class="form-label">Horas/mês:</label>
-                        <input type="text" class="form-control" id="horaMes" value="{{cargoModal.horaMes.quantidade}}" disabled>
+                        <label for="horasMes" class="form-label">Horas/mês:</label>
+                        <input type="text" class="form-control" name="horasMes" value="{{cargoModal.horasMes.quantidade}}" disabled>
                     </div>
 
                     <div class="form-group">
@@ -293,24 +292,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="data_cadastro" class="form-label">Data de Cadastro:</label>
-                        <input type="text" class="form-control" name="data_cadastro" value="31/05/2021" disabled>
+                        <label for="dataCadastro" class="form-label">Data de Cadastro:</label>
+                        <input type="text" class="form-control" name="dataCadastro" value="{{cargoModal.dataCadastro}}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="ultima_revisao" class="form-label">Última revisão:</label>
-                        <input type="text" class="form-control" name="ultima_revisao" value="01/06/2021" disabled>
+                        <label for="dataUltimaRevisao" class="form-label">Última revisão:</label>
+                        <input type="text" class="form-control" name="dataUltimaRevisao" value="{{cargoModal.dataUltimaRevisao}}" disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="status" class="form-label">Status:</label>
-                        <input type="text" class="form-control" name="status" value="Ativo" disabled>
+                        <input type="text" class="form-control" name="status" value="{{cargoModal.status}}" disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="atribuicoes" class="form-label">Atribuições:</label><br>
-                        <textarea name="atribuicoes" rows="4" cols="50" class="form-control"
-                            value="{{cargoModal.atribuicoes}}" disabled></textarea>
+                        <input type="text" name="atribuicoes" class="form-control"
+                            value="{{cargoModal.atribuicoes}}" disabled>
                     </div>
 
                 </div>

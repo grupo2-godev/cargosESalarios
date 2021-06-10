@@ -133,7 +133,7 @@ public class Validadores {
 			throw new CBO2002NuloException("O cbo2002 não foi informado.");
 		if (Validadores.ehObjetoNulo(cargo.getCbo94()))
 			throw new CBO1994NuloException("O cbo94 não foi informado.");
-		if (Validadores.ehObjetoNulo(cargo.getHoraMes()))
+		if (Validadores.ehObjetoNulo(cargo.getHorasMes()))
 			throw new Exception("A quantidade de horas trabalhadas por mês não pode ser igual a zero.");
 		if (Validadores.ehObjetoNulo(cargo.getGrauInstrucao()))
 			throw new GrauInstrucaoNuloException("O grau de instrução não foi informado.");

@@ -11,7 +11,7 @@ export interface Cargo {
     dataUltimaRevisao: String;
     cbo2002: CBO2002;
     cbo94: CBO1994;
-    horaMes: HorasMes;
+    horasMes: HorasMes;
     grauInstrucao: GrauInstrucao;
     experienciaMinima: String;
     atribuicoes: String;

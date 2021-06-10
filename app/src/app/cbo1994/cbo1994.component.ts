@@ -19,7 +19,7 @@ export class Cbo1994Component implements OnInit {
 
 
   ngOnInit(): void {
-    this.get();
+    //this.get();
 
     this.form = this.formBuilder.group({
       codigo_cbo: ['' , Validators.required],

@@ -21,19 +21,19 @@ import { HoraMesService } from '../services/hora-mes.service';
 export class CargoComponent implements OnInit {
 
   constructor(private cargoService: CargoService,
-              private cbo94Service: Cbo1994Service,
-              private cbo02Service: Cbo2002Service,
-              private horasMesService: HoraMesService,
-              private grauInstrucaoService: GrauInstrucaoService,
-              private router: Router,
-              private formBuilder: FormBuilder,
-              private route: ActivatedRoute) { }
+    private cbo94Service: Cbo1994Service,
+    private cbo02Service: Cbo2002Service,
+    private horasMesService: HoraMesService,
+    private grauInstrucaoService: GrauInstrucaoService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute) { }
 
   form!: FormGroup;
   cargo!: Cargo;
   cargoModal!: Cargo;
   cargos!: Cargo[];
-  cbos94: CBO1994[]=[];
+  cbos94: CBO1994[] = [];
   cbo94!: CBO1994;
   cbos02: CBO2002[] = [];
   cbo2002!: CBO2002;
@@ -45,28 +45,34 @@ export class CargoComponent implements OnInit {
   ngOnInit() {
     this.get();
 
-    this.cbo94Service.get().subscribe(cbos94 => this.cbos94 = cbos94)
-    this.cbo02Service.get().subscribe(cbos02 => this.cbos02 = cbos02)
-    this.horasMesService.get().subscribe(horasMes => this.horasMeses = horasMes)
-    this.grauInstrucaoService.get().subscribe(grauInstrucao => this.grauInstrucoes = grauInstrucao)
-
     this.form = this.formBuilder.group({
       idCargo: [],
       nomeCargo: ['', Validators.required],
       experienciaMinima: ['', Validators.required],
       atribuicoes: ['', Validators.required],
-      horasMes: ['',Validators.required],
-      cbo2002: ['',Validators.required],
-      cbo94: ['',Validators.required],
-      grauInstrucao: ['',Validators.required]
+      horasMes: ['', Validators.required],
+      cbo2002: ['', Validators.required],
+      cbo94: ['', Validators.required],
+      grauInstrucao: ['', Validators.required]
 
     })
   }
 
   get() {
     this.cargoService.get().subscribe(result => {
-      debugger;
       this.cargos = result;
+      this.cbo94Service.get().subscribe(cbos94 => {
+        this.cbos94 = cbos94
+        this.cbo02Service.get().subscribe(cbos02 => {
+          this.cbos02 = cbos02
+          this.horasMesService.get().subscribe(horasMes => {
+            this.horasMeses = horasMes
+            this.grauInstrucaoService.get().subscribe(grauInstrucao => {
+              this.grauInstrucoes = grauInstrucao
+            })
+          })
+        })
+      })
     })
   }
 
@@ -76,7 +82,7 @@ export class CargoComponent implements OnInit {
       this.form.setValue({
         idCargo: this.cargo.idCargo,
         nomeCargo: this.cargo.nomeCargo,
-        horasMes: this.cargo.horaMes,
+        horasMes: this.cargo.horasMes,
         grauInstrucao: this.cargo.grauInstrucao,
         experienciaMinima: this.cargo.experienciaMinima,
         cbo2002: this.cargo.cbo2002,
@@ -97,8 +103,7 @@ export class CargoComponent implements OnInit {
     })
   }
 
-  getModal(cargo : Cargo){
-    debugger;
+  getModal(cargo: Cargo) {
     this.cargoModal = cargo;
   }
 

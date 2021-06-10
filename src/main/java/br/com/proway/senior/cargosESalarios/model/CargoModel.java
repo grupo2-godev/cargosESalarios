@@ -38,7 +38,7 @@ public class CargoModel {
 	private CBO1994Model cbo94;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	private HorasMesModel horaMes;
+	private HorasMesModel horasMes;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private GrauInstrucaoModel grauInstrucao;
@@ -88,7 +88,7 @@ public class CargoModel {
 	 * @param dataUltimaRevisao LocalDateTime - Referente a {@link CargoModel#dataUltimaRevisao} do {@link CargoModel}
 	 * @param cbo2002 {@link CBO2002Model} - Referente ao {@link CargoModel#cbo2002} do {@link CargoModel}
 	 * @param cbo94 {@link CBO1994Model} - Referente ao {@link CargoModel#cbo94} do {@link CargoModel}
-	 * @param horaMes {@link HorasMesModel} - Referente as {@link CargoModel#horaMes} do {@link CargoModel}
+	 * @param horaMes {@link HorasMesModel} - Referente as {@link CargoModel#horasMes} do {@link CargoModel}
 	 * @param grauInstrucao {@link GrauInstrucaoModel} - Referente ao {@link CargoModel#grauInstrucao} do {@link CargoModel}
 	 * @param experienciaMinima String - Referente a {@link CargoModel#experienciaMinima} do {@link CargoModel}
 	 * @param atribuicoes String - Referente as {@link CargoModel#atribuicoes} do {@link CargoModel}
@@ -103,7 +103,7 @@ public class CargoModel {
 	 * @see CargoModel#dataUltimaRevisao
 	 * @see CargoModel#cbo2002
 	 * @see CargoModel#cbo94
-	 * @see CargoModel#horaMes
+	 * @see CargoModel#horasMes
 	 * @see CargoModel#grauInstrucao
 	 * @see CargoModel#experienciaMinima
 	 * @see CargoModel#atribuicoes
@@ -111,14 +111,14 @@ public class CargoModel {
 	 * @see CargoModel#idPermissao
 	 */
 	public CargoModel(String nomeCargo, LocalDateTime dataCadastro, LocalDateTime dataUltimaRevisao,
-			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
+			CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horasMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.dataCadastro = dataCadastro;
 		this.dataUltimaRevisao = dataUltimaRevisao;
 		this.cbo2002 = cbo2002;
 		this.cbo94 = cbo94;
-		this.horaMes = horaMes;
+		this.horasMes = horasMes;
 		this.grauInstrucao = grauInstrucao;
 		this.experienciaMinima = experienciaMinima;
 		this.atribuicoes = atribuicoes;
@@ -126,12 +126,12 @@ public class CargoModel {
 		this.idPermissao = idPermissao;
 	}
 	
-	public CargoModel(String nomeCargo, CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
+	public CargoModel(String nomeCargo, CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horasMes, GrauInstrucaoModel grauInstrucao,
 			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
 		this.nomeCargo = nomeCargo;
 		this.cbo2002 = cbo2002;
 		this.cbo94 = cbo94;
-		this.horaMes = horaMes;
+		this.horasMes = horasMes;
 		this.grauInstrucao = grauInstrucao;
 		this.experienciaMinima = experienciaMinima;
 		this.atribuicoes = atribuicoes;
@@ -348,39 +348,39 @@ public class CargoModel {
 	}
 
 	/**
-	 * <h1>Pega o {@link CargoModel#horaMes}.</h1>
+	 * <h1>Pega o {@link CargoModel#horasMes}.</h1>
 	 * 
-	 * <p>Pega a {@link CargoModel#horaMes}
+	 * <p>Pega a {@link CargoModel#horasMes}
 	 * da classe {@link CargoModel}.</p>
 	 * 
-	 * @return {@link HorasMesModel} - Referente a {@link CargoModel#horaMes} da classe {@link CargoModel}
+	 * @return {@link HorasMesModel} - Referente a {@link CargoModel#horasMes} da classe {@link CargoModel}
 	 * 
 	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
 	 * 
 	 * @see CargoModel
-	 * @see CargoModel#horaMes
+	 * @see CargoModel#horasMes
 	 * @see HorasMesModel
 	 */
-	public HorasMesModel getHoraMes() {
-		return this.horaMes;
+	public HorasMesModel getHorasMes() {
+		return this.horasMes;
 	}
 
 	/**
-	 * <h1>Seta o {@link CargoModel#horaMes}.</h1>
+	 * <h1>Seta o {@link CargoModel#horasMes}.</h1>
 	 * 
-	 * <p>Seta um valor para a {@link CargoModel#horaMes}
+	 * <p>Seta um valor para a {@link CargoModel#horasMes}
 	 * da classe {@link CargoModel}.</p>
 	 * 
-	 * @param horaMes {@link HorasMesModel} - Referente a {@link CargoModel#horaMes} da classe {@link CargoModel}
+	 * @param horaMes {@link HorasMesModel} - Referente a {@link CargoModel#horasMes} da classe {@link CargoModel}
 	 * 
 	 * @author Sprint 6: Lucas Nunes <lucasnunes.ln365@gmail.com>
 	 * 
 	 * @see CargoModel
-	 * @see CargoModel#horaMes
+	 * @see CargoModel#horasMes
 	 * @see HorasMesModel
 	 */
-	public void setHoraMes(HorasMesModel horaMes) {
-		this.horaMes = horaMes;
+	public void setHorasMes(HorasMesModel horasMes) {
+		this.horasMes = horasMes;
 	}
 
 	/**
@@ -559,7 +559,7 @@ public class CargoModel {
 	public String toString() {
 		return "CargoModel [idCargo=" + idCargo + ", nomeCargo=" + nomeCargo + ", dataCadastro=" + dataCadastro
 				+ ", dataUltimaRevisao=" + dataUltimaRevisao + ", cbo2002=" + cbo2002 + ", cbo94=" + cbo94
-				+ ", horaMes=" + horaMes + ", grauInstrucao=" + grauInstrucao + ", experienciaMinima="
+				+ ", horasMes=" + horasMes + ", grauInstrucao=" + grauInstrucao + ", experienciaMinima="
 				+ experienciaMinima + ", atribuicoes=" + atribuicoes + ", status=" + status + ", idPermissao="
 				+ idPermissao + "]";
 	}

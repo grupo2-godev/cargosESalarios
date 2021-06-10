@@ -30,7 +30,7 @@ public class CargoModelDTO {
 	private LocalDateTime dataUltimaRevisao;
 	private CBO2002Model cbo2002;
 	private CBO1994Model cbo94;
-	private HorasMesModel horaMes;
+	private HorasMesModel horasMes;
 	private GrauInstrucaoModel grauInstrucao;
 	private String experienciaMinima;
 	private Boolean status;
@@ -56,7 +56,7 @@ public class CargoModelDTO {
 		this.dataUltimaRevisao = cargoModel.getDataUltimaRevisao();
 		this.cbo2002 = cargoModel.getCbo2002();
 		this.cbo94 = cargoModel.getCbo94();
-		this.horaMes = cargoModel.getHoraMes();
+		this.horasMes = cargoModel.getHorasMes();
 		this.grauInstrucao = cargoModel.getGrauInstrucao();
 		this.experienciaMinima = cargoModel.getExperienciaMinima();
 		this.status = cargoModel.getStatus();
@@ -168,23 +168,23 @@ public class CargoModelDTO {
 	}
 
 	/**
-	 * <h1>Pega o {@link CargoModelDTO#horaMes}.</h1>
+	 * <h1>Pega o {@link CargoModelDTO#horasMes}.</h1>
 	 * 
-	 * <p>Pega a {@link CargoModelDTO#horaMes}
+	 * <p>Pega a {@link CargoModelDTO#horasMes}
 	 * da classe {@link CargoModelDTO}.</p>
 	 * 
-	 * @return {@link HorasMesModel} - Referente a {@link CargoModelDTO#horaMes} da classe {@link CargoModelDTO}
+	 * @return {@link HorasMesModel} - Referente a {@link CargoModelDTO#horasMes} da classe {@link CargoModelDTO}
 	 * 
 	 * @author Lucas Ivan <b>lucas.ivan@senior.com.br</b> - Sprint 6
 	 * @author Lucas Nunes <b>lucas.nunes@senior.com.br</b> - Sprint 6
 	 * @author Vitor Nathan Goncalves <b>vitor.goncalves@senior.com.br</b> - Sprint 6
 	 * 
 	 * @see CargoModelDTO
-	 * @see CargoModelDTO#horaMes
+	 * @see CargoModelDTO#horasMes
 	 * @see HorasMesModel
 	 */
-	public HorasMesModel getHoraMes() {
-		return horaMes;
+	public HorasMesModel getHorasMes() {
+		return horasMes;
 	}
 
 	/**

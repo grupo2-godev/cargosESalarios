@@ -181,7 +181,7 @@ public class CargoControllerTest {
 		cargoNovo.setDataUltimaRevisao(dataUltimaRevisao);
 		cargoNovo.setCbo2002(cbo2002);
 		cargoNovo.setCbo94(cbo1994);
-		cargoNovo.setHoraMes(horasMes);
+		cargoNovo.setHorasMes(horasMes);
 		cargoNovo.setGrauInstrucao(grauInstrucao);
 		cargoNovo.setExperienciaMinima(experienciaMinima);
 		cargoNovo.setAtribuicoes(atribuicoes);

@@ -75,7 +75,7 @@ public class CargoController {
 		cargo.setDataUltimaRevisao(dataUltimaRevisao);
 		cargo.setCbo2002(cbo2002);
 		cargo.setCbo94(cbo94);
-		cargo.setHoraMes(horasMes);
+		cargo.setHorasMes(horasMes);
 		cargo.setGrauInstrucao(grauInstrucao);
 		cargo.setExperienciaMinima(experienciaMinima);
 		cargo.setAtribuicoes(atribuicoes);
