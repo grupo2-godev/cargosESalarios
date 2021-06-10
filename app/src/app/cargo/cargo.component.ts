@@ -31,6 +31,7 @@ export class CargoComponent implements OnInit {
 
   form!: FormGroup;
   cargo!: Cargo;
+  cargoModal!: Cargo;
   cargos!: Cargo[];
   cbos94: CBO1994[]=[];
   cbo94!: CBO1994;
@@ -64,6 +65,7 @@ export class CargoComponent implements OnInit {
 
   get() {
     this.cargoService.get().subscribe(result => {
+      debugger;
       this.cargos = result;
     })
   }
@@ -95,7 +97,10 @@ export class CargoComponent implements OnInit {
     })
   }
 
-
+  getModal(cargo : Cargo){
+    debugger;
+    this.cargoModal = cargo;
+  }
 
 
 }

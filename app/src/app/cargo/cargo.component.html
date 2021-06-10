@@ -27,78 +27,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Pessoa desenvolvedora</td>
+                <tr *ngFor="let cargo of cargos">
+                    <td>{{cargo.idCargo}}</td>
+                    <td>{{cargo.nomeCargo}}</td>
                     <td>01/06/2021</td>
                     <td>Ativo</td>
                     <td>
-                        <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
+                        <a href="#visualizarCargo" (click)="getModal(cargo)"class="visualizar" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
                         <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Pessoa desenvolvedora</td>
-                    <td>01/06/2021</td>
-                    <td>Ativo</td>
-                    <td>
-                        <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                        <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>3</td>
-                    <td>Pessoa desenvolvedora</td>
-                    <td>01/06/2021</td>
-                    <td>Inativo</td>
-                    <td>
-                        <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                        <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Pessoa recrutadora</td>
-                    <td>01/06/2021</td>
-                    <td>Ativo</td>
-                    <td>
-                        <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                        <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Pessoa supervisora de qualidade</td>
-                    <td>01/06/2021</td>
-                    <td>Ativo</td>
-                    <td>
-                        <a href="#visualizarCargo" class="visualizar" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></a>
-                        <a href="#editarCargo" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deletarCargo" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
+                </tr>          
             </tbody>
         </table>
 
@@ -301,7 +243,7 @@
 </div>
 
 <!--------------------------- Visualizar --------------------------->
-<div id="visualizarCargo" class="modal fade">
+<div *ngIf="cargoModal" id="visualizarCargo" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
@@ -313,47 +255,36 @@
 
                 <div class="modal-body">
 
+                        
                     <div class="form-group">
-
-                        <label for="nome_cargo" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome_cargo" value="Fonoaudiólogo" disabled>
+                        <label for="nomeCargo" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nomeCargo" value="{{cargoModal.nomeCargo}}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="horas_mes" class="form-label">Horas/mês:</label>
-                        <input type="number" class="form-control" name="horas_mes" value="240" min="0" max="730"
+                        <label for="horaMes" class="form-label">Horas/mês:</label>
+                        <input type="text" class="form-control" id="horaMes" value="{{cargoModal.horaMes.quantidade}}" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grauInstrucao" class="form-label">Grau de Instrução:</label>
+                        <input type="text" class="form-control" name="grauInstrucao" value="{{cargoModal.grauInstrucao.instrucao}}"
                             disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="grau_instrucao" class="form-label">Grau de Instrução:</label>
-                        <input type="text" class="form-control" name="grau_instrucao" value="Superior completo"
-                            disabled>
+                        <label for="experienciaMinima" class="form-label">Experiência mínima:</label>
+                        <input type="text" class="form-control" name="experienciaMinima" value="{{cargoModal.experienciaMinima}}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="experiencia_minima" class="form-label">Experiência mínima:</label>
-                        <input type="text" class="form-control" name="experiencia_minima" value="2 anos" disabled>
+                        <label for="cbo2002" class="form-label">CBO2002</label>
+                        <input type="text" class="form-control" name="cbo2002" value="{{cargoModal.cbo2002.codigoCBO2002}}-{{cargoModal.cbo2002.descricao}}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="CBO2002" class="form-label">CBO2002</label>
-                        <select name="CBO2002" class="form-control" disabled>
-                            <option value="">322230 - Auxiliar de enfermagem</option>
-                            <option selected value="">223820 - Fonoaudiólogo</option>
-                            <option value="">225135 - Médico dermatologista</option>
-                            <option value="">212405 - Desenvolvedor de TI</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="CBO1994" class="form-label">CBO1994</label>
-                        <select name="CBO1994" class="form-control" disabled>
-                            <option value="">57210 - Auxiliar de enfermagem</option>
-                            <option selected value="">07925 - Fonoaudiólogo</option>
-                            <option value="">06119 - Médico dermatologista</option>
-                            <option value="">08320 - Desenvolvedor de TI</option>
-                        </select>
+                        <label for="cbo94" class="form-label">CBO1994</label>
+                        <input type="text" class="form-control" name="cbo94" value="{{cargoModal.cbo94.codigo_cbo}}-{{cargoModal.cbo94.descricao}}" disabled>
                     </div>
 
                     <div class="form-group">
@@ -372,9 +303,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="atribucoes" class="form-label">Atribuições:</label><br>
-                        <textarea name="atribucoes" rows="4" cols="50" class="form-control"
-                            value="Fazer exames de audiometria." disabled>Fazer exames de audiometria.</textarea>
+                        <label for="atribuicoes" class="form-label">Atribuições:</label><br>
+                        <textarea name="atribuicoes" rows="4" cols="50" class="form-control"
+                            value="{{cargoModal.atribuicoes}}" disabled></textarea>
                     </div>
 
                 </div>
