@@ -39,7 +39,21 @@ public class CargoDAO extends HibernateMethods<CargoModel> {
 		return instancia;
 	}
 	
-	 
+	@Override
+	public int criar(CargoModel cargoModel) {
+		if (!sessao.getTransaction().isActive())
+			sessao.beginTransaction();
+		sessao.clear();
+		LocalDateTime dataAtual = LocalDateTime.now();
+		cargoModel.setDataUltimaRevisao(dataAtual);
+		cargoModel.setDataCadastro(dataAtual);
+		cargoModel.setStatus(true);
+		cargoModel.setIdPermissao(1234567);
+		Integer idCadastrado = (Integer) sessao.save(cargoModel);
+		sessao.getTransaction().commit();
+		return idCadastrado;
+	}
+	
 	/**
 	 * Atualiza um objeto no banco de dados.
 	 * 

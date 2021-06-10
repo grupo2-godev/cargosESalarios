@@ -44,7 +44,7 @@ public class GrauInstrucaoController {
 			throw (new Exception("O grau de instrução possui caracteres inválidos."));
 		}
 		GrauInstrucaoModel grauInstrucaoModel = new GrauInstrucaoModel();
-		grauInstrucaoModel.setNome(grauInstrucao);
+		grauInstrucaoModel.setInstrucao(grauInstrucao);
 		return grauInstrucaoDAO.criar(grauInstrucaoModel);
 	}
 
@@ -108,12 +108,12 @@ public class GrauInstrucaoController {
 			throw (new Exception("O objeto não existe no banco de dados."));
 		}
 		
-		if(objetoParaAtualizar.getNome() == novaInstrucao) {
+		if(objetoParaAtualizar.getInstrucao() == novaInstrucao) {
 			return false;
 		}
 
-		objetoParaAtualizar.setId(idObjetoASerAlterado);
-		objetoParaAtualizar.setNome(novaInstrucao);
+		objetoParaAtualizar.setIdInstrucao(idObjetoASerAlterado);
+		objetoParaAtualizar.setInstrucao(novaInstrucao);
 		
 		grauInstrucaoDAO.atualizar(objetoParaAtualizar);
 		return true;

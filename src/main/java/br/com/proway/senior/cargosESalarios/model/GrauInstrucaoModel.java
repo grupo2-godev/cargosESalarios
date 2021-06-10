@@ -45,28 +45,28 @@ public class GrauInstrucaoModel {
 	/**
 	 * @return the idInstrucao
 	 */
-	public Integer getId() {
+	public Integer getIdInstrucao() {
 		return idInstrucao;
 	}
 
 	/**
 	 * @param idInstrucao the idInstrucao to set
 	 */
-	public void setId(Integer idInstrucao) {
+	public void setIdInstrucao(Integer idInstrucao) {
 		this.idInstrucao = idInstrucao;
 	}
 
 	/**
 	 * @return the instrucao
 	 */
-	public String getNome() {
+	public String getInstrucao() {
 		return instrucao;
 	}
 
 	/**
 	 * @param instrucao the instrucao to set
 	 */
-	public void setNome(String instrucao) {
+	public void setInstrucao(String instrucao) {
 		this.instrucao = instrucao;
 	}
 

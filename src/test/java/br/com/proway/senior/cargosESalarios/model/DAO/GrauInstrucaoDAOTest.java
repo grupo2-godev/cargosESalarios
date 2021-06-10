@@ -27,14 +27,14 @@ public class GrauInstrucaoDAOTest {
 		Integer idObjetoCadastrado = grauInstrucaoDAO.criar(grauInstrucao);
 		Object grauInstrucaoConsultado = ConexaoHibernate.getSessao().get(GrauInstrucaoModel.class,
 				idObjetoCadastrado);
-		assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getId());
+		assertEquals(idObjetoCadastrado, ((GrauInstrucaoModel) grauInstrucaoConsultado).getIdInstrucao());
 	}
 
 	@Test
 	public void testBuscarGrauInstrucaoPorID() {
 		GrauInstrucaoModel grauInstrucao = new GrauInstrucaoModel("Superior Completo");
 		GrauInstrucaoModel grauInstrucaoConsultado = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, grauInstrucaoDAO.criar(grauInstrucao));
-		assertEquals(grauInstrucao.getNome(), grauInstrucaoConsultado.getNome());
+		assertEquals(grauInstrucao.getInstrucao(), grauInstrucaoConsultado.getInstrucao());
 	}
 	
 	@Test
@@ -51,10 +51,10 @@ public class GrauInstrucaoDAOTest {
 		GrauInstrucaoModel grauInstrucaoAntigo = new GrauInstrucaoModel("Tecnologia Antigo");
 		GrauInstrucaoModel grauInstrucaoNovo = new GrauInstrucaoModel("Tecnologia Novo");
 		Integer idObjetoCadastrado = grauInstrucaoDAO.criar(grauInstrucaoAntigo);
-		grauInstrucaoNovo.setId(idObjetoCadastrado);
+		grauInstrucaoNovo.setIdInstrucao(idObjetoCadastrado);
 		grauInstrucaoDAO.atualizar(grauInstrucaoNovo);
 		GrauInstrucaoModel grauInstrucaoAtualizado = grauInstrucaoDAO.buscar(GrauInstrucaoModel.class, idObjetoCadastrado);
-		assertEquals(grauInstrucaoNovo.getNome(), grauInstrucaoAtualizado.getNome());
+		assertEquals(grauInstrucaoNovo.getInstrucao(), grauInstrucaoAtualizado.getInstrucao());
 	}
 	
 	@Test
@@ -90,37 +90,37 @@ public class GrauInstrucaoDAOTest {
 	@Test
 	public void testConstrutorVazio() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
-		novoGI.setId(1);
-		novoGI.setNome("Ensino Médio Completo");
-		assertEquals((Integer) 1, novoGI.getId());
-		assertEquals("Ensino Médio Completo", novoGI.getNome());
+		novoGI.setIdInstrucao(1);
+		novoGI.setInstrucao("Ensino Médio Completo");
+		assertEquals((Integer) 1, novoGI.getIdInstrucao());
+		assertEquals("Ensino Médio Completo", novoGI.getInstrucao());
 	}
 
 	@Test
 	public void testConstrutorComId() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel(3, "Ensino Superior Completo");
-		assertEquals((Integer) 3, novoGI.getId());
-		assertEquals("Ensino Superior Completo", novoGI.getNome());
+		assertEquals((Integer) 3, novoGI.getIdInstrucao());
+		assertEquals("Ensino Superior Completo", novoGI.getInstrucao());
 	}
 
 	@Test
 	public void testConstrutorSemId() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel("Pós Graduação");
-		assertEquals("Pós Graduação", novoGI.getNome());
+		assertEquals("Pós Graduação", novoGI.getInstrucao());
 	}
 
 	@Test
 	public void testSetEGetId() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
-		novoGI.setId(1);
-		assertEquals((Integer) 1, novoGI.getId());
+		novoGI.setIdInstrucao(1);
+		assertEquals((Integer) 1, novoGI.getIdInstrucao());
 	}
 
 	@Test
 	public void testSetEGetNome() {
 		GrauInstrucaoModel novoGI = new GrauInstrucaoModel();
-		novoGI.setNome("Ensino Fundamental Completo");
-		assertEquals("Ensino Fundamental Completo", novoGI.getNome());
+		novoGI.setInstrucao("Ensino Fundamental Completo");
+		assertEquals("Ensino Fundamental Completo", novoGI.getInstrucao());
 	}
 	
 	@Before
