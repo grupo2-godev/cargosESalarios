@@ -24,7 +24,7 @@ export class Cbo2002Service {
   }
 
   put(cbo2002: CBO2002): Observable<CBO2002[]> {
-    return this.http.put<CBO2002[]>(environment.baseUrl + 'CBO2002/'+cbo2002.codigoCBO2002, cbo2002);
+    return this.http.put<CBO2002[]>(environment.baseUrl + 'CBO2002/'+cbo2002.codigo_cbo, cbo2002);
   }
 
   delete(id: number): Observable<CBO2002[]> {

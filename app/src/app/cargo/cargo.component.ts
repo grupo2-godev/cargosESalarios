@@ -38,14 +38,8 @@ export class CargoComponent implements OnInit {
       }
     )
 
-    this.cbos2002.push(
-      {
-        codigoCBO2002: 122234,
-        descricao: 'CBO NOME',
-        percentualInsalubridade: 0,
-        percentualPericulosidade: 0
-      }
-    )
+   
+    
 
     this.grauInstrucao.push(
       {
