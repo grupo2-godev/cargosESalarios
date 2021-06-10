@@ -1,44 +1,44 @@
 <form [formGroup]="form">
 
-      <h4 class="modal-title">Cadastrar CBO1994</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Cadastrar CBO1994</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
 
 
 
-      <div class="form-group">
-          <label for="codigo_cbo" class="form-label">Código:</label>
-          <input type="number" class="form-control" formControlName="codigo_cbo"
-              placeholder="Ex.: 24000 (cinco dígitos)" min="0" max="99999" required>
-      </div>
+    <div class="form-group">
+        <label for="codigo_cbo" class="form-label">Código:</label>
+        <input type="number" class="form-control" formControlName="codigo_cbo" placeholder="Ex.: 24000 (cinco dígitos)"
+            min="0" max="99999" required>
+    </div>
 
-      <div class="form-group">
-          <label for="descricao" class="form-label">Descrição:</label>
-          <input type="text" class="form-control" formControlName="descricao"
-              placeholder="Ex.: Técnico de informática" required>
-      </div>
+    <div class="form-group">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <input type="text" class="form-control" formControlName="descricao" placeholder="Ex.: Técnico de informática"
+            required>
+    </div>
 
-      <div class="form-group">
-          <label for="percentualInsalubridade" class="form-label">Percentual Insalubridade</label>
-          <select type="number" class="form-control " formControlName="percentualInsalubridade"  required>
-              <option>0</option>
-              <option>10</option>
-              <option>20</option>
-              <option>40</option>
-          </select>
-      </div>
+    <div class="form-group">
+        <label for="percentualInsalubridade" class="form-label">Percentual Insalubridade</label>
+        <select type="number" class="form-control" formControlName="percentualInsalubridade" required>
+            <option>0</option>
+            <option>10</option>
+            <option>20</option>
+            <option>40</option>
+        </select>
+    </div>
 
-      <div class="form-group">
-          <label for="percentualPericulosidade" class="form-label">Percentual Periculosidade</label>
-          <select type="number" class="form-control" formControlName="percentualPericulosidade" required>
-              <option>0</option>
-              <option>30</option>
-          </select>
-      </div>
+    <div class="form-group">
+        <label for="percentualPericulosidade" class="form-label">Percentual Periculosidade</label>
+        <select type="number" class="form-control" formControlName="percentualPericulosidade" required>
+            <option>0</option>
+            <option>30</option>
+        </select>
+    </div>
 
 
-      <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
 
-      <button type="submit" class="btn btn-success" (click)="create()">Cadastrar</button>
+    <button type="submit" class="btn btn-success" (click)="create()">Cadastrar</button>
 
 </form>

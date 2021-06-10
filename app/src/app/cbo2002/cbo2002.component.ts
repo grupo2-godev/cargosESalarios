@@ -32,7 +32,7 @@ export class Cbo2002Component implements OnInit {
 
   get() {
     this.cbo2002Service.get().subscribe(result => {
-      this.cbos2002 = result;
+      this.cbos02 = result;
     })
   }
 

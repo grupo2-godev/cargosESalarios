@@ -166,13 +166,10 @@
 
                     <div class="form-group">
                         <label for="cbo2002" class="form-label">CBO2002</label>
-                        <!-- <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
-                            <option *ngFor="let cbo of cbos94" value="cbo.">Selecione...</option>
-                            <option value="">322230 - Auxiliar de enfermagem</option>
-                            <option value="">223820 - Fonoaudiólogo</option>
-                            <option value="">225135 - Médico dermatologista</option>
-                            <option value="">212405 - Desenvolvedor de TI</option>
-                        </select> -->
+                        <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
+                            <option selected disabled value="">Selecione...</option>
+                            <option  *ngFor="let cbo2002 of cbos2002" [ngValue]="cbo2002.codigo_cbo">{{ cbo2002.codigo_cbo }} - {{cbo2002.descricao}}</option>
+                        </select> 
                         <a routerLink="/cbo2002" class="edit"><input type="submit"
                                 data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
                     </div>
