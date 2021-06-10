@@ -53,9 +53,8 @@ export class Cbo1994Component implements OnInit {
 
     this.cbo1994 = this.form.value
 
-
     this.cbo1994Service.post(this.cbo1994).subscribe(result => {
-      this.router.navigateByUrl("CBO1994/all");
+      this.router.navigateByUrl("CBO1994");
     })
   }
 

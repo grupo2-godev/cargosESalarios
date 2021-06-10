@@ -181,7 +181,7 @@
                         <label for="cbo94" class="form-label">CBO1994</label>
                         <select name="cbo94" class="form-control" formControlName="cbo94" required>
                             <option selected disabled value="">Selecione...</option>
-                            <option  *ngFor="let cbo94 of cbos94" [ngValue]="cbo94.codigo_cbo">{{ cbo94.codigo_cbo }} - {{cbo94.descricao}}</option>
+                            <option  *ngFor="let cbo94 of cbos94" [ngValue]="cbo94">{{ cbo94.codigo_cbo }} - {{cbo94.descricao}}</option>
                         </select> 
                         <a routerLink="/cbo1994" class="edit"><input type="submit"
                                 data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>

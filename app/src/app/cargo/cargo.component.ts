@@ -67,7 +67,7 @@ export class CargoComponent implements OnInit {
       grauInstrucao: [null, Validators.required],
       experienciaMinima: ['', Validators.required],
       //cbo2002: [null, Validators.required],
-      //cbo94: [null, Validators.required],
+      cbo94: [null, Validators.required],
       atribuicoes: ['', Validators.required]
     })
   }
@@ -81,7 +81,6 @@ export class CargoComponent implements OnInit {
   getById(id: number) {
     this.cargoService.getById(id).subscribe(result => {
       this.cargo = result;
-
       this.form.setValue({
         idCargo: this.cargo.idCargo,
         nomeCargo: this.cargo.nomeCargo,
@@ -97,12 +96,9 @@ export class CargoComponent implements OnInit {
 
   create() {
     delete this.form.value['idCargo'];
+    console.log(this.form.value)
 
     this.cargo = this.form.value
-    this.cargo.cbo94 = this.cbos94[0]
-    this.cargo.cbo2002 = this.cbos2002[0]
-    this.cargo.grauInstrucao = this.grauInstrucao[0]
-    this.cargo.horaMes = this.horasMes[0]
 
     this.cargoService.post(this.cargo).subscribe(result => {
       this.router.navigateByUrl("cargos");
