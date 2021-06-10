@@ -23,7 +23,7 @@ export class Cbo1994Component implements OnInit {
     this.get();
 
     this.form = this.formBuilder.group({
-      codigoCbo: ['' , Validators.required],
+      codigo_cbo: ['' , Validators.required],
       descricao: ['', Validators.required],
       percentualInsalubridade: ['', Validators.required],
       percentualPericulosidade: ['', Validators.required]
@@ -55,7 +55,7 @@ export class Cbo1994Component implements OnInit {
 
 
     this.cbo1994Service.post(this.cbo1994).subscribe(result => {
-      this.router.navigateByUrl("CBO1994");
+      this.router.navigateByUrl("CBO1994/all");
     })
   }
 
