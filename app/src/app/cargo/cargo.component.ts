@@ -37,14 +37,8 @@ export class CargoComponent implements OnInit {
 
     this.cbo94Service.get().subscribe(cbos94 => this.cbos94 = cbos94)
 
-    this.cbos2002.push(
-      {
-        codigoCBO2002: 122234,
-        descricao: 'CBO NOME',
-        percentualInsalubridade: 0,
-        percentualPericulosidade: 0
-      }
-    )
+   
+    
 
     this.grauInstrucao.push(
       {
