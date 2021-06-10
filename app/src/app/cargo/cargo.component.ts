@@ -102,5 +102,4 @@ export class CargoComponent implements OnInit {
     this.cargoModal = cargo;
   }
 
-
 }
