@@ -23,7 +23,7 @@ export class Cbo2002Component implements OnInit {
     this.get();
 
     this.form = this.formBuilder.group({
-      codigo_cbo: ['' , Validators.required],
+      codigoCBO2002: ['' , Validators.required],
       descricao: ['', Validators.required],
       percentualInsalubridade: ['', Validators.required],
       percentualPericulosidade: ['', Validators.required]
@@ -41,7 +41,7 @@ export class Cbo2002Component implements OnInit {
       this.cbo2002 = result;
 
       this.form.setValue({
-        codigo_cbo: this.cbo2002.codigo_cbo,
+        codigoCBO2002: this.cbo2002.codigoCBO2002,
         descricao: this.cbo2002.descricao,
         percentualInsalubridade: this.cbo2002.percentualInsalubridade,
         percentualPericulosidade: this.cbo2002.percentualPericulosidade,
@@ -53,9 +53,13 @@ export class Cbo2002Component implements OnInit {
 
     this.cbo2002 = this.form.value
 
+    this.cbo2002.percentualInsalubridade = parseFloat(this.form.value['percentualInsalubridade'])
+    this.cbo2002.percentualPericulosidade = parseFloat(this.form.value['percentualPericulosidade'])
+
+
 
     this.cbo2002Service.post(this.cbo2002).subscribe(result => {
-      this.router.navigateByUrl("CBO2002/all");
+      this.router.navigateByUrl("CBO2002");
     })
   }
 

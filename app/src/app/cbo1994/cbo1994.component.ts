@@ -52,6 +52,8 @@ export class Cbo1994Component implements OnInit {
   create() {
 
     this.cbo1994 = this.form.value
+    this.cbo1994.percentualInsalubridade = parseInt(this.form.value['percentualInsalubridade'])
+    this.cbo1994.percentualPericulosidade = parseInt(this.form.value['percentualPericulosidade'])
 
     this.cbo1994Service.post(this.cbo1994).subscribe(result => {
       this.router.navigateByUrl("CBO1994");

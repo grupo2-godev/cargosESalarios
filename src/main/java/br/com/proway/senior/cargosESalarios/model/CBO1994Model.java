@@ -21,7 +21,7 @@ public class CBO1994Model {
 
 	private String descricao;
 	private Double percentualInsalubridade;
-	public Double percentualPericulosidade;
+	private Double percentualPericulosidade;
 
 	public CBO1994Model(Integer codigo_cbo, String descricao, Double percentualInsalubridade,
 			Double percentualPericulosidade) {
