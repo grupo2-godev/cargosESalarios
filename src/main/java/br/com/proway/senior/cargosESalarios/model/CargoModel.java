@@ -125,6 +125,19 @@ public class CargoModel {
 		this.status = status;
 		this.idPermissao = idPermissao;
 	}
+	
+	public CargoModel(String nomeCargo, CBO2002Model cbo2002, CBO1994Model cbo94, HorasMesModel horaMes, GrauInstrucaoModel grauInstrucao,
+			String experienciaMinima, String atribuicoes, Boolean status, Integer idPermissao) {
+		this.nomeCargo = nomeCargo;
+		this.cbo2002 = cbo2002;
+		this.cbo94 = cbo94;
+		this.horaMes = horaMes;
+		this.grauInstrucao = grauInstrucao;
+		this.experienciaMinima = experienciaMinima;
+		this.atribuicoes = atribuicoes;
+		this.status = status;
+		this.idPermissao = idPermissao;
+	}
 
 	/**
 	 * <h1>Pega o {@link CargoModel#idCargo}.</h1>

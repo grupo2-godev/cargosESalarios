@@ -1,0 +1,15 @@
+.backgroundCBO {
+    display: flex; 
+    justify-content: center;
+    width: 40vw; 
+    background-color: white;
+    border: solid rgb(0, 102, 102);
+    border-radius: 10px; 
+    border-width: 1px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.botaoVermelho {
+    background-color: #ff5858;
+    color: white;
+}

@@ -40,8 +40,9 @@ public class GrauInstrucaoControllerAPI {
 	@GetMapping("/grauinstrucao/{id}")
 	public ResponseEntity<?> buscarPorCodigo(@PathVariable Integer id) {
 		try {
-			GrauInstrucaoModel grauInstrucao = grauInstrucaoController.buscarInstrucaoPorID(id);
-			return ResponseEntity.ok(grauInstrucao);
+			GrauInstrucaoModel grauInstrucaoModel = grauInstrucaoController.buscarInstrucaoPorID(id);
+			return ResponseEntity.ok(grauInstrucaoModel);
+
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID do grau de instrucao invalido");
 		}

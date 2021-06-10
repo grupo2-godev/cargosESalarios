@@ -26,6 +26,7 @@ public class CargoModelDTO {
 
 	private Integer idCargo;
 	private String nomeCargo;
+	private LocalDateTime dataCadastro;
 	private LocalDateTime dataUltimaRevisao;
 	private CBO2002Model cbo2002;
 	private CBO1994Model cbo94;
@@ -51,6 +52,7 @@ public class CargoModelDTO {
 	public CargoModelDTO(CargoModel cargoModel) {
 		this.idCargo = cargoModel.getIdCargo();
 		this.nomeCargo = cargoModel.getNomeCargo();
+		this.dataCadastro = cargoModel.getDataCadastro();
 		this.dataUltimaRevisao = cargoModel.getDataUltimaRevisao();
 		this.cbo2002 = cargoModel.getCbo2002();
 		this.cbo94 = cargoModel.getCbo94();
@@ -237,5 +239,9 @@ public class CargoModelDTO {
 	 */
 	public Boolean getStatus() {
 		return status;
-	}	
+	}
+
+	public LocalDateTime getDataCadastro() {
+		return dataCadastro;
+	}
 }

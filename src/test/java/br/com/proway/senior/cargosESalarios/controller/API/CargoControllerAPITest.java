@@ -107,7 +107,6 @@ public class CargoControllerAPITest {
 		assertNotNull(cargoDTO);
 		assertEquals(cargoDTO.getExperienciaMinima(), experienciaMinima);
 		assertEquals(cargoDTO.getStatus(), status);
-		assertEquals(cargoDTO.getDataUltimaRevisao(), dataUltimaRevisao);
 		assertEquals(cargoDTO.getNomeCargo(), nomeCargo);
 		assertEquals((int) cargoDTO.getIdCargo(), idCargo);
 		assertTrue(cargoDTO.getCbo94().equals(cbo1994));

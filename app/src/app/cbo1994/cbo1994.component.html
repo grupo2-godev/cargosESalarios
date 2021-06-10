@@ -1,44 +1,52 @@
-<form [formGroup]="form">
+<div class="backgroundCBO">
+    <form [formGroup]="form" style="display: flex; flex-direction: column; width: 100%;">
 
-    <h4 class="modal-title">Cadastrar CBO1994</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div
+            style="display: flex; justify-content: space-between;align-items: center; width: 100%; height: 50px; background-color: #0facb8; border-radius: 9px 9px 0 0; padding: 25px;">
+            <h4 style="color: white;">Cadastrar <b>CBO1994</b></h4>
+            <button routerLink="/cargos" type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+        </div>
 
+        <div style="padding: 25px;">
+            <div class="form-group">
+                <label for="codigo_cbo" class="form-label">Código:</label>
+                <input type="number" class="form-control" formControlName="codigo_cbo"
+                    placeholder="Ex.: 24000 (cinco dígitos)" min="0" max="99999" required>
+            </div>
 
+            <div class="form-group">
+                <label for="descricao" class="form-label">Descrição:</label>
+                <input type="text" class="form-control" formControlName="descricao"
+                    placeholder="Ex.: Técnico de informática" required>
+            </div>
 
+            <div class="form-group">
+                <label for="percentualInsalubridade" class="form-label">Percentual Insalubridade</label>
+                <select type="number" class="form-control" formControlName="percentualInsalubridade" required>
+                    <option>0</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>40</option>
+                </select>
+            </div>
 
-    <div class="form-group">
-        <label for="codigo_cbo" class="form-label">Código:</label>
-        <input type="number" class="form-control" formControlName="codigo_cbo" placeholder="Ex.: 24000 (cinco dígitos)"
-            min="0" max="99999" required>
-    </div>
+            <div class="form-group">
+                <label for="percentualPericulosidade" class="form-label">Percentual Periculosidade</label>
+                <select type="number" class="form-control" formControlName="percentualPericulosidade" required>
+                    <option>0</option>
+                    <option>30</option>
+                </select>
+            </div>
 
-    <div class="form-group">
-        <label for="descricao" class="form-label">Descrição:</label>
-        <input type="text" class="form-control" formControlName="descricao" placeholder="Ex.: Técnico de informática"
-            required>
-    </div>
+            <div style="display: flex; justify-content: space-between;">
+                <button routerLink="/cargos" type="submit" style="padding: 15px 20px;" class="btn btn-success"
+                    (click)="create()">Cadastrar</button>
 
-    <div class="form-group">
-        <label for="percentualInsalubridade" class="form-label">Percentual Insalubridade</label>
-        <select type="number" class="form-control" formControlName="percentualInsalubridade" required>
-            <option>0</option>
-            <option>10</option>
-            <option>20</option>
-            <option>40</option>
-        </select>
-    </div>
+                <input routerLink="/cargos" type="button" style="padding: 15px 20px;"
+                    class="btn btn-default botaoVermelho" data-dismiss="modal" value="Cancelar">
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="percentualPericulosidade" class="form-label">Percentual Periculosidade</label>
-        <select type="number" class="form-control" formControlName="percentualPericulosidade" required>
-            <option>0</option>
-            <option>30</option>
-        </select>
-    </div>
-
-
-    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-
-    <button type="submit" class="btn btn-success" (click)="create()">Cadastrar</button>
-
-</form>
+    </form>
+</div>

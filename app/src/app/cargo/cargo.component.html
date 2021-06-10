@@ -8,8 +8,8 @@
                 <div class="col-sm-6" style="display: flex; justify-content: flex-end;">
                     <form class="" style="display: flex;">
                         <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-                        <button type="button" class="btn btn-light" style="background: #0facb8;"><i class="material-icons"
-                            data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></button>
+                        <button type="button" class="btn btn-light" style="background: #0facb8;"><i
+                                class="material-icons" data-toggle="tooltip" title="Visualizar">&#xe8b6;</i></button>
                     </form>
                 </div>
             </div>
@@ -106,33 +106,39 @@
 
                     <div class="form-group">
                         <label for="experienciaMinima" class="form-label">Experiência mínima:</label>
-                        <input type="text" class="form-control" formControlName="experienciaMinima" placeholder="Ex.: 2 anos"
-                            required>
+                        <input type="text" class="form-control" formControlName="experienciaMinima"
+                            placeholder="Ex.: 2 anos" required>
                     </div>
 
                     <div class="form-group">
                         <label for="cbo2002" class="form-label">CBO2002</label>
-                        <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
-                            <option selected disabled value="">Selecione...</option>
-                            <option  *ngFor="let cbo2002 of cbos02" [ngValue]="cbo2002">{{ cbo2002.codigoCBO2002 }} - {{cbo2002.descricao}}</option>
-                        </select> 
-                        <a routerLink="/cbo2002" class="edit"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
+                        <div style="display: flex;">
+                            <select name="cbo2002" class="form-control" formControlName="cbo2002" required>
+                                <option selected disabled value="">Selecione...</option>
+                                <option *ngFor="let cbo2002 of cbos02" [ngValue]="cbo2002.codigoCBO2002">{{cbo2002.codigoCBO2002}} - {{cbo2002.descricao}}</option>
+                            </select>
+                            <a routerLink="/cbo2002" class="edit" style="margin-left: 10px;"><input type="submit"
+                                    data-dismiss="modal" class="btn btn-success" value="Novo CBO2002"></a>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="cbo94" class="form-label">CBO1994</label>
-                        <select name="cbo94" class="form-control" formControlName="cbo94" required>
-                            <option selected disabled value="">Selecione...</option>
-                            <option  *ngFor="let cbo94 of cbos94" [ngValue]="cbo94">{{ cbo94.codigo_cbo }} - {{cbo94.descricao}}</option>
-                        </select> 
-                        <a routerLink="/cbo1994" class="edit"><input type="submit"
-                                data-dismiss="modal" class="btn btn-success" value="Novo CBO1994"></a>
+                        <div style="display: flex;">
+                            <select name="cbo94" class="form-control" formControlName="cbo94" required>
+                                <option selected disabled value="">Selecione...</option>
+                                <option *ngFor="let cbo94 of cbos94" [ngValue]="cbo94">{{ cbo94.codigo_cbo }} -
+                                    {{cbo94.descricao}}</option>
+                            </select>
+                            <a routerLink="/cbo1994" class="edit" style="margin-left: 10px;"><input type="submit" data-dismiss="modal"
+                                    class="btn btn-success" value="Novo CBO1994"></a>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="atribuicoes" class="form-label">Atribuições:</label><br>
-                        <textarea name="atribuicoes" rows="4" cols="50" class="form-control" formControlName="atribuicoes"
+                        <textarea name="atribuicoes" rows="4" cols="50" class="form-control"
+                            formControlName="atribuicoes"
                             placeholder="Ex.: Programar em Java, Python, Angular; Manipular banco de dados; Front-end e back-end."
                             required></textarea>
                     </div>
@@ -162,8 +168,7 @@
 
                     <div class="form-group">
                         <label for="nome_cargo" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome_cargo" value="Pessoa Desenvolvedora"
-                            required>
+                        <input type="text" class="form-control" id="nome_cargo" value="Pessoa Desenvolvedora" required>
                     </div>
 
                     <div class="form-group">
@@ -312,8 +317,8 @@
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
 
-                    <a href="#editarCargo" class="edit" data-toggle="modal"><input type="submit"
-                            data-dismiss="modal" class="btn btn-success" value="Editar"></a>
+                    <a href="#editarCargo" class="edit" data-toggle="modal"><input type="submit" data-dismiss="modal"
+                            class="btn btn-success" value="Editar"></a>
                 </div>
             </form>
 
