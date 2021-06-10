@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cargo } from 'src/app/cargo/cargo';
 import { CargoService } from 'src/app/cargo/cargo.service';
+import { Cbo1994Service } from '../cbo1994/cbo1994.service';
 import { CBO1994 } from '../model/cbo1994/cbo1994';
 import { CBO2002 } from '../model/cbo2002/cbo2002';
 import { GrauInstrucao } from '../model/grauinstrucao/grauinstrucao';
@@ -16,12 +17,17 @@ import { HorasMes } from '../model/horasmes/horasmes';
 })
 export class CargoComponent implements OnInit {
 
-  constructor(private cargoService: CargoService, private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
+  constructor(private cargoService: CargoService,
+              private cbo94Service: Cbo1994Service,
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) { }
 
   form!: FormGroup;
   cargo!: Cargo;
   cargos!: Cargo[];
-  cbos94: CBO1994[] = [];
+  cbos94: CBO1994[]=[];
+  cbo94!: CBO1994;
   cbos2002: CBO2002[] = [];
   grauInstrucao: GrauInstrucao[] = [];
   horasMes: HorasMes[] = [];
@@ -29,14 +35,7 @@ export class CargoComponent implements OnInit {
   ngOnInit() {
     this.get();
 
-    this.cbos94.push(
-      {
-        codigo_cbo: 12223,
-        descricao: 'CBO NOME',
-        percentualInsalubridade: 0,
-        percentualPericulosidade: 0
-      }
-    )
+    this.cbo94Service.get().subscribe(cbos94 => this.cbos94 = cbos94)
 
     this.cbos2002.push(
       {
