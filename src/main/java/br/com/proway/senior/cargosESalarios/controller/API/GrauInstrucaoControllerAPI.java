@@ -42,6 +42,7 @@ public class GrauInstrucaoControllerAPI {
 		try {
 			GrauInstrucaoModel grauInstrucaoModel = grauInstrucaoController.buscarInstrucaoPorID(id);
 			return ResponseEntity.ok(grauInstrucaoModel);
+
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID do grau de instrucao invalido");
 		}
@@ -67,8 +68,8 @@ public class GrauInstrucaoControllerAPI {
 	@GetMapping("/grauinstrucao/all")
 	public ResponseEntity<?> buscarTodos() {
 		ArrayList<GrauInstrucaoModel> graus = new ArrayList<GrauInstrucaoModel>();
-		for (GrauInstrucaoModel nivelModel : grauInstrucaoController.buscarTodasInstrucoes()) {
-			graus.add(nivelModel);
+		for (GrauInstrucaoModel grauInstrucaoModel : grauInstrucaoController.buscarTodasInstrucoes()) {
+			graus.add(grauInstrucaoModel);
 		}
 		if(graus.size() == 0) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há nenhum grau de instrucao cadastrado");
