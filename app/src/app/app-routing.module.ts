@@ -5,12 +5,14 @@ import { HomeComponent } from './home/home.component';
 import { PostoComponent } from './posto/posto.component';
 import { RouterModule, Routes } from '@angular/router';
 import { Cbo1994Component } from './cbo1994/cbo1994.component';
+import { Cbo2002Component } from './cbo2002/cbo2002.component';
 
 const routes: Routes = [
   { path: 'cargos', component: CargoComponent },
   { path: 'home', component: HomeComponent },
   { path: 'postos', component: PostoComponent },
-  { path: 'cbo1994', component: Cbo1994Component}
+  { path: 'cbo1994', component: Cbo1994Component},
+  { path: 'cbo2002', component: Cbo2002Component}
 ];
 
 @NgModule({

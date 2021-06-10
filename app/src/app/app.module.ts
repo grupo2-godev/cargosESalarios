@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PostoComponent } from './posto/posto.component';
 import { Cbo1994Component } from './cbo1994/cbo1994.component';
+import { Cbo2002Component } from './cbo2002/cbo2002.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Cbo1994Component } from './cbo1994/cbo1994.component';
     CargoComponent,
     HomeComponent,
     PostoComponent,
-    Cbo1994Component
+    Cbo1994Component,
+    Cbo2002Component
   ],
   imports: [
     BrowserModule,
