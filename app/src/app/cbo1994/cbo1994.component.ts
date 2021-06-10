@@ -15,7 +15,6 @@ export class Cbo1994Component implements OnInit {
 
   form!: FormGroup;
   cbo1994!: CBO1994;
-  cbos1994!: CBO1994[];
   cbos94: CBO1994[] = [];
 
 

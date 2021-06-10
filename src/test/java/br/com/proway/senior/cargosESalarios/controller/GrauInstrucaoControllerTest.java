@@ -39,7 +39,7 @@ public class GrauInstrucaoControllerTest {
 		int idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
 		GrauInstrucaoModel grauInstrucao = controller.buscarInstrucaoPorID(idCadastrado);
 		assertNotNull(grauInstrucao);
-		assertEquals("Ensino Medio Completo", grauInstrucao.getNome());
+		assertEquals("Ensino Medio Completo", grauInstrucao.getInstrucao());
 	}
 
 	@Test(expected = Exception.class)
@@ -65,14 +65,14 @@ public class GrauInstrucaoControllerTest {
 	public void testAtualizarGrauDeInstrucao() throws Exception {
 		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
 		controller.atualizarInstrucao(idCadastrado, "Ensino Alterado");
-		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getNome());
+		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getInstrucao());
 	}
 
 	@Test(expected = Exception.class)
 	public void testAtualizarGrauDeInstrucaoComCaracteresInvalidos() throws Exception {
 		Integer idCadastrado = controller.cadastrarInstrucao("Ensino Medio Completo");
 		controller.atualizarInstrucao(idCadastrado, "Ensino Alter-+ado");
-		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getNome());
+		assertEquals("Ensino Alterado", controller.buscarInstrucaoPorID(idCadastrado).getInstrucao());
 	}
 
 	@Test

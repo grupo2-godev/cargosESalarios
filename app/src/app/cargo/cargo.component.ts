@@ -5,10 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cargo } from 'src/app/cargo/cargo';
 import { CargoService } from 'src/app/cargo/cargo.service';
 import { Cbo1994Service } from '../cbo1994/cbo1994.service';
+import { Cbo2002Service } from '../cbo2002/cbo2002.service';
 import { CBO1994 } from '../model/cbo1994/cbo1994';
 import { CBO2002 } from '../model/cbo2002/cbo2002';
 import { GrauInstrucao } from '../model/grauinstrucao/grauinstrucao';
 import { HorasMes } from '../model/horasmes/horasmes';
+import { GrauInstrucaoService } from '../services/grau-instrucao.service';
+import { HoraMesService } from '../services/hora-mes.service';
 
 @Component({
   selector: 'app-cargo',
@@ -19,6 +22,9 @@ export class CargoComponent implements OnInit {
 
   constructor(private cargoService: CargoService,
               private cbo94Service: Cbo1994Service,
+              private cbo02Service: Cbo2002Service,
+              private horasMesService: HoraMesService,
+              private grauInstrucaoService: GrauInstrucaoService,
               private router: Router,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute) { }
@@ -28,41 +34,31 @@ export class CargoComponent implements OnInit {
   cargos!: Cargo[];
   cbos94: CBO1994[]=[];
   cbo94!: CBO1994;
-  cbos2002: CBO2002[] = [];
-  grauInstrucao: GrauInstrucao[] = [];
-  horasMes: HorasMes[] = [];
+  cbos02: CBO2002[] = [];
+  cbo2002!: CBO2002;
+  grauInstrucoes: GrauInstrucao[] = [];
+  horasMeses: HorasMes[] = [];
+  horasMes!: HorasMes;
+  grauInstrucao!: GrauInstrucao;
 
   ngOnInit() {
     this.get();
 
     this.cbo94Service.get().subscribe(cbos94 => this.cbos94 = cbos94)
-
-   
-    
-
-    this.grauInstrucao.push(
-      {
-        idInstrucao: 12223,
-        instrucao: 'CBO NOME'
-      }
-    )
-
-    this.horasMes.push(
-      {
-        idHorasMes: 12223,
-        quantidade: 220
-      }
-    )
+    this.cbo02Service.get().subscribe(cbos02 => this.cbos02 = cbos02)
+    this.horasMesService.get().subscribe(horasMes => this.horasMeses = horasMes)
+    this.grauInstrucaoService.get().subscribe(grauInstrucao => this.grauInstrucoes = grauInstrucao)
 
     this.form = this.formBuilder.group({
       idCargo: [],
       nomeCargo: ['', Validators.required],
-      horasMes: [null, Validators.required],
-      grauInstrucao: [null, Validators.required],
       experienciaMinima: ['', Validators.required],
-      //cbo2002: [null, Validators.required],
-      cbo94: [null, Validators.required],
-      atribuicoes: ['', Validators.required]
+      atribuicoes: ['', Validators.required],
+      horasMes: ['',Validators.required],
+      cbo2002: ['',Validators.required],
+      cbo94: ['',Validators.required],
+      grauInstrucao: ['',Validators.required]
+
     })
   }
 
