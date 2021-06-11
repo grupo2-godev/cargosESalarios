@@ -107,4 +107,18 @@ export class CargoComponent implements OnInit {
     this.cargoModal = cargo;
   }
 
+  edit() {
+
+    // Obtém os valores do formulário na interface
+    this.cargo = this.form.value;
+
+    // Se inscreve no serviço e aguarda o retorno
+    this.cargoService.put(this.cargo).subscribe(result => {
+
+      // Redireciona para o componente de produtos
+      this.router.navigateByUrl('cargos');
+    })
+
+  }
+
 }
